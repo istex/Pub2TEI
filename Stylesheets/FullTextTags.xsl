@@ -929,10 +929,8 @@
         <xsl:apply-templates/>
     </xsl:template>
 	
-	<xsl:template match="wiley:section/wiley:title">
-	    <head>
+    <xsl:template match="wiley:section/wiley:title">
 		<xsl:apply-templates/>
-	    </head>
 	</xsl:template>
 	<!-- SG ajout citation "other" -->
     <xsl:template match="wiley:citation [@type='other']">

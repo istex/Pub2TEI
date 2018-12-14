@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
-    xmlns:ce="http://www.elsevier.com/xml/common/dtd" 
-    xmlns:mml="http://www.w3.org/1998/Math/MathML"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
-    xmlns:wiley="http://www.wiley.com/namespaces/wiley/wiley"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
-    <!-- ajout déclaration schema ODD-ISTEX -->
-    
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:wiley="http://www.wiley.com/namespaces/wiley" 
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    exclude-result-prefixes="#all">
+
     <xsl:output encoding="UTF-8" method="xml"/>
     <xsl:variable name="journalList" select="document('JournalList.xml')"/>
     <!-- SAGE - ajout des issns -->
@@ -2605,7 +2602,7 @@ reactorsa'</title>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and not(contains(.,'n/a'))">
-                    <biblScope unit="page" from="{translate(.,' ','')}">
+                    <biblScope unit="page" from="{translate(.,' ','')}">
                         <xsl:value-of select="normalize-space(.)"/>
                     </biblScope>
                 </xsl:if>
@@ -2625,7 +2622,7 @@ reactorsa'</title>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and not(contains(.,'n/a'))">
-                    <biblScope unit="page" to="{translate(.,' ','')}">
+                    <biblScope unit="page" to="{translate(.,' ','')}">
                         <xsl:value-of select="translate(.,' ','')"/>
                     </biblScope>
                 </xsl:if>
