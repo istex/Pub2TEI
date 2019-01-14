@@ -968,15 +968,20 @@
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://istex.github.io/odd-istex/out/istex.xsd</xsl:text>
             </xsl:attribute>
-            <xsl:if test="@xml:lang">
-                <xsl:choose>
-                    <xsl:when test="normalize-space(//article/@xml:lang)='IW'"><xsl:attribute name="xml:lang">HE</xsl:attribute></xsl:when>
-                    <xsl:when test="normalize-space(//article/@xml:lang)='fn'"><xsl:attribute name="xml:lang">EN</xsl:attribute></xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy-of select="@xml:lang"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@xml:lang">
+                    <xsl:choose>
+                        <xsl:when test="normalize-space(//article/@xml:lang)='IW'"><xsl:attribute name="xml:lang">HE</xsl:attribute></xsl:when>
+                        <xsl:when test="normalize-space(//article/@xml:lang)='fn'"><xsl:attribute name="xml:lang">EN</xsl:attribute></xsl:when>
+                        <xsl:otherwise>
+                            <xsl:copy-of select="@xml:lang"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="xml:lang">EN</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <teiHeader>
                 <fileDesc>
                     <titleStmt>

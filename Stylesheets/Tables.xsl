@@ -43,9 +43,7 @@
                 </head>
             </xsl:if>
             <xsl:apply-templates select="* except tgroup"/>
-			<!--<table>
-				<xsl:apply-templates select="tgroup"/>
-			</table>-->
+			<formula/>
         </table>
     </xsl:template>
     

@@ -713,7 +713,21 @@
 
     <xsl:template
         match="i  | ce:italic | Emphasis[@Type='Italic'] | italic | emph[@display='italic'] | wiley:i">
-        <xsl:if test="normalize-space(.)"><hi rend="italic"><xsl:apply-templates/></hi></xsl:if>
+        <xsl:if test="normalize-space(.)">
+            <xsl:choose>
+                <xsl:when test="ancestor::reftxt and contains(.,'et al.')">
+                        <author>et al.</author>
+                </xsl:when>
+                <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
+                    <title><xsl:apply-templates/></title>
+                </xsl:when>
+                <xsl:otherwise>
+                    <hi rend="italic">
+                        <xsl:apply-templates/>
+                    </hi>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="bold | ce:bold | Emphasis[@Type='Bold'] | emph[@display='bold'] | wiley:b | b|bo">

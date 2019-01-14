@@ -823,10 +823,8 @@
 			<analytic>
 				<xsl:apply-templates select="reftxt/atl"/>
             	<xsl:apply-templates select="reftxt/refau"/>
-			    <!-- SG : ajout de "et al." -->
-			    <xsl:if test="contains(reftxt/i,'et al')">
-			        <author>et al.</author>
-			    </xsl:if>
+			    <xsl:apply-templates select="reftxt/i"/>
+			    
 			</analytic>
 			<monogr>
 			    <xsl:if test="reftxt/jtl | reftxt/btl">

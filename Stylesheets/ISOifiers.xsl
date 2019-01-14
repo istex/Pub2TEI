@@ -5,7 +5,7 @@
     <xsl:template name="Varia2ISO639">
         <xsl:param name="code"/>
         <xsl:choose>
-            <xsl:when test="$code='EN' or $code='En' or $code='--'">
+            <xsl:when test="$code='EN' or $code='En' or $code='--' or $code=''">
                 <xsl:text>en</xsl:text>
             </xsl:when>
             <xsl:when test="$code='DE' or $code='De'">
@@ -13,6 +13,9 @@
             </xsl:when>
             <xsl:when test="$code='FR' or $code='Fr'">
                 <xsl:text>fr</xsl:text>
+            </xsl:when>
+            <xsl:when test="$code='ES' or $code='Es'">
+                <xsl:text>es</xsl:text>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$code"/>
