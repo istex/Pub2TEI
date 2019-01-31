@@ -91,15 +91,19 @@
             <xsl:choose>
                 <!-- numerique premium -->
                 <xsl:when test="//abstract/@xml:lang[string-length() &gt; 0]">
+                    <xsl:for-each select="//abstract/@xml:lang">
                     <xsl:attribute name="xml:lang">
-                    <xsl:value-of select="translate(//abstract/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                        <xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                     </xsl:attribute>
+                    </xsl:for-each>
                 </xsl:when>
                 <!-- brepols book -->
                 <xsl:when test="//body/book-part/@xml:lang[string-length()&gt; 0]">
-                    <xsl:attribute name="xml:lang">
-                        <xsl:value-of select="//body/book-part/@xml:lang"/>
-                    </xsl:attribute>
+                    <xsl:for-each select="//body/book-part/@xml:lang">
+                        <xsl:attribute name="xml:lang">
+                            <xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                        </xsl:attribute>
+                    </xsl:for-each>
                 </xsl:when>
             </xsl:choose>
             <teiHeader>
@@ -109,18 +113,18 @@
                             <xsl:when test="//body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                 <xsl:apply-templates select="//body/book-part/book-part-meta/title-group/title"/>
                             </xsl:when>
-                            <xsl:when test="book-meta/book-title-group/book-title[string-length()&gt; 0]">
+                           <!-- <xsl:when test="book-meta/book-title-group/book-title[string-length()&gt; 0]">
                                 <xsl:if test="@xml:lang">
                                     <xsl:attribute name="xml:lang">
                                         <xsl:value-of select="translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                     </xsl:attribute>
                                 </xsl:if>
                                 <xsl:apply-templates select="book-meta/book-title-group/book-title"/>
-                            </xsl:when>
+                            </xsl:when>-->
                         </xsl:choose>
-                        <xsl:if test="book-meta/book-title-group/subtitle[string-length()&gt; 0]">
+                       <!-- <xsl:if test="book-meta/book-title-group/subtitle[string-length()&gt; 0]">
                             <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
-                        </xsl:if>
+                        </xsl:if>-->
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -374,7 +378,7 @@
             </analytic>
             <monogr>
                 <xsl:apply-templates select="//book/book-meta/book-title-group/book-title"/>
-                <xsl:apply-templates select="//book/book-meta/book-title-group/subtitle"/>
+                <xsl:apply-templates select="//book/book-meta/book-title-group/subtitle" mode="monogr"/>
                 <xsl:apply-templates select="$docIssue//book-meta/contrib-group/contrib"/>
                 <xsl:if test="$docIssue//book-meta/contrib-group/isbn[@pub-type='ppub']">
                     <idno type="ISBN">

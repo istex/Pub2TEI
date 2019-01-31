@@ -1967,6 +1967,11 @@ reactorsa'</title>
             </title>
         </xsl:if>
     </xsl:template>
+    <xsl:template match="book-title">
+        <title level="m">
+        <xsl:apply-templates/>
+        </title>
+    </xsl:template>
     <xsl:template match="sb:subtitle">
         <xsl:apply-templates/>
     </xsl:template>
@@ -2018,6 +2023,13 @@ reactorsa'</title>
     <xsl:template match="subtitle | article_sub_title|art_stitle">
         <xsl:if test="normalize-space(.)">
             <title level="a" type="sub">
+                <xsl:apply-templates/>
+            </title>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="subtitle" mode="monogr">
+        <xsl:if test="normalize-space(.)">
+            <title level="m" type="sub">
                 <xsl:apply-templates/>
             </title>
         </xsl:if>
@@ -2295,9 +2307,17 @@ reactorsa'</title>
             <xsl:message>pISSN: <xsl:value-of select="$ISSNCode"/></xsl:message>
             <xsl:message>Journal: <xsl:value-of select="$journalEntry/tei:cell[@role='Journal']"
                 /></xsl:message>-->
-            <idno type="pISSN">
-                <xsl:value-of select="$ISSNCode"/>
-            </idno>
+        <xsl:choose>
+            <xsl:when test="//wiley:publicationMeta/wiley:issn[@type='print']='0009-9163' and contains(//wiley:publicationMeta/wiley:coverDate/@startDate,'2003') and  //wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='43' ">
+                <idno type="pISSN">0914-3505</idno>
+            </xsl:when>
+            <xsl:otherwise>
+                <idno type="pISSN">
+                    <xsl:value-of select="$ISSNCode"/>
+                </idno>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
     <xsl:template match="JournalElectronicISSN | ElectronicISSN | issn[@issn_type='digital'] | issn[@pub-type='epub'] | issn-elec | SeriesElectronicISSN | issn[@type='electronic'] | wiley:issn[@type='electronic']|E-ISSN">
@@ -2312,9 +2332,16 @@ reactorsa'</title>
             <xsl:message>eISSN: <xsl:value-of select="$ISSNCode"/></xsl:message>
             <xsl:message>Journal: <xsl:value-of select="$journalEntry/tei:cell[@role='Journal']"
                 /></xsl:message>-->
-            <idno type="eISSN">
-                <xsl:value-of select="$ISSNCode"/>
-            </idno>
+        <xsl:choose>
+            <xsl:when test="//wiley:publicationMeta/wiley:issn[@type='print']='0009-9163' and contains(//wiley:publicationMeta/wiley:coverDate/@startDate,'2003') and  //wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='43' ">
+                <idno type="eISSN">1741-4520</idno>
+            </xsl:when>
+            <xsl:otherwise>
+                <idno type="eISSN">
+                    <xsl:value-of select="$ISSNCode"/>
+                </idno>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template
         match="journal-id[@journal-id-type='isbn'][string-length()&gt;0]|//ISBN[string-length()&gt;0]|//isbn[string-length()&gt;0]">
@@ -2368,12 +2395,25 @@ reactorsa'</title>
     
     <!-- SG - ajout identifiants de production-->
     <xsl:template match="wiley:publicationMeta[@level='product']/wiley:idGroup/wiley:id">
-            <idno>
-                <xsl:attribute name="type">
-                    <xsl:apply-templates select="@type"/>
-                </xsl:attribute>
-                <xsl:apply-templates select="@value"/>
-            </idno>
+            <xsl:choose>
+                <xsl:when test="//wiley:publicationMeta/wiley:issn[@type='print']='0009-9163' and contains(//wiley:publicationMeta/wiley:coverDate/@startDate,'2003') and  //wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='43' ">
+                    <idno>
+                        <xsl:attribute name="type">
+                            <xsl:apply-templates select="@type"/>
+                        </xsl:attribute>
+                        <xsl:text>CGA</xsl:text>
+                    </idno>
+                </xsl:when>
+                <xsl:otherwise>
+                    <idno>
+                        <xsl:attribute name="type">
+                            <xsl:apply-templates select="@type"/>
+                        </xsl:attribute>
+                        <xsl:apply-templates select="@value"/>
+                    </idno>
+                </xsl:otherwise>
+            </xsl:choose>
+        
     </xsl:template>
     
     <!-- DOI numbers -->
@@ -2478,6 +2518,16 @@ reactorsa'</title>
     
     <xsl:template match="vol | Volume | VolumeID | volume | volumeref | volumeno | sb:volume-nr | vid | wiley:numbering[@type='journalVolume'] | wiley:vol">
         <xsl:choose>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='4‐1'">
+                    <biblScope unit="vol">
+                        <xsl:text>14</xsl:text>
+                    </biblScope>
+            </xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0066-4812' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='3‐1'">
+                <biblScope unit="vol">
+                    <xsl:text>11</xsl:text>
+                </biblScope>
+            </xsl:when>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::p">
                 <bibl>
                     <biblScope unit="vol">
@@ -2491,11 +2541,18 @@ reactorsa'</title>
                             <xsl:value-of select="normalize-space(.)"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:if test="normalize-space(.)">
-                        <biblScope unit="vol">
-                            <xsl:value-of select="normalize-space(.)"/>
-                        </biblScope>
-                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test=".='0'">
+                                <biblScope unit="vol">1</biblScope>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:if test="normalize-space(.)">
+                                    <biblScope unit="vol">
+                                        <xsl:value-of select="normalize-space(.)"/>
+                                    </biblScope>
+                                </xsl:if>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
@@ -2554,9 +2611,28 @@ reactorsa'</title>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
+                <xsl:if test="normalize-space(.) and .!='0'">
                     <biblScope unit="issue">
-                        <xsl:value-of select="normalize-space(.)"/>
+                        <xsl:choose>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0066-4812' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='3‐1'">
+                                    <xsl:text>1</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0066-4812' and //wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='10-11'">
+                                <xsl:text>1</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='17'">
+                                <xsl:text>1-2</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='4‐1'">
+                                <xsl:text>1</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='2'">
+                                <xsl:text>2-3</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="normalize-space(.)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </biblScope>
                 </xsl:if>
             </xsl:otherwise>

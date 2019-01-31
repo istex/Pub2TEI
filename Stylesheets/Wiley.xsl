@@ -301,9 +301,50 @@
 						</xsl:if>
 						<!-- date -->
 						<xsl:if test="header/publicationMeta[@level='part']/coverDate">
-							<date type="published">
-								<xsl:attribute name="when"><xsl:value-of select="header/publicationMeta[@level='part']/coverDate/@startDate"/></xsl:attribute>
-							</date>
+						    <xsl:choose>
+						        <xsl:when test="header/publicationMeta[@level='product']/issn[@type='print']='0365-5563' and header/publicationMeta[@level='part']/numberingGroup/numbering[@type='journalVolume']='80B'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                <xsl:text>1972</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta[@level='unit']/doi='10.1111/j.1744-1714.1968.tb00414.x'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                <xsl:text>1968</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0002-9246' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='58'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                <xsl:text>1999</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0077-8923' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='105'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1963</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0077-8923' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='196'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1972</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:otherwise>
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:value-of select="header/publicationMeta[@level='part']/coverDate/@startDate"/>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:otherwise>
+						    </xsl:choose>
 						</xsl:if>
                     </publicationStmt>
                     <!-- SG - ajout du codeGenre article et revue -->
@@ -587,6 +628,13 @@
                     </xsl:when>
                 </xsl:choose>
                 <xsl:choose>
+                    <xsl:when test="publicationMeta/issn[@type='print']='0009-9163' and contains(publicationMeta/coverDate/@startDate,'2003') and  publicationMeta/numberingGroup/numbering[@type='journalVolume']='43' ">
+                        <titleInfo xmlns="http://www.loc.gov/mods/v3">
+                            <title xmlns="http://www.loc.gov/mods/v3">
+                                <xsl:text>Congenital Anomalies</xsl:text>
+                            </title>
+                        </titleInfo>
+                    </xsl:when>
                     <xsl:when test="publicationMeta[@level='product']/titleGroup/title[@type ='main']">
                         <title level="j" type="main">
                             <xsl:value-of select="publicationMeta[@level='product']/titleGroup/title[@type ='main']"/>
@@ -604,13 +652,22 @@
                         <xsl:value-of select="normalize-space(publicationMeta[@level='part']/titleGroup/title[@type ='specialIssueTitle'])"/>
                     </title>
                 </xsl:if>
-                <!-- SG ajout titre specialIssue -->
-                <xsl:if test="publicationMeta[@level='product']/titleGroup/title/@sort !=''">
-                    <title level="j" type="alt">
-                        <xsl:apply-templates select="publicationMeta[@level='product']/titleGroup/title/@sort"/>
+                <xsl:if test="publicationMeta[@level='part']/titleGroup/title/@type ='supplementTitle'">
+                    <title level="j" type="sub">
+                        <xsl:value-of select="normalize-space(publicationMeta[@level='part']/titleGroup/title[@type ='supplementTitle'])"/>
                     </title>
                 </xsl:if>
-               
+                <!-- SG ajout titre specialIssue -->
+                <xsl:choose>
+                    <xsl:when test="publicationMeta/issn[@type='print']='0009-9163' and contains(publicationMeta/coverDate/@startDate,'2003') and  publicationMeta/numberingGroup/numbering[@type='journalVolume']='43' "/>
+                    <xsl:otherwise>
+                        <xsl:if test="publicationMeta[@level='product']/titleGroup/title/@sort !=''">
+                            <title level="j" type="alt">
+                                <xsl:apply-templates select="publicationMeta[@level='product']/titleGroup/title/@sort"/>
+                            </title>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:apply-templates select="publicationMeta[@level='product']/issn"/>
                 <xsl:apply-templates select="publicationMeta[@level='product']/doi"/>
                 <xsl:apply-templates select="publicationMeta[@level='part']/doi"/>
@@ -633,9 +690,50 @@
                     </xsl:if>
 					
 					<xsl:if test="publicationMeta[@level='part']/coverDate">
-						<date type="published">
-							<xsl:attribute name="when"><xsl:value-of select="publicationMeta[@level='part']/coverDate/@startDate"/></xsl:attribute>
-						</date>
+					    <xsl:choose>
+					        <xsl:when test="publicationMeta[@level='unit']/doi='10.1111/j.1744-1714.1968.tb00414.x'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                <xsl:text>1968</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta[@level='product']/issn[@type='print']='0365-5563' and publicationMeta[@level='part']/numberingGroup/numbering[@type='journalVolume']='80B'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                <xsl:text>1972</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0002-9246' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='58'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1999</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0077-8923' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='105'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1963</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0077-8923' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='196'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1972</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:otherwise>
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:value-of select="publicationMeta[@level='part']/coverDate/@startDate"/>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:otherwise>
+					    </xsl:choose>
 					</xsl:if>
                 </imprint>
             </monogr>
@@ -1057,10 +1155,6 @@
                 </xsl:variable>
                 <xsl:if test="normalize-space(//affiliation[@xml:id=$aff])">
                     <affiliation>
-                        <xsl:if test="//affiliation[@xml:id=$aff]/unparsedAffiliation[string-length() &gt; 0 ]">
-                            <xsl:call-template name="wileyParseAffiliation"></xsl:call-template>
-                          <!--  <xsl:value-of select="normalize-space(//affiliation[@xml:id=$aff]/unparsedAffiliation)"/>-->
-                        </xsl:if>
                         <xsl:if test="//affiliation[@xml:id=$aff]/orgDiv[string-length() &gt; 0 ]">
                             <xsl:for-each select="//affiliation[@xml:id=$aff]/orgDiv/text()">
                                 <orgName type="division">
@@ -1118,6 +1212,18 @@
                         </xsl:if>
                             </address>
                         </xsl:if>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/unparsedAffiliation[string-length() &gt; 0 ]">
+                                <xsl:apply-templates select="//affiliation[@xml:id=$aff]/unparsedAffiliation/text()"/>
+                                <xsl:if test="//affiliation[@xml:id=$aff]/@countryCode">
+                                    <address>
+                                        <country>
+                                            <xsl:attribute name="key">
+                                                <xsl:value-of select="//affiliation[@xml:id=$aff]/@countryCode"/>
+                                            </xsl:attribute>
+                                        </country>
+                                    </address>
+                                </xsl:if>
+                            </xsl:if>
                     </affiliation>
                 </xsl:if>
                 <xsl:if test="//affiliation[@xml:id=$aff]/unparsedAffiliation/email[string-length() &gt; 0 ]">
@@ -1127,6 +1233,88 @@
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
+                <affiliation>
+                    <xsl:variable name="translate">
+                        <xsl:value-of select="translate($text,'#','')"/>
+                    </xsl:variable>
+                    <xsl:variable name="aff">
+                        <xsl:value-of select="normalize-space(substring-before($translate, $separator))"/>
+                    </xsl:variable>
+                    
+                    
+                    <xsl:if test="//affiliation[@xml:id=$aff]/orgDiv[string-length() &gt; 0 ]">
+                        <xsl:for-each select="//affiliation[@xml:id=$aff]/orgDiv/text()">
+                            <orgName>
+                                <xsl:apply-templates select="."/>
+                            </orgName>
+                        </xsl:for-each>
+                    </xsl:if>
+                    <xsl:if test="//affiliation[@xml:id=$aff]/orgName[string-length() &gt; 0 ]">
+                        <xsl:for-each select="//affiliation[@xml:id=$aff]/orgName/text()">
+                            <orgName>
+                                <xsl:apply-templates select="."/>
+                            </orgName>
+                        </xsl:for-each>
+                    </xsl:if>
+                    <xsl:if test="//affiliation[@xml:id=$aff]/address/street[string-length() &gt; 0 ] | //affiliation[@xml:id=$aff]/address/countryPart | //affiliation[@xml:id=$aff]/address/postCode | //affiliation[@xml:id=$aff]/address/city | //affiliation[@xml:id=$aff]/address/state | //affiliation[@xml:id=$aff]/address/country">
+                        <address>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/address/street[string-length() &gt; 0 ]">
+                                <street>
+                                    <xsl:apply-templates select="//affiliation[@xml:id=$aff]/address/street/text()"/>   
+                                </street>
+                            </xsl:if>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/address/city[string-length() &gt; 0 ]">
+                                <settlement type="city">
+                                    <xsl:apply-templates select="//affiliation[@xml:id=$aff]/address/city/text()"/>   
+                                </settlement>
+                            </xsl:if>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/address/postCode[string-length() &gt; 0 ]">
+                                <postCode>
+                                    <xsl:apply-templates select="//affiliation[@xml:id=$aff]/address/postCode/text()"/>   
+                                </postCode>
+                            </xsl:if>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/address/state[string-length() &gt; 0 ]">
+                                <state>
+                                    <xsl:apply-templates select="//affiliation[@xml:id=$aff]/address/state/text()"/>   
+                                </state>
+                            </xsl:if>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/address/countryPart[string-length() &gt; 0 ]">
+                                <region>
+                                    <xsl:apply-templates select="//affiliation[@xml:id=$aff]/address/countryPart/text()"/>   
+                                </region>
+                            </xsl:if>
+                            <xsl:if test="//affiliation[@xml:id=$aff]/@countryCode | //affiliation[@xml:id=$aff]/address/country[string-length() &gt; 0 ]">
+                                <country>
+                                    <xsl:if test="//affiliation[@xml:id=$aff]/@countryCode[string-length() &gt; 0 ]">
+                                        <xsl:attribute name="key">
+                                            <xsl:value-of select="//affiliation[@xml:id=$aff]/@countryCode"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:if test="//affiliation[@xml:id=$aff]/address/country[string-length() &gt; 0 ]">
+                                        <xsl:apply-templates select="//affiliation[@xml:id=$aff]/address/country/text()"/>
+                                    </xsl:if>
+                                </country>
+                            </xsl:if>
+                        </address>
+                    </xsl:if>
+                    <xsl:if test="//affiliation[@xml:id=$aff]/unparsedAffiliation[string-length() &gt; 0 ]">
+                        <xsl:apply-templates select="//affiliation[@xml:id=$aff]/unparsedAffiliation/text()"/>
+                        <xsl:if test="//affiliation[@xml:id=$aff]/@countryCode">
+                            <address>
+                                <country>
+                                    <xsl:attribute name="key">
+                                        <xsl:value-of select="//affiliation[@xml:id=$aff]/@countryCode"/>
+                                    </xsl:attribute>
+                                </country>
+                            </address>
+                        </xsl:if>
+                    </xsl:if>
+                </affiliation>
+                <xsl:call-template name="tokenize">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+            <!--<xsl:otherwise>
                 <affiliation>
                     <xsl:variable name="translate">
                         <xsl:value-of select="translate($text,'#','')"/>
@@ -1195,22 +1383,12 @@
                     </xsl:if>
                     <xsl:if test="//affiliation[@xml:id=$aff]/unparsedAffiliation[string-length() &gt; 0 ]">
                             <xsl:call-template name="wileyParseAffiliation"/>
-                            <!--<xsl:apply-templates select="//affiliation[@xml:id=$aff]/unparsedAffiliation/text()"/>-->
-                       <!-- <xsl:if test="//affiliation[@xml:id=$aff]/@countryCode">
-                            <address>
-                                <country>
-                                    <xsl:attribute name="key">
-                                        <xsl:value-of select="//affiliation[@xml:id=$aff]/@countryCode"/>
-                                    </xsl:attribute>
-                                </country>
-                                    </address>
-                        </xsl:if>-->
                     </xsl:if>
                 </affiliation>
                 <xsl:call-template name="tokenize">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
                 </xsl:call-template>
-            </xsl:otherwise>
+            </xsl:otherwise>-->
         </xsl:choose>
     </xsl:template>
     
@@ -1993,7 +2171,8 @@
             <xsl:apply-templates/>
         </term>
     </xsl:template>
-    <xsl:template match="unparsedAffiliation" name="wileyParseAffiliation">
+    
+    <xsl:template name="wileyParseAffiliation">
         <xsl:param name="text" select="@affiliationRef"/>
         <xsl:variable name="aff">
             <xsl:value-of select="translate($text,'#','')"/>
@@ -2004,6 +2183,7 @@
                     </xsl:with-param>
                 </xsl:call-template>
     </xsl:template>
+    
     <xsl:template name="WileyParseAffiliation2">
         <xsl:param name="text" select="@affiliationRef"/>
         <xsl:param name="theAffil"/>
@@ -2063,13 +2243,6 @@
                                 <xsl:with-param name="theAffil" select="$theAffil"/>
                                 <xsl:with-param name="inAddress" select="true()"/>
                             </xsl:call-template>
-                            <xsl:if test="//affiliation[@xml:id=$aff]/@countryCode">
-                                <country>
-                                    <xsl:attribute name="key">
-                                        <xsl:value-of select="//affiliation[@xml:id=$aff]/@countryCode[string-length() &gt; 0 ]"/>
-                                    </xsl:attribute>
-                                </country>
-                            </xsl:if>
                         </address>
                     </xsl:otherwise>
                 </xsl:choose>
