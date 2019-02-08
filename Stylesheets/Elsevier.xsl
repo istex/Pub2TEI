@@ -14,7 +14,8 @@
     <xsl:output encoding="UTF-8" method="xml"/>
     
     <xsl:include href="ElsevierFormula.xsl"/>
-    <xsl:variable name="docIssueEls" select="document($issueXmlPath)" />
+    <xsl:param name="issueXmlPath"/>
+    <xsl:variable name="docIssueEls" select="document($issueXmlPath)"/>
     <xsl:variable name="titre">
         <xsl:choose>
             <xsl:when test="//ce:doi='10.1016/S0140-7007(01)00037-8'">
