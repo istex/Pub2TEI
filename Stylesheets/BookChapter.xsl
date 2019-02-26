@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
-    <xsl:param name="issueXmlPath"/>
+    <!--<xsl:param name="issueXmlPath"/>-->
     <xsl:variable name="docIssue" select="document($issueXmlPath)"/>
     <!-- todo : abstract niveau supérieur book / series
     todo: issue
