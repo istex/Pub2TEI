@@ -2576,6 +2576,19 @@
                                         <xsl:value-of select="els1:head/ce:presented |els2:head/ce:presented | head/ce:presented"/>
                                     </title>
                                 </xsl:if>
+
+                                <!-- ajout identifiants ISTEX et ARK -->
+                                <xsl:if test="string-length($idistex) &gt; 0 ">
+                                    <idno type="istex">
+                                        <xsl:value-of select="$idistex"/>
+                                    </idno>
+                                </xsl:if>
+                                <xsl:if test="string-length($arkistex) &gt; 0 ">
+                                    <idno type="ark">
+                                        <xsl:value-of select="$arkistex"/>
+                                    </idno>
+                                </xsl:if>
+
                                 <!-- All authors are included here -->
                                 <xsl:apply-templates
                                     select="els1:head/ce:author-group/ce:author |els2:head/ce:author-group/ce:author | head/ce:author-group/ce:author"/>
