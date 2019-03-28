@@ -5212,7 +5212,7 @@
             <xsl:when test="normalize-space($codeISSN)='0399-077X' and normalize-space($codeVol)='12' and normalize-space($date)='1997'">12</xsl:when>
             <xsl:when test="normalize-space($codeISSN)='0142-1123' and normalize-space($codeVol)='19' and normalize-space($date)='1998' and normalize-space($codeNum)='93'">sup.1</xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$docIssueEls//iss-first | $docIssue//s1:iss-first"/>
+                <xsl:value-of select="$docIssueEls//iss-first | $docIssueEls//s1:iss-first"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
