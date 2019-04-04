@@ -435,11 +435,31 @@
 
     <!-- 2017-04-03: Vérifier le traitement des éléments de XMLLatex -->
     <xsl:template match="els1:math |els2:math | math">
-        <formula notation="MathML">
-            <xsl:copy exclude-result-prefixes="#all">
-                <xsl:apply-templates/>
-            </xsl:copy>
+        <formula notation="MathML" xmlns:m="http://www.w3.org/1998/Math/MathML">
+            <m:math>
+            <xsl:apply-templates/>
+            </m:math>
         </formula>
+    </xsl:template>
+    <xsl:template match="els1:fr |els2:fr | fr">
+        <m:mfrac xmlns:m="http://www.w3.org/1998/Math/MathML">
+            <m:mrow xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <xsl:apply-templates select="els1:nu |els2:nu | nu"/>
+            </m:mrow>
+            <m:mrow xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <xsl:apply-templates select="els1:de |els2:de | de"/>
+            </m:mrow>
+        </m:mfrac>
+    </xsl:template>
+    <xsl:template match="els1:nu |els2:nu | nu">
+        <m:mn xmlns:m="http://www.w3.org/1998/Math/MathML">
+            <xsl:apply-templates/>
+        </m:mn>
+    </xsl:template>
+    <xsl:template match="els1:de |els2:de | de">
+        <m:mn xmlns:m="http://www.w3.org/1998/Math/MathML">
+            <xsl:apply-templates/>
+        </m:mn>
     </xsl:template>
     
     <!-- SG - WILEY ajout élément latex -->

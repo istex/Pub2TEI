@@ -5671,8 +5671,8 @@
         </publisher>
         <!-- PL: put the date under the paragraph, as it is TEI P5 valid -->
         <!-- LR: moved the date two nodes higher so that the encompassing publicationStmt is closer to what is expected-->
-        <date when="{@year}">
-            <xsl:value-of select="@year"/>
+        <date when="{$rattrapageDateElsevier}">
+            <xsl:value-of select="$rattrapageDateElsevier"/>
         </date>
         <availability status="restricted">
             <licence>
