@@ -5175,7 +5175,20 @@
             <xsl:when test="normalize-space($codeISSN)='0268-005X' and normalize-space($codeVol)='11'">1997</xsl:when>
             <xsl:when test="normalize-space($codeISSN)='0278-4254' and normalize-space($codeVol)='17'and normalize-space($date)='1997'">1998</xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+                <xsl:variable name="date">
+                    <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="string-length($date)=8">
+                        <xsl:value-of select="normalize-space(substring($date,-3,string-length($date)))"/>
+                    </xsl:when>
+                    <xsl:when test="string-length($date)=6">
+                        <xsl:value-of select="normalize-space(substring($date,-1,string-length($date)))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
