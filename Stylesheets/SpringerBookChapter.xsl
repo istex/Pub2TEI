@@ -246,5 +246,4 @@
             </series>
         </biblStruct>
     </xsl:template>
-
 </xsl:stylesheet>

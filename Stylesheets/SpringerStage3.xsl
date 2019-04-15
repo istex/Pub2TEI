@@ -6,10 +6,11 @@
 
     <xsl:output encoding="UTF-8" method="xml"/>
     <xsl:variable name="codeGenreSpringerJournal">
-        <xsl:value-of select="//ArticleInfo/@ArticleType"/>
+        <xsl:value-of select="//ArticleInfo/@ArticleType | //BookInfo/@BookProductType"/>
     </xsl:variable>
     <xsl:variable name="codeGenreSJ">
         <xsl:choose>
+            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Graduate/advanced undergraduate textbook'">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='OriginalPaper'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Article'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Report'">research-article</xsl:when>
@@ -60,7 +61,7 @@
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
-                        <xsl:apply-templates select="Journal//ArticleTitle"/>
+                        <xsl:apply-templates select="Journal//ArticleTitle | Book/BookInfo/BookTitle"/>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -79,6 +80,8 @@
                                 />
                             </xsl:otherwise>
                         </xsl:choose>
+                        <xsl:apply-templates
+                            select="Book/descendant::Chapter/ChapterInfo/ChapterCopyright"/>
                         <xsl:if test="//ArticleGrants/BodyPDFGrant[string(@Grant)='OpenAccess']">
                                 <availability status="free">
                                     <p>Open Access</p>
@@ -123,6 +126,7 @@
                     </notesStmt>
                     <sourceDesc>
                         <xsl:apply-templates select="Journal" mode="sourceDesc"/>
+                        <xsl:apply-templates select="Book" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
                 <xsl:choose>
@@ -214,6 +218,23 @@
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
+                <profileDesc>
+                    <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/Abstract"/>
+                    <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/AbbreviationGroup"/>
+                    <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/KeywordGroup"/>
+                    <textClass ana="subject">
+                        <xsl:apply-templates select="Book/descendant::SubjectCollection"/></textClass>
+                    <textClass ana="subject"><xsl:apply-templates select="Book/descendant::BookSubjectGroup"/></textClass>
+                    <xsl:if test="//Chapter/@Language">
+                        <langUsage>
+                            <language>
+                                <xsl:attribute name="ident">
+                                    <xsl:value-of select="translate(//Chapter/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                </xsl:attribute>
+                            </language>
+                        </langUsage>
+                    </xsl:if>
+                </profileDesc>
             </teiHeader>
 			<text>
 			    <body>
@@ -325,4 +346,56 @@
         </biblStruct>
     </xsl:template>
 
+    <!-- Building the sourceDesc bibliographical representation -->
+    
+    <xsl:template match="Book" mode="sourceDesc">
+        <biblStruct>
+            <analytic>
+                <!-- Title information related to the chapter goes here -->
+                <xsl:apply-templates select="descendant::Chapter/ChapterInfo/ChapterTitle"/>
+                <!-- All authors are included here -->
+                <xsl:apply-templates select="descendant::Chapter/ChapterHeader/AuthorGroup/Author"/>
+                <xsl:apply-templates
+                    select="descendant::Chapter/ChapterHeader//AuthorGroup/InstitutionalAuthor"/>
+                <!-- ajout identifiants ISTEX et ARK -->
+                <xsl:if test="string-length($idistex) &gt; 0 ">
+                    <idno type="istex">
+                        <xsl:value-of select="$idistex"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if test="string-length($arkistex) &gt; 0 ">
+                    <idno type="ark">
+                        <xsl:value-of select="$arkistex"/>
+                    </idno>
+                </xsl:if>
+                <xsl:apply-templates select="Chapter/ChapterInfo/ChapterID"/>
+                <xsl:apply-templates select="descendant::Chapter/ChapterInfo/ChapterDOI"/>
+            </analytic>
+            <monogr>
+                <xsl:apply-templates select="BookInfo/BookTitle"/>
+                <xsl:apply-templates select="BookInfo/BookSubTitle"/>
+                <xsl:apply-templates select="Part/PartInfo/PartTitle"/>
+                <xsl:apply-templates select="BookInfo/BookDOI"/>
+                <xsl:apply-templates select="BookInfo/BookID"/>
+                <xsl:apply-templates select="BookInfo/BookTitleID"/>
+                <xsl:apply-templates select="BookInfo/BookPrintISBN"/>
+                <xsl:apply-templates select="BookInfo/BookElectronicISBN"/>
+                <xsl:apply-templates select="//Chapter"/>
+                <xsl:apply-templates select="//Part"/>
+                <xsl:apply-templates select="BookHeader/AuthorGroup/Author"/>
+                <xsl:apply-templates select="BookHeader/EditorGroup/Editor"/>
+                <xsl:apply-templates select="BookInfo/ConferenceInfo"/>
+                <imprint>
+                    <xsl:apply-templates select="BookInfo/BookVolumeNumber"/>
+                    <xsl:apply-templates select="descendant::Chapter/ChapterInfo/ChapterFirstPage"/>
+                    <xsl:apply-templates select="descendant::Chapter/ChapterInfo/ChapterLastPage"/>
+                    <xsl:apply-templates select="Volume/VolumeInfo"/>
+                    <xsl:apply-templates select="BookInfo/BookChapterCount"/>
+                    <xsl:apply-templates select="Part/PartInfo/PartChapterCount"/>
+                    <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
+                    <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
+                </imprint>
+            </monogr>
+        </biblStruct>
+    </xsl:template>
 </xsl:stylesheet>
