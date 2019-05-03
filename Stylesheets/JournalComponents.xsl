@@ -2528,6 +2528,26 @@ reactorsa'</title>
                     <xsl:text>11</xsl:text>
                 </biblScope>
             </xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='17'">
+                <biblScope unit="vol">
+                    <xsl:text>11</xsl:text>
+                </biblScope>
+            </xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='10'">
+                <biblScope unit="vol">
+                    <xsl:text>33</xsl:text>
+                </biblScope>
+            </xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='11'">
+                <biblScope unit="vol">
+                    <xsl:text>33</xsl:text>
+                </biblScope>
+            </xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='18'">
+                <biblScope unit="vol">
+                    <xsl:text>11</xsl:text>
+                </biblScope>
+            </xsl:when>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::p">
                 <bibl>
                     <biblScope unit="vol">
@@ -2601,7 +2621,7 @@ reactorsa'</title>
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="iid | iss | Issue | issue | issue-number | IssueID | issueref | wiley:numbering[@type='journalIssue'] | wiley:issue">
+    <xsl:template match="iid | iss | Issue | issue | issue-number | IssueID | issueref | wiley:numbering[@type='journalIssue'] | wiley:numbering[@type='supplement'] | wiley:issue">
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation">
                 <bibl>
@@ -2614,8 +2634,20 @@ reactorsa'</title>
                 <xsl:if test="normalize-space(.) and .!='0'">
                     <biblScope unit="issue">
                         <xsl:choose>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='17'">
+                                <xsl:text>1</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='18'">
+                                <xsl:text>2</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='10'">
+                                <xsl:text>1</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0019-1019' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='11'">
+                                <xsl:text>2</xsl:text>
+                            </xsl:when>
                             <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0066-4812' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='3‐1'">
-                                    <xsl:text>1</xsl:text>
+                                <xsl:text>1</xsl:text>
                             </xsl:when>
                             <xsl:when test="//wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0066-4812' and //wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='10-11'">
                                 <xsl:text>1</xsl:text>
@@ -2629,8 +2661,11 @@ reactorsa'</title>
                             <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='2'">
                                 <xsl:text>2-3</xsl:text>
                             </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='03‐04'">
+                                <xsl:text>3-4</xsl:text>
+                            </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="normalize-space(.)"/>
+                                <xsl:value-of select="normalize-space(translate(.,'n',''))"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </biblScope>
@@ -2685,7 +2720,7 @@ reactorsa'</title>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and not(contains(.,'n/a'))">
-                    <biblScope unit="page" from="{translate(.,' ','')}">
+                    <biblScope unit="page" from="{translate(.,'  p.','')}">
                         <xsl:value-of select="normalize-space(.)"/>
                     </biblScope>
                 </xsl:if>
