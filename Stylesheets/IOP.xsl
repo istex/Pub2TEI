@@ -341,7 +341,7 @@
     <!-- web address
         ex: "stacks.iop.org/JPhysD" -->
     <xsl:template match="jnl-data/jnl-web-address">
-        <ref type="URL">
+        <ref type="url">
             <xsl:value-of select="."/>
         </ref>
     </xsl:template>
