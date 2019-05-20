@@ -1023,9 +1023,19 @@
                             </distributor>
                         </xsl:if>
                         <xsl:if test="suppfm/parent/cpg/cpn |pubfm/cpg/cpn">
-                            <publisher scheme="https://publisher-list.data.istex.fr">
-                                <xsl:value-of select="suppfm/parent/cpg/cpn|pubfm/cpg/cpn"/>
-                            </publisher>
+                            <xsl:choose>
+                                <xsl:when test="suppfm/parent/cpg/cpn |pubfm/cpg/cpn='Nature Publishing Group'">
+                                    <publisher ref="https://scientific-publisher.data.istex.fr">
+                                        <xsl:value-of select="suppfm/parent/cpg/cpn|pubfm/cpg/cpn"/>
+                                    </publisher>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <publisher ref="https://scientific-publisher.data.istex.fr">
+                                        <xsl:value-of select="suppfm/parent/cpg/cpn|pubfm/cpg/cpn"/>
+                                    </publisher>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            
                         </xsl:if>
                         <xsl:if test="front/article-meta/article-categories/subj-group[@subj-group-type='access-type']/compound-subject/compound-subject-part[@content-type='code']='access-type-free'">
                             <availability status="free">
@@ -1504,8 +1514,8 @@
                             <xsl:if test="front/journal-meta/publisher">
                                 <xsl:apply-templates select="front/journal-meta/publisher/*"/>
                             </xsl:if>
-                            <xsl:if test="not(front/journal-meta/publisher)">
-                                <publisher>Nature Publishing Group</publisher>
+                            <xsl:if test="not(front/journal-meta/publisher) and //cpn='Nature Publishing Group'">
+                                <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-12K39592-G">Nature Publishing Group</publisher>
                             </xsl:if>
                             <xsl:apply-templates select="front/article-meta/permissions/*"/>
                             <xsl:if test="not(front/article-meta/permissions)">

@@ -2955,7 +2955,10 @@
                 <xsl:when test="normalize-space(text())">
                     <xsl:value-of select="normalize-space(text())"/>
                 </xsl:when>
-                <xsl:otherwise>Elsevier</xsl:otherwise>
+                <xsl:otherwise>
+                    <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G</xsl:attribute>
+                    <xsl:text>Elsevier</xsl:text>
+                </xsl:otherwise>
             </xsl:choose>
         </publisher>
         <!-- PL: put the date under the paragraph, as it is TEI P5 valid -->

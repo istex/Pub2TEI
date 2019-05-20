@@ -533,15 +533,15 @@
 
     <!-- Copyright related information to appear in <publicationStmt> -->
     <xsl:template match="ArticleCopyright | ChapterCopyright">
-        <xsl:apply-templates/>
-    </xsl:template>
-
-    <xsl:template match="CopyrightHolderName">
         <availability>
-            <licence>
-            <xsl:apply-templates/>
-            </licence>
+            <xsl:apply-templates select="CopyrightHolderName"/>
+            <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-3XSW68JL-F">springer</p>
         </availability>
+    </xsl:template>
+    <xsl:template match="CopyrightHolderName">
+        <licence>
+            <xsl:apply-templates/>
+        </licence>
     </xsl:template>
 
     <xsl:template match="CopyrightYear">

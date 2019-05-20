@@ -129,7 +129,7 @@
                         <authority>ISTEX</authority>
                         <xsl:choose>
                             <xsl:when test="//body/book-part/book-part-meta">
-                                <publisher scheme="https://scientific-publisher.data.istex.fr/ark:/67375/H02-N14T76M9-6">Brepols Publishers</publisher>
+                                <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-N14T76M9-6">Brepols Publishers</publisher>
                             </xsl:when>
                             <xsl:when test="book-meta/publisher/publisher-name[string-length() &gt; 0]">
                                 <xsl:choose>
@@ -137,7 +137,10 @@
                                         <publisher><xsl:value-of select="book-meta/publisher/publisher-name"/></publisher>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <publisher source="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-XPK2D80W-F">Numérique Premium</publisher></xsl:otherwise>
+                                        <xsl:if test="contains(//self-uri/@xlink:href,'numeriquepremium')">
+                                            <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-ZX4M1CKJ-Z">Numérique Premium</publisher>
+                                        </xsl:if>
+                                    </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
                         </xsl:choose>

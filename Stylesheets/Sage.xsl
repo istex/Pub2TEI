@@ -90,7 +90,7 @@
                             <xsl:apply-templates select="header/jrn_info/pub_info/pub_name"/>
                         </xsl:if>
                         <xsl:if test="not(header/jrn_info/pub_info/pub_name)">
-                            <publisher>Sage Publishing Ltd</publisher>
+                            <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-7W6GJSM4-X">Sage Publishing Ltd</publisher>
                         </xsl:if>
                         <!-- SG ajout publisherLoc -->
                         <xsl:if test="header/jrn_info/pub_info/pub_location">
@@ -350,7 +350,7 @@
     </xsl:template>
     
     <xsl:template match="pub-name">
-        <publisher>
+        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-7W6GJSM4-X">
             <xsl:apply-templates/>
         </publisher>
     </xsl:template>

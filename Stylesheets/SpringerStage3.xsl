@@ -131,7 +131,6 @@
                 </fileDesc>
                 <xsl:choose>
                     <xsl:when test="Journal/JournalOnlineFirst">
-
                         <xsl:if test="Journal/JournalOnlineFirst/Article/ArticleHeader/KeywordGroup">
                             <profileDesc>
                                 <xsl:apply-templates
@@ -212,29 +211,37 @@
                                 </xsl:choose>
                             </profileDesc>
                         </xsl:if>
+                        <xsl:if test="Book/descendant::Chapter/ChapterHeader/Abstract 
+                            | Book/descendant::Chapter/ChapterHeader/AbbreviationGroup
+                            | Book/descendant::Chapter/ChapterHeader/KeywordGroup
+                            |Book/descendant::SubjectCollection
+                            | Book/descendant::BookSubjectGroup">
+                            <profileDesc>
+                                <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/Abstract"/>
+                                <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/AbbreviationGroup"/>
+                                <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/KeywordGroup"/>
+                                <textClass ana="subject">
+                                    <xsl:apply-templates select="Book/descendant::SubjectCollection"/></textClass>
+                                <textClass ana="subject">
+                                    <xsl:apply-templates select="Book/descendant::BookSubjectGroup"/>
+                                </textClass>
+                                <xsl:if test="//Chapter/@Language">
+                                    <langUsage>
+                                        <language>
+                                            <xsl:attribute name="ident">
+                                                <xsl:value-of select="translate(//Chapter/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                            </xsl:attribute>
+                                        </language>
+                                    </langUsage>
+                                </xsl:if>
+                            </profileDesc>
+                        </xsl:if>
                         <xsl:if test="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory">
                             <xsl:apply-templates
                                 select="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory"/>
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
-                <profileDesc>
-                    <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/Abstract"/>
-                    <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/AbbreviationGroup"/>
-                    <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/KeywordGroup"/>
-                    <textClass ana="subject">
-                        <xsl:apply-templates select="Book/descendant::SubjectCollection"/></textClass>
-                    <textClass ana="subject"><xsl:apply-templates select="Book/descendant::BookSubjectGroup"/></textClass>
-                    <xsl:if test="//Chapter/@Language">
-                        <langUsage>
-                            <language>
-                                <xsl:attribute name="ident">
-                                    <xsl:value-of select="translate(//Chapter/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
-                                </xsl:attribute>
-                            </language>
-                        </langUsage>
-                    </xsl:if>
-                </profileDesc>
             </teiHeader>
 			<text>
 			    <body>

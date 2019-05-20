@@ -67,6 +67,7 @@
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
+                        <xsl:apply-templates select="PublisherInfo/PublisherName"/>
                         <xsl:apply-templates
                             select="Series/Book/descendant::Chapter/ChapterInfo/ChapterCopyright"/>
                         <xsl:if test="//ArticleGrants/BodyPDFGrant[string(@Grant)='OpenAccess']">
@@ -74,6 +75,7 @@
                                 <p>Open Access</p>
                             </availability>
                         </xsl:if>
+                        <xsl:apply-templates select="//ChapterCopyright/CopyrightYear"/>
                     </publicationStmt>
                     <notesStmt>
                         <!-- niveau book -->

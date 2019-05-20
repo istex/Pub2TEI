@@ -285,7 +285,7 @@
                        	 	<xsl:apply-templates select="header/publicationMeta/publisherInfo/publisherName"/>
 						</xsl:if>
 						<xsl:if test="not(header/publicationMeta/publisherInfo/publisherName)">
-                       	 	<publisher>Wiley Publishing Ltd</publisher>
+						    <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-QW5Q88H5-V">Wiley Publishing Ltd</publisher>
 						</xsl:if>
                         <!-- SG ajout publisherLoc -->
                         <xsl:if test="header/publicationMeta/publisherInfo/publisherLoc">

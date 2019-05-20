@@ -98,7 +98,7 @@
                     </xsl:if>
                     <publicationStmt>
                         <authority>ISTEX</authority>
-                        <publisher>Duke University Press</publisher>
+                        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-BRG9S9X3-V">Duke University Press</publisher>
                         <pubPlace>Durham, NC 27701, USA</pubPlace>
                         <availability>
                             <licence><p>©Duke University Press, Project Euclid, Durham, NC 27701,USA</p></licence>
@@ -398,7 +398,7 @@
                         </editionStmt>
                     </xsl:if>
                 <publicationStmt>
-                    <publisher>Duke University Press</publisher>
+                    <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-BRG9S9X3-V">Duke University Press</publisher>
                 </publicationStmt>
                 <sourceDesc>
                     <biblStruct type="toc">

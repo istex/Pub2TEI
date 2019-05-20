@@ -2781,15 +2781,23 @@ reactorsa'</title>
         <xsl:choose>
             <xsl:when test="ancestor::p/.">
                 <bibl>
-                <publisher>
-                    <xsl:apply-templates/>
-                </publisher>
+                    <publisher>
+                        <xsl:apply-templates/>
+                    </publisher>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.)">
                     <publisher>
-                        <xsl:apply-templates/>
+                        <xsl:choose>
+                            <xsl:when test="contains(.,'Springer')">
+                                <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-SWLMH5L1-1</xsl:attribute>
+                                <xsl:apply-templates/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </publisher>
                 </xsl:if>
             </xsl:otherwise>
