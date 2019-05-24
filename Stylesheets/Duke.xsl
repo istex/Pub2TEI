@@ -56,9 +56,18 @@
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://istex.github.io/odd-istex/out/istex.xsd</xsl:text>
             </xsl:attribute>
-            <xsl:attribute name="xml:lang">
-                <xsl:value-of select="issue/record/@lang"/>
-            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="issue/record/@lang">
+                    <xsl:attribute name="xml:lang">
+                        <xsl:value-of select="translate(issue/record/@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="xml:lang">
+                        <xsl:value-of select="translate(issue/record/title/@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <teiHeader>
                 <fileDesc>
                     <!-- SG - titre brut -->
@@ -167,11 +176,11 @@
                                 <xsl:apply-templates select="issue/record/subjects"/>
                             </textClass>
                         </xsl:if>
-                        <xsl:if test="issue/record/@lang">
+                        <xsl:if test="issue/record/title/@lang">
                         <langUsage>
                             <language>
                                 <xsl:attribute name="ident">
-                                    <xsl:value-of select="translate(issue/record/@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                    <xsl:value-of select="translate(issue/record/title/@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                 </xsl:attribute>
                             </language>
                         </langUsage>
@@ -592,8 +601,24 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="subject">
+        <xsl:variable name="avantEspace">
+            <xsl:value-of select="normalize-space(substring-before(.,' '))"/>
+        </xsl:variable>
+        <xsl:variable name="apresEspace">
+            <xsl:value-of select="normalize-space(substring-after(.,' '))"/>
+        </xsl:variable>
                             <xsl:variable name="mscSubjectCode">
-                                <xsl:value-of select="."/>
+                                <xsl:choose>
+                                    <xsl:when test="contains(.,' ')">
+                                        <xsl:value-of select="$avantEspace"/>
+                                    </xsl:when>
+                                    <xsl:when test="contains(.,' ')">
+                                        <xsl:value-of select="$apresEspace"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="."/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:variable>
                             <xsl:variable name="mscSubjectVerb">
                                 <xsl:choose>
@@ -1696,10 +1721,16 @@
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A27'">Commutativity</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A29'">Inverse problems</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A30'">Algebraic systems of matrices [See also 16S50, 20Gxx, 20Hxx]</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A33'">Matrices over special rings (quaternions, finite fields, etc.)</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A36'">Matrices of integers [See also 11C20]</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A39'">Linear inequalities</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A42'">Inequalities involving eigenvalues and eigenvectors</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A45'">Miscellaneous inequalities involving matrices</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A48'">Positive matrices and their generalizations; cones of matrices</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A51'">Stochastic matrices</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A52'">Random matrices</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A54'">Matrices over function rings in one or more variables</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A57'">Other types of matrices (Hermitian, skew-Hermitian, etc.)</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A60'">Norms of matrices, numerical range, applications of functional analysis to matrix theory [See also 65F35, 65J05]</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A63'">Quadratic and bilinear forms, inner products [See mainly 11Exx]</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A66'">Clifford algebras, spinors</xsl:when>
@@ -1710,6 +1741,7 @@
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A80'">Max-plus and related algebras</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A83'">Matrix completion problems</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A86'">Linear preserver problems</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='15A90'">Applications of matrix theory to physics</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15A99'">Miscellaneous topics</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15Bxx'">Special matrices</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='15B05'">Toeplitz, Cauchy, and related matrices</xsl:when>
@@ -6814,14 +6846,33 @@
 							                        </xsl:attribute>
 							                    </xsl:if>
 							                    <list>
-							                        <item>
-							                            <label>
-							                                <xsl:value-of select="normalize-space($mscSubjectCode)"/>
-							                            </label>
-							                            <term>
-							                                <xsl:value-of select="normalize-space($mscSubjectVerb)"/>
-							                            </term> 
-							                        </item>
+							                        <xsl:choose>
+							                            <xsl:when test="contains(.,' ')">
+							                                <item>
+							                                    <label>
+							                                        <xsl:value-of select="normalize-space($avantEspace)"/>
+							                                    </label>
+							                                    <term>
+							                                        <xsl:value-of select="normalize-space($mscSubjectVerb)"/>
+							                                    </term> 
+							                                </item>
+							                                <item>
+							                                    <label>
+							                                        <xsl:value-of select="normalize-space($apresEspace)"/>
+							                                    </label>
+							                                </item>
+							                            </xsl:when>
+							                            <xsl:otherwise>
+							                                <item>
+							                                    <label>
+							                                        <xsl:value-of select="normalize-space($mscSubjectCode)"/>
+							                                    </label>
+							                                    <term>
+							                                        <xsl:value-of select="normalize-space($mscSubjectVerb)"/>
+							                                    </term> 
+							                                </item>
+							                            </xsl:otherwise>
+							                        </xsl:choose>
 							                    </list>
 							                </keywords>
 							
