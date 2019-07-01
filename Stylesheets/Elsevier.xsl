@@ -10,6 +10,7 @@
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
+    xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd"
     exclude-result-prefixes="xsi mml els1 els2 s1 sb ce xlink">
     <xsl:output encoding="UTF-8" method="xml"/>
     
@@ -2502,7 +2503,7 @@
         </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
-                <xsl:text>https://istex.github.io/odd-istex/out/istex.xsd</xsl:text>
+                <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
             <xsl:if test="@xml:lang">
                 <xsl:copy-of select="@xml:lang"/>
@@ -2806,7 +2807,7 @@
                                             <biblScope unit="volume">
                                                 <xsl:value-of select="$rattrapageVolElsevier"/>
                                                 <xsl:if test="$docIssueEls//vol-last |$docIssueEls//s1:vol-last">
-                                                    <xsl:text>&#8211;</xsl:text>
+                                                    <xsl:text>-</xsl:text>
                                                     <xsl:value-of select="$docIssueEls//vol-last | $docIssueEls//s1:vol-last"/>
                                                 </xsl:if>
                                             </biblScope>
@@ -2819,7 +2820,7 @@
                                         <biblScope unit="issue">
                                             <xsl:value-of select="$rattrapageNumElsevier"/>
                                             <xsl:if test="$docIssueEls//iss-last | $docIssueEls//s1:iss-last">
-                                                <xsl:text>&#8211;</xsl:text>
+                                                <xsl:text>-</xsl:text>
                                                 <xsl:value-of select="$docIssueEls//iss-last | $docIssueEls//s1:iss-last"/>
                                             </xsl:if>
                                         </biblScope>
