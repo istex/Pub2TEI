@@ -1405,9 +1405,9 @@
                         
                     </profileDesc>
                 </xsl:if>
-                <xsl:if test="front/article-meta/history">
+               <!-- <xsl:if test="front/article-meta/history">
                     <xsl:apply-templates select="front/article-meta/history"/>
-                </xsl:if>
+                </xsl:if>-->
             </teiHeader>
             <text>
                 <!-- PL: abstract is moved to <abstract> under <profileDesc> -->
@@ -3104,12 +3104,12 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- Revision information -->
+    <!-- Revision information 
     <xsl:template match="history">
         <revisionDesc>
             <xsl:apply-templates/>
         </revisionDesc>
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:template match="date[@date-type = 'received']">
         <change>
