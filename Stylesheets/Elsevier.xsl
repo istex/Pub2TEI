@@ -2498,7 +2498,7 @@
     </xsl:variable>
     <xsl:template match="els1:article[els1:item-info] |els2:article[els2:item-info] | els1:converted-article[els1:item-info] | els2:converted-article[els2:item-info] | converted-article[item-info] | article[item-info]">
         <xsl:comment>
-            <xsl:text>Version 0.1 générée le </xsl:text>
+            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
             <xsl:value-of select="$datecreation"/>
         </xsl:comment>
         <TEI>

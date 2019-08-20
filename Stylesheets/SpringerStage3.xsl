@@ -51,7 +51,7 @@
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="/Publisher[not(Series/Book/descendant::Chapter)]">
         <xsl:comment>
-            <xsl:text>Version 0.1 générée le </xsl:text>
+            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
             <xsl:value-of select="$datecreation"/>
         </xsl:comment>
         <TEI>
