@@ -2848,6 +2848,15 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <xsl:if test="//ce:doctopics|head/ce:keywords |els2:head/ce:keywords | head/ce:keywords | els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -2887,28 +2896,10 @@
                             </langUsage>
                         </xsl:if>
                     </profileDesc>
-                </xsl:if>
-                <xsl:if test="//ce:glyph">
-                    <encodingDesc>
-                        <charDecl>
-                            <xsl:for-each select="//ce:glyph">
-                                <char>
-                                    <xsl:attribute name="xml:id">
-                                        <xsl:value-of select="@name"/>
-                                    </xsl:attribute>
-                                </char>
-                            </xsl:for-each>
-                        </charDecl>
-                    </encodingDesc>
-                </xsl:if>
-                <xsl:if
-                    test="els1:head/ce:date-received | els1:head/ce:date-revised | els1:head/ce:date-accepted |els2:head/ce:date-received | els2:head/ce:date-revised | els2:head/ce:date-accepted  | head/ce:date-received | head/ce:date-revised | head/ce:date-accepted | head/ce:date-received">
-                    <revisionDesc>
-                        <xsl:apply-templates
-                            select="els1:head/ce:date-received | els1:head/ce:date-revised | els1:head/ce:date-accepted |els2:head/ce:date-received | els2:head/ce:date-revised | els2:head/ce:date-accepted  | head/ce:date-received | head/ce:date-revised | head/ce:date-accepted | head/ce:date-received"
-                        />
-                    </revisionDesc>
-                </xsl:if>
+                </xsl:if><!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
 				<!-- PL: abstract is moved from <front> to <abstract> under <profileDesc> -->

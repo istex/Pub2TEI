@@ -129,6 +129,15 @@
                         <xsl:apply-templates select="Book" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <xsl:choose>
                     <xsl:when test="Journal/JournalOnlineFirst">
                         <xsl:if test="Journal/JournalOnlineFirst/Article/ArticleHeader/KeywordGroup">
@@ -242,6 +251,10 @@
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
 			<text>
 			    <body>

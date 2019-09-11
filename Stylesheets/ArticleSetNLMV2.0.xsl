@@ -80,6 +80,15 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <xsl:if test="Language | Abstract">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -95,9 +104,10 @@
                         </langUsage>
                     </profileDesc>
                 </xsl:if>
-                <xsl:if test="History">
-                    <xsl:apply-templates select="History"/>
-                </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
 			<!-- PL: abstract is moved to <abstract> under <profileDesc> -->
             <!--text>
