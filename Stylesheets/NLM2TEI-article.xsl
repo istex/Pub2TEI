@@ -1140,8 +1140,8 @@
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate" select="${datecreation}"/>
-                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                    <xsl:with-param name="creationDate"><xsl:value-of select="datecreation"/></xsl:with-param>
+                    <xsl:with-param name="versionNumber"><xsl:value-of select="xslversion"/></xsl:with-param>
                 </xsl:call-template>
                 <!-- ProfileDesc -->
                 <xsl:if test="front/article-meta/abstract or front/article-meta/kwd-group or bdy/fp or fm/abs or fm/fp or //pubfm/subject or //suppfm/subject or @xml:lang or front/article-meta/article-categories">

@@ -152,8 +152,8 @@
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate" select="${datecreation}"/>
-                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                    <xsl:with-param name="creationDate"><xsl:value-of select="datecreation"/></xsl:with-param>
+                    <xsl:with-param name="versionNumber"><xsl:value-of select="xslversion"/></xsl:with-param>
                 </xsl:call-template>
                 <xsl:if test="issue/record/abstract[string-length() &gt; 0] |issue/record/abstract[string-length() &gt; 0]">
                     <profileDesc>
@@ -490,8 +490,8 @@
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate" select="${datecreation}"/>
-                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                    <xsl:with-param name="creationDate"><xsl:value-of select="datecreation"/></xsl:with-param>
+                    <xsl:with-param name="versionNumber"><xsl:value-of select="xslversion"/></xsl:with-param>
                 </xsl:call-template>
                 <profileDesc>
                     <xsl:if test="abstract | subjects">

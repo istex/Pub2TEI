@@ -8,10 +8,12 @@
         <xsl:param name="versionNumber"/>
         <encodingDesc>
             <appInfo>
-                <application ident="pub2tei" version="${versionNumber}" when="{$creationDate}">
+                <application ident="pub2tei" version="${versionNumber}" when="${creationDate}">
                     <label>pub2TEI</label>
                     <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
                 </application>
             </appInfo>
         </encodingDesc>
     </xsl:template>
+
+</xsl:stylesheet>
