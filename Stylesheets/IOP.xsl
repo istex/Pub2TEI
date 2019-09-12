@@ -146,10 +146,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate"><xsl:value-of select="$datecreation"/></xsl:with-param>
-                    <xsl:with-param name="versionNumber"><xsl:value-of select="$xslversion"/></xsl:with-param>
-                </xsl:call-template>
+                <xsl:call-template name="insertVersion"/>
                 <!-- métadonnées de profil (thématique et historique du doc) -->
                 <profileDesc>
 					

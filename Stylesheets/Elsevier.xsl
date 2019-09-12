@@ -2845,10 +2845,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate"><xsl:value-of select="$datecreation"/></xsl:with-param>
-                    <xsl:with-param name="versionNumber"><xsl:value-of select="$xslversion"/></xsl:with-param>
-                </xsl:call-template>
+                <xsl:call-template name="insertVersion"/>
                 <xsl:if test="//ce:doctopics|head/ce:keywords |els2:head/ce:keywords | head/ce:keywords | els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->

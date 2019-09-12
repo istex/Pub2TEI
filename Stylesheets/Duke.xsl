@@ -151,10 +151,7 @@
                     </xsl:if>
                 </fileDesc>
                 <!-- versionning -->
-                <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate"><xsl:value-of select="$datecreation"/></xsl:with-param>
-                    <xsl:with-param name="versionNumber"><xsl:value-of select="$xslversion"/></xsl:with-param>
-                </xsl:call-template>
+                <xsl:call-template name="insertVersion"/>
                 <xsl:if test="issue/record/abstract[string-length() &gt; 0] |issue/record/abstract[string-length() &gt; 0]">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -489,10 +486,7 @@
                 </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate"><xsl:value-of select="$datecreation"/></xsl:with-param>
-                    <xsl:with-param name="versionNumber"><xsl:value-of select="$xslversion"/></xsl:with-param>
-                </xsl:call-template>
+                <xsl:call-template name="insertVersion"/>
                 <profileDesc>
                     <xsl:if test="abstract | subjects">
                         <xsl:apply-templates select="abstract"/>

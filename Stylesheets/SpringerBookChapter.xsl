@@ -148,10 +148,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <xsl:call-template name="insertVersion">
-                    <xsl:with-param name="creationDate"><xsl:value-of select="$datecreation"/></xsl:with-param>
-                    <xsl:with-param name="versionNumber"><xsl:value-of select="$xslversion"/></xsl:with-param>
-                </xsl:call-template>
+                <xsl:call-template name="insertVersion"/>
                 <profileDesc>
                     <xsl:apply-templates select="//Book/descendant::Chapter/ChapterHeader/Abstract"/>
                     <xsl:apply-templates select="//Book/descendant::Chapter/ChapterHeader/AbbreviationGroup"/>
