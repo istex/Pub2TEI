@@ -960,10 +960,6 @@
    
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="article[front] | article[pubfm] | article[suppfm] | headerx">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -1142,6 +1138,11 @@
                         <xsl:apply-templates select="front | pubfm | suppfm" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                 <!-- ProfileDesc -->
                 <xsl:if test="front/article-meta/abstract or front/article-meta/kwd-group or bdy/fp or fm/abs or fm/fp or //pubfm/subject or //suppfm/subject or @xml:lang or front/article-meta/article-categories">
                     <profileDesc>
@@ -1405,9 +1406,10 @@
                         
                     </profileDesc>
                 </xsl:if>
-               <!-- <xsl:if test="front/article-meta/history">
-                    <xsl:apply-templates select="front/article-meta/history"/>
-                </xsl:if>-->
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
                 <!-- PL: abstract is moved to <abstract> under <profileDesc> -->
@@ -1558,6 +1560,15 @@
                             <xsl:apply-templates select="front | pubfm | suppfm" mode="sourceDesc"/>
                         </sourceDesc>
                     </fileDesc>
+                    <!-- versionning -->
+                    <encodingDesc>
+                        <appInfo>
+                            <application ident="pub2tei" version="" when="{$datecreation}">
+                                <label>pub2TEI</label>
+                                <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                            </application>
+                        </appInfo>
+                    </encodingDesc>
                     <xsl:choose>
                         <xsl:when test="front/article-meta/abstract or front/article-meta/kwd-group or bdy/fp or fm/abs or fm/fp or //pubfm/subject or //suppfm/subject">
                         <profileDesc>

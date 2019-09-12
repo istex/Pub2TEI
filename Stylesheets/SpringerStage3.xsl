@@ -50,10 +50,6 @@
     </xsl:variable>
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="/Publisher[not(Series/Book/descendant::Chapter)]">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -129,6 +125,11 @@
                         <xsl:apply-templates select="Book" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                 <xsl:choose>
                     <xsl:when test="Journal/JournalOnlineFirst">
                         <xsl:if test="Journal/JournalOnlineFirst/Article/ArticleHeader/KeywordGroup">
@@ -242,6 +243,10 @@
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
 			<text>
 			    <body>

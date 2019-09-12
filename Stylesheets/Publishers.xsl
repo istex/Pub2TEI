@@ -17,6 +17,7 @@
     <xsl:param name="rawfulltextpath"/>
     
     <xsl:include href="Imports.xsl"/>
+    <xsl:include href="Templates.xsl"/>
 
     <xsl:include href="BMJ.xsl"/>
     <xsl:include href="EDPSArticle.xsl"/>

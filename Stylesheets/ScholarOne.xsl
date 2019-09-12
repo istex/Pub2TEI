@@ -13,10 +13,6 @@
 
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="article_set/article">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <xsl:variable name="ms_no" select="@ms_no"/>
         <xsl:variable name="localISSN">
             <xsl:value-of select="journal/issn[@issn_type='print']"/>
@@ -115,6 +111,11 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                 <xsl:if test="@lang">
                     <profileDesc>
 						<!-- PL: abstract is moved to here from <front> -->
@@ -131,6 +132,10 @@
                         </langUsage>
                     </profileDesc>
                 </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
 				<!-- PL: abstract is moved to <abstract> under <profileDesc> -->

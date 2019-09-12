@@ -40,10 +40,6 @@
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
     <xsl:template match="article">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -149,7 +145,11 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
-                
+                <!-- versionning -->
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                 <!-- métadonnées de profil (thématique et historique du doc) -->
                 <profileDesc>
 					
@@ -167,7 +167,10 @@
 
                 </profileDesc>
                 
-                <!-- TODO ici <encodingDesc> ? -->
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
 
             </teiHeader>
                 <text>

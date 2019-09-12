@@ -16,10 +16,6 @@
         </xsl:variable>
         <xsl:variable name="journalDescription"
             select="$journalList/descendant::tei:row[tei:cell/text()=$localISSN]"/>-->
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -80,6 +76,10 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                 <xsl:if test="Language | Abstract">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -95,9 +95,10 @@
                         </langUsage>
                     </profileDesc>
                 </xsl:if>
-                <xsl:if test="History">
-                    <xsl:apply-templates select="History"/>
-                </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
 			<!-- PL: abstract is moved to <abstract> under <profileDesc> -->
             <!--text>

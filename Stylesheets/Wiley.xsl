@@ -139,10 +139,6 @@
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="component">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -154,104 +150,7 @@
                 <fileDesc>
                     <!-- SG - titre brut -->
                     <titleStmt>
-                        <xsl:choose>
-                            <xsl:when test="header/contentMeta/titleGroup/title">
-                                <xsl:for-each select="header/contentMeta/titleGroup/title[@type='main']">
-                                    <title level="a" type="main">
-                                        <xsl:choose>
-                                            <xsl:when test="//component/header/publicationMeta/issn[@type='print']='0378-5599'">
-                                                <xsl:attribute name="xml:lang">fr</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/asna.19322451602'">
-                                                <xsl:attribute name="xml:lang">en</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
-                                                <xsl:attribute name="xml:lang">en</xsl:attribute>
-                                            </xsl:when>
-                                            <!-- correction ouzbeck 10.1002/asna.2103030307 -->
-                                            <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1550-7408.1980.tb04229.x' or header/publicationMeta[@level='unit']/doi='10.1111/j.1365-3180.1990.tb01689.x'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030307'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030305'">
-                                                <xsl:attribute name="xml:lang">de</xsl:attribute>
-                                            </xsl:when>
-                                            <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S -->
-                                            <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">
-                                                <xsl:attribute name="xml:lang">es</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x' ">
-                                                <xsl:attribute name="xml:lang">de</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">
-                                                <xsl:attribute name="xml:lang">es</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">
-                                                <xsl:attribute name="xml:lang">it</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">
-                                                <xsl:attribute name="xml:lang">fr</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="@xml:lang ='be'">
-                                                <xsl:attribute name="xml:lang">nl</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:when test="@xml:lang='ka'">
-                                                <xsl:choose>
-                                                    <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">
-                                                        <xsl:attribute name="xml:lang">it</xsl:attribute>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <xsl:attribute name="xml:lang">de</xsl:attribute>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:if test="@xml:lang">
-                                                    <xsl:attribute name="xml:lang">
-                                                        <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                                    </xsl:attribute>
-                                                </xsl:if>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                        <!-- redressement des titres vides -->
-                                        <xsl:choose>
-                                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1046/j.1523-1739.1997.0110051265.x'">
-                                                <xsl:text>Erratum: Diploid expected heterozygosity and haploid allelic diversity equations misprinted</xsl:text>
-                                            </xsl:when>
-                                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-401X(199809)26:5&lt;253::AID-AHEH253&gt;3.0.CO;2-S'">
-                                                <xsl:text>Vertical and Annual Distribution of Ferric and Ferrous Iron in Acid Mining Lakes</xsl:text> 
-                                            </xsl:when>
-                                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-4133(199811)100:11&lt;513::AID-LIPI513&gt;3.0.CO;2-I'">
-                                                <xsl:text>Die Bleichung von Speisefetten und Ölen V Aus dem Arbeitskreis "Technologien der industriellen"</xsl:text> 
-                                            </xsl:when>
-                                            <xsl:when test="//publicationMeta[@level='unit']/doi='10.1111/insr.12044'">
-                                                <xsl:text>Table of contents</xsl:text> 
-                                            </xsl:when>
-                                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/sres.2200'">
-                                                <xsl:text>Editorial</xsl:text> 
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:choose>
-                                                    <xsl:when test="//header/contentMeta/titleGroup/title[@type='main']/citation[@type='book']">
-                                                        <xsl:if test="//publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']">
-                                                            <xsl:value-of select="//publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']"/>
-                                                            <xsl:text> - </xsl:text>
-                                                        </xsl:if>
-                                                        <xsl:choose>
-                                                            <xsl:when test="//header/contentMeta/titleGroup/title[@type='tocForm']">
-                                                                    <xsl:value-of select="normalize-space(//header/contentMeta/titleGroup/title[@type='tocForm'])"/>
-                                                            </xsl:when>
-                                                            <xsl:otherwise>
-                                                                <xsl:value-of select="normalize-space(//header/contentMeta/titleGroup/title[@type='main']/citation[@type='book']/bookTitle)"/>
-                                                            </xsl:otherwise>
-                                                        </xsl:choose>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <xsl:apply-templates/>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </title>
-                                </xsl:for-each>
-                            </xsl:when>
-                        </xsl:choose>
+                        <xsl:apply-templates select="//titleGroup"/>
                     </titleStmt>
                     <!-- SG - ajout <enrichedObject> -->
                     <xsl:if test="header/contentMeta/enrichedObjectGroup">
@@ -344,6 +243,69 @@
 						                </xsl:attribute>
 						            </date>
 						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='1355-4905' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='15'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1998</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0956-5507' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='7'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1996</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0265-0665' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='21'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>2001</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0026-1068' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='24'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1993</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0309-8249' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='35'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>2001</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0384-9694' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='29'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>2001</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0363-6550' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='10'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1986</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0363-6550' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='12'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1987</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
+						        <xsl:when test="header/publicationMeta/issn[@type='print']='0023-852X' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='40'">
+						            <date type="published">
+						                <xsl:attribute name="when">
+						                    <xsl:text>1930</xsl:text>
+						                </xsl:attribute>
+						            </date>
+						        </xsl:when>
 						        <xsl:otherwise>
 						            <date type="published">
 						                <xsl:attribute name="when">
@@ -396,6 +358,11 @@
                     </sourceDesc>
                 </fileDesc>
                 
+                <!-- versionning -->
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                
                 <xsl:if test="header/contentMeta/abstractGroup | header/contentMeta/keywordGroup | header/publicationMeta[@level='unit']/subjectInfo | header/publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']">
                     <profileDesc>
@@ -490,9 +457,10 @@
                         </xsl:if>
                     </profileDesc>
                 </xsl:if>
-                <xsl:if test="front/article-meta/history">
-                    <xsl:apply-templates select="front/article-meta/history"/>
-                </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
                 <!-- No test if made for body since it is considered a mandatory element -->
@@ -740,6 +708,69 @@
 					                </xsl:attribute>
 					            </date>
 					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='1355-4905' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='15'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1998</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0956-5507' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='7'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1996</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0265-0665' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='21'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>2001</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0309-8249' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='35'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>2001</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0384-9694' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='29'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>2001</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0026-1068' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='24'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1993</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0363-6550' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='10'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1986</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0363-6550' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='12'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1987</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='0023-852X' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='40'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1930</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
 					        <xsl:otherwise>
 					            <date type="published">
 					                <xsl:attribute name="when">
@@ -756,111 +787,109 @@
     </xsl:template>
 
 	<!-- title group -->
-	<xsl:template match="titleGroup">
-		    <xsl:choose>
-		        <xsl:when test="//header/contentMeta/titleGroup/title">
-		            <xsl:for-each select="//header/contentMeta/titleGroup/title[@type='main']">
-		                <title level="a" type="main">
-		                    <xsl:choose>
-		                        <xsl:when test="//component/header/publicationMeta/issn[@type='print']='0378-5599'">
-		                            <xsl:attribute name="xml:lang">fr</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/asna.19322451602'">
-		                            <xsl:attribute name="xml:lang">en</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or //component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or //component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
-		                            <xsl:attribute name="xml:lang">en</xsl:attribute>
-		                        </xsl:when>
-		                        <!-- correction ouzbeck 10.1002/asna.2103030307 -->
-		                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1550-7408.1980.tb04229.x' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1365-3180.1990.tb01689.x'or //component/header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030307'or //component/header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030305'">
-		                            <xsl:attribute name="xml:lang">de</xsl:attribute>
-		                        </xsl:when>
-		                        <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S -->
-		                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">
-		                            <xsl:attribute name="xml:lang">es</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x' ">
-		                            <xsl:attribute name="xml:lang">de</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">
-		                            <xsl:attribute name="xml:lang">es</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">
-		                            <xsl:attribute name="xml:lang">it</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">
-		                            <xsl:attribute name="xml:lang">fr</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang ='be'">
-		                            <xsl:attribute name="xml:lang">nl</xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang='ka'">
-		                            <xsl:choose>
-		                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">
-		                                    <xsl:attribute name="xml:lang">it</xsl:attribute>
-		                                </xsl:when>
-		                                <xsl:otherwise>
-		                                    <xsl:attribute name="xml:lang">de</xsl:attribute>
-		                                </xsl:otherwise>
-		                            </xsl:choose>
-		                        </xsl:when>
-		                        <xsl:when test="@xml:lang">
-		                            <xsl:attribute name="xml:lang">
-		                                <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-		                            </xsl:attribute>
-		                        </xsl:when>
-		                        <xsl:otherwise>
-		                            <xsl:if test="@xml:lang">
-		                                <xsl:attribute name="xml:lang">
-		                                    <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-		                                </xsl:attribute>
-		                            </xsl:if>
-		                        </xsl:otherwise>
-		                    </xsl:choose>
-		                    <!-- redressement des titres vides -->
-		                    <xsl:choose>
-		                        <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1046/j.1523-1739.1997.0110051265.x'">
-		                            <xsl:text>Erratum: Diploid expected heterozygosity and haploid allelic diversity equations misprinted</xsl:text>
-		                        </xsl:when>
-		                        <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-401X(199809)26:5&lt;253::AID-AHEH253&gt;3.0.CO;2-S'">
-		                            <xsl:text>Vertical and Annual Distribution of Ferric and Ferrous Iron in Acid Mining Lakes</xsl:text> 
-		                        </xsl:when>
-		                        <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-4133(199811)100:11&lt;513::AID-LIPI513&gt;3.0.CO;2-I'">
-		                            <xsl:text>Die Bleichung von Speisefetten und Ölen V Aus dem Arbeitskreis "Technologien der industriellen"</xsl:text> 
-		                        </xsl:when>
-		                        <xsl:when test="//publicationMeta[@level='unit']/doi='10.1111/insr.12044'">
-		                            <xsl:text>Table of contents</xsl:text> 
-		                        </xsl:when>
-		                        <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/sres.2200'">
-		                            <xsl:text>Editorial</xsl:text> 
-		                        </xsl:when>
-		                        <xsl:otherwise>
-		                            <xsl:choose>
-		                                <xsl:when test="//header/contentMeta/titleGroup/title[@type='main']/citation[@type='book']">
-		                                    <xsl:if test="//publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']">
-		                                        <xsl:value-of select="//publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']"/>
-		                                        <xsl:text> - </xsl:text>
-		                                    </xsl:if>
-		                                    <xsl:choose>
-		                                        <xsl:when test="//header/contentMeta/titleGroup/title[@type='tocForm']">
-		                                            <xsl:value-of select="normalize-space(//header/contentMeta/titleGroup/title[@type='tocForm'])"/>
-		                                        </xsl:when>
-		                                        <xsl:otherwise>
-		                                            <xsl:value-of select="normalize-space(//header/contentMeta/titleGroup/title[@type='main']/citation[@type='book']/bookTitle)"/>
-		                                        </xsl:otherwise>
-		                                    </xsl:choose>
-		                                </xsl:when>
-		                                <xsl:otherwise>
-		                                    <xsl:apply-templates/>
-		                                </xsl:otherwise>
-		                            </xsl:choose>
-		                        </xsl:otherwise>
-		                    </xsl:choose>
-		                </title>
-		            </xsl:for-each>
-		        </xsl:when>
-		    </xsl:choose>
-		
+    <xsl:template match="//header/contentMeta/titleGroup">
+	    <xsl:choose>
+	        <xsl:when test="title">
+	            <xsl:choose>
+	                <xsl:when test="title[@type='main']/citation[@type='book']">
+	                    <xsl:for-each select="title[@type='main']/citation[@type='book']">
+	                        <title level="a" type="main">
+	                            <xsl:if test="//publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']">
+	                                <xsl:value-of select="//publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']"/>
+	                                <xsl:text> - </xsl:text>
+	                            </xsl:if>
+	                            <xsl:choose>
+	                                <xsl:when test="title[@type='tocForm']">
+	                                    <xsl:value-of select="normalize-space(//header/contentMeta/titleGroup/title[@type='tocForm'])"/>
+	                                </xsl:when>
+	                                <xsl:otherwise>
+	                                    <xsl:for-each select="bookTitle">
+	                                        <xsl:value-of select="normalize-space(.)"/>
+	                                    </xsl:for-each>
+	                                </xsl:otherwise>
+	                            </xsl:choose>
+	                        </title>
+	                    </xsl:for-each>
+	                </xsl:when>
+	                <xsl:otherwise>
+	                        <title level="a" type="main">
+	                            <xsl:choose>
+	                                <xsl:when test="//component/header/publicationMeta/issn[@type='print']='0378-5599'">
+	                                    <xsl:attribute name="xml:lang">fr</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/asna.19322451602'">
+	                                    <xsl:attribute name="xml:lang">en</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
+	                                    <xsl:attribute name="xml:lang">en</xsl:attribute>
+	                                </xsl:when>
+	                                <!-- correction ouzbeck 10.1002/asna.2103030307 -->
+	                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1550-7408.1980.tb04229.x' or header/publicationMeta[@level='unit']/doi='10.1111/j.1365-3180.1990.tb01689.x'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030307'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030305'">
+	                                    <xsl:attribute name="xml:lang">de</xsl:attribute>
+	                                </xsl:when>
+	                                <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S -->
+	                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">
+	                                    <xsl:attribute name="xml:lang">es</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x' ">
+	                                    <xsl:attribute name="xml:lang">de</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">
+	                                    <xsl:attribute name="xml:lang">es</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">
+	                                    <xsl:attribute name="xml:lang">it</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">
+	                                    <xsl:attribute name="xml:lang">fr</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="@xml:lang ='be'">
+	                                    <xsl:attribute name="xml:lang">nl</xsl:attribute>
+	                                </xsl:when>
+	                                <xsl:when test="@xml:lang='ka'">
+	                                    <xsl:choose>
+	                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">
+	                                            <xsl:attribute name="xml:lang">it</xsl:attribute>
+	                                        </xsl:when>
+	                                        <xsl:otherwise>
+	                                            <xsl:attribute name="xml:lang">de</xsl:attribute>
+	                                        </xsl:otherwise>
+	                                    </xsl:choose>
+	                                </xsl:when>
+	                                <xsl:otherwise>
+	                                    <xsl:if test="@xml:lang">
+	                                        <xsl:attribute name="xml:lang">
+	                                            <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+	                                        </xsl:attribute>
+	                                    </xsl:if>
+	                                </xsl:otherwise>
+	                            </xsl:choose>
+	                            <!-- redressement des titres vides -->
+	                            <xsl:choose>
+	                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1046/j.1523-1739.1997.0110051265.x'">
+	                                    <xsl:text>Erratum: Diploid expected heterozygosity and haploid allelic diversity equations misprinted</xsl:text>
+	                                </xsl:when>
+	                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-401X(199809)26:5&lt;253::AID-AHEH253&gt;3.0.CO;2-S'">
+	                                    <xsl:text>Vertical and Annual Distribution of Ferric and Ferrous Iron in Acid Mining Lakes</xsl:text> 
+	                                </xsl:when>
+	                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-4133(199811)100:11&lt;513::AID-LIPI513&gt;3.0.CO;2-I'">
+	                                    <xsl:text>Die Bleichung von Speisefetten und Ölen V Aus dem Arbeitskreis "Technologien der industriellen"</xsl:text> 
+	                                </xsl:when>
+	                                <xsl:when test="//publicationMeta[@level='unit']/doi='10.1111/insr.12044'">
+	                                    <xsl:text>Table of contents</xsl:text> 
+	                                </xsl:when>
+	                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/sres.2200'">
+	                                    <xsl:text>Editorial</xsl:text> 
+	                                </xsl:when>
+	                                <xsl:otherwise>
+	                                    <xsl:value-of select="title[@type='main']"/>
+	                                </xsl:otherwise>
+	                            </xsl:choose>
+	                        </title>
+	                </xsl:otherwise>
+	            </xsl:choose>
+	        </xsl:when>
+	    </xsl:choose>
 	    <!-- SG - ajout conditionnel -->
 	    <xsl:if test="title[@type='subtitle']">
 	        <title level= "a" type="sub">
@@ -873,15 +902,15 @@
 	            <xsl:value-of select="title[@type='subtitle']"/>
 	        </title>
 	    </xsl:if>
-	    <xsl:if test="title[@type='short']">
+	    <xsl:if test="//header/contentMeta/titleGroup/title[@type='short']">
 	        <title level= "a" type="short">
 	            <!-- SG - ajout de la langue du titre -->
-	            <xsl:if test="title[@type='short']/@xml:lang">
+	            <xsl:if test="//header/contentMeta/titleGroup/title[@type='short']/@xml:lang">
 	                <xsl:attribute name="xml:lang">
-	                    <xsl:value-of select="title[@type='short']/@xml:lang"/>
+	                    <xsl:value-of select="//header/contentMeta/titleGroup/title[@type='short']/@xml:lang"/>
 	                </xsl:attribute>
 	            </xsl:if>
-	            <xsl:value-of select="title[@type='short']"/>
+	            <xsl:value-of select="//header/contentMeta/titleGroup/title[@type='short']"/>
 	        </title>
 	    </xsl:if>
 	</xsl:template>
@@ -1186,16 +1215,18 @@
         <xsl:choose>
             <xsl:when test="contains($restAff4,' ')">
                 <affiliation>
-                    <xsl:apply-templates select="//affiliation[@xml:id=substring-before($restAff4,' ')]"/>
+                    <xsl:value-of select="//affiliation[@xml:id=substring-before($restAff4,' ')]/p/email"/>
                 </affiliation>
                 <xsl:call-template name="createWileyAffiliations">
                     <xsl:with-param name="restAff" select="translate(substring-after($restAff4,' '),'#','')"/> 
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <affiliation>
-                    <xsl:apply-templates select="//affiliation[@xml:id=$restAff4]"/>
-                </affiliation>
+                <xsl:if test="//note[@xml:id=$restAff4]/p/email">
+                <email>
+                    <xsl:value-of select="//note[@xml:id=$restAff4]/p/email"/>
+                </email>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

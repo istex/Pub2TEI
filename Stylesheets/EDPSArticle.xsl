@@ -74,6 +74,11 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <xsl:call-template name="insertVersion">
+                    <xsl:with-param name="creationDate" select="${datecreation}"/>
+                    <xsl:with-param name="versionNumber" select="${xslversion}"/>
+                </xsl:call-template>
                 <xsl:if test="Language">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -90,9 +95,10 @@
                         </langUsage>
                     </profileDesc>
                 </xsl:if>
-                <xsl:if test="History">
-                    <xsl:apply-templates select="History"/>
-                </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
 			<!-- PL: abstract is moved to <abstract> under <profileDesc> -->
             <!--text>
