@@ -2548,6 +2548,11 @@ reactorsa'</title>
                     <xsl:text>11</xsl:text>
                 </biblScope>
             </xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0957-7734' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='S7'">
+                <biblScope unit="vol">
+                    <xsl:text>17</xsl:text>
+                </biblScope>
+            </xsl:when>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::p">
                 <bibl>
                     <biblScope unit="vol">
@@ -2662,6 +2667,9 @@ reactorsa'</title>
                                 <xsl:text>2-3</xsl:text>
                             </xsl:when>
                             <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='03‐04'">
+                                <xsl:text>3-4</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0931-2439' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='3‐4–4'">
                                 <xsl:text>3-4</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>

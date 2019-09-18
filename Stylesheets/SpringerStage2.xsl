@@ -44,6 +44,15 @@
                         <xsl:apply-templates select="ArticleInfo" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <xsl:if test="ArticleHeader/KeywordGroup">
                     <profileDesc>
 						<!-- PL: abstract is moved here from <front> -->
@@ -52,9 +61,10 @@
                         <xsl:apply-templates select="ArticleHeader/KeywordGroup"/>
                     </profileDesc>
                 </xsl:if>
-                <xsl:if test="ArticleInfo/ArticleHistory">
-                    <xsl:apply-templates select="ArticleInfo/ArticleHistory"/>
-                </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
 				<!-- PL: abstract is moved to <abstract> under <profileDesc> -->

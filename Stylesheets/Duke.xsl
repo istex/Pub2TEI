@@ -154,7 +154,15 @@
                         </sourceDesc>
                     </xsl:if>
                 </fileDesc>
-                
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <xsl:if test="issue/record/abstract[string-length() &gt; 0] |issue/record/abstract[string-length() &gt; 0]">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -187,6 +195,10 @@
                         </xsl:if>
                     </profileDesc>
                 </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
                 <!-- pas de body dans les notices -->
@@ -484,6 +496,15 @@
                     </biblStruct>
                 </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <profileDesc>
                     <xsl:if test="abstract | subjects">
                         <xsl:apply-templates select="abstract"/>

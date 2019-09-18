@@ -189,6 +189,15 @@
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
+                <!-- versionning -->
+                <encodingDesc>
+                    <appInfo>
+                        <application ident="pub2tei" version="" when="{$datecreation}">
+                            <label>pub2TEI</label>
+                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
+                        </application>
+                    </appInfo>
+                </encodingDesc>
                 <xsl:if test="body/keywords|body/abstract">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
@@ -197,6 +206,10 @@
                         <xsl:apply-templates select="body/keywords"/>
                     </profileDesc>
                 </xsl:if>
+                <!-- traceability -->
+                <revisionDesc>
+                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                </revisionDesc>
             </teiHeader>
             <text>
 				<!-- PL: abstract is moved to <abstract> under <profileDesc> -->
