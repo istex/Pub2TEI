@@ -8,10 +8,6 @@
     <!-- Le format de la RCS utilise essentiellement des composant NLM en ayant pris le soin (!) de définir ses propres constructions ici el là. -->
     <!-- On sent le travail visionaire du grouillot... -->
     <xsl:template match="article[art-admin]">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -65,14 +61,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <encodingDesc>
-                    <appInfo>
-                        <application ident="pub2tei" version="" when="{$datecreation}">
-                            <label>pub2TEI</label>
-                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                        </application>
-                    </appInfo>
-                </encodingDesc>
+                <xsl:call-template name="insertVersion"/>
                 <xsl:if test="toBeCompleted">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->

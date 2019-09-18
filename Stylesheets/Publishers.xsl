@@ -10,13 +10,15 @@
     <!-- ajout déclaration schema ODD-ISTEX -->
     
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
-    <xsl:param name="xslversion" value="1.0.0"/>
+    <xsl:param name="xslversion">1.0.2</xsl:param>
+    <xsl:param name="releasedate">17-09-2019</xsl:param>
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
     <xsl:param name="rawfulltextpath"/>
     
     <xsl:include href="Imports.xsl"/>
+    <xsl:include href="Templates.xsl"/>
 
     <xsl:include href="BMJ.xsl"/>
     <xsl:include href="EDPSArticle.xsl"/>

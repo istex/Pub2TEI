@@ -1,0 +1,25 @@
+{
+  "name": "pub2tei",
+  "version": "1.0.2",
+  "description": "set of XSLT stylesheets for convert scientific documents from publisher formats (jats, A++, ...) to a unique TEI customized for ISTEX",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postversion": "bash update-version.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/istex/Pub2TEI.git"
+  },
+  "keywords": [
+    "XSLT",
+    "TEI",
+    "publishers"
+  ],
+  "author": "INIST-CNRS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/istex/Pub2TEI/issues"
+  },
+  "homepage": "https://github.com/istex/Pub2TEI#readme"
+}

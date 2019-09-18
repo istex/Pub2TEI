@@ -8,10 +8,6 @@
 
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="edp-article">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <xsl:variable name="localISSN">
             <xsl:value-of select="journal-id/issn-paper"/>
         </xsl:variable>
@@ -81,14 +77,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <encodingDesc>
-                    <appInfo>
-                        <application ident="pub2tei" version="" when="{$datecreation}">
-                            <label>pub2TEI</label>
-                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                        </application>
-                    </appInfo>
-                </encodingDesc>
+                <xsl:call-template name="insertVersion"/>
                 <xsl:if test="Language">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->

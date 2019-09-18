@@ -2497,10 +2497,6 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:template match="els1:article[els1:item-info] |els2:article[els2:item-info] | els1:converted-article[els1:item-info] | els2:converted-article[els2:item-info] | converted-article[item-info] | article[item-info]">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -2849,14 +2845,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <encodingDesc>
-                    <appInfo>
-                        <application ident="pub2tei" version="" when="{$datecreation}">
-                            <label>pub2TEI</label>
-                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                        </application>
-                    </appInfo>
-                </encodingDesc>
+                <xsl:call-template name="insertVersion"/>
                 <xsl:if test="//ce:doctopics|head/ce:keywords |els2:head/ce:keywords | head/ce:keywords | els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->

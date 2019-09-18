@@ -7,10 +7,6 @@
     <xsl:output encoding="UTF-8" method="xml"/>
 
     <xsl:template match="nihms-submit">
-        <xsl:comment>
-            <xsl:text>Version </xsl:text><xsl:value-of select="$xslversion"/><xsl:text> générée le </xsl:text>
-            <xsl:value-of select="$datecreation"/>
-        </xsl:comment>
         <TEI>
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -47,14 +43,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <encodingDesc>
-                    <appInfo>
-                        <application ident="pub2tei" version="" when="{$datecreation}">
-                            <label>pub2TEI</label>
-                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                        </application>
-                    </appInfo>
-                </encodingDesc>
+                <xsl:call-template name="insertVersion"/>
                 <!-- traceability -->
                 <revisionDesc>
                     <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>

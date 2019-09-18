@@ -75,14 +75,7 @@
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
-                <encodingDesc>
-                    <appInfo>
-                        <application ident="pub2tei" version="" when="{$datecreation}">
-                            <label>pub2TEI</label>
-                            <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                        </application>
-                    </appInfo>
-                </encodingDesc>
+                <xsl:call-template name="insertVersion"/>
                 <xsl:if test="Language">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
