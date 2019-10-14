@@ -112,9 +112,7 @@
     
     <!-- SG - traitement tables WILEY -->
     <xsl:template match="wiley:thead">
-        <head>
-            <xsl:value-of select="wiley:row/wiley:entry"/>
-        </head>
+            <xsl:apply-templates select="wiley:row"/>
     </xsl:template>
     <xsl:template match="wiley:tbody">
         <xsl:apply-templates select="wiley:row"/>
@@ -141,7 +139,6 @@
             <xsl:apply-templates/>
         </cell>
     </xsl:template>
-    
     <xsl:template match="wiley:colspec">
         <!-- not obvious to use in TEI transformation -->
         <xsl:apply-templates select="*"/>
