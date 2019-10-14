@@ -2887,7 +2887,7 @@
                     </profileDesc>
                 </xsl:if><!-- traceability -->
                 <revisionDesc>
-                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                    <change when="{$datecreation}" who="#istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
             </teiHeader>
             <text>
@@ -3494,7 +3494,7 @@
                     <xsl:otherwise>
                         <address>
                             <xsl:call-template name="parseAffiliation">
-                                <xsl:with-param name="theAffil" select="$theAffil"/>
+                                <xsl:with-param name="theAffil" select="translate($theAffil,'.','')"/>
                                 <xsl:with-param name="inAddress" select="true()"/>
                             </xsl:call-template>
                         </address>
