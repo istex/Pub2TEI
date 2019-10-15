@@ -52,7 +52,7 @@
                 </xsl:if>
                 <!-- traceability -->
                 <revisionDesc>
-                    <change when="{$datecreation}" who="#istex" xml:id="pub2tei">formatting</change>
+                    <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
             </teiHeader>
             <text>

@@ -986,8 +986,8 @@
                         </title>
                     </titleStmt>
                     <!-- PL: pour les suppinfo, sous fileDesc/editionStmt/edition/ref, solution de HAL --> 
-                    <!-- SG - reprise correction lors de l'édition -->
-                    <xsl:if test="pubfm/suppinfo | pubfm/chghst">
+                    <!-- SG - non reprise car n'apporte pas d'information pertinente vers les annexes (pas de liens) -->
+                   <!-- <xsl:if test="pubfm/suppinfo | pubfm/chghst">
                         <editionStmt>
                             <edition>
                                 <xsl:attribute name="xml:id">
@@ -1007,7 +1007,7 @@
                                 <xsl:apply-templates select="suppfm/suppinfo/suppobj"/>
                             </edition>	
                         </editionStmt>
-                    </xsl:if>
+                    </xsl:if>-->
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <xsl:if test="front/journal-meta/publisher">
@@ -1405,7 +1405,7 @@
                 </xsl:if>
                 <!-- traceability -->
                 <revisionDesc>
-                    <change when="{$datecreation}" who="#istex" xml:id="pub2tei">formatting</change>
+                    <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
             </teiHeader>
             <text>
@@ -1557,15 +1557,6 @@
                             <xsl:apply-templates select="front | pubfm | suppfm" mode="sourceDesc"/>
                         </sourceDesc>
                     </fileDesc>
-                    <!-- versionning -->
-                    <encodingDesc>
-                        <appInfo>
-                            <application ident="pub2tei" version="" when="{$datecreation}">
-                                <label>pub2TEI</label>
-                                <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                            </application>
-                        </appInfo>
-                    </encodingDesc>
                     <xsl:choose>
                         <xsl:when test="front/article-meta/abstract or front/article-meta/kwd-group or bdy/fp or fm/abs or fm/fp or //pubfm/subject or //suppfm/subject">
                         <profileDesc>
@@ -2214,9 +2205,7 @@
     <xsl:template match="caff" mode="sourceDesc">
         <xsl:choose>
             <xsl:when test="email">
-                <email>
-                    <xsl:value-of select="normalize-space(email)"/>
-                </email>
+                <xsl:apply-templates select="email"/>
             </xsl:when>
             <xsl:otherwise>
                 <affiliation>
@@ -3271,7 +3260,7 @@
             <xsl:apply-templates/>
         </keywords>
     </xsl:template>
-    <xsl:template match="pubfm/subject">
+   <!-- <xsl:template match="pubfm/subject">
         <keywords>
             <xsl:attribute name="scheme">
                 <xsl:choose>
@@ -3282,10 +3271,10 @@
                 </xsl:choose>
             </xsl:attribute>
             <term>
-                <xsl:apply-templates/>
+                <xsl:value-of select="."/>
             </term>
         </keywords>
-    </xsl:template>
+    </xsl:template>-->
     <xsl:template match="front/article-meta/article-categories/subj-group/subject">
         <term>
             <xsl:apply-templates/>

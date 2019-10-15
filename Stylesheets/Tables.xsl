@@ -11,6 +11,7 @@
 
     <!-- Royal Chemical Society: table-entry; NLM: table-wrap -->
     <xsl:template match="table-entry | table-wrap | table">
+        <div>
         <table>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
@@ -42,9 +43,10 @@
                     <xsl:value-of select="label"/>
                 </head>
             </xsl:if>
-            <xsl:apply-templates select="* except tgroup"/>
-			<formula/>
+           <!-- <xsl:apply-templates select="* except tgroup"/>-->
+            <xsl:apply-templates select="*"/>
         </table>
+        </div>
     </xsl:template>
     
     <!-- American chemical Society: oasis:table; oasis:table-wrap -->

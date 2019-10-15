@@ -735,7 +735,7 @@
         match="i  | ce:italic | Emphasis[@Type='Italic'] | italic | emph[@display='italic'] | wiley:i">
         <xsl:if test="normalize-space(.)">
             <xsl:choose>
-                <xsl:when test="ancestor::reftxt and contains(.,'et al.')">
+                <xsl:when test="ancestor::reftxt and contains(.,'et al')">
                         <author>et al.</author>
                 </xsl:when>
                 <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
