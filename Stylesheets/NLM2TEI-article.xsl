@@ -984,30 +984,12 @@
                         <title level="a" type="main">
                             <xsl:value-of select="$repriseTitreVide"/>
                         </title>
+                        <!-- SG - informations book-reviews-->
+                        <xsl:if test="fm/rvwinfo">
+                            <xsl:apply-templates select="fm/rvwinfo"/>
+                        </xsl:if>
                     </titleStmt>
-                    <!-- PL: pour les suppinfo, sous fileDesc/editionStmt/edition/ref, solution de HAL --> 
-                    <!-- SG - non reprise car n'apporte pas d'information pertinente vers les annexes (pas de liens) -->
-                   <!-- <xsl:if test="pubfm/suppinfo | pubfm/chghst">
-                        <editionStmt>
-                            <edition>
-                                <xsl:attribute name="xml:id">
-                                    <xsl:value-of select="pubfm/suppinfo/@id"/>
-                                </xsl:attribute>
-                                <xsl:apply-templates select="pubfm/suppinfo/suppobj"/>
-                                <xsl:apply-templates select="pubfm/chghst/chg"/>
-                            </edition>
-                        </editionStmt>
-                    </xsl:if>
-                    <xsl:if test="suppfm/suppinfo">
-                        <editionStmt>
-                            <edition>
-                                <xsl:attribute name="xml:id">
-                                    <xsl:value-of select="suppfm/suppinfo/@id"/>
-                                </xsl:attribute>
-                                <xsl:apply-templates select="suppfm/suppinfo/suppobj"/>
-                            </edition>	
-                        </editionStmt>
-                    </xsl:if>-->
+                    
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <xsl:if test="front/journal-meta/publisher">
@@ -1672,12 +1654,20 @@
                         </title>
                         <xsl:apply-templates select="article-meta/title-group/*"/>
                         <xsl:apply-templates select="article-meta/title-group/fn-group/*"/>
+                        <!-- SG - informations book-reviews-->
+                        <xsl:if test="//fm/rvwinfo">
+                            <xsl:apply-templates select="//fm/rvwinfo"/>
+                        </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Title information related to the paper goes here -->
                         <xsl:apply-templates select="article-meta/title-group/*"/>
                         <xsl:apply-templates select="article-meta/title-group/fn-group/*"/>
                         <xsl:apply-templates select="//fm/atl"/>
+                        <!-- SG - informations book-reviews-->
+                        <xsl:if test="//fm/rvwinfo">
+                            <xsl:apply-templates select="//fm/rvwinfo"/>
+                        </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- All authors are included here -->
@@ -1866,7 +1856,35 @@
             </monogr>
         </biblStruct>
     </xsl:template>
-
+<!-- SG information book-reviews -->
+    <xsl:template match="rvwinfo">
+        <title level="a" type="sub">
+            <xsl:apply-templates select="rvwpubt"/>
+            <xsl:text> </xsl:text>
+            <xsl:apply-templates select="pubinfo" mode="rvw"/>
+        </title>
+    </xsl:template>
+    <xsl:template match="rvwpubt">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="pubinfo" mode="rvw">
+        <xsl:apply-templates select="node()" mode="rvw"/>
+    </xsl:template>
+    <xsl:template match="pubaug" mode="rvw">
+        <xsl:apply-templates select="pubau" mode="rvw"/>
+    </xsl:template>
+    <xsl:template match="pubau" mode="rvw">
+        <xsl:apply-templates select="node()"/>
+    </xsl:template>
+    <xsl:template match="ttl">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="fnm" mode="rvw">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="snm" mode="rvw">
+        <xsl:apply-templates/>
+    </xsl:template>
     <!-- Generic rules for IDs -->
     <xsl:template match="article-id">
         <idno>
