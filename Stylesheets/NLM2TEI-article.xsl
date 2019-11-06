@@ -2236,13 +2236,23 @@
         <affiliation>
             <xsl:choose>
                 <xsl:when test="org | street | cny | zip | cty | st">
-                    <xsl:if test="org">
-                        <xsl:for-each select="org">
-                        <orgName type="institution">
-                            <xsl:value-of select="."/>
-                        </orgName>
-                        </xsl:for-each>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="org">
+                            <xsl:for-each select="org">
+                                <orgName type="institution">
+                                    <xsl:value-of select="."/>
+                                </orgName>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <orgName type="institution">
+                                <xsl:variable name="org">
+                                    <xsl:apply-templates select="text() except(street | cny | zip | cty | st)"/>
+                                </xsl:variable>
+                                <xsl:value-of select="normalize-space(substring-before($org,', ,'))"/>
+                            </orgName>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:if test="street | cny | zip | cty | st">
                         <address>
 		                    <xsl:if test="cny | cty | zip | street">

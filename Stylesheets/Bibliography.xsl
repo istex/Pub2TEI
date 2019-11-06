@@ -806,12 +806,17 @@
 
     <xsl:template match="sb:author | refau">
         <author>
-            <xsl:apply-templates/>
+            <persName>
+                <xsl:apply-templates select="fnm"/>
+                <xsl:apply-templates select="snm"/>
+            </persName>
         </author>
     </xsl:template>
     <xsl:template match="sb:editor">
         <editor>
-            <xsl:apply-templates/>
+            <persName>
+                <xsl:apply-templates/>
+            </persName>
         </editor>
     </xsl:template>
 	
@@ -824,7 +829,6 @@
 				<xsl:apply-templates select="reftxt/atl"/>
             	<xsl:apply-templates select="reftxt/refau"/>
 			    <xsl:apply-templates select="reftxt/i"/>
-			    
 			</analytic>
 			<monogr>
 			    <xsl:if test="reftxt/jtl | reftxt/btl">
