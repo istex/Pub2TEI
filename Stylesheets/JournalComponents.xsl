@@ -2840,14 +2840,19 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="reftxt/cd">
-        <date>
-            <xsl:attribute name="when">
-                <!-- SG reprise de la date (ex:nrn3258_subject.xml)(26 Aug  2011)
+        <xsl:choose>
+            <xsl:when test="contains(@year,'in the press')"><date/></xsl:when>
+            <xsl:otherwise>
+                <date>
+                    <xsl:attribute name="when">
+                        <!-- SG reprise de la date (ex:nrn3258_subject.xml)(26 Aug  2011)
                 cibler sur attribut @year et non plus sur le text() + PL: cleaning of alphabetical characters in the year string -->
-                    <!--xsl:apply-templates select="@year"/-->
-					<xsl:value-of select="replace(@year, '[a-zA-Z]', '')"/>
-			</xsl:attribute> 
-        </date>
+                        <!--xsl:apply-templates select="@year"/-->
+                        <xsl:value-of select="replace(@year, '[a-zA-Z]', '')"/>
+                    </xsl:attribute>
+                </date>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 	
     <!-- SG: nettoyage caractéres polluants dans les données -->

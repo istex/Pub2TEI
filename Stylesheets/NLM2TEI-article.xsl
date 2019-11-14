@@ -1675,6 +1675,7 @@
                 <xsl:if test="/article/fm/aug | /headerx/fm/aug">
                     <xsl:apply-templates select="/article/fm/aug/* | /headerx/fm/aug/*"/>
                 </xsl:if>
+                <xsl:apply-templates select="//article/fm/aug/group"/>
                 <xsl:if test="//bdy/corres/aug">
                     <xsl:apply-templates select="//bdy/corres/aug/*"/>
                 </xsl:if>
@@ -1907,10 +1908,11 @@
     <!-- +++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- author related information -->
 
-    <xsl:template match="aug/au | aug/cau">
+    <xsl:template match="aug/au | aug/cau | group/au">
         <author>
             <xsl:variable name="i" select="position() - 1"/>
-            <xsl:attribute name="xml:id">
+            <xsl:if test="not(//group)">
+           <xsl:attribute name="xml:id">
                 <xsl:choose>
                     <xsl:when test="$i &lt; 10">
                         <xsl:value-of select="concat('author-000', $i)"/>
@@ -1927,6 +1929,7 @@
                 </xsl:choose>
                 <!--<xsl:variable name="i" select="$i + 1" />-->
             </xsl:attribute>
+            </xsl:if>
             <persName>
                 <xsl:apply-templates select="* except (bio,corf,orf)"/>
             </persName>
@@ -1968,6 +1971,14 @@
                 <xsl:when test="../aff/oid">
                     <xsl:apply-templates select="../aff[oid[@id = current()/orf/@rid]]" mode="sourceDesc"/>
                 </xsl:when>
+                <xsl:when test="//fm/aug/aff/oid">
+                    <affiliation>
+                        <xsl:variable name="affGroup">
+                            <xsl:apply-templates select="//fm/aug/aff[oid[@id = current()/orf/@rid]]" mode="group"/>
+                        </xsl:variable>
+                        <xsl:value-of select="normalize-space($affGroup)"/>
+                    </affiliation>
+                </xsl:when>
                 <xsl:when test="../aff">
                     <xsl:apply-templates select="../aff" mode="sourceDesc"/>
                 </xsl:when>
@@ -1977,7 +1988,23 @@
                     <xsl:value-of select="//aufn[@id = current()/aufnr/@rid]"/>
                 </affiliation>
             </xsl:if>
+            <xsl:if test="//aug/group/groupttl">
+                <orgName>
+                    <xsl:value-of select="normalize-space(//aug/group/groupttl)"/>
+                    <xsl:if test="ancestor::group">
+                        <xsl:text> (</xsl:text>
+                        <xsl:value-of select="normalize-space(../groupttl)"/>
+                        <xsl:text>)</xsl:text>
+                    </xsl:if>
+                </orgName>
+            </xsl:if>
         </author>
+    </xsl:template>
+    <xsl:template match="aug/group">
+        <xsl:apply-templates select="group"/>
+    </xsl:template>
+    <xsl:template match="group">
+        <xsl:apply-templates select="au"/>
     </xsl:template>
     <!--SG: reprise biographie des auteurs -->
     <xsl:template match="bio">
