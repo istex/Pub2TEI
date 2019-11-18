@@ -1673,9 +1673,9 @@
                 <!-- All authors are included here -->
                 <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
                 <xsl:if test="/article/fm/aug | /headerx/fm/aug">
-                    <xsl:apply-templates select="/article/fm/aug/* | /headerx/fm/aug/*"/>
+                    <xsl:apply-templates select="/article/fm/aug/* except(//aff)| /headerx/fm/aug/* except(//aff)"/>
                 </xsl:if>
-                <xsl:apply-templates select="//article/fm/aug/group"/>
+                <!--<xsl:apply-templates select="//article/fm/aug/group"/>-->
                 <xsl:if test="//bdy/corres/aug">
                     <xsl:apply-templates select="//bdy/corres/aug/*"/>
                 </xsl:if>
@@ -1960,17 +1960,17 @@
                     </xsl:for-each>
                 </xsl:when>
                 <!-- SG - cas quand les affiliations n'ont pas de liens auteurs/affiliations définis explicitement ex: nature_headerx_315736a0.xml -->
-                <xsl:when test="../aff/org and not(../aff/oid)">
-                    <xsl:apply-templates select="../aff" mode="sourceDesc"/>
+                <xsl:when test="//aff/org and not(//aff/oid)">
+                    <xsl:apply-templates select="aff"/>
                 </xsl:when>
-                <xsl:when test="../aff and not(../aff/oid)">
+               <xsl:when test="../aff and not(../aff/oid)">
                     <affiliation>
-                        <xsl:value-of select="following-sibling::aff"/>
+                        <xsl:apply-templates select="following-sibling::aff"/>
                     </affiliation>
                 </xsl:when>
-                <xsl:when test="../aff/oid">
-                    <xsl:apply-templates select="../aff[oid[@id = current()/orf/@rid]]" mode="sourceDesc"/>
-                </xsl:when>
+              <xsl:when test="//aff/oid">
+                    <xsl:apply-templates select="//aff[oid[@id = current()/orf/@rid]]"/>
+              </xsl:when>
                 <xsl:when test="//fm/aug/aff/oid">
                     <affiliation>
                         <xsl:variable name="affGroup">
@@ -1979,8 +1979,8 @@
                         <xsl:value-of select="normalize-space($affGroup)"/>
                     </affiliation>
                 </xsl:when>
-                <xsl:when test="../aff">
-                    <xsl:apply-templates select="../aff" mode="sourceDesc"/>
+               <xsl:when test="../aff">
+                    <xsl:apply-templates select="aff"/>
                 </xsl:when>
             </xsl:choose>
             <xsl:if test="aufnr/@rid">
@@ -1999,6 +1999,202 @@
                 </orgName>
             </xsl:if>
         </author>
+    </xsl:template>
+   <xsl:template match="aff">
+       <xsl:choose>
+           <xsl:when test="./org">
+               <affiliation>
+                  <xsl:apply-templates select="org"/>
+                   <address>
+                       <xsl:apply-templates select="zip"/>
+                       <xsl:apply-templates select="cty"/>
+                       <xsl:apply-templates select="cny"/>
+                   </address>
+               </affiliation>
+           </xsl:when>
+           <xsl:otherwise>
+               <affiliation>
+                   <xsl:call-template name="NLMParseAffiliation">
+                       <xsl:with-param name="theAffil">
+                           <xsl:value-of select="translate(.,'.;','')"/>
+                       </xsl:with-param>
+                   </xsl:call-template>
+               </affiliation>
+           </xsl:otherwise>
+       </xsl:choose>
+    </xsl:template>
+   <xsl:template match="org">
+           <xsl:call-template name="NLMParseOrg">
+               <xsl:with-param name="theOrg">
+                   <xsl:value-of select="translate(.,'.;','')"/>
+               </xsl:with-param>
+           </xsl:call-template>
+   </xsl:template>
+    
+    <xsl:template name="NLMParseAffiliation">
+        <xsl:param name="theAffil"/>
+        <xsl:param name="inAddress" select="false()"/>
+        <xsl:for-each select="$theAffil">
+            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+        </xsl:for-each>
+        <xsl:variable name="avantVirgule">
+            <xsl:choose>
+                <xsl:when test="contains($theAffil,',')">
+                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="normalize-space($theAffil)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="apresVirgule">
+            <xsl:choose>
+                <xsl:when test="contains($theAffil,',')">
+                    <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="''"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="testOrganisation">
+            <xsl:call-template name="identifyOrgLevel">
+                <xsl:with-param name="theOrg">
+                    <xsl:value-of select="$avantVirgule"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="not($inAddress)">
+                <xsl:choose>
+                    <xsl:when test="$testOrganisation!='' and not(contains(.,'equally'))">
+                        <orgName>
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="$testOrganisation"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="$avantVirgule"/>
+                        </orgName>
+                        <xsl:if test="$apresVirgule !=''">
+                            <xsl:call-template name="NLMParseAffiliation">
+                                <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                            </xsl:call-template>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:choose>
+                            <xsl:when test="contains(.,'authors contributed equally')">
+                                <xsl:value-of select="."/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <address>
+                                    <xsl:call-template name="NLMParseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$theAffil"/>
+                                        <xsl:with-param name="inAddress" select="true()"/>
+                                    </xsl:call-template>
+                                </address>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="testCountry">
+                    <xsl:call-template name="normalizeISOCountry">
+                        <xsl:with-param name="country" select="$avantVirgule"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:choose>
+                   <!-- <xsl:when test="$testOrganisation!=''">
+                        <orgName>
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="$testOrganisation"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="$avantVirgule"/>
+                        </orgName>
+                        <xsl:if test="$apresVirgule !=''">
+                            <xsl:call-template name="NLMParseAffiliation">
+                                <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                            </xsl:call-template>
+                        </xsl:if>
+                    </xsl:when>-->
+                    <xsl:when test="$testCountry != ''">
+                        <country>
+                            <xsl:attribute name="key">
+                                <xsl:value-of select="$testCountry"/>
+                            </xsl:attribute>
+                            <xsl:call-template name="normalizeISOCountryName">
+                                <xsl:with-param name="country" select="$avantVirgule"/>
+                            </xsl:call-template>
+                        </country>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:choose>
+                            <xsl:when test="../org">
+                                <xsl:call-template name="NLMParseOrg">
+                                    <xsl:with-param name="theOrg" select="$apresVirgule"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <addrLine>
+                                    <xsl:value-of select="$avantVirgule"/>
+                                </addrLine>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="$apresVirgule !=''">
+                    <xsl:call-template name="NLMParseAffiliation">
+                        <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                        <xsl:with-param name="inAddress" select="true()"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="NLMParseOrg">
+        <xsl:param name="theOrg"/>
+        <xsl:for-each select="$theOrg">
+            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+        </xsl:for-each>
+        <xsl:variable name="avantVirgule">
+            <xsl:choose>
+                <xsl:when test="contains($theOrg,',')">
+                    <xsl:value-of select="normalize-space(substring-before($theOrg,','))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="normalize-space($theOrg)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="apresVirgule">
+            <xsl:choose>
+                <xsl:when test="contains($theOrg,',')">
+                    <xsl:value-of select="normalize-space(substring-after($theOrg,','))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="''"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="testOrganisation">
+            <xsl:call-template name="identifyOrgLevel">
+                <xsl:with-param name="theOrg">
+                    <xsl:value-of select="$avantVirgule"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+        <orgName>
+            <xsl:attribute name="type">
+                <xsl:value-of select="$testOrganisation"/>
+            </xsl:attribute>
+            <xsl:value-of select="$avantVirgule"/>
+        </orgName>
+        <xsl:if test="$apresVirgule !=''">
+            <xsl:call-template name="NLMParseOrg">
+                <xsl:with-param name="theOrg" select="$apresVirgule"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="aug/group">
         <xsl:apply-templates select="group"/>
@@ -2193,7 +2389,7 @@
     <xsl:template match="title-group/fn-group"/>
 
     <!-- Inline affiliation (embedded in <contrib>) -->
-    <xsl:template match="aff | contrib/address">
+    <xsl:template match="contrib/address">
         <xsl:if test="not(/article/pubfm | /headerx/pubfm | /article/suppfm)">
             <!-- this only apply to NPG articles not containing a pubfm style component -->
             <affiliation>
