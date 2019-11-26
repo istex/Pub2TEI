@@ -10,8 +10,8 @@
     <!-- ajout déclaration schema ODD-ISTEX -->
     
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
-    <xsl:param name="xslversion">1.0.5</xsl:param>
-    <xsl:param name="releasedate">2019-11-18</xsl:param>
+    <xsl:param name="xslversion">1.1.0</xsl:param>
+    <xsl:param name="releasedate">2019-11-26</xsl:param>
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
@@ -43,6 +43,7 @@
 	<xsl:include href="Wiley.xsl"/>
     <xsl:include href="BookChapter.xsl"/>
     <xsl:include href="Duke.xsl"/>
+    <xsl:include href="OpenEdition.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">

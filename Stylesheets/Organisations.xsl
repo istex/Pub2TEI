@@ -11,7 +11,7 @@
     <xsl:template name="identifyOrgLevel">
         <xsl:param name="theOrg"/>
         <xsl:choose>
-            <xsl:when test="contains($theOrg,'Center') or contains($theOrg,'Institute') or contains($theOrg,'Institut') or contains($theOrg,'Campus') or contains($theOrg,'Centre') or contains($theOrg,'Universit') or contains($theOrg,'University of') or contains($theOrg,'Academy') or contains($theOrg,'Pasteur') or starts-with($theOrg,'Inserm')  or starts-with($theOrg,'Ministr')">
+            <xsl:when test="contains($theOrg,'Museum') or contains($theOrg,'Center') or contains($theOrg,'Institute') or contains($theOrg,'Institut') or contains($theOrg,'Campus') or contains($theOrg,'Centre') or contains($theOrg,'Universit') or contains($theOrg,'University of') or contains($theOrg,'Academy') or contains($theOrg,'Pasteur') or starts-with($theOrg,'Inserm')  or starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
             <xsl:when test="ends-with($theOrg,'ogy') or contains($theOrg,'Division') or contains($theOrg,'Dpto') or contains($theOrg,'depart') or contains($theOrg,'Depart') or contains($theOrg,'Dept') or contains($theOrg,'Dipart') or contains($theOrg,'Départ') or contains($theOrg,'School') or contains($theOrg,'Ecole')or contains($theOrg,'Facul')">
