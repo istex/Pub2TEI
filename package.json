@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "version": "bash update-version.sh"
+    "version": "bash update-version.sh && git commit -m \"automatic update of version number in XSL\" ./Stylesheets/Publishers.xsl"
   },
   "repository": {
     "type": "git",
