@@ -230,7 +230,6 @@
             </region>
         </xsl:if>
     </xsl:template>
-
     <!-- PL: add cty for Nature -->
     <xsl:template match="City | city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
         <xsl:if test="normalize-space(.)">

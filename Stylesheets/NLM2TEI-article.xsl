@@ -2006,6 +2006,8 @@
                <affiliation>
                   <xsl:apply-templates select="org"/>
                    <address>
+                       <xsl:apply-templates select="street"/>
+                       <xsl:apply-templates select="st"/>
                        <xsl:apply-templates select="zip"/>
                        <xsl:apply-templates select="cty"/>
                        <xsl:apply-templates select="cny"/>
