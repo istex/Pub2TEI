@@ -303,9 +303,12 @@
     
     <xsl:template match="tei:affiliation">
         <!-- pour distinguer les biographies des vrais affiliations
-        parenthéses présentent dans les biographies-->
+        rechercher le nom de l'auteur-->
+        <xsl:variable name="auteur">
+            <xsl:value-of select="ancestor::tei:author/tei:persName/tei:surname"/>
+        </xsl:variable>
         <xsl:choose>
-            <xsl:when test="contains(.,'(')">
+            <xsl:when test="contains(.,$auteur)">
                 <note type="biography">
                     <xsl:value-of select="normalize-space(.)"/>
                 </note>
@@ -315,6 +318,14 @@
                     <xsl:choose>
                         <xsl:when test="not(contains(.,','))">
                             <xsl:value-of select="normalize-space(.)"/>
+                        </xsl:when>
+                        <xsl:when test="contains(.,'(')">
+                            <!-- <affiliation>
+                        CEMAf (CNRS, EPHE, Paris I, Université d’Aix-en-Provence)
+                    </affiliation> -->
+                            <orgName type="institution">
+                                <xsl:value-of select="normalize-space(.)"/>
+                            </orgName>
                         </xsl:when>
                         <xsl:when test="contains(.,', Courriel')">
                             <xsl:call-template name="OpenEdParseAffiliation">

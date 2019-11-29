@@ -741,11 +741,11 @@
                 <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
                     <title><xsl:apply-templates/></title>
                 </xsl:when>
-                <xsl:otherwise>
+              <!--  <xsl:otherwise>
                     <hi rend="italic">
                         <xsl:apply-templates/>
                     </hi>
-                </xsl:otherwise>
+                </xsl:otherwise>-->
             </xsl:choose>
         </xsl:if>
     </xsl:template>

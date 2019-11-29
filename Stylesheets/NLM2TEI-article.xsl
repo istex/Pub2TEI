@@ -2185,9 +2185,14 @@
             </xsl:call-template>
         </xsl:variable>
         <orgName>
-            <xsl:attribute name="type">
-                <xsl:value-of select="$testOrganisation"/>
-            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="$testOrganisation !=''">
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="$testOrganisation"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
+            
             <xsl:value-of select="$avantVirgule"/>
         </orgName>
         <xsl:if test="$apresVirgule !=''">

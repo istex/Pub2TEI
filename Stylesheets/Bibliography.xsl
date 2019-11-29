@@ -47,9 +47,9 @@
     <xsl:template match="art-ref">
             <xsl:apply-templates/>
     </xsl:template>
-    <xsl:template match="atl">
+  <!--  <xsl:template match="atl">
         <xsl:apply-templates/>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template match="ce:textref">
         <xsl:apply-templates/>
