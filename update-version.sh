@@ -11,19 +11,19 @@ if [ $? -ne 0 ]; then
     exit 1
 else
     echo "XSLT version number and release date successfully updated."
-    git commit -m "automatic update version to $version in Publishers.xsl" ./Stylesheets/Publishers.xsl
+    git commit -m "automatic update version to v$version in Publishers.xsl" package.json ./Stylesheets/Publishers.xsl
     if [ $? -ne 0 ]; then 
         echo "error commit Publishers.xsl"
         exit 1 
     fi
-    git tag -a "$version" -m "release version $version"
+    git tag -a "v$version" -m "release version v$version"
     if [ $? -ne 0 ]; then
         echo "error creating tag $version"
         exit 1
     fi
-    git push origin $version
+    git push origin "v$version"
     if [ $? -ne 0 ]; then
-        echo "error pushing tag $version"
+        echo "error pushing tag v$version"
         exit 1
     fi
 fi
