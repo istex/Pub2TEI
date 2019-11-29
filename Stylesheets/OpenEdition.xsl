@@ -7,7 +7,7 @@
     <!-- ******************* Genre ******************************-->
    
     <xsl:template match="tei:TEI">
-        <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd">
+        <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="http://standoff.proposal">
             <xsl:apply-templates select="tei:teiHeader"/>
             <xsl:apply-templates select="tei:text"/>
         </TEI>

@@ -11,10 +11,11 @@
         <xsl:variable name="localISSN">
             <xsl:value-of select="journal-id/issn-paper"/>
         </xsl:variable>
-        <xsl:variable name="journalDescription"
-            select="$journalList/descendant::tei:row[tei:cell/text()=$localISSN]"/>
+        <xsl:variable name="journalDescription">
+            <xsl:value-of select="$journalList/descendant::tei:row[tei:cell/text()=$localISSN]"/>
+        </xsl:variable>
 
-        <TEI>
+        <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>

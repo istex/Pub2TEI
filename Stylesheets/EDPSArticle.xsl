@@ -15,7 +15,7 @@
         <xsl:variable name="journalDescription"
             select="$journalList/descendant::tei:row[tei:cell/text()=$localISSN]"/>
 
-        <TEI xmlns:ce="http://www.elsevier.com/xml/common/dtd">
+        <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:if test="ArticleID/Language">
                 <xsl:attribute name="xml:lang">
                     <xsl:value-of select="ArticleID/Language"/>
