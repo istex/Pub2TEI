@@ -1990,7 +1990,7 @@
             </xsl:if>
             <xsl:if test="//aug/group/groupttl">
                 <orgName>
-                    <xsl:value-of select="normalize-space(//aug/group/groupttl)"/>
+                    <xsl:value-of select="//aug/group/groupttl"/>
                     <xsl:if test="ancestor::group">
                         <xsl:text> (</xsl:text>
                         <xsl:value-of select="normalize-space(../groupttl)"/>
