@@ -6,7 +6,7 @@ sed -i 's/name="xslversion">[0-9]*.[0-9]*.[0-9]</name="xslversion">'$version'</'
 madate=$(date +'%Y-%m-%d')
 sed -i 's/name="releasedate">[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}</name="releasedate">'$madate'</' Stylesheets/Publishers.xsl
 
-if [ $? ! -ne 0 ]
+if [ $? ! -ne 0 ] then
     echo "error generating XSLT version number and release date."
     exit 1
 else
