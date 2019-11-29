@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "echo 'PLEASE DON'T USE \"npm version\" COMMAND, but \"npm run version-patch\" INSTEAD' && echo '(you can replace patch by minor or major.)' && exit 1",
     "version-patch": "npm version patch --no-git-tag-version && bash update-version.sh",
     "version-minor": "npm version minor --no-git-tag-version && bash update-version.sh",
     "version-major": "npm version major --no-git-tag-version && bash update-version.sh"
