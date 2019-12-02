@@ -17,7 +17,7 @@
                 <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
                 <xsl:apply-templates
                     select="ref | citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
-                />
+                /> 
             </listBibl>
         </div>
     </xsl:template>
@@ -841,38 +841,93 @@
     </xsl:template>
 
     <xsl:template match="bib">
+       
+            <xsl:variable name="count">
+                <xsl:value-of select="count(reftxt)"/>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$count &gt; 1">
+                    <xsl:apply-templates select="reftxt" mode="plusieursRef"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <biblStruct>
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    <analytic>
+                        <xsl:choose>
+                            <xsl:when test="reftxt/atl">
+                                <xsl:apply-templates select="reftxt/atl"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="reftxt/jtl"/>
+                                    <xsl:when test="reftxt/btl"/>
+                                    <xsl:otherwise>
+                                        <xsl:for-each select="reftxt">
+                                            <title>
+                                                <xsl:value-of select="normalize-space(.)"/>
+                                            </title>
+                                        </xsl:for-each>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:apply-templates select="reftxt/refau"/>
+                        <xsl:apply-templates select="reftxt/i"/>
+                    </analytic>
+                    <monogr>
+                        <xsl:if test="reftxt/jtl | reftxt/btl">
+                            <xsl:apply-templates select="reftxt/jtl | reftxt/btl"/>
+                        </xsl:if>
+                        <imprint>
+                            <xsl:choose>
+                                <xsl:when test="reftxt/vid | reftxt/ppf | reftxt/ppl | reftxt/cd">
+                                    <xsl:apply-templates
+                                        select="reftxt/vid | reftxt/ppf | reftxt/ppl | reftxt/cd"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <!-- ajout <publisher> vide pour validation TEI quand <imprint> est vide -->
+                                    <publisher/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </imprint>
+                    </monogr>
+                    </biblStruct>
+                </xsl:otherwise>
+            </xsl:choose>
+    </xsl:template>
+    <xsl:template match="reftxt" mode="plusieursRef">
         <biblStruct>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
             <analytic>
                 <xsl:choose>
-                    <xsl:when test="reftxt/atl">
-                        <xsl:apply-templates select="reftxt/atl"/>
+                    <xsl:when test="atl">
+                        <xsl:apply-templates select="atl"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <xsl:when test="reftxt/jtl"/>
+                            <xsl:when test="jtl"/>
+                            <xsl:when test="btl"/>
                             <xsl:otherwise>
                                 <title>
-                                    <xsl:value-of select="normalize-space(reftxt)"/>
+                                    <xsl:value-of select="normalize-space(.)"/>
                                 </title>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:apply-templates select="reftxt/refau"/>
-                <xsl:apply-templates select="reftxt/i"/>
+                <xsl:apply-templates select="refau"/>
+                <xsl:apply-templates select="i"/>
             </analytic>
             <monogr>
-                <xsl:if test="reftxt/jtl | reftxt/btl">
-                    <xsl:apply-templates select="reftxt/jtl | reftxt/btl"/>
+                <xsl:if test="jtl | btl">
+                    <xsl:apply-templates select="jtl | btl"/>
                 </xsl:if>
                 <imprint>
                     <xsl:choose>
-                        <xsl:when test="reftxt/vid | reftxt/ppf | reftxt/ppl | reftxt/cd">
+                        <xsl:when test="vid | ppf | ppl | cd">
                             <xsl:apply-templates
-                                select="reftxt/vid | reftxt/ppf | reftxt/ppl | reftxt/cd"/>
+                                select="vid | ppf | ppl | cd"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <!-- ajout <publisher> vide pour validation TEI quand <imprint> est vide -->
@@ -883,7 +938,6 @@
             </monogr>
         </biblStruct>
     </xsl:template>
-
     <xsl:template match="wiley:bibSection">
         <xsl:apply-templates/>
     </xsl:template>

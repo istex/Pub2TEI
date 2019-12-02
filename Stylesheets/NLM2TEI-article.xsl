@@ -1402,8 +1402,8 @@
                     <xsl:when test="body/* | bdy/p | bdy/sec | bdy/corres/*|article/floats-group">
                 <body>
                     <xsl:choose>
-                        <xsl:when test="body/* | bdy/p | bdy/sec | bdy/corres/*">
-                            <xsl:apply-templates select="body/* | bdy/p | bdy/sec | bdy/corres/*"/>
+                        <xsl:when test="body/* | bdy/*">
+                            <xsl:apply-templates select="body/* | bdy/*"/>
                             <xsl:apply-templates select="bm/objects/*"/>
                             <xsl:apply-templates select="//article/floats-group"/>
                         </xsl:when>
@@ -2194,7 +2194,6 @@
                     </xsl:attribute>
                 </xsl:when>
             </xsl:choose>
-            
             <xsl:value-of select="$avantVirgule"/>
         </orgName>
         <xsl:if test="$apresVirgule !=''">

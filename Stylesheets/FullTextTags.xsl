@@ -609,9 +609,49 @@
     <xsl:template match="bibr | bibrinl">
         <ref type="bibr">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@rid)"/>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="@rid"/>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="contains($diese,' ')">
+                        <xsl:apply-templates select="@rid" mode="rid"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('#',$diese)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
         </ref>
+    </xsl:template>
+    <xsl:template match="bibr/@rid" mode="rid">
+        <xsl:call-template name="splitName"/>
+    </xsl:template>
+    <xsl:template name="splitName">
+        <!-- start with nothing in $first and all the words in $rest -->
+        <xsl:param name="first" select="''" />
+        <xsl:param name="rest" select="." />
+        
+        <xsl:choose>
+            <!-- if rest contains more than one word -->
+            <xsl:when test="substring-after($rest, ' ')">
+                <xsl:call-template name="splitName">
+                    <!-- move the first word of $rest to the end of $first and recurse.
+               For the very first word this will add a stray leading space
+               to $first, which we will clean up later. -->
+                    <xsl:with-param name="first" select="concat($first, ' ',substring-before($rest, ' '))" />
+                    <xsl:with-param name="rest" select="substring-after($rest, ' ')" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- $rest is now just the last word of the original name, and $first
+             contains all the others plus a leading space that we have to
+             remove -->
+                <xsl:text>#</xsl:text>
+                    <xsl:value-of select="substring($first, 2)" />
+                <xsl:text> #</xsl:text>
+                    <xsl:value-of select="$rest" />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="cite">
         <ref type="cit">
@@ -662,6 +702,7 @@
             <xsl:attribute name="target">
                 <xsl:value-of select="concat('#',@rid)"/>
             </xsl:attribute>
+            <xsl:value-of select="."/>
         </ref>
     </xsl:template>
 	
