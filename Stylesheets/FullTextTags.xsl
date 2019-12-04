@@ -782,11 +782,13 @@
                 <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
                     <title><xsl:apply-templates/></title>
                 </xsl:when>
-              <!--  <xsl:otherwise>
+              <xsl:otherwise>
+                  <xsl:if test="not(ancestor::reftxt)">
                     <hi rend="italic">
                         <xsl:apply-templates/>
                     </hi>
-                </xsl:otherwise>-->
+                  </xsl:if>
+                </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
     </xsl:template>
@@ -815,9 +817,16 @@
     </xsl:template>
 
     <xsl:template match="Emphasis[@Type='SmallCaps'] | ce:small-caps | sc | scp | wiley:sc">
-        <xsl:if test="normalize-space(.)">
-            <hi rend="smallCaps"><xsl:apply-templates/></hi>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="ancestor::label"/>
+            <xsl:otherwise>
+                <xsl:if test="normalize-space(.)">
+                    <hi rend="smallCaps">
+                        <xsl:apply-templates/>
+                    </hi>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="Emphasis | emph">

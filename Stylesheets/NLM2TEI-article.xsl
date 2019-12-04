@@ -974,9 +974,6 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="xml:lang">EN</xsl:attribute>
-                </xsl:otherwise>
             </xsl:choose>
             <teiHeader>
                 <fileDesc>
@@ -1375,7 +1372,7 @@
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
                                                         <xsl:value-of select="@xml:lang"/>
                                                     </xsl:when>
-                                                    <xsl:otherwise>zxx</xsl:otherwise>
+                                                    <xsl:otherwise>und</xsl:otherwise>
                                                 </xsl:choose>
                                             </xsl:otherwise>
                                         </xsl:choose>
@@ -1388,6 +1385,9 @@
                 <!-- traceability -->
                 <revisionDesc>
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
+                    <xsl:if test="//chghst/chg[@chgtype='corr']">
+                        <xsl:apply-templates select="//chghst/chg" mode="correction"/>
+                    </xsl:if>
                 </revisionDesc>
             </teiHeader>
             <text>
@@ -2001,6 +2001,9 @@
         </author>
     </xsl:template>
    <xsl:template match="aff">
+       <xsl:variable name="notLabel">
+           <xsl:apply-templates/>
+       </xsl:variable>
        <xsl:choose>
            <xsl:when test="./org">
                <affiliation>
@@ -2018,7 +2021,10 @@
                <affiliation>
                    <xsl:call-template name="NLMParseAffiliation">
                        <xsl:with-param name="theAffil">
-                           <xsl:value-of select="translate(.,'.;','')"/>
+                           <xsl:variable name="nettoie">
+                               <xsl:apply-templates/> 
+                           </xsl:variable>
+                          <xsl:value-of select="translate($nettoie,'.;','')"/>
                        </xsl:with-param>
                    </xsl:call-template>
                </affiliation>
@@ -2037,7 +2043,7 @@
         <xsl:param name="theAffil"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:for-each select="$theAffil">
-            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+            <xsl:message>Un bout: <xsl:apply-templates/></xsl:message>
         </xsl:for-each>
         <xsl:variable name="avantVirgule">
             <xsl:choose>
@@ -2106,7 +2112,7 @@
                     </xsl:call-template>
                 </xsl:variable>
                 <xsl:choose>
-                   <!-- <xsl:when test="$testOrganisation!=''">
+                   <!--<xsl:when test="$testOrganisation!=''">
                         <orgName>
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
@@ -2135,6 +2141,19 @@
                                 <xsl:call-template name="NLMParseOrg">
                                     <xsl:with-param name="theOrg" select="$apresVirgule"/>
                                 </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="$testOrganisation!='' and not(contains(.,','))">
+                                <orgName>
+                                    <xsl:attribute name="type">
+                                        <xsl:value-of select="$testOrganisation"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$avantVirgule"/>
+                                </orgName>
+                                <xsl:if test="$apresVirgule !=''">
+                                    <xsl:call-template name="NLMParseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                                    </xsl:call-template>
+                                </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
                                 <addrLine>
@@ -2275,7 +2294,7 @@
             </xsl:if>-->
             <xsl:choose>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
-                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]"/>
+                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
                 <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="//aff"/>
@@ -2512,11 +2531,7 @@
         </ref>
     </xsl:template>
 
-    <xsl:template match="aff/label">
-        <ref>
-            <xsl:apply-templates/>
-        </ref>
-    </xsl:template>
+    <xsl:template match="aff/label"/>
 
     <!-- redirected affiliation by means of basic index (BMJ - 3.0 example) -->
     <xsl:template match="xref[@ref-type = 'aff']">
@@ -2953,13 +2968,11 @@
                         <xsl:attribute name="type">
                             <xsl:value-of select="@list-type"/>
                         </xsl:attribute>
-                        <xsl:apply-templates/>
                     </xsl:if>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
-                        <xsl:apply-templates/>
                     </xsl:if>
                     <xsl:if test="li|item|list-item">
                         <xsl:apply-templates/>
@@ -3091,18 +3104,18 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="back/app-group">
-        <div type="app-group">
+        <div type="appendices">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="app-group/app">
-        <p>
+        <div>
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
             </xsl:attribute>
         <xsl:apply-templates/>
-        </p>
+        </div>
     </xsl:template>
 
     <xsl:template match="fn/label">
@@ -3292,9 +3305,9 @@
                 </title>
             </xsl:when>
             <xsl:when test="ancestor::app">
-                <title>
+                <head>
                     <xsl:apply-templates/>
-                </title>
+                </head>
             </xsl:when>
             <xsl:when test="ancestor::citgroup">
                 <title level="m" type="main">
@@ -3721,5 +3734,25 @@
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="chghst">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="chg" mode="correction">
+        <change xml:id="correction">
+           <xsl:attribute name="when">
+               <xsl:value-of select="chgdate/@year"/>
+           </xsl:attribute>
+            <xsl:if test="chgmade">
+                <label>
+                    <xsl:value-of select="normalize-space(chgmade)"/>
+                </label>
+            </xsl:if>
+            <xsl:if test="chgreason">
+                <desc>
+                    <xsl:value-of select="normalize-space(chgreason)"/>
+                </desc>
+            </xsl:if>
+        </change>
     </xsl:template>
 </xsl:stylesheet>

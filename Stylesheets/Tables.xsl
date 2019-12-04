@@ -11,42 +11,81 @@
 
     <!-- Royal Chemical Society: table-entry; NLM: table-wrap -->
     <xsl:template match="table-entry | table-wrap | table">
-        <div>
-        <table>
-            <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="oasis:table/@rowsep">
-                <xsl:attribute name="rows">
-                    <xsl:value-of select="oasis:table/@rowsep"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="oasis:table/@colsep">
-                <xsl:attribute name="cols">
-                    <xsl:value-of select="oasis:table/@colsep"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@position">
-                <xsl:attribute name="rend">
-                    <xsl:value-of select="@position"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="label">
-                <head type="label">
-                    <xsl:value-of select="label"/>
-                </head>
-            </xsl:if>
-           <!-- <xsl:apply-templates select="* except tgroup"/>-->
-            <xsl:apply-templates select="*"/>
-        </table>
-        </div>
+        <xsl:choose>
+            <xsl:when test="ancestor::p">
+                <table>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="oasis:table/@rowsep">
+                        <xsl:attribute name="rows">
+                            <xsl:value-of select="oasis:table/@rowsep"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="oasis:table/@colsep">
+                        <xsl:attribute name="cols">
+                            <xsl:value-of select="oasis:table/@colsep"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@position">
+                        <xsl:attribute name="rend">
+                            <xsl:value-of select="@position"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="label">
+                        <head type="label">
+                            <xsl:value-of select="label"/>
+                        </head>
+                    </xsl:if>
+                    <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                    <xsl:apply-templates/>
+                </table>
+            </xsl:when>
+            <xsl:otherwise>
+                    <table>
+                        <xsl:if test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="oasis:table/@rowsep">
+                            <xsl:attribute name="rows">
+                                <xsl:value-of select="oasis:table/@rowsep"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="oasis:table/@colsep">
+                            <xsl:attribute name="cols">
+                                <xsl:value-of select="oasis:table/@colsep"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@position">
+                            <xsl:attribute name="rend">
+                                <xsl:value-of select="@position"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="label">
+                            <head type="label">
+                                <xsl:value-of select="label"/>
+                            </head>
+                        </xsl:if>
+                        <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                        <xsl:apply-templates/>
+                    </table>
+                
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- American chemical Society: oasis:table; oasis:table-wrap -->

@@ -165,10 +165,20 @@
                     <!-- <xsl:attribute name="xml:id">
                 <xsl:apply-templates select="$entry/@id | @id"/>
             </xsl:attribute>-->
+                    <xsl:variable name="countTitle">
+                        <xsl:value-of select="count($entry/article-title)"/>
+                    </xsl:variable>
                     <xsl:if test="$entry/article-title">
                         <analytic>
                             <!-- Title information related to the paper goes here -->
-                            <xsl:apply-templates select="$entry/article-title"/>
+                            <xsl:choose>
+                                <xsl:when test="$countTitle &gt;2">
+                                    <toto></toto>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="$entry/article-title"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                             <!-- All authors are included here -->
                             <xsl:apply-templates
                                 select="$entry/person-group | $entry/citauth | $entry/name"/>
@@ -187,6 +197,11 @@
                         </xsl:choose>
                         <xsl:if test="not($entry/article-title)">
                             <xsl:apply-templates select="$entry/person-group"/>
+                        </xsl:if>
+                        <xsl:if test="$entry/collab">
+                            <author>
+                            <xsl:apply-templates select="$entry/collab"/>
+                            </author>
                         </xsl:if>
                         <xsl:apply-templates select="$entry/citauth | $entry/name"/>
                         <xsl:apply-templates select="$entry/comment"/>
@@ -224,6 +239,9 @@
 
     <xsl:template name="createOther">
         <xsl:param name="entry"/>
+        <xsl:variable name="countTitle">
+            <xsl:value-of select="count($entry/article-title)"/>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="$entry/source">
                 <biblStruct type="other">
@@ -232,8 +250,18 @@
                     </xsl:attribute>
                     <xsl:if test="$entry/article-title">
                         <analytic>
-                            <!-- Title information related to the paper goes here -->
-                            <xsl:apply-templates select="$entry/article-title"/>
+                            <xsl:choose>
+                                <xsl:when test="$countTitle &gt;2">
+                                    <xsl:for-each select="$entry/article-title">
+                                        <title>
+                                            <xsl:value-of select="."/>
+                                        </title>
+                                    </xsl:for-each>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="$entry/article-title"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                             <!-- All authors are included here -->
                             <xsl:apply-templates
                                 select="$entry/person-group | $entry/citauth | $entry/name"/>
@@ -365,52 +393,135 @@
 
     <xsl:template name="createBook">
         <xsl:param name="entry"/>
-        <biblStruct type="book">
-            <xsl:attribute name="xml:id">
-                <xsl:apply-templates select="$entry/@id | @id"/>
-            </xsl:attribute>
-            <xsl:if test="$entry/article-title">
-                <analytic>
-                    <xsl:apply-templates select="$entry/article-title"/>
-                    <xsl:apply-templates select="$entry/person-group"/>
-                    <xsl:apply-templates select="$entry/name"/>
-                    <xsl:apply-templates select="$entry/citauth | $entry/name"/>
-                </analytic>
-            </xsl:if>
-            <monogr>
-                <!-- palier à l'absence de titre qui est obligatoire dans monogr -->
-                <xsl:choose>
-                    <xsl:when test="$entry/source">
-                        <xsl:apply-templates select="$entry/source"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <title level="m" type="main">
-                            <xsl:value-of select="normalize-space($entry/article-title)"/>
-                        </title>
-                    </xsl:otherwise>
-                </xsl:choose>
-
-                <xsl:apply-templates select="$entry/uri" mode="citation"/>
-                <xsl:apply-templates select="$entry/pub-id"/>
-                <!-- All authors are included here -->
-                <xsl:if test="not($entry/article-title)">
-                    <xsl:apply-templates select="$entry/person-group"/>
-                    <xsl:apply-templates select="$entry/name"/>
-                    <xsl:apply-templates select="$entry/citauth | $entry/name"/>
-                </xsl:if>
-                <xsl:apply-templates select="$entry/editor"/>
-                <imprint>
-                    <xsl:apply-templates select="$entry/year"/>
-                    <xsl:apply-templates select="$entry/publisher-loc"/>
-                    <xsl:apply-templates select="$entry/publisher-name"/>
-                    <xsl:apply-templates select="$entry/citpub"/>
-                    <xsl:apply-templates select="$entry/pubplace"/>
-                    <xsl:apply-templates select="$entry/fpage"/>
-                    <xsl:apply-templates select="$entry/lpage"/>
-                    <xsl:apply-templates select="$entry/edition"/>
-                </imprint>
-            </monogr>
-        </biblStruct>
+       
+            <xsl:choose>
+                <xsl:when test="$entry/../nlm-citation">
+                    <xsl:variable name="countID">
+                        <xsl:value-of select="count($entry/../nlm-citation)"/>
+                    </xsl:variable>
+                    <xsl:variable name="position">
+                        <xsl:value-of select="count($entry/../nlm-citation)"/>
+                    </xsl:variable>
+                    <xsl:for-each select="$entry/../nlm-citation">
+                        <biblStruct type="book">
+                            <!-- SG - pour pallier référence multiple contenu dans un même bloc
+                            ayant le même ID-->
+                            <xsl:attribute name="xml:id">
+                                <xsl:choose>
+                                    <xsl:when test="$countID != 1">
+                                        <xsl:value-of select="ancestor::ref/@id"/>
+                                        <xsl:text>-</xsl:text>
+                                        <xsl:value-of select=" position()"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:attribute name="xml:id">
+                                            <xsl:value-of select="ancestor::ref/@id"/>
+                                        </xsl:attribute>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        <xsl:if test="./article-title">
+                            <analytic>
+                                <xsl:apply-templates select="./article-title"/>
+                                <xsl:apply-templates select="./person-group"/>
+                                <xsl:apply-templates select="./name"/>
+                                <xsl:apply-templates select="./citauth | ./name"/>
+                            </analytic>
+                        </xsl:if>
+                        <monogr>
+                            <!-- palier à l'absence de titre qui est obligatoire dans monogr -->
+                            <xsl:choose>
+                                <xsl:when test="./source">
+                                    <xsl:apply-templates select="./source"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <title level="m" type="main">
+                                        <xsl:value-of select="normalize-space(./article-title)"/>
+                                    </title>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            
+                            <xsl:apply-templates select="./uri" mode="citation"/>
+                            <xsl:apply-templates select="./pub-id"/>
+                            <!-- All authors are included here -->
+                            <xsl:if test="not(./article-title)">
+                                <xsl:apply-templates select="./person-group"/>
+                                <xsl:apply-templates select="./name"/>
+                                <xsl:apply-templates select="./citauth | ./name"/>
+                            </xsl:if>
+                            <xsl:apply-templates select="./editor"/>
+                            <imprint>
+                                <xsl:apply-templates select="./year"/>
+                                <xsl:apply-templates select="./publisher-loc"/>
+                                <xsl:apply-templates select="./publisher-name"/>
+                                <xsl:apply-templates select="./citpub"/>
+                                <xsl:apply-templates select="./pubplace"/>
+                                <xsl:apply-templates select="./fpage"/>
+                                <xsl:apply-templates select="./lpage"/>
+                                <xsl:apply-templates select="./edition"/>
+                            </imprint>
+                        </monogr>
+                        </biblStruct>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:variable name="countTitle">
+                        <xsl:value-of select="count($entry/article-title)"/>
+                    </xsl:variable>
+                    <biblStruct type="book">
+                        <xsl:attribute name="xml:id">
+                            <xsl:apply-templates select="$entry/@id | @id"/>
+                        </xsl:attribute>
+                    <xsl:if test="$entry/article-title">
+                        <analytic>
+                            <xsl:apply-templates select="$entry/article-title"/>
+                            <xsl:apply-templates select="$entry/person-group"/>
+                            <xsl:apply-templates select="$entry/name"/>
+                            <xsl:apply-templates select="$entry/citauth | $entry/name"/>
+                        </analytic>
+                    </xsl:if>
+                    <monogr>
+                        <!-- palier à l'absence de titre qui est obligatoire dans monogr -->
+                        <xsl:choose>
+                            <!--La référence en position 2 correspond à la source -->
+                            <xsl:when test="$countTitle =2">
+                                <title level="m" type="main">
+                                    <xsl:value-of select="normalize-space($entry/article-title[position()=2])"/>
+                                </title>
+                            </xsl:when>
+                            <xsl:when test="$entry/source">
+                                <xsl:apply-templates select="$entry/source"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <title level="m" type="main">
+                                    <xsl:value-of select="normalize-space($entry/article-title)"/>
+                                </title>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        
+                        <xsl:apply-templates select="$entry/uri" mode="citation"/>
+                        <xsl:apply-templates select="$entry/pub-id"/>
+                        <!-- All authors are included here -->
+                        <xsl:if test="not($entry/article-title)">
+                            <xsl:apply-templates select="$entry/person-group"/>
+                            <xsl:apply-templates select="$entry/name"/>
+                            <xsl:apply-templates select="$entry/citauth | $entry/name"/>
+                        </xsl:if>
+                        <xsl:apply-templates select="$entry/editor"/>
+                        <imprint>
+                            <xsl:apply-templates select="$entry/year"/>
+                            <xsl:apply-templates select="$entry/publisher-loc"/>
+                            <xsl:apply-templates select="$entry/publisher-name"/>
+                            <xsl:apply-templates select="$entry/citpub"/>
+                            <xsl:apply-templates select="$entry/pubplace"/>
+                            <xsl:apply-templates select="$entry/fpage"/>
+                            <xsl:apply-templates select="$entry/lpage"/>
+                            <xsl:apply-templates select="$entry/edition"/>
+                        </imprint>
+                    </monogr>
+                    </biblStruct>
+                </xsl:otherwise>
+            </xsl:choose>
     </xsl:template>
 
     <xsl:template match="citpub">
@@ -463,8 +574,8 @@
                                         <!-- ACS ex: <ref id="bc980059jn00002">
             <mixed-citation><comment>Abbreviations:  Abz, <italic toggle="yes">o</italic>-aminobenzoyl; Abz-OH, o-aminobenzoic acid; BTEE, <italic toggle="yes">N</italic>-benzoyl tyrosine ethyl ester; Bop, (benzotriazolyloxy)tris-(dimethylamino)phosphonium hexafluorophosphate; Boc, <italic toggle="yes">tert</italic>-butoxycarbonyl; <italic toggle="yes">  t-</italic>Bu, <italic toggle="yes">tert</italic>-butyl; DCC, <italic toggle="yes">N</italic>,<italic toggle="yes">N</italic>‘-dicyclohexylcarbodiimide; dhbt, 3,4-dihydro-4-oxo-1,2,3-benzotriazo-3-yl; DIEA, diisopropylethylamine; DMF, <italic toggle="yes">N</italic>,<italic toggle="yes">N</italic>-dimethylformamide; DTT, dithiothreitol; DOTA, 1,4,7,10-tetraazacyclododecane-<italic toggle="yes">N</italic>,<italic toggle="yes">N</italic>‘,<italic toggle="yes">N</italic>‘ ‘,<italic toggle="yes">N</italic>‘ ‘‘-tetraacetic acid; EtOH, ethanol; EtOAc, ethyl acetate; EDTA; ethylenediaminetetraacetic acid; Fmoc, fluoren-9-ylmethyloxycarbonyl; HOBt, 1-hydroxybenzotriazole; NO<sub>2</sub>Phe, <italic toggle="yes">p</italic>-nitrophenylalanine; NO<sub>2</sub>Tyr, 3-nitrotyrosine; NMP, 1-methyl-2-pyrrolidone; PEGA, bis(2-acrylamido-1-yl)poly(ethylene glycol) (800) cross-linked dimethyl acrylamide and mono-2-acrylamidoprop-1-yl [2-aminoprop-1-yl]poly(ethylene glycol); pfp, pentafluorophenol; THF, tetrahydrofuran; trt, trityl.</comment></mixed-citation>-->
                                         <xsl:when test="contains(@id, 'jn')">footnote</xsl:when>
-                                        <xsl:when test="contains(@id, 'jb')"
-                                            >miscellaneous</xsl:when>
+                                        <xsl:when test="contains(@id, 'jb')">miscellaneous</xsl:when>
+                                        <xsl:otherwise>citation</xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:otherwise>
                             </xsl:choose>

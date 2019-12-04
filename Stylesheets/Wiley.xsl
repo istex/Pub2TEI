@@ -1277,6 +1277,11 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="testCountry">
+            <xsl:call-template name="normalizeISOCountry">
+                <xsl:with-param name="country" select="../@countryCode"/>
+            </xsl:call-template>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:choose>
@@ -1292,6 +1297,18 @@
                                 <xsl:with-param name="theAffil" select="$apresVirgule"/>
                             </xsl:call-template>
                         </xsl:if>
+                        <xsl:if test="$testCountry != '' and not(contains(.,','))">
+                            <address>
+                                <country>
+                                    <xsl:attribute name="key">
+                                        <xsl:value-of select="$testCountry"/>
+                                    </xsl:attribute>
+                                    <xsl:call-template name="normalizeISOCountryName">
+                                        <xsl:with-param name="country" select="../@countryCode"/>
+                                    </xsl:call-template>
+                                </country>
+                            </address>
+                        </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <address>
@@ -1299,16 +1316,21 @@
                                 <xsl:with-param name="theAffil" select="$theAffil"/>
                                 <xsl:with-param name="inAddress" select="true()"/>
                             </xsl:call-template>
+                            <xsl:if test="$testCountry != ''">
+                                <country>
+                                    <xsl:attribute name="key">
+                                        <xsl:value-of select="$testCountry"/>
+                                    </xsl:attribute>
+                                    <xsl:call-template name="normalizeISOCountryName">
+                                        <xsl:with-param name="country" select="../@countryCode"/>
+                                    </xsl:call-template>
+                                </country>
+                            </xsl:if>
                         </address>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="testCountry">
-                    <xsl:call-template name="normalizeISOCountry">
-                        <xsl:with-param name="country" select="$avantVirgule"/>
-                    </xsl:call-template>
-                </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$testOrganisation!=''">
                         <orgName>
@@ -1322,26 +1344,6 @@
                                 <xsl:with-param name="theAffil" select="$apresVirgule"/>
                             </xsl:call-template>
                         </xsl:if>
-                    </xsl:when>
-                    <xsl:when test="$testCountry != ''">
-                        <country>
-                            <xsl:choose>
-                                <xsl:when test="//ce:doi='10.1016/S0735-1097(98)00474-4'">
-                                    <xsl:attribute name="key">
-                                        <xsl:text>UK</xsl:text>
-                                    </xsl:attribute>
-                                    <xsl:text>UNITED KINGDOM</xsl:text>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:attribute name="key">
-                                        <xsl:value-of select="$testCountry"/>
-                                    </xsl:attribute>
-                                    <xsl:call-template name="normalizeISOCountryName">
-                                        <xsl:with-param name="country" select="$avantVirgule"/>
-                                    </xsl:call-template>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </country>
                     </xsl:when>
                     <xsl:otherwise>
                         <addrLine>
