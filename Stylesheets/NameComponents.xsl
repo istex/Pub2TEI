@@ -156,7 +156,6 @@
             </affiliation>
         </xsl:if>
     </xsl:template>
-
     <xsl:template match="collab">
         <name>
             <xsl:apply-templates/>

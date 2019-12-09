@@ -280,7 +280,10 @@
                     </addrLine>
                  </xsl:if>-->
                  <addrLine>
-                     <xsl:apply-templates/>
+                     <xsl:variable name="addrline">
+                         <xsl:apply-templates/>
+                     </xsl:variable>
+                     <xsl:value-of select="normalize-space($addrline)"/>
                  </addrLine>
                 </xsl:otherwise>
             </xsl:choose>

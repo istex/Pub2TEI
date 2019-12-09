@@ -92,12 +92,7 @@
             <xsl:when test="normalize-space($codeGenre2)='paper-read'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='obituary'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='oration'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='other'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0] and contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='other' and article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='partial-retraction'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='pdf-issue'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='poster'">conference</xsl:when>
@@ -109,7 +104,7 @@
             <xsl:when test="normalize-space($codeGenre2)='retraction'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='review-article'">review-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='translation'">article</xsl:when>
-            <xsl:otherwise>
+           <xsl:otherwise>
                 <xsl:text>other</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
@@ -2072,10 +2067,15 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="testCountry">
+            <xsl:call-template name="normalizeISOCountry">
+                <xsl:with-param name="country" select="$avantVirgule"/>
+            </xsl:call-template>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:choose>
-                    <xsl:when test="$testOrganisation!='' and not(contains(.,'equally'))">
+                    <xsl:when test="$testOrganisation">
                         <orgName>
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
@@ -2083,9 +2083,15 @@
                             <xsl:value-of select="$avantVirgule"/>
                         </orgName>
                         <xsl:if test="$apresVirgule !=''">
-                            <xsl:call-template name="NLMParseAffiliation">
-                                <xsl:with-param name="theAffil" select="$apresVirgule"/>
-                            </xsl:call-template>
+                            <address>
+                                <addrLine>
+                                    <xsl:value-of select="$apresVirgule"/>
+                                </addrLine>
+                                <xsl:call-template name="NLMParseAffiliation">
+                                    <xsl:with-param name="theAffil" select="$theAffil"/>
+                                    <xsl:with-param name="inAddress" select="true()"/>
+                                </xsl:call-template>
+                            </address>
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
@@ -2106,13 +2112,8 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="testCountry">
-                    <xsl:call-template name="normalizeISOCountry">
-                        <xsl:with-param name="country" select="$avantVirgule"/>
-                    </xsl:call-template>
-                </xsl:variable>
                 <xsl:choose>
-                   <!--<xsl:when test="$testOrganisation!=''">
+                  <!-- <xsl:when test="$testOrganisation!=''">
                         <orgName>
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
@@ -2142,7 +2143,7 @@
                                     <xsl:with-param name="theOrg" select="$apresVirgule"/>
                                 </xsl:call-template>
                             </xsl:when>
-                            <xsl:when test="$testOrganisation!='' and not(contains(.,','))">
+                            <xsl:when test="$testOrganisation!='' and not($apresVirgule)">
                                 <orgName>
                                     <xsl:attribute name="type">
                                         <xsl:value-of select="$testOrganisation"/>
@@ -2155,11 +2156,11 @@
                                     </xsl:call-template>
                                 </xsl:if>
                             </xsl:when>
-                            <xsl:otherwise>
+                           <!-- <xsl:otherwise>
                                 <addrLine>
                                     <xsl:value-of select="$avantVirgule"/>
                                 </addrLine>
-                            </xsl:otherwise>
+                            </xsl:otherwise>-->
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -2276,22 +2277,19 @@
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
             <xsl:apply-templates select="string-name"/>
-           <!-- <xsl:if test="//article-meta/aff and not(//article-meta/aff/@id)">
+           <xsl:if test="//article-meta/aff/institution and not(//article-meta/aff/@id)">
                 <affiliation>
                     <xsl:if test="//article-meta/aff/institution">
-                        <xsl:for-each select="//article-meta/aff/institution">
-                            <orgName type="institution">
-                                <xsl:value-of select="."/>
-                            </orgName>
-                        </xsl:for-each>
+                        <xsl:apply-templates select="//article-meta/aff/institution"/>
                     </xsl:if>
-                    <xsl:if test="//article-meta/aff/addr-line">
-                        <xsl:for-each select="//article-meta/aff/addr-line">
-                            <xsl:call-template name="NLMaffiliation"/>
-                        </xsl:for-each>
+                    <xsl:if test="//article-meta/aff/addr-line | //article-meta/aff/country">
+                        <address>
+                            <xsl:apply-templates select="//article-meta/aff/addr-line"/>
+                            <xsl:apply-templates select="//article-meta/aff/country"/>
+                        </address>
                     </xsl:if>
                 </affiliation>
-            </xsl:if>-->
+            </xsl:if>
             <xsl:choose>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
@@ -2303,7 +2301,7 @@
             <!-- appelle les affiliations complementaires -->
             <xsl:choose>
                 <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
-                    <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]"/>
+                    <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
                 </xsl:when>
             </xsl:choose>
             <xsl:choose>
@@ -3588,9 +3586,9 @@
         </date>
     </xsl:template>
     <xsl:template match="conf-loc">
-        <pubPlace>
+        <placeName>
             <xsl:apply-templates/>
-        </pubPlace>
+        </placeName>
     </xsl:template>
     <xsl:template match="conf-sponsor">
         <orgName>

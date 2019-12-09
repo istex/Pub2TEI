@@ -332,6 +332,7 @@
                         <cell role="a3code">CHN</cell>
                         <cell role="name" xml:lang="fr">CHINE</cell>
                         <cell role="name" xml:lang="en">CHINA</cell>
+                        <cell role="nameAlt" xml:lang="en">China</cell>
                         <cell role="nameAlt" xml:lang="en">People’s Republic of China</cell>
                         <cell role="nameAlt" xml:lang="en">People’s Republic China</cell>
                         <cell role="nameAlt" xml:lang="en">P.R. China</cell>
