@@ -2012,6 +2012,17 @@
                    </address>
                </affiliation>
            </xsl:when>
+          <xsl:when test="institution">
+               <affiliation>
+                   <xsl:apply-templates select="institution"/>
+                   <xsl:if test="addr-line | country">
+                   <address>
+                       <xsl:apply-templates select="addr-line"/>
+                       <xsl:apply-templates select="country"/>
+                   </address>
+                   </xsl:if>
+               </affiliation>
+           </xsl:when>
            <xsl:otherwise>
                <affiliation>
                    <xsl:call-template name="NLMParseAffiliation">
@@ -2033,6 +2044,15 @@
                </xsl:with-param>
            </xsl:call-template>
    </xsl:template>
+    <xsl:template match="institution">
+        <xsl:if test="normalize-space(.)">
+            <xsl:call-template name="NLMParseOrg">
+                <xsl:with-param name="theOrg">
+                    <xsl:value-of select="translate(.,'.;','')"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
     
     <xsl:template name="NLMParseAffiliation">
         <xsl:param name="theAffil"/>

@@ -389,7 +389,7 @@
     <!-- ScholarOne: inst, dept -->
     <!-- Springer 2/3: OrgDivision, OrgName -->
 
-    <xsl:template match="institution | corresponding-author-institution | inst | OrgName | Institution">
+    <xsl:template match="corresponding-author-institution | inst | OrgName | Institution">
         <xsl:if test="normalize-space(.)">
             <orgName type="institution">
                 <xsl:apply-templates/>
