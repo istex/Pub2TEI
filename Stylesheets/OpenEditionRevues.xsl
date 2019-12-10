@@ -169,6 +169,10 @@
                     <xsl:copy-of select="//tei:profileDesc"/>
                 </xsl:otherwise>
             </xsl:choose>
+            <!-- traceability -->
+            <revisionDesc>
+                <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
+            </revisionDesc>
         </teiHeader>
     </xsl:template>
     <xsl:template match="tei:textClass">

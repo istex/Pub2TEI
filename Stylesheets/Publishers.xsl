@@ -43,7 +43,8 @@
 	<xsl:include href="Wiley.xsl"/>
     <xsl:include href="BookChapter.xsl"/>
     <xsl:include href="Duke.xsl"/>
-    <xsl:include href="OpenEdition.xsl"/>
+    <xsl:include href="OpenEditionRevues.xsl"/>
+    <xsl:include href="OpenEditionBooks.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
