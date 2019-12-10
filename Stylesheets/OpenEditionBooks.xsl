@@ -20,6 +20,7 @@
                     <!-- SG - titre brut -->
                     <titleStmt>
                         <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:title"/>
+                        <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:alternative"/>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -35,12 +36,13 @@
                     </publicationStmt>
                     <notesStmt>
                         <note type="content-type" subtype="chapter" source="chapter" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6">chapter</note>
-                        <note type="publication-type" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
+                        <note type="publication-type" source="book" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
                     </notesStmt>
                     <sourceDesc>
                         <biblStruct type="chapter">
                             <analytic>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:title"/>
+                                <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:alternative"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:creator"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:contributor"/>
                                 <!-- ajout identifiants ISTEX et ARK -->
@@ -64,35 +66,41 @@
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:identifier[@scheme='URN']" mode="book"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:identifier[@scheme='URI']"/>
                                 <xsl:choose>
-                                    <xsl:when test="//mets:xmlData[dcterms:type='book']/dcterms:creator[position() =1] = //mets:xmlData[dcterms:type='book']/dcterms:creator[position() =2]">
-                                        <xsl:variable name="parse">
-                                            <xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:creator[position() =1]"/>
-                                        </xsl:variable>
-                                        <author>
-                                            <persName>
-                                                <xsl:choose>
-                                                    <xsl:when test="contains($parse,', ')">
-                                                        <forename type="first">
-                                                            <xsl:value-of select="substring-after($parse,', ')"/>
-                                                        </forename>
-                                                        <surname>
-                                                            <xsl:value-of select="substring-before($parse,', ')"/>
-                                                        </surname> 
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <surname>
-                                                            <xsl:value-of select="$parse"/>
-                                                        </surname> 
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </persName>
-                                        </author>
+                                    <xsl:when test="//mets:xmlData[dcterms:type='book']/dcterms:contributor">
+                                        <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:contributor"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:creator"/>
+                                        <xsl:choose>
+                                            <xsl:when test="//mets:xmlData[dcterms:type='book']/dcterms:creator[position() =1] = //mets:xmlData[dcterms:type='book']/dcterms:creator[position() =2]">
+                                                <xsl:variable name="parse">
+                                                    <xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:creator[position() =1]"/>
+                                                </xsl:variable>
+                                                <author>
+                                                    <persName>
+                                                        <xsl:choose>
+                                                            <xsl:when test="contains($parse,', ')">
+                                                                <forename type="first">
+                                                                    <xsl:value-of select="substring-after($parse,', ')"/>
+                                                                </forename>
+                                                                <surname>
+                                                                    <xsl:value-of select="substring-before($parse,', ')"/>
+                                                                </surname> 
+                                                            </xsl:when>
+                                                            <xsl:otherwise>
+                                                                <surname>
+                                                                    <xsl:value-of select="$parse"/>
+                                                                </surname> 
+                                                            </xsl:otherwise>
+                                                        </xsl:choose>
+                                                    </persName>
+                                                </author>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:creator"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose> 
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:contributor"/>
                                 <imprint>
                                     <!--<biblScope unit="vol">73</biblScope>
                                     <biblScope unit="issue">1</biblScope>-->
@@ -127,6 +135,7 @@
                 <xsl:call-template name="insertVersion"/>
                 <profileDesc>
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:description"/>
+                    <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:abstract"/>
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type='chapter']/dcterms:spatial"/>
                     <xsl:if test="//mets:xmlData[dcterms:type='chapter']/dcterms:subject[@scheme='keywords']">
                         <textClass>
@@ -174,7 +183,7 @@
                 </revisionDesc>
             </teiHeader>
             <xsl:choose>
-                <!-- reprise du body dans le tei openEdition Book 
+                <!-- reprise du body dans le tei openEdition au 
                 niveau du chapitre en format TEI-->
                 <xsl:when test="$docIssueTEI/tei:text">
                     <xsl:copy-of select="$docIssueTEI/tei:text"/>
@@ -200,6 +209,21 @@
     </xsl:template>
     <xsl:template match="dcterms:title">
         <title level="a" type="main">
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
+    <xsl:template match="dcterms:alternative">
+        <title level="a" type="alt">
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </title>
     </xsl:template>
@@ -245,13 +269,14 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </persName>
+            <roleName>author</roleName>
         </author>
     </xsl:template>
     <xsl:template match="dcterms:contributor">
         <xsl:variable name="contributor">
             <xsl:apply-templates/>
         </xsl:variable>
-        <editor>
+        <author>
             <persName>
                 <xsl:choose>
                     <xsl:when test="contains($contributor,', ')">
@@ -269,7 +294,8 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </persName>
-        </editor>
+            <roleName type="office">editor</roleName>
+        </author>
     </xsl:template>
     <xsl:template match="dcterms:identifier">
         <xsl:if test="contains(@scheme,'URI')">
@@ -304,13 +330,23 @@
     </xsl:template>
     <xsl:template match="dcterms:description">
         <abstract>
-            <xsl:choose>
-                <xsl:when test="@xml:lang">
-                    <xsl:attribute name="xml:lang">
-                        <xsl:value-of select="@xml:lang"/>
-                    </xsl:attribute>
-                </xsl:when>
-            </xsl:choose>
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <p>
+                <xsl:apply-templates/>
+            </p>
+        </abstract>
+    </xsl:template>
+    <xsl:template match="dcterms:abstract">
+        <abstract>
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
             <p>
                 <xsl:apply-templates/>
             </p>
