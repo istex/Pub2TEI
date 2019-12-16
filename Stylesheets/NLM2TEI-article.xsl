@@ -1403,9 +1403,16 @@
                             <xsl:apply-templates select="//article/floats-group"/>
                         </xsl:when>
                         <xsl:otherwise>
-                                    <div>
+                            <div>
+                                <xsl:choose>
+                                    <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                                        <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
+                                    </xsl:when>
+                                    <xsl:otherwise>
                                         <p/>
-                                    </div>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </div>
                         </xsl:otherwise>
                     </xsl:choose>
                 </body>
@@ -2730,6 +2737,11 @@
                             <xsl:value-of select="@sec-type"/>
                         </xsl:attribute>
                     </xsl:if>
+                    <xsl:if test="@sec-type">
+                        <xsl:attribute name="type">
+                            <xsl:value-of select="@sec-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     
                     <xsl:if test="parent::boxed-text">
                         <xsl:attribute name="rend">
@@ -2896,21 +2908,23 @@
 
     <!-- Quoted passages -->
     <xsl:template match="disp-quote">
-        <!--<cit>
+        <cit>
             <xsl:if test="attrib">
                 <xsl:attribute name="rend">
                     <xsl:text>block</xsl:text>
                 </xsl:attribute>
-            </xsl:if>-->
+            </xsl:if>
             <quote>
                 <xsl:apply-templates select="*[not(name() = 'attrib')]"/>
             </quote>
-            <xsl:apply-templates select="child::attrib"/>
-      <!--  </cit>-->
+            <xsl:apply-templates select="attrib"/>
+      </cit>
     </xsl:template>
 
     <xsl:template match="disp-quote/attrib">
+        <bibl>
         <xsl:apply-templates/>
+        </bibl>
     </xsl:template>
 
     <!-- Glossaries -->
@@ -3180,25 +3194,40 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <ref>
-                    <xsl:choose>
-                        <xsl:when test="@ref-type">
-                            <xsl:attribute name="type">
-                                <xsl:value-of select="@ref-type"/>
-                            </xsl:attribute>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="type">
-                                <xsl:text>bib</xsl:text>
-                            </xsl:attribute>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    
-                    <xsl:attribute name="target">
-                        <xsl:value-of select="concat('#', @rid)"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </ref>
+                <xsl:choose>
+                    <xsl:when test="ancestor::label"/>
+                    <xsl:when test="ancestor::notes"/>
+                    <xsl:otherwise>
+                        <ref>
+                            <xsl:choose>
+                                <xsl:when test="@ref-type">
+                                    <xsl:attribute name="type">
+                                        <xsl:value-of select="@ref-type"/>
+                                    </xsl:attribute>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="type">
+                                        <xsl:text>bib</xsl:text>
+                                    </xsl:attribute>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="@rid">
+                                    <xsl:attribute name="target">
+                                        <xsl:value-of select="concat('#', @rid)"/>
+                                    </xsl:attribute>
+                                </xsl:when>
+                                <xsl:when test="@id">
+                                    <xsl:attribute name="target">
+                                        <xsl:value-of select="concat('#', @id)"/>
+                                    </xsl:attribute>
+                                </xsl:when>
+                            </xsl:choose>
+                            
+                            <xsl:apply-templates/>
+                        </ref>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -3332,6 +3361,8 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="ancestor::ref-list"/>
+            <xsl:when test="ancestor::notes"/>
             <xsl:otherwise>
                 <head>
                     <xsl:apply-templates/>

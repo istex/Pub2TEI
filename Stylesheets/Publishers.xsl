@@ -42,6 +42,7 @@
     <xsl:include href="RoyalChemicalSociety.xsl"/>
 	<xsl:include href="Wiley.xsl"/>
     <xsl:include href="BookChapter.xsl"/>
+    <xsl:include href="BookAll.xsl"/>
     <xsl:include href="Duke.xsl"/>
     <xsl:include href="OpenEditionRevues.xsl"/>
     <xsl:include href="OpenEditionBooks.xsl"/>

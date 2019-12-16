@@ -11,15 +11,25 @@
     <!-- ref-list: NLM article, ScholarOne -->
 
     <xsl:template match="ref-list | biblist | ce:bibliography | bibl | wiley:bibliography">
-        <div type="references">
-            <xsl:apply-templates select="title | ce:section-title"/>
-            <listBibl>
-                <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
-                <xsl:apply-templates
-                    select="ref | citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
-                /> 
-            </listBibl>
-        </div>
+        <xsl:choose>
+            <xsl:when test="ref">
+                <div type="references">
+                    <xsl:apply-templates select="title | ce:section-title"/>
+                    <listBibl>
+                        <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
+                        <xsl:apply-templates
+                            select="ref | citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
+                        /> 
+                    </listBibl>
+                </div>
+            </xsl:when>
+            <xsl:when test="p">
+                <div type="references">
+                    <xsl:apply-templates select="p"/>
+                </div>
+            </xsl:when>
+        </xsl:choose>
+        
     </xsl:template>
 
     <xsl:template match="ce:bibliography-sec">
@@ -785,13 +795,29 @@
     </xsl:template>
     <xsl:template match="string-name">
         <xsl:choose>
-            <xsl:when test="surname | given-names | wiley:givenNames | wiley:familyName">
+            <xsl:when test="wiley:givenNames | wiley:familyName">
                 <persName>
-                    <xsl:apply-templates select="surname"/>
-                    <xsl:apply-templates select="given-names"/>
                     <xsl:apply-templates select="wiley:givenNames"/>
                     <xsl:apply-templates select="wiley:familyName"/>
                 </persName>
+            </xsl:when>
+            <xsl:when test="surname | given-names">
+                <xsl:choose>
+                    <xsl:when test="ancestor::ref">
+                        <author>
+                            <persName>
+                                <xsl:apply-templates select="surname"/>
+                                <xsl:apply-templates select="given-names"/>
+                            </persName>
+                        </author>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <persName>
+                            <xsl:apply-templates select="surname"/>
+                            <xsl:apply-templates select="given-names"/>
+                        </persName>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="ancestor::name-alternatives">
@@ -1726,8 +1752,16 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <analytic>
-                        <xsl:apply-templates select="article-title"/>
+                        <xsl:choose>
+                            <xsl:when test="article-title|chapter-title">
+                                <xsl:apply-templates select="article-title|chapter-title"/>
+                            </xsl:when>
+                            <xsl:when test="source">
+                                <xsl:apply-templates select="source"/>
+                            </xsl:when>
+                        </xsl:choose>
                         <xsl:apply-templates select="name"/>
+                        <xsl:apply-templates select="string-name"/>
                         <xsl:apply-templates select="person-group"/>
                         <xsl:apply-templates select="elocation-id"/>
                     </analytic>

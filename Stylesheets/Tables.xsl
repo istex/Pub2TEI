@@ -77,11 +77,17 @@
                         </xsl:if>
                         <xsl:if test="label">
                             <head type="label">
+                                <xsl:if test="label/xref/@id">
+                                    <xsl:attribute name="corresp">
+                                        <xsl:text>#</xsl:text>
+                                        <xsl:value-of select="label/xref/@id"/>
+                                    </xsl:attribute>
+                                </xsl:if>
                                 <xsl:value-of select="label"/>
                             </head>
                         </xsl:if>
                         <!-- <xsl:apply-templates select="* except tgroup"/>-->
-                        <xsl:apply-templates/>
+                        <xsl:apply-templates select="* except(label/xref)"/>
                     </table>
                 
             </xsl:otherwise>
