@@ -164,22 +164,13 @@
                         </xsl:call-template>
                     </xsl:when>
                     <xsl:otherwise>
-                        <!--<xsl:attribute name="key">
+                        <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">
                                 <xsl:with-param name="country" select="$countryWithNoSpace"/>
                             </xsl:call-template>
                         </xsl:attribute>
                         <xsl:call-template name="normalizeISOCountryName">
                             <xsl:with-param name="country" select="$countryWithNoSpace"/>
-                        </xsl:call-template>
-                    </xsl:otherwise>-->
-                        <xsl:attribute name="key">
-                            <xsl:call-template name="normalizeISOCountry">
-                                <xsl:with-param name="country" select="."/>
-                            </xsl:call-template>
-                        </xsl:attribute>
-                        <xsl:call-template name="normalizeISOCountryName">
-                            <xsl:with-param name="country" select="."/>
                         </xsl:call-template>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -389,7 +380,7 @@
     <!-- ScholarOne: inst, dept -->
     <!-- Springer 2/3: OrgDivision, OrgName -->
 
-    <xsl:template match="corresponding-author-institution | inst | OrgName | Institution">
+    <xsl:template match="institution | corresponding-author-institution | inst | OrgName | Institution">
         <xsl:if test="normalize-space(.)">
             <orgName type="institution">
                 <xsl:apply-templates/>

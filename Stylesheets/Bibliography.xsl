@@ -2,8 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
-    xmlns:wiley="http://www.wiley.com/namespaces/wiley" exclude-result-prefixes="#all">
+    xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
+	exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
 
@@ -28,8 +28,16 @@
                     <xsl:apply-templates select="p"/>
                 </div>
             </xsl:when>
+            <xsl:otherwise>
+                <div type="references">
+                    <xsl:apply-templates select="title | ce:section-title"/>
+                    <listBibl>
+                        <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
+                        <xsl:apply-templates select="ref |citgroup | ce:bibliography-sec | bib |wiley:bib | wiley:bibSection"/>
+                    </listBibl>
+                </div>
+            </xsl:otherwise>
         </xsl:choose>
-        
     </xsl:template>
 
     <xsl:template match="ce:bibliography-sec">
@@ -190,8 +198,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                             <!-- All authors are included here -->
-                            <xsl:apply-templates
-                                select="$entry/person-group | $entry/citauth | $entry/name"/>
+                            <xsl:apply-templates select="$entry/person-group | $entry/citauth | $entry/name"/>
                             <xsl:apply-templates select="$entry/object-id"/>
                         </analytic>
                     </xsl:if>
@@ -272,9 +279,19 @@
                                     <xsl:apply-templates select="$entry/article-title"/>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            <!-- All authors are included here -->
-                            <xsl:apply-templates
-                                select="$entry/person-group | $entry/citauth | $entry/name"/>
+                            <xsl:choose>
+                                <xsl:when test="$countTitle &gt;2">
+                                    <xsl:for-each select="$entry/article-title">
+                                        <title>
+                                            <xsl:value-of select="."/>
+                                        </title>
+                                    </xsl:for-each>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="$entry/article-title"/>
+                                </xsl:otherwise>
+                            </xsl:choose><!-- All authors are included here -->
+                            <xsl:apply-templates select="$entry/person-group | $entry/citauth | $entry/name"/>
                             <xsl:apply-templates select="$entry/object-id"/>
                         </analytic>
                     </xsl:if>
@@ -1101,8 +1118,7 @@
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@xml:id"/>
                             </xsl:attribute>
-                            <xsl:if
-                                test="wiley:articleTitle | wiley:chapterTitle | wiley:author | wiley:groupName">
+                            <xsl:if test="wiley:articleTitle | wiley:chapterTitle | wiley:author | wiley:groupName">
                                 <xsl:apply-templates select="wiley:articleTitle"/>
                                 <!-- SG - ajout chapterTitle -->
                                 <xsl:apply-templates select="wiley:chapterTitle"/>

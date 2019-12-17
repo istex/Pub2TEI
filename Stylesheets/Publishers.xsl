@@ -116,7 +116,7 @@
             
             <xsl:otherwise>
                 <xsl:message>Converting a non-identified article: - name: <xsl:value-of
-                        select="name(*)"/> - local-name: <xsl:value-of select="local-name(*)"/> -
+                    select="name(*)"/> - local-name: <xsl:value-of select="local-name(*)"/> -
                     namespace-uri: <xsl:value-of select="namespace-uri(*)"/>
                 </xsl:message>
             </xsl:otherwise>

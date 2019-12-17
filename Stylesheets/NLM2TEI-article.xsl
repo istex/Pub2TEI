@@ -2801,6 +2801,16 @@
     </xsl:template>
     
     <xsl:template match="sec/label"/>
+    <xsl:template match="sig-block">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="sig">
+        <name>
+            <xsl:apply-templates/> 
+        </name>
+    </xsl:template>
 
     <xsl:template match="boxed-text">
         <figure type="boxed-text">

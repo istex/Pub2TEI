@@ -2861,10 +2861,10 @@ reactorsa'</title>
             <xsl:attribute name="when">
                 <xsl:choose>
                     <xsl:when test="@year">
-                            <xsl:value-of select="translate(@year,',.[a-zA-Z]','')"/>
+                        <xsl:value-of select="translate(@year,',.[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]','')"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="translate(.,',.[a-zA-Z]','')"/>
+                        <xsl:value-of select="translate(.,',.[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]','')"/>
                     </xsl:otherwise>
                 </xsl:choose>
 			</xsl:attribute>

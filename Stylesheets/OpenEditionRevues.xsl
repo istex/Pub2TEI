@@ -427,7 +427,7 @@
                             <xsl:attribute name="key">
                                 <xsl:value-of select="$testCountry"/>
                             </xsl:attribute>
-                            <xsl:call-template name="normalizeISOCountryNameFR">
+                           <xsl:call-template name="normalizeISOCountryNameFR">
                                 <xsl:with-param name="country" select="translate($avantVirgule,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
                             </xsl:call-template>
                         </country>

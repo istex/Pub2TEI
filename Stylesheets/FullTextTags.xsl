@@ -973,10 +973,8 @@
                     <xsl:value-of select="@type"/>
                 </xsl:attribute>
             </xsl:if>
-			<xsl:if test="wiley:title">
-		        <head>
+            <xsl:if test="wiley:title">
 		            <xsl:apply-templates select="wiley:title"/>
-				</head>
 			</xsl:if>
 			<xsl:apply-templates select="* except (wiley:title)"/>
         </div>
@@ -998,9 +996,7 @@
                 <xsl:attribute name="type">section</xsl:attribute>
             </xsl:if>
             <xsl:if test="wiley:title">
-                <head>
                     <xsl:apply-templates select="wiley:title"/>
-                </head>
             </xsl:if>
             <xsl:apply-templates select="* except (wiley:title)"/>
         </div>
@@ -1009,8 +1005,10 @@
         <xsl:apply-templates/>
     </xsl:template>
 	
-    <xsl:template match="wiley:section/wiley:title">
+   <xsl:template match="wiley:section/wiley:title">
+       <head>
 		<xsl:apply-templates/>
+       </head>
 	</xsl:template>
 	<!-- SG ajout citation "other" -->
     <xsl:template match="wiley:citation [@type='other']">

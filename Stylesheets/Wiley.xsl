@@ -139,7 +139,7 @@
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="component">
-        <TEI  xmlns:ns1="http://standoff.proposal">
+        <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
@@ -1241,11 +1241,15 @@
             <xsl:with-param name="theAffil">
                 <xsl:value-of select="."/>
             </xsl:with-param>
+            <xsl:with-param name="theCountry">
+                <xsl:value-of select="ancestor::affiliation/@countryCode"/>
+            </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
     
     <xsl:template name="WileyParseAffiliation">
         <xsl:param name="theAffil"/>
+        <xsl:param name="theCountry"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:for-each select="$theAffil">
             <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
@@ -1277,11 +1281,6 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:variable name="testCountry">
-            <xsl:call-template name="normalizeISOCountry">
-                <xsl:with-param name="country" select="../@countryCode"/>
-            </xsl:call-template>
-        </xsl:variable>
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:choose>
@@ -1297,40 +1296,52 @@
                                 <xsl:with-param name="theAffil" select="$apresVirgule"/>
                             </xsl:call-template>
                         </xsl:if>
-                        <xsl:if test="$testCountry != '' and not(contains(.,','))">
-                            <address>
-                                <country>
-                                    <xsl:attribute name="key">
-                                        <xsl:value-of select="$testCountry"/>
-                                    </xsl:attribute>
-                                    <xsl:call-template name="normalizeISOCountryName">
-                                        <xsl:with-param name="country" select="../@countryCode"/>
-                                    </xsl:call-template>
-                                </country>
-                            </address>
-                        </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <address>
-                            <xsl:call-template name="WileyParseAffiliation">
-                                <xsl:with-param name="theAffil" select="$theAffil"/>
-                                <xsl:with-param name="inAddress" select="true()"/>
-                            </xsl:call-template>
-                            <xsl:if test="$testCountry != ''">
-                                <country>
-                                    <xsl:attribute name="key">
-                                        <xsl:value-of select="$testCountry"/>
-                                    </xsl:attribute>
-                                    <xsl:call-template name="normalizeISOCountryName">
-                                        <xsl:with-param name="country" select="../@countryCode"/>
+                            <xsl:choose>
+                                <xsl:when test="$avantVirgule">
+                                    <xsl:call-template name="WileyParseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$theAffil"/>
+                                        <xsl:with-param name="inAddress" select="true()"/>
                                     </xsl:call-template>
-                                </country>
-                            </xsl:if>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:call-template name="WileyParseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$theAffil"/>
+                                        <xsl:with-param name="inAddress" select="true()"/>
+                                    </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            
+                            <country>
+                                <xsl:choose>
+                                    <xsl:when test="//ce:doi='10.1016/S0735-1097(98)00474-4'">
+                                        <xsl:attribute name="key">
+                                            <xsl:text>UK</xsl:text>
+                                        </xsl:attribute>
+                                        <xsl:text>UNITED KINGDOM</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:attribute name="key">
+                                            <xsl:value-of select="ancestor::affiliation/@countryCode"/>
+                                        </xsl:attribute>
+                                        <xsl:call-template name="normalizeISOCountryName">
+                                            <xsl:with-param name="country" select="ancestor::affiliation/@countryCode"/>
+                                        </xsl:call-template>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </country>
                         </address>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:variable name="testCountry">
+                    <xsl:call-template name="normalizeISOCountry">
+                        <xsl:with-param name="country" select="$avantVirgule"/>
+                    </xsl:call-template>
+                </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$testOrganisation!=''">
                         <orgName>
@@ -1414,13 +1425,13 @@
     
     <xsl:template match="state">
         <state>
-            <p><xsl:apply-templates select="text()"/></p>
+            <xsl:apply-templates select="text()"/>
         </state>
     </xsl:template>
     
     <xsl:template match="countryPart">
         <region>
-            <p><xsl:apply-templates select="text()"/></p>
+            <xsl:apply-templates select="text()"/>
         </region>
     </xsl:template>
 </xsl:stylesheet>

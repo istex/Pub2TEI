@@ -865,7 +865,7 @@
                         <cell role="a3code">LBN</cell>
                         <cell role="name" xml:lang="fr">LIBAN</cell>
                         <cell role="name" xml:lang="en">LEBANON</cell>
-                        <cell role="name" xml:lang="en">Lebanon</cell>
+                        <cell role="nameAlt" xml:lang="en">Lebanon</cell>
                     </row>
                     <row>
                         <cell role="a2code">LR</cell>
@@ -967,7 +967,7 @@
                         <cell role="a3code">MAR</cell>
                         <cell role="name" xml:lang="fr">MAROC</cell>
                         <cell role="name" xml:lang="en">MOROCCO</cell>
-                        <cell role="name" xml:lang="en">Morocco</cell>
+                        <cell role="nameAlt" xml:lang="en">Morocco</cell>
                     </row>
                     <row>
                         <cell role="a2code">MH</cell>
@@ -1109,7 +1109,7 @@
                         <cell role="a3code">NOR</cell>
                         <cell role="name" xml:lang="fr">NORVÈGE</cell>
                         <cell role="name" xml:lang="en">NORWAY</cell>
-                        <cell role="name" xml:lang="en">Norway</cell>
+                        <cell role="nameAlt" xml:lang="en">Norway</cell>
                     </row>
                     <row>
                         <cell role="a2code">NC</cell>
@@ -1122,7 +1122,7 @@
                         <cell role="a3code">NZL</cell>
                         <cell role="name" xml:lang="fr">NOUVELLE-ZÉLANDE</cell>
                         <cell role="name" xml:lang="en">NEW ZEALAND</cell>
-                        <cell role="name" xml:lang="en">New Zealand</cell>
+                        <cell role="nameAlt" xml:lang="en">New Zealand</cell>
                     </row>
                     <row>
                         <cell role="a2code">IO</cell>
@@ -1512,7 +1512,7 @@
                         <cell role="a3code">CZE</cell>
                         <cell role="name" xml:lang="fr">TCHÈQUE, RÉPUBLIQUE</cell>
                         <cell role="name" xml:lang="en">CZECH REPUBLIC</cell>
-                        <cell role="name" xml:lang="en">Czech Republic</cell>
+                        <cell role="nameAlt" xml:lang="en">Czech Republic</cell>
                     </row>
                     <row>
                         <cell role="a2code">TF</cell>
