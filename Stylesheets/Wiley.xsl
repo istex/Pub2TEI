@@ -1028,12 +1028,6 @@
                             <xsl:with-param name="restAff4" select="translate(@noteRef,'#','')"/>
                         </xsl:call-template>
                     </xsl:if>
-                    <!-- affiliation nomade sans lien auteurs/affiliations -->
-                    <xsl:if test="//contentMeta/affiliationGroup/affiliation and not(@affiliationRef|@currentRef|@correspondenceRef|@noteRef)">
-                        <affiliation>
-                            <xsl:apply-templates select="//contentMeta/affiliationGroup/affiliation"/>
-                        </affiliation>
-                    </xsl:if>
                 </editor>
             </xsl:when>
         </xsl:choose>
@@ -1297,6 +1291,31 @@
                             </xsl:call-template>
                         </xsl:if>
                     </xsl:when>
+                    <xsl:when test="$testOrganisation=''">
+                        <address>
+                        <addrLine>
+                            <xsl:value-of select="$avantVirgule"/>
+                        </addrLine>
+                            <country>
+                                <xsl:choose>
+                                    <xsl:when test="//doi='10.1111/j.1600-0471.2000.aae110207.x'">
+                                        <xsl:attribute name="key">
+                                            <xsl:text>CA</xsl:text>
+                                        </xsl:attribute>
+                                        <xsl:text>CANADA</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:attribute name="key">
+                                            <xsl:value-of select="ancestor::affiliation/@countryCode"/>
+                                        </xsl:attribute>
+                                        <xsl:call-template name="normalizeISOCountryName">
+                                            <xsl:with-param name="country" select="ancestor::affiliation/@countryCode"/>
+                                        </xsl:call-template>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </country>
+                        </address>
+                    </xsl:when>
                     <xsl:otherwise>
                         <address>
                             <xsl:choose>
@@ -1313,14 +1332,13 @@
                                     </xsl:call-template>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            
                             <country>
                                 <xsl:choose>
-                                    <xsl:when test="//ce:doi='10.1016/S0735-1097(98)00474-4'">
+                                    <xsl:when test="//doi='10.1111/j.1600-0471.2000.aae110207.x'">
                                         <xsl:attribute name="key">
-                                            <xsl:text>UK</xsl:text>
+                                            <xsl:text>CA</xsl:text>
                                         </xsl:attribute>
-                                        <xsl:text>UNITED KINGDOM</xsl:text>
+                                        <xsl:text>CANADA</xsl:text>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:attribute name="key">
@@ -1342,26 +1360,9 @@
                         <xsl:with-param name="country" select="$avantVirgule"/>
                     </xsl:call-template>
                 </xsl:variable>
-                <xsl:choose>
-                    <xsl:when test="$testOrganisation!=''">
-                        <orgName>
-                            <xsl:attribute name="type">
-                                <xsl:value-of select="$testOrganisation"/>
-                            </xsl:attribute>
-                            <xsl:value-of select="$avantVirgule"/>
-                        </orgName>
-                        <xsl:if test="$apresVirgule !=''">
-                            <xsl:call-template name="WileyParseAffiliation">
-                                <xsl:with-param name="theAffil" select="$apresVirgule"/>
-                            </xsl:call-template>
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <addrLine>
-                            <xsl:value-of select="$avantVirgule"/>
-                        </addrLine>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <addrLine1>
+                    <xsl:value-of select="$avantVirgule"/>
+                </addrLine1>
                 <xsl:if test="$apresVirgule !=''">
                     <xsl:call-template name="WileyParseAffiliation">
                         <xsl:with-param name="theAffil" select="$apresVirgule"/>

@@ -33,19 +33,21 @@
     </xsl:template-->
 
     <!-- Default rules for MathML, PL: copy is via template to allow selective copy -->
-    <xsl:template match="*[namespace-uri() = 'http://www.w3.org/1998/Math/MathML']">
+    <xsl:template match="mml:math">
         <xsl:message terminate="no">MathML: <xsl:value-of select="name(.)"/> - <xsl:for-each
             select="attribute::*">
             <xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>" </xsl:for-each>
         </xsl:message>
-        <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="@*|node()" mode="mathml"/>
-        </xsl:copy>
+        <formula>
+            <xsl:copy copy-namespaces="no">
+                <xsl:apply-templates select="node() | @*" mode="mathml"/>
+            </xsl:copy>
+        </formula>
     </xsl:template>
     
     <xsl:template match="node() | @*" mode="mathml">
         <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="node() | @*" mode="mathml"/>
         </xsl:copy>
     </xsl:template>
 
