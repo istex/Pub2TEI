@@ -1293,9 +1293,14 @@
                     </xsl:when>
                     <xsl:when test="$testOrganisation=''">
                         <address>
-                        <addrLine>
-                            <xsl:value-of select="$avantVirgule"/>
-                        </addrLine>
+                            <addrLine>
+                                <xsl:value-of select="$avantVirgule"/>
+                            </addrLine>
+                            <xsl:if test="$apresVirgule !=''">
+                                <addrLine>
+                                    <xsl:value-of select="$apresVirgule"/>
+                                </addrLine>
+                            </xsl:if>
                             <country>
                                 <xsl:choose>
                                     <xsl:when test="//doi='10.1111/j.1600-0471.2000.aae110207.x'">

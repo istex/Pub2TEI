@@ -33,6 +33,7 @@
                 contains($theOrg,'Eurocat') or
                 contains($theOrg,'Fundação') or
                 contains($theOrg,'Network') or
+                contains($theOrg,'BASF AG') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
@@ -60,6 +61,7 @@
             <xsl:when test="contains($theOrg,'Research') or
                 contains($theOrg,'Unit') or
                 contains($theOrg,'Labo') or
+                contains($theOrg,'labo') or
                 contains($theOrg,'Servic') or
                 contains($theOrg,'Biol')">
                 <xsl:text>laboratory</xsl:text>
