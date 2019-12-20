@@ -1312,24 +1312,28 @@
                                     <xsl:value-of select="$apresVirgule"/>
                                 </addrLine>
                             </xsl:if>
-                            <country>
                                 <xsl:choose>
                                     <xsl:when test="//doi='10.1111/j.1600-0471.2000.aae110207.x'">
-                                        <xsl:attribute name="key">
-                                            <xsl:text>CA</xsl:text>
-                                        </xsl:attribute>
-                                        <xsl:text>CANADA</xsl:text>
+                                        <country>
+                                            <xsl:attribute name="key">
+                                                <xsl:text>CA</xsl:text>
+                                            </xsl:attribute>
+                                            <xsl:text>CANADA</xsl:text>
+                                        </country>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:attribute name="key">
-                                            <xsl:value-of select="ancestor::affiliation/@countryCode"/>
-                                        </xsl:attribute>
-                                        <xsl:call-template name="normalizeISOCountryName">
-                                            <xsl:with-param name="country" select="ancestor::affiliation/@countryCode"/>
-                                        </xsl:call-template>
+                                        <xsl:if test="ancestor::affiliation/@countryCode[string-length()&gt; 0]">
+                                            <country>
+                                                <xsl:attribute name="key">
+                                                    <xsl:value-of select="ancestor::affiliation/@countryCode"/>
+                                                </xsl:attribute>
+                                                <xsl:call-template name="normalizeISOCountryName">
+                                                    <xsl:with-param name="country" select="ancestor::affiliation/@countryCode"/>
+                                                </xsl:call-template>
+                                            </country>
+                                            </xsl:if>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </country>
                         </address>
                     </xsl:when>
                     <xsl:otherwise>
