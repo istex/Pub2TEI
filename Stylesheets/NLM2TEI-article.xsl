@@ -3109,7 +3109,7 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="fn-group/fn">
+    <xsl:template match="fn-group">
         <xsl:choose>
             <xsl:when test="ancestor::title-group/fn-group/fn">
                 <title type="note">
@@ -3124,7 +3124,7 @@
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:if>
-                        <xsl:apply-templates/>
+                        <xsl:apply-templates select="fn"/>
                     </note>
                 </title>
             </xsl:when>
@@ -3140,10 +3140,13 @@
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="fn"/>
                 </note>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="fn">
+            <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="back/app-group">
         <div type="appendices">

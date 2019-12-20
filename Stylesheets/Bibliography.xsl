@@ -1767,26 +1767,27 @@
                             </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <analytic>
-                        <xsl:choose>
-                            <xsl:when test="article-title|chapter-title">
-                                <xsl:apply-templates select="article-title|chapter-title"/>
-                            </xsl:when>
-                            <xsl:when test="source">
-                                <xsl:apply-templates select="source"/>
-                            </xsl:when>
-                        </xsl:choose>
-                        <xsl:apply-templates select="name"/>
-                        <xsl:apply-templates select="string-name"/>
-                        <xsl:apply-templates select="person-group"/>
-                        <xsl:apply-templates select="elocation-id"/>
-                    </analytic>
+                    <xsl:if test="article-title|chapter-title">
+                        <analytic>
+                            <xsl:apply-templates select="article-title|chapter-title"/>
+                            <xsl:apply-templates select="name"/>
+                            <xsl:apply-templates select="string-name"/>
+                            <xsl:apply-templates select="person-group"/>
+                            <xsl:apply-templates select="elocation-id"/>
+                        </analytic>
+                    </xsl:if>
                     <monogr>
                         <xsl:apply-templates select="source"/>
                         <!-- cas particulier chez ACS le titre de la 
                         ressource est contenue parfois dans italic@toggle
                         dans les mixed-citation-->
                         <xsl:apply-templates select="italic" mode="toggle"/>
+                        <xsl:if test="not(article-title|chapter-title)">
+                            <xsl:apply-templates select="name"/>
+                            <xsl:apply-templates select="string-name"/>
+                            <xsl:apply-templates select="person-group"/>
+                            <xsl:apply-templates select="elocation-id"/>
+                        </xsl:if>
                         <imprint>
                             <xsl:choose>
                                 <xsl:when test="publisher-name | publisher-loc | year">

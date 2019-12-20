@@ -34,6 +34,8 @@
                 contains($theOrg,'Fundação') or
                 contains($theOrg,'Network') or
                 contains($theOrg,'BASF AG') or
+                contains($theOrg,'Chemie') or
+                contains($theOrg,'chemie') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>

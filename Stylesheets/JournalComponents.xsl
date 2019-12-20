@@ -1835,7 +1835,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:template
-        match="fm/atl |article-title/title | ArticleTitle | article-title | atl | ce:title | art_title | article_title | nihms-submit/title | ArticleTitle/Title | ChapterTitle |wiley:chapterTitle | titlegrp/title | wiley:articleTitle | wiley:otherTitle | chaptl">
+        match="fm/atl |article-title/title | ArticleTitle | article-title | atl | ce:title | art_title | article_title | nihms-submit/title | ArticleTitle/Title | ChapterTitle |chapter-title |wiley:chapterTitle | titlegrp/title | wiley:articleTitle | wiley:otherTitle | chaptl">
         <xsl:choose>
             <xsl:when test="ancestor::news-article/art-front/titlegrp">
                     <xsl:apply-templates/>
@@ -1904,7 +1904,10 @@ reactorsa'</title>
                                 </xsl:attribute>
                             </xsl:when>
                         </xsl:choose>
-                        <xsl:apply-templates/>
+                        <xsl:variable name="normalize">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="normalize-space($normalize)"/>
                     </title>
                     <xsl:if test="//ce:dochead/ce:textfn">
                         <title level="a" type="note">

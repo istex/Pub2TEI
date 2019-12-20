@@ -621,12 +621,12 @@
                 <!-- SG ajout titre alternatif -->
                 <xsl:if test="publicationMeta[@level='part']/titleGroup/title/@type ='specialIssueTitle'">
                     <title level="j" type="sub">
-                        <xsl:value-of select="normalize-space(publicationMeta[@level='part']/titleGroup/title[@type ='specialIssueTitle'])"/>
+                        <xsl:value-of select="normalize-space(publicationMeta[@level='part']/titleGroup/title[@type ='specialIssueTitle'][1])"/>
                     </title>
                 </xsl:if>
                 <xsl:if test="publicationMeta[@level='part']/titleGroup/title/@type ='supplementTitle'">
                     <title level="j" type="sub">
-                        <xsl:value-of select="normalize-space(publicationMeta[@level='part']/titleGroup/title[@type ='supplementTitle'])"/>
+                        <xsl:value-of select="normalize-space(publicationMeta[@level='part']/titleGroup/title[@type ='supplementTitle'][1])"/>
                     </title>
                 </xsl:if>
                 <!-- SG ajout titre specialIssue -->

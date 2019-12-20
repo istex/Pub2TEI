@@ -188,7 +188,10 @@
     <xsl:template match="fname |first_name | FirstName | ce:given-name | GivenName | per_aut/fn | given-names | given_name | corresponding-author-firstname | fname | fnm | wiley:givenNames">
         <xsl:if test="normalize-space(.)">
             <forename type="first">
-                <xsl:apply-templates/>
+                <xsl:variable name="normalize">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($normalize)"/>
             </forename>
         </xsl:if>
     </xsl:template>

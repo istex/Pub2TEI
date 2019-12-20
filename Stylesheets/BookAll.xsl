@@ -206,10 +206,23 @@
                     </body>
                 </xsl:otherwise>
             </xsl:choose>
-            
-            <xsl:if test="//book/back[string-length() &gt; 0 ]">
-                <xsl:apply-templates select="//book/back"/>
-            </xsl:if>
+            <back>
+               <!-- <xsl:apply-templates select="//book/back" mode="TF"/>
+                <xsl:apply-templates select="//book-part/back" mode="TF"/>-->
+                <xsl:if test="//fn-group">
+                    <div type="notes">
+                        <head>Notes</head>
+                    <xsl:apply-templates select="//fn" mode="TF"/>
+                    </div>
+                </xsl:if>
+                <xsl:if test="//ref-list">
+                    <div type="references">
+                        <listBibl>
+                            <xsl:apply-templates select="//ref-list" mode="TF"/>
+                        </listBibl>
+                    </div>
+                </xsl:if>
+            </back>
         </text>
     </xsl:template>
     <!-- taylor et francis -->
@@ -545,36 +558,44 @@
             <!-- traitement des sous-parties-->
             <xsl:choose>
                 <xsl:when test="ancestor::book/body/book-part/book-part-meta/title-group/title and not(child::book-part/book-part-meta/title-group/title)">
-                    <head2>
+                    <head>
                         <xsl:value-of select="ancestor::book-part/book-part-meta/title-group/title"/>
-                    </head2>
+                    </head>
                     <xsl:apply-templates select="book-part/body"/> 
                     <xsl:apply-templates select="* except(back)"/>
                 </xsl:when>
                 <xsl:when test="child::book-part/book-part-meta/title-group/title">
-                    <head1>
+                    <head>
                         <xsl:value-of select="ancestor::book-part/book-part-meta/title-group/title"/>
-                    </head1>
+                    </head>
                     <xsl:apply-templates select="book-part/body" mode="child"/>
                 </xsl:when>
             </xsl:choose>
             <xsl:choose>
                 <xsl:when test="../book-part/book-part-meta/title-group/title">
-                    <head3>
+                    <head>
                         <xsl:value-of select="../book-part/book-part-meta/title-group/title [position()=last()]"/>
-                    </head3>
+                    </head>
                 </xsl:when>
             </xsl:choose>
             <xsl:apply-templates select="* except(back)"/>
         </div>
     </xsl:template>
-    <xsl:template match="back">
-        <back>
-            <xsl:apply-templates select="//book/book-front/ack"/>
-            <xsl:apply-templates select="* except(ancestor::book-part/book-part-meta/back)"/>
-            <xsl:if test="//book/body/book-part/back/ref-list">
-                <xsl:apply-templates select="//book/body/book-part/back/ref-list"/>
-            </xsl:if>
-        </back>
+    <xsl:template match="sec" mode="TF">
+        <xsl:choose>
+            <xsl:when test="title">
+                <div type="{title}">
+                    <xsl:apply-templates select="fn-group"/>
+                </div>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="ref-list" mode="TF">
+        <xsl:apply-templates select="ref "/> 
+    </xsl:template>
+    <xsl:template match="fn" mode="TF">
+        <note place="inline">
+        <xsl:apply-templates/>
+        </note>
     </xsl:template>
 </xsl:stylesheet>
