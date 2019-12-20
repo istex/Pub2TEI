@@ -1153,9 +1153,20 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <affiliation>
-                <xsl:apply-templates select="//affiliation[@xml:id=$restAff]"/>
-                </affiliation>
+                <xsl:choose>
+                    <xsl:when test="//affiliation[@xml:id=$restAff]">
+                        <affiliation>
+                            <xsl:apply-templates select="//affiliation[@xml:id=$restAff]"/>
+                        </affiliation>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="//affiliation[string-length()&gt; 0]">
+                            <affiliation>
+                                <xsl:value-of select="normalize-space(//affiliation)"/>
+                            </affiliation>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1416,17 +1427,26 @@
     <xsl:template match="country">
         <xsl:variable name="testCountry">
             <xsl:call-template name="normalizeISOCountry">
-                <xsl:with-param name="country" select="."/>
+                <xsl:with-param name="country" select="ancestor::affiliation/@countryCode"/>
             </xsl:call-template>
         </xsl:variable>
-        <country>
-            <xsl:attribute name="key">
-                <xsl:value-of select="$testCountry"/>
-            </xsl:attribute>
-            <xsl:call-template name="normalizeISOCountryName">
-                <xsl:with-param name="country" select="."/>
-            </xsl:call-template>
-        </country>
+        <xsl:choose>
+            <xsl:when test="ancestor::affiliation/@countryCode">
+                <country>
+                    <xsl:attribute name="key">
+                        <xsl:value-of select="$testCountry"/>
+                    </xsl:attribute>
+                    <xsl:call-template name="normalizeISOCountryName">
+                        <xsl:with-param name="country" select="ancestor::affiliation/@countryCode"/>
+                    </xsl:call-template>
+                </country>
+            </xsl:when>
+            <xsl:otherwise>
+                <country>
+                    <xsl:value-of select="."/>
+                </country>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="state">

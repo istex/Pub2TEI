@@ -20,11 +20,17 @@
                 contains($theOrg,'Osservatorio') or
                 contains($theOrg,'Museum') or
                 contains($theOrg,'Center') or
+                contains($theOrg,'Inst.') or
                 contains($theOrg,'Institute') or
                 contains($theOrg,'Institut') or
+                contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
-                contains($theOrg,' Universit') or
+                contains($theOrg,'Universit') or
+                contains($theOrg,'Universität ') or
+                contains($theOrg,'Université ') or
                 contains($theOrg,'University of') or
+                contains($theOrg,'universit') or
+                contains($theOrg,'Univ.') or
                 contains($theOrg,'Academy') or
                 contains($theOrg,'Pasteur') or
                 contains($theOrg,'Registry') or
@@ -36,15 +42,29 @@
                 contains($theOrg,'BASF AG') or
                 contains($theOrg,'Chemie') or
                 contains($theOrg,'chemie') or
+                contains($theOrg,'C.N.R.S.') or
+                contains($theOrg,'GmhH') or
+                contains($theOrg,'Gabinetto') or
+                starts-with($theOrg,'CN') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
+            <xsl:when test="contains($theOrg,'Research') or
+                contains($theOrg,'Unit') or
+                contains($theOrg,'Labo') or
+                contains($theOrg,'labo') or
+                contains($theOrg,'Servic') or
+                contains($theOrg,'Biol')">
+                <xsl:text>laboratory</xsl:text>
+            </xsl:when>
             <xsl:when test=" 
                 ends-with($theOrg,'ogy') or
                 contains($theOrg,'School') or 
-                contains($theOrg,'Ecole')or 
-                contains($theOrg,'Facul')">
+                contains($theOrg,'Ecole') or
+                contains($theOrg,'Scuola') or
+                contains($theOrg,'Facul') or 
+                contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Branch') or
@@ -57,16 +77,14 @@
                 contains($theOrg,'Depart') or
                 contains($theOrg,'Dept') or
                 contains($theOrg,'Dipart') or
+                contains($theOrg,'Oficina') or
                 contains($theOrg,'Départ')">
                 <xsl:text>division</xsl:text>
             </xsl:when>
-            <xsl:when test="contains($theOrg,'Research') or
-                contains($theOrg,'Unit') or
-                contains($theOrg,'Labo') or
-                contains($theOrg,'labo') or
-                contains($theOrg,'Servic') or
-                contains($theOrg,'Biol')">
-                <xsl:text>laboratory</xsl:text>
+            <xsl:when test="contains($theOrg,'Doctoral') or
+                contains($theOrg,'Lecturer') or
+                contains($theOrg,'associate')">
+                <xsl:text>function</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Group') or
                 contains($theOrg,'Program')">

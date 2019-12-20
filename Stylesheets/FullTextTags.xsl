@@ -505,12 +505,12 @@
 				    </xsl:when>
 				    <xsl:when test="contains(@href, 'n')">
 				        <!-- we have a note (normally) -->
-				        <ref type="note">
+				        <hi><ref type="note">
 				            <xsl:attribute name="target">
 				                <xsl:value-of select="@href"/>
 				            </xsl:attribute>
 				            <xsl:apply-templates/>
-				        </ref>
+				        </ref></hi>
 				    </xsl:when>
 				    
 				    <xsl:when test="contains(@href,'sec')">
