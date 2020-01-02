@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version=`node get-version.js`
-sed -i 's/name="xslversion">[0-9]*.[0-9]*.[0-9]</name="xslversion">'$version'</' Stylesheets/Publishers.xsl
+sed -i 's/name="xslversion">[0-9]*.[0-9]*.[0-9]*</name="xslversion">'$version'</' Stylesheets/Publishers.xsl
 
 madate=$(date +'%Y-%m-%d')
 sed -i 's/name="releasedate">[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}</name="releasedate">'$madate'</' Stylesheets/Publishers.xsl
