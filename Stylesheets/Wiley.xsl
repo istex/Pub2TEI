@@ -153,7 +153,7 @@
                         <xsl:apply-templates select="//titleGroup"/>
                     </titleStmt>
                     <!-- SG - ajout <enrichedObject> -->
-                    <xsl:if test="header/contentMeta/enrichedObjectGroup">
+                    <xsl:if test="header/contentMeta/enrichedObjectGroup | //fundingInfo">
                         <editionStmt>
                             <edition>
                                 <xsl:variable name="ana">
@@ -176,6 +176,7 @@
                                     </ref>
                                 </xsl:for-each>
                             </edition>
+                            <xsl:apply-templates select="//fundingInfo"/>
                         </editionStmt>
                     </xsl:if>
                     <publicationStmt>
@@ -879,7 +880,7 @@
 	                                    <xsl:text>Editorial</xsl:text> 
 	                                </xsl:when>
 	                                <xsl:otherwise>
-	                                    <xsl:value-of select="title[@type='main']"/>
+	                                    <xsl:value-of select="normalize-space(title[@type='main'])"/>
 	                                </xsl:otherwise>
 	                            </xsl:choose>
 	                        </title>
@@ -970,16 +971,16 @@
                     <xsl:with-param name="restAff2" select="translate(@currentRef,'#','')"/>
                 </xsl:call-template>
             </xsl:if>
-            <xsl:if test="@correspondenceRef">
+          <!--  <xsl:if test="@correspondenceRef">
                 <xsl:call-template name="createWileyAffiliations3">
                     <xsl:with-param name="restAff3" select="translate(@correspondenceRef,'#','')"/>
                 </xsl:call-template>
             </xsl:if>
-            <xsl:if test="@noteRef">
+           <xsl:if test="@noteRef">
                 <xsl:call-template name="createWileyAffiliations4">
                     <xsl:with-param name="restAff4" select="translate(@noteRef,'#','')"/>
                 </xsl:call-template>
-            </xsl:if>
+            </xsl:if>-->
             <!-- affiliation nomade sans lien auteurs/affiliations -->
             <xsl:if test="//contentMeta/affiliationGroup/affiliation and not(@affiliationRef|@currentRef|@correspondenceRef|@noteRef)">
                 <affiliation>
@@ -1023,11 +1024,11 @@
                             <xsl:with-param name="restAff3" select="translate(@correspondenceRef,'#','')"/>
                         </xsl:call-template>
                     </xsl:if>
-                    <xsl:if test="@noteRef">
+                   <!-- <xsl:if test="@noteRef">
                         <xsl:call-template name="createWileyAffiliations4">
                             <xsl:with-param name="restAff4" select="translate(@noteRef,'#','')"/>
                         </xsl:call-template>
-                    </xsl:if>
+                    </xsl:if>-->
                 </editor>
             </xsl:when>
         </xsl:choose>
@@ -1211,28 +1212,17 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template name="createWileyAffiliations4">
+  <!--  <xsl:template name="createWileyAffiliations4">
         <xsl:param name="restAff4"/>
         <xsl:message>Affiliations: <xsl:value-of select="$restAff4"/></xsl:message>
         <xsl:choose>
             <xsl:when test="contains($restAff4,' ')">
                 <affiliation>
-                    <xsl:value-of select="//affiliation[@xml:id=substring-before($restAff4,' ')]/p/email"/>
+                    <xsl:value-of select="//affiliation[@xml:id=$restAff4]/p"/>
                 </affiliation>
-                <xsl:call-template name="createWileyAffiliations">
-                    <xsl:with-param name="restAff" select="translate(substring-after($restAff4,' '),'#','')"/> 
-                </xsl:call-template>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:if test="//note[@xml:id=$restAff4]/p/email">
-                <email>
-                    <xsl:value-of select="//note[@xml:id=$restAff4]/p/email"/>
-                </email>
-                </xsl:if>
-            </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
-    
+    </xsl:template>-->
     <xsl:template match="affiliationGroup">
         <xsl:apply-templates/>
     </xsl:template>
@@ -1463,5 +1453,22 @@
         <region>
             <xsl:apply-templates select="text()"/>
         </region>
+    </xsl:template>
+    
+    <xsl:template match="fundingInfo">
+        <funder>
+            <xsl:apply-templates select="fundingAgency"/>
+            <xsl:apply-templates select="fundingNumber"/>
+        </funder>
+    </xsl:template>
+    <xsl:template match="fundingAgency">
+        <name>
+            <xsl:apply-templates/>
+        </name>
+    </xsl:template>
+    <xsl:template match="fundingNumber">
+        <idno>
+            <xsl:apply-templates/>
+        </idno>
     </xsl:template>
 </xsl:stylesheet>
