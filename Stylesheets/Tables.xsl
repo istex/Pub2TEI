@@ -177,7 +177,7 @@
             <xsl:if test="@rowsep">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
-            <xsl:if test="@morerows &gt;1">
+            <xsl:if test="@morerows">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
             <xsl:if test="@align">

@@ -1991,7 +1991,7 @@
                 </affiliation>
             </xsl:if>
             <xsl:if test="//aug/group/groupttl">
-                <orgName>
+                <orgName type="team">
                     <xsl:value-of select="//aug/group/groupttl"/>
                     <xsl:if test="ancestor::group">
                         <xsl:text> (</xsl:text>
@@ -2021,7 +2021,7 @@
            </xsl:when>
           <xsl:when test="institution">
                <affiliation>
-                   <xsl:apply-templates select="institution"/>
+                   <xsl:apply-templates select="institution" mode="NLM"/>
                    <xsl:if test="addr-line | country">
                    <address>
                        <xsl:apply-templates select="addr-line"/>
@@ -2031,6 +2031,7 @@
                </affiliation>
            </xsl:when>
            <xsl:otherwise>
+               <xsl:if test="not(contains(.,'equally'))">
                <affiliation>
                    <xsl:call-template name="NLMParseAffiliation">
                        <xsl:with-param name="theAffil">
@@ -2041,6 +2042,7 @@
                        </xsl:with-param>
                    </xsl:call-template>
                </affiliation>
+               </xsl:if>
            </xsl:otherwise>
        </xsl:choose>
     </xsl:template>
@@ -2051,7 +2053,7 @@
                </xsl:with-param>
            </xsl:call-template>
    </xsl:template>
-    <xsl:template match="institution">
+    <xsl:template match="institution" mode="NLM">
         <xsl:if test="normalize-space(.)">
             <xsl:call-template name="NLMParseOrg">
                 <xsl:with-param name="theOrg">
@@ -2304,15 +2306,15 @@
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
             <xsl:apply-templates select="string-name"/>
-           <xsl:if test="//article-meta/aff/institution and not(//article-meta/aff/@id)">
+           <xsl:if test="//aff/institution and not(//aff/@id)">
                 <affiliation>
-                    <xsl:if test="//article-meta/aff/institution">
-                        <xsl:apply-templates select="//article-meta/aff/institution"/>
+                    <xsl:if test="//aff/institution">
+                        <xsl:apply-templates select="//aff/institution"/>
                     </xsl:if>
-                    <xsl:if test="//article-meta/aff/addr-line | //article-meta/aff/country">
+                    <xsl:if test="//aff/addr-line | //aff/country">
                         <address>
-                            <xsl:apply-templates select="//article-meta/aff/addr-line"/>
-                            <xsl:apply-templates select="//article-meta/aff/country"/>
+                            <xsl:apply-templates select="//aff/addr-line"/>
+                            <xsl:apply-templates select="//aff/country"/>
                         </address>
                     </xsl:if>
                 </affiliation>

@@ -28,7 +28,7 @@
                             </email>
                         </xsl:if>-->
                         <xsl:for-each select="ancestor::contrib-group/aff | ancestor::article-meta/aff">
-                            <xsl:if test="not(contains(//aff/xref/@ref-type,'fn')) and not(contains(@id,'cor'))">
+                            <xsl:if test="not(contains(@id,'cor'))">
                                 <xsl:if test="not(break|target) and not(ancestor::contrib-group/contrib/xref)">
                                     <affiliation>
                                         <xsl:choose>

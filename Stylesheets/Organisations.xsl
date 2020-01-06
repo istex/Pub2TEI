@@ -43,6 +43,7 @@
                 contains($theOrg,'Chemie') or
                 contains($theOrg,'chemie') or
                 contains($theOrg,'C.N.R.S.') or
+                contains($theOrg,'MIT') or
                 contains($theOrg,'GmhH') or
                 contains($theOrg,'Gabinetto') or
                 starts-with($theOrg,'CN') or

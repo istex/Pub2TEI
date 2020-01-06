@@ -848,11 +848,9 @@
 
     <!-- SG ajout refs groupName -->
     <xsl:template match="wiley:groupName">
-        <author>
             <orgName>
                 <xsl:apply-templates/>
             </orgName>
-        </author>
     </xsl:template>
 
     <xsl:template match="wiley:url">

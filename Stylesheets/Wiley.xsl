@@ -407,19 +407,10 @@
                             header/publicationMeta[@level='unit']/titleGroup/title[@type][string-length()&gt;0]">
 							<textClass>
 							    <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]">
-							        <keywords>
-							            <!--SG - ajout langue -->
-							            <xsl:if test="header/contentMeta/keywordGroup/@xml:lang[string-length()&gt;0]">
-							                <xsl:copy-of select="header/contentMeta/keywordGroup/@xml:lang"/>
-							            </xsl:if>
-							            <xsl:for-each select="header/contentMeta/keywordGroup/keyword">
-							                <term>
-							                    <xsl:copy-of select="@xml:id"/>
-							                    <xsl:apply-templates/>
-							                    <!--<xsl:value-of select="normalize-space(.)"/>-->
-							                </term>
-							            </xsl:for-each>
-							        </keywords>
+							        <xsl:apply-templates select="header/contentMeta/keywordGroup"/>
+							        
+							        
+							        
 							    </xsl:if>
 							    <xsl:if test="header/publicationMeta[@level='unit']/titleGroup/title[string-length()&gt;0]">
 							        <xsl:for-each select="header/publicationMeta[@level='unit']/titleGroup/title">
@@ -1009,17 +1000,17 @@
                         </xsl:choose>
                     </xsl:attribute>
                     <xsl:apply-templates/>
-                    <xsl:if test="@affiliationRef">
+                    <xsl:if test="@affiliationRef !=''">
                         <xsl:call-template name="createWileyAffiliations">
                             <xsl:with-param name="restAff" select="translate(@affiliationRef,'#','')"/>
                         </xsl:call-template>
                     </xsl:if>
-                    <xsl:if test="@currentRef">
+                    <xsl:if test="@currentRef[string-length()&gt; 0]">
                         <xsl:call-template name="createWileyAffiliations2">
                             <xsl:with-param name="restAff2" select="translate(@currentRef,'#','')"/>
                         </xsl:call-template>
                     </xsl:if>
-                    <xsl:if test="@correspondenceRef">
+                    <xsl:if test="@correspondenceRef[string-length()&gt; 0]">
                         <xsl:call-template name="createWileyAffiliations3">
                             <xsl:with-param name="restAff3" select="translate(@correspondenceRef,'#','')"/>
                         </xsl:call-template>
@@ -1161,9 +1152,9 @@
                         </affiliation>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:if test="//affiliation[string-length()&gt; 0]">
+                        <xsl:if test="//affiliation[string-length()&gt; 0] and not(//groupName)">
                             <affiliation>
-                                <xsl:value-of select="normalize-space(//affiliation)"/>
+                                <xsl:value-of select="//affiliation"/>
                             </affiliation>
                         </xsl:if>
                     </xsl:otherwise>
@@ -1470,5 +1461,20 @@
         <idno>
             <xsl:apply-templates/>
         </idno>
+    </xsl:template>
+    
+    <xsl:template match="keywordGroup">
+        <keywords>
+            <xsl:if test="@xml:lang[string-length()&gt;0]">
+                <xsl:copy-of select="@xml:lang"/>
+            </xsl:if>
+            <xsl:apply-templates select="keyword"/>
+        </keywords>
+    </xsl:template>
+    <xsl:template match="keyword">
+        <term>
+            <xsl:copy-of select="@xml:id"/>
+            <xsl:apply-templates/>
+        </term>
     </xsl:template>
 </xsl:stylesheet>
