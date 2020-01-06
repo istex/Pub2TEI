@@ -908,7 +908,7 @@
 	                    <xsl:value-of select="//header/contentMeta/titleGroup/title[@type='short']/@xml:lang"/>
 	                </xsl:attribute>
 	            </xsl:if>
-	            <xsl:value-of select="//header/contentMeta/titleGroup/title[@type='short']"/>
+	            <xsl:value-of select="normalize-space(//header/contentMeta/titleGroup/title[@type='short'])"/>
 	        </title>
 	    </xsl:if>
 	</xsl:template>
