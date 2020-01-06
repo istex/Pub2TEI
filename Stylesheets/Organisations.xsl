@@ -87,8 +87,14 @@
                 <xsl:text>function</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Group') or
-                contains($theOrg,'Program')">
+                contains($theOrg,'Program')
+                ">
                 <xsl:text>group</xsl:text>
+            </xsl:when>
+            <xsl:when test="contains($theOrg,'Organization') or
+                contains($theOrg,'Organisation')
+                ">
+                <xsl:text>organization</xsl:text>
             </xsl:when>
 <xsl:otherwise>
                 <xsl:message>Org inconnue: <xsl:value-of select="$theOrg"/></xsl:message>
