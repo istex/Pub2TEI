@@ -780,6 +780,22 @@
 	    <xsl:choose>
 	        <xsl:when test="title">
 	            <xsl:choose>
+	                <xsl:when test="contains(title[@type='main'],'Abstracts')">
+	                    <xsl:choose>
+	                        <xsl:when test="//publicationMeta[@level='part']/titleGroup/title[@type='supplementTitle']">
+	                            <title level="a" type="main">
+	                                <xsl:value-of select="title[@type='main']"/>
+	                                <xsl:text> : </xsl:text>
+	                                <xsl:value-of select="//publicationMeta[@level='part']/titleGroup/title[@type='supplementTitle']"/>
+	                            </title>  
+	                        </xsl:when>
+	                        <xsl:otherwise>
+	                            <title level="a" type="main">
+	                                <xsl:value-of select="title[@type='main']"/>
+	                            </title>
+	                        </xsl:otherwise>
+	                    </xsl:choose>
+	                </xsl:when>
 	                <xsl:when test="title[@type='main']/citation[@type='book']">
 	                    <xsl:for-each select="title[@type='main']/citation[@type='book']">
 	                        <title level="a" type="main">

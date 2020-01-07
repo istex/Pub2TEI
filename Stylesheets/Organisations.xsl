@@ -15,6 +15,7 @@
                 contains($theOrg,'Study') or
                 contains($theOrg,'CCS') or
                 contains($theOrg,'College of') or
+                contains($theOrg,'College') or
                 contains($theOrg,'Universidad') or
                 contains($theOrg,'Hospi') or
                 contains($theOrg,'Osservatorio') or
@@ -84,7 +85,7 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Doctoral') or
                 contains($theOrg,'Lecturer') or
-                contains($theOrg,'associate')">
+                contains($theOrg,'Professor')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Group') or
@@ -93,7 +94,8 @@
                 <xsl:text>group</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Organization') or
-                contains($theOrg,'Organisation')
+                contains($theOrg,'Organisation') or
+                contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>
             </xsl:when>
