@@ -2343,6 +2343,54 @@
             </xsl:choose>
         </author>
     </xsl:template>
+    <!-- author au niveau chapitre -->
+    <xsl:template match="contrib" mode="section">
+        <name>
+            <xsl:apply-templates select="collab"/>
+            <xsl:apply-templates select="name"/>
+            <xsl:apply-templates select="string-name"/>
+            <xsl:if test="//aff/institution and not(//aff/@id)">
+                <affiliation>
+                    <xsl:if test="//aff/institution">
+                        <xsl:apply-templates select="//aff/institution"/>
+                    </xsl:if>
+                    <xsl:if test="//aff/addr-line | //aff/country">
+                        <address>
+                            <xsl:apply-templates select="//aff/addr-line"/>
+                            <xsl:apply-templates select="//aff/country"/>
+                        </address>
+                    </xsl:if>
+                </affiliation>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
+                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
+                </xsl:when>
+                <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
+                    <xsl:apply-templates select="//aff"/>
+                </xsl:when>
+            </xsl:choose>
+            <!-- appelle les affiliations complementaires -->
+            <xsl:choose>
+                <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
+                    <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="/article/front/article-meta/author-notes/corresp[@id=current()/xref/@rid]">
+                    <xsl:apply-templates select="/article/front/article-meta/author-notes"/>
+                </xsl:when>
+                <xsl:when test="/article/front/article-meta/author-notes/corresp and not(/article/front/article-meta/author-notes/corresp/@id)">
+                    <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:if test="@contrib-type">
+                <roleName>
+                    <xsl:value-of select="@contrib-type"/>
+                </roleName>
+            </xsl:if>
+        </name>
+    </xsl:template>
     <!-- corresp -->
     <xsl:template match="author-notes">
         <xsl:apply-templates select="corresp"/>
@@ -2733,18 +2781,17 @@
 
     <!-- Macrostructure of main body if the text -->
     <xsl:template match="sec[not(parent::boxed-text)]">
+        <xsl:choose>
+            <!-- cas particulier taylor et francis
+            redondance des informations-->
+            <xsl:when test="ref-list"/>
+            <xsl:otherwise>
                 <div>
                     <xsl:if test="@sec-type">
                         <xsl:attribute name="type">
                             <xsl:value-of select="@sec-type"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="@sec-type">
-                        <xsl:attribute name="type">
-                            <xsl:value-of select="@sec-type"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    
                     <xsl:if test="parent::boxed-text">
                         <xsl:attribute name="rend">
                             <xsl:text>boxed-text</xsl:text>
@@ -2775,6 +2822,9 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
+            </xsl:otherwise>
+        </xsl:choose>
+       
     </xsl:template>
 
     <xsl:template match="sec[parent::boxed-text]">
@@ -2803,6 +2853,11 @@
     </xsl:template>
     
     <xsl:template match="sec/label"/>
+    <xsl:template match="sec-meta">
+        <docAuthor>
+            <xsl:apply-templates select="contrib-group/contrib" mode="section"/>
+        </docAuthor>
+    </xsl:template>
     <xsl:template match="sig-block">
         <p>
             <xsl:apply-templates/>
@@ -3073,21 +3128,17 @@
 
     <xsl:template match="graphic">
         <graphic>
-            <xsl:if test="@xlink:href">
             <xsl:attribute name="url">
                 <xsl:value-of select="@xlink:href"/>
             </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="graphic-file/@filename">
-                <xsl:attribute name="url">
-                    <xsl:for-each select="graphic-file">
-                    <xsl:value-of select="@filename"/>
-                        <xsl:text> ; </xsl:text>
-                    </xsl:for-each>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:apply-templates/>
         </graphic>
+    </xsl:template>
+    
+    <xsl:template match="attrib">
+        <desc>
+            <xsl:apply-templates/>
+        </desc>
     </xsl:template>
     <!-- Tables -->
 
@@ -3101,11 +3152,11 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="back/notes/fn-group">
+   <!-- <xsl:template match="back/notes/fn-group">
         <div type="fn-group">
             <xsl:apply-templates/>
         </div>
-    </xsl:template>
+    </xsl:template>-->
     <xsl:template match="back/notes[@notes-type='citation-text']">
         <div type="citation-text">
             <xsl:apply-templates/>
@@ -3131,24 +3182,24 @@
                 </title>
             </xsl:when>
             <xsl:otherwise>
-                <note place="inline">
-                    <xsl:if test="@fn-type">
-                        <xsl:attribute name="type">
-                            <xsl:value-of select="@fn-type"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
                     <xsl:apply-templates select="fn"/>
-                </note>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="fn">
+        <note place="inline">
+            <xsl:if test="@fn-type">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@fn-type"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
+        </note>
     </xsl:template>
     <xsl:template match="back/app-group">
         <div type="appendices">
@@ -3238,7 +3289,6 @@
                                     </xsl:attribute>
                                 </xsl:when>
                             </xsl:choose>
-                            
                             <xsl:apply-templates/>
                         </ref>
                     </xsl:otherwise>
@@ -3652,9 +3702,9 @@
         </date>
     </xsl:template>
     <xsl:template match="conf-loc">
-        <placeName>
+        <pubPlace>
             <xsl:apply-templates/>
-        </placeName>
+        </pubPlace>
     </xsl:template>
     <xsl:template match="conf-sponsor">
         <orgName>
@@ -3681,6 +3731,11 @@
             </xsl:when>
             <xsl:otherwise>
                 <note>
+                    <xsl:if test="@notes-type">
+                        <xsl:attribute name="type">
+                            <xsl:value-of select="@notes-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </note>
             </xsl:otherwise>

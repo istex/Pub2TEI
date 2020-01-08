@@ -14,9 +14,16 @@
                 </author>
             </xsl:when>
             <xsl:otherwise>
-                <persName>
-                    <xsl:apply-templates/>
-                </persName>
+                <xsl:choose>
+                    <xsl:when test="ancestor::book-part-meta">
+                        <xsl:apply-templates/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <persName>
+                            <xsl:apply-templates/>
+                        </persName>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:choose>
                     <xsl:when test="ancestor::contrib-group/aff or ancestor::article-meta/aff and not(ancestor::contrib-group/contrib/xref)">
                         <xsl:if test="ancestor::contrib-group/aff/email and not(ancestor::contrib-group/contrib/xref)">

@@ -10,9 +10,9 @@
     <!-- Références bibliographiques à la fin d'un article -->
     <!-- ref-list: NLM article, ScholarOne -->
 
-    <xsl:template match="ref-list | biblist | ce:bibliography | bibl | wiley:bibliography">
+    <xsl:template match="biblist | ce:bibliography | bibl | wiley:bibliography">
         <xsl:choose>
-            <xsl:when test="ref">
+            <xsl:when test="ref | citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection">
                 <div type="references">
                     <xsl:apply-templates select="title | ce:section-title"/>
                     <listBibl>
@@ -28,15 +28,6 @@
                     <xsl:apply-templates select="p"/>
                 </div>
             </xsl:when>
-            <xsl:otherwise>
-                <div type="references">
-                    <xsl:apply-templates select="title | ce:section-title"/>
-                    <listBibl>
-                        <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
-                        <xsl:apply-templates select="ref |citgroup | ce:bibliography-sec | bib |wiley:bib | wiley:bibSection"/>
-                    </listBibl>
-                </div>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
@@ -1746,6 +1737,28 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
+            <!-- références contenant plusieurs citations non
+                déterminées-->
+            <xsl:when test="contains(.,';') or contains(.,':')">
+                <bibl>
+                    <xsl:attribute name="type">
+                        <xsl:text>in-line</xsl:text>
+                    </xsl:attribute>
+                   <xsl:choose>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                       <xsl:otherwise>
+                           <xsl:attribute name="xml:id">
+                               <xsl:value-of select="../@id"/>
+                           </xsl:attribute>
+                       </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
             <xsl:otherwise>
                 <biblStruct>
                     <xsl:if test="@citation-type | @publication-type">
@@ -1753,17 +1766,17 @@
                             <xsl:apply-templates select="@citation-type | @publication-type"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:choose>
+                   <xsl:choose>
                         <xsl:when test="@id">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="../@id"/>
-                            </xsl:attribute>
-                        </xsl:otherwise>
+                       <xsl:otherwise>
+                           <xsl:attribute name="xml:id">
+                               <xsl:value-of select="../@id"/>
+                           </xsl:attribute>
+                       </xsl:otherwise>
                     </xsl:choose>
                     <xsl:if test="article-title|chapter-title">
                         <analytic>

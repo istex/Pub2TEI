@@ -215,13 +215,14 @@
                     <xsl:apply-templates select="//fn" mode="TF"/>
                     </div>
                 </xsl:if>
-                <xsl:if test="//ref-list">
+               <xsl:if test="//ref-list">
                     <div type="references">
                         <listBibl>
                             <xsl:apply-templates select="//ref-list" mode="TF"/>
                         </listBibl>
                     </div>
                 </xsl:if>
+                <xsl:apply-templates select="//book/back" mode="TF"/>
             </back>
         </text>
     </xsl:template>
@@ -493,6 +494,12 @@
                         <head>
                             <xsl:value-of select="ancestor::book-part/book-part-meta/title-group/title"/>
                         </head>
+                        <!-- traitement des auteurs-->
+                        <xsl:if test="ancestor::book/body/book-part/book-part-meta/contrib-group/contrib">
+                            <docAuthor>
+                                <xsl:apply-templates select="ancestor::book-part/book-part-meta/contrib-group/contrib" mode="section"/>
+                            </docAuthor>
+                        </xsl:if>
                         <xsl:apply-templates select="* except(back)"/>
                     </xsl:if>
                 </div>
@@ -538,6 +545,12 @@
                                 <xsl:value-of select="book-part-meta/title-group/title"/>
                             </head>
                         </xsl:if>
+                        <!-- traitement des auteurs-->
+                        <xsl:if test="book-part-meta/contrib-group/contrib">
+                            <docAuthor>
+                                <xsl:apply-templates select="book-part-meta/contrib-group/contrib" mode="section"/>
+                            </docAuthor>
+                        </xsl:if>
                         <xsl:apply-templates select="* except(back)"/>
                     </div>
                 </div>
@@ -582,7 +595,7 @@
         </div>
     </xsl:template>
     <xsl:template match="sec" mode="TF">
-        <xsl:choose>
+       <xsl:choose>
             <xsl:when test="title">
                 <div type="{title}">
                     <xsl:apply-templates select="fn-group"/>
@@ -594,8 +607,17 @@
         <xsl:apply-templates select="ref "/> 
     </xsl:template>
     <xsl:template match="fn" mode="TF">
-        <note place="inline">
-        <xsl:apply-templates/>
-        </note>
+        <xsl:choose>
+            <xsl:when test="ancestor::table-wrap-foot"/>
+            <xsl:when test="ancestor::fig"/>
+            <xsl:otherwise>
+                <note place="inline" xml:id="{@id}">
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="back" mode="TF">
+        <xsl:apply-templates select="* except(../ref-list|notes)"/>
     </xsl:template>
 </xsl:stylesheet>
