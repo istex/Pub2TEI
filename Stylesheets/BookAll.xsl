@@ -24,7 +24,7 @@
                         <licence>
                             <p>Taylor &amp; Francis – ebooks</p>   
                         </licence>
-                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-">taylor-francis</p>
+                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-QGNTS49S-T">taylor-francis</p>
                     <xsl:apply-templates select="permissions" mode="TF"/>
                     <xsl:apply-templates select="imprint-meta" mode="TF"/>
                     </availability>
