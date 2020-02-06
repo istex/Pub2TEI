@@ -2307,6 +2307,7 @@
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
             <xsl:apply-templates select="string-name"/>
+            <xsl:apply-templates select="name-alternatives"/>
             <!-- affiliation -->
            <xsl:if test="//aff/institution and not(//aff/@id)">
                 <affiliation>
@@ -2464,7 +2465,7 @@
         </editor>
     </xsl:template>
 
-    <xsl:template match="contrib[@contrib-type = 'biographee']">
+    <!--<xsl:template match="contrib[@contrib-type = 'biographee']">
         <respStmt>
             <resp>
                 <xsl:value-of select="@contrib-type"/>
@@ -2474,10 +2475,8 @@
                     </idno>
                 </xsl:if>
             </resp>
-            <xsl:apply-templates/>
-            
         </respStmt>
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:template match="contrib/address">
         <address>
