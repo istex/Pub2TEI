@@ -1040,7 +1040,7 @@
                                         <xsl:apply-templates select="front/article-meta/permissions/license/license-p"/>
                                     </p>
                                 </xsl:if>
-                                <xsl:if test="//permissions/license/p">
+                                <xsl:if test="normalize-space(//permissions/license/p)">
                                     <p>
                                         <xsl:apply-templates select="front/article-meta/permissions/license/p"/>
                                     </p>
@@ -1398,7 +1398,8 @@
                 <body>
                     <xsl:choose>
                         <xsl:when test="body/* | bdy/*">
-                            <xsl:apply-templates select="body/* | bdy/*"/>
+                            <xsl:apply-templates select="body/*"/>
+                            <xsl:apply-templates select="bdy/*except(bdy/fp)"/>
                             <xsl:apply-templates select="bm/objects/*"/>
                             <xsl:apply-templates select="//article/floats-group"/>
                         </xsl:when>
@@ -2306,6 +2307,7 @@
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
             <xsl:apply-templates select="string-name"/>
+            <!-- affiliation -->
            <xsl:if test="//aff/institution and not(//aff/@id)">
                 <affiliation>
                     <xsl:if test="//aff/institution">
@@ -2322,6 +2324,9 @@
             <xsl:choose>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
+                </xsl:when>
+                <xsl:when test="aff">
+                    <xsl:apply-templates select="aff"/>
                 </xsl:when>
                 <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="//aff"/>
@@ -2507,10 +2512,10 @@
             </affiliation>
         </xsl:if>
     </xsl:template>
-   <xsl:template match="contrib/aff">
-            <!-- this only apply to NPG articles not containing a pubfm style component -->
+   <!--<xsl:template match="contrib/aff">
+
           <affiliation>
-                <xsl:apply-templates select="*[name(.) != 'addr-line' and name(.) != 'country']"/>
+                <xsl:apply-templates/>
                 <xsl:choose>
                     <xsl:when test="addr-line | country">
                         <address>
@@ -2518,12 +2523,13 @@
                         </address>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:call-template name="NLMaffiliation"/>
-                       <!-- <xsl:value-of select=".except(sup)"/>-->
+
+                         <xsl:call-template name="NLMaffiliation"/>
+
                     </xsl:otherwise>
                 </xsl:choose>
             </affiliation>
-    </xsl:template>
+    </xsl:template>-->
    <!--<xsl:template match="author-notes/corresp">
        <xsl:if test="*[name(.) != 'addr-line' and name(.) != 'country'] except(email)">
         <affiliation role="corresp">
@@ -3825,7 +3831,7 @@
             <xsl:otherwise>
                 <xsl:variable name="testCountry">
                     <xsl:call-template name="normalizeISOCountry">
-                        <xsl:with-param name="country" select="$avantVirgule"/>
+                        <xsl:with-param name="country" select="translate($avantVirgule,'.','')"/>
                     </xsl:call-template>
                 </xsl:variable>
                 <xsl:choose>
