@@ -2791,6 +2791,7 @@
             <!-- cas particulier taylor et francis
             redondance des informations-->
             <xsl:when test="ref-list"/>
+            <xsl:when test="fn-group"/>
             <xsl:otherwise>
                 <div>
                     <xsl:if test="@sec-type[string-length()&gt; 0]">
@@ -3102,9 +3103,13 @@
     </xsl:template>
     <xsl:template match="fig">
         <figure>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="@id">
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="@id"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates/>
         </figure>
     </xsl:template>
@@ -3267,6 +3272,9 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
+                    <xsl:when test="ancestor::fn/label">
+                        <xsl:apply-templates/>
+                    </xsl:when>
                     <xsl:when test="ancestor::label"/>
                     <xsl:when test="ancestor::notes"/>
                     <xsl:otherwise>
@@ -3455,7 +3463,54 @@
     </xsl:template>
 
     <xsl:template match="pub-date">
-        <xsl:if test="year!='0'">
+        <xsl:choose>
+            <xsl:when test="@pub-type = 'epub'">
+                <xsl:attribute name="type">e-published</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@publication-format='print'">
+                <xsl:attribute name="type">published</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@publication-format='electronic'">
+                <xsl:attribute name="type">e-published</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@pub-type = 'epub-original'">
+                <xsl:attribute name="type">original-e-published</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@pub-type = 'collection'">
+                <xsl:attribute name="type">collection-published</xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@pub-type = 'final'">
+                <xsl:attribute name="type">final-published</xsl:attribute>
+            </xsl:when>
+        </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="year[string-length()&gt; 0]">
+                <xsl:if test="position() = last()">
+                    <date>
+                        <xsl:value-of select="normalize-space(year)"/>
+                    </date>
+                </xsl:if>
+            </xsl:when>
+            <!-- reprise pour certaines données ou year n'existe pas -->
+            <xsl:when test="day[string-length()&gt; 0]">
+                <xsl:if test="position() = last()">
+                    <date>
+                        <xsl:value-of select="normalize-space(day)"/>
+                    </date>
+                </xsl:if>
+            </xsl:when>
+            <!-- date par défaut erreur de l'éditeur pas de date de publication -->
+            <xsl:otherwise>
+                <xsl:if test="//book/book-meta/permissions/copyright-year[string-length()&gt; 0]">
+                    <date>
+                        <xsl:value-of select="normalize-space(//book/book-meta/permissions/copyright-year)"/>
+                    </date>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        
+      <!--  <xsl:if test="year!='0'">
         <date>
             <xsl:choose>
                 <xsl:when test="@pub-type = 'epub'">
@@ -3488,7 +3543,7 @@
                 <xsl:with-param name="oldYear" select="year"/>
             </xsl:call-template>
         </date>
-        </xsl:if>
+        </xsl:if>-->
     </xsl:template>
 
     <!-- Revision information 

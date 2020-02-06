@@ -85,7 +85,7 @@
             </xsl:attribute>
             <xsl:choose>
                <!-- traitement spécial TaylorFrancis -->
-               <xsl:when test="starts-with(book-meta/book-id[@pub-id-type='doi'],'10.4324/')">
+                <xsl:when test="starts-with(book-meta/book-id[@pub-id-type='doi'],'10.4324/') or contains(.,'Routledge')">
                     <xsl:apply-templates select="book-meta" mode="TF"/>
                 </xsl:when>
                 <xsl:otherwise>

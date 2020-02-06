@@ -779,7 +779,7 @@
                     <title><xsl:apply-templates/></title>
                 </xsl:when>
               <xsl:otherwise>
-                  <xsl:if test="not(ancestor::reftxt)">
+                  <xsl:if test="not(ancestor::reftxt or ancestor::list-item)">
                     <hi rend="italic">
                         <xsl:apply-templates/>
                     </hi>
@@ -1066,5 +1066,14 @@
                 <xsl:apply-templates/>
             </bibl>
         </div>
+    </xsl:template>
+    <!-- taylor et francis -->
+    <xsl:template match="index-entry">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="index-term">
+        <term>
+            <xsl:apply-templates/>
+        </term>
     </xsl:template>
 </xsl:stylesheet>

@@ -29,7 +29,16 @@
                     <xsl:apply-templates select="imprint-meta" mode="TF"/>
                     </availability>
                     <!-- date -->
-                    <xsl:apply-templates select="pub-date"/>
+                    <xsl:choose>
+                        <xsl:when test="pub-date">
+                            <xsl:apply-templates select="pub-date"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <date>
+                                <xsl:value-of select="//copyright-year"/>
+                            </date>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </publicationStmt>
                 <notesStmt>
                     <!-- genre de publication -->
@@ -78,7 +87,16 @@
                             
                             <imprint>
                                 <!-- date -->
-                                <xsl:apply-templates select="pub-date"/>
+                                <xsl:choose>
+                                    <xsl:when test="//book/book-meta/pub-date ">
+                                        <xsl:apply-templates select="pub-date"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <date type="published" when="{//copyright-year}">
+                                            <xsl:value-of select="//copyright-year"/>
+                                        </date>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                                 <!-- tomaison -->
                                 <xsl:apply-templates select="volume"/>
                                 <xsl:apply-templates select="issue"/>
@@ -86,8 +104,6 @@
                                 <xsl:call-template name="pagination"/>
                                 <!-- publisher -->
                                 <xsl:apply-templates select="publisher" mode="TF"/>
-                                <!-- date -->
-                                <xsl:apply-templates select="pub-date" mode="TF"/>
                             </imprint>
                         </monogr>
                         <!-- ******************* serie ******************************-->
@@ -292,6 +308,7 @@
                     <xsl:when test="@pub-type='pbk'">pISBN</xsl:when>
                     <xsl:when test="@pub-type='ebk'">eISBN</xsl:when>
                     <xsl:when test="@pub-type='hbk'">hISBN</xsl:when>
+                    <xsl:otherwise>ISBN</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
             <xsl:apply-templates/>
@@ -359,6 +376,7 @@
         </editionStmt>
     </xsl:template>
     <xsl:template name="pagination">
+        <!-- pagination -->
         <!-- page de début-->
         <xsl:choose>
             <xsl:when test="//book/back/ref-list/sec-meta/fpage">
@@ -377,19 +395,34 @@
                     <xsl:apply-templates select="//book/body/book-part/book-part-meta/fpage" mode="book"/>
                 </biblScope>
             </xsl:when>
-            <xsl:otherwise>
+            <!-- début de pagination -->
+            <xsl:when test="//book/body/book-part/book-part-meta/title-group/title/xref[@ref-type='page']/@id[string-length()&gt; 0]">
                 <xsl:for-each select="//book/body/book-part/book-part-meta/title-group/title/xref[@ref-type='page']/@id">
-                    <xsl:choose>
-                        <xsl:when test="position() = 1">
-                            <biblScope unit="page">
-                                <xsl:attribute name="from">
-                                    <xsl:value-of select="substring-after(.,'page_')"/>
-                                </xsl:attribute>
-                                <xsl:value-of select="substring-after(.,'page_')"/>
-                            </biblScope> 
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:if test="position() = 1">
+                        <biblScope unit="page">
+                            <xsl:attribute name="from">
+                                <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                        </biblScope>
+                    </xsl:if>
                 </xsl:for-each>
+            </xsl:when>
+            <xsl:when test="//book/body/sec/title/target/@id[string-length()&gt; 0]">
+                <xsl:for-each select="//book/body/sec/title/target/@id">
+                    <xsl:if test="position() = 1">
+                        <biblScope unit="page">
+                            <xsl:attribute name="from">
+                                <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                        </biblScope>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:when>
+            <!-- quand il n'y a pas de pagination -->
+            <xsl:otherwise>
+                <biblScope unit="page" from="1">1</biblScope>
             </xsl:otherwise>
         </xsl:choose>
         <!-- page de fin-->
@@ -410,19 +443,44 @@
                     <xsl:apply-templates select="//book/body/book-part/book-part-meta/lpage" mode="book"/>
                 </biblScope>
             </xsl:when>
+            <xsl:when test="//book/body/book-part/book-part-meta/title-group/title/xref[@ref-type='page']/@id[string-length()&gt; 0]">
+                <xsl:for-each select="//book/body/book-part/book-part-meta/title-group/title/xref[@ref-type='page']/@id">
+                    <xsl:if test="position() = last()">
+                        <biblScope unit="page">
+                            <xsl:attribute name="to">
+                                <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                        </biblScope>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:when test="//book/body/sec/title/target/@id[string-length()&gt; 0]">
+                <xsl:for-each select="//book/body/sec/title/target/@id">
+                    <xsl:if test="position() = last()">
+                        <biblScope unit="page">
+                            <xsl:attribute name="to">
+                                <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
+                        </biblScope>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:when>
+            <!-- quand il n'y a pas de pagination parceque pas de body-->
             <xsl:otherwise>
-                <xsl:for-each select="//title/xref[@ref-type='page']/@id">
-                    <xsl:choose>
-                        <xsl:when test="position() = last()">
+                <xsl:if test="//book/book-front/sec/title/target/@id[string-length()&gt; 0]">
+                    <xsl:for-each select="//book/book-front/sec/title/target/@id">
+                        <xsl:if test="position() = last()">
                             <biblScope unit="page">
                                 <xsl:attribute name="to">
-                                    <xsl:value-of select="substring-after(.,'page_')"/>
+                                    <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
                                 </xsl:attribute>
-                                <xsl:value-of select="substring-after(.,'page_')"/>
+                                <xsl:value-of select="normalize-space(substring-after(.,'page_'))"/>
                             </biblScope>
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:for-each>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
             <!--  nombre total de page-->
