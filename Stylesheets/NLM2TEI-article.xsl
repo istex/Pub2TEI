@@ -1121,7 +1121,7 @@
                         <xsl:apply-templates select="front/article-meta/abstract | bdy/fp | fm/abs"/>
                         <xsl:apply-templates select="front/article-meta/trans-abstract| fm/fp | fm/execsumm | fm/websumm"/>
                         <!-- SG NLM subject -->
-                        <xsl:if test="front/article-meta/article-categories/subj-group/subject">
+                        <xsl:if test="front/article-meta/article-categories/subj-group/subject[string-length()&gt; 0]">
                             <textClass ana="subject">
                                 <xsl:apply-templates select="front/article-meta/article-categories/subj-group"/>
                             </textClass>
@@ -2787,7 +2787,7 @@
             <xsl:when test="ref-list"/>
             <xsl:otherwise>
                 <div>
-                    <xsl:if test="@sec-type">
+                    <xsl:if test="@sec-type[string-length()&gt; 0]">
                         <xsl:attribute name="type">
                             <xsl:value-of select="@sec-type"/>
                         </xsl:attribute>
@@ -2797,13 +2797,13 @@
                             <xsl:text>boxed-text</xsl:text>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="@id">
+                    <xsl:if test="@id[string-length()&gt; 0]">
                         <xsl:attribute name="xml:id">
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
                     </xsl:if>
                     
-                    <xsl:if test="label">
+                    <xsl:if test="label[string-length()&gt; 0]">
                         <xsl:attribute name="n">
                             <xsl:value-of select="label"/>
                         </xsl:attribute>

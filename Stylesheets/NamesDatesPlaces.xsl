@@ -264,6 +264,16 @@
                     </xsl:if>-->
                     <xsl:apply-templates select="*"/>
                 </xsl:when>
+                <xsl:when test="parent::publisher-loc">
+                    <!-- <xsl:if test="text()[. != ', ']">
+                        <addrLine>
+                            <xsl:for-each select="text()[. != ', ']">
+                                <xsl:value-of select="."/>
+                            </xsl:for-each>
+                        </addrLine>
+                    </xsl:if>-->
+                    <xsl:apply-templates/>
+                </xsl:when>
              <xsl:otherwise>
                <!--  <xsl:if test="not(ancestor::corresp)">
                     <addrLine>

@@ -47,6 +47,7 @@
                 contains($theOrg,'MIT') or
                 contains($theOrg,'GmhH') or
                 contains($theOrg,'Gabinetto') or
+                contains($theOrg,'Observatory') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
