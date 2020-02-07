@@ -954,7 +954,7 @@
     </xsl:variable>
    
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <xsl:template match="article[front] | article[pubfm] | article[suppfm] | headerx">
+    <xsl:template match="article[front] | article[pubfm] | article[suppfm] | headerx | art">
         <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -976,12 +976,16 @@
                         <title level="a" type="main">
                             <xsl:value-of select="$repriseTitreVide"/>
                         </title>
+                        <xsl:if test="//art/fm/atl/sbt">
+                            <title level="a" type="sub">
+                                <xsl:value-of select="//art/fm/atl/sbt"/>
+                            </title>
+                        </xsl:if>  
                         <!-- SG - informations book-reviews-->
                         <xsl:if test="fm/rvwinfo">
                             <xsl:apply-templates select="fm/rvwinfo"/>
                         </xsl:if>
                     </titleStmt>
-                    
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <xsl:if test="front/journal-meta/publisher">
@@ -1005,7 +1009,6 @@
                                     </publisher>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            
                         </xsl:if>
                         <xsl:if test="front/article-meta/article-categories/subj-group[@subj-group-type='access-type']/compound-subject/compound-subject-part[@content-type='code']='access-type-free'">
                             <availability status="free">
@@ -1049,6 +1052,11 @@
                         </xsl:if>
                         <xsl:if test="suppfm/parent/cpg/cpy">
                             <date when="{suppfm/parent/cpg/cpy}"/>
+                        </xsl:if>
+                        <xsl:if test="//art/coverdate/@yr">
+                            <publisher>The Royal Society of London</publisher>
+                            <pubPlace>London, UK</pubPlace>
+                            <date type="published" when="{//art/coverdate/@yr}"/>
                         </xsl:if>
                         <xsl:if test="pubfm/cpg/cpy">
                             <date when="{pubfm/cpg/cpy}">
@@ -1109,7 +1117,7 @@
                     </notesStmt>
                    
                     <sourceDesc>
-                        <xsl:apply-templates select="front | pubfm | suppfm" mode="sourceDesc"/>
+                        <xsl:apply-templates select="front | pubfm | suppfm |fm" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
@@ -1367,6 +1375,9 @@
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
                                                         <xsl:value-of select="@xml:lang"/>
                                                     </xsl:when>
+                                                    <xsl:when test="@language[string-length()&gt; 0]">
+                                                        <xsl:value-of select="translate(@language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                    </xsl:when>
                                                     <xsl:otherwise>und</xsl:otherwise>
                                                 </xsl:choose>
                                             </xsl:otherwise>
@@ -1610,7 +1621,7 @@
     <xsl:template match="article-meta"/>
 
     <!-- Building the sourceDesc bibliographical representation -->
-    <xsl:template match="front | pubfm | suppfm" mode="sourceDesc">
+    <xsl:template match="front | pubfm | suppfm | fm" mode="sourceDesc">
         <biblStruct>
             <xsl:variable name="articleType" select="/article/@article-type"/>
             <xsl:if test="$articleType != ''">
@@ -1675,8 +1686,8 @@
                 </xsl:choose>
                 <!-- All authors are included here -->
                 <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
-                <xsl:if test="/article/fm/aug | /headerx/fm/aug">
-                    <xsl:apply-templates select="/article/fm/aug/* except(//aff)| /headerx/fm/aug/* except(//aff)"/>
+                <xsl:if test="/article/fm/aug | /headerx/fm/aug | /art/fm/aug">
+                    <xsl:apply-templates select="/article/fm/aug/* except(//aff)| /headerx/fm/aug/* except(//aff) | /art/fm/aug/*"/>
                 </xsl:if>
                 <!--<xsl:apply-templates select="//article/fm/aug/group"/>-->
                 <xsl:if test="//bdy/corres/aug">
@@ -1730,6 +1741,14 @@
                 <xsl:apply-templates select="//article/@id"/>
             </analytic>
             <monogr>
+                <!-- Bloc RSL version dtd highWire -->
+                <xsl:if test="//art/@jid='roybiogmem'">
+                    <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
+                    <title level="j" type="alt">roybiogmem</title>
+                    <idno type="pISSN">0080-4606</idno>
+                    <idno type="eISSN">1748-8494</idno>
+                </xsl:if>
+                
                 <xsl:apply-templates select="journal-meta/journal-title |journal-meta/journal-title-group/journal-title | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
                 <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
                 <xsl:apply-templates select="journal-meta/journal-id"/>
@@ -1790,6 +1809,39 @@
                 </xsl:if>
                 <xsl:apply-templates select="//conference"/>
                 <imprint>
+                    <!-- Bloc RSL version dtd highWire -->
+                    <xsl:if test="//art/@jid='roybiogmem'">
+                        <xsl:if test="//art/@vol !=0">
+                            <biblScope unit="vol">
+                                <xsl:value-of select="//art/@vol"/>
+                            </biblScope>
+                        </xsl:if>
+                        <xsl:if test="//art/@issue !=0">
+                            <biblScope unit="issue">
+                                <xsl:value-of select="//art/@issue"/>
+                            </biblScope>
+                        </xsl:if>
+                        <xsl:if test="//art/@fpage !=0">
+                            <biblScope unit="page" from="{//art/@fpage}">
+                                <xsl:value-of select="normalize-space(//art/@fpage)"/>
+                            </biblScope>
+                        </xsl:if>
+                        <xsl:if test="//art/@lpage !=0">
+                            <biblScope unit="page" to="{//art/@lpage}">
+                                <xsl:value-of select="normalize-space(//art/@lpage)"/>
+                            </biblScope>
+                        </xsl:if>
+                        <publisher>The Royal Society of London</publisher>
+                        <pubPlace>London, UK</pubPlace>
+                        <xsl:choose>
+                            <xsl:when test="//art/coverdate/@yr">
+                                <date type="published" when="{//art/coverdate/@yr}"/>
+                            </xsl:when>
+                            <xsl:when test="//art/copyright/@yr">
+                                <date type="published" when="{//art/copyright/@yr}"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:if>
                     <!-- suppfm/parent/cpg/cpn |pubfm/cpg/cpn -->
                     <!-- pubfm/cpg/cpy -->
                     <!-- suppfm/cpg/cpy -->
@@ -1945,6 +1997,15 @@
                 <xsl:apply-templates select="../caff[coid[@id = current()/corf/@rid]]" mode="sourceDesc"/>
             </xsl:if>
             <!-- affiliation -->
+            <!-- traitement des affiliations -->
+            <!-- Pour l'éditeur RSL version highWire.dtd -->
+            <xsl:choose>
+                <xsl:when test="//aff[@id=current()/following::cross-ref/@refid]">
+                    <affiliation>
+                        <xsl:value-of select="//aff[@id=current()/following::cross-ref/@refid]"/>
+                    </affiliation>
+                </xsl:when>
+            </xsl:choose>
             <xsl:choose>
                 <!-- SG - cas quand les liens auteurs/affiliations sont définis dans <super> ex: nature_headerx_315773a0.xml -->
                 <xsl:when test="super">
@@ -1965,6 +2026,14 @@
                 <!-- SG - cas quand les affiliations n'ont pas de liens auteurs/affiliations définis explicitement ex: nature_headerx_315736a0.xml -->
                 <xsl:when test="//aff/org and not(//aff/oid)">
                     <xsl:apply-templates select="aff"/>
+                </xsl:when>
+                <xsl:when test="//cross-ref">
+                    <xsl:apply-templates select="aff"/>
+                </xsl:when>
+                <xsl:when test="../aff and not(../aff/oid)">
+                    <affiliation>
+                        <xsl:apply-templates select="following-sibling::aff"/>
+                    </affiliation>
                 </xsl:when>
                <xsl:when test="../aff and not(../aff/oid)">
                     <affiliation>
@@ -2033,16 +2102,18 @@
            </xsl:when>
            <xsl:otherwise>
                <xsl:if test="not(contains(.,'equally'))">
-               <affiliation>
-                   <xsl:call-template name="NLMParseAffiliation">
-                       <xsl:with-param name="theAffil">
-                           <xsl:variable name="nettoie">
-                               <xsl:apply-templates/> 
-                           </xsl:variable>
-                          <xsl:value-of select="translate($nettoie,'.;','')"/>
-                       </xsl:with-param>
-                   </xsl:call-template>
-               </affiliation>
+                   <xsl:if test="not(//fm/aug/cross-ref)">
+                   <affiliation>
+                       <xsl:call-template name="NLMParseAffiliation">
+                           <xsl:with-param name="theAffil">
+                               <xsl:variable name="nettoie">
+                                   <xsl:apply-templates/> 
+                               </xsl:variable>
+                               <xsl:value-of select="translate($nettoie,'.;','')"/>
+                           </xsl:with-param>
+                       </xsl:call-template>
+                   </affiliation>
+               </xsl:if>
                </xsl:if>
            </xsl:otherwise>
        </xsl:choose>
