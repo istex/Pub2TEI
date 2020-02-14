@@ -4,6 +4,7 @@
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
     xmlns:cals="http://www.elsevier.com/xml/common/cals/dtd"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
     xmlns:oasis="http://www.niso.org/standards/z39-96/ns/oasis-exchange/table"
 	exclude-result-prefixes="#all" version="2.0"
@@ -55,6 +56,11 @@
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:if>
+                        <xsl:if test="graphic/@xlink:href">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="graphic/@xlink:href"/>
+                            </xsl:attribute>
+                        </xsl:if>
                         <xsl:if test="oasis:table/@rowsep">
                             <xsl:attribute name="rows">
                                 <xsl:value-of select="oasis:table/@rowsep"/>
@@ -87,7 +93,7 @@
                             </head>
                         </xsl:if>
                         <!-- <xsl:apply-templates select="* except tgroup"/>-->
-                        <xsl:apply-templates select="* except(label/xref)"/>
+                        <xsl:apply-templates select="* except(label/xref | graphic)"/>
                     </table>
                 
             </xsl:otherwise>

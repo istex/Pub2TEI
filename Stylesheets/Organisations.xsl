@@ -48,6 +48,7 @@
                 contains($theOrg,'GmhH') or
                 contains($theOrg,'Gabinetto') or
                 contains($theOrg,'Observatory') or
+                contains($theOrg,'Engineering') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
@@ -66,7 +67,8 @@
                 contains($theOrg,'School') or 
                 contains($theOrg,'Ecole') or
                 contains($theOrg,'Scuola') or
-                contains($theOrg,'Facul') or 
+                contains($theOrg,'Facul') or
+                contains($theOrg,'Directorate') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>

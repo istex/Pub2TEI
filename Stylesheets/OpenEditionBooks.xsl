@@ -85,9 +85,6 @@
                             <xsl:attribute name="scheme"><xsl:value-of select="$codeGenreArkOE"/></xsl:attribute>
                             <xsl:value-of select="$codeGenreOE2"/>
                         </note>
-                        
-                        
-                        
                         <note type="publication-type" source="book" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
                     </notesStmt>
                     <sourceDesc>

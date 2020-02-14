@@ -18,7 +18,7 @@
                 <publicationStmt>
                     <authority>ISTEX</authority>
                     <!-- AJOUTER LES ARKS -->
-                    <publisher scheme="https://scientific-publisher.data.istex.fr/ark:/67375/H02-">Taylor &amp; Francis</publisher>
+                    <publisher scheme="https://scientific-publisher.data.istex.fr/ark:/67375/H02-CR0WP21S-C">Taylor &amp; Francis</publisher>
                     <xsl:apply-templates select="publisher" mode="TF"/>
                     <availability>
                         <licence>
@@ -43,7 +43,7 @@
                 <notesStmt>
                     <!-- genre de publication -->
                     <xsl:choose>
-                        <xsl:when test="issn[string-length()&gt; 0] | series[string-length()&gt; 0]">
+                        <xsl:when test="issn[string-length()&gt; 0]">
                             <note type="book-series" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z">book-series</note>
                         </xsl:when>
                         <xsl:when test="//book">
@@ -83,8 +83,9 @@
                                     <xsl:value-of select="//body/book-id[@pub-id-type='doi']"/>
                                 </idno>
                             </xsl:if>
-                            <xsl:apply-templates select="isbn" mode="TF"/>
-                            
+                            <xsl:if test="isbn[string-length()&gt; 0]">
+                                <xsl:apply-templates select="isbn" mode="TF"/>
+                            </xsl:if>
                             <imprint>
                                 <!-- date -->
                                 <xsl:choose>
@@ -302,17 +303,26 @@
         </publisher>
     </xsl:template>
     <xsl:template match="isbn" mode="TF">
-        <idno>
-            <xsl:attribute name="type">
+        <xsl:if test=".!=''">
+            <idno>
+                <xsl:attribute name="type">
+                    <xsl:choose>
+                        <xsl:when test="@pub-type='pbk'">pISBN</xsl:when>
+                        <xsl:when test="@pub-type='ebk'">eISBN</xsl:when>
+                        <xsl:when test="@pub-type='hbk'">hISBN</xsl:when>
+                        <xsl:otherwise>ISBN</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="@pub-type='pbk'">pISBN</xsl:when>
-                    <xsl:when test="@pub-type='ebk'">eISBN</xsl:when>
-                    <xsl:when test="@pub-type='hbk'">hISBN</xsl:when>
-                    <xsl:otherwise>ISBN</xsl:otherwise>
+                    <xsl:when test="starts-with(.,'978')">
+                        <xsl:value-of select="translate(.,'-,&#x96;','')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="translate(concat('978',.),'-,&#x96;','')"/>
+                    </xsl:otherwise>
                 </xsl:choose>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </idno>
+            </idno>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="permissions" mode="TF">
             <xsl:apply-templates select="copyright-statement" mode="TF"/>
@@ -379,20 +389,20 @@
         <!-- pagination -->
         <!-- page de début-->
         <xsl:choose>
-            <xsl:when test="//book/back/ref-list/sec-meta/fpage">
-                <biblScope unit="page">
-                    <xsl:attribute name="from">
-                        <xsl:value-of select="normalize-space(//book/back/ref-list/sec-meta/fpage)"/>
-                    </xsl:attribute>
-                    <xsl:value-of select="//book/back/ref-list/sec-meta/fpage"/>
-                </biblScope>
-            </xsl:when>
             <xsl:when test="//book/body/book-part/book-part-meta/fpage[string-length() &gt; 0]">
                 <biblScope unit="page">
                     <xsl:attribute name="from">
                         <xsl:apply-templates select="//book/body/book-part/book-part-meta/fpage" mode="book"/>
                     </xsl:attribute>
                     <xsl:apply-templates select="//book/body/book-part/book-part-meta/fpage" mode="book"/>
+                </biblScope>
+            </xsl:when>
+            <xsl:when test="//book/back/ref-list/sec-meta/fpage">
+                <biblScope unit="page">
+                    <xsl:attribute name="from">
+                        <xsl:value-of select="normalize-space(//book/back/ref-list/sec-meta/fpage)"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="//book/back/ref-list/sec-meta/fpage"/>
                 </biblScope>
             </xsl:when>
             <!-- début de pagination -->
@@ -427,20 +437,20 @@
         </xsl:choose>
         <!-- page de fin-->
         <xsl:choose>
-            <xsl:when test="//book/back/ref-list/sec-meta/lpage">
-                <biblScope unit="page">
-                    <xsl:attribute name="to">
-                        <xsl:value-of select="normalize-space(//book/back/ref-list/sec-meta/lpage)"/>
-                    </xsl:attribute>
-                    <xsl:value-of select="//book/back/ref-list/sec-meta/lpage"/>
-                </biblScope>
-            </xsl:when>
             <xsl:when test="//book/body/book-part/book-part-meta/lpage[string-length() &gt; 0]">
                 <biblScope unit="page">
                     <xsl:attribute name="to">
                         <xsl:apply-templates select="//book/body/book-part/book-part-meta/lpage" mode="book"/>
                     </xsl:attribute>
                     <xsl:apply-templates select="//book/body/book-part/book-part-meta/lpage" mode="book"/>
+                </biblScope>
+            </xsl:when>
+            <xsl:when test="//book/back/ref-list/sec-meta/lpage">
+                <biblScope unit="page">
+                    <xsl:attribute name="to">
+                        <xsl:value-of select="normalize-space(//book/back/ref-list/sec-meta/lpage)"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="//book/back/ref-list/sec-meta/lpage"/>
                 </biblScope>
             </xsl:when>
             <xsl:when test="//book/body/book-part/book-part-meta/title-group/title/xref[@ref-type='page']/@id[string-length()&gt; 0]">

@@ -964,6 +964,8 @@
                     <xsl:choose>
                         <xsl:when test="normalize-space(//article/@xml:lang)='IW'"><xsl:attribute name="xml:lang">HE</xsl:attribute></xsl:when>
                         <xsl:when test="normalize-space(//article/@xml:lang)='fn'"><xsl:attribute name="xml:lang">EN</xsl:attribute></xsl:when>
+                        <!-- sage-->
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'"><xsl:attribute name="xml:lang">FR</xsl:attribute></xsl:when>
                         <xsl:otherwise>
                             <xsl:copy-of select="@xml:lang"/>
                         </xsl:otherwise>
@@ -1370,6 +1372,11 @@
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq145'">FR</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp106'">FR</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">FR</xsl:when>
+                                            <!-- sage-->
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'">FR</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">FR</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458580904300109'">IT</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458587901300403'">FR</xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:choose>
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
@@ -1406,31 +1413,26 @@
                 <!-- No test if made for body since it is considered a mandatory element -->
                 <xsl:choose>
                     <xsl:when test="body/* | bdy/p | bdy/sec | bdy/corres/*|article/floats-group">
-                <body>
-                    <xsl:choose>
-                        <xsl:when test="body/* | bdy/*">
+                        <body>
                             <xsl:apply-templates select="body/*"/>
                             <xsl:apply-templates select="bdy/*except(bdy/fp)"/>
                             <xsl:apply-templates select="bm/objects/*"/>
                             <xsl:apply-templates select="//article/floats-group"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <div>
-                                <xsl:choose>
-                                    <xsl:when test="string-length($rawfulltextpath) &gt; 0">
-                                        <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <p/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </div>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </body>
+                        </body>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:if test="not(//sub-article)">
+                        <xsl:choose>
+                            <!-- pour sage le contenu du body non structurée est contenu dans ce champ
+                            <xsl:when test="not(body) and //custom-meta[meta-name='search-text']/meta-value [string-length() &gt; 0]">
+                                <body>
+                                    <div>
+                                        <p>
+                                            <xsl:value-of select="//custom-meta[meta-name='search-text']/meta-value"/>
+                                        </p>
+                                    </div>
+                                </body>
+                            </xsl:when> -->
+                            <xsl:when test="not(//sub-article)">
                                 <body>
                                     <div>
                                         <xsl:choose>
@@ -1448,8 +1450,21 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </div>
-                                </body> 
-                            </xsl:if>
+                                </body>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <div>
+                                    <xsl:choose>
+                                        <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                                            <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <p/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </div>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:if test="sub-article">
@@ -2073,9 +2088,9 @@
         </author>
     </xsl:template>
    <xsl:template match="aff">
-       <xsl:variable name="notLabel">
-           <xsl:apply-templates/>
-       </xsl:variable>
+       <xsl:if test="email">
+           <xsl:apply-templates select="email"/>
+       </xsl:if>
        <xsl:choose>
            <xsl:when test="./org">
                <affiliation>
@@ -2103,17 +2118,18 @@
            <xsl:otherwise>
                <xsl:if test="not(contains(.,'equally'))">
                    <xsl:if test="not(//fm/aug/cross-ref)">
-                   <affiliation>
-                       <xsl:call-template name="NLMParseAffiliation">
-                           <xsl:with-param name="theAffil">
-                               <xsl:variable name="nettoie">
-                                   <xsl:apply-templates/> 
-                               </xsl:variable>
-                               <xsl:value-of select="translate($nettoie,'.;','')"/>
-                           </xsl:with-param>
-                       </xsl:call-template>
-                   </affiliation>
-               </xsl:if>
+                       <affiliation>
+                           <xsl:call-template name="NLMParseAffiliation">
+                               <xsl:with-param name="theAffil">
+                                   <xsl:variable name="nettoie">
+                                       <xsl:apply-templates/>
+                                   </xsl:variable>
+                                   
+                                   <xsl:value-of select="translate($nettoie,'.;','')"/>
+                               </xsl:with-param>
+                           </xsl:call-template>
+                       </affiliation>
+                   </xsl:if>
                </xsl:if>
            </xsl:otherwise>
        </xsl:choose>
@@ -2891,11 +2907,13 @@
                     <xsl:choose>
                         <xsl:when test="not(descendant::sec) and descendant::boxed-text">
                             <xsl:comment>Boxed-text</xsl:comment>
-                            <xsl:apply-templates/>
+                            <xsl:apply-templates select="title"/>
+                            <xsl:apply-templates select="*except(title)"/>
                             <xsl:apply-templates select="descendant::boxed-text/sec" mode="boxed-text"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:apply-templates/>
+                            <xsl:apply-templates select="title"/>
+                            <xsl:apply-templates select="*except(title)"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
@@ -2931,9 +2949,19 @@
     
     <xsl:template match="sec/label"/>
     <xsl:template match="sec-meta">
-        <docAuthor>
-            <xsl:apply-templates select="contrib-group/contrib" mode="section"/>
-        </docAuthor>
+        <xsl:choose>
+            <xsl:when test="contrib-group/contrib">
+                <docAuthor>
+                    <xsl:apply-templates select="contrib-group/contrib" mode="section"/>
+                </docAuthor>
+            </xsl:when>
+            <xsl:when test="fpage">
+                <bibl>
+                    <xsl:apply-templates select="fpage"/>
+                    <xsl:apply-templates select="lpage"/>
+                </bibl>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="sig-block">
         <p>
@@ -3114,50 +3142,23 @@
     </xsl:template>
 
     <!-- Lists -->
-
     <xsl:template match="list">
-        <xsl:choose>
-            <xsl:when test="parent::boxed-text/sec">
-                <div>
-                    <list>
-                        <xsl:if test="@list-type">
-                            <xsl:attribute name="type">
-                                <xsl:value-of select="@list-type"/>
-                            </xsl:attribute>
-                            <xsl:apply-templates/>
-                        </xsl:if>
-                        <xsl:if test="@id">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@id"/>
-                            </xsl:attribute>
-                            <xsl:apply-templates/>
-                        </xsl:if>
-                        <xsl:if test="li|item">
-                            <xsl:apply-templates/>
-                        </xsl:if>
-                    </list>
-                </div>
-            </xsl:when>
-            <xsl:otherwise>
-                <list>
-                    <xsl:if test="@list-type">
-                        <xsl:attribute name="type">
-                            <xsl:value-of select="@list-type"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="li|item|list-item">
-                        <xsl:apply-templates/>
-                    </xsl:if>
-                </list>
-            </xsl:otherwise>
-        </xsl:choose>
+        <list>
+            <xsl:if test="@list-type">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@list-type"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="li|item|list-item">
+                <xsl:apply-templates/>
+            </xsl:if>
+        </list>
     </xsl:template>
-
     <xsl:template match="list-item">
         <item>
             <xsl:apply-templates/>
@@ -3208,12 +3209,17 @@
     </xsl:template>
 
     <xsl:template match="graphic">
-        <graphic>
-            <xsl:attribute name="url">
-                <xsl:value-of select="@xlink:href"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </graphic>
+        <xsl:choose>
+            <xsl:when test="ancestor::table-wrap"/>
+            <xsl:otherwise>
+                <graphic>
+                    <xsl:attribute name="url">
+                        <xsl:value-of select="@xlink:href"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </graphic>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="attrib">
@@ -3275,7 +3281,7 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
+                <xsl:attribute name="n">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
@@ -3293,7 +3299,8 @@
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
             </xsl:attribute>
-        <xsl:apply-templates/>
+            <xsl:apply-templates select="title"/>
+            <xsl:apply-templates select="*except(title)"/>
         </div>
     </xsl:template>
 

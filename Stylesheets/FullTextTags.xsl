@@ -33,19 +33,30 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <p>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@xml:lang">
-                        <xsl:attribute name="xml:lang">
-                            <xsl:value-of select="@xml:lang"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:apply-templates/>
-                </p>
+                <xsl:choose>
+                    <xsl:when test="ancestor::boxed-text/sec">
+                        <div>
+                            <p>
+                            <xsl:apply-templates/>
+                            </p>
+                        </div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <p>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@xml:lang">
+                                <xsl:attribute name="xml:lang">
+                                    <xsl:value-of select="@xml:lang"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:apply-templates/>
+                        </p>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

@@ -1883,27 +1883,6 @@ reactorsa'</title>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.)">
                     <title level="a" type="main">
-                        <xsl:choose>
-                            <xsl:when test="@Language | @xml:lang">
-                                <xsl:attribute name="xml:lang">
-                                    <xsl:choose>
-                                        <xsl:when test="@Language='' or @xml:lang=''">
-                                            <xsl:text>en</xsl:text>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:call-template name="Varia2ISO639">
-                                                <xsl:with-param name="code" select="@Language | @xml:lang"/>
-                                            </xsl:call-template>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </xsl:attribute>
-                            </xsl:when>
-                            <xsl:when test="not(@Language or @xml:lang)">
-                                <xsl:attribute name="xml:lang">
-                                    <xsl:call-template name="codeLang"/>
-                                </xsl:attribute>
-                            </xsl:when>
-                        </xsl:choose>
                         <xsl:variable name="normalize">
                             <xsl:apply-templates/>
                         </xsl:variable>
