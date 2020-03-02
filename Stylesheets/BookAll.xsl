@@ -493,12 +493,32 @@
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
-            <!--  nombre total de page-->
+            <!--  nombre total de pages-->
             <xsl:if test="//book-meta/counts/page-count/@count[string-length() &gt; 0]">
                 <biblScope unit="page-count">
                     <xsl:value-of select="//book-meta/counts/page-count/@count"/>
                 </biblScope>
             </xsl:if>
+        <xsl:if test="//book-meta/counts/ref-count/@count[string-length() &gt; 0]">
+            <biblScope unit="ref-count">
+                <xsl:value-of select="//book-meta/counts/ref-count/@count"/>
+            </biblScope>
+        </xsl:if>
+        <xsl:if test="//book-meta/counts/table-count/@count[string-length() &gt; 0]">
+            <biblScope unit="table-count">
+                <xsl:value-of select="//book-meta/counts/table-count/@count"/>
+            </biblScope>
+        </xsl:if>
+        <xsl:if test="//book-meta/counts/fig-count/@count != 0">
+            <biblScope unit="fig-count">
+                <xsl:value-of select="//book-meta/counts/fig-count/@count"/>
+            </biblScope>
+        </xsl:if>
+        <xsl:if test="//book-meta/counts/equation-count/@count!=0">
+            <biblScope unit="equation-count">
+                <xsl:value-of select="//book-meta/counts/equation-count/@count"/>
+            </biblScope>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="fpage" mode="book">
         <xsl:choose>
