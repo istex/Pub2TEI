@@ -10,8 +10,8 @@
     <!-- ajout déclaration schema ODD-ISTEX -->
     
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
-    <xsl:param name="xslversion">1.0.36</xsl:param>
-    <xsl:param name="releasedate">2020-02-14</xsl:param>
+    <xsl:param name="xslversion">1.0.37</xsl:param>
+    <xsl:param name="releasedate">2020-03-02</xsl:param>
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
