@@ -349,6 +349,10 @@
                         <xsl:when test="contains(.,'?option=')">
                             <xsl:value-of select="substring-before(.,'?option=')"/>  
                         </xsl:when>
+                        <xsl:when test="contains(.,'HTTP: ')">
+                            <xsl:value-of select="substring-after(.,'HTTP: ')"/>  
+                        </xsl:when>
+                        
                         <xsl:otherwise>
                             <xsl:apply-templates/>  
                         </xsl:otherwise>

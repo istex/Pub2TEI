@@ -3536,6 +3536,11 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="parent::table-wrap-foot">
+                <title>
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
             <xsl:when test="ancestor::app">
                 <head>
                     <xsl:apply-templates/>
