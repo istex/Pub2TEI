@@ -34,7 +34,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="ancestor::boxed-text/sec">
+                    <xsl:when test="ancestor::boxed-text/sec | ancestor::sec">
                         <div>
                             <p>
                             <xsl:apply-templates/>
