@@ -50,7 +50,7 @@
                             <note type="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
                         </xsl:when>
                     </xsl:choose>
-                    
+                    <xsl:apply-templates select="//book/book-meta/notes"/>
                 </notesStmt>
                 <sourceDesc>
                     <biblStruct type="inbook">
