@@ -542,7 +542,7 @@
     
     <xsl:template match="book-front" mode="TF">
         <front>
-            <xsl:apply-templates select="* except(bio,ack)"/>
+            <xsl:apply-templates select="* except(bio)"/>
             <xsl:apply-templates select="bio" mode="TF"/>
         </front>
     </xsl:template>
