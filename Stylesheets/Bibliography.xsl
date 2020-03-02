@@ -1738,9 +1738,11 @@
                             </xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:if test="../@id">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="../@id"/>
                             </xsl:attribute>
+                            </xsl:if>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:apply-templates/>
@@ -1760,9 +1762,11 @@
                             </xsl:attribute>
                         </xsl:when>
                        <xsl:otherwise>
+                           <xsl:if test="../@id">
                            <xsl:attribute name="xml:id">
                                <xsl:value-of select="../@id"/>
                            </xsl:attribute>
+                           </xsl:if>
                        </xsl:otherwise>
                     </xsl:choose>
                     <xsl:apply-templates/>
@@ -1782,9 +1786,11 @@
                             </xsl:attribute>
                         </xsl:when>
                        <xsl:otherwise>
-                           <xsl:attribute name="xml:id">
-                               <xsl:value-of select="../@id"/>
-                           </xsl:attribute>
+                           <xsl:if test="../@id">
+                               <xsl:attribute name="xml:id">
+                                   <xsl:value-of select="../@id"/>
+                               </xsl:attribute>
+                           </xsl:if>
                        </xsl:otherwise>
                     </xsl:choose>
                     <xsl:if test="article-title|chapter-title">
