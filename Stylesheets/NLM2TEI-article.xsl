@@ -3243,9 +3243,18 @@
     </xsl:template>
     
     <xsl:template match="attrib">
-        <desc>
-            <xsl:apply-templates/>
-        </desc>
+        <xsl:choose>
+            <xsl:when test="ancestor::list">
+                <item>
+                    <xsl:apply-templates/>
+                </item>
+            </xsl:when>
+            <xsl:otherwise>
+                <desc>
+                    <xsl:apply-templates/>
+                </desc>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- Tables -->
 
