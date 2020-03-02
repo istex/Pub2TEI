@@ -364,6 +364,7 @@
             <analytic>
                 <!-- All authors are included here -->
                 <xsl:apply-templates select="$entry/person-group"/>
+                <xsl:apply-templates select="$entry/string-name"/>
                 <xsl:apply-templates select="$entry/collab" mode="editors"/>
                 <!-- Title information related to the paper goes here -->
                 <xsl:apply-templates select="$entry/article-title"/>
@@ -375,6 +376,7 @@
                 <imprint>
                     <xsl:apply-templates select="$entry/publisher-name"/>
                     <xsl:apply-templates select="$entry/conf-loc"/>
+                    <xsl:apply-templates select="$entry/conf-date"/>
                     <xsl:apply-templates select="$entry/year"/>
                     <xsl:apply-templates select="$entry/volume"/>
                     <xsl:apply-templates select="$entry/issue"/>

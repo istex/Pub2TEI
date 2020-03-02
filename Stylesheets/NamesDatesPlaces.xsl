@@ -346,6 +346,9 @@
                         <xsl:when test="contains(.,'?ReadForm&amp;c%PS')">
                             <xsl:value-of select="substring-before(.,'?ReadForm&amp;c%PS')"/>  
                         </xsl:when>
+                        <xsl:when test="contains(.,'?option=')">
+                            <xsl:value-of select="substring-before(.,'?option=')"/>  
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates/>  
                         </xsl:otherwise>
