@@ -679,7 +679,12 @@
             <xsl:when test="ancestor::table-wrap-foot"/>
             <xsl:when test="ancestor::fig"/>
             <xsl:otherwise>
-                <note place="inline" xml:id="{@id}">
+                <note place="inline">
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </note>
             </xsl:otherwise>

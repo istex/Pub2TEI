@@ -3080,17 +3080,37 @@
 
     <!-- Quoted passages -->
     <xsl:template match="disp-quote">
-        <cit>
-            <xsl:if test="attrib">
-                <xsl:attribute name="rend">
-                    <xsl:text>block</xsl:text>
-                </xsl:attribute>
-            </xsl:if>
-            <quote>
-                <xsl:apply-templates select="*[not(name() = 'attrib')]"/>
-            </quote>
-            <xsl:apply-templates select="attrib"/>
-      </cit>
+        <xsl:choose>
+            <xsl:when test="ancestor::abstract">
+                <p>
+                    <cit>
+                        <xsl:if test="attrib">
+                            <xsl:attribute name="rend">
+                                <xsl:text>block</xsl:text>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <quote>
+                            <xsl:apply-templates select="*[not(name() = 'attrib')]"/>
+                        </quote>
+                        <xsl:apply-templates select="attrib"/>
+                    </cit>  
+                </p>
+            </xsl:when>
+            <xsl:otherwise>
+                <cit>
+                    <xsl:if test="attrib">
+                        <xsl:attribute name="rend">
+                            <xsl:text>block</xsl:text>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <quote>
+                        <xsl:apply-templates select="*[not(name() = 'attrib')]"/>
+                    </quote>
+                    <xsl:apply-templates select="attrib"/>
+                </cit>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
     <xsl:template match="disp-quote/attrib">
