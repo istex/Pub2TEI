@@ -214,7 +214,7 @@
     </xsl:template>
 
     <!-- PL: add st for Nature -->
-    <xsl:template match="State | state | corresponding-author-state | province | st">
+    <xsl:template match="State | state | corresponding-author-state | province | st | named-content[@content-type = 'state']">
         <xsl:if test="normalize-space(.)">
             <region>
                 <xsl:apply-templates/>

@@ -2104,7 +2104,16 @@
                    </address>
                </affiliation>
            </xsl:when>
-          <xsl:when test="institution">
+           <xsl:when test="addr-line">
+               <affiliation>
+                   <xsl:apply-templates select="addr-line/institution"/>
+                   <address>
+                       <xsl:apply-templates select="addr-line/named-content"/>
+                       <xsl:apply-templates select="addr-line/country"/>
+                   </address>
+               </affiliation>
+           </xsl:when>
+          <xsl:when test="institution and institution/addr-line">
                <affiliation>
                    <xsl:apply-templates select="institution" mode="NLM"/>
                    <xsl:if test="addr-line | country">
