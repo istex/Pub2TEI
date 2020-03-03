@@ -3331,7 +3331,6 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-
     <xsl:template match="app-group/app">
         <div>
             <xsl:attribute name="xml:id">
@@ -3550,7 +3549,7 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
-            <xsl:when test="ancestor::app">
+            <xsl:when test="parent::app">
                 <head>
                     <xsl:apply-templates/>
                 </head>
@@ -3948,6 +3947,11 @@
     </xsl:template>
     <xsl:template match="notes">
         <xsl:choose>
+            <xsl:when test="parent::app">
+                <div type="notes">
+                <xsl:apply-templates/>
+                </div>
+            </xsl:when>
             <xsl:when test="ancestor::back">
                 <xsl:apply-templates/>
             </xsl:when>

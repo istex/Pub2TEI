@@ -617,12 +617,12 @@
                         </head>
                     </xsl:if>
                     <div>
-                        <xsl:if test="@book-part-type">
+                        <xsl:if test="@book-part-type[string-length()&gt; 0]">
                             <xsl:attribute name="type">
                                 <xsl:value-of select="@book-part-type"/>
                             </xsl:attribute>
                         </xsl:if>
-                        <xsl:if test="@id">
+                        <xsl:if test="@id[string-length()&gt; 0]">
                             <xsl:attribute name="subtype">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
