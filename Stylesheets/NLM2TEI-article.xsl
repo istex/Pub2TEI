@@ -1477,7 +1477,7 @@
                     <back>
                         <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                         <xsl:apply-templates select="front/article-meta/product"/>
-                        <xsl:apply-templates select="back/* | bm/ack | bm/bibl"/>
+                        <xsl:apply-templates select="back/* |bm/ack | bm/bibl"/>
                     </back>
                 </xsl:if>
             </text>
@@ -3011,6 +3011,12 @@
 
     <xsl:template match="ack">
         <div type="acknowledgements">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="ref-list">
+        <div type="references">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
