@@ -38,7 +38,12 @@
     <!-- Références simples Elsevier -->
 
     <xsl:template match="ce:bib-reference[ce:other-ref]">
-        <bibl xml:id="{@id}" n="{ce:label}">
+        <bibl xml:id="{@id}">
+            <xsl:if test="ce:label[string-length() &gt; 0]">
+            <xsl:attribute name="n">
+                <xsl:value-of select="normalize-space(ce:label)"/>
+            </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates select="*[name() != 'ce:label']"/>
         </bibl>
     </xsl:template>
@@ -91,6 +96,7 @@
             <monogr>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:title/*"/>
+                <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:editors/*"/>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:book/sb:title/*"/>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:book/sb:editors/*"/>
@@ -101,6 +107,9 @@
                         select="sb:reference/sb:host/sb:edited-book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
                     <xsl:apply-templates
                         select="sb:reference/sb:host/sb:book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
+                    <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:issue-nr"/>
+                    <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:volume-nr"/>
+                    <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:issue-nr"/>
                     <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:date"/>
                     <xsl:apply-templates select="sb:reference/sb:host/sb:pages/*"/>
                 </imprint>
@@ -952,7 +961,8 @@
 
     <!-- Elsevier -->
     <xsl:template match="sb:date">
-        <date when="{.}">
+        <!-- ne garder que les chiffres dans @when -->
+        <date when="{translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')}">
             <xsl:apply-templates/>
         </date>
     </xsl:template>
@@ -981,11 +991,18 @@
         <author role="et-al"/>
     </xsl:template>
 
-    <xsl:template match="sb:author | refau">
+    <xsl:template match="refau">
         <author>
             <persName>
                 <xsl:apply-templates select="fnm"/>
                 <xsl:apply-templates select="snm"/>
+            </persName>
+        </author>
+    </xsl:template>
+    <xsl:template match="sb:author">
+        <author>
+            <persName>
+                <xsl:apply-templates/>
             </persName>
         </author>
     </xsl:template>

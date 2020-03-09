@@ -23,7 +23,7 @@
             <xsl:when test="child::boxref">
                     <xsl:apply-templates/>
             </xsl:when>
-            <xsl:when test="ancestor::ce:floats">
+            <xsl:when test="parent::ce:floats">
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:when test="ancestor::ce:caption">
@@ -328,6 +328,11 @@
     
     <xsl:template match="ce:list-item">
         <item>
+            <xsl:if test="ce:label">
+                <label>
+                    <xsl:value-of select="ce:label"/>
+                </label>
+            </xsl:if>
             <xsl:apply-templates/>
         </item>
     </xsl:template>
@@ -443,15 +448,28 @@
     <!-- 2017-04-03: Vérifier le traitement des éléments de XMLLatex -->
     <xsl:template match="els1:math |els2:math | math">
         <formula notation="MathML" xmlns:m="http://www.w3.org/1998/Math/MathML">
+            <xsl:if test="../ce:label[string-length() &gt; 0]">
+                <xsl:attribute name="n">
+                    <xsl:value-of select="../ce:label"/>
+                </xsl:attribute>
+            </xsl:if>
             <m:math>
             <xsl:apply-templates/>
             </m:math>
         </formula>
     </xsl:template>
-    <xsl:template match="els1:fr |els2:fr | fr">
+    <xsl:template match="r">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="c">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="els1:fr |els2:fr | fr | ar">
         <m:mfrac xmlns:m="http://www.w3.org/1998/Math/MathML">
             <m:mrow xmlns:m="http://www.w3.org/1998/Math/MathML">
-                <xsl:apply-templates select="els1:nu |els2:nu | nu"/>
+                <xsl:apply-templates select="els1:nu |els2:nu | nu |
+                    els1:r |els2:r | r |
+                    els1:c |els2:c | c"/>
             </m:mrow>
             <m:mrow xmlns:m="http://www.w3.org/1998/Math/MathML">
                 <xsl:apply-templates select="els1:de |els2:de | de"/>
@@ -462,6 +480,12 @@
         <m:mn xmlns:m="http://www.w3.org/1998/Math/MathML">
             <xsl:apply-templates/>
         </m:mn>
+    </xsl:template>
+    <xsl:template match="els1:rm |els2:rm |rm">
+            <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="els1:ovl |els2:ovl |ovl">
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="els1:de |els2:de | de">
         <m:mn xmlns:m="http://www.w3.org/1998/Math/MathML">
@@ -940,10 +964,6 @@
             <xsl:apply-templates/>
         </quote>
     </xsl:template>
-    
-    <!-- Formarting elements that we discard -->
-    
-    <xsl:template match="ce:vsp"/>
     
 	<!-- Entity markers (NPG) -->
 	<xsl:template match="named-entity"><rs><xsl:apply-templates/></rs></xsl:template>

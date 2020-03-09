@@ -110,23 +110,56 @@
     </xsl:template>
     <!--elsevier-->
     <xsl:template match="ce:table">
-        <div type="table">
-            <table>
-                <xsl:if test="@id">
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="@id"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates select="*"/>
-                
-            </table>
-        </div>
+        <xsl:choose>
+            <xsl:when test="parent::display">
+                <table>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates select="*"/>
+                </table>
+            </xsl:when>
+            <xsl:otherwise>
+                <div type="table">
+                    <table>
+                        <xsl:if test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:apply-templates select="*"/>
+                    </table>
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="table-entry/title| ce:table/ce:caption">
         <head>
             <xsl:apply-templates/>
         </head>
+    </xsl:template>
+    <xsl:template match="ce:legend">
+        <note type="legend">
+            <xsl:if test="ce:label">
+                <label>
+                    <xsl:value-of select="ce:label"/>
+                </label>
+            </xsl:if>
+            <xsl:apply-templates select="ce:simple-para"/>
+        </note>
+    </xsl:template>
+    <xsl:template match="ce:table-footnote">
+        <note type="foot-note">
+            <xsl:if test="ce:label">
+                <label>
+                    <xsl:value-of select="ce:label"/>
+                </label>
+            </xsl:if>
+            <xsl:apply-templates select="ce:note-para"/>
+        </note>
     </xsl:template>
     <!-- le label est reporté dans l'attribut "@n"
         <xsl:template match="table-wrap/label">

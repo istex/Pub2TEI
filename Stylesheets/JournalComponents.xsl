@@ -1954,7 +1954,7 @@ reactorsa'</title>
         <xsl:apply-templates/>
         </title>
     </xsl:template>
-    <xsl:template match="sb:subtitle">
+    <xsl:template match="sb:subtitle|ce:subtitle">
         <xsl:apply-templates/>
     </xsl:template>
     <!-- EDP - trans-title-group -->
@@ -2608,7 +2608,7 @@ reactorsa'</title>
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="iid | iss | Issue | issue | issue-number | IssueID | issueref | wiley:numbering[@type='journalIssue'] | wiley:numbering[@type='supplement'] | wiley:issue">
+    <xsl:template match="iid | iss | Issue | issue | issue-number | IssueID | issueref | wiley:numbering[@type='journalIssue'] | wiley:numbering[@type='supplement'] | wiley:issue| sb:issue-nr">
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation">
                 <bibl>

@@ -2518,9 +2518,29 @@
                                 <xsl:apply-templates select="els1:head/ce:title |els2:head/ce:title | head/ce:title"/>
                             </xsl:otherwise>
                         </xsl:choose>
+                        <xsl:if test="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle">
+                            <title level="a" type="sub">
+                                <xsl:value-of select="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle"/>
+                            </title>
+                        </xsl:if>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
+                        <date type="published">
+                            <xsl:attribute name="when">
+                                <xsl:choose>
+                                    <xsl:when test="string-length($date)=8">
+                                        <xsl:value-of select="normalize-space(substring($date,-3,string-length($date)))"/>
+                                    </xsl:when>
+                                    <xsl:when test="string-length($date)=6">
+                                        <xsl:value-of select="normalize-space(substring($date,-1,string-length($date)))"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$date"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </date>
                         <xsl:apply-templates
                             select="els1:item-info/ce:copyright |els2:item-info/ce:copyright | item-info/ce:copyright"/>
                     </publicationStmt>
@@ -2605,7 +2625,7 @@
                         </xsl:choose>
                     </notesStmt>
                     <sourceDesc>
-                        <biblStruct>
+                        <biblStruct type="inbook">
                             <analytic>
                                 <!-- Title information related to the paper goes here -->
                                 <!-- rattrapage titres vides -->
@@ -2619,6 +2639,11 @@
                                         <xsl:apply-templates select="els1:head/ce:title | els2:head/ce:title |head/ce:title"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
+                                <xsl:if test="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle">
+                                    <title level="a" type="sub">
+                                        <xsl:value-of select="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle"/>
+                                    </title>
+                                </xsl:if>
                                 <xsl:if test="els1:head/ce:presented |els2:head/ce:presented | head/ce:presented">
                                     <title level="a" type="sub">
                                         <xsl:value-of select="els1:head/ce:presented |els2:head/ce:presented | head/ce:presented"/>
@@ -2735,6 +2760,7 @@
                                     </xsl:for-each>
                                 </xsl:if>
                                 <imprint>
+                                    <publisher scheme="https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G">ELSEVIER</publisher>
                                   <!--  <xsl:choose>
                                         <xsl:when
                                             test="els1:head/ce:miscellaneous |els2:head/ce:miscellaneous | head/ce:miscellaneous">
@@ -2848,12 +2874,21 @@
                 <xsl:call-template name="insertVersion"/>
                 <xsl:if test="//ce:doctopics|head/ce:keywords |els2:head/ce:keywords | head/ce:keywords | els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract">
                     <profileDesc>
-						<!-- PL: abstract is moved from <front> to here -->
-                        <xsl:apply-templates select="els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract"/>
-                        <xsl:apply-templates select="els1:item-info/ce:doctopics"/>
-                        <xsl:apply-templates select="els2:item-info/ce:doctopics"/>
-                        <xsl:apply-templates select="item-info/ce:doctopics"/>
-                        <xsl:apply-templates select="els1:head/ce:keywords |els2:head/ce:keywords | head/ce:keywords"/>
+                        <creation>
+                            <date>
+                                <xsl:choose>
+                                    <xsl:when test="string-length($date)=8">
+                                        <xsl:value-of select="normalize-space(substring($date,-3,string-length($date)))"/>
+                                    </xsl:when>
+                                    <xsl:when test="string-length($date)=6">
+                                        <xsl:value-of select="normalize-space(substring($date,-1,string-length($date)))"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$date"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </date>
+                        </creation>
                         <!-- language -->
                         <xsl:variable name="codeLangue">
                             <xsl:choose>
@@ -2884,6 +2919,12 @@
                                 </language>
                             </langUsage>
                         </xsl:if>
+						<!-- PL: abstract is moved from <front> to here -->
+                        <xsl:apply-templates select="els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract"/>
+                        <xsl:apply-templates select="els1:item-info/ce:doctopics"/>
+                        <xsl:apply-templates select="els2:item-info/ce:doctopics"/>
+                        <xsl:apply-templates select="item-info/ce:doctopics"/>
+                        <xsl:apply-templates select="els1:head/ce:keywords |els2:head/ce:keywords | head/ce:keywords"/>
                     </profileDesc>
                 </xsl:if><!-- traceability -->
                 <revisionDesc>
@@ -2944,24 +2985,25 @@
         </publisher>
         <!-- PL: put the date under the paragraph, as it is TEI P5 valid -->
         <!-- LR: moved the date two nodes higher so that the encompassing publicationStmt is closer to what is expected-->
-        <date>
+        
+        <date type="copyright">
             <xsl:attribute name="when">
                 <xsl:choose>
-                    <xsl:when test="string-length($date)=8">
+                    <xsl:when test="string-length(@year)=8">
                         <xsl:value-of select="normalize-space(substring($date,-3,string-length($date)))"/>
                     </xsl:when>
-                    <xsl:when test="string-length($date)=6">
+                    <xsl:when test="string-length(@year)=6">
                         <xsl:value-of select="normalize-space(substring($date,-1,string-length($date)))"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="$date"/>
+                        <xsl:value-of select="@year"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
         </date>
         <availability status="restricted">
             <licence>
-            	<p>
+                <p>
             	    <xsl:if test="@year">
             	        <xsl:text>&#169;</xsl:text>
             	        <xsl:value-of select="@year"/>
@@ -2974,6 +3016,7 @@
             	        <xsl:otherwise>Elsevier.</xsl:otherwise>
             	    </xsl:choose>
             	</p>
+                <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-HKKZVM7B-M"/>
 			</licence>
         </availability>
     </xsl:template>
@@ -3114,7 +3157,8 @@
     <xsl:template match="ce:section">
         <div>
             <xsl:if test="ce:label">
-                <xsl:attribute name="type" select="ce:label"/>
+                <!-- la tei n'accepte pas les espaces dans l'attribut type -->
+                <xsl:attribute name="type" select="translate(ce:label,' ','_')"/>
             </xsl:if>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id" select="@id"/>
@@ -3133,7 +3177,16 @@
     </xsl:template>
 
     <xsl:template match="ce:abstract-sec">
-        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="ce:section-title">
+                <div type="section">
+                    <xsl:apply-templates/>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="ce:section-title">
@@ -3334,6 +3387,28 @@
     
     <xsl:template match="ce:author">
         <author>
+            <xsl:variable name="i" select="position()-1"/>
+            <xsl:variable name="authorNumber">
+                <xsl:choose>
+                    <xsl:when test="$i &lt; 10">
+                        <xsl:value-of select="concat('author-000', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 100">
+                        <xsl:value-of select="concat('author-00', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 1000">
+                        <xsl:value-of select="concat('author-0', $i)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('author-', $i)"/>
+                    </xsl:otherwise>
+                </xsl:choose> 
+            </xsl:variable>
+            <xsl:if test="not(ancestor::sub-article)">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="$authorNumber"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:variable name="structId" select="ce:cross-ref/@refid"/>
             <xsl:for-each select="$structId">
                 <xsl:if test="//ce:correspondence[@id=.]">
@@ -3355,6 +3430,18 @@
                 <xsl:when test="../ce:affiliation[not(@id)]">
                     <xsl:message>Affiliation sans identifiant</xsl:message>
                     <xsl:for-each select="../ce:affiliation">
+                        <affiliation>
+                            <xsl:call-template name="parseAffiliation">
+                                <xsl:with-param name="theAffil">
+                                    <xsl:value-of select="ce:textfn"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </affiliation>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:when test="not(ce:cross-ref) and following::ce:affiliation[@id]">
+                    <xsl:message>Affiliation avec identifiant, auteur sans relation</xsl:message>
+                    <xsl:for-each select="following::ce:affiliation">
                         <affiliation>
                             <xsl:call-template name="parseAffiliation">
                                 <xsl:with-param name="theAffil">
@@ -3507,6 +3594,80 @@
                         <xsl:with-param name="country" select="$avantVirgule"/>
                     </xsl:call-template>
                 </xsl:variable>
+                <!-- signalement des états américains dans <region> -->
+                <xsl:variable name="etatsAmericains">
+                    <xsl:choose>
+                        <xsl:when test="$avantVirgule='Alabama'">Alabama</xsl:when>
+                        <xsl:when test="$avantVirgule='Alaska'">Alaska</xsl:when>
+                        <xsl:when test="$avantVirgule='Arizona'">Arizona</xsl:when>
+                        <xsl:when test="$avantVirgule='Arkansas'">Arkansas</xsl:when>
+                        <xsl:when test="$avantVirgule='California'">California</xsl:when>
+                        <xsl:when test="$avantVirgule='North Carolina'">North Carolina</xsl:when>
+                        <xsl:when test="$avantVirgule='South Carolina'">South Carolina</xsl:when>
+                        <xsl:when test="$avantVirgule='Colorado'">Colorado</xsl:when>
+                        <xsl:when test="$avantVirgule='Connecticut'">Connecticut</xsl:when>
+                        <xsl:when test="$avantVirgule='North Dakota'">North Dakota</xsl:when>
+                        <xsl:when test="$avantVirgule='South Dakota'">South Dakota</xsl:when>
+                        <xsl:when test="$avantVirgule='Delaware'">Delaware</xsl:when>
+                        <xsl:when test="$avantVirgule='Florida'">Florida</xsl:when>
+                        <xsl:when test="$avantVirgule='Georgia'">Georgia</xsl:when>
+                        <xsl:when test="$avantVirgule='Hawaii'">Hawaii</xsl:when>
+                        <xsl:when test="$avantVirgule='Idaho'">Idaho</xsl:when>
+                        <xsl:when test="$avantVirgule='Illinois'">Illinois</xsl:when>
+                        <xsl:when test="$avantVirgule='Indiana'">Indiana</xsl:when>
+                        <xsl:when test="$avantVirgule='Iowa'">Iowa</xsl:when>
+                        <xsl:when test="$avantVirgule='Kansas'">Kansas</xsl:when>
+                        <xsl:when test="$avantVirgule='Kentucky'">Kentucky</xsl:when>
+                        <xsl:when test="$avantVirgule='Commonwealth of Kentucky'">Commonwealth of Kentucky</xsl:when>
+                        <xsl:when test="$avantVirgule='Louisiana'">Louisiana</xsl:when>
+                        <xsl:when test="$avantVirgule='Maine'">Maine</xsl:when>
+                        <xsl:when test="$avantVirgule='Maryland'">Maryland</xsl:when>
+                        <xsl:when test="$avantVirgule='Massachusetts'">Massachusetts</xsl:when>
+                        <xsl:when test="$avantVirgule='Commonwealth of Massachusetts'">Commonwealth of Massachusetts</xsl:when>
+                        <xsl:when test="$avantVirgule='Michigan'">Michigan</xsl:when>
+                        <xsl:when test="$avantVirgule='Minnesota'">Minnesota</xsl:when>
+                        <xsl:when test="$avantVirgule='Mississippi'">Mississippi</xsl:when>
+                        <xsl:when test="$avantVirgule='Missouri'">Missouri</xsl:when>
+                        <xsl:when test="$avantVirgule='Montana'">Montana</xsl:when>
+                        <xsl:when test="$avantVirgule='Nebraska'">Nebraska</xsl:when>
+                        <xsl:when test="$avantVirgule='Nevada'">Nevada</xsl:when>
+                        <xsl:when test="$avantVirgule='New Hampshire'">New Hampshire</xsl:when>
+                        <xsl:when test="$avantVirgule='New Jersey'">New Jersey</xsl:when>
+                        <xsl:when test="$avantVirgule='Nouveau-Mexique'">New Mexico</xsl:when>
+                        <xsl:when test="$avantVirgule='New York'">New York</xsl:when>
+                        <xsl:when test="$avantVirgule='Ohio'">Ohio</xsl:when>
+                        <xsl:when test="$avantVirgule='Oklahoma'">Oklahoma</xsl:when>
+                        <xsl:when test="$avantVirgule='Oregon'">Oregon</xsl:when>
+                        <xsl:when test="$avantVirgule='Pennsylvania'">Pennsylvania</xsl:when>
+                        <xsl:when test="$avantVirgule='Rhode Island'">Rhode Island</xsl:when>
+                        <xsl:when test="$avantVirgule='Tennessee'">Tennessee</xsl:when>
+                        <xsl:when test="$avantVirgule='Texas'">Texas</xsl:when>
+                        <xsl:when test="$avantVirgule='Utah'">Utah</xsl:when>
+                        <xsl:when test="$avantVirgule='Vermont'">Vermont</xsl:when>
+                        <xsl:when test="$avantVirgule='Virginia'">Virginia</xsl:when>
+                        <xsl:when test="$avantVirgule='Commonwealth of Virginia'">Commonwealth of Virginia</xsl:when>
+                        <xsl:when test="$avantVirgule='West Virginia'">West Virginia</xsl:when>
+                        <!-- enlever intentionnellement, peut être confondu avec Washington DC <xsl:when test="$avantVirgule='Washington'">Washington</xsl:when>-->
+                        <xsl:when test="$avantVirgule='Wisconsin'">Wisconsin</xsl:when>
+                        <xsl:when test="$avantVirgule='Wyoming'">Wyoming</xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$etatsAmericains != ''">
+                        <region>
+                            <xsl:value-of select="$etatsAmericains"/>
+                        </region>
+                        <!-- rattrapage du code pays quand il n'est pas présent -->
+                        <xsl:if test="not(contains($theAffil,'USA'))">
+                            <country key="US" xml:lang="en">UNITED STATES</country>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <addrLine>
+                            <xsl:value-of select="$avantVirgule"/>
+                        </addrLine>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:choose>
                     <xsl:when test="$testCountry != ''">
                         <country>
@@ -3516,6 +3677,12 @@
                                         <xsl:text>UK</xsl:text>
                                     </xsl:attribute>
                                     <xsl:text>UNITED KINGDOM</xsl:text>
+                                </xsl:when>
+                                <xsl:when test="//ce:doi='10.1016/S1047-2797(00)00184-8'">
+                                    <xsl:attribute name="key">
+                                        <xsl:text>US</xsl:text>
+                                    </xsl:attribute>
+                                    <xsl:text>UNITED STATES</xsl:text>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:attribute name="key">
@@ -3528,11 +3695,6 @@
                             </xsl:choose>
                         </country>
                     </xsl:when>
-                    <xsl:otherwise>
-                        <addrLine>
-                            <xsl:value-of select="$avantVirgule"/>
-                        </addrLine>
-                    </xsl:otherwise>
                 </xsl:choose>
                 <xsl:if test="$apresVirgule !=''">
                     <xsl:call-template name="parseAffiliation">
@@ -3576,7 +3738,11 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- text effects: hsp et hsp balisage non repris -->
     <xsl:template match="ce:hsp">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="ce:vsp">
         <xsl:apply-templates/>
     </xsl:template>
 

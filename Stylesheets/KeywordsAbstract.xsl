@@ -119,6 +119,7 @@
                 <xsl:choose>
                     <xsl:when test="ce:keyword/ce:text">
                         <list>
+                            <xsl:apply-templates select="ce:section-title"/>
                             <xsl:apply-templates select="*[not(self::ce:section-title|self::Heading)]"/>
                         </list>
                     </xsl:when>
