@@ -41,6 +41,13 @@
                             </p>
                         </div>
                     </xsl:when>
+                    <xsl:when test="parent::notes">
+                        <div>
+                            <p>
+                                <xsl:apply-templates/>
+                            </p>
+                        </div>
+                    </xsl:when>
                     <xsl:otherwise>
                         <p>
                             <xsl:if test="@id">
@@ -404,6 +411,9 @@
     </xsl:template>
 
     <xsl:template match="disp-formula/label"/>
+    <xsl:template match="disp-formula/alternatives">
+        <xsl:apply-templates/>
+    </xsl:template>
 
 
     <!-- Specific rule for Springer's Inline equation -->

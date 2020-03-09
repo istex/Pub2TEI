@@ -129,6 +129,11 @@
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:if>
+                        <xsl:if test="ce:label[string-length() &gt; 0]">
+                            <head>
+                                <xsl:value-of select="ce:label"/>
+                            </head>
+                        </xsl:if>
                         <xsl:apply-templates select="*"/>
                     </table>
                 </div>
@@ -377,16 +382,14 @@
     
     <!-- SG - traitement tables ACS -->
     <xsl:template match="oasis:thead">
-        <head>
-            <xsl:value-of select="oasis:row/oasis:entry"/>
-        </head>
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="oasis:tbody">
         <xsl:apply-templates select="oasis:row"/>
     </xsl:template>
     <xsl:template match="oasis:row">
         <row>
-            <xsl:if test="@rowsep">
+            <xsl:if test="@rowsep or parent::oasis:thead">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="oasis:entry"/>

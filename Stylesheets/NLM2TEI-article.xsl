@@ -1385,7 +1385,7 @@
                                                     <xsl:when test="@language[string-length()&gt; 0]">
                                                         <xsl:value-of select="translate(@language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                     </xsl:when>
-                                                    <xsl:otherwise>und</xsl:otherwise>
+                                                    <xsl:otherwise>en</xsl:otherwise>
                                                 </xsl:choose>
                                             </xsl:otherwise>
                                         </xsl:choose>
@@ -2201,7 +2201,7 @@
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:choose>
-                    <xsl:when test="$testOrganisation">
+                    <xsl:when test="$testOrganisation!=''">
                         <orgName>
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
@@ -2209,15 +2209,18 @@
                             <xsl:value-of select="$avantVirgule"/>
                         </orgName>
                         <xsl:if test="$apresVirgule !=''">
-                            <address>
-                                <addrLine>
+                            <!--<address><addrLine>
                                     <xsl:value-of select="$apresVirgule"/>
                                 </addrLine>
                                 <xsl:call-template name="NLMParseAffiliation">
                                     <xsl:with-param name="theAffil" select="$theAffil"/>
                                     <xsl:with-param name="inAddress" select="true()"/>
-                                </xsl:call-template>
-                            </address>
+                                </xsl:call-template></address>-->
+                                <xsl:if test="$apresVirgule !=''">
+                                    <xsl:call-template name="NLMparseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                                    </xsl:call-template>
+                                </xsl:if>
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>

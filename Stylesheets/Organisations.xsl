@@ -14,6 +14,7 @@
             <xsl:when test="contains($theOrg,'IB')  or
                 contains($theOrg,'Study') or
                 contains($theOrg,'CCS') or
+                contains($theOrg,'CNRS') or
                 contains($theOrg,'College of') or
                 contains($theOrg,'College') or
                 contains($theOrg,'Universidad') or
