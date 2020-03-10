@@ -2125,20 +2125,17 @@
                </affiliation>
            </xsl:when>
            <xsl:otherwise>
-               <xsl:if test="not(contains(.,'equally'))">
-                   <xsl:if test="not(//fm/aug/cross-ref)">
-                       <affiliation>
-                           <xsl:call-template name="NLMParseAffiliation">
-                               <xsl:with-param name="theAffil">
-                                   <xsl:variable name="nettoie">
-                                       <xsl:apply-templates/>
-                                   </xsl:variable>
-                                   
-                                   <xsl:value-of select="translate($nettoie,';','')"/>
-                               </xsl:with-param>
-                           </xsl:call-template>
-                       </affiliation>
-                   </xsl:if>
+               <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
+                   <affiliation>
+                       <xsl:call-template name="NLMParseAffiliation">
+                           <xsl:with-param name="theAffil">
+                               <xsl:variable name="nettoie">
+                                   <xsl:apply-templates/>
+                               </xsl:variable>
+                               <xsl:value-of select="translate($nettoie,';','')"/>
+                           </xsl:with-param>
+                       </xsl:call-template>
+                   </affiliation>
                </xsl:if>
            </xsl:otherwise>
        </xsl:choose>
@@ -2229,12 +2226,14 @@
                                 <xsl:value-of select="."/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <address>
-                                    <xsl:call-template name="NLMParseAffiliation">
-                                        <xsl:with-param name="theAffil" select="$theAffil"/>
-                                        <xsl:with-param name="inAddress" select="true()"/>
-                                    </xsl:call-template>
-                                </address>
+                                <xsl:if test="$inAddress =true()">
+                                    <address>
+                                        <xsl:call-template name="NLMParseAffiliation">
+                                            <xsl:with-param name="theAffil" select="$theAffil"/>
+                                            <xsl:with-param name="inAddress" select="true()"/>
+                                        </xsl:call-template>
+                                    </address>
+                                </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>
@@ -2425,12 +2424,12 @@
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
-                <xsl:when test="aff">
+                <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
-                <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
+               <!-- <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="//aff"/>
-                </xsl:when>
+                </xsl:when>-->
             </xsl:choose>
             <!-- appelle les affiliations complementaires -->
             <xsl:choose>
@@ -2513,14 +2512,21 @@
                     <affiliation role="corresp">
                         <xsl:choose>
                             <xsl:when test="addr-line | country">
-                                <address>
-                                    <xsl:if test="addr-line">
-                                        <xsl:apply-templates select="addr-line"/>
-                                    </xsl:if>
-                                    <xsl:if test="country">
-                                        <xsl:apply-templates select="country"/>
-                                    </xsl:if>
-                                </address>
+                                <xsl:choose>
+                                    <xsl:when test="addr-line/named-content/email">
+                                        <xsl:apply-templates select="addr-line/named-content/email"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <address>
+                                            <xsl:if test="addr-line">
+                                                <xsl:apply-templates select="addr-line"/>
+                                            </xsl:if>
+                                            <xsl:if test="country">
+                                                <xsl:apply-templates select="country"/>
+                                            </xsl:if>
+                                        </address> 
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of select="normalize-space($corresp)"/>
@@ -3038,14 +3044,21 @@
     </xsl:template>
 
     <xsl:template match="named-content">
-        <name>
-            <xsl:if test="@content-type">
-                <xsl:attribute name="type">
-                    <xsl:value-of select="@content-type"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </name>
+        <xsl:choose>
+            <xsl:when test="email">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <name>
+                    <xsl:if test="@content-type">
+                        <xsl:attribute name="type">
+                            <xsl:value-of select="@content-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </name>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="comment">
@@ -4082,7 +4095,6 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                
                 <xsl:variable name="testCountry2">
                     <xsl:call-template name="normalizeISOCountry">
                         <xsl:with-param name="country" select="$SuppEmail"/>
@@ -4115,16 +4127,18 @@
                         </country>
                     </xsl:when>
                     <xsl:otherwise>
-                        <addrLine>
-                            <xsl:choose>
-                                <xsl:when test="contains($avantVirgule,'@')">
+                        <xsl:choose>
+                            <xsl:when test="contains($avantVirgule,'@')">
+                                <addrLine>
                                     <xsl:value-of select="$SuppEmail"/>
-                                </xsl:when>
-                                <xsl:otherwise>
+                                </addrLine>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <addrLine>
                                     <xsl:value-of select="$avantVirgule"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </addrLine>
+                                </addrLine>
+                            </xsl:otherwise>
+                        </xsl:choose>
                         <xsl:if test="contains($avantVirgule,'@') and $testCountry3 !=''">
                             <country xml:lang="en">
                                 <xsl:attribute name="key">

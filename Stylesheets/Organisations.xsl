@@ -27,7 +27,9 @@
                 contains($theOrg,'Institut') or
                 contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
-                contains($theOrg,'Universität ') or
+                contains($theOrg,'Campus') or
+                contains($theOrg,'University') or
+                contains($theOrg,'Universität') or
                 contains($theOrg,'Université ') or
                 contains($theOrg,'University of') or
                 contains($theOrg,'universit') or
