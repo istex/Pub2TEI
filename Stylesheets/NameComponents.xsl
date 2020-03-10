@@ -213,7 +213,10 @@
     <xsl:template match="Initials | inits">
         <xsl:if test="normalize-space(.)">
             <forename full="init">
-                <xsl:apply-templates/>
+                <xsl:variable name="forename">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($forename)"/>
             </forename>
         </xsl:if>
     </xsl:template>
@@ -221,7 +224,10 @@
         match="last_name | LastName | ce:surname | FamilyName | ln | surname | corresponding-author-lastname | surname | snm | wiley:familyName">
         <xsl:if test="normalize-space(.)">
             <surname>
-                <xsl:apply-templates/>
+                <xsl:variable name="surname">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($surname)"/>
             </surname>
         </xsl:if>
     </xsl:template>
