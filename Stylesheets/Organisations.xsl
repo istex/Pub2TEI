@@ -27,7 +27,6 @@
                 contains($theOrg,'Institut') or
                 contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
-                contains($theOrg,'Universit') or
                 contains($theOrg,'Universität ') or
                 contains($theOrg,'Université ') or
                 contains($theOrg,'University of') or
@@ -60,7 +59,8 @@
                 contains($theOrg,'Labo') or
                 contains($theOrg,'labo') or
                 contains($theOrg,'Servic') or
-                contains($theOrg,'Biol')">
+                contains($theOrg,'Biol') or
+                contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
             <xsl:when test=" 
