@@ -178,19 +178,19 @@
                                 />
                                 <!-- Language -->
                                 <xsl:choose>
-                                    <xsl:when test="//ArticleTitle[1]/@Language">
-                                    <langUsage>
-                                        <language>
-                                            <xsl:attribute name="ident">
-                                                <xsl:choose>
-                                                    <xsl:when test="//ArticleDOI='10.1007/BF02584710'">PT</xsl:when>
-                                                    <xsl:otherwise>
-                                                        <xsl:value-of select="translate(//ArticleTitle[1]/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:attribute>
-                                        </language>
-                                    </langUsage>
+                                    <xsl:when test="//ArticleTitle[1]/@Language != '--'">
+                                        <langUsage>
+                                            <language>
+                                                <xsl:attribute name="ident">
+                                                    <xsl:choose>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02584710'">PT</xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="translate(//ArticleTitle[1]/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:attribute>
+                                            </language>
+                                        </langUsage>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <langUsage>
@@ -198,8 +198,10 @@
                                                 <xsl:attribute name="ident">
                                                     <xsl:choose>
                                                         <xsl:when test="//ArticleDOI='10.1007/BF02584710'">PT</xsl:when>
+                                                        <xsl:when test="//ArticleTitle[1]/@Language= '--'">und</xsl:when>
+                                                        <xsl:when test="//ArticleInfo[1]/@Language= '--'">und</xsl:when>
                                                         <xsl:otherwise>
-                                                            <xsl:value-of select="translate(//ArticleInfo/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                                            <xsl:value-of select="//ArticleInfo/@Language"/>
                                                         </xsl:otherwise>
                                                     </xsl:choose>
                                                 </xsl:attribute>
