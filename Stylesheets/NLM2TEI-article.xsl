@@ -4125,7 +4125,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </addrLine>
-                        <xsl:if test="contains($avantVirgule,'@')">
+                        <xsl:if test="contains($avantVirgule,'@') and $testCountry3 !=''">
                             <country xml:lang="en">
                                 <xsl:attribute name="key">
                                     <xsl:value-of select="$testCountry3"/>
