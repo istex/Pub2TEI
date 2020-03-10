@@ -20,7 +20,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <persName>
-                            <xsl:apply-templates/>
+                            <xsl:apply-templates select="* except(x)"/>
                         </persName>
                     </xsl:otherwise>
                 </xsl:choose>

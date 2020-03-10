@@ -2134,7 +2134,7 @@
                                        <xsl:apply-templates/>
                                    </xsl:variable>
                                    
-                                   <xsl:value-of select="translate($nettoie,'.;','')"/>
+                                   <xsl:value-of select="translate($nettoie,';','')"/>
                                </xsl:with-param>
                            </xsl:call-template>
                        </affiliation>
@@ -4063,6 +4063,36 @@
                         <xsl:with-param name="country" select="translate($avantVirgule,'.','')"/>
                     </xsl:call-template>
                 </xsl:variable>
+                <xsl:variable name="SuppEmail">
+                    <xsl:value-of select="substring-before($avantVirgule,'. ')"/>
+                </xsl:variable>
+                <xsl:variable name="finEmail1">
+                    <xsl:value-of select="substring-after($avantVirgule,'@')"/>
+                </xsl:variable>
+                <xsl:variable name="finEmail2">
+                    <xsl:value-of select="substring-after($finEmail1,'.')"/>
+                </xsl:variable>
+                <xsl:variable name="finEmail">
+                    <xsl:choose>
+                        <xsl:when test="contains($finEmail2,'.')">
+                            <xsl:value-of select="substring-after($finEmail2,'.')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$finEmail2"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                
+                <xsl:variable name="testCountry2">
+                    <xsl:call-template name="normalizeISOCountry">
+                        <xsl:with-param name="country" select="$SuppEmail"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="testCountry3">
+                    <xsl:call-template name="normalizeISOCountry">
+                        <xsl:with-param name="country" select="$finEmail"/>
+                    </xsl:call-template>
+                </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$testCountry != ''">
                         <country>
@@ -4074,10 +4104,37 @@
                             </xsl:call-template>
                         </country>
                     </xsl:when>
+                    <xsl:when test="$testCountry2 != ''">
+                        <country>
+                            <xsl:attribute name="key">
+                                <xsl:value-of select="$testCountry2"/>
+                            </xsl:attribute>
+                            <xsl:call-template name="normalizeISOCountryName">
+                                <xsl:with-param name="country" select="$SuppEmail"/>
+                            </xsl:call-template>
+                        </country>
+                    </xsl:when>
                     <xsl:otherwise>
                         <addrLine>
-                            <xsl:value-of select="$avantVirgule"/>
+                            <xsl:choose>
+                                <xsl:when test="contains($avantVirgule,'@')">
+                                    <xsl:value-of select="$SuppEmail"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$avantVirgule"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </addrLine>
+                        <xsl:if test="contains($avantVirgule,'@')">
+                            <country xml:lang="en">
+                                <xsl:attribute name="key">
+                                    <xsl:value-of select="$testCountry3"/>
+                                </xsl:attribute>
+                                <xsl:call-template name="normalizeISOCountryName">
+                                    <xsl:with-param name="country" select="$finEmail"/>
+                                </xsl:call-template>
+                            </country>
+                        </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:if test="$apresVirgule !=''">
