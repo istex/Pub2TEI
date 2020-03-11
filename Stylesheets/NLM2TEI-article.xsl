@@ -1473,7 +1473,7 @@
                     </group>
                 </xsl:if>
                 
-                <xsl:if test="back | bm |front/article-meta/product">
+                <xsl:if test="back [string-length() &gt; 0] | bm [string-length() &gt; 0]|front/article-meta/product[string-length() &gt; 0]">
                     <back>
                         <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                         <xsl:apply-templates select="front/article-meta/product"/>
@@ -2105,13 +2105,30 @@
                </affiliation>
            </xsl:when>
            <xsl:when test="addr-line">
-               <affiliation>
-                   <xsl:apply-templates select="addr-line/institution"/>
-                   <address>
-                       <xsl:apply-templates select="addr-line/named-content"/>
-                       <xsl:apply-templates select="addr-line/country"/>
-                   </address>
-               </affiliation>
+               <xsl:choose>
+                   <xsl:when test="../aff/institution | addr-line/institution">
+                       <affiliation>
+                           <xsl:apply-templates select="addr-line/institution"/>
+                           <address>
+                               <xsl:apply-templates select="addr-line/named-content"/>
+                               <xsl:apply-templates select="addr-line/country"/>
+                           </address>
+                       </affiliation>
+                   </xsl:when>
+                   <xsl:otherwise>
+                       <affiliation>
+                           <xsl:call-template name="NLMParseAffiliation">
+                               <xsl:with-param name="theAffil">
+                                   <xsl:variable name="nettoie">
+                                       <xsl:apply-templates/>
+                                   </xsl:variable>
+                                   <xsl:value-of select="translate($nettoie,';/','')"/>
+                               </xsl:with-param>
+                           </xsl:call-template>
+                       </affiliation>
+                   </xsl:otherwise>
+               </xsl:choose>
+               
            </xsl:when>
           <xsl:when test="institution and institution/addr-line">
                <affiliation>
@@ -2136,6 +2153,38 @@
                    </xsl:call-template>
                </affiliation>
            </xsl:when>
+           <xsl:when test="contains(.,'Professor') or
+               contains(.,'Maître') or
+               contains(.,'Lecturer')">
+               <roleName type="biography">
+                   <xsl:variable name="normalize">
+                       <xsl:apply-templates/> 
+                   </xsl:variable>
+                   <xsl:value-of select="normalize-space($normalize)"/>
+               </roleName>
+           </xsl:when>
+           <xsl:when test="country">
+               <affiliation>
+                   <xsl:if test="country and not(addr-line)">
+                       <xsl:choose>
+                           <xsl:when test="contains(country,',')">
+                               <address>
+                                   <addrLine>
+                                       <xsl:value-of select="normalize-space(country)"/>
+                                   </addrLine>
+                               </address>
+                           </xsl:when>
+                           <xsl:otherwise>
+                               <address>
+                                   <country>
+                                       <xsl:value-of select="normalize-space(country)"/>
+                                   </country>
+                               </address>
+                           </xsl:otherwise>
+                       </xsl:choose>
+                   </xsl:if>
+               </affiliation>
+           </xsl:when>
            <xsl:when test="not(contains(.,','))">
                <affiliation>
                    <xsl:variable name="normalize">
@@ -2143,16 +2192,6 @@
                    </xsl:variable>
                    <xsl:value-of select="normalize-space($normalize)"/>
                </affiliation>
-           </xsl:when>
-           <xsl:when test="contains(.,'Professor') or
-                           contains(.,'Maître') or
-                           contains(.,'Lecturer')">
-               <roleName type="biography">
-                   <xsl:variable name="normalize">
-                       <xsl:apply-templates/> 
-                   </xsl:variable>
-                   <xsl:value-of select="normalize-space($normalize)"/>
-               </roleName>
            </xsl:when>
            <xsl:otherwise>
                <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
@@ -2456,6 +2495,11 @@
                 </affiliation>
             </xsl:if>
             <xsl:choose>
+                <xsl:when test="contains(xref/@rid,' ')">
+                    <xsl:call-template name="createNLMAffiliations">
+                        <xsl:with-param name="restAff" select="xref/@rid"/>
+                    </xsl:call-template>
+                </xsl:when>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
@@ -4215,5 +4259,22 @@
                 </desc>
             </xsl:if>
         </change>
+    </xsl:template>
+    
+    <!-- affiliations multiples -->
+    <xsl:template name="createNLMAffiliations">
+        <xsl:param name="restAff"/>
+        <xsl:message>Affiliations: <xsl:value-of select="$restAff"/></xsl:message>
+        <xsl:choose>
+            <xsl:when test=" contains($restAff,' ')">
+                <xsl:apply-templates select="../aff[@id=substring-before($restAff,' ')]"/>
+                <xsl:call-template name="createNLMAffiliations">
+                    <xsl:with-param name="restAff" select="substring-after($restAff,' ')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="../aff[@id=$restAff]"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>

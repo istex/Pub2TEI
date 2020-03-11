@@ -148,7 +148,7 @@
     <!-- BMJ: corresponding-author-city, corresponding-author-country, corresponding-author-state, corresponding-author-zipcode -->
 
     <xsl:template match="Country | country | corresponding-author-country | cny">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=".!=''">
             <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
             <country>
                 <xsl:choose>

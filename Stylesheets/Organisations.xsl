@@ -97,6 +97,8 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Branch') or
                 contains($theOrg,'Centre') or
+                contains($theOrg,'zentrum') or
+                contains($theOrg,'Zentrum') or
                 contains($theOrg,'Centro') or
                 contains($theOrg,'Section') or
                 contains($theOrg,'Division') or
@@ -112,6 +114,7 @@
             <xsl:when test="contains($theOrg,'Doctoral') or
                 contains($theOrg,'Lecturer') or
                 contains($theOrg,'Maître de') or
+                contains($theOrg,'Associate') or
                 contains($theOrg,'Professor')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
