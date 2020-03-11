@@ -915,7 +915,7 @@
         <xsl:if test="normalize-space(.)"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
     <xsl:template match="sup">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=".!=''">
             <xsl:choose>
                 <!-- nettoyage des labels dans les affiliations -->
                 <xsl:when test="parent::aff"/>

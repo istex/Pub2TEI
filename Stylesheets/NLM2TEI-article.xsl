@@ -2126,12 +2126,22 @@
            </xsl:when>
            <xsl:when test="italic or bold">
                <affiliation>
-                   <xsl:apply-templates/>
+                   <xsl:call-template name="NLMParseAffiliation">
+                       <xsl:with-param name="theAffil">
+                           <xsl:variable name="nettoie">
+                               <xsl:apply-templates/>
+                           </xsl:variable>
+                           <xsl:value-of select="translate($nettoie,';/','')"/>
+                       </xsl:with-param>
+                   </xsl:call-template>
                </affiliation>
            </xsl:when>
            <xsl:when test="not(contains(.,','))">
                <affiliation>
-                   <xsl:apply-templates/>
+                   <xsl:variable name="normalize">
+                       <xsl:apply-templates/> 
+                   </xsl:variable>
+                   <xsl:value-of select="normalize-space($normalize)"/>
                </affiliation>
            </xsl:when>
            <xsl:otherwise>

@@ -143,7 +143,7 @@
                                                         </xsl:for-each>-->
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:value-of select="."/>
+                                                <xsl:apply-templates/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </affiliation>
