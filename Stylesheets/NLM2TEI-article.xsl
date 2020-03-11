@@ -2129,11 +2129,6 @@
                    <xsl:apply-templates/>
                </affiliation>
            </xsl:when>
-           <xsl:when test="contains(.,'/')">
-               <affiliation>
-                   <xsl:apply-templates/>
-               </affiliation>
-           </xsl:when>
            <xsl:when test="not(contains(.,','))">
                <affiliation>
                    <xsl:apply-templates/>
@@ -2147,7 +2142,7 @@
                                <xsl:variable name="nettoie">
                                    <xsl:apply-templates/>
                                </xsl:variable>
-                               <xsl:value-of select="translate($nettoie,';','')"/>
+                               <xsl:value-of select="translate($nettoie,';/','')"/>
                            </xsl:with-param>
                        </xsl:call-template>
                    </affiliation>

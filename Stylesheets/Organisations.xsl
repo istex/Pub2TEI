@@ -66,6 +66,7 @@
                 contains($theOrg,' AWF') or
                 contains($theOrg,' GmbH') or
                 starts-with($theOrg,'CN') or
+                starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
@@ -77,6 +78,7 @@
                 contains($theOrg,'labo') or
                 contains($theOrg,'Servic') or
                 contains($theOrg,'Biol') or
+                contains($theOrg,'Pracownia') or
                 contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
