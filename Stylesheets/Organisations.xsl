@@ -111,6 +111,7 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Doctoral') or
                 contains($theOrg,'Lecturer') or
+                contains($theOrg,'Maître de') or
                 contains($theOrg,'Professor')">
                 <xsl:text>function</xsl:text>
             </xsl:when>

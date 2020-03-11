@@ -2144,6 +2144,14 @@
                    <xsl:value-of select="normalize-space($normalize)"/>
                </affiliation>
            </xsl:when>
+           <xsl:when test="contains(.,'Professor')">
+               <roleName type="biography">
+                   <xsl:variable name="normalize">
+                       <xsl:apply-templates/> 
+                   </xsl:variable>
+                   <xsl:value-of select="normalize-space($normalize)"/>
+               </roleName>
+           </xsl:when>
            <xsl:otherwise>
                <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
                    <affiliation>
