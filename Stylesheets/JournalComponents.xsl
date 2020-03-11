@@ -2304,7 +2304,7 @@ reactorsa'</title>
 
     <xsl:template match="JournalElectronicISSN | ElectronicISSN | issn[@issn_type='digital'] | issn[@pub-type='epub'] | issn-elec | SeriesElectronicISSN | issn[@type='electronic'] | wiley:issn[@type='electronic']|E-ISSN">
         <xsl:variable name="ISSNCode">
-            <xsl:if test="normalize-space(.)">
+            <xsl:if test=".!=''">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:if>
         </xsl:variable>
@@ -2319,9 +2319,11 @@ reactorsa'</title>
                 <idno type="eISSN">1741-4520</idno>
             </xsl:when>
             <xsl:otherwise>
-                <idno type="eISSN">
-                    <xsl:value-of select="$ISSNCode"/>
-                </idno>
+                <xsl:if test=".!=''">
+                    <idno type="eISSN">
+                        <xsl:value-of select="$ISSNCode"/>
+                    </idno>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

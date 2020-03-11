@@ -971,6 +971,7 @@
                         <cell role="a3code">LVA</cell>
                         <cell role="name" xml:lang="fr">LETTONIE</cell>
                         <cell role="name" xml:lang="en">LATVIA</cell>
+                        <cell role="nameAlt" xml:lang="en">Latvia</cell>
                         <cell role="nameAlt" xml:lang="en">lv</cell>
                     </row>
                     <row>
@@ -1391,6 +1392,10 @@
                         <cell role="name" xml:lang="fr">POLOGNE</cell>
                         <cell role="name" xml:lang="en">POLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Poland</cell>
+                        <cell role="nameAlt" xml:lang="pl">Polska</cell>
+                        <cell role="nameAlt" xml:lang="pl">Krakowie</cell>
+                        <cell role="nameAlt" xml:lang="pl">Warszawie</cell>
+                        <cell role="nameAlt" xml:lang="en">Warsaw</cell>
                         <cell role="nameAlt" xml:lang="en">pl</cell>
                     </row>
                     <row>
@@ -1803,6 +1808,7 @@
                         <cell role="name" xml:lang="fr">TURQUIE</cell>
                         <cell role="name" xml:lang="en">TURKEY</cell>
                         <cell role="nameAlt" xml:lang="en">Turkey</cell>
+                        <cell role="nameAlt" xml:lang="pl">Turcja</cell>
                         <cell role="nameAlt" xml:lang="en">tr</cell>
                     </row>
                     <row>
@@ -1818,6 +1824,7 @@
                         <cell role="name" xml:lang="fr">UKRAINE</cell>
                         <cell role="name" xml:lang="en">UKRAINE</cell>
                         <cell role="nameAlt" xml:lang="en">Ukraine</cell>
+                        <cell role="nameAlt" xml:lang="en">Ukraina</cell>
                         <cell role="nameAlt" xml:lang="en">ua</cell>
                     </row>
                     <row>

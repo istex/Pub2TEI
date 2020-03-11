@@ -817,18 +817,22 @@
         match="i  | ce:italic | Emphasis[@Type='Italic'] | italic | emph[@display='italic'] | wiley:i">
         <xsl:if test="normalize-space(.)">
             <xsl:choose>
+                <!-- nettoyage des labels dans les affiliations -->
+                <xsl:when test="parent::aff">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </xsl:when>
                 <xsl:when test="ancestor::reftxt and contains(.,'et al')">
-                        <author>et al.</author>
+                    <author>et al.</author>
                 </xsl:when>
                 <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
                     <title><xsl:apply-templates/></title>
                 </xsl:when>
-              <xsl:otherwise>
-                  <xsl:if test="not(ancestor::reftxt or ancestor::list-item)">
-                    <hi rend="italic">
-                        <xsl:apply-templates/>
-                    </hi>
-                  </xsl:if>
+                <xsl:otherwise>
+                    <xsl:if test="not(ancestor::reftxt or ancestor::list-item)">
+                        <hi rend="italic">
+                            <xsl:apply-templates/>
+                        </hi>
+                    </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
@@ -836,6 +840,9 @@
 
     <xsl:template match="bold | ce:bold | Emphasis[@Type='Bold'] | emph[@display='bold'] | wiley:b | b|bo">
     <xsl:choose>
+        <xsl:when test="parent::aff">
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:when>
         <xsl:when test="ancestor::label">
                 <head type="label">
                     <hi rend="italic"><xsl:apply-templates/></hi>
@@ -856,7 +863,7 @@
         </xsl:otherwise>
     </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template match="Emphasis[@Type='SmallCaps'] | ce:small-caps | sc | scp | wiley:sc">
         <xsl:choose>
             <xsl:when test="ancestor::label"/>
@@ -903,7 +910,7 @@
     <xsl:template match="inf|Subscript | sub | ce:inf | wiley:sub">
         <xsl:if test="."><hi rend="subscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
-
+    
     <xsl:template match="Superscript | ce:sup | super | wiley:sup">
         <xsl:if test="normalize-space(.)"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>

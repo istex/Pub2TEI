@@ -25,12 +25,14 @@
                 contains($theOrg,'Inst.') or
                 contains($theOrg,'Institute') or
                 contains($theOrg,'Institut') or
+                contains($theOrg,'Instytut') or
                 contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
                 contains($theOrg,'Campus') or
                 contains($theOrg,'University') or
                 contains($theOrg,'Universität') or
                 contains($theOrg,'Università') or
+                contains($theOrg,'Uniwersytet') or
                 contains($theOrg,'Université ') or
                 contains($theOrg,'University of') or
                 contains($theOrg,'universit') or
@@ -52,7 +54,19 @@
                 contains($theOrg,'Gabinetto') or
                 contains($theOrg,'Observatory') or
                 contains($theOrg,'Engineering') or
+                contains($theOrg,' Haus') or
+                contains($theOrg,' akademi') or
+                contains($theOrg,' Akademi') or
+                contains($theOrg,' Sportu') or
+                contains($theOrg,' Polonistyki') or
+                contains($theOrg,'Katedra') or
+                contains($theOrg,'logii') or
+                contains($theOrg,'zofii') or
+                contains($theOrg,'grafii') or
+                contains($theOrg,' AWF') or
+                contains($theOrg,' GmbH') or
                 starts-with($theOrg,'CN') or
+                starts-with($theOrg,'UJ') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
@@ -71,6 +85,9 @@
                 contains($theOrg,'School') or 
                 contains($theOrg,'Ecole') or
                 contains($theOrg,'Scuola') or
+                contains($theOrg,'Szkoła') or
+                contains($theOrg,'Wydział') or
+                contains($theOrg,'Schule') or
                 contains($theOrg,'Facul') or
                 contains($theOrg,'Directorate') or
                 contains($theOrg,'EES')">

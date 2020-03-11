@@ -2124,6 +2124,21 @@
                    </xsl:if>
                </affiliation>
            </xsl:when>
+           <xsl:when test="italic or bold">
+               <affiliation>
+                   <xsl:apply-templates/>
+               </affiliation>
+           </xsl:when>
+           <xsl:when test="contains(.,'/')">
+               <affiliation>
+                   <xsl:apply-templates/>
+               </affiliation>
+           </xsl:when>
+           <xsl:when test="not(contains(.,','))">
+               <affiliation>
+                   <xsl:apply-templates/>
+               </affiliation>
+           </xsl:when>
            <xsl:otherwise>
                <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
                    <affiliation>
@@ -4129,6 +4144,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
+                            <xsl:when test="email"/>
                             <xsl:when test="contains($avantVirgule,'@')">
                                 <addrLine>
                                     <xsl:value-of select="$SuppEmail"/>
