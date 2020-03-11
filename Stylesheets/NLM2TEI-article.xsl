@@ -2404,6 +2404,7 @@
             </xsl:if>
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
+            <xsl:apply-templates select="email"/>
             <xsl:apply-templates select="string-name"/>
             <xsl:apply-templates select="name-alternatives"/>
             <!-- affiliation -->
