@@ -2144,7 +2144,9 @@
                    <xsl:value-of select="normalize-space($normalize)"/>
                </affiliation>
            </xsl:when>
-           <xsl:when test="contains(.,'Professor')">
+           <xsl:when test="contains(.,'Professor') or
+                           contains(.,'Maître') or
+                           contains(.,'Lecturer')">
                <roleName type="biography">
                    <xsl:variable name="normalize">
                        <xsl:apply-templates/> 
