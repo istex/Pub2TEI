@@ -904,8 +904,21 @@
         <xsl:if test="."><hi rend="subscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
 
-    <xsl:template match="Superscript | sup | ce:sup | super | wiley:sup">
+    <xsl:template match="Superscript | ce:sup | super | wiley:sup">
         <xsl:if test="normalize-space(.)"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
+    </xsl:template>
+    <xsl:template match="sup">
+        <xsl:if test="normalize-space(.)">
+            <xsl:choose>
+                <!-- nettoyage des labels dans les affiliations -->
+                <xsl:when test="parent::aff"/>
+                <xsl:otherwise>
+                    <hi rend="superscript">
+                        <xsl:apply-templates/>
+                    </hi> 
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="ul |underline | ce:underline">
