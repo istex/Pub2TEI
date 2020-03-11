@@ -2233,17 +2233,21 @@
                     <xsl:otherwise>
                         <xsl:choose>
                             <xsl:when test="contains(.,'authors contributed equally')">
-                                <xsl:value-of select="."/>
+                                <xsl:value-of select="normalize-space(.)"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:if test="$inAddress =true()">
-                                    <address>
-                                        <xsl:call-template name="NLMParseAffiliation">
-                                            <xsl:with-param name="theAffil" select="$theAffil"/>
-                                            <xsl:with-param name="inAddress" select="true()"/>
-                                        </xsl:call-template>
-                                    </address>
-                                </xsl:if>
+                                <xsl:choose>
+                                    <xsl:when test="$inAddress =true()">
+                                        <address>
+                                            <xsl:call-template name="NLMParseAffiliation">
+                                                <xsl:with-param name="theAffil" select="$theAffil"/>
+                                                <xsl:with-param name="inAddress" select="true()"/>
+                                            </xsl:call-template>
+                                        </address></xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="normalize-space(.)"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>
