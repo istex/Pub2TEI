@@ -2155,7 +2155,8 @@
            </xsl:when>
            <xsl:when test="contains(.,'Professor') or
                contains(.,'Maître') or
-               contains(.,'Lecturer')">
+               contains(.,'Lecturer') or
+               contains(.,'Warden of')">
                <roleName type="biography">
                    <xsl:variable name="normalize">
                        <xsl:apply-templates/> 
@@ -2494,7 +2495,13 @@
                     </xsl:if>
                 </affiliation>
             </xsl:if>
+            <xsl:variable name="count">
+                <xsl:value-of select="count(name)"/>
+            </xsl:variable>
             <xsl:choose>
+                <xsl:when test="$count &gt;1">
+                    <xsl:apply-templates select="//aff"/>
+                </xsl:when>
                 <xsl:when test="contains(xref/@rid,' ')">
                     <xsl:call-template name="createNLMAffiliations">
                         <xsl:with-param name="restAff" select="xref/@rid"/>

@@ -575,6 +575,7 @@
                         <cell role="name" xml:lang="en">UNITED STATES</cell>
                         <cell role="nameAlt" xml:lang="en">United States</cell>
                         <cell role="nameAlt" xml:lang="en">U.S.A.</cell>
+                        <cell role="nameAlt" xml:lang="en">U. S. A.</cell>
                     </row>
                     <row>
                         <cell role="a2code">ET</cell>

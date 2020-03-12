@@ -132,6 +132,10 @@
                 ">
                 <xsl:text>organization</xsl:text>
             </xsl:when>
+            <xsl:when test="contains($theOrg,' Ltd.')
+                ">
+                <xsl:text>society</xsl:text>
+            </xsl:when>
 <xsl:otherwise>
                 <xsl:message>Org inconnue: <xsl:value-of select="$theOrg"/></xsl:message>
                 <xsl:text></xsl:text>
