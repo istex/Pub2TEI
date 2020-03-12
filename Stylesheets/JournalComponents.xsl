@@ -5,7 +5,7 @@
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
-    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:wiley="http://www.wiley.com/namespaces/wiley" 
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="#all">

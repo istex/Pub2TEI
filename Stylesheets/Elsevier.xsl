@@ -4,14 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:mml="http://www.w3.org/1998/Math/MathML" 
+    xmlns:m="http://www.w3.org/1998/Math/MathML" 
     xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
     xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd"
-    exclude-result-prefixes="xsi mml els1 els2 s1 sb ce xlink">
+    exclude-result-prefixes="xsi m els1 els2 s1 sb ce xlink">
     <xsl:output encoding="UTF-8" method="xml"/>
     
     <xsl:include href="ElsevierFormula.xsl"/>

@@ -143,7 +143,10 @@
 
     <xsl:template match="table-entry/title| ce:table/ce:caption">
         <head>
-            <xsl:apply-templates/>
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
         </head>
     </xsl:template>
     <xsl:template match="ce:legend">
@@ -195,7 +198,7 @@
         </note>
     </xsl:template>
 
-    <xsl:template match="thead/tr | cals:thead/cals:row">
+    <xsl:template match="thead/tr | cals:thead/cals:row |els1:thead|els2:thead">
         <row>
             <xsl:apply-templates/>
         </row>
@@ -326,6 +329,26 @@
 
     <xsl:template match="ce:entry">
         <cell>
+            <xsl:apply-templates/>
+        </cell>
+    </xsl:template>
+    <xsl:template match="els1:entry |els2:entry">
+        <cell>
+            <xsl:if test="ancestor::thead">
+                <xsl:attribute name="role">label</xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@colname">
+                <xsl:attribute name="cols">
+                    <xsl:choose>
+                        <xsl:when test="contains(@colname,'col')">
+                            <xsl:value-of select="substring-after(@colname,'col')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@colname"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </cell>
     </xsl:template>

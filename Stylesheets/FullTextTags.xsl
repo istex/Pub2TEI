@@ -476,20 +476,20 @@
     </xsl:template>
     <xsl:template match="els1:fr |els2:fr | fr | ar">
         <m:mfrac xmlns:m="http://www.w3.org/1998/Math/MathML">
-            <m:mrow xmlns:m="http://www.w3.org/1998/Math/MathML">
-                <xsl:apply-templates select="els1:nu |els2:nu | nu |
-                    els1:r |els2:r | r |
-                    els1:c |els2:c | c"/>
-            </m:mrow>
-            <m:mrow xmlns:m="http://www.w3.org/1998/Math/MathML">
-                <xsl:apply-templates select="els1:de |els2:de | de"/>
-            </m:mrow>
+                <xsl:apply-templates/>
         </m:mfrac>
     </xsl:template>
     <xsl:template match="els1:nu |els2:nu | nu">
-        <m:mn xmlns:m="http://www.w3.org/1998/Math/MathML">
-            <xsl:apply-templates/>
-        </m:mn>
+        <xsl:choose>
+            <xsl:when test="els1:fen |els2:fen | fen">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
+                    <xsl:apply-templates/>
+                </m:mi>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="els1:rm |els2:rm |rm">
             <xsl:apply-templates/>
@@ -498,9 +498,9 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="els1:de |els2:de | de">
-        <m:mn xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
             <xsl:apply-templates/>
-        </m:mn>
+        </m:mi>
     </xsl:template>
     
     <!-- SG - WILEY ajout élément latex -->

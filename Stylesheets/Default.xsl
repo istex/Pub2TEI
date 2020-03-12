@@ -2,7 +2,7 @@
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0" 
-    xmlns:mml="http://www.w3.org/1998/Math/MathML" 
+    xmlns:m="http://www.w3.org/1998/Math/MathML" 
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" 
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
     xmlns:wiley="http://www.wiley.com/namespaces/wiley/wiley"
@@ -33,7 +33,7 @@
     </xsl:template-->
 
     <!-- Default rules for MathML, PL: copy is via template to allow selective copy -->
-    <xsl:template match="mml:math">
+    <xsl:template match="m:math">
         <xsl:message terminate="no">MathML: <xsl:value-of select="name(.)"/> - <xsl:for-each
             select="attribute::*">
             <xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>" </xsl:for-each>

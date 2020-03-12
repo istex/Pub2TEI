@@ -1,152 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
+    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
-    >
+    exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
 
     <xsl:template match="els1:formula |els2:formula">
         <formula>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </formula>
     </xsl:template>
     
     <xsl:template match="els1:cp">
-        <els1:cp type="{@type}">
+        <hi rendition="{@type}">
             <xsl:apply-templates/>
-        </els1:cp>
+        </hi>
     </xsl:template>
     <xsl:template match="els2:cp">
-        <els2:cp type="{@type}">
+        <hi rendition="{@type}">
             <xsl:apply-templates/>
-        </els2:cp>
+        </hi>
     </xsl:template>
     
     <xsl:template match="els1:ll">
-        <els1:ll>
+        <hi rend="subscript">
             <xsl:apply-templates/>
-        </els1:ll>
+        </hi>
     </xsl:template>
     <xsl:template match="els2:ll">
-        <els2:ll>
+        <hi rend="subscript">
             <xsl:apply-templates/>
-        </els2:ll>
+        </hi>
     </xsl:template>
         
     <xsl:template match="els1:fen">
-        <els1:fen>
+        <m:mfenced>
             <xsl:apply-templates/>
-        </els1:fen>
+        </m:mfenced>
     </xsl:template>
     <xsl:template match="els2:fen">
-        <els2:fen>
+        <m:mfenced>
             <xsl:apply-templates/>
-        </els2:fen>
+        </m:mfenced>
     </xsl:template>
     
     <xsl:template match="els1:lim">
-        <els1:lim>
+        <m:mrow>
             <xsl:apply-templates/>
-        </els1:lim>
+        </m:mrow>
     </xsl:template>
     <xsl:template match="els2:lim">
-        <els2:lim>
+        <m:mrow>
             <xsl:apply-templates/>
-        </els2:lim>
+        </m:mrow>
+    </xsl:template>
+    <xsl:template match="els1:ul">
+        <hi rend="underline">
+            <xsl:apply-templates/>
+        </hi>
+    </xsl:template>
+    <xsl:template match="els2:ul">
+        <hi rend="underline">
+            <xsl:apply-templates/>
+        </hi>
     </xsl:template>
     
     <xsl:template match="els1:op">
-        <els1:op>
+        <m:mi>
             <xsl:apply-templates/>
-        </els1:op>
+        </m:mi>
     </xsl:template>
     <xsl:template match="els2:op">
-        <els2:op>
+        <m:mi>
             <xsl:apply-templates/>
-        </els2:op>
+        </m:mi>
     </xsl:template>
     
     <xsl:template match="els1:inf">
-        <els1:inf>
+        <hi rend="subscript">
             <xsl:apply-templates/>
-        </els1:inf>
+        </hi>
     </xsl:template>
     <xsl:template match="els2:inf">
-        <els2:inf>
+        <hi rend="subscript">
             <xsl:apply-templates/>
-        </els2:inf>
+        </hi>
     </xsl:template>
-    
-    <xsl:template match="els1:rm">
-        <els1:rm>
-            <xsl:apply-templates/>
-        </els1:rm>
-    </xsl:template>
-    <xsl:template match="els2:rm">
-        <els2:rm>
-            <xsl:apply-templates/>
-        </els2:rm>
-    </xsl:template>
-    
-    <xsl:template match="els1:sup">
-        <els1:sup>
-            <xsl:apply-templates/>
-        </els1:sup>
-    </xsl:template>
-    <xsl:template match="els2:sup">
-        <els2:sup>
-            <xsl:apply-templates/>
-        </els2:sup>
-    </xsl:template>
-    
-    <xsl:template match="els1:de">
-        <els1:de>
-            <xsl:apply-templates/>
-        </els1:de>
-    </xsl:template>
-    <xsl:template match="els2:de">
-        <els2:de>
-            <xsl:apply-templates/>
-        </els2:de>
-    </xsl:template>
-    
-    <xsl:template match="els1:nu">
-        <els1:nu>
-            <xsl:apply-templates/>
-        </els1:nu>
-    </xsl:template>
-    <xsl:template match="els2:nu">
-        <els2:nu>
-            <xsl:apply-templates/>
-        </els2:nu>
-    </xsl:template>
-    
-    <xsl:template match="els1:fr">
-        <els1:fr>
-            <xsl:apply-templates/>
-        </els1:fr>
-    </xsl:template>
-    <xsl:template match="els2:fr">
-        <els2:fr>
-            <xsl:apply-templates/>
-        </els2:fr>
-    </xsl:template>
-    
-    <xsl:template match="els1:ul">
-        <els1:ul>
-            <xsl:apply-templates/>
-        </els1:ul>
-    </xsl:template>
-    <xsl:template match="els2:ul">
-        <els2:ul>
-            <xsl:apply-templates/>
-        </els2:ul>
-    </xsl:template>
-    
-    
 </xsl:stylesheet>

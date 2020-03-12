@@ -65,10 +65,12 @@
                 contains($theOrg,'grafii') or
                 contains($theOrg,' AWF') or
                 contains($theOrg,' GmbH') or
+                contains($theOrg,'Edificio') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
                 starts-with($theOrg,'Inserm') or
+                starts-with($theOrg,'CSIC') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
@@ -92,6 +94,7 @@
                 contains($theOrg,'Schule') or
                 contains($theOrg,'Facul') or
                 contains($theOrg,'Directorate') or
+                contains($theOrg,'Ciencias') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
