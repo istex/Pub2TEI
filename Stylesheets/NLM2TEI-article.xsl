@@ -2160,7 +2160,7 @@
                    <xsl:value-of select="normalize-space($normalize)"/>
                </roleName>
            </xsl:when>
-           <xsl:when test="country">
+           <xsl:when test="country and not(institution)">
                <affiliation>
                    <xsl:if test="country and not(addr-line)">
                        <xsl:choose>

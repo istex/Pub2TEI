@@ -132,6 +132,10 @@
                 contains($theOrg,'Maître de') or
                 contains($theOrg,'Associate') or
                 contains($theOrg,'Professor') or
+                contains($theOrg,'Dr.') or
+                contains($theOrg,'Prof.') or
+                contains($theOrg,'Der Autor') or
+                contains($theOrg,'Assessor') or
                 contains($theOrg,'konzultant') or
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
