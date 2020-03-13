@@ -912,44 +912,6 @@
             <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1051/jp3:1992124'">Erratum</xsl:when>
             <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1051/jphyscol:1982832'">Note - J. Steinberger</xsl:when>
             <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1098/rsnr.2005.0103'">Editorial - Terry Quinn</xsl:when>
-            <!-- RSL -->
-            <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="//article/front/article-meta/title-group/article-title[string-length() &gt; 0] |//fm/atl[string-length() &gt; 0]">
-                        <xsl:apply-templates select="//article/front/article-meta/title-group/article-title | //fm/atl "/>
-                    </xsl:when>
-                    <!-- SG: reprise du titre principal dans left si seulement indication 'Book Reviews/Comptes rendus' dans right -->
-                    <xsl:when test="contains(//front/article-meta/title-group/alt-title[@alt-title-type='right-running'],'Book Reviews/Comptes rendus') or contains(//front/article-meta/title-group/alt-title[@alt-title-type='right-running'],'Book Reviews / Comptes rendus')">
-                        <!--cambridge : reprise du titre dans product/source  -->
-                        <xsl:choose>
-                            <xsl:when test="//front/article-meta/product/source[string-length() &gt; 0]">
-                                <xsl:text>Review of "</xsl:text>
-                                <xsl:value-of select="//front/article-meta/product/source"/>
-                                <xsl:text>"</xsl:text>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='left-running']"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:if test="//front/article-meta/title-group/alt-title[@alt-title-type='right-running'][string-length() &gt; 0]">
-                            <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='right-running']"/>
-                        </xsl:if>
-                        <xsl:choose>
-                            <xsl:when test="//fm/atl ='' and //pubfm/categtxt[string-length() &gt; 0]">
-                                <xsl:value-of select="//pubfm/categtxt"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="$codeGenreNature"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                        <xsl:if test="//article-meta/article-id[@pub-id-type='publisher-id'][string-length()&gt; 0] and //publisher-name='Oxford University Press'">
-                                    <xsl:value-of select="normalize-space(//article-meta/article-id[@pub-id-type='publisher-id'])"/>
-                        </xsl:if>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
    
@@ -975,9 +937,42 @@
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
-                        <title level="a" type="main">
-                            <xsl:value-of select="$repriseTitreVide"/>
-                        </title>
+                        <xsl:choose>
+                            <xsl:when test="$repriseTitreVide!=''"><title level="a" type="main"><xsl:value-of select="$repriseTitreVide"/></title></xsl:when>
+                            <xsl:when test="//article/front/article-meta/title-group/article-title[string-length() &gt; 0] |//fm/atl[string-length() &gt; 0]">
+                                <xsl:apply-templates select="//article/front/article-meta/title-group/article-title | //fm/atl "/>
+                            </xsl:when>
+                            <!-- SG: reprise du titre principal dans left si seulement indication 'Book Reviews/Comptes rendus' dans right -->
+                            <xsl:when test="contains(//front/article-meta/title-group/alt-title[@alt-title-type='right-running'],'Book Reviews/Comptes rendus') or contains(//front/article-meta/title-group/alt-title[@alt-title-type='right-running'],'Book Reviews / Comptes rendus')">
+                                <!--cambridge : reprise du titre dans product/source  -->
+                                <xsl:choose>
+                                    <xsl:when test="//front/article-meta/product/source[string-length() &gt; 0]">
+                                        <xsl:text>Review of "</xsl:text>
+                                        <xsl:value-of select="//front/article-meta/product/source"/>
+                                        <xsl:text>"</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='left-running']"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:if test="//front/article-meta/title-group/alt-title[@alt-title-type='right-running'][string-length() &gt; 0]">
+                                    <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='right-running']"/>
+                                </xsl:if>
+                                <xsl:choose>
+                                    <xsl:when test="//fm/atl ='' and //pubfm/categtxt[string-length() &gt; 0]">
+                                        <xsl:value-of select="//pubfm/categtxt"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$codeGenreNature"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                <xsl:if test="//article-meta/article-id[@pub-id-type='publisher-id'][string-length()&gt; 0] and //publisher-name='Oxford University Press'">
+                                    <xsl:value-of select="normalize-space(//article-meta/article-id[@pub-id-type='publisher-id'])"/>
+                                </xsl:if>
+                            </xsl:otherwise>
+                        </xsl:choose>
                         <xsl:if test="//art/fm/atl/sbt">
                             <title level="a" type="sub">
                                 <xsl:value-of select="//art/fm/atl/sbt"/>
@@ -1677,10 +1672,12 @@
             <analytic>
                 <!-- Cambridge - OUP ... ajout corrections des titres vides -->
                 <xsl:choose>
-                    <xsl:when test="//article-title |//atl ='' and $repriseTitreVide">
+                    <xsl:when test="$repriseTitreVide !=''">
                         <title level="a" type="main">
                             <xsl:value-of select="$repriseTitreVide"/>
                         </title>
+                    </xsl:when>
+                    <xsl:when test="//article-title |//atl">
                         <xsl:apply-templates select="article-meta/title-group/*"/>
                         <xsl:apply-templates select="article-meta/title-group/fn-group/*"/>
                         <!-- SG - informations book-reviews-->
