@@ -1883,10 +1883,7 @@ reactorsa'</title>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.)">
                     <title level="a" type="main">
-                        <xsl:variable name="normalize">
-                            <xsl:apply-templates/>
-                        </xsl:variable>
-                        <xsl:value-of select="normalize-space($normalize)"/>
+                        <xsl:apply-templates/>
                     </title>
                     <xsl:if test="//ce:dochead/ce:textfn">
                         <title level="a" type="note">
