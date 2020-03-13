@@ -60,7 +60,10 @@
                                     <xsl:value-of select="@xml:lang"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:apply-templates/>
+                            <xsl:variable name="normalize">
+                                <xsl:apply-templates/>
+                            </xsl:variable>
+                            <xsl:value-of select="normalize-space($normalize)"/>
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
