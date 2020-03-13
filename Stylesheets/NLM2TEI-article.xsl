@@ -2173,6 +2173,9 @@
                            </xsl:when>
                            <xsl:otherwise>
                                <address>
+                                   <addrLine>
+                                       <xsl:apply-templates/>
+                                   </addrLine>
                                    <country>
                                        <xsl:value-of select="normalize-space(country)"/>
                                    </country>
