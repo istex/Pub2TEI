@@ -67,6 +67,7 @@
                 contains($theOrg,' AWF') or
                 contains($theOrg,' GmbH') or
                 contains($theOrg,'Edificio') or
+                contains($theOrg,'Ústav') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
