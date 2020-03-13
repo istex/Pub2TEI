@@ -315,11 +315,16 @@
     <!-- Springer: Email -->
 
     <xsl:template match="corresponding-author-email | Email | eml |email">
-        <xsl:if test="normalize-space(.)">
-            <email>
-                <xsl:apply-templates/>
-            </email>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="parent::aff"/>
+            <xsl:otherwise>
+                <xsl:if test="normalize-space(.)">
+                    <email>
+                        <xsl:apply-templates/>
+                    </email>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="phone | Phone">

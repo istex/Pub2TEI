@@ -36,6 +36,7 @@
                 contains($theOrg,'Università') or
                 contains($theOrg,'Uniwersytet') or
                 contains($theOrg,'Université ') or
+                contains($theOrg,'Universidade') or
                 contains($theOrg,'University of') or
                 contains($theOrg,'universit') or
                 contains($theOrg,'Universit') or
@@ -142,6 +143,7 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Organization') or
                 contains($theOrg,'Organisation') or
+                contains($theOrg,'Proxecto') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>

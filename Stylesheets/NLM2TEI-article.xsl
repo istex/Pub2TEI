@@ -2128,7 +2128,6 @@
                        </affiliation>
                    </xsl:otherwise>
                </xsl:choose>
-               
            </xsl:when>
           <xsl:when test="institution and institution/addr-line">
                <affiliation>
@@ -2481,6 +2480,7 @@
             <xsl:apply-templates select="email"/>
             <xsl:apply-templates select="string-name"/>
             <xsl:apply-templates select="name-alternatives"/>
+            
             <!-- affiliation -->
            <xsl:if test="//aff/institution and not(//aff/@id)">
                 <affiliation>
@@ -2508,6 +2508,12 @@
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
+                    <!-- email -->
+                    <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
+                        <email>
+                            <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
+                        </email>
+                    </xsl:if>
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
                 <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
@@ -4147,17 +4153,12 @@
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:choose>
-                            <xsl:when test="email"/>
-                            <xsl:otherwise>
-                                <address>
-                                    <xsl:call-template name="NLMparseAffiliation">
-                                        <xsl:with-param name="theAffil" select="$theAffil"/>
-                                        <xsl:with-param name="inAddress" select="true()"/>
-                                    </xsl:call-template>
-                                </address>
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <address>
+                            <xsl:call-template name="NLMparseAffiliation">
+                                <xsl:with-param name="theAffil" select="$theAffil except(email)"/>
+                                <xsl:with-param name="inAddress" select="true()"/>
+                            </xsl:call-template>
+                        </address>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
