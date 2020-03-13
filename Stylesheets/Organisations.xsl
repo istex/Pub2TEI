@@ -115,6 +115,7 @@
                 contains($theOrg,'Zentrum') or
                 contains($theOrg,'Centro') or
                 contains($theOrg,'Section') or
+                contains($theOrg,'Seksjon') or
                 contains($theOrg,'Division') or
                 contains($theOrg,'Dpto') or
                 contains($theOrg,'depart') or
