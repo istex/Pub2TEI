@@ -51,6 +51,7 @@
                 contains($theOrg,'C.N.R.S.') or
                 contains($theOrg,'MIT') or
                 contains($theOrg,'GmhH') or
+                contains($theOrg,'GbR') or
                 contains($theOrg,'Gabinetto') or
                 contains($theOrg,'Observatory') or
                 contains($theOrg,'Engineering') or
@@ -71,6 +72,7 @@
                 starts-with($theOrg,'UJ') or
                 starts-with($theOrg,'Inserm') or
                 starts-with($theOrg,'CSIC') or
+                starts-with($theOrg,'Supreme Court') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
@@ -118,7 +120,8 @@
                 contains($theOrg,'Lecturer') or
                 contains($theOrg,'Maître de') or
                 contains($theOrg,'Associate') or
-                contains($theOrg,'Professor')">
+                contains($theOrg,'Professor') or
+                contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Group') or

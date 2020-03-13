@@ -4147,12 +4147,17 @@
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
-                        <address>
-                            <xsl:call-template name="NLMparseAffiliation">
-                                <xsl:with-param name="theAffil" select="$theAffil"/>
-                                <xsl:with-param name="inAddress" select="true()"/>
-                            </xsl:call-template>
-                        </address>
+                        <xsl:choose>
+                            <xsl:when test="email"/>
+                            <xsl:otherwise>
+                                <address>
+                                    <xsl:call-template name="NLMparseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$theAffil"/>
+                                        <xsl:with-param name="inAddress" select="true()"/>
+                                    </xsl:call-template>
+                                </address>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
