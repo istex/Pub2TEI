@@ -36,6 +36,7 @@
                 contains($theOrg,'Université ') or
                 contains($theOrg,'University of') or
                 contains($theOrg,'universit') or
+                contains($theOrg,'Universit') or
                 contains($theOrg,'univerzita') or
                 contains($theOrg,'Univ.') or
                 contains($theOrg,'Academy') or
