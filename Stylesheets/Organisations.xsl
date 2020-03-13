@@ -148,7 +148,8 @@
                 ">
                 <xsl:text>organization</xsl:text>
             </xsl:when>
-            <xsl:when test="contains($theOrg,' Ltd.')
+            <xsl:when test="contains($theOrg,' Ltd.') or
+                starts-with($theOrg,'nke')
                 ">
                 <xsl:text>society</xsl:text>
             </xsl:when>

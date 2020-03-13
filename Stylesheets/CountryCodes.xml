@@ -65,6 +65,7 @@
                         <cell role="name" xml:lang="fr">ALLEMAGNE</cell>
                         <cell role="name" xml:lang="en">GERMANY</cell>
                         <cell role="nameAlt" xml:lang="en">Germany</cell>
+                        <cell role="nameAlt" xml:lang="cz">Německo</cell>
                         <cell role="nameAlt" xml:lang="en">de</cell>
                         <cell role="nameAlt" xml:lang="de">Deutschland</cell>
                     </row>
@@ -493,6 +494,7 @@
                         <cell role="name" xml:lang="fr">DANEMARK</cell>
                         <cell role="name" xml:lang="en">DENMARK</cell>
                         <cell role="nameAlt" xml:lang="en">Denmark</cell>
+                        <cell role="nameAlt" xml:lang="cz">Dánsko</cell>
                         <cell role="nameAlt" xml:lang="en">dk</cell>
                     </row>
                     <row>
@@ -621,6 +623,9 @@
                         <cell role="name" xml:lang="fr">FRANCE</cell>
                         <cell role="name" xml:lang="en">FRANCE</cell>
                         <cell role="nameAlt" xml:lang="en">France</cell>
+                        <cell role="nameAlt" xml:lang="en">Francie</cell>
+                        <cell role="nameAlt" xml:lang="es">Francia</cell>
+                        <cell role="nameAlt" xml:lang="de">Frankreich</cell>
                         <cell role="nameAlt" xml:lang="en">fr</cell>
                         <cell role="nameAlt" xml:lang="en">uni</cell>
                         <cell role="nameAlt" xml:lang="en">gov</cell>
@@ -1662,6 +1667,8 @@
                         <cell role="name" xml:lang="fr">SUISSE</cell>
                         <cell role="name" xml:lang="en">SWITZERLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Switzerland</cell>
+                        <cell role="nameAlt" xml:lang="en">Switzerland</cell>
+                        <cell role="nameAlt" xml:lang="cz">Švýcarsko</cell>
                         <cell role="nameAlt" xml:lang="en">ch</cell>
                     </row>
                     <row>
