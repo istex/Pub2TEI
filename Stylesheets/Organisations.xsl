@@ -36,6 +36,7 @@
                 contains($theOrg,'Université ') or
                 contains($theOrg,'University of') or
                 contains($theOrg,'universit') or
+                contains($theOrg,'univerzita') or
                 contains($theOrg,'Univ.') or
                 contains($theOrg,'Academy') or
                 contains($theOrg,'Pasteur') or
@@ -124,6 +125,7 @@
                 contains($theOrg,'Maître de') or
                 contains($theOrg,'Associate') or
                 contains($theOrg,'Professor') or
+                contains($theOrg,'konzultant') or
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
