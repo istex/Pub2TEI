@@ -25,9 +25,11 @@
                 contains($theOrg,'Inst.') or
                 contains($theOrg,'Institute') or
                 contains($theOrg,'Institut') or
+                contains($theOrg,'institut') or
                 contains($theOrg,'Instytut') or
                 contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
+                contains($theOrg,'校区') or
                 contains($theOrg,'Campus') or
                 contains($theOrg,'University') or
                 contains($theOrg,'Universität') or
@@ -38,6 +40,7 @@
                 contains($theOrg,'universit') or
                 contains($theOrg,'Universit') or
                 contains($theOrg,'univerzita') or
+                contains($theOrg,'大学') or
                 contains($theOrg,'Univ.') or
                 contains($theOrg,'Academy') or
                 contains($theOrg,'Pasteur') or
@@ -92,7 +95,8 @@
             </xsl:when>
             <xsl:when test=" 
                 ends-with($theOrg,'ogy') or
-                contains($theOrg,'School') or 
+                contains($theOrg,'School') or
+                contains($theOrg,'校') or
                 contains($theOrg,'Ecole') or
                 contains($theOrg,'Scuola') or
                 contains($theOrg,'Szkoła') or
