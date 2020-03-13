@@ -66,6 +66,7 @@
                 contains($theOrg,'grafii') or
                 contains($theOrg,' AWF') or
                 contains($theOrg,' GmbH') or
+                contains($theOrg,' VŠCHT') or
                 contains($theOrg,'Edificio') or
                 contains($theOrg,'Ústav') or
                 starts-with($theOrg,'CN') or
@@ -103,6 +104,7 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Branch') or
                 contains($theOrg,'Centre') or
+                contains($theOrg,'centrum') or
                 contains($theOrg,'zentrum') or
                 contains($theOrg,'Zentrum') or
                 contains($theOrg,'Centro') or
