@@ -126,21 +126,6 @@
                                                         </xsl:choose>
                                                     </xsl:for-each>
                                                 </xsl:if>
-                                                        <!--<xsl:for-each select="addr-line">
-                                                            <addrLine>
-                                                                <xsl:value-of select="."/>
-                                                            </addrLine>
-                                                        </xsl:for-each>
-                                                        <xsl:for-each select="country">
-                                                            <country>
-                                                                <xsl:attribute name="key">
-                                                                    <xsl:call-template name="normalizeISOCountry">
-                                                                        <xsl:with-param name="country" select="."/>
-                                                                    </xsl:call-template>
-                                                                </xsl:attribute>
-                                                                <xsl:value-of select="."/>
-                                                            </country>
-                                                        </xsl:for-each>-->
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:apply-templates/>

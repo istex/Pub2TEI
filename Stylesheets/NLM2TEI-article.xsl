@@ -2103,6 +2103,18 @@
            </xsl:when>
            <xsl:when test="addr-line">
                <xsl:choose>
+                   <xsl:when test="../aff">
+                       <affiliation>
+                           <xsl:call-template name="NLMParseAffiliation">
+                               <xsl:with-param name="theAffil">
+                                   <xsl:variable name="nettoie">
+                                       <xsl:apply-templates/>
+                                   </xsl:variable>
+                                   <xsl:value-of select="translate($nettoie,';/','')"/>
+                               </xsl:with-param>
+                           </xsl:call-template>
+                       </affiliation>
+                   </xsl:when>
                    <xsl:when test="../aff/institution | addr-line/institution">
                        <affiliation>
                            <xsl:apply-templates select="addr-line/institution"/>
