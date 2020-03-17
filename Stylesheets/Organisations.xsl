@@ -83,9 +83,19 @@
                 contains($theOrg,'CSIC') or
                 contains($theOrg,'Fondation') or
                 contains($theOrg,'Hôpital') or
+                contains($theOrg,'CHU') or
                 contains($theOrg,'ParisTech') or
                 contains($theOrg,'Inra') or
                 contains($theOrg,'INRA') or
+                contains($theOrg,'Conservatoire') or
+                contains($theOrg,'IUT') or
+                contains($theOrg,'Inserm') or
+                contains($theOrg,'INSERM') or
+                contains($theOrg,'CIRAD') or
+                contains($theOrg,'Direction') or
+                contains($theOrg,'Agenc') or
+                contains($theOrg,'Cnam ') or
+                contains($theOrg,'Lara-Spiral SA') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
@@ -97,10 +107,20 @@
                 <xsl:text>institution</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Research') or
+                contains($theOrg,'LIX') or
                 contains($theOrg,'Unit') or
+                contains($theOrg,'Products') or
+                contains($theOrg,'Sylvadour') or
+                contains($theOrg,'Biotechnologie') or
                 contains($theOrg,'Labo') or
                 contains($theOrg,'LABO') or
+                contains($theOrg,'GIPSA-Lab') or
                 contains($theOrg,'LERFOB') or
+                contains($theOrg,'bioMérieux') or
+                contains($theOrg,'LEGOS/OMP') or
+                contains($theOrg,'UMR') or
+                contains($theOrg,'UPR') or
+                contains($theOrg,'CTP') or
                 contains($theOrg,'labo') or
                 contains($theOrg,' Inc') or
                 contains($theOrg,'Estación') or
@@ -110,6 +130,11 @@
                 contains($theOrg,'Survey of') or
                 contains($theOrg,'EcoFoG') or
                 contains($theOrg,'LGMT') or
+                contains($theOrg,'INRA-LORIA') or
+                contains($theOrg,'LORIA') or
+                contains($theOrg,'UMC ') or
+                contains($theOrg,'IFR ') or
+                contains($theOrg,'Dauphinoise de Tri ') or
                 contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
