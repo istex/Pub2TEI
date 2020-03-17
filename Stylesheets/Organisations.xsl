@@ -19,6 +19,9 @@
                 contains($theOrg,'College') or
                 contains($theOrg,'Universidad') or
                 contains($theOrg,'Hospi') or
+                contains($theOrg,'Krankenhaus') or
+                contains($theOrg,'szpital') or
+                contains($theOrg,'больница') or
                 contains($theOrg,'Osservatorio') or
                 contains($theOrg,'Museum') or
                 contains($theOrg,'Center') or
@@ -29,6 +32,7 @@
                 contains($theOrg,'Instytut') or
                 contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
+                contains($theOrg,'Hemosystem') or
                 contains($theOrg,'校区') or
                 contains($theOrg,'Campus') or
                 contains($theOrg,'University') or
@@ -77,10 +81,16 @@
                 contains($theOrg,'Edificio') or
                 contains($theOrg,'Ústav') or
                 contains($theOrg,'CSIC') or
+                contains($theOrg,'Fondation') or
+                contains($theOrg,'Hôpital') or
+                contains($theOrg,'ParisTech') or
+                contains($theOrg,'Inra') or
+                contains($theOrg,'INRA') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
                 starts-with($theOrg,'Inserm') or
+                starts-with($theOrg,'INSERM') or
                 starts-with($theOrg,'CSIC') or
                 starts-with($theOrg,'Supreme Court') or
                 starts-with($theOrg,'Ministr')">
@@ -89,6 +99,8 @@
             <xsl:when test="contains($theOrg,'Research') or
                 contains($theOrg,'Unit') or
                 contains($theOrg,'Labo') or
+                contains($theOrg,'LABO') or
+                contains($theOrg,'LERFOB') or
                 contains($theOrg,'labo') or
                 contains($theOrg,' Inc') or
                 contains($theOrg,'Estación') or
@@ -96,6 +108,8 @@
                 contains($theOrg,'Biol') or
                 contains($theOrg,'Pracownia') or
                 contains($theOrg,'Survey of') or
+                contains($theOrg,'EcoFoG') or
+                contains($theOrg,'LGMT') or
                 contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
@@ -114,6 +128,7 @@
                 contains($theOrg,'Abteilung') or
                 contains($theOrg,'Directorate') or
                 contains($theOrg,'Ciencias') or
+                starts-with($theOrg,'EA 4604') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>

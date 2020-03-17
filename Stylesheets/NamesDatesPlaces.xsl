@@ -317,6 +317,7 @@
     <xsl:template match="corresponding-author-email | Email | eml |email">
         <xsl:choose>
             <xsl:when test="parent::aff"/>
+            <xsl:when test="parent::corresp"/>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.)">
                     <email>
