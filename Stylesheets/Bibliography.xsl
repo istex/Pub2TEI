@@ -95,7 +95,34 @@
             </xsl:if>
             <monogr>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:series/sb:title/*"/>
-                <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:title/*"/>
+                <xsl:choose>
+                    <xsl:when test="sb:reference/sb:host/sb:edited-book/sb:title">
+                        <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:title/*"/>  
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!--pour le cas ou le book aurait son titre au niveau de sb:reference-->
+                        <xsl:if test="sb:reference/sb:contribution/sb:title/sb:maintitle[string-length() &gt; 0] and sb:reference/sb:host/sb:edited-book">
+                            <title level="m" type="main">
+                                <xsl:if test="@Language | @xml:lang">
+                                    <xsl:attribute name="xml:lang">
+                                        <xsl:choose>
+                                            <xsl:when test="@Language='' or @xml:lang=''">
+                                                <xsl:text>en</xsl:text>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:call-template name="Varia2ISO639">
+                                                    <xsl:with-param name="code" select="@Language | @xml:lang"/>
+                                                </xsl:call-template>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:attribute>
+                                </xsl:if>
+                                <xsl:apply-templates select="sb:reference/sb:contribution/sb:title/sb:maintitle"/>
+                            </title>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
+
                 <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:editors/*"/>
                 <xsl:apply-templates select="sb:reference/sb:host/sb:book/sb:title/*"/>

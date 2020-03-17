@@ -75,6 +75,7 @@
                 contains($theOrg,' VŠCHT') or
                 contains($theOrg,'Edificio') or
                 contains($theOrg,'Ústav') or
+                contains($theOrg,'CSIC') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
@@ -88,9 +89,12 @@
                 contains($theOrg,'Unit') or
                 contains($theOrg,'Labo') or
                 contains($theOrg,'labo') or
+                contains($theOrg,' Inc') or
+                contains($theOrg,'Estación') or
                 contains($theOrg,'Servic') or
                 contains($theOrg,'Biol') or
                 contains($theOrg,'Pracownia') or
+                contains($theOrg,'Survey of') or
                 contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
