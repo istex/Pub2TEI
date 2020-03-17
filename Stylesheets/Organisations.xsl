@@ -35,6 +35,7 @@
                 contains($theOrg,'Universität') or
                 contains($theOrg,'Università') or
                 contains($theOrg,'Uniwersytet') or
+                contains($theOrg,'Uniwersytet') or
                 contains($theOrg,'Université ') or
                 contains($theOrg,'Universidade') or
                 contains($theOrg,'University of') or
@@ -101,6 +102,7 @@
             <xsl:when test=" 
                 ends-with($theOrg,'ogy') or
                 contains($theOrg,'School') or
+                contains($theOrg,'DSHS Köln') or
                 contains($theOrg,'校') or
                 contains($theOrg,'Ecole') or
                 contains($theOrg,'Scuola') or
@@ -108,6 +110,8 @@
                 contains($theOrg,'Wydział') or
                 contains($theOrg,'Schule') or
                 contains($theOrg,'Facul') or
+                contains($theOrg,'Fakult') or
+                contains($theOrg,'Abteilung') or
                 contains($theOrg,'Directorate') or
                 contains($theOrg,'Ciencias') or
                 contains($theOrg,'EES')">
@@ -140,6 +144,7 @@
                 contains($theOrg,'Prof.') or
                 contains($theOrg,'Der Autor') or
                 contains($theOrg,'Assessor') or
+                contains($theOrg,'PhD ') or
                 contains($theOrg,'konzultant') or
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>

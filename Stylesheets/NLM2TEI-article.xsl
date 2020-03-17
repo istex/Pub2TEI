@@ -2161,17 +2161,6 @@
                    </xsl:call-template>
                </affiliation>
            </xsl:when>
-           <xsl:when test="contains(.,'Professor') or
-               contains(.,'Maître') or
-               contains(.,'Lecturer') or
-               contains(.,'Warden of')">
-               <roleName type="biography">
-                   <xsl:variable name="normalize">
-                       <xsl:apply-templates/> 
-                   </xsl:variable>
-                   <xsl:value-of select="normalize-space($normalize)"/>
-               </roleName>
-           </xsl:when>
            <xsl:when test="country and not(institution)">
                <affiliation>
                    <xsl:if test="country and not(addr-line)">
@@ -4211,14 +4200,52 @@
                 </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$testCountry != ''">
-                        <country>
-                            <xsl:attribute name="key">
-                                <xsl:value-of select="$testCountry"/>
-                            </xsl:attribute>
-                            <xsl:call-template name="normalizeISOCountryName">
-                                <xsl:with-param name="country" select="$avantVirgule"/>
-                            </xsl:call-template>
-                        </country>
+                        <xsl:choose>
+                            <!-- prise en charge des regions USA se confondant avec les codes pays -->
+                            <xsl:when test="$avantVirgule='AL'
+                                or $avantVirgule='AZ'
+                                or $avantVirgule='AR'
+                                or $avantVirgule='CA'
+                                or $avantVirgule='NC'
+                                or $avantVirgule='SC'
+                                or $avantVirgule='CO'
+                                or $avantVirgule='SD'
+                                or $avantVirgule='DE'
+                                or $avantVirgule='GA'
+                                or $avantVirgule='ID'
+                                or $avantVirgule='IL'
+                                or $avantVirgule='IN'
+                                or $avantVirgule='KY'
+                                or $avantVirgule='LA'
+                                or $avantVirgule='ME'
+                                or $avantVirgule='MD'
+                                or $avantVirgule='MA'
+                                or $avantVirgule='MN'
+                                or $avantVirgule='MS'
+                                or $avantVirgule='MO'
+                                or $avantVirgule='MT'
+                                or $avantVirgule='NE'
+                                or $avantVirgule='NH'
+                                or $avantVirgule='NJ'
+                                or $avantVirgule='NM'
+                                or $avantVirgule='PA'
+                                or $avantVirgule='TN'
+                                or $avantVirgule='VA'">
+                                <region>
+                                    <xsl:value-of select="$avantVirgule"/>
+                                </region>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <country>
+                                    <xsl:attribute name="key">
+                                        <xsl:value-of select="$testCountry"/>
+                                    </xsl:attribute>
+                                    <xsl:call-template name="normalizeISOCountryName">
+                                        <xsl:with-param name="country" select="$avantVirgule"/>
+                                    </xsl:call-template>
+                                </country>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="$testCountry2 != ''">
                         <country>
@@ -4239,9 +4266,40 @@
                                 </addrLine>
                             </xsl:when>
                             <xsl:otherwise>
-                                <addrLine>
-                                    <xsl:value-of select="$avantVirgule"/>
-                                </addrLine>
+                                <xsl:choose>
+                                    <!-- prise en charge des regions américaines -->
+                                    <xsl:when test="$avantVirgule='AK'
+                                        or $avantVirgule='CT'
+                                        or $avantVirgule='ND'
+                                        or $avantVirgule='FL'
+                                        or $avantVirgule='ID'
+                                        or $avantVirgule='IL'
+                                        or $avantVirgule='IN'
+                                        or $avantVirgule='KY'
+                                        or $avantVirgule='MI'
+                                        or $avantVirgule='NV'
+                                        or $avantVirgule='NY'
+                                        or $avantVirgule='OH'
+                                        or $avantVirgule='OK'
+                                        or $avantVirgule='OR'
+                                        or $avantVirgule='RI'
+                                        or $avantVirgule='TX'
+                                        or $avantVirgule='UT'
+                                        or $avantVirgule='VT'
+                                        or $avantVirgule='WV'
+                                        or $avantVirgule='WA'
+                                        or $avantVirgule='WI'
+                                        or $avantVirgule='WY'">
+                                        <region>
+                                            <xsl:value-of select="$avantVirgule"/>
+                                        </region> 
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <addrLine>
+                                            <xsl:value-of select="$avantVirgule"/>
+                                        </addrLine>  
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:if test="contains($avantVirgule,'@') and $testCountry3 !=''">

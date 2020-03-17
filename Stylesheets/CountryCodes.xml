@@ -1368,6 +1368,8 @@
                         <cell role="name" xml:lang="en">THE NETHERLANDS</cell>
                         <cell role="nameAlt" xml:lang="en">Netherlands</cell>
                         <cell role="nameAlt" xml:lang="en">The Netherlands</cell>
+                        <cell role="nameAlt" xml:lang="en">Holland.</cell>
+                        <cell role="nameAlt" xml:lang="en">Holland</cell>
                         <cell role="nameAlt" xml:lang="en">nl</cell>
                     </row>
                     <row>
@@ -1461,6 +1463,8 @@
                         <cell role="nameAlt" xml:lang="en">United Kingdom</cell>
                         <cell role="nameAlt" xml:lang="en">Northern Ireland, UK</cell>
                         <cell role="nameAlt" xml:lang="en">Scotland, UK</cell>
+                        <cell role="nameAlt" xml:lang="en">England.</cell>
+                        <cell role="nameAlt" xml:lang="en">England</cell>
                         <cell role="nameAlt" xml:lang="en">uk</cell>
                    </row>
                     <row>
@@ -1470,6 +1474,7 @@
                         <cell role="name" xml:lang="en">RUSSIAN FEDERATION</cell>
                         <cell role="nameAlt" xml:lang="en">Russian Federation</cell>
                         <cell role="nameAlt" xml:lang="en">Russia</cell>
+                        <cell role="nameAlt" xml:lang="en">Russia.</cell>
                         <cell role="nameAlt" xml:lang="en">ru</cell>
                     </row>
                     <row>
@@ -1477,6 +1482,7 @@
                         <cell role="a3code">RWA</cell>
                         <cell role="name" xml:lang="fr">RWANDA</cell>
                         <cell role="name" xml:lang="en">RWANDA</cell>
+                        <cell role="nameAlt" xml:lang="en">Rwanda.</cell>
                         <cell role="nameAlt" xml:lang="en">rw</cell>
                     </row>
                     <row>
