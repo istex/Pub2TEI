@@ -1040,7 +1040,7 @@
                                         <xsl:apply-templates select="front/article-meta/permissions/license/license-p"/>
                                     </p>
                                 </xsl:if>
-                                <xsl:if test="normalize-space(//permissions/license/p)">
+                                <xsl:if test="//permissions/license/p">
                                     <p>
                                         <xsl:apply-templates select="front/article-meta/permissions/license/p"/>
                                     </p>
@@ -2503,9 +2503,9 @@
                 <xsl:when test="$count &gt;1">
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>
-                <xsl:when test="contains(xref/@rid,' ')">
+                <xsl:when test="contains(xref[@type='aff']/@rid,' ')">
                     <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff" select="xref/@rid"/>
+                        <xsl:with-param name="restAff" select="xref[@type='aff']/@rid"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">

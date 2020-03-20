@@ -2408,6 +2408,14 @@ reactorsa'</title>
             <xsl:variable name="DOIValue" select="string(.)"/>
             <idno type="DOI">
                 <xsl:choose>
+                    <!-- rattrapage de 7 doublons de DOI RSL et non de contenu -->
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rspb.1936.0078' and //article/front/article-meta/title-group/article-title='Photoelectric methods of measuring the velocity of rapid reactions I—General principles and controls'">10.1098/rspa.1936.0097</xsl:when>
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rspl.1871.0105' and //article/front/article-meta/title-group/article-title='Presents list, March 7, 1872'">10.1098/rspl.1871.0104</xsl:when>
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rspl.1884.0134' and //article/front/article-meta/title-group/article-title='Publication announcements'">10.1098/rspl.1884.0135</xsl:when>
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rspl.1890.0008' and //article/front/article-meta/title-group/article-title='III. On barometric oscillations during thunderstorms, and on the brontometer, an instrument designed to facilitate their study.'">10.1098/rspl.1890.0130</xsl:when>
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rsta.2003.1183' and //article/front/article-meta/title-group/article-title='General discussion'"><!-- pas de doi connu --></xsl:when>
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rstl.1735.0085' and //article/front/article-meta/title-group/article-title='VIII. An extraordinary case of the foramen ovale of the heart, being found open in an adult, communicated by Claudius Amyand, Esq; Serjeant Surgeon to his Majesty, and F. R. S.'"><!-- pas de doi connu --></xsl:when>
+                    <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='doi'])='10.1098/rstl.1746.0124' and //article/front/article-meta/title-group/article-title='Figures 1 - 3 of issue 482'">10.1098/rstl.1746.0127</xsl:when>
                     <xsl:when test=" starts-with($DOIValue,'DOI')">
                         <xsl:value-of select="normalize-space( substring-after($DOIValue,'DOI'))"/>
                     </xsl:when>
