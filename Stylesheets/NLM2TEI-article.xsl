@@ -3546,20 +3546,14 @@
                 <xsl:value-of select="@ext-link-type"/>
             </xsl:attribute>
 
-            <xsl:attribute name="target">
-                <xsl:variable name="url">
-                <xsl:choose>
-                    <xsl:when test="@xlink:href">
-                        <xsl:value-of select="@xlink:href"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="."/>
-                    </xsl:otherwise>
-                </xsl:choose>
-                </xsl:variable>
-                <xsl:value-of select="$url"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="@xlink:href !=''">
+                    <xsl:value-of select="@xlink:href"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </ref>
         <!-- récuperation des doi -->
         <xsl:if test="contains(.,'doi:')">
