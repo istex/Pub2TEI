@@ -806,12 +806,22 @@
         </author>
     </xsl:template>
     <xsl:template match="string-name" mode="authors">
-        <author>
-            <xsl:apply-templates select="."/>
-            <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
-                <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
-            </xsl:if>
-        </author>
+        <xsl:choose>
+            <xsl:when test="ancestor::ref">
+                <xsl:apply-templates select="."/>
+                <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
+                    <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <author>
+                    <xsl:apply-templates select="."/>
+                    <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
+                        <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
+                    </xsl:if>
+                </author>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="collab" mode="authors">
         <author role="collab">
