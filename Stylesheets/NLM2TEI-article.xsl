@@ -1032,6 +1032,11 @@
                             <availability>
                                 <xsl:if test="//permissions/license[@license-type='open-access']">
                                     <xsl:attribute name="status">free</xsl:attribute>
+                                    <xsl:if test="//permissions/license/@xlink:href!=''">
+                                        <xsl:attribute name="source">
+                                            <xsl:value-of select="//permissions/license/@xlink:href"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
                                 </xsl:if>
                                 <xsl:apply-templates select="front/article-meta/permissions/copyright-statement"/>
                                 <xsl:apply-templates select="front/article-meta/permissions/copyright-holder | pubfm/cpg/cpn"/>
@@ -3633,9 +3638,15 @@
 
     <xsl:template match="copyright-statement">
             <!-- SG: ajout licence -->
-            <licence>
-                <xsl:apply-templates/>
-            </licence>
+        <xsl:choose>
+            <xsl:when test=".=''"/>
+            <xsl:otherwise>
+                <licence>
+                    <xsl:apply-templates/>
+                </licence>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     <xsl:template match="cpn">
         <!-- SG: ajout publisher -->

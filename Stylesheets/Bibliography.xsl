@@ -873,6 +873,7 @@
                             <persName>
                                 <xsl:apply-templates select="surname"/>
                                 <xsl:apply-templates select="given-names"/>
+                                <xsl:apply-templates select="../contrib-id"/>
                             </persName>
                         </author>
                     </xsl:when>
@@ -880,6 +881,7 @@
                         <persName>
                             <xsl:apply-templates select="surname"/>
                             <xsl:apply-templates select="given-names"/>
+                            <xsl:apply-templates select="../contrib-id"/>
                         </persName>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -1805,7 +1807,7 @@
                 </bibl>
             </xsl:when>
             <!-- références contenant plusieurs citations non
-                déterminées-->
+                déterminées
             <xsl:when test="contains(.,';') or contains(.,':')">
                 <bibl>
                     <xsl:attribute name="type">
@@ -1827,7 +1829,7 @@
                     </xsl:choose>
                     <xsl:apply-templates/>
                 </bibl>
-            </xsl:when>
+            </xsl:when>-->
             <xsl:otherwise>
                 <biblStruct>
                     <xsl:if test="@citation-type | @publication-type">
