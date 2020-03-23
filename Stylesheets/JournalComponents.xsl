@@ -1951,9 +1951,10 @@ reactorsa'</title>
         <xsl:apply-templates/>
         </title>
     </xsl:template>
-    <xsl:template match="sb:subtitle|ce:subtitle">
+    <xsl:template match="ce:subtitle">
         <xsl:apply-templates/>
     </xsl:template>
+   
     <!-- EDP - trans-title-group -->
     <xsl:template
         match="trans-title-group">

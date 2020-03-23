@@ -995,6 +995,24 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template match="sb:subtitle">
+        <xsl:choose>
+            <xsl:when test="ancestor::sb:series/sb:title">
+                <title level="s" type="sub">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:when test="ancestor::sb:edited-book/sb:title | ancestor::sb:book/sb:title">
+                <title level="m" type="sub">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <!-- Dates -->
 

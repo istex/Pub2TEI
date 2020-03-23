@@ -111,7 +111,7 @@
     <!--elsevier-->
     <xsl:template match="ce:table">
         <xsl:choose>
-            <xsl:when test="parent::display">
+            <xsl:when test="parent::ce:display">
                 <table>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
