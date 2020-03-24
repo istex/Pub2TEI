@@ -280,7 +280,12 @@
                     <xsl:value-of select="$authorNumber"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="contrib-id"/>
+            <xsl:apply-templates select="collab"/>
+            <xsl:apply-templates select="name"/>
+            <xsl:apply-templates select="string-name"/>
+            <xsl:apply-templates select="name-alternatives"/>
+            <xsl:apply-templates select="email"/>
             <roleName>
                 <xsl:value-of select="@contrib-type"/>
             </roleName>

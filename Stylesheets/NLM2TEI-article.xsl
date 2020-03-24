@@ -2481,12 +2481,12 @@
                     <xsl:text>corresp</xsl:text>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:apply-templates select="contrib-id"/>
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
-            <xsl:apply-templates select="email"/>
             <xsl:apply-templates select="string-name"/>
             <xsl:apply-templates select="name-alternatives"/>
-            
+            <xsl:apply-templates select="email"/>
             <!-- affiliation -->
            <xsl:if test="//aff/institution and not(//aff/@id)">
                 <affiliation>
@@ -2511,6 +2511,11 @@
                 <xsl:when test="contains(xref[@type='aff']/@rid,' ')">
                     <xsl:call-template name="createNLMAffiliations">
                         <xsl:with-param name="restAff" select="xref[@type='aff']/@rid"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:when test="contains(xref[@ref-type='aff']/@rid,' ')">
+                    <xsl:call-template name="createNLMAffiliations">
+                        <xsl:with-param name="restAff2" select="xref[@ref-type='aff']/@rid"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
@@ -3708,6 +3713,9 @@
                 <xsl:if test="position() = last()">
                     <date>
                         <xsl:choose>
+                            <xsl:when test="@pub-type = 'ppub'">
+                                <xsl:attribute name="type">published</xsl:attribute>
+                            </xsl:when>
                             <xsl:when test="@pub-type = 'epub'">
                                 <xsl:attribute name="type">e-published</xsl:attribute>
                             </xsl:when>
@@ -4352,6 +4360,7 @@
     <!-- affiliations multiples -->
     <xsl:template name="createNLMAffiliations">
         <xsl:param name="restAff"/>
+        <xsl:param name="restAff2"/>
         <xsl:message>Affiliations: <xsl:value-of select="$restAff"/></xsl:message>
         <xsl:choose>
             <xsl:when test=" contains($restAff,' ')">
@@ -4360,8 +4369,14 @@
                     <xsl:with-param name="restAff" select="substring-after($restAff,' ')"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test=" contains($restAff2,' ')">
+                <xsl:apply-templates select="//aff[@id=substring-before($restAff2,' ')]"/>
+                <xsl:call-template name="createNLMAffiliations">
+                    <xsl:with-param name="restAff" select="substring-after($restAff2,' ')"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="../aff[@id=$restAff]"/>
+                <xsl:apply-templates select="//aff[@id=$restAff]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
