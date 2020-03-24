@@ -2108,6 +2108,24 @@
            </xsl:when>
            <xsl:when test="addr-line">
                <xsl:choose>
+                   <xsl:when test="addr-line/institution">
+                       <affiliation>
+                           <xsl:apply-templates select="addr-line/institution"/>
+                           <address>
+                               <xsl:apply-templates select="addr-line/named-content"/>
+                               <xsl:apply-templates select="addr-line/country"/>
+                           </address>
+                       </affiliation>
+                   </xsl:when>
+                   <xsl:when test="addr-line and institution">
+                       <affiliation>
+                           <xsl:apply-templates select="institution"/>
+                           <address>
+                               <xsl:apply-templates select="addr-line"/>
+                               <xsl:apply-templates select="country"/>
+                           </address>
+                       </affiliation>
+                   </xsl:when>
                    <xsl:when test="../aff">
                        <affiliation>
                            <xsl:call-template name="NLMParseAffiliation">
@@ -2118,15 +2136,6 @@
                                    <xsl:value-of select="translate($nettoie,';/','')"/>
                                </xsl:with-param>
                            </xsl:call-template>
-                       </affiliation>
-                   </xsl:when>
-                   <xsl:when test="../aff/institution | addr-line/institution">
-                       <affiliation>
-                           <xsl:apply-templates select="addr-line/institution"/>
-                           <address>
-                               <xsl:apply-templates select="addr-line/named-content"/>
-                               <xsl:apply-templates select="addr-line/country"/>
-                           </address>
                        </affiliation>
                    </xsl:when>
                    <xsl:otherwise>
@@ -2152,6 +2161,15 @@
                        <xsl:apply-templates select="country"/>
                    </address>
                    </xsl:if>
+               </affiliation>
+           </xsl:when>
+           <xsl:when test="institution and named-content">
+               <affiliation>
+                   <xsl:apply-templates select="institution" mode="NLM"/>
+                       <address>
+                           <xsl:apply-templates select="named-content"/>
+                           <xsl:apply-templates select="country"/>
+                       </address>
                </affiliation>
            </xsl:when>
            <xsl:when test="italic or bold">
@@ -2452,104 +2470,6 @@
     <xsl:template match="caff"/>
     <xsl:template match="au/super"/>
 
-    <xsl:template match="contrib[@contrib-type='author' or not(@contrib-type)]">
-        <author>
-            <xsl:variable name="i" select="position()-1"/>
-            <xsl:variable name="authorNumber">
-                <xsl:choose>
-                    <xsl:when test="$i &lt; 10">
-                        <xsl:value-of select="concat('author-000', $i)"/>
-                    </xsl:when>
-                    <xsl:when test="$i &lt; 100">
-                        <xsl:value-of select="concat('author-00', $i)"/>
-                    </xsl:when>
-                    <xsl:when test="$i &lt; 1000">
-                        <xsl:value-of select="concat('author-0', $i)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="concat('author-', $i)"/>
-                    </xsl:otherwise>
-                </xsl:choose> 
-            </xsl:variable>
-           <xsl:if test="not(ancestor::sub-article | ancestor::ref)">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="$authorNumber"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@corresp = 'yes'">
-                <xsl:attribute name="role">
-                    <xsl:text>corresp</xsl:text>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="contrib-id"/>
-            <xsl:apply-templates select="collab"/>
-            <xsl:apply-templates select="name"/>
-            <xsl:apply-templates select="string-name"/>
-            <xsl:apply-templates select="name-alternatives"/>
-            <xsl:apply-templates select="email"/>
-            <!-- affiliation -->
-           <xsl:if test="//aff/institution and not(//aff/@id)">
-                <affiliation>
-                    <xsl:if test="//aff/institution">
-                        <xsl:apply-templates select="//aff/institution"/>
-                    </xsl:if>
-                    <xsl:if test="//aff/addr-line | //aff/country">
-                        <address>
-                            <xsl:apply-templates select="//aff/addr-line"/>
-                            <xsl:apply-templates select="//aff/country"/>
-                        </address>
-                    </xsl:if>
-                </affiliation>
-            </xsl:if>
-            <xsl:variable name="count">
-                <xsl:value-of select="count(name)"/>
-            </xsl:variable>
-            <xsl:choose>
-                <xsl:when test="$count &gt;1">
-                    <xsl:apply-templates select="//aff"/>
-                </xsl:when>
-                <xsl:when test="contains(xref[@type='aff']/@rid,' ')">
-                    <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff" select="xref[@type='aff']/@rid"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:when test="contains(xref[@ref-type='aff']/@rid,' ')">
-                    <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff2" select="xref[@ref-type='aff']/@rid"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
-                    <!-- email -->
-                    <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
-                        <email>
-                            <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
-                        </email>
-                    </xsl:if>
-                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
-                </xsl:when>
-                <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
-                    <xsl:apply-templates select="aff"/>
-                </xsl:when>
-               <!-- <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
-                    <xsl:apply-templates select="//aff"/>
-                </xsl:when>-->
-            </xsl:choose>
-            <!-- appelle les affiliations complementaires -->
-            <xsl:choose>
-                <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
-                    <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
-                </xsl:when>
-            </xsl:choose>
-            <xsl:choose>
-                <xsl:when test="/article/front/article-meta/author-notes/corresp[@id=current()/xref/@rid]">
-                    <xsl:apply-templates select="/article/front/article-meta/author-notes"/>
-                </xsl:when>
-                <xsl:when test="/article/front/article-meta/author-notes/corresp and not(/article/front/article-meta/author-notes/corresp/@id)">
-                    <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
-                </xsl:when>
-            </xsl:choose>
-        </author>
-    </xsl:template>
     <!-- author au niveau chapitre -->
     <xsl:template match="contrib" mode="section">
         <name>
