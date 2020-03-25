@@ -2214,7 +2214,18 @@
                    <xsl:variable name="normalize">
                        <xsl:apply-templates/> 
                    </xsl:variable>
-                   <xsl:value-of select="normalize-space($normalize)"/>
+                   <xsl:choose>
+                       <xsl:when test="contains(.,'Foundation')
+                           or contains(.,'Institut')
+                           or contains(.,'Universit')">
+                           <orgName type="insitution">
+                               <xsl:value-of select="normalize-space($normalize)"/>
+                           </orgName>
+                       </xsl:when>
+                       <xsl:otherwise>
+                           <xsl:value-of select="normalize-space($normalize)"/>
+                       </xsl:otherwise>
+                   </xsl:choose>
                </affiliation>
            </xsl:when>
            <xsl:otherwise>
@@ -2228,6 +2239,11 @@
                                <xsl:value-of select="translate($nettoie,';/','')"/>
                            </xsl:with-param>
                        </xsl:call-template>
+                       <xsl:if test="email">
+                           <email>
+                           <xsl:value-of select="email"/>
+                           </email>
+                       </xsl:if>
                    </affiliation>
                </xsl:if>
            </xsl:otherwise>

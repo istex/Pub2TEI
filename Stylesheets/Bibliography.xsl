@@ -1729,11 +1729,11 @@
 
             <xsl:choose>
                 <!-- comme pour book-ref -->
-                <xsl:when test="art-title">
+                <xsl:when test="art-title | authors/au">
                     <analytic>
                         <xsl:apply-templates
                             select="
-                                authors
+                                authors/au
                                 | art-title"
                         />
                     </analytic>
@@ -1765,7 +1765,7 @@
                                 authors
                                 | editors
                                 | misc-title
-                                | patent-number
+                                | misc-textr
                                 | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
                         <imprint>
                             <xsl:apply-templates

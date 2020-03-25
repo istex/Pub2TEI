@@ -7,6 +7,8 @@
         <xd:desc>
             <xd:p>created by romain dot loth at inist.fr</xd:p>
             <xd:p>ISTEX-CNRS 2014-12</xd:p>
+            <xd:p>updated by Stéphanie Gregorio from inist.fr</xd:p>
+            <xd:p>ISTEX-CNRS 2020-03</xd:p>
         </xd:desc>
     </xd:doc>
 
@@ -39,7 +41,7 @@
         /TEI/teiHeader/fileDesc/respStmt
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
-    <xsl:template match="article">
+    <xsl:template match="article | header">
         <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -48,9 +50,10 @@
                 <fileDesc>
                     <titleStmt>
                         <!-- Ici simplement reprise du titre principal (le détail est dans sourceDesc) -->
-                        <title level="a" type="main">
-                            <xsl:value-of select="header/title-group/title"/>
-                        </title>
+                        <xsl:apply-templates select="header/title-group/title | title/title_full"></xsl:apply-templates>
+                        
+                        
+                        
                     </titleStmt>
 
                     <!-- proposition d'un "stamp" Pub2TEI -->
@@ -228,6 +231,18 @@
         >> idno
         
     -->
+<!-- title -->
+<xsl:template match="header/title-group/title | title/title_full">
+    <title level="a" type="main">
+        <xsl:if test="@lang">
+            <xsl:attribute name="xml:lang">
+                <xsl:value-of select="@lang"/>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </title>
+</xsl:template>
+
 
     <!-- identifiant DOI-->
     <xsl:template match="article-data/doi">
@@ -466,12 +481,6 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="title-group/title">
-        <title level="a" type="main">
-            <xsl:value-of select="."/>
-        </title>
-    </xsl:template>
-
     <xsl:template match="title-group/short-title">
         <title level="a" type="short">
             <xsl:value-of select="."/>
@@ -538,12 +547,20 @@
                        | authors/au
                        | collaboration/author">
         <author>
-            <persName>
-                <!-- ne préjuge pas de l'ordre -->
-                <xsl:apply-templates/>
-            </persName>
-            <xsl:apply-templates select="/article/header/address-group/e-address/email"/>
-            <xsl:apply-templates select="/article/header/address-group/address"/>
+            <xsl:choose>
+                <xsl:when test="first-names">
+                    <persName>
+                        <!-- ne préjuge pas de l'ordre -->
+                        <xsl:apply-templates/>
+                    </persName>
+                </xsl:when>
+                <xsl:otherwise>
+                    <name>
+                        <xsl:apply-templates/>
+                    </name>
+                </xsl:otherwise>
+            </xsl:choose>
+            
         </author>
     </xsl:template>
     
@@ -692,12 +709,9 @@
     <!-- 1) adresse postale -->
     <xsl:template match="/article/header/address-group/address">
         <affiliation>
-            <address>
-                <addrLine>
+            
                     <!--pays et/ou orgname dans une ligne "d'affiliation" plus longue-->
                     <xsl:apply-templates/>
-                </addrLine>
-            </address>
         </affiliation>
     </xsl:template>
 

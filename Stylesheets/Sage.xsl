@@ -288,9 +288,11 @@
                     <orgName type="department">
                         <xsl:value-of select="normalize-space(substring-before(.,','))"/>
                     </orgName>
-                    <orgName type="institution">
+                    <address>
+                        <addrLine>
                         <xsl:value-of select="normalize-space(substring-after(.,','))"/>
-                    </orgName>
+                        </addrLine>
+                    </address>
                 </affiliation>
                 <xsl:if test="eml">
                     <xsl:apply-templates select="eml"/>

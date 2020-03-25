@@ -705,7 +705,7 @@
     </xsl:template>
     <xsl:template match="secref">
         <ref type="section">
-            <xsl:attribute name="xml:id">
+            <xsl:attribute name="target">
                 <xsl:value-of select="@linkend"/>
             </xsl:attribute>
             <xsl:apply-templates/>

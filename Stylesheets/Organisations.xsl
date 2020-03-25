@@ -198,6 +198,7 @@
                 contains($theOrg,'Organisation') or
                 contains($theOrg,'Proxecto') or
                 contains($theOrg,'CoDebris') or
+                contains($theOrg,'Landesstelle') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>

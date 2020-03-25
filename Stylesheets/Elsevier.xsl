@@ -2759,6 +2759,35 @@
                                         </xsl:if>
                                     </xsl:for-each>
                                 </xsl:if>
+                                
+                                <!--meeting-->
+                                <xsl:if test="$docIssueEls//issue-data/title-editors-group/conference-info/venue[string-length() &gt; 0] | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:venue[string-length() &gt; 0]">
+                                    <meeting>
+                                        <xsl:if test="$docIssueEls//issue-data/title-editors-group/ce:title[string-length() &gt; 0] |$docIssueEls//s1:issue-data/s1:title-editors-group/ce:title[string-length() &gt; 0]">
+                                            <xsl:for-each select="$docIssueEls//issue-data/title-editors-group/ce:title|$docIssueEls//s1:issue-data/s1:title-editors-group/ce:title">
+                                                <addName>
+                                                    <xsl:value-of select="."/>
+                                                </addName>
+                                            </xsl:for-each>
+                                        </xsl:if>
+                                        <xsl:if test="$docIssueEls//issue-data/title-editors-group/conference-info/venue[string-length() &gt; 0] | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:venue[string-length() &gt; 0]">
+                                            <placeName>
+                                                <xsl:value-of select="$docIssueEls//issue-data/title-editors-group/conference-info/venue | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:venue"/>
+                                            </placeName>
+                                        </xsl:if>
+                                        <xsl:if test="$docIssueEls//issue-data/title-editors-group/conference-info/date-range/start-date[string-length() &gt; 0] | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:date-range/s1:start-date[string-length() &gt; 0]">
+                                            <date from="{$docIssueEls//issue-data/title-editors-group/conference-info/date-range/start-date | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:date-range/s1:start-date}">
+                                                <xsl:value-of select="$docIssueEls//issue-data/title-editors-group/conference-info/date-range/start-date | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:date-range/s1:start-date"/>
+                                            </date>
+                                        </xsl:if>
+                                        <xsl:if test="$docIssueEls//issue-data/title-editors-group/conference-info/date-range/end-date[string-length() &gt; 0] | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:date-range/s1:end-date[string-length() &gt; 0]">
+                                            <date to="{$docIssueEls//issue-data/title-editors-group/conference-info/date-range/end-date | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:date-range/s1:end-date}">
+                                                <xsl:value-of select="$docIssueEls//issue-data/title-editors-group/conference-info/date-range/end-date | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:date-range/s1:end-date"/>
+                                            </date>
+                                        </xsl:if>
+                                    </meeting>
+                                </xsl:if>
+                                
                                 <imprint>
                                     <publisher scheme="https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G">ELSEVIER</publisher>
                                   <!--  <xsl:choose>
@@ -3190,9 +3219,14 @@
     </xsl:template>
 
     <xsl:template match="ce:section-title">
-        <head>
-            <xsl:apply-templates/>
-        </head>
+        <xsl:choose>
+            <xsl:when test="parent::ce:bibliography-sec"/>
+            <xsl:otherwise>
+                <head>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="ce:e-address">
