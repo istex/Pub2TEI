@@ -330,18 +330,24 @@
             <xsl:variable name="count">
                 <xsl:value-of select="count(name)"/>
             </xsl:variable>
+            <xsl:variable name="countRef">
+                <xsl:value-of select="count(xref)"/>
+            </xsl:variable>
             <xsl:choose>
                 <xsl:when test="$count &gt;1">
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>
-                <xsl:when test="contains(xref[@type='aff']/@rid,' ')">
-                    <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff" select="xref[@type='aff']/@rid"/>
-                    </xsl:call-template>
+                <xsl:when test="$countRef &gt;1">
+                    <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
+                        <email>
+                            <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
+                        </email>
+                    </xsl:if>
+                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
-                <xsl:when test="contains(xref[@ref-type='aff']/@rid,' ')">
+               <xsl:when test="contains(xref/@rid,' ')">
                     <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff2" select="xref[@ref-type='aff']/@rid"/>
+                        <xsl:with-param name="restAff" select="xref/@rid"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
