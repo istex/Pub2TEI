@@ -4004,11 +4004,11 @@
     <xsl:template match="front/article-meta/permissions/license/license-p">
             <xsl:apply-templates/>
     </xsl:template>
-    <xsl:template match="volume-id">
+    <!--<xsl:template match="volume-id">
         <note type="edition" subtype="volume-id">
             <xsl:apply-templates/>
         </note>
-    </xsl:template>
+    </xsl:template>-->
     <xsl:template match="notes">
         <xsl:choose>
             <xsl:when test="parent::app">

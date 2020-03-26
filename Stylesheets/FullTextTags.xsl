@@ -34,7 +34,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="ancestor::boxed-text/sec">
+                    <xsl:when test="ancestor::boxed-text/sec and not(parent::list-item)">
                         <div>
                             <p>
                             <xsl:apply-templates/>
