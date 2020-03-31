@@ -2218,7 +2218,7 @@
                        <xsl:when test="contains(.,'Foundation')
                            or contains(.,'Institut')
                            or contains(.,'Universit')">
-                           <orgName type="insitution">
+                           <orgName type="institution">
                                <xsl:value-of select="normalize-space($normalize)"/>
                            </orgName>
                        </xsl:when>
@@ -4115,7 +4115,7 @@
             <xsl:otherwise>
                 <xsl:variable name="testCountry">
                     <xsl:call-template name="normalizeISOCountry">
-                        <xsl:with-param name="country" select="translate($avantVirgule,'.','')"/>
+                        <xsl:with-param name="country" select="translate($avantVirgule,'. ','')"/>
                     </xsl:call-template>
                 </xsl:variable>
                 <xsl:variable name="SuppEmail">

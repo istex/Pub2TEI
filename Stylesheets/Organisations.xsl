@@ -135,6 +135,7 @@
                 contains($theOrg,'UMC ') or
                 contains($theOrg,'IFR ') or
                 contains($theOrg,'Dauphinoise de Tri ') or
+                contains($theOrg,'Systems') or
                 contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>

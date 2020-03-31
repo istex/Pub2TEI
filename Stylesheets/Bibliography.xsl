@@ -888,7 +888,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="ancestor::name-alternatives">
-                    <name>
+                    <name type="person">
                         <xsl:apply-templates/>
                     </name>
                 </xsl:if>
@@ -1568,7 +1568,17 @@
                 <xsl:attribute name="n" select="@num"/>
             </xsl:if>
             <monogr>
-                <xsl:apply-templates select="art-title"/>
+                <xsl:choose>
+                    <xsl:when test="art-title">
+                        <xsl:apply-templates select="art-title"/>
+                    </xsl:when>
+                    <xsl:when test="conf-title">
+                        <title>
+                            <xsl:value-of select="conf-title"/>
+                        </title>
+                    </xsl:when>
+                </xsl:choose>
+                
                 <xsl:for-each select="authors/au">
                     <author>
                         <persName>
