@@ -88,10 +88,10 @@
                                 <xsl:apply-templates select="header/title-group"/>
 
                                 <!-- Auteurs article -->
-                                <xsl:apply-templates select="header/author-group
-                                    | header/authors
-                                    | header/collaboration" mode ="IOP"/>
-
+                                <xsl:apply-templates select="header/author-group" mode ="IOP"/>
+                                
+                                
+                                <xsl:apply-templates select="header/collaboration" mode ="IOP"/>
                                 <!-- Adresse(s) d'affiliation -->
                                 <xsl:apply-templates select="header/editor-group | header/author-group/collaboration | header/authors/collaboration | header/editors/collaboration"/>
 
@@ -240,7 +240,18 @@
         <xsl:apply-templates/>
     </title>
 </xsl:template>
-
+    
+    <!-- ajout identifiants ISTEX et ARK -->
+    <xsl:if test="string-length($idistex) &gt; 0 ">
+        <idno type="istex">
+            <xsl:value-of select="$idistex"/>
+        </idno>
+    </xsl:if>
+    <xsl:if test="string-length($arkistex) &gt; 0 ">
+        <idno type="ark">
+            <xsl:value-of select="$arkistex"/>
+        </idno>
+    </xsl:if>
 
     <!-- identifiant DOI-->
     <xsl:template match="article-data/doi">
@@ -540,14 +551,16 @@
         Cas "auteur normal"
     -->
     <xsl:template match="author-group
-        | authors
         | collaboration">
-        <xsl:apply-templates select="au|author" mode="IOP"/>
+        <xsl:apply-templates select="author" mode="IOP"/>
+    </xsl:template>
+    <xsl:template match="authors">
+        <xsl:apply-templates select="au" mode="IOP"/>
     </xsl:template>
     <xsl:template match="author" mode="IOP">
         <author>
-            <!--<xsl:variable name="i" select="position()-1"/>
-            <xsl:variable name="authorNumber">
+            <xsl:variable name="i" select="position() -1"/>
+            <xsl:attribute name="xml:id">
                 <xsl:choose>
                     <xsl:when test="$i &lt; 10">
                         <xsl:value-of select="concat('author-000', $i)"/>
@@ -561,11 +574,9 @@
                     <xsl:otherwise>
                         <xsl:value-of select="concat('author-', $i)"/>
                     </xsl:otherwise>
-                </xsl:choose> 
-            </xsl:variable>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="$authorNumber"/>
-            </xsl:attribute>-->
+                </xsl:choose>
+            </xsl:attribute>
+            
             <xsl:choose>
                 <xsl:when test="first-names">
                     <persName>
@@ -577,6 +588,15 @@
                     <name>
                         <xsl:apply-templates/>
                     </name>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="//address-group/address[@id=current()/@address]">
+                    <affiliation>
+                        <xsl:apply-templates select="//address-group/address[@id=current()/@address]"/>
+                    </affiliation>
+                </xsl:when>
+                <xsl:otherwise>
                 </xsl:otherwise>
             </xsl:choose>
         </author>
@@ -596,10 +616,185 @@
                     </name>
                 </xsl:otherwise>
             </xsl:choose>
-            
         </author>
     </xsl:template>
-    
+    <xsl:template match="address">
+        <toto></toto>
+        <xsl:if test="email">
+            <xsl:apply-templates select="email"/>
+        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="./org">
+                <affiliation>
+                    <xsl:apply-templates select="org"/>
+                    <address>
+                        <xsl:apply-templates select="street"/>
+                        <xsl:apply-templates select="st"/>
+                        <xsl:apply-templates select="zip"/>
+                        <xsl:apply-templates select="cty"/>
+                        <xsl:apply-templates select="cny"/>
+                    </address>
+                </affiliation>
+            </xsl:when>
+            <xsl:when test="addr-line">
+                <xsl:choose>
+                    <xsl:when test="addr-line/institution">
+                        <affiliation>
+                            <xsl:apply-templates select="addr-line/institution"/>
+                            <address>
+                                <xsl:apply-templates select="addr-line/named-content"/>
+                                <xsl:apply-templates select="addr-line/country"/>
+                            </address>
+                        </affiliation>
+                    </xsl:when>
+                    <xsl:when test="addr-line and institution">
+                        <affiliation>
+                            <xsl:apply-templates select="institution"/>
+                            <address>
+                                <xsl:apply-templates select="addr-line"/>
+                                <xsl:apply-templates select="country"/>
+                            </address>
+                        </affiliation>
+                    </xsl:when>
+                    <xsl:when test="../aff">
+                        <affiliation>
+                            <xsl:call-template name="NLMParseAffiliation">
+                                <xsl:with-param name="theAffil">
+                                    <xsl:variable name="nettoie">
+                                        <xsl:apply-templates/>
+                                    </xsl:variable>
+                                    <xsl:value-of select="translate($nettoie,';/','')"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </affiliation>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <affiliation>
+                            <xsl:call-template name="NLMParseAffiliation">
+                                <xsl:with-param name="theAffil">
+                                    <xsl:variable name="nettoie">
+                                        <xsl:apply-templates/>
+                                    </xsl:variable>
+                                    <xsl:value-of select="translate($nettoie,';/','')"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </affiliation>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="institution and institution/addr-line">
+                <affiliation>
+                    <xsl:apply-templates select="institution" mode="NLM"/>
+                    <xsl:if test="addr-line | country">
+                        <address>
+                            <xsl:apply-templates select="addr-line"/>
+                            <xsl:apply-templates select="country"/>
+                        </address>
+                    </xsl:if>
+                </affiliation>
+            </xsl:when>
+            <xsl:when test="institution and named-content">
+                <affiliation>
+                    <xsl:apply-templates select="institution" mode="NLM"/>
+                    <address>
+                        <xsl:apply-templates select="named-content"/>
+                        <xsl:apply-templates select="country"/>
+                    </address>
+                </affiliation>
+            </xsl:when>
+            <xsl:when test="italic or bold">
+                <affiliation>
+                    <xsl:call-template name="NLMParseAffiliation">
+                        <xsl:with-param name="theAffil">
+                            <xsl:variable name="nettoie">
+                                <xsl:apply-templates/>
+                            </xsl:variable>
+                            <xsl:value-of select="translate($nettoie,';/','')"/>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </affiliation>
+            </xsl:when>
+            <xsl:when test="country and not(institution)">
+                <affiliation>
+                    <xsl:if test="country and not(addr-line)">
+                        <xsl:choose>
+                            <xsl:when test="contains(country,',')">
+                                <address>
+                                    <addrLine>
+                                        <xsl:value-of select="normalize-space(country)"/>
+                                    </addrLine>
+                                </address>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <address>
+                                    <addrLine>
+                                        <xsl:apply-templates/>
+                                    </addrLine>
+                                    <country>
+                                        <xsl:value-of select="normalize-space(country)"/>
+                                    </country>
+                                </address>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:if>
+                </affiliation>
+            </xsl:when>
+            <xsl:when test="not(contains(.,','))">
+                <affiliation>
+                    <xsl:variable name="normalize">
+                        <xsl:apply-templates/> 
+                    </xsl:variable>
+                    <xsl:choose>
+                        <xsl:when test="contains(.,'Foundation')
+                            or contains(.,'Institut')
+                            or contains(.,'Universit')">
+                            <orgName type="institution">
+                                <xsl:value-of select="normalize-space($normalize)"/>
+                            </orgName>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="normalize-space($normalize)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </affiliation>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
+                    <affiliation>
+                        <xsl:call-template name="NLMParseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:variable name="nettoie">
+                                    <xsl:apply-templates/>
+                                </xsl:variable>
+                                <xsl:value-of select="translate($nettoie,';/','')"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:if test="email">
+                            <email>
+                                <xsl:value-of select="email"/>
+                            </email>
+                        </xsl:if>
+                    </affiliation>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="org">
+        <xsl:call-template name="NLMParseOrg">
+            <xsl:with-param name="theOrg">
+                <xsl:value-of select="translate(.,'.;','')"/>
+            </xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="institution" mode="NLM">
+        <xsl:if test="normalize-space(.)">
+            <xsl:call-template name="NLMParseOrg">
+                <xsl:with-param name="theOrg">
+                    <xsl:value-of select="translate(.,'.;','')"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
     <!-- idem si père = editors -->
     <xsl:template match="editors/author
                        | editors/au">
@@ -744,11 +939,7 @@
 
     <!-- 1) adresse postale -->
     <xsl:template match="/article/header/address-group/address">
-        <affiliation>
-            
-                    <!--pays et/ou orgname dans une ligne "d'affiliation" plus longue-->
-                    <xsl:apply-templates/>
-        </affiliation>
+        <xsl:apply-templates/>
     </xsl:template>
 
 
