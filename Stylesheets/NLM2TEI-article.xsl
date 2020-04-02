@@ -1756,6 +1756,31 @@
                 </xsl:if>
                 <xsl:apply-templates select="article-meta/article-id"/>
                 <xsl:apply-templates select="//article/@id"/>
+                <!-- lien vers les articles corrigés -->
+                <xsl:if test="article-meta/related-article/name">
+                    <ref type="corrected-article">
+                        <xsl:for-each select="article-meta/related-article/name">
+                            <name>
+                                <xsl:if test="given-names">
+                                    <forename>
+                                        <xsl:value-of select="given-names"/>
+                                    </forename>
+                                </xsl:if>
+                                <xsl:if test="surname">
+                                    <surname>
+                                        <xsl:value-of select="surname"/>
+                                    </surname>
+                                </xsl:if>
+                            </name>
+                        </xsl:for-each>
+                        <xsl:if test="article-meta/related-article/object-id">
+                            <idno type="doi">
+                                <xsl:value-of select="article-meta/related-article/object-id"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:value-of select="article-meta/related-article/text()"/>
+                    </ref>
+                </xsl:if>
             </analytic>
             <monogr>
                 <!-- Bloc RSL version dtd highWire -->
@@ -1967,7 +1992,7 @@
             <xsl:value-of select="."/>
         </idno>
     </xsl:template>
-
+    
     <xsl:template match="ArticleId">
         <idno>
             <xsl:attribute name="type">

@@ -2496,7 +2496,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:template match="els1:article[els1:item-info] |els2:article[els2:item-info] | els1:converted-article[els1:item-info] | els2:converted-article[els2:item-info] | converted-article[item-info] | article[item-info]">
+    <xsl:template match="els1:article[els1:item-info] |els2:article[els2:item-info] | els1:converted-article[els1:item-info] | els2:converted-article[els2:item-info] | converted-article[item-info] | article[item-info] | simple-article">
         <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -2509,6 +2509,16 @@
                     <titleStmt>
                         <xsl:apply-templates select="ce:dochead/ce:textfn"/>
                         <xsl:choose>
+                            <xsl:when test="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title">
+                                <title level="a" type="main">
+                                    <xsl:value-of select="simple-head/ce:title| els1:simple-head/ce:title|els2:simple-head/ce:title"/>
+                                </title>
+                                <xsl:if test="simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
+                                    <title level="a" type="sub">
+                                        <xsl:value-of select="simple-head/ce:dochead/ce:textfn | els1:simple-head/ce:dochead/ce:textfn | els2:simple-head/ce:dochead/ce:textfn"/>
+                                    </title>
+                                </xsl:if>
+                            </xsl:when>
                             <xsl:when test="els1:head/ce:title | els2:head/ce:title |head/ce:title ='' or not(els1:head/ce:title | els2:head/ce:title |head/ce:title)">
                                 <title level="a" type="main">
                                     <xsl:value-of select="$titre"/>
@@ -2629,8 +2639,21 @@
                             <analytic>
                                 <!-- Title information related to the paper goes here -->
                                 <!-- rattrapage titres vides -->
+                                <xsl:if test="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title">
+                                    <title level="a" type="main">
+                                        <xsl:value-of select="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title"/>
+                                    </title>
+                                    <xsl:if test="simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
+                                        <title level="a" type="sub">
+                                            <xsl:value-of select="simple-head/ce:dochead/ce:textfn | els1:simple-head/ce:dochead/ce:textfn | els2:simple-head/ce:dochead/ce:textfn"/>
+                                        </title>
+                                    </xsl:if>
+                                </xsl:if>
                                 <xsl:choose>
-                                    <xsl:when test="els1:head/ce:title |els2:head/ce:title | head/ce:title ='' or not(els1:head/ce:title |els2:head/ce:title | head/ce:title)">
+                                    <xsl:when test="simple-head/ce:title | els1:head/ce:title 
+                                        |els2:head/ce:title 
+                                        | head/ce:title ='' 
+                                        or not(simple-head/ce:title | els1:head/ce:title |els2:head/ce:title | head/ce:title)">
                                         <title level="a" type="main">
                                             <xsl:value-of select="$titre"/>
                                         </title>
@@ -2651,7 +2674,7 @@
                                 </xsl:if>
                                 <!-- All authors are included here -->
                                 <xsl:apply-templates
-                                    select="els1:head/ce:author-group/ce:author |els2:head/ce:author-group/ce:author | head/ce:author-group/ce:author"/>
+                                    select="simple-head/ce:author-group/ce:author|els1:head/ce:author-group/ce:author |els2:head/ce:author-group/ce:author | head/ce:author-group/ce:author"/>
                                 <xsl:apply-templates
                                     select="els1:head/ce:author-group/ce:collaboration |els2:head/ce:author-group/ce:collaboration | head/ce:author-group/ce:collaboration"/>
                                 <!-- identifier -->
@@ -2670,6 +2693,7 @@
                                 <xsl:apply-templates select="els1:item-info/ce:pii |els2:item-info/ce:pii | item-info/ce:pii"/>
                                 <xsl:apply-templates select="els1:item-info/els1:aid |els2:item-info/els2:aid | item-info/els1:aid| item-info/els2:aid"
                                 />
+                                <xsl:apply-templates select="els1:item-info/ce:document-thread |els2:item-info/ce:document-thread | item-info/ce:document-thread"/>
                             </analytic>
                             <monogr>
                                 <!-- verbalisation titre série / journal -->
@@ -2987,10 +3011,10 @@
                         </body>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:if test="els1:back/* | els1:tail/* |els2:back/* | els2:tail/* | tail/*">
+                <xsl:if test="els1:back/* | simple-tail/* | els1:simple-tail/*|els2:simple-tail/*| els1:tail/* |els2:back/* | els2:tail/* | tail/*">
                     <back>
                         <!-- Bravo: Elsevier a renommé son back en tail... visionnaire -->
-                        <xsl:apply-templates select="els1:back/* | els1:tail/* |els2:back/* | els2:tail/* | tail/*"/>
+                        <xsl:apply-templates select="simple-tail/* | els1:simple-tail/*|els2:simple-tail/*|els1:back/* | els1:tail/* |els2:back/* | els2:tail/* | tail/*"/>
                     </back>
                 </xsl:if>
             </text>
@@ -3861,6 +3885,16 @@
             </xsl:if>
             <xsl:apply-templates/>
         </g>
+    </xsl:template>
+    
+    <!-- erratums -->
+    <xsl:template match="ce:document-thread">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="ce:refers-to-document">
+        <ref type="corrected-article">
+        <xsl:apply-templates/>
+        </ref>
     </xsl:template>
 
 </xsl:stylesheet>
