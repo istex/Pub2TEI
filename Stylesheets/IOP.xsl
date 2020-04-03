@@ -101,7 +101,17 @@
                                 <xsl:apply-templates select="article-metadata/article-data/ccc"/>
                                 <xsl:apply-templates
                                     select="article-metadata/article-data/article-number"/>
-
+                                <!-- ajout identifiants ISTEX et ARK -->
+                                <xsl:if test="string-length($idistex) &gt; 0 ">
+                                    <idno type="istex">
+                                        <xsl:value-of select="$idistex"/>
+                                    </idno>
+                                </xsl:if>
+                                <xsl:if test="string-length($arkistex) &gt; 0 ">
+                                    <idno type="ark">
+                                        <xsl:value-of select="$arkistex"/>
+                                    </idno>
+                                </xsl:if>
                                 <idno type="iop-artid">
                                     <xsl:value-of select="@artid"/>
                                 </idno>
@@ -241,17 +251,7 @@
     </title>
 </xsl:template>
     
-    <!-- ajout identifiants ISTEX et ARK -->
-    <xsl:if test="string-length($idistex) &gt; 0 ">
-        <idno type="istex">
-            <xsl:value-of select="$idistex"/>
-        </idno>
-    </xsl:if>
-    <xsl:if test="string-length($arkistex) &gt; 0 ">
-        <idno type="ark">
-            <xsl:value-of select="$arkistex"/>
-        </idno>
-    </xsl:if>
+   
 
     <!-- identifiant DOI-->
     <xsl:template match="article-data/doi">
