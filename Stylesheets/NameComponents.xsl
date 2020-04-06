@@ -37,6 +37,7 @@
                                         <xsl:when test="addr-line">
                                             <xsl:call-template name="affSSID"/>
                                         </xsl:when>
+                                        <xsl:when test="xref"/>
                                         <xsl:otherwise>
                                             <xsl:apply-templates/>
                                         </xsl:otherwise>

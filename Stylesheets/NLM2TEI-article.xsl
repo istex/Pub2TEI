@@ -1684,7 +1684,7 @@
                     </xsl:when>
                     <xsl:when test="//article-title |//atl">
                         <xsl:apply-templates select="article-meta/title-group/*"/>
-                        <xsl:apply-templates select="article-meta/title-group/fn-group/*"/>
+                        <!--<xsl:apply-templates select="article-meta/title-group/fn-group/*"/>-->
                         <!-- SG - informations book-reviews-->
                         <xsl:if test="//fm/rvwinfo">
                             <xsl:apply-templates select="//fm/rvwinfo"/>
@@ -2143,13 +2143,23 @@
                        </affiliation>
                    </xsl:when>
                    <xsl:when test="addr-line and institution">
-                       <affiliation>
-                           <xsl:apply-templates select="institution"/>
-                           <address>
-                               <xsl:apply-templates select="addr-line"/>
-                               <xsl:apply-templates select="country"/>
-                           </address>
-                       </affiliation>
+                       <!-- voir comme exemple 10.1093/jnci/13.6.1473 -->
+                       <xsl:choose>
+                           <xsl:when test="xref">
+                               <affiliation>
+                                   <xsl:apply-templates/>
+                               </affiliation>
+                           </xsl:when>
+                           <xsl:otherwise>
+                               <affiliation>
+                                   <xsl:apply-templates select="institution"/>
+                                   <address>
+                                       <xsl:apply-templates select="addr-line"/>
+                                       <xsl:apply-templates select="country"/>
+                                   </address>
+                               </affiliation>
+                           </xsl:otherwise>
+                       </xsl:choose>
                    </xsl:when>
                    <xsl:when test="../aff">
                        <affiliation>
@@ -3478,33 +3488,38 @@
                     <xsl:when test="ancestor::label"/>
                     <xsl:when test="ancestor::notes"/>
                     <xsl:otherwise>
-                        <ref>
-                            <xsl:choose>
-                                <xsl:when test="@ref-type">
-                                    <xsl:attribute name="type">
-                                        <xsl:value-of select="@ref-type"/>
-                                    </xsl:attribute>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:attribute name="type">
-                                        <xsl:text>bib</xsl:text>
-                                    </xsl:attribute>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            <xsl:choose>
-                                <xsl:when test="@rid">
-                                    <xsl:attribute name="target">
-                                        <xsl:value-of select="concat('#', @rid)"/>
-                                    </xsl:attribute>
-                                </xsl:when>
-                                <xsl:when test="@id">
-                                    <xsl:attribute name="target">
-                                        <xsl:value-of select="concat('#', @id)"/>
-                                    </xsl:attribute>
-                                </xsl:when>
-                            </xsl:choose>
-                            <xsl:apply-templates/>
-                        </ref>
+                        <xsl:choose>
+                            <xsl:when test="ancestor::aff"/>
+                            <xsl:otherwise>
+                                <ref>
+                                    <xsl:choose>
+                                        <xsl:when test="@ref-type">
+                                            <xsl:attribute name="type">
+                                                <xsl:value-of select="@ref-type"/>
+                                            </xsl:attribute>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="type">
+                                                <xsl:text>bib</xsl:text>
+                                            </xsl:attribute>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                    <xsl:choose>
+                                        <xsl:when test="@rid">
+                                            <xsl:attribute name="target">
+                                                <xsl:value-of select="concat('#', @rid)"/>
+                                            </xsl:attribute>
+                                        </xsl:when>
+                                        <xsl:when test="@id">
+                                            <xsl:attribute name="target">
+                                                <xsl:value-of select="concat('#', @id)"/>
+                                            </xsl:attribute>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <xsl:apply-templates/>
+                                </ref>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>

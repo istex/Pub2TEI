@@ -280,12 +280,23 @@
                         <xsl:apply-templates/>
                     </addrLine>
                  </xsl:if>-->
-                 <addrLine>
-                     <xsl:variable name="addrline">
-                         <xsl:apply-templates/>
-                     </xsl:variable>
-                     <xsl:value-of select="normalize-space($addrline)"/>
-                 </addrLine>
+                 <xsl:variable name="addrline">
+                     <xsl:apply-templates/>
+                 </xsl:variable>
+                 <xsl:choose>
+                     <xsl:when test="ancestor::aff/xref">
+                         <address>
+                             <addrLine>
+                                 <xsl:value-of select="normalize-space($addrline)"/>
+                             </addrLine>
+                         </address>
+                     </xsl:when>
+                     <xsl:otherwise>
+                         <addrLine>
+                             <xsl:value-of select="normalize-space($addrline)"/>
+                         </addrLine>
+                     </xsl:otherwise>
+                 </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>

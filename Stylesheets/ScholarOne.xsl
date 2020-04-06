@@ -331,7 +331,7 @@
                 <xsl:value-of select="count(name)"/>
             </xsl:variable>
             <xsl:variable name="countRef">
-                <xsl:value-of select="count(xref)"/>
+                <xsl:value-of select="count(xref[@ref-type='aff'])"/>
             </xsl:variable>
             <xsl:choose>
                 <xsl:when test="$count &gt;1">
@@ -345,7 +345,12 @@
                     </xsl:if>
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
-               <xsl:when test="contains(xref/@rid,' ')">
+                <xsl:when test="xref[@ref-type='fn']">
+                    <xsl:if test="//contrib-group/aff">
+                        <xsl:apply-templates select="following-sibling::aff"/>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="contains(xref/@rid,' ')">
                     <xsl:call-template name="createNLMAffiliations">
                         <xsl:with-param name="restAff" select="xref/@rid"/>
                     </xsl:call-template>
@@ -359,12 +364,15 @@
                     </xsl:if>
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
-                <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
+                <xsl:when test="//contrib-group/aff">
+                    <xsl:apply-templates select="following-sibling::aff"/>
+                </xsl:when>
+                <xsl:when test="aff and not(//collab)">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
-                <!-- <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
+                <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="//aff"/>
-                </xsl:when>-->
+                </xsl:when>
             </xsl:choose>
             <!-- appelle les affiliations complementaires -->
             <xsl:choose>
