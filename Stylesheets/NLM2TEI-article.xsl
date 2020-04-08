@@ -911,7 +911,28 @@
             <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='pii'])='S0883769400055160'">Rapidly Solidified Metals— A Technological Overview</xsl:when>
             <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1051/jp3:1992124'">Erratum</xsl:when>
             <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1051/jphyscol:1982832'">Note - J. Steinberger</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1098/rsnr.2005.0103'">Editorial - Terry Quinn</xsl:when>
+       <!-- RSL -->
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rsnr.2005.0103'">Editorial - Terry Quinn</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstb.1949.0002'">The filamentous bacteria Sphaerotilus, Leptothrix, Cladothrix, and their relation to iron and manganese</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rsta.1987.0082'">The Oligocene and Miocene Outliers of West Cornwall and their bearing on the geomorphological evolution of Oldland Britain</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1971.0188'">Address of the President Professor A. L. Hodgkin at the Anniversary Meeting, 30 November 1971</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1971.0038'">The finite compression of elastic solid cylinders in the presence of gravity</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstl.1883.0004'">IV. Experiments on the Value of the British Association Unit of Resistance</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1978.0029'">Address of the President Lord Todd, O.M. at the Anniversary Meeting, 30 November 1977</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1971.0039'">On the degree of sharpness in solutions of Einstein’s field equations</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstb.1970.0025'">Concluding remarks</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1914.0053'">On Protection from Lightning and the Range of Protection afforded by Lightning Rods</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstl.1717.0016'">Figure</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rsta.1969.0038'">CORRIGENDUM - Phil.Trans. A 264, p. 107, line 3 of title.</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstl.1702.0072'">Advertisement</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1939.0156'">Structure and thermal properties</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstl.1683.0001'">ERRATA Page. 33. l. 1. read recruiting p. 35 l.</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspl.1896.0001'">Erratum P. 313, line 23.</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspl.1894.0123'">Errata Proceedings, Vol. LVII. On page 369</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1949.0082'">Cover</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1955.0162'">Cover</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1948.0046'">Cover</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstl.1670.0073'">Figures</xsl:when>
         </xsl:choose>
     </xsl:variable>
    
