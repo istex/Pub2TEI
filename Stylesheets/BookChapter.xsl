@@ -361,6 +361,20 @@
                                                 </language>
                                             </langUsage>
                                         </xsl:when>
+                                        <xsl:when test="//book-meta/book-id[@pub-id-type='doi']='10.1484/M.TEMA-EB.4.00775'">
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">en</xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:when>
+                                        <xsl:when test="//book-meta/book-id[@pub-id-type='doi']='10.1484/M.IPM-EB.4.2017034'">
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">la</xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:when>
                                         <xsl:otherwise>
                                             <langUsage>
                                                 <language>
