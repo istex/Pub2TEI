@@ -1907,7 +1907,11 @@
                             <xsl:apply-templates select="."/>
                         </xsl:if>
                     </xsl:for-each>
-
+                    <xsl:choose>
+                        <!-- RSL rattrapage dates de publication erronées-->
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rspa.1991.0136'"><date type="published">1991</date></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1920.0006'"><date type="published">1920</date></xsl:when>
+                    </xsl:choose>
                     <!-- the special date notation <idt>201211</idt> -->
                     <xsl:apply-templates select="idtidt | suppmast/idt"/>
                     <xsl:apply-templates
@@ -3660,6 +3664,11 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="ancestor::book-part-meta">
+            <title level="a" type="main">
+                <xsl:apply-templates/>
+            </title>
+            </xsl:when>
             <xsl:when test="ancestor::ref-list"/>
             <xsl:when test="ancestor::notes"/>
             <xsl:otherwise>
@@ -3683,7 +3692,13 @@
     </xsl:template>
 
     <xsl:template match="pub-date">
-        
+        <xsl:choose>
+            <!-- RSL rattrapage dates de publication erronées-->
+            <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1934.0003'"><date type="published">1933</date></xsl:when>
+            <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rspa.1991.0136'"><date type="published">1991</date></xsl:when>
+            <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1975.0007'"><date type="published">1975</date></xsl:when>
+            <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1920.0006'"><date type="published">1920</date></xsl:when>
+            <xsl:otherwise>
         <xsl:choose>
             <xsl:when test="year[string-length()&gt; 0]">
                 <xsl:if test="position() = last()">
@@ -3711,7 +3726,7 @@
                                 <xsl:attribute name="type">final-published</xsl:attribute>
                             </xsl:when>
                         </xsl:choose>
-                        <xsl:value-of select="normalize-space(year)"/>
+                                <xsl:value-of select="normalize-space(year)"/>
                     </date>
                 </xsl:if>
             </xsl:when>
@@ -3772,7 +3787,8 @@
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
-        
+            </xsl:otherwise>
+        </xsl:choose>
         
       <!--  <xsl:if test="year!='0'">
         <date>
