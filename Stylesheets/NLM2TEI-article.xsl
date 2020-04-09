@@ -3780,6 +3780,23 @@
             <xsl:when test="//issn[@pub-type='ppub']='0260-7085' and //article/front/article-meta/volume='23'"><date type="published">1703</date></xsl:when>
             <xsl:when test="//issn[@pub-type='ppub']='0260-7085' and //article/front/article-meta/volume='19'"><date type="published">1697</date></xsl:when>
             <xsl:when test="//issn[@pub-type='ppub']='0260-7085' and //article/front/article-meta/volume='16'"><date type="published">1687</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0261-0523' and //article/front/article-meta/volume='68'"><date type="published">1778</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3839' and //article/front/article-meta/volume='185'"><date type="published">1894</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3839' and //article/front/article-meta/volume='182'"><date type="published">1891</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3839' and //article/front/article-meta/volume='180'"><date type="published">1889</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3839' and //article/front/article-meta/volume='179'"><date type="published">1888</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3820' and //article/front/article-meta/volume='182'"><date type="published">1891</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0370-1662' and //article/front/article-meta/volume='57'"><date type="published">1895</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0370-1662' and //article/front/article-meta/volume='43'"><date type="published">1888</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0370-1662' and //article/front/article-meta/volume='26'"><date type="published">1878</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0370-1662' and //article/front/article-meta/volume='12'"><date type="published">1863</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3960' and //article/front/article-meta/volume='187'"><date type="published">1897</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3960' and //article/front/article-meta/volume='197'"><date type="published">1905</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3960' and //article/front/article-meta/volume='199'"><date type="published">1907</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3960' and //article/front/article-meta/volume='200'"><date type="published">1909</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3960' and //article/front/article-meta/volume='208'"><date type="published">1918</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0264-3960' and //article/front/article-meta/volume='204'"><date type="published">1914</date></xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0962-8436' and //article/front/article-meta/volume='347'"><date type="published">1995</date></xsl:when>
             <xsl:otherwise>
         <xsl:choose>
             <xsl:when test="year[string-length()&gt; 0]">
