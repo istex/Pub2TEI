@@ -50,51 +50,104 @@
                 </table>
             </xsl:when>
             <xsl:otherwise>
-                    <table>
-                        <xsl:if test="@id">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@id"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="graphic/@xlink:href">
-                            <xsl:attribute name="n">
-                                <xsl:value-of select="graphic/@xlink:href"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="oasis:table/@rowsep">
-                            <xsl:attribute name="rows">
-                                <xsl:value-of select="oasis:table/@rowsep"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="oasis:table/@colsep">
-                            <xsl:attribute name="cols">
-                                <xsl:value-of select="oasis:table/@colsep"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="@id">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@id"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="@position">
-                            <xsl:attribute name="rend">
-                                <xsl:value-of select="@position"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="label">
-                            <head type="label">
-                                <xsl:if test="label/xref/@id">
-                                    <xsl:attribute name="corresp">
-                                        <xsl:text>#</xsl:text>
-                                        <xsl:value-of select="label/xref/@id"/>
-                                    </xsl:attribute>
-                                </xsl:if>
-                                <xsl:value-of select="label"/>
-                            </head>
-                        </xsl:if>
-                        <!-- <xsl:apply-templates select="* except tgroup"/>-->
-                        <xsl:apply-templates select="* except(label/xref | graphic)"/>
-                    </table>
+                <xsl:choose>
+                    <xsl:when test="not(oasis:table)">
+                        <figure>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="graphic/@xlink:href">
+                                <xsl:attribute name="n">
+                                    <xsl:value-of select="graphic/@xlink:href"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="oasis:table/@rowsep">
+                                <xsl:attribute name="rows">
+                                    <xsl:value-of select="oasis:table/@rowsep"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="oasis:table/@colsep">
+                                <xsl:attribute name="cols">
+                                    <xsl:value-of select="oasis:table/@colsep"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@position">
+                                <xsl:attribute name="rend">
+                                    <xsl:value-of select="@position"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="label">
+                                <head type="label">
+                                    <xsl:if test="label/xref/@id">
+                                        <xsl:attribute name="corresp">
+                                            <xsl:text>#</xsl:text>
+                                            <xsl:value-of select="label/xref/@id"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:value-of select="label"/>
+                                </head>
+                            </xsl:if>
+                            <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                            <xsl:apply-templates select="* except(label/xref | graphic)"/>
+                        </figure>
+                        
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <table>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="graphic/@xlink:href">
+                                <xsl:attribute name="n">
+                                    <xsl:value-of select="graphic/@xlink:href"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="oasis:table/@rowsep">
+                                <xsl:attribute name="rows">
+                                    <xsl:value-of select="oasis:table/@rowsep"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="oasis:table/@colsep">
+                                <xsl:attribute name="cols">
+                                    <xsl:value-of select="oasis:table/@colsep"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@position">
+                                <xsl:attribute name="rend">
+                                    <xsl:value-of select="@position"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="label">
+                                <head type="label">
+                                    <xsl:if test="label/xref/@id">
+                                        <xsl:attribute name="corresp">
+                                            <xsl:text>#</xsl:text>
+                                            <xsl:value-of select="label/xref/@id"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:value-of select="label"/>
+                                </head>
+                            </xsl:if>
+                            <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                            <xsl:apply-templates select="* except(label/xref | graphic)"/>
+                        </table>
+                        
+                    </xsl:otherwise>
+                </xsl:choose>
                 
             </xsl:otherwise>
         </xsl:choose>

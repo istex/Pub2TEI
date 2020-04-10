@@ -362,9 +362,9 @@
                 <xsl:when test="aff">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
-                <xsl:when test="//contrib-group/aff">
+               <!-- <xsl:when test="//contrib-group/aff">
                     <xsl:apply-templates select="//contrib-group/aff"/>
-                </xsl:when>
+                </xsl:when>-->
                 <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
@@ -375,6 +375,9 @@
             <!-- appelle les affiliations complementaires -->
             <xsl:choose>
                 <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
+                    <xsl:if test="//contrib-group/aff">
+                        <xsl:apply-templates select="//contrib-group/aff"/>
+                    </xsl:if>
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
                 </xsl:when>
             </xsl:choose>

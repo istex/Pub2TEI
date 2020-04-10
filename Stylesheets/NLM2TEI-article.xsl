@@ -3370,7 +3370,7 @@
     <xsl:template match="graphic">
         <xsl:choose>
             <xsl:when test="ancestor::table-wrap"/>
-            <xsl:when test="ancestor::abstract">
+            <xsl:when test="parent::abstract">
                 <p>
                 <graphic>
                     <xsl:attribute name="url">
@@ -3573,7 +3573,7 @@
     <xsl:template match="ext-link">
         <ref>
             <xsl:attribute name="type">
-                <xsl:value-of select="@ext-link-type"/>
+                <xsl:value-of select="translate(@ext-link-type,' ','')"/>
             </xsl:attribute>
 
             <xsl:choose>
