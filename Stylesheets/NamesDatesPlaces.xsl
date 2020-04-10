@@ -329,13 +329,6 @@
         <xsl:choose>
             <xsl:when test="parent::aff"/>
             <xsl:when test="parent::corresp"/>
-            <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
-                    <email>
-                        <xsl:apply-templates/>
-                    </email>
-                </xsl:if>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
