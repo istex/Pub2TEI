@@ -1884,6 +1884,10 @@ reactorsa'</title>
                 <xsl:if test="normalize-space(.)">
                     <title level="a" type="main">
                         <xsl:apply-templates/>
+                        <xsl:if test="//article/front/article-meta/title-group/article-title ='REVIEWS' and //product/source">
+                            <xsl:text> : </xsl:text>
+                            <xsl:value-of select="normalize-space(//product)"/>
+                        </xsl:if>
                     </title>
                     <xsl:if test="//ce:dochead/ce:textfn">
                         <title level="a" type="note">
