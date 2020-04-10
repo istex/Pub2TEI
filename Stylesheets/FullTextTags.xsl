@@ -353,6 +353,7 @@
                 </emph>
             </xsl:when>
             <xsl:otherwise>
+                <p>
                 <formula>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
@@ -406,6 +407,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </formula>
+                </p>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
