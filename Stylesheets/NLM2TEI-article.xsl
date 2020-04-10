@@ -3361,6 +3361,16 @@
     <xsl:template match="graphic">
         <xsl:choose>
             <xsl:when test="ancestor::table-wrap"/>
+            <xsl:when test="ancestor::abstract">
+                <p>
+                <graphic>
+                    <xsl:attribute name="url">
+                        <xsl:value-of select="@xlink:href"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </graphic>
+                </p>
+            </xsl:when>
             <xsl:otherwise>
                 <graphic>
                     <xsl:attribute name="url">
