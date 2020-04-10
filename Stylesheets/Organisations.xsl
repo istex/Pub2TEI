@@ -97,6 +97,8 @@
                 contains($theOrg,'Cnam ') or
                 contains($theOrg,'Lara-Spiral SA') or
                 contains($theOrg,'Clinic of') or
+                contains($theOrg,'Chemistry') or
+                contains($theOrg,'Engineering') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
