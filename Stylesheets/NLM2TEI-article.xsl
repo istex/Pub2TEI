@@ -2247,9 +2247,22 @@
            <xsl:when test="country and not(institution)">
                <affiliation>
                    <xsl:if test="country and not(addr-line)">
+                       <xsl:variable name="countCountry">
+                           <xsl:value-of select="count(country)"/>
+                       </xsl:variable>
                        <xsl:choose>
-                           <xsl:when test="country">
+                           <xsl:when test="$countCountry =1 ">
                                <xsl:apply-templates/>
+                           </xsl:when>
+                           <xsl:when test="$countCountry &gt;1 ">
+                               <xsl:call-template name="NLMParseAffiliation">
+                                   <xsl:with-param name="theAffil">
+                                       <xsl:variable name="nettoie">
+                                           <xsl:apply-templates/>
+                                       </xsl:variable>
+                                       <xsl:value-of select="translate($nettoie,';/','')"/>
+                                   </xsl:with-param>
+                               </xsl:call-template>
                            </xsl:when>
                            <xsl:otherwise>
                                <address>
