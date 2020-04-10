@@ -2248,12 +2248,8 @@
                <affiliation>
                    <xsl:if test="country and not(addr-line)">
                        <xsl:choose>
-                           <xsl:when test="contains(country,',')">
-                               <address>
-                                   <addrLine>
-                                       <xsl:value-of select="normalize-space(country)"/>
-                                   </addrLine>
-                               </address>
+                           <xsl:when test="country">
+                               <xsl:apply-templates/>
                            </xsl:when>
                            <xsl:otherwise>
                                <address>
