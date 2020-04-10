@@ -359,8 +359,11 @@
                     </xsl:if>
                     <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
-                <xsl:when test="ancestor::contrib-group">
-                    <xsl:apply-templates select="//aff"/>
+                <xsl:when test="aff">
+                    <xsl:apply-templates select="aff"/>
+                </xsl:when>
+                <xsl:when test="//contrib-group/aff">
+                    <xsl:apply-templates select="//contrib-group/aff"/>
                 </xsl:when>
                 <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="aff"/>
