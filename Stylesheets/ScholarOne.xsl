@@ -350,11 +350,11 @@
                         <xsl:apply-templates select="following-sibling::aff"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="contains(xref/@rid,' ')">
+               <!-- <xsl:when test="contains(xref/@rid,' ')">
                     <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff" select="xref/@rid"/>
+                        <xsl:with-param name="restAff" select="."/>
                     </xsl:call-template>
-                </xsl:when>
+                </xsl:when>-->
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
                     <!-- email -->
                     <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
@@ -374,7 +374,7 @@
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>
             </xsl:choose>
-            <!-- appelle les affiliations complementaires -->
+            <!-- appelle les affiliations complementaires 
             <xsl:choose>
                 <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
@@ -387,7 +387,7 @@
                 <xsl:when test="/article/front/article-meta/author-notes/corresp and not(/article/front/article-meta/author-notes/corresp/@id)">
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
                 </xsl:when>
-            </xsl:choose>
+            </xsl:choose>-->
         </author>
     </xsl:template>
     
