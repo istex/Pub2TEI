@@ -3311,11 +3311,20 @@
                 </xsl:if>
                 <xsl:message>Identifier: <xsl:value-of select="."/></xsl:message>
             </xsl:for-each>
+            <xsl:choose>
+                <xsl:when test="ce:text">
+                    <name>
+                        <xsl:value-of select="ce:text/text()"/>
+                    </name>
+                </xsl:when>
+                <xsl:otherwise>
+                    <name>
+                        <xsl:apply-templates select="*[name(.)!='ce:cross-ref' and name(.)!='ce:e-address']"
+                        />
+                    </name>
+                </xsl:otherwise>
+            </xsl:choose>
             
-            <name>
-                <xsl:apply-templates select="*[name(.)!='ce:cross-ref' and name(.)!='ce:e-address']"
-                />
-            </name>
             <xsl:choose>
                 <xsl:when test="../ce:footnote[not(@id)]">
                     <xsl:message>Affiliation sans identifiant</xsl:message>
@@ -3333,9 +3342,9 @@
                         </xsl:variable>
                         <xsl:if test="//ce:footnote[@id=$localId]">
                             <xsl:message>Trouvé: <xsl:value-of select="$localId"/></xsl:message>
-                            <email>
+                            <note>
                                 <xsl:value-of select="//ce:footnote[@id=$localId]/ce:note-para"/>
-                            </email>
+                            </note>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:otherwise>

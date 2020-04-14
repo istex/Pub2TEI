@@ -99,6 +99,11 @@
                 contains($theOrg,'Clinic of') or
                 contains($theOrg,'Chemistry') or
                 contains($theOrg,'Engineering') or
+                contains($theOrg,'Health') or
+                contains($theOrg,'OMNI') or
+                contains($theOrg,'Sectors') or
+                contains($theOrg,'Government of') or
+                contains($theOrg,'Council') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
@@ -202,6 +207,7 @@
                 contains($theOrg,'Organisation') or
                 contains($theOrg,'Proxecto') or
                 contains($theOrg,'CoDebris') or
+                contains($theOrg,'Merck') or
                 contains($theOrg,'Landesstelle') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
