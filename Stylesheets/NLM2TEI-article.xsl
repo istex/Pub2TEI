@@ -4141,6 +4141,9 @@
                 </name>
             </xsl:when>
             <xsl:when test="ancestor::nlm-citation">
+                <title level="m">
+                    <xsl:apply-templates/>
+                </title>
                 <meeting>
                     <xsl:apply-templates/>
                 </meeting>

@@ -51,7 +51,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="not(oasis:table)">
+                    <xsl:when test="not(oasis:table | table)">
                         <figure>
                             <xsl:if test="@id">
                                 <xsl:attribute name="xml:id">
@@ -97,7 +97,6 @@
                             <!-- <xsl:apply-templates select="* except tgroup"/>-->
                             <xsl:apply-templates select="* except(label/xref | graphic)"/>
                         </figure>
-                        
                     </xsl:when>
                     <xsl:otherwise>
                         <table>
