@@ -4,7 +4,10 @@
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
-    <!-- ******************* Genre ******************************-->
+    <!-- Feuille de style concernant les données:
+    - DROZ
+    - Open Edition Revues
+    -->
    
     <xsl:template match="tei:TEI">
         <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="http://standoff.proposal">
@@ -16,24 +19,89 @@
         <teiHeader>
             <fileDesc>
                 <xsl:apply-templates select="tei:fileDesc"/>
+                <xsl:if test="contains(.,'Droz')">
+                    <notesStmt>
+                        <note type="content-type" subtype="chapter" source="chapter" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6">chapter</note>
+                        <note type="publication-type" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
+                        <xsl:copy-of select="//tei:fileDesc/tei:notesStmt/tei:note"/>
+                    </notesStmt>
+                </xsl:if>
                 <sourceDesc>
                     <biblStruct>
+                        <xsl:attribute name="type">
+                            <xsl:choose>
+                                <xsl:when test="contains(.,'Droz')">inbook</xsl:when>
+                                <xsl:otherwise>article</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
                         <analytic>
-                            <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:title"/>
+                            <xsl:choose>
+                                <!-- DROZ -->
+                                <xsl:when test="contains(.,'Droz')">
+                                    <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title" mode="chap"/>
+                                    <xsl:choose>
+                                        <xsl:when test="//tei:fileDesc/tei:titleStmt/tei:author">
+                                            <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:when>
+                                <!-- autre éditeur -->
+                                <xsl:otherwise>
+                                    <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:title"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                             <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
                             <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:editor"/>
                             <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:respStmt"/>
+                            <!-- ajout identifiants ISTEX et ARK -->
+                            <xsl:if test="string-length($idistex) &gt; 0 ">
+                                <idno type="istex">
+                                    <xsl:value-of select="$idistex"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="string-length($arkistex) &gt; 0 ">
+                                <idno type="ark">
+                                    <xsl:value-of select="$arkistex"/>
+                                </idno>
+                            </xsl:if>
                             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']"/>
                             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno[@type='url']"/>
                         </analytic>
                         <monogr>
                             <xsl:choose>
+                                <!-- DROZ -->
+                                <xsl:when test="contains(.,'Droz')">
+                                    <title level="m" type="main">
+                                    <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title"/>
+                                    </title>
+                                    <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno"/>
+                                    <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author"/>
+                                <imprint>
+                                    <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:publisher"/>
+                                    <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:pubPlace"/>
+                                    <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                    <xsl:if test="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@from">
+                                        <biblScope unit="page" from="{//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@from}">
+                                            <xsl:value-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@from"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@to">
+                                        <biblScope unit="page" to="{//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@to}">
+                                            <xsl:value-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@to"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                </imprint>
+                                </xsl:when>
+                                <!-- autres corpus -->
                                 <xsl:when test="normalize-space(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title[1])[string-length()&gt; 0]">
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno"/>
                                     <imprint>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:publisher"/>
-                                    <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+                                        <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
                                         <!-- volume et numero -->
                                         <xsl:choose>
                                             <xsl:when test="contains(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue'],'Volume')">
@@ -100,7 +168,6 @@
                                     </imprint>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    
                                     <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title" mode="mono"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:author"/>
@@ -128,6 +195,16 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </monogr>
+                        <xsl:choose>
+                            <xsl:when test="contains(.,'Droz')">
+                                <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:seriesStmt">
+                                    <series>
+                                        <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title"/>
+                                        <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:idno"/>
+                                    </series>
+                                </xsl:if>
+                            </xsl:when>
+                        </xsl:choose>
                     </biblStruct>
                 </sourceDesc>
             </fileDesc>
@@ -226,12 +303,26 @@
     </xsl:template>
     <xsl:template match="tei:fileDesc">
         <xsl:apply-templates select="tei:titleStmt"/>
+        <xsl:apply-templates select="tei:editionStmt"/>
         <xsl:apply-templates select="tei:publicationStmt"/>
     </xsl:template>
     <xsl:template match="tei:titleStmt">
         <titleStmt>
-            <xsl:copy-of select="tei:title"/>
+            <xsl:choose>
+                <xsl:when test="contains(.,'Droz')">
+                    <xsl:apply-templates select="tei:title" mode="chap"/>
+                    <xsl:copy-of select="tei:funder"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="tei:title"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </titleStmt>
+    </xsl:template>
+    <xsl:template match="tei:title" mode="chap">
+        <title level='a' type='main'>
+            <xsl:apply-templates/>
+        </title>
     </xsl:template>
     <xsl:template match="tei:title" mode="mono">
         <xsl:variable name="recupTitMono">
@@ -248,6 +339,11 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template match="tei:editionStmt">
+        <editionStmt>
+            <xsl:copy-of select="tei:edition"/>
+        </editionStmt>
+    </xsl:template>
     <xsl:template match="tei:publicationStmt">
         <publicationStmt>
             <authority>ISTEX</authority>
@@ -259,7 +355,14 @@
                     <publisher>OpenEdition</publisher>
                 </xsl:otherwise>
             </xsl:choose>
+            <xsl:copy-of select="tei:address"/>
             <xsl:choose>
+                <xsl:when test="contains(tei:availability/tei:licence,'Droz')">
+                    <availability status="{tei:availability/@status}">
+                        <xsl:copy-of select="tei:availability/tei:licence"/>
+                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
+                    </availability>
+                </xsl:when>
                 <xsl:when test="normalize-space(tei:availability/tei:p)[string-length()&gt; 0]">
                     <xsl:copy-of select="tei:availability"/>
                     <availability>
@@ -276,12 +379,20 @@
             </xsl:choose>
             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor"/>
             <xsl:apply-templates select="tei:date"/>
+            <xsl:if test="tei:availability/tei:licence/tei:date">
+                <date type="Copyright" when="{tei:availability/tei:licence/tei:date}"/>
+            </xsl:if>
         </publicationStmt>
     </xsl:template>
     <xsl:template match="tei:date">
-        <date when="{.}">
-            <xsl:value-of select="."/>
-        </date>
+        <xsl:choose>
+            <xsl:when test="@when">
+                <date type="published" when="{@when}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <date type="published" when="{.}"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="tei:author">

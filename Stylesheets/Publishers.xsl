@@ -44,8 +44,10 @@
     <xsl:include href="BookChapter.xsl"/>
     <xsl:include href="BookAll.xsl"/>
     <xsl:include href="Duke.xsl"/>
-    <xsl:include href="OpenEditionRevues.xsl"/>
-    <xsl:include href="OpenEditionBooks.xsl"/>
+    <!-- SG: ajout du format TEI vers TEI (DROZ / openEdition revues-->
+    <xsl:include href="Tei.xsl"/>
+    <!-- SG: ajout du format METS - openEditon Books-->
+    <xsl:include href="Mets.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">

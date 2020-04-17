@@ -5,6 +5,9 @@
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:mets="http://www.loc.gov/METS/" exclude-result-prefixes="#all">
     
     <xsl:output encoding="UTF-8" method="xml"/>
+    <!-- Feuille de style concernant les données:
+    - Open Edition ebooks
+    -->
     <xsl:variable name="docIssueTEI" select="document($partOfSetXmlPath)"/>
     <xsl:variable name="codeGenreOE">
         <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:type"/>
