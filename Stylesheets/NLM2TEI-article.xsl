@@ -1488,12 +1488,6 @@
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:if test="sub-article">
-                    <group>
-                        <xsl:apply-templates select="sub-article"/>
-                    </group>
-                </xsl:if>
-                
                 <xsl:if test="back [string-length() &gt; 0] | bm [string-length() &gt; 0]|front/article-meta/product[string-length() &gt; 0]">
                     <back>
                         <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
@@ -1502,11 +1496,18 @@
                     </back>
                 </xsl:if>
             </text>
+            <xsl:if test="sub-article | response">
+                <text>
+                    <group>
+                        <xsl:apply-templates select="sub-article | response"/>
+                    </group>
+                </text>
+            </xsl:if>
         </TEI>
     </xsl:template>
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <xsl:template match="sub-article">
+    <xsl:template match="sub-article | response">
         <text type="sub-article">
             <xsl:if test="@xml:lang">
                 <xsl:copy-of select="@xml:lang"/>
@@ -1634,8 +1635,8 @@
                                     </div>
                                 </xsl:if>
                             </xsl:when>
-                            <xsl:when test="sub-article">
-                                <xsl:apply-templates select="sub-article"/>
+                            <xsl:when test="sub-article | response">
+                                <xsl:apply-templates select="sub-article | response"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <div>

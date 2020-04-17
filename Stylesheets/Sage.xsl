@@ -263,7 +263,7 @@
 
     <!-- We do not care about components from <article-meta> which have 
     not been explicitely addressed -->
-    <xsl:template match="article-meta"/>
+   <!-- <xsl:template match="article-meta"/>-->
 
 
     <xsl:template match="full_text">

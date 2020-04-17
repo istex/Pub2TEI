@@ -48,6 +48,11 @@
                             </p>
                         </div>
                     </xsl:when>
+                    <xsl:when test="parent::fn">
+                        <p>
+                            <xsl:value-of select="normalize-space(.)"/>
+                        </p>
+                    </xsl:when>
                     <xsl:otherwise>
                         <p>
                             <xsl:if test="@id">
