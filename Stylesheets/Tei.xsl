@@ -39,21 +39,80 @@
                                 <!-- DROZ -->
                                 <xsl:when test="contains(.,'Droz')">
                                     <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title" mode="chap"/>
-                                    <xsl:choose>
-                                        <xsl:when test="//tei:fileDesc/tei:titleStmt/tei:author">
-                                            <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author">
+                                        <xsl:for-each select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author">
+                                                <author>
+                                                    <xsl:variable name="i" select="position() - 1"/>
+                                                    <xsl:attribute name="xml:id">
+                                                        <xsl:choose>
+                                                            <xsl:when test="$i &lt; 10">
+                                                                <xsl:value-of select="concat('author-000', $i)"/>
+                                                            </xsl:when>
+                                                            <xsl:when test="$i &lt; 100">
+                                                                <xsl:value-of select="concat('author-00', $i)"/>
+                                                            </xsl:when>
+                                                            <xsl:when test="$i &lt; 1000">
+                                                                <xsl:value-of select="concat('author-0', $i)"/>
+                                                            </xsl:when>
+                                                            <xsl:otherwise>
+                                                                <xsl:value-of select="concat('author-', $i)"/>
+                                                            </xsl:otherwise>
+                                                        </xsl:choose>
+                                                    </xsl:attribute>
+                                                    <xsl:copy-of select="@* except(@role,@ref)"/>
+                                                    <persName>
+                                                        <xsl:if test="substring-after(@key,', ')[string-length()&gt; 0]">
+                                                            <forename type="first">
+                                                                <xsl:value-of select="substring-after(@key,', ')"/>
+                                                            </forename>
+                                                        </xsl:if>
+                                                        <surname>
+                                                            <xsl:value-of select="substring-before(@key,',')"/>
+                                                        </surname>
+                                                    </persName>
+                                                </author>
+                                        </xsl:for-each>
+                                    </xsl:if>
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:editor and not(//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author)">
+                                        <xsl:for-each select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:editor">
+                                            <xsl:if test="@role !='edition_direction'">
+                                            <author>
+                                                <xsl:variable name="i" select="position() - 1"/>
+                                                <xsl:attribute name="xml:id">
+                                                    <xsl:choose>
+                                                        <xsl:when test="$i &lt; 10">
+                                                            <xsl:value-of select="concat('author-000', $i)"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="$i &lt; 100">
+                                                            <xsl:value-of select="concat('author-00', $i)"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="$i &lt; 1000">
+                                                            <xsl:value-of select="concat('author-0', $i)"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="concat('author-', $i)"/>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:attribute>
+                                                <xsl:copy-of select="@* except(@role,@ref)"/>
+                                                <persName>
+                                                    <forename type="first">
+                                                        <xsl:value-of select="substring-after(@key,', ')"/>
+                                                    </forename>
+                                                    <surname>
+                                                        <xsl:value-of select="substring-before(@key,',')"/>
+                                                    </surname>
+                                                </persName>
+                                            </author>
+                                            </xsl:if>
+                                        </xsl:for-each>
+                                    </xsl:if>
                                 </xsl:when>
-                                <!-- autre éditeur -->
                                 <xsl:otherwise>
-                                    <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:title"/>
+                                    <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
+                            <!-- autre éditeur -->
                             <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:editor"/>
                             <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:respStmt"/>
                             <!-- ajout identifiants ISTEX et ARK -->
@@ -75,10 +134,69 @@
                                 <!-- DROZ -->
                                 <xsl:when test="contains(.,'Droz')">
                                     <title level="m" type="main">
-                                    <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title"/>
+                                        <xsl:choose>
+                                            <xsl:when test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='main']">
+                                                <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='main']"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </title>
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub']">
+                                        <title level="m" type="sub">
+                                            <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub']"/>
+                                        </title>
+                                    </xsl:if>
                                     <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno"/>
-                                    <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:author"/>
+                                    <xsl:if test="//tei:sourceDesc/tei:bibl/tei:author">
+                                        <xsl:for-each select="//tei:sourceDesc/tei:bibl/tei:author">
+                                            <author>
+                                                <persName>
+                                                    <xsl:if test="substring-after(.,', ')[string-length()&gt; 0]">
+                                                        <forename type="first">
+                                                            <xsl:value-of select="substring-after(.,', ')"/>
+                                                        </forename>
+                                                    </xsl:if>
+                                                    <surname>
+                                                        <xsl:value-of select="substring-before(.,',')"/>
+                                                    </surname>
+                                                </persName>
+                                            </author>
+                                        </xsl:for-each>
+                                    </xsl:if>
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:editor">
+                                        <xsl:for-each select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:editor">
+                                            <editor>
+                                                <xsl:variable name="i" select="position() - 1"/>
+                                                <xsl:attribute name="xml:id">
+                                                    <xsl:choose>
+                                                        <xsl:when test="$i &lt; 10">
+                                                            <xsl:value-of select="concat('editor-000', $i)"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="$i &lt; 100">
+                                                            <xsl:value-of select="concat('editor-00', $i)"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="$i &lt; 1000">
+                                                            <xsl:value-of select="concat('editor-0', $i)"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="concat('editor-', $i)"/>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:attribute>
+                                                    <xsl:copy-of select="@* except(@ref)"/>
+                                                <persName>
+                                                    <forename type="first">
+                                                        <xsl:value-of select="substring-after(@key,', ')"/>
+                                                    </forename>
+                                                    <surname>
+                                                        <xsl:value-of select="substring-before(@key,',')"/>
+                                                    </surname>
+                                                </persName>
+                                            </editor>
+                                        </xsl:for-each>
+                                    </xsl:if>
                                 <imprint>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:publisher"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:pubPlace"/>
@@ -321,7 +439,21 @@
     </xsl:template>
     <xsl:template match="tei:title" mode="chap">
         <title level='a' type='main'>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="//tei:idno[@type='nom_pdf']=''
+                    or //tei:idno[@type='nom_pdf']='9782600004190_front-1.pdf'
+                    or //tei:idno[@type='nom_pdf']='9782600000321_front-1.pdf'
+                    or //tei:idno[@type='nom_pdf']='9782600000482_front-1.pdf'
+                    or //tei:idno[@type='nom_pdf']='9782600001533_front-1.pdf'
+                    or //tei:idno[@type='nom_pdf']='9782600002226_body-1.pdf'"><xsl:text>Dédicace</xsl:text></xsl:when>
+                <xsl:when test="//tei:idno[@type='nom_pdf']='9782600001533_body-3-1.pdf'"><xsl:text>DE L'IMMOBILITE COMME PERFECTION ?</xsl:text></xsl:when>
+                <xsl:when test="//tei:idno[@type='nom_pdf']='9782600002882_front-2.pdf'"><xsl:text>Citations</xsl:text></xsl:when>
+                <xsl:when test="//tei:idno[@type='nom_pdf']='9782600002288_front-1.pdf'"><xsl:text>NOUVELLES FRANÇAISES DU XVIe SIÈCLE - IMAGES DE LA VIE DU TEMPS</xsl:text></xsl:when>
+                <xsl:when test="//tei:idno[@type='nom_pdf']='9782600003551_front-1.pdf'"><xsl:text>Cliché Bibliothèque nationale de France, Paris.</xsl:text></xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </title>
     </xsl:template>
     <xsl:template match="tei:title" mode="mono">
