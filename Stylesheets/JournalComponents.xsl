@@ -1891,7 +1891,7 @@ reactorsa'</title>
                             <xsl:choose>
                                 <xsl:when test="$countProduct = 1">
                                     <xsl:text> : </xsl:text>
-                                    <xsl:value-of select="normalize-space(//product/source)"/></xsl:when>
+                                    <xsl:value-of select="//product/source"/></xsl:when>
                             </xsl:choose>
                         </xsl:if>
                     </title>
