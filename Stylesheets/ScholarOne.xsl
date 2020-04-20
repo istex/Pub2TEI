@@ -310,7 +310,7 @@
                     </xsl:otherwise>
                 </xsl:choose> 
             </xsl:variable>
-            <xsl:if test="not(ancestor::sub-article | ancestor::ref)">
+            <xsl:if test="not(ancestor::sub-article | ancestor::response | ancestor::ref)">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="$authorNumber"/>
                 </xsl:attribute>
