@@ -20,9 +20,51 @@
             <fileDesc>
                 <xsl:apply-templates select="tei:fileDesc"/>
                 <xsl:if test="contains(.,'Droz')">
+                    <!-- genre -->
                     <notesStmt>
-                        <note type="content-type" subtype="chapter" source="chapter" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6">chapter</note>
-                        <note type="publication-type" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
+                        <note type="content-type">
+                            <xsl:attribute name="subtype">
+                                <xsl:choose>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'body')">chapter</xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:text>other</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="source">
+                                <xsl:choose>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'body')">body</xsl:when>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'front')">front</xsl:when>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'home')">home</xsl:when>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'home')">home</xsl:when>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'back')">back</xsl:when>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="scheme">
+                                <xsl:choose>
+                                    <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'body')">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:text>https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:choose>
+                                <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'body')">chapter</xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:text>other</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </note>
+                        <xsl:choose>
+                            <xsl:when test="//tei:seriesStmt/tei:title[string-length()&gt; 0]">
+                                <note type="publication-type" subtype="book-series" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z"
+                                    >book-series</note>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <note type="publication-type" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F"
+                                    >book</note>
+                            </xsl:otherwise>
+                        </xsl:choose>
                         <xsl:copy-of select="//tei:fileDesc/tei:notesStmt/tei:note"/>
                     </notesStmt>
                 </xsl:if>
@@ -148,6 +190,11 @@
                                             <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub']"/>
                                         </title>
                                     </xsl:if>
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']">
+                                        <idno type="ISBN">
+                                            <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']"/>
+                                        </idno>
+                                    </xsl:if>
                                     <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno"/>
                                     <xsl:if test="//tei:sourceDesc/tei:bibl/tei:author">
                                         <xsl:for-each select="//tei:sourceDesc/tei:bibl/tei:author">
@@ -201,6 +248,11 @@
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:publisher"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:pubPlace"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']">
+                                        <biblScope unit="issue">
+                                            <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']"/>
+                                        </biblScope>
+                                    </xsl:if>
                                     <xsl:if test="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@from">
                                         <biblScope unit="page" from="{//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@from}">
                                             <xsl:value-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']/@from"/>
@@ -317,7 +369,33 @@
                             <xsl:when test="contains(.,'Droz')">
                                 <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:seriesStmt">
                                     <series>
-                                        <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title"/>
+                                        <xsl:for-each select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title">
+                                            <xsl:choose>
+                                                <xsl:when test="@type='main'">
+                                                    <title level="s" type="main">
+                                                    <xsl:value-of select=".[@type='main']"/>
+                                                    </title>
+                                                </xsl:when>
+                                                <xsl:when test="@type='sub'">
+                                                    <title level="s" type="sub">
+                                                        <xsl:value-of select=".[@type='sub']"/>
+                                                    </title>
+                                                </xsl:when>
+                                                <xsl:when test="@type='num'">
+                                                    <biblScope unit="issue">
+                                                        <xsl:value-of select=".[@type='num']"/>
+                                                    </biblScope>
+                                                </xsl:when>
+                                                <xsl:when test="@type='sub-num'">
+                                                    <biblScope unit="tome">
+                                                        <xsl:value-of select=".[@type='sub-num']"/>
+                                                    </biblScope>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:copy-of select="."/> 
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:for-each>
                                         <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:idno"/>
                                     </series>
                                 </xsl:if>
@@ -361,7 +439,7 @@
                     </profileDesc>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="//tei:profileDesc"/>
+                    <xsl:copy-of select="//tei:profileDesc" />
                 </xsl:otherwise>
             </xsl:choose>
             <!-- traceability -->
@@ -404,7 +482,14 @@
                 </front>
             </xsl:if>
             <xsl:copy-of select="//tei:text/tei:body"/>
-            <xsl:apply-templates select="//tei:text/tei:back"/>
+            <xsl:choose>
+                <xsl:when test="contains(.,'Droz')">
+                    <xsl:copy-of select="//tei:text/tei:back"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="//tei:text/tei:back"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </text>
     </xsl:template>
     <xsl:template match="tei:back">
