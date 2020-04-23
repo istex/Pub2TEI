@@ -23,6 +23,11 @@
                                     </title>
                                 </xsl:for-each>
                             </xsl:when>
+                            <xsl:when test="//article/art-front/titlegrp/title/fnoteref">
+                                    <title level="a" type="main">
+                                        <xsl:value-of select="//article/art-front/titlegrp/title/text()"/>
+                                    </title>
+                            </xsl:when>
                             <xsl:otherwise>
                                 <xsl:apply-templates select="art-front/titlegrp/title"/>
                             </xsl:otherwise>
