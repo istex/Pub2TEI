@@ -218,7 +218,7 @@
                 </xsl:if>
                 <xsl:if test="//article/published[@type='print']/journalref/sercode">
                     <idno type="sercode">
-                        <xsl:value-of select="//article/published[@type='print']|published[@type='book']/journalref/sercode"/>
+                        <xsl:value-of select="//article/published[@type='print']/journalref/sercode"/>
                     </idno>
                 </xsl:if>
                 <xsl:if test="//article/published[@type='book']/journalref/sercode">
@@ -226,22 +226,60 @@
                         <xsl:value-of select="//article/published[@type='book']/journalref/sercode"/>
                     </idno>
                 </xsl:if>
-                <xsl:if test="//article/published/journalref/issn">
-                    <xsl:for-each select="//article/published/journalref/issn">
-                    <idno>
+                <xsl:choose>
+                    <xsl:when test="//article/published[@type='subsyear']/journalref/issn[string-length() &gt; 0]">
+                        <xsl:for-each select="//article/published[@type='subsyear']/journalref/issn">
+                        <idno>
                         <xsl:choose>
-                            <xsl:when test="@type='isbn'"><xsl:attribute name="type">ISBN</xsl:attribute></xsl:when>
-                            <xsl:when test="@type='print'"><xsl:attribute name="type">pISSN</xsl:attribute></xsl:when>
-                            <xsl:when test="@type='online'"><xsl:attribute name="type">eISSN</xsl:attribute></xsl:when>
+                            <xsl:when test=".[@type='isbn']"><xsl:attribute name="type">ISBN</xsl:attribute></xsl:when>
+                            <xsl:when test=".[@type='print']"><xsl:attribute name="type">pISSN</xsl:attribute></xsl:when>
+                            <xsl:when test=".[@type='online']"><xsl:attribute name="type">eISSN</xsl:attribute></xsl:when>
                         </xsl:choose>
-                        <xsl:value-of select="."/>
-                    </idno>
-                    </xsl:for-each>
-                    <xsl:if test="//coden">
-                        <idno type="CODEN">
-                            <xsl:value-of select="//coden"/>
+                            <xsl:value-of select="."/>
                         </idno>
-                    </xsl:if>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='print']/journalref/issn[string-length() &gt; 0]">
+                        <xsl:for-each select="//article/published[@type='print']/journalref/issn">
+                            <idno>
+                                <xsl:choose>
+                                    <xsl:when test=".[@type='isbn']"><xsl:attribute name="type">ISBN</xsl:attribute></xsl:when>
+                                    <xsl:when test=".[@type='print']"><xsl:attribute name="type">pISSN</xsl:attribute></xsl:when>
+                                    <xsl:when test=".[@type='online']"><xsl:attribute name="type">eISSN</xsl:attribute></xsl:when>
+                                </xsl:choose>
+                                <xsl:value-of select="."/>
+                            </idno>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='web']/journalref/issn[string-length() &gt; 0]">
+                        <xsl:for-each select="//article/published[@type='web']/journalref/issn">
+                            <idno>
+                                <xsl:choose>
+                                    <xsl:when test=".[@type='isbn']"><xsl:attribute name="type">ISBN</xsl:attribute></xsl:when>
+                                    <xsl:when test=".[@type='print']"><xsl:attribute name="type">pISSN</xsl:attribute></xsl:when>
+                                    <xsl:when test=".[@type='online']"><xsl:attribute name="type">eISSN</xsl:attribute></xsl:when>
+                                </xsl:choose>
+                                <xsl:value-of select="."/>
+                            </idno>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='book']/journalref/issn[string-length() &gt; 0]">
+                        <xsl:for-each select="//article/published[@type='book']/journalref/issn">
+                            <idno>
+                                <xsl:choose>
+                                    <xsl:when test=".[@type='isbn']"><xsl:attribute name="type">ISBN</xsl:attribute></xsl:when>
+                                    <xsl:when test=".[@type='print']"><xsl:attribute name="type">pISSN</xsl:attribute></xsl:when>
+                                    <xsl:when test=".[@type='online']"><xsl:attribute name="type">eISSN</xsl:attribute></xsl:when>
+                                </xsl:choose>
+                                <xsl:value-of select="."/>
+                            </idno>
+                        </xsl:for-each>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:if test="//coden">
+                    <idno type="CODEN">
+                        <xsl:value-of select="//coden"/>
+                    </idno>
                 </xsl:if>
                 <imprint>
                     <xsl:for-each select="article-meta/pub-date">
@@ -251,8 +289,115 @@
                             <xsl:apply-templates select="."/>
                         </xsl:if>
                     </xsl:for-each>
-                    <xsl:apply-templates select="published[@type='subsyear']/volumeref |published[@type='book']/volumeref"/>
-                    <xsl:apply-templates select="published[@type='subsyear']/issueref | published[@type='book']/issueref"/>
+                    <!-- volume -->
+                    <xsl:variable name="volume">
+                        <xsl:variable name="book">
+                            <xsl:value-of select="normalize-space(//published[@type='book']/volumeref/link)"/>
+                        </xsl:variable>
+                        <xsl:variable name="subsyear">
+                            <xsl:value-of select="normalize-space(//published[@type='subsyear']/volumeref/link)"/>
+                        </xsl:variable>
+                        <xsl:variable name="print">
+                            <xsl:value-of select="normalize-space(//published[@type='print']/volumeref/link)"/>
+                        </xsl:variable>
+                        <xsl:variable name="web">
+                            <xsl:value-of select="normalize-space(//published[@type='web']/volumeref/link)"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="$print !=0">
+                                <xsl:if test="$print!='Unassigned'">
+                                    <xsl:if test="$print!='Advance Articles'">
+                                        <xsl:value-of select="$print"/>
+                                    </xsl:if>
+                                </xsl:if>
+                                
+                            </xsl:when>
+                            <xsl:when test="$subsyear!='0'">
+                                <xsl:if test="$subsyear!='Unassigned'">
+                                    <xsl:if test="$subsyear!='Advance Articles'">
+                                        <xsl:value-of select="$subsyear"/>
+                                    </xsl:if>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:when test="$web!='0'">
+                                <xsl:if test="$web!='Unassigned'">
+                                    <xsl:if test="$web!='Advance Articles'">
+                                        <xsl:value-of select="$web"/>
+                                    </xsl:if>
+                                </xsl:if>
+                                
+                            </xsl:when>
+                            <xsl:when test="$book!='0'">
+                                <xsl:if test="$book!='Unassigned'">
+                                    <xsl:if test="$book!='Advance Articles'">
+                                        <xsl:value-of select="$book"/>
+                                    </xsl:if>
+                                </xsl:if>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:if test="$volume!=''">
+                        <biblScope unit="vol">
+                            <xsl:value-of select="$volume"/>
+                        </biblScope>
+                    </xsl:if>
+                    <!-- issue -->
+                    <xsl:variable name="issue">
+                        <xsl:variable name="book">
+                            <xsl:value-of select="normalize-space(//published[@type='book']/issueref/link)"/>
+                        </xsl:variable>
+                        <xsl:variable name="subsyear">
+                            <xsl:value-of select="normalize-space(//published[@type='subsyear']/issueref/link)"/>
+                        </xsl:variable>
+                        <xsl:variable name="print">
+                            <xsl:value-of select="normalize-space(//published[@type='print']/issueref/link)"/>
+                        </xsl:variable>
+                        <xsl:variable name="web">
+                            <xsl:value-of select="normalize-space(//published[@type='web']/issueref/link)"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="not(//published[@type='book'])">
+                                <xsl:choose>
+                                    <xsl:when test="$print!='0'">
+                                        <xsl:if test="$print!='Unassigned'">
+                                            <xsl:if test="$print!='Advance Articles'">
+                                                <xsl:value-of select="$print"/>
+                                            </xsl:if>
+                                        </xsl:if>
+                                        
+                                    </xsl:when>
+                                    <xsl:when test="$subsyear!='0'">
+                                        <xsl:if test="$subsyear!='Unassigned'">
+                                            <xsl:if test="$subsyear!='Advance Articles'">
+                                                <xsl:value-of select="$subsyear"/>
+                                            </xsl:if>
+                                        </xsl:if>
+                                        
+                                    </xsl:when>
+                                    <xsl:when test="$web!='0'">
+                                        <xsl:if test="$web!='Unassigned'">
+                                            <xsl:if test="$web!='Advance Articles'">
+                                                <xsl:value-of select="$web"/>
+                                            </xsl:if>
+                                        </xsl:if>
+                                        
+                                    </xsl:when>
+                                </xsl:choose>
+                            </xsl:when>
+                            <xsl:when test="$book!='0'">
+                                <xsl:if test="$book!='Unassigned'">
+                                    <xsl:if test="$book!='Advance Articles'">
+                                        <xsl:value-of select="$book"/>
+                                    </xsl:if>
+                                </xsl:if> 
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:if test="$issue !=''">
+                        <biblScope unit="issue">
+                            <xsl:value-of select="$issue"/>
+                        </biblScope>
+                    </xsl:if>
                     <xsl:apply-templates select="published[@type='print']/pubfront/fpage |published[@type='book']/pubfront/fpage"/>
                     <xsl:apply-templates select="published[@type='print']/pubfront/lpage |published[@type='book']/pubfront/lpage"/>
                     <xsl:apply-templates select="published[@type='subsyear']/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt"/>
