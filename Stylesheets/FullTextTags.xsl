@@ -5,6 +5,7 @@
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
     xmlns="http://www.tei-c.org/ns/1.0" xmlns:mml="http://www.w3.org/1998/Math/MathML/" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	xmlns:wiley="http://www.wiley.com/namespaces/wiley"
+	xmlns:rsc="http://www.rsc.org/schema/rscart38"
     exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
@@ -12,7 +13,7 @@
     <!-- Macrostructure -->
     <!-- Springer: Para, SimplePara -->
 
-    <xsl:template match="p| ce:simple-para | ce:note-para | ce:para">
+    <xsl:template match="p| rsc:p| ce:simple-para | ce:note-para | ce:para">
         <xsl:choose>
             <!--RSC plusieurs titres dans le titre contenu par des p-->
             <xsl:when test="ancestor::title">
@@ -586,11 +587,12 @@
     <!-- References in text -->
     <!-- citref for RCS (Royal CHemical Society) -->
 
-    <xsl:template match="citref">
+    <xsl:template match="citref |rsc:citref">
         <ref type="bibr">
             <xsl:attribute name="target">
                 <xsl:value-of select="concat('#',@idrefs)"/>
             </xsl:attribute>
+            <xsl:apply-templates/>
         </ref>
     </xsl:template>
     
@@ -969,11 +971,11 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="inf|Subscript | sub | ce:inf | wiley:sub">
+    <xsl:template match="inf|rsc:inf|Subscript | sub  | rsc:sub | ce:inf | wiley:sub">
         <xsl:if test="."><hi rend="subscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
     
-    <xsl:template match="Superscript | ce:sup | super | wiley:sup">
+    <xsl:template match="Superscript |rsc:Superscript | ce:sup | super| rsc:super | wiley:sup">
         <xsl:if test="normalize-space(.)"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
     <xsl:template match="sup">

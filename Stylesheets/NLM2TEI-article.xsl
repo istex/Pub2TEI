@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -1109,6 +1109,12 @@
                                     <xsl:text>book-series</xsl:text>
                                 </note>
                             </xsl:when>
+                            <xsl:when test="//article/front/journal-meta/journal-id[@journal-id-type='series'] |//rsc:article/rscfront/rscjournal-meta/rscjournal-id[@journal-id-type='series'][string-length() &gt; 0] and //article/front/journal-meta/journal-id[@journal-id-type='isbn'] |//rsc:article/rscfront/rscjournal-meta/rscjournal-id[@journal-id-type='isbn'][string-length() &gt; 0]">
+                                <note type="publication-type">
+                                    <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
+                                    <xsl:text>book-series</xsl:text>
+                                </note>
+                            </xsl:when>
                             <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
                                 <note type="publication-type">
                                     <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
@@ -1861,7 +1867,12 @@
                         </idno>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:apply-templates select="journal-meta/issn | issn |parent/issn"/>
+                        <xsl:choose>
+                            <xsl:when test="journal-meta/issn and //journal-id/@journal-id-type='isbn'"/>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="journal-meta/issn | issn |parent/issn"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                         <xsl:apply-templates select="journal-meta/issn[@pub-type='isbn'] | //isbn"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -1978,6 +1989,26 @@
                     <xsl:apply-templates select="copyright-year | cpg/cpy"/>
 				</imprint>
             </monogr>
+            <!-- rsc-journal niveau series-->
+            <xsl:if test="//journal-meta/journal-id[@journal-id-type='book_series']">
+                <series>
+                    <title level="s" type="main">
+                        <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='book_series']"/>
+                    </title>
+                    <xsl:if test="//journal-meta/journal-id[@journal-id-type='series']">
+                        <xsl:if test="//journal-meta/journal-id[@journal-id-type='print']">
+                            <idno type="pISSN">
+                                <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='print']"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:if test="//journal-meta/journal-id[@journal-id-type='online']">
+                            <idno type="eISSN">
+                                <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='online']"/>
+                            </idno>
+                        </xsl:if>
+                    </xsl:if>
+                </series>
+            </xsl:if>
         </biblStruct>
     </xsl:template>
 <!-- SG information book-reviews -->
@@ -3127,7 +3158,7 @@
             </head>
     </xsl:template>
 
-    <xsl:template match="ack">
+    <xsl:template match="ack | rsc:ack">
         <div type="acknowledgements">
             <xsl:apply-templates/>
         </div>
@@ -3719,9 +3750,9 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="it">
+    <xsl:template match="it | rsc:it">
         <xsl:choose>
-            <xsl:when test="ancestor::citgroup">
+            <xsl:when test="ancestor::citgroup | ancestor::rsc:citgroup">
                 <title>
                     <xsl:apply-templates/>
                 </title>

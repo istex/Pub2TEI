@@ -7,13 +7,14 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
     xmlns:oasis="http://www.niso.org/standards/z39-96/ns/oasis-exchange/table"
+    xmlns:rsc="http://www.rsc.org/schema/rscart38"
 	exclude-result-prefixes="#all" version="2.0"
 	xmlns="http://www.tei-c.org/ns/1.0">
 
     <!-- Royal Chemical Society: table-entry; NLM: table-wrap -->
-    <xsl:template match="table-entry | table-wrap | table">
+    <xsl:template match="table-entry |rsc:table-entry | table-wrap | table">
         <xsl:choose>
-            <xsl:when test="ancestor::p">
+            <xsl:when test="ancestor::p | ancestor::rsc:p">
                 <table>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
@@ -40,9 +41,9 @@
                             <xsl:value-of select="@position"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="label">
+                    <xsl:if test="label | rsc:label">
                         <head type="label">
-                            <xsl:value-of select="label"/>
+                            <xsl:value-of select="label| rsc:label"/>
                         </head>
                     </xsl:if>
                     <!-- <xsl:apply-templates select="* except tgroup"/>-->
@@ -51,16 +52,16 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="not(oasis:table | table)">
+                    <xsl:when test="not(oasis:table | table | rsc:table)">
                         <figure>
                             <xsl:if test="@id">
                                 <xsl:attribute name="xml:id">
                                     <xsl:value-of select="@id"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="graphic/@xlink:href">
+                            <xsl:if test="graphic/@xlink:href |rsc:graphic/@xlink:href">
                                 <xsl:attribute name="n">
-                                    <xsl:value-of select="graphic/@xlink:href"/>
+                                    <xsl:value-of select="graphic/@xlink:href|rsc:graphic/@xlink:href"/>
                                 </xsl:attribute>
                             </xsl:if>
                             <xsl:if test="oasis:table/@rowsep">
@@ -83,19 +84,19 @@
                                     <xsl:value-of select="@position"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="label">
+                            <xsl:if test="label| rsc:label">
                                 <head type="label">
-                                    <xsl:if test="label/xref/@id">
+                                    <xsl:if test="label/xref/@id | rsc:label/rsc:xref/@id">
                                         <xsl:attribute name="corresp">
                                             <xsl:text>#</xsl:text>
-                                            <xsl:value-of select="label/xref/@id"/>
+                                            <xsl:value-of select="label/xref/@id| rsc:label/rsc:xref/@id"/>
                                         </xsl:attribute>
                                     </xsl:if>
-                                    <xsl:value-of select="label"/>
+                                    <xsl:value-of select="label| rsc:label"/>
                                 </head>
                             </xsl:if>
                             <!-- <xsl:apply-templates select="* except tgroup"/>-->
-                            <xsl:apply-templates select="* except(label/xref | graphic)"/>
+                            <xsl:apply-templates select="* except(label/xref | graphic | rsc:graphic |rsc:label/rsc:xref)"/>
                         </figure>
                     </xsl:when>
                     <xsl:otherwise>
@@ -157,7 +158,7 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
     
-    <xsl:template match="label">
+    <xsl:template match="label | rsc:label">
                 <xsl:apply-templates select="*"/>
     </xsl:template>
     <!--elsevier-->
@@ -193,7 +194,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="table-entry/title| ce:table/ce:caption">
+    <xsl:template match="table-entry/title|rsc:table-entry/rsc:title| ce:table/ce:caption">
         <head>
             <xsl:variable name="normalize">
                 <xsl:apply-templates/>

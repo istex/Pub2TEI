@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
-    xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
+    xmlns="http://www.tei-c.org/ns/1.0" xmlns:rsc="http://www.rsc.org/schema/rscart38" exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
 
     <!-- Revision information -->
@@ -600,7 +600,7 @@
         </label>
     </xsl:template>
 
-    <xsl:template match="row">
+    <xsl:template match="row | rsc:row">
         <row>
         <xsl:if test="ancestor::thead">
             <xsl:attribute name="role">label</xsl:attribute>
@@ -609,9 +609,9 @@
         </row>
     </xsl:template>
 
-    <xsl:template match="entry">
+    <xsl:template match="entry | rsc:entry">
         <cell>
-            <xsl:if test="ancestor::thead">
+            <xsl:if test="ancestor::thead | ancestor::rsc:thead">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
             <xsl:if test="@colname">
@@ -630,7 +630,7 @@
         </cell>
     </xsl:template>
 
-    <xsl:template match="tgroup">
+    <xsl:template match="tgroup | rsc:tgroup">
         <xsl:apply-templates/>
     </xsl:template>
 

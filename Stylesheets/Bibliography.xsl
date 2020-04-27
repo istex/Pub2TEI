@@ -2,7 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
+    xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
 	exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
@@ -10,15 +11,15 @@
     <!-- Références bibliographiques à la fin d'un article -->
     <!-- ref-list: NLM article, ScholarOne -->
 
-    <xsl:template match="biblist | ce:bibliography | bibl | wiley:bibliography">
+    <xsl:template match="biblist |rsc:biblist | ce:bibliography | bibl | wiley:bibliography">
         <xsl:choose>
-            <xsl:when test="ref | citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection">
+            <xsl:when test="ref | citgroup| rsc:citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection">
                 <div type="references">
-                    <xsl:apply-templates select="title | ce:section-title"/>
+                    <xsl:apply-templates select="title | rsc:title |ce:section-title"/>
                     <listBibl>
                         <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
                         <xsl:apply-templates
-                            select="ref | citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
+                            select="ref | citgroup| rsc:citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
                         /> 
                     </listBibl>
                 </div>
@@ -163,20 +164,20 @@
 
     <!-- Journal paper in RCS -->
 
-    <xsl:template match="citgroup">
-        <xsl:if test="journalcit">
+    <xsl:template match="citgroup | rsc:citgroup">
+        <xsl:if test="journalcit | rsc:journalcit">
             <xsl:call-template name="createArticle">
-                <xsl:with-param name="entry" select="journalcit"/>
+                <xsl:with-param name="entry" select="journalcit | rsc:journalcit"/>
             </xsl:call-template>
         </xsl:if>
-        <xsl:if test="citation[@type = 'book']">
+        <xsl:if test="citation[@type = 'book'] | rsc:citation[@type = 'book']">
             <xsl:call-template name="createBook">
-                <xsl:with-param name="entry" select="citation[@type = 'book']"/>
+                <xsl:with-param name="entry" select="citation[@type = 'book'] | rsc:citation[@type = 'book']"/>
             </xsl:call-template>
         </xsl:if>
-        <xsl:if test="citation[@type = 'other']">
+        <xsl:if test="citation[@type = 'other'] | rsc:citation[@type = 'other']">
             <xsl:call-template name="createOther">
-                <xsl:with-param name="entry" select="citation[@type = 'other']"/>
+                <xsl:with-param name="entry" select="citation[@type = 'other'] | rsc:citation[@type = 'other']"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
@@ -225,15 +226,15 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                             <!-- All authors are included here -->
-                            <xsl:apply-templates select="$entry/person-group | $entry/citauth | $entry/name"/>
+                            <xsl:apply-templates select="$entry/person-group | $entry/citauth| $entry/rsc:citauth | $entry/name"/>
                             <xsl:apply-templates select="$entry/object-id"/>
                         </analytic>
                     </xsl:if>
                     <monogr>
                         <!-- palier à l'absence de titre qui est obligatoire dans monogr -->
                         <xsl:choose>
-                            <xsl:when test="$entry/source | $entry/title">
-                                <xsl:apply-templates select="$entry/source | $entry/title"/>
+                            <xsl:when test="$entry/source | $entry/title| $entry/rsc:title">
+                                <xsl:apply-templates select="$entry/source | $entry/title| $entry/rsc:title"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <title/>
@@ -247,25 +248,25 @@
                             <xsl:apply-templates select="$entry/collab"/>
                             </author>
                         </xsl:if>
-                        <xsl:apply-templates select="$entry/citauth | $entry/name"/>
+                        <xsl:apply-templates select="$entry/citauth | $entry/rsc:citauth | $entry/name"/>
                         <xsl:apply-templates select="$entry/comment"/>
                         <xsl:apply-templates select="$entry/conference"/>
                         <xsl:apply-templates select="$entry/conf-name"/>
                         <xsl:choose>
                             <xsl:when
-                                test="$entry/year | $entry/volume | $entry/volumeno | $entry/issue | $entry/descendant::fpage | $entry/descendant::lpage">
+                                test="$entry/year |$entry/rsc:year | $entry/volume | $entry/volumeno| $entry/rsc:volumeno | $entry/issue | $entry/descendant::fpage | $entry/descendant::lpage">
                                 <note type="content">
                                     <xsl:value-of select="normalize-space(.)"/>
                                 </note>
                                 <xsl:apply-templates select="$entry/access-date"/>
                                 <imprint>
-                                    <xsl:apply-templates select="$entry/citpub"/>
+                                    <xsl:apply-templates select="$entry/citpub |$entry/rsc:citpub"/>
                                     <xsl:apply-templates select="$entry/pubplace"/>
-                                    <xsl:apply-templates select="$entry/year"/>
-                                    <xsl:apply-templates select="$entry/volume | $entry/volumeno"/>
-                                    <xsl:apply-templates select="$entry/issue"/>
-                                    <xsl:apply-templates select="$entry/descendant::fpage"/>
-                                    <xsl:apply-templates select="$entry/descendant::lpage"/>
+                                    <xsl:apply-templates select="$entry/year | $entry/rsc:year"/>
+                                    <xsl:apply-templates select="$entry/volume | $entry/volumeno | $entry/rsc:volumeno"/>
+                                    <xsl:apply-templates select="$entry/issue |$entry/rsc:issue"/>
+                                    <xsl:apply-templates select="$entry/descendant::fpage |$entry/descendant::rsc:fpage"/>
+                                    <xsl:apply-templates select="$entry/descendant::lpage |$entry/descendant::rsc:lpage"/>
                                 </imprint>
                             </xsl:when>
                             <xsl:otherwise>
@@ -838,7 +839,7 @@
         </editor>
     </xsl:template>
 
-    <xsl:template match="citauth | wiley:author">
+    <xsl:template match="citauth |rsc:citauth | wiley:author">
         <xsl:choose>
             <xsl:when test="ancestor::name-alternatives">
                 <persName type="byline">
@@ -848,9 +849,9 @@
             <xsl:otherwise>
                 <author>
                     <persName>
-                        <xsl:apply-templates select="surname"/>
+                        <xsl:apply-templates select="surname|rsc:surname"/>
                         <xsl:apply-templates select="given-names"/>
-                        <xsl:apply-templates select="fname"/>
+                        <xsl:apply-templates select="fname|rsc:fname"/>
                         <xsl:apply-templates select="wiley:givenNames"/>
                         <xsl:apply-templates select="wiley:familyName"/>
                     </persName>

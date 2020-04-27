@@ -4,6 +4,7 @@
     xmlns:cals="http://www.elsevier.com/xml/common/cals/dtd"
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:wiley2="http://www.wiley.com/namespaces/wiley/wiley" xmlns:m="http://www.w3.org/1998/Math/MathML/"
     xmlns:oasis="http://www.niso.org/standards/z39-96/ns/oasis-exchange/table"
+    xmlns:rsc="http://www.rsc.org/schema/rscart38"
 	exclude-result-prefixes="#all" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0">
 
@@ -34,7 +35,7 @@
         <xsl:apply-templates/>
     </xsl:template>
 	<!-- IOP -->
-    <xsl:template match="figure">
+    <xsl:template match="figure | rsc:figure">
         <figure>
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
@@ -49,15 +50,15 @@
                 <xsl:value-of select="@width"/>
             </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
             <xsl:if test="@xsrc">
-            <p>
-                <xsl:value-of select="@xsrc"/>
-            </p>
+                <xsl:attribute name="corresp">
+                    <xsl:value-of select="@xsrc"/>
+                </xsl:attribute>
             </xsl:if>
+            <xsl:apply-templates/>
         </figure>
     </xsl:template>
-    <xsl:template match="figure/title">
+    <xsl:template match="figure/title | rsc:figure/rsc:title">
         <head>
             <xsl:apply-templates/>
         </head>

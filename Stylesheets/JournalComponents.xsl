@@ -8,6 +8,7 @@
     xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:wiley="http://www.wiley.com/namespaces/wiley" 
     xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:rsc="http://www.rsc.org/schema/rscart38"
     exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
@@ -2063,7 +2064,7 @@ reactorsa'</title>
     <!-- Nature: journal-title -->
     <!-- Elsevier: els1:jid |els2:jid, ce:issn -->
 
-    <xsl:template match="j-title | JournalTitle | full_journal_title | jrn_title | journal-title | tei:cell[@role='Journal'] | journalcit/title | jtl | wiley:journalTitle">
+    <xsl:template match="j-title | JournalTitle | full_journal_title | jrn_title | journal-title | tei:cell[@role='Journal'] | journalcit/title| rsc:journalcit/rsc:title | jtl | wiley:journalTitle">
         <xsl:choose>
             <!-- SAGE - traitement des titres de journaux non verbalisés -->
             <xsl:when test="normalize-space(.)">
@@ -2183,11 +2184,44 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="journal-id">
-        <xsl:if test="normalize-space(.) and @journal-id-type!='isbn'">
-            <idno type="{@journal-id-type}">
-                <xsl:apply-templates/>
-            </idno>
-        </xsl:if>
+        <xsl:choose>
+            <!-- rsc-ebooks -->
+            <xsl:when test="@journal-id-type='book_series'"/>
+            <xsl:when test="@journal-id-type='series'"/>
+            <xsl:when test="@journal-id-type='print' and //journal-meta/issn !=''"/>
+            <xsl:when test="@journal-id-type='online' and //@journal-id-type='series'"/>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="@journal-id-type='print'">
+                        <idno type="ISSN">
+                            <xsl:apply-templates/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="@journal-id-type='online'">
+                        <idno type="eISSN">
+                            <xsl:apply-templates/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="@journal-id-type='isbn'">
+                        <idno type="pISBN">
+                            <xsl:apply-templates/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="@journal-id-type='eisbn'">
+                        <idno type="eISBN">
+                            <xsl:apply-templates/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test=".!=''">
+                            <idno type="{@journal-id-type}">
+                                <xsl:apply-templates/>
+                            </idno>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>            
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="j-edpsname | JournalEDPSName">
@@ -2335,22 +2369,6 @@ reactorsa'</title>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template
-        match="journal-id[@journal-id-type='isbn'][string-length()&gt;0]|//ISBN[string-length()&gt;0]|//isbn[string-length()&gt;0]">
-        <xsl:choose>
-            <xsl:when test="@content-type='epub'">
-                <idno type="eISBN">
-                    <xsl:value-of select="."/>
-                </idno>
-            </xsl:when>
-            <xsl:otherwise>
-                <idno type="ISBN">
-                    <xsl:value-of select="."/>
-                </idno>
-            </xsl:otherwise>
-        </xsl:choose>
-        
-    </xsl:template>
     <!-- SG - ajout DOI niveau book - pour matcher avec les reversement du Hub de métadonnées-->
     <xsl:template match="wiley:publicationMeta[@level='product']/wiley:doi">
         <xsl:if test="normalize-space(.)">
@@ -2414,7 +2432,7 @@ reactorsa'</title>
     <!-- NLM 2.3 article: article-id[@pub-id-type='doi'] -->
 
     <xsl:template
-        match="article_id[@id_type='doi'] | article-id[@pub-id-type='doi'] | ArticleDOI | doi | ArticleId[@IdType='doi'] | ce:doi | @doi | DOI | ChapterDOI | wiley:publicationMeta[@level='unit']/wiley:doi">
+        match="article_id[@id_type='doi'] | article-id[@pub-id-type='doi'] | ArticleDOI | doi| rsc:doi | ArticleId[@IdType='doi'] | ce:doi | @doi | DOI | ChapterDOI | wiley:publicationMeta[@level='unit']/wiley:doi">
         <xsl:if test="normalize-space(.)">
             <xsl:variable name="DOIValue" select="string(.)"/>
             <idno type="DOI">
@@ -2438,9 +2456,25 @@ reactorsa'</title>
         </xsl:if>
     </xsl:template>
     <xsl:template
-        match="ms-id">
+        match="ms-id | rsc:ms-id">
         <xsl:if test="normalize-space(.)">
             <idno type="ms-id">
+                <xsl:value-of select="normalize-space(.)"/>
+            </idno>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template
+        match="pii | rsc:pii">
+        <xsl:if test="normalize-space(.)">
+            <idno type="pii">
+                <xsl:value-of select="normalize-space(.)"/>
+            </idno>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template
+        match="sici| rsc:sici">
+        <xsl:if test="normalize-space(.)">
+            <idno type="sici">
                 <xsl:value-of select="normalize-space(.)"/>
             </idno>
         </xsl:if>
@@ -2516,7 +2550,7 @@ reactorsa'</title>
     <!-- Elements for Imprint components in BMJ (issue-number, volume) -->
     <!-- Elements for Imprint components in Elsevier () -->
     
-    <xsl:template match="vol | Volume | VolumeID | volume | volumeref | volumeno | sb:volume-nr | vid | wiley:numbering[@type='journalVolume'] | wiley:vol">
+    <xsl:template match="vol | Volume | VolumeID | volume | volumeref | volumeno| rsc:volumeno | sb:volume-nr | vid | wiley:numbering[@type='journalVolume'] | wiley:vol">
         <xsl:choose>
             <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='4‐1'">
                     <biblScope unit="vol">
@@ -2717,7 +2751,7 @@ reactorsa'</title>
 
     <!-- Pagination -->
 
-    <xsl:template match="spn | FirstPage | ArticleFirstPage | fpage | first-page | sb:first-page | ChapterFirstPage | ppf | wiley:numbering[@type='pageFirst'] | wiley:pageFirst">
+    <xsl:template match="spn | FirstPage | ArticleFirstPage | fpage | rsc:fpage | first-page | sb:first-page | ChapterFirstPage | ppf | wiley:numbering[@type='pageFirst'] | wiley:pageFirst">
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::product/. |ancestor::p">
                 <bibl>
@@ -2737,7 +2771,7 @@ reactorsa'</title>
     </xsl:template>
 
 <!-- SG: nettoyage caractéres polluants dans les données -->
-    <xsl:template match="epn | LastPage | ArticleLastPage | lpage | last-page | ChapterLastPage | sb:last-page | ppl | wiley:numbering[@type='pageLast'] | wiley:pageLast">
+    <xsl:template match="epn | LastPage | ArticleLastPage | lpage| rsc:lpage | last-page | ChapterLastPage | sb:last-page | ppl | wiley:numbering[@type='pageLast'] | wiley:pageLast">
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::p">
                 <bibl>

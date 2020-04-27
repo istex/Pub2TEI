@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
     <xsl:variable name="countryCodes" select="document('CountryCodes.xml')"/>
@@ -127,7 +128,7 @@
         </date>
     </xsl:template>
 
-    <xsl:template match="Year | year | yy">
+    <xsl:template match="Year | year| rsc:year | yy">
         <date type="year">
             <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwyyz ','')"/>
         </date>

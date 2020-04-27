@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
-    exclude-result-prefixes="#all">
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
     <!-- Generic rules for the decomposing names (cf. e.g. BMJ) -->
-    <xsl:template match="name | persname | auname">
+    <xsl:template match="name | persname| rsc:persname | auname">
         <xsl:choose>
             <xsl:when test="ancestor::fm | ancestor::ref/element-citation |ancestor::ref/nlm-citation |ancestor::ref/citation |ancestor::ref/mixed-citation and not(ancestor::person-group)">
                 <author>
@@ -112,7 +112,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="fname |first_name | FirstName | ce:given-name | GivenName | per_aut/fn | given-names | given_name | corresponding-author-firstname | fname | fnm | wiley:givenNames">
+    <xsl:template match="fname |rsc:fname |first_name | FirstName | ce:given-name | GivenName | per_aut/fn | given-names | given_name | corresponding-author-firstname | fname | fnm | wiley:givenNames">
         <xsl:if test="normalize-space(.)">
             <forename type="first">
                 <xsl:variable name="normalize">
@@ -141,7 +141,7 @@
         </xsl:if>
     </xsl:template>
     <xsl:template
-        match="last_name | LastName | ce:surname | FamilyName | ln | surname | corresponding-author-lastname | surname | snm | wiley:familyName">
+        match="last_name | LastName | ce:surname| rsc:surname | FamilyName | ln | surname | corresponding-author-lastname | surname | snm | wiley:familyName">
         <xsl:if test="normalize-space(.)">
             <surname>
                 <xsl:variable name="surname">
