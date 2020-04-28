@@ -593,11 +593,9 @@
                 </xsl:choose>
                 <xsl:choose>
                     <xsl:when test="publicationMeta/issn[@type='print']='0009-9163' and contains(publicationMeta/coverDate/@startDate,'2003') and  publicationMeta/numberingGroup/numbering[@type='journalVolume']='43' ">
-                        <titleInfo xmlns="http://www.loc.gov/mods/v3">
-                            <title xmlns="http://www.loc.gov/mods/v3">
-                                <xsl:text>Congenital Anomalies</xsl:text>
-                            </title>
-                        </titleInfo>
+                        <title level="j" type="main">
+                            <xsl:text>Congenital Anomalies</xsl:text>
+                        </title>
                     </xsl:when>
                     <xsl:when test="publicationMeta[@level='product']/titleGroup/title[@type ='main']">
                         <title level="j" type="main">

@@ -618,8 +618,8 @@
             </xsl:choose>
         </author>
     </xsl:template>
-    <xsl:template match="address">
-        <toto></toto>
+   <!-- deja utilisé <xsl:template match="address">
+       
         <xsl:if test="email">
             <xsl:apply-templates select="email"/>
         </xsl:if>
@@ -794,7 +794,7 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:if>
-    </xsl:template>
+    </xsl:template>-->
     <!-- idem si père = editors -->
     <xsl:template match="editors/author
                        | editors/au">

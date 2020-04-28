@@ -145,7 +145,6 @@
                             <!-- <xsl:apply-templates select="* except tgroup"/>-->
                             <xsl:apply-templates select="* except(label/xref | graphic)"/>
                         </table>
-                        
                     </xsl:otherwise>
                 </xsl:choose>
                 
@@ -251,7 +250,7 @@
         </note>
     </xsl:template>
 
-    <xsl:template match="thead/tr | cals:thead/cals:row |els1:thead|els2:thead">
+    <xsl:template match="thead/tr |rsc:thead/rsc:tr | cals:thead/cals:row |els1:thead|els2:thead">
         <row>
             <xsl:apply-templates/>
         </row>
@@ -298,18 +297,18 @@
         </row>
     </xsl:template>
 
-    <xsl:template match="thead | cals:thead">
+    <xsl:template match="thead |rsc:thead | cals:thead">
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="tbody | cals:tbody | cals:tgroup">
+    <xsl:template match="tbody |rsc:tbody | cals:tbody | cals:tgroup">
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="oasis:tgroup">
         <xsl:apply-templates select="* except oasis:colspec"/>
     </xsl:template>
 
-    <xsl:template match="table-entry/table | table-wrap/table | els1:display[not(parent::ce:para)]/ce:table| els2:display[not(parent::ce:para)]/ce:table">
+    <xsl:template match="table-entry/table |rsc:table-entry/rsc:table | table-wrap/table | rsc:table-wrap/rsc:table | els1:display[not(parent::ce:para)]/ce:table| els2:display[not(parent::ce:para)]/ce:table">
        <!-- <ab>
             <table>
                 <xsl:apply-templates/>
@@ -487,10 +486,5 @@
             </xsl:if>
             <xsl:apply-templates/>
         </cell>
-    </xsl:template>
-    
-    <xsl:template match="oasis:colspec">
-        <!-- not obvious to use in TEI transformation -->
-        <xsl:apply-templates select="*"/>
     </xsl:template>
 </xsl:stylesheet>

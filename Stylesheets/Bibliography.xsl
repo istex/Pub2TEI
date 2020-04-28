@@ -13,15 +13,116 @@
 
     <xsl:template match="biblist |rsc:biblist | ce:bibliography | bibl | wiley:bibliography">
         <xsl:choose>
-            <xsl:when test="ref | citgroup| rsc:citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection">
+            <xsl:when test="ref  | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection">
                 <div type="references">
                     <xsl:apply-templates select="title | rsc:title |ce:section-title"/>
-                    <listBibl>
+                    
                         <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
                         <xsl:apply-templates
                             select="ref | citgroup| rsc:citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
                         /> 
-                    </listBibl>
+                    
+                </div>
+            </xsl:when>
+            
+            
+            <!-- rsc references / citations -->
+            <xsl:when test="citgroup| rsc:citgroup">
+                <div type="references">
+                <xsl:for-each select="rsc:citgroup| citgroup">
+                      <xsl:variable name="id">
+                          <xsl:value-of select="normalize-space(@id)"/>
+                      </xsl:variable>
+                    <bibl type="citation">
+                        <xsl:if test="$id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="normalize-space($id)"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                    
+                        <xsl:if test="rsc:citext | citext and not(.)">
+                            <xsl:for-each select="rsc:citext| citext">
+                                    <xsl:variable name="citext">
+                                        <xsl:apply-templates select="."/>
+                                    </xsl:variable>
+                                    <title>
+                                            <xsl:value-of select="normalize-space($citext)"/>
+                                        </title>
+                                    <xsl:if test="rsc:url/@url[string-length() &gt; 0] | url/@url[string-length() &gt; 0]">
+                                        <idno>
+                                            <xsl:attribute name="type">url</xsl:attribute>
+                                            <xsl:value-of select="normalize-space(rsc:url/@url| url/@url)"/>
+                                        </idno>
+                                    </xsl:if>
+                            </xsl:for-each>
+                        </xsl:if>
+                        <xsl:for-each select="rsc:citation[@type='other'] | citation[@type='other']">
+                            <bibl type="journal">
+                                <xsl:apply-templates/>
+                            </bibl>
+                        </xsl:for-each>
+                                
+                        <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] | journalcit |citation[@type='book']">
+                            <xsl:choose>
+                                <xsl:when test="rsc:arttitle[string-length()&gt; 0] | arttitle[string-length()&gt; 0]">
+                                    <bibl type="journal">
+                                        <xsl:apply-templates/>
+                                    </bibl>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <bibl type="journal">
+                                        <xsl:apply-templates/>
+                                    </bibl>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:for-each>
+                        <!-- citations particulieres -->
+                        <xsl:if test="rsc:citation or citation and rsc:citation/rsc:citauth or citation/citauth or rsc:citation/rsc:title or citation/title  and not(rsc:citation/@type='book' or citation/@type='book')">
+                            <xsl:for-each select="rsc:citation| citation">
+                            <xsl:choose>
+                                <xsl:when test="rsc:arttitle[string-length()&gt; 0] | arttitle[string-length()&gt; 0]">
+                                    <bibl type="journal">
+                                        <xsl:apply-templates/>
+                                    </bibl>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                        </xsl:if>
+                        <!-- citations particulieres -->
+                        <xsl:if test="rsc:citation | citation and rsc:citation/rsc:citauth | rsc:citation/rsc:title | citation/citauth | citation/title">
+                            <xsl:for-each select="rsc:citation| citation">
+                            <xsl:choose>
+                                <xsl:when test="rsc:arttitle[string-length()&gt; 0] | arttitle[string-length()&gt; 0]">
+                                    <bibl type="journal">
+                                        <xsl:apply-templates/>
+                                    </bibl>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                        </xsl:if>
+                            <!-- niveau citgroup supplémentaire -->
+                        <xsl:for-each select="rsc:citgroup | citgroup">
+                            <xsl:variable name="id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:variable>
+                            <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] |rsc:citation[@type='patent']
+                                | journalcit |citation[@type='book'] |citation[@type='patent']">
+                            <xsl:choose>
+                                <xsl:when test="rsc:arttitle[string-length()&gt; 0] | arttitle[string-length()&gt; 0]">
+                                    <bibl type="journal">
+                                        <xsl:apply-templates/>
+                                    </bibl>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <bibl type="journal">
+                                        <xsl:apply-templates/>
+                                    </bibl>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            </xsl:for-each>
+                        </xsl:for-each>
+                    </bibl>
+                </xsl:for-each>
                 </div>
             </xsl:when>
             <xsl:when test="p">
@@ -185,6 +286,9 @@
 
     <xsl:template name="createArticle">
         <xsl:param name="entry"/>
+        <xsl:variable name="countCitation">
+            <xsl:value-of select="//citgroup/journalcit|//rsc:citgroup/rsc:journalcit"/>
+        </xsl:variable>
         <xsl:choose>
             <!-- enléve les mixed-citation contenant des informations de type abbreviation
             - enléve tout ce qui n'est pas des références pures-->
@@ -214,17 +318,10 @@
                     <xsl:variable name="countTitle">
                         <xsl:value-of select="count($entry/article-title)"/>
                     </xsl:variable>
-                    <xsl:if test="$entry/article-title">
+                    <xsl:if test="$entry/article-title | $entry/arttitle| $entry/rsc:arttitle">
                         <analytic>
                             <!-- Title information related to the paper goes here -->
-                            <xsl:choose>
-                                <xsl:when test="$countTitle &gt;2">
-                                    <toto></toto>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:apply-templates select="$entry/article-title"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:apply-templates select="$entry/article-title| $entry/arttitle| $entry/rsc:arttitle"/>
                             <!-- All authors are included here -->
                             <xsl:apply-templates select="$entry/person-group | $entry/citauth| $entry/rsc:citauth | $entry/name"/>
                             <xsl:apply-templates select="$entry/object-id"/>
@@ -261,7 +358,7 @@
                                 <xsl:apply-templates select="$entry/access-date"/>
                                 <imprint>
                                     <xsl:apply-templates select="$entry/citpub |$entry/rsc:citpub"/>
-                                    <xsl:apply-templates select="$entry/pubplace"/>
+                                    <xsl:apply-templates select="$entry/pubplace |$entry/rsc:pubplace"/>
                                     <xsl:apply-templates select="$entry/year | $entry/rsc:year"/>
                                     <xsl:apply-templates select="$entry/volume | $entry/volumeno | $entry/rsc:volumeno"/>
                                     <xsl:apply-templates select="$entry/issue |$entry/rsc:issue"/>
@@ -1917,38 +2014,6 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </imprint>
-                        <!--  <xsl:otherwise>
-                            <xsl:choose>
-                                <xsl:when test="@citation-type='confproc'">
-                                    <name xmlns="http://www.loc.gov/mods/v3" type="conference">
-                                        <namePart xmlns="http://www.loc.gov/mods/v3">
-                                            <xsl:apply-templates select="source"/>
-                                        </namePart>
-                                        <xsl:apply-templates select="comment"/>
-                                        <xsl:apply-templates select="conf-name"/>
-                                        <xsl:apply-templates select="conf-theme"/> 
-                                        <xsl:apply-templates select="conf-sponsor"/> 
-                                        <xsl:apply-templates select="conf-loc"/>
-                                        <xsl:apply-templates select="conf-date"/>
-                                    </name>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <titleInfo xmlns="http://www.loc.gov/mods/v3">
-                                        <title>
-                                            <xsl:choose>
-                                                <xsl:when test="source">
-                                                    <xsl:apply-templates select="source"></xsl:apply-templates>
-                                                </xsl:when>
-                                              
-                                                <xsl:otherwise>
-                                                    <xsl:apply-templates/>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
-                                            <xsl:value-of select="italic[@toggle='yes']"/> 
-                                        </title>
-                                    </titleInfo>
-                                </xsl:otherwise>
-                            </xsl:choose>-->
                     </monogr>
                 </biblStruct>
             </xsl:otherwise>

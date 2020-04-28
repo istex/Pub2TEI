@@ -602,7 +602,7 @@
 
     <xsl:template match="row | rsc:row">
         <row>
-        <xsl:if test="ancestor::thead">
+            <xsl:if test="ancestor::thead | ancestor::rsc:thead">
             <xsl:attribute name="role">label</xsl:attribute>
         </xsl:if>
             <xsl:apply-templates/>

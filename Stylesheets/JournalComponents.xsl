@@ -1836,7 +1836,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:template
-        match="fm/atl |article-title/title | ArticleTitle | article-title | atl | ce:title | art_title | article_title | nihms-submit/title | ArticleTitle/Title | ChapterTitle |chapter-title |wiley:chapterTitle | titlegrp/title | wiley:articleTitle | wiley:otherTitle | chaptl">
+        match="fm/atl |article-title/title | ArticleTitle | article-title | atl | ce:title | art_title | article_title | nihms-submit/title | ArticleTitle/Title | ChapterTitle |chapter-title |wiley:chapterTitle | titlegrp/title| rsc:titlegrp/rsc:title | wiley:articleTitle | wiley:otherTitle | chaptl">
         <xsl:choose>
             <xsl:when test="ancestor::news-article/art-front/titlegrp">
                     <xsl:apply-templates/>
@@ -2763,12 +2763,16 @@ reactorsa'</title>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and not(contains(.,'n/a'))">
                     <biblScope unit="page" from="{translate(.,'  p.','')}">
-                        <xsl:value-of select="normalize-space(.)"/>
+                        <xsl:value-of select="."/>
                     </biblScope>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template match="pages | rsc:pages">
+       <xsl:apply-templates/>
+    </xsl:template>
+    
 
 <!-- SG: nettoyage caractéres polluants dans les données -->
     <xsl:template match="epn | LastPage | ArticleLastPage | lpage| rsc:lpage | last-page | ChapterLastPage | sb:last-page | ppl | wiley:numbering[@type='pageLast'] | wiley:pageLast">

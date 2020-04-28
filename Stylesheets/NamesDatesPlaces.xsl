@@ -148,7 +148,7 @@
     <!-- PL: Nanture: cny -->
     <!-- BMJ: corresponding-author-city, corresponding-author-country, corresponding-author-state, corresponding-author-zipcode -->
 
-    <xsl:template match="Country | country | corresponding-author-country | cny">
+    <xsl:template match="Country | country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
             <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
             <country>
@@ -215,7 +215,7 @@
     </xsl:template>
 
     <!-- PL: add st for Nature -->
-    <xsl:template match="State | state | corresponding-author-state | province | st | named-content[@content-type = 'state']">
+    <xsl:template match="State | state| rsc:state | corresponding-author-state | province | st | named-content[@content-type = 'state']">
         <xsl:if test="normalize-space(.)">
             <region>
                 <xsl:apply-templates/>
@@ -223,7 +223,7 @@
         </xsl:if>
     </xsl:template>
     <!-- PL: add cty for Nature -->
-    <xsl:template match="City | city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
+    <xsl:template match="City | city| rsc:city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
         <xsl:if test="normalize-space(.)">
             <settlement>
                 <xsl:apply-templates/>
@@ -232,7 +232,7 @@
     </xsl:template>
 
     <!-- PL: add zip for Nature -->
-    <xsl:template match="Postcode | post_code | corresponding-author-zipcode | named-content[@content-type = 'postcode'] | postcode | zip">
+    <xsl:template match="Postcode | post_code | corresponding-author-zipcode | named-content[@content-type = 'postcode'] | postcode| rsc:postcode | zip">
         <xsl:if test="normalize-space(.)">
             <postCode>
                 <xsl:apply-templates/>
@@ -252,7 +252,7 @@
     <!-- BMJ: corresponding-author-address-1, corresponding-author-address-1 -->
     <!-- Springer 2: OrgAddress  -->
 
-    <xsl:template match="addr-line | addr1 | addr2 | addr3 | corresponding-author-address-1 | corresponding-author-address-2 | addrelt">
+    <xsl:template match="addr-line | addr1 | addr2 | addr3 | corresponding-author-address-1 | corresponding-author-address-2 | addrelt| rsc:addrelt">
         <xsl:if test="normalize-space(.)">
             <xsl:choose>
                 <xsl:when test="*">
@@ -326,14 +326,19 @@
     <!-- NLM 2.2: email -->
     <!-- Springer: Email -->
 
-    <xsl:template match="corresponding-author-email | Email | eml |email">
+    <xsl:template match="corresponding-author-email | Email | eml |email | rsc:email">
         <xsl:choose>
             <xsl:when test="parent::aff"/>
             <xsl:when test="parent::corresp"/>
+            <xsl:otherwise>
+                <email>
+                    <xsl:apply-templates/>
+                </email>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="phone | Phone">
+    <xsl:template match="phone |rsc:phone | Phone">
         <xsl:if test="normalize-space(.)">
             <note type="phone">
                 <xsl:apply-templates/>
@@ -341,7 +346,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="fax | Fax">
+    <xsl:template match="fax |rsc:fax | Fax">
         <xsl:if test="normalize-space(.)">
             <note type="fax">
                 <xsl:apply-templates/>
@@ -349,7 +354,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="uri | url | URL">
+    <xsl:template match="uri | url |rsc:uri | rsc:url | URL">
         <xsl:if test="normalize-space(.)">
             <ptr type="url">
                 <xsl:attribute name="target">

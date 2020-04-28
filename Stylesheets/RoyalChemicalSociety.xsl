@@ -8,7 +8,7 @@
     <!-- Le format de la RCS utilise essentiellement des composant NLM en ayant pris le soin (!) de définir ses propres constructions ici el là. -->
     <!-- On sent le travail visionaire du grouillot... -->
     <xsl:template match="article[art-admin] | rsc:article[rsc:art-admin]">
-        <TEI>
+        <TEI xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
@@ -70,6 +70,52 @@
                             <xsl:variable name="articleType" select="//articletype/@pubmedForm |//rsc:articletype/@pubmedForm"/>
                             <xsl:variable name="codeGenreRSCSource">
                                 <xsl:choose>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ART'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='REV'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EDI'">editorial</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FEA'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TRV'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CRV'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CVR'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CRV'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='BKR'">book-reviews</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ASU'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='COM'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ESS'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NTP'">research-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='RES'">research-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='KEY'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='PER'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='LET'">research-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TRV'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TEC'">research-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='HIG'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='INV'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FOC'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='DIS'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='HOT'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='OTH'">other</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='SAB'">abstract</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EMA'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CMT'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='OPN'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='APP'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FRO'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='AFO'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CRP'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EDU'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='MET'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='IRE'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='VPT'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FOR'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ILN'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='MES'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='AMS'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ESS'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='WAT'">review-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NTP'">research-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='RES'">research-article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='KEY'">article</xsl:when>
                                     <xsl:when test="normalize-space($articleType)='abstract'">abstract</xsl:when>
                                     <xsl:when test="normalize-space($articleType)='addendum'">other</xsl:when>
                                     <xsl:when test="normalize-space($articleType)='announcement'">other</xsl:when>
@@ -93,7 +139,7 @@
                                     <xsl:when test="normalize-space(//@articleType)='oration'">other</xsl:when>
                                     <xsl:when test="normalize-space(//@articleType)='other'">
                                         <xsl:choose>
-                                            <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0] and contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
+                                            <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and contains(//article-meta/fpage |//rsc:article-meta/rsc:fpage,'s') or contains(//article-meta/fpage | //rsc:article-meta/rsc:fpage,'S')">article</xsl:when>
                                             <xsl:otherwise>other</xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:when>
@@ -107,52 +153,6 @@
                                     <xsl:when test="normalize-space(//@articleType)='retraction'">other</xsl:when>
                                     <xsl:when test="normalize-space(//@articleType)='review-article'">review-article</xsl:when>
                                     <xsl:when test="normalize-space(//@articleType)='translation'">other</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='ART'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='REV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='EDI'">editorial</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='FEA'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='TRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='CRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='CVR'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='CRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='BKR'">book-reviews</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='ASU'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='COM'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='ESS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='NTP'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='RES'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='KEY'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='PER'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='LET'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='TRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='TEC'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='HIG'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='INV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='FOC'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='DIS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='HOT'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='OTH'">other</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='SAB'">abstract</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='EMA'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='CMT'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='OPN'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='APP'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='FRO'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='AFO'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='CRP'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='EDU'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='MET'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='IRE'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='VPT'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='FOR'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='ILN'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='MES'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='AMS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='ESS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='WAT'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='NTP'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='RES'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type)='KEY'">article</xsl:when>
                                     <xsl:otherwise>
                                         <xsl:text>other</xsl:text>
                                     </xsl:otherwise>
@@ -176,7 +176,7 @@
                             </xsl:variable>
                             <!-- niveau article / chapter -->
                             <xsl:attribute name="source">
-                                <xsl:value-of select="$articleType"/>
+                                <xsl:value-of select="$articleType |//article/@type | //rsc:article/@type"/>
                             </xsl:attribute>
                             <xsl:attribute name="scheme">
                                 <xsl:value-of select="$codeGenreRSCArk"/>
@@ -246,7 +246,7 @@
                 </xsl:choose>
                 <xsl:if test="art-back | rsc:art-back !=''">
                 <back>
-                    <xsl:apply-templates select="art-back/* | rsc:art-back/*"/>
+                    <xsl:apply-templates select="art-back/*| rsc:art-back/*"/>
                 </back>
                </xsl:if>
             </text>
@@ -415,7 +415,7 @@
                             <xsl:value-of select="normalize-space(//published[@type='web']/volumeref/link |//rsc:published[@type='web']/rsc:volumeref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:choose>
-                            <xsl:when test="$print !=0">
+                            <xsl:when test="$print !='0'">
                                 <xsl:if test="$print!='Unassigned'">
                                     <xsl:if test="$print!='Advance Articles'">
                                         <xsl:value-of select="$print"/>
@@ -634,7 +634,7 @@
                     <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
                 </xsl:variable>
                     <xsl:apply-templates select="//aff[@id=$aff]/org/orgname/* | //rsc:aff[@id=$aff]/rsc:org/rsc:orgname/*"/>
-                    <xsl:apply-templates select="//aff[@id=$aff]/address | //rsc:aff[@id=$aff]/rsc:address" mode="rsc"/>
+                    <xsl:apply-templates select="//aff[@id=$aff]/address| //rsc:aff[@id=$aff]/rsc:address" mode="rsc"/>
                     <xsl:apply-templates select="//aff[@id=$aff]/email | //rsc:aff[@id=$aff]/rsc:email"/>
                 </affiliation>
                 <xsl:call-template name="tokenize">
