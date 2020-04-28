@@ -42,20 +42,21 @@
                     
                         <xsl:if test="rsc:citext | citext and not(.)">
                             <xsl:for-each select="rsc:citext| citext">
-                                    <xsl:variable name="citext">
-                                        <xsl:apply-templates select="."/>
-                                    </xsl:variable>
-                                    <title>
-                                            <xsl:value-of select="normalize-space($citext)"/>
-                                        </title>
-                                    <xsl:if test="rsc:url/@url[string-length() &gt; 0] | url/@url[string-length() &gt; 0]">
-                                        <idno>
-                                            <xsl:attribute name="type">url</xsl:attribute>
-                                            <xsl:value-of select="normalize-space(rsc:url/@url| url/@url)"/>
-                                        </idno>
-                                    </xsl:if>
+                                <xsl:variable name="citext">
+                                    <xsl:apply-templates select="."/>
+                                </xsl:variable>
+                                <title>
+                                    <xsl:value-of select="normalize-space($citext)"/>
+                                </title>
+                                <xsl:if test="rsc:url/@url[string-length() &gt; 0] | url/@url[string-length() &gt; 0]">
+                                    <idno>
+                                        <xsl:attribute name="type">url</xsl:attribute>
+                                        <xsl:value-of select="normalize-space(rsc:url/@url| url/@url)"/>
+                                    </idno>
+                                </xsl:if>
                             </xsl:for-each>
                         </xsl:if>
+                        
                         <xsl:for-each select="rsc:citation[@type='other'] | citation[@type='other']">
                             <bibl type="journal">
                                 <xsl:apply-templates/>
@@ -63,18 +64,9 @@
                         </xsl:for-each>
                                 
                         <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] | journalcit |citation[@type='book']">
-                            <xsl:choose>
-                                <xsl:when test="rsc:arttitle[string-length()&gt; 0] | arttitle[string-length()&gt; 0]">
-                                    <bibl type="journal">
-                                        <xsl:apply-templates/>
-                                    </bibl>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <bibl type="journal">
-                                        <xsl:apply-templates/>
-                                    </bibl>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <bibl type="journal">
+                                <xsl:apply-templates/>
+                            </bibl>
                         </xsl:for-each>
                         <!-- citations particulieres -->
                         <xsl:if test="rsc:citation or citation and rsc:citation/rsc:citauth or citation/citauth or rsc:citation/rsc:title or citation/title  and not(rsc:citation/@type='book' or citation/@type='book')">
@@ -107,18 +99,9 @@
                             </xsl:variable>
                             <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] |rsc:citation[@type='patent']
                                 | journalcit |citation[@type='book'] |citation[@type='patent']">
-                            <xsl:choose>
-                                <xsl:when test="rsc:arttitle[string-length()&gt; 0] | arttitle[string-length()&gt; 0]">
-                                    <bibl type="journal">
-                                        <xsl:apply-templates/>
-                                    </bibl>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <bibl type="journal">
-                                        <xsl:apply-templates/>
-                                    </bibl>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                                <bibl type="journal">
+                                    <xsl:apply-templates/>
+                                </bibl>
                             </xsl:for-each>
                         </xsl:for-each>
                     </bibl>
