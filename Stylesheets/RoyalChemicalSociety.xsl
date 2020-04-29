@@ -656,6 +656,16 @@
     <xsl:template match="plate |rsc:plate">
             <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="jnltrans |rsc:jnltrans">
+        <bibl type="journal">
+        <xsl:apply-templates/>
+        </bibl>
+    </xsl:template>
+    <xsl:template match="sertitle |rsc:sertitle">
+        <title type="main" level="j">
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
 
     <!-- Specific to RCS: references to compound -->
 

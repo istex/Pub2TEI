@@ -198,10 +198,91 @@
         </item>
     </xsl:template>
 
-    <xsl:template match="keyword | Keyword | kwd">
-        <term>
-            <xsl:apply-templates/>
-        </term>
+    <!--springer / OUP-->
+    <xsl:template match="Keyword |keyword | kwd">
+        <xsl:choose>
+            <xsl:when test="contains(.,' – ')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains(.,',')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <term>
+                    <xsl:value-of select="normalize-space(translate(.,'\','ß'))"/>
+                </term>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="ParseKeyword">
+        <xsl:param name="theKeyword"/>
+        <xsl:param name="inAddress" select="false()"/>
+        <xsl:variable name="avantTiret">
+            <xsl:choose>
+                <xsl:when test="contains($theKeyword,' – ')">
+                    <xsl:value-of select="normalize-space(substring-before($theKeyword,' – '))"/>
+                </xsl:when>
+                <xsl:when test="contains($theKeyword,', ')">
+                    <xsl:value-of select="normalize-space(substring-before($theKeyword,','))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="normalize-space($theKeyword)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="apresTiret">
+            <xsl:choose>
+                <xsl:when test="contains($theKeyword,' – ')">
+                    <xsl:value-of select="normalize-space(substring-after($theKeyword,' – '))"/>
+                </xsl:when>
+                <xsl:when test="contains($theKeyword,', ')">
+                    <xsl:value-of select="normalize-space(substring-after($theKeyword,','))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="''"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="not($inAddress)">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword" select="."/>
+                    <xsl:with-param name="inAddress" select="true()"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <term>
+                    <xsl:choose>
+                        <xsl:when test="contains($avantTiret,'Keywords: ')">
+                            <xsl:value-of select="substring-after($avantTiret,'Keywords: ')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$avantTiret"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </term>
+                <xsl:if test="$apresTiret !=''">
+                    <xsl:call-template name="ParseKeyword">
+                        <xsl:with-param name="theKeyword" select="$apresTiret"/>
+                        <xsl:with-param name="inAddress" select="true()"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!--elsevier-->
     <xsl:template match="ce:keyword">

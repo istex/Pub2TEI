@@ -65,9 +65,11 @@
                                 
                         <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] | journalcit |citation[@type='book']">
                             <bibl type="journal">
-                                <xsl:apply-templates/>
+                                <xsl:apply-templates select="* except(journalcit/jnltrans |rsc:journalcit/rsc:jnltrans)"/>
                             </bibl>
                         </xsl:for-each>
+                        
+                        <xsl:apply-templates select="journalcit/jnltrans |rsc:journalcit/rsc:jnltrans"></xsl:apply-templates>
                         <!-- citations particulieres -->
                         <xsl:if test="rsc:citation or citation and rsc:citation/rsc:citauth or citation/citauth or rsc:citation/rsc:title or citation/title  and not(rsc:citation/@type='book' or citation/@type='book')">
                             <xsl:for-each select="rsc:citation| citation">
@@ -1266,10 +1268,6 @@
                 <xsl:choose>
                     <xsl:when test="wiley:articleTitle | wiley:journalTitle">
                         <bibl type="journal">
-                            <!-- <xsl:attribute name="corresp">
-                      <xsl:text>#</xsl:text>
-                       <xsl:value-of select="$id"/>
-                   </xsl:attribute>-->
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@xml:id"/>
                             </xsl:attribute>

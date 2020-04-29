@@ -144,11 +144,6 @@
                                 </textClass>
                             </profileDesc>
                         </xsl:if>
-                        <xsl:if test="Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleHistory">
-                            <xsl:apply-templates
-                                select="Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleHistory"
-                            />
-                        </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:if test="Journal/Volume/Issue/Article/ArticleHeader/KeywordGroup |Journal/JournalInfo/JournalSubjectGroup">
@@ -236,15 +231,16 @@
                                 </xsl:if>
                             </profileDesc>
                         </xsl:if>
-                        <xsl:if test="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory">
-                            <xsl:apply-templates
-                                select="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory"/>
-                        </xsl:if>
+                       
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- traceability -->
                 <revisionDesc>
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
+                    <xsl:if test="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory">
+                        <xsl:apply-templates
+                            select="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory"/>
+                    </xsl:if>
                 </revisionDesc>
             </teiHeader>
 			<text>

@@ -590,7 +590,14 @@
     <xsl:template match="citref |rsc:citref">
         <ref type="bibr">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@idrefs)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@idrefs)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -779,15 +786,30 @@
     <xsl:template match="xnav">
         <ref type="bibr">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@extrefid)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@extrefid)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
+            <xsl:apply-templates/>
         </ref>
     </xsl:template>
 	
     <xsl:template match="figr">
         <ref type="figure">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@rid)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@rid)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -796,7 +818,14 @@
     <xsl:template match="illusr">
         <ref type="figure">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@rid)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@rid)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -805,17 +834,32 @@
     <xsl:template match="tablr">
         <ref type="table">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@rid)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@rid)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </ref>
     </xsl:template>
 	
     <xsl:template match="schemref | rsc:schemref">
         <ref type="schema">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@idrefs)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@idrefs)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
+            <xsl:apply-templates/>
         </ref>
     </xsl:template>
     <xsl:template match="scheme">
@@ -840,8 +884,16 @@
     <xsl:template match="figref |rsc:figref">
         <ref type="figure">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@idrefs)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@idrefs)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
+            <xsl:apply-templates/>
         </ref>
     </xsl:template>
 
@@ -849,13 +901,31 @@
     <xsl:template match="tableref | rsc:tableref">
         <ref type="table">
             <xsl:attribute name="target">
-                <xsl:value-of select="concat('#',@idrefs)"/>
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@idrefs)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
             </xsl:attribute>
+            <xsl:apply-templates/>
         </ref>
     </xsl:template>
     
     <xsl:template match="ancref | rsc:ancref">
-        <ref type="anchor" target="{concat('#',@rid)}">
+        <ref type="anchor">
+            <xsl:attribute name="target">
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@rid)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
     </xsl:template>
@@ -868,7 +938,18 @@
     <!-- Elsevier pointers -->
     
     <xsl:template match="ce:float-anchor">
-        <ptr target="{concat('#',@refid)}"/>
+        <ptr>
+            <xsl:attribute name="target">
+                <xsl:variable name="concat">
+                    <xsl:value-of select="concat('#',@refid)"/>
+                </xsl:variable>
+                <xsl:variable name="diese">
+                    <xsl:value-of select="translate($concat,' ','#')"/>
+                </xsl:variable>
+                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                <xsl:value-of select="normalize-space($espace)"/>
+            </xsl:attribute>
+        </ptr>
     </xsl:template>
 
     <!-- +++++ Tags de formatage +++++++ -->

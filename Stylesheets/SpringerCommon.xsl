@@ -5,9 +5,7 @@
 
     <!-- Revision information -->
     <xsl:template match="ArticleHistory">
-        <revisionDesc>
             <xsl:apply-templates/>
-        </revisionDesc>
     </xsl:template>
 
     <xsl:template match="RegistrationDate">

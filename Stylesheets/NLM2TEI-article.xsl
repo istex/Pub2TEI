@@ -3583,12 +3583,26 @@
                                     <xsl:choose>
                                         <xsl:when test="@rid">
                                             <xsl:attribute name="target">
-                                                <xsl:value-of select="concat('#', @rid)"/>
+                                                <xsl:variable name="concat">
+                                                    <xsl:value-of select="concat('#',@rid)"/>
+                                                </xsl:variable>
+                                                <xsl:variable name="diese">
+                                                    <xsl:value-of select="translate($concat,' ','#')"/>
+                                                </xsl:variable>
+                                                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                                                <xsl:value-of select="normalize-space($espace)"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                         <xsl:when test="@id">
                                             <xsl:attribute name="target">
-                                                <xsl:value-of select="concat('#', @id)"/>
+                                                <xsl:variable name="concat">
+                                                    <xsl:value-of select="concat('#',@id)"/>
+                                                </xsl:variable>
+                                                <xsl:variable name="diese">
+                                                    <xsl:value-of select="translate($concat,' ','#')"/>
+                                                </xsl:variable>
+                                                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
+                                                <xsl:value-of select="normalize-space($espace)"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                     </xsl:choose>
