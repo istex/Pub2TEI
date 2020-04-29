@@ -304,21 +304,21 @@
             <xsl:apply-templates/>
         </ref>
     </xsl:template>
-    <xsl:template match="deflist">
+    <xsl:template match="deflist | rsc:deflist">
         <list>
             <xsl:apply-templates select="@*"/>
             <xsl:apply-templates/>
         </list>
     </xsl:template>
-    <xsl:template match="deflist/@type">
+    <xsl:template match="deflist/@type| rsc:deflist/@type">
         <xsl:attribute name="type">gloss</xsl:attribute>
     </xsl:template>
-    <xsl:template match="deflist/term">
+    <xsl:template match="deflist/term |rsc:deflist/rsc:term">
         <label>
             <xsl:apply-templates/>
         </label>
     </xsl:template>
-    <xsl:template match="deflist/defn">
+    <xsl:template match="deflist/defn | rsc:deflist/rsc:defn">
         <item>
             <xsl:apply-templates/>
         </item>
@@ -327,8 +327,8 @@
     <xsl:template match="bdy"/>
     <!-- SG - Nature: nettoyage des auteurs coincés dans le bdy (ex:nature_body_corres.xml) -->
     <xsl:template match="bdy/corres/aug"/>
-    <xsl:template match="deflist/@colwd"/>
-    <xsl:template match="deflist/@sepch"/>
+    <xsl:template match="deflist/@colwd |rsc:deflist/@colwd"/>
+    <xsl:template match="deflist/@sepch | rsc:deflist/@sepch"/>
     <!-- SG - Nature: nettoyage du <linkgrp> polluant -->
     <xsl:template match="linkgrp"/>
     <!-- Lists -->

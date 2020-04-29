@@ -1812,7 +1812,7 @@
             </analytic>
             <monogr>
                 <!-- Bloc RSL version dtd highWire -->
-                <xsl:if test="//art/@jid='roybiogmem'">
+                <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
                     <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
                     <title level="j" type="alt">roybiogmem</title>
                     <idno type="pISSN">0080-4606</idno>
@@ -1885,35 +1885,35 @@
                 <xsl:apply-templates select="//conference"/>
                 <imprint>
                     <!-- Bloc RSL version dtd highWire -->
-                    <xsl:if test="//art/@jid='roybiogmem'">
-                        <xsl:if test="//art/@vol !=0">
+                    <xsl:if test="//art/@jid |//rsc:art/@jid='roybiogmem'">
+                        <xsl:if test="//art/@vol|//rsc:art/@vol !=0">
                             <biblScope unit="vol">
-                                <xsl:value-of select="//art/@vol"/>
+                                <xsl:value-of select="//art/@vol | //rsc:art/@vol"/>
                             </biblScope>
                         </xsl:if>
-                        <xsl:if test="//art/@issue !=0">
+                        <xsl:if test="//art/@issue|//rsc:art/@issue !=0">
                             <biblScope unit="issue">
-                                <xsl:value-of select="//art/@issue"/>
+                                <xsl:value-of select="//art/@issue |//rsc:art/@issue"/>
                             </biblScope>
                         </xsl:if>
-                        <xsl:if test="//art/@fpage !=0">
-                            <biblScope unit="page" from="{//art/@fpage}">
-                                <xsl:value-of select="normalize-space(//art/@fpage)"/>
+                        <xsl:if test="//art/@fpage|//rsc:art/@fpage !=0">
+                            <biblScope unit="page" from="{//art/@fpage|//rsc:art/@fpage}">
+                                <xsl:value-of select="normalize-space(//art/@fpage|//rsc:art/@fpage)"/>
                             </biblScope>
                         </xsl:if>
-                        <xsl:if test="//art/@lpage !=0">
-                            <biblScope unit="page" to="{//art/@lpage}">
-                                <xsl:value-of select="normalize-space(//art/@lpage)"/>
+                        <xsl:if test="//art/@lpage|//rsc:art/@lpage !=0">
+                            <biblScope unit="page" to="{//art/@lpage|//rsc:art/@lpage}">
+                                <xsl:value-of select="normalize-space(//art/@lpage|//rsc:art/@lpage)"/>
                             </biblScope>
                         </xsl:if>
                         <publisher>The Royal Society of London</publisher>
                         <pubPlace>London, UK</pubPlace>
                         <xsl:choose>
-                            <xsl:when test="//art/coverdate/@yr">
-                                <date type="published" when="{//art/coverdate/@yr}"/>
+                            <xsl:when test="//art/coverdate/@yr |//rsc:art/rsc:coverdate/@yr">
+                                <date type="published" when="{//art/coverdate/@yr|//rsc:art/rsc:coverdate/@yr}"/>
                             </xsl:when>
-                            <xsl:when test="//art/copyright/@yr">
-                                <date type="published" when="{//art/copyright/@yr}"/>
+                            <xsl:when test="//art/copyright/@yr|//rsc:art/rsc:copyright/@yr">
+                                <date type="published" when="{//art/copyright/@yr|//rsc:art/rsc:copyright/@yr}"/>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:if>
@@ -3234,7 +3234,7 @@
     </xsl:template>
 
     <!-- We just get rid of all <p>s in <def>s -->
-    <xsl:template match="def/p">
+    <xsl:template match="def/p | rsc:def/rsc:p">
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -3304,28 +3304,28 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="def-list">
+    <xsl:template match="def-list | rsc:def-list">
         <list type="termlist">
             <!-- To be compliant with the ISO style for terms and definitions ;-) -->
             <xsl:apply-templates/>
         </list>
     </xsl:template>
 
-    <xsl:template match="def-item">
+    <xsl:template match="def-item | rsc:def-item">
         <item>
             <!-- To be compliant with the ISO style for terms and definitions ;-) -->
             <xsl:apply-templates/>
         </item>
     </xsl:template>
 
-    <xsl:template match="term">
+    <xsl:template match="term | rsc:term">
         <term>
             <!-- To be compliant with the ISO style for terms and definitions ;-) -->
             <xsl:apply-templates/>
         </term>
     </xsl:template>
 
-    <xsl:template match="def">
+    <xsl:template match="def|rsc:def">
         <gloss>
             <!-- To be compliant with the ISO style for terms and definitions ;-) -->
             <xsl:apply-templates/>
@@ -3730,6 +3730,11 @@
                 <head>
                     <xsl:apply-templates/>
                 </head>
+            </xsl:when>
+            <xsl:when test="ancestor::biography|ancestor::rsc:biography">
+                <bibl>
+                    <xsl:apply-templates/>
+                </bibl>
             </xsl:when>
             <xsl:when test="ancestor::citgroup | ancestor::rsc:citgroup">
                 <title level="m" type="main">

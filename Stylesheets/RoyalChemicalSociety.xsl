@@ -637,6 +637,25 @@
             </xsl:if>
         </author>
     </xsl:template>
+    
+    <xsl:template match="biography |rsc:biography">
+        <state type="biography">
+            <xsl:if test="@id">
+                <xsl:attribute name="type">
+                <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@xsrc">
+                <xsl:attribute name="corresp">
+                    <xsl:value-of select="@xsrc"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </state>
+    </xsl:template>
+    <xsl:template match="plate |rsc:plate">
+            <xsl:apply-templates/>
+    </xsl:template>
 
     <!-- Specific to RCS: references to compound -->
 
@@ -738,6 +757,9 @@
     <xsl:template match="section | rsc:section">
         <xsl:choose>
             <xsl:when test="ancestor::box |ancestor::rsc:box">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:when test="ancestor::biography |ancestor::rsc:biography">
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
