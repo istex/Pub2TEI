@@ -3802,14 +3802,7 @@
         </div>
     </xsl:template>
 
-    <!-- footnote -->
-    <xsl:template match="footnote">
-        <note place="foot">
-            <!-- id -->
-            <xsl:attribute name="xml:id" select="@id"/>
-            <xsl:value-of select="normalize-space(.)"/>
-        </note>
-    </xsl:template>
+    
     
     <!-- FIN FOOTNOTES *********************** -->
    

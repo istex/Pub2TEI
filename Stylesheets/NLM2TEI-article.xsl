@@ -3333,7 +3333,7 @@
     </xsl:template>
 
     <!-- Lists -->
-    <xsl:template match="list">
+    <xsl:template match="list |rsc:list">
         <list>
             <xsl:if test="@list-type">
                 <xsl:attribute name="type">
@@ -3345,12 +3345,12 @@
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="li|item|list-item">
+            <xsl:if test="li|item|list-item | rsc:li|rsc:item|rsc:list-item">
                 <xsl:apply-templates/>
             </xsl:if>
         </list>
     </xsl:template>
-    <xsl:template match="list-item">
+    <xsl:template match="list-item |rsc:list-item">
         <item>
             <xsl:apply-templates/>
         </item>
@@ -3714,7 +3714,7 @@
 
     <xsl:template match="allowbreak"/>
 
-    <xsl:template match="title">
+    <xsl:template match="title | rsc:title">
         <xsl:choose>
             <xsl:when test="ancestor::record">
                 <title level="a" type="main" xml:lang="{translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')}">
@@ -3731,7 +3731,7 @@
                     <xsl:apply-templates/>
                 </head>
             </xsl:when>
-            <xsl:when test="ancestor::citgroup">
+            <xsl:when test="ancestor::citgroup | ancestor::rsc:citgroup">
                 <title level="m" type="main">
                     <xsl:apply-templates/>
                 </title>

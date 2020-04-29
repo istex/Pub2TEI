@@ -177,12 +177,12 @@
             <xsl:apply-templates/>
         </head>
     </xsl:template>
-    <xsl:template match="li">
+    <xsl:template match="li| rsc:li">
         <item>
             <xsl:apply-templates/>
         </item>
     </xsl:template>
-    <xsl:template match="item">
+    <xsl:template match="item | rsc:item">
         <item>
             <xsl:apply-templates/>
         </item>
@@ -811,7 +811,7 @@
         </ref>
     </xsl:template>
 	
-    <xsl:template match="schemref">
+    <xsl:template match="schemref | rsc:schemref">
         <ref type="schema">
             <xsl:attribute name="target">
                 <xsl:value-of select="concat('#',@idrefs)"/>
@@ -837,7 +837,7 @@
         </figure>
     </xsl:template>
 
-    <xsl:template match="figref">
+    <xsl:template match="figref |rsc:figref">
         <ref type="figure">
             <xsl:attribute name="target">
                 <xsl:value-of select="concat('#',@idrefs)"/>
@@ -846,7 +846,7 @@
     </xsl:template>
 
 
-    <xsl:template match="tableref">
+    <xsl:template match="tableref | rsc:tableref">
         <ref type="table">
             <xsl:attribute name="target">
                 <xsl:value-of select="concat('#',@idrefs)"/>
@@ -854,7 +854,7 @@
         </ref>
     </xsl:template>
     
-    <xsl:template match="ancref">
+    <xsl:template match="ancref | rsc:ancref">
         <ref type="anchor" target="{concat('#',@rid)}">
             <xsl:apply-templates/>
         </ref>
@@ -902,7 +902,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="bold | ce:bold | Emphasis[@Type='Bold'] | emph[@display='bold'] | wiley:b | b|bo">
+    <xsl:template match="bold | ce:bold | Emphasis[@Type='Bold'] | emph[@display='bold'] | wiley:b | b|bo|rsc:bo">
     <xsl:choose>
         <xsl:when test="parent::aff">
             <xsl:value-of select="normalize-space(.)"/>
@@ -928,9 +928,9 @@
     </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="Emphasis[@Type='SmallCaps'] | ce:small-caps | sc | scp | wiley:sc">
+    <xsl:template match="Emphasis[@Type='SmallCaps'] | ce:small-caps | sc | scp| rsc:sc | rsc:scp | wiley:sc">
         <xsl:choose>
-            <xsl:when test="ancestor::label"/>
+            <xsl:when test="ancestor::label |ancestor::rsc:label"/>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.)">
                     <hi rend="smallCaps">
@@ -978,11 +978,11 @@
     <xsl:template match="Superscript |rsc:Superscript | ce:sup | super| rsc:super | wiley:sup">
         <xsl:if test="normalize-space(.)"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
-    <xsl:template match="sup">
+    <xsl:template match="sup| rsc:sup">
         <xsl:if test=".!=''">
             <xsl:choose>
                 <!-- nettoyage des labels dans les affiliations -->
-                <xsl:when test="parent::aff"/>
+                <xsl:when test="parent::aff |parent::rsc:aff"/>
                 <xsl:otherwise>
                     <hi rend="superscript">
                         <xsl:apply-templates/>

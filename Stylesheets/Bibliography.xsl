@@ -664,12 +664,12 @@
             </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="citpub">
+    <xsl:template match="citpub |rsc:citpub">
         <publisher>
             <xsl:apply-templates/>
         </publisher>
     </xsl:template>
-    <xsl:template match="pubplace">
+    <xsl:template match="pubplace | rsc:pubplace">
         <pubPlace>
             <xsl:apply-templates/>
         </pubPlace>
@@ -840,9 +840,9 @@
             <xsl:text>et al.</xsl:text>
         </author>
     </xsl:template>
-    <xsl:template match="editor">
+    <xsl:template match="editor | rsc:editor">
         <editor>
-            <xsl:if test="not(ancestor::citation)">
+            <xsl:if test="not(ancestor::citation | ancestor::rsc:citation)">
                 <xsl:attribute name="xml:id">
                     <xsl:variable name="i" select="position() - 1"/>
                     <xsl:choose>

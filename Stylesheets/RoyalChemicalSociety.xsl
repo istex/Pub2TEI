@@ -176,7 +176,14 @@
                             </xsl:variable>
                             <!-- niveau article / chapter -->
                             <xsl:attribute name="source">
-                                <xsl:value-of select="$articleType |//article/@type | //rsc:article/@type"/>
+                                <xsl:choose>
+                                    <xsl:when test="//article/@type | //rsc:article/@type">
+                                        <xsl:value-of select="//article/@type | //rsc:article/@type"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$articleType"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="scheme">
                                 <xsl:value-of select="$codeGenreRSCArk"/>
@@ -301,6 +308,11 @@
                             <xsl:value-of select="//article/published[@type='print']/journalref/title[@type='full']| //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='full']"/>
                         </title>
                     </xsl:when>
+                    <xsl:when test="//article/published[@type='subsyear']/journalref/title[@type='full'] | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='full'] !=''">
+                        <title level="j" type="main">
+                            <xsl:value-of select="//article/published[@type='subsyear']/journalref/title[@type='full']| //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='full']"/>
+                        </title>
+                    </xsl:when>
                     <xsl:when test="//article/published[@type='print']/journalref/title | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title !=''">
                         <title level="j" type="main">
                             <xsl:value-of select="//article/published[@type='print']/journalref/title| //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title "/>
@@ -317,26 +329,34 @@
                         </title>
                     </xsl:when>
                 </xsl:choose>
-                <xsl:if test="//article/published[@type='print']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
-                    <title level="j" type="abbrev">
-                        <xsl:value-of select="//article/published[@type='print']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='abbreviated']"/>
-                    </title>
-                </xsl:if>
-                <xsl:if test="//article/published[@type='book']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
-                    <title level="m" type="abbrev">
-                        <xsl:value-of select="//article/published[@type='book']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:title[@type='abbreviated']"/>
-                    </title>
-                </xsl:if>
-                <xsl:if test="//article/published[@type='print']/journalref/sercode | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:sercode !=''">
-                    <idno type="sercode">
-                        <xsl:value-of select="//article/published[@type='print']/journalref/sercode | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:sercode"/>
-                    </idno>
-                </xsl:if>
-                <xsl:if test="//article/published[@type='book']/journalref/sercode | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:sercode !=''">
-                    <idno type="sercode">
-                        <xsl:value-of select="//article/published[@type='book']/journalref/sercode | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:sercode"/>
-                    </idno>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="//article/published[@type='print']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
+                        <title level="j" type="abbrev">
+                            <xsl:value-of select="//article/published[@type='print']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='abbreviated']"/>
+                        </title>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='subsyear']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
+                        <title level="j" type="abbrev">
+                            <xsl:value-of select="//article/published[@type='subsyear']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='abbreviated']"/>
+                        </title>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='book']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
+                        <title level="m" type="abbrev">
+                            <xsl:value-of select="//article/published[@type='book']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:title[@type='abbreviated']"/>
+                        </title>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='print']/journalref/sercode | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:sercode !=''">
+                        <idno type="sercode">
+                            <xsl:value-of select="//article/published[@type='print']/journalref/sercode | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:sercode"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="//article/published[@type='book']/journalref/sercode | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:sercode !=''">
+                        <idno type="sercode">
+                            <xsl:value-of select="//article/published[@type='book']/journalref/sercode | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:sercode"/>
+                        </idno>
+                    </xsl:when>
+                </xsl:choose>
+                
                 <xsl:choose>
                     <xsl:when test="//article/published[@type='subsyear']/journalref/issn | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:issn[string-length() &gt; 0]">
                         <xsl:for-each select="//article/published[@type='subsyear']/journalref/issn | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:issn">
@@ -585,6 +605,26 @@
 
     <xsl:template match="/article/art-front/authgrp/author | /rsc:article/rsc:art-front/rsc:authgrp/rsc:author">
         <author>
+            <xsl:variable name="i" select="position()-1"/>
+            <xsl:variable name="authorNumber">
+                <xsl:choose>
+                    <xsl:when test="$i &lt; 10">
+                        <xsl:value-of select="concat('author-000', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 100">
+                        <xsl:value-of select="concat('author-00', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 1000">
+                        <xsl:value-of select="concat('author-0', $i)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('author-', $i)"/>
+                    </xsl:otherwise>
+                </xsl:choose> 
+            </xsl:variable>
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="$authorNumber"/>
+                </xsl:attribute>
             <xsl:if test="@role='corres'">
                 <xsl:attribute name="role">
                     <xsl:text>corresp</xsl:text>
@@ -620,23 +660,28 @@
                         <xsl:apply-templates select="//aff[@id=$text]/org/orgname/* | //rsc:aff[@id=$text]/rsc:org/rsc:orgname/*"/>
                         <xsl:apply-templates select="//aff[@id=$text]/address | //rsc:aff[@id=$text]/rsc:address" mode="rsc"/>
                     </affiliation>
+                    <!-- EMAIL -->
+                    <xsl:if test="//art-front/authgrp/aff[@id=$text]/email | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email[string-length() &gt; 0 ]">
+                        <email>                                     
+                            <xsl:value-of select="normalize-space(//art-front/authgrp/aff[@id=$text]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email)"/>
+                        </email>
+                    </xsl:if>   
                 </xsl:if>
-                <!-- EMAIL -->
-                <xsl:if test="//art-front/authgrp/aff[@id=$text]/email[string-length() &gt; 0 ]">
-                    <email>                                     
-                        <xsl:value-of select="normalize-space(//art-front/authgrp/aff[@id=$text]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email)"/>
-                    </email>
-                </xsl:if>   
             </xsl:when>
             <xsl:otherwise>
-                <affiliation>
                 <xsl:variable name="aff">
                     <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
                 </xsl:variable>
+                <affiliation>
                     <xsl:apply-templates select="//aff[@id=$aff]/org/orgname/* | //rsc:aff[@id=$aff]/rsc:org/rsc:orgname/*"/>
                     <xsl:apply-templates select="//aff[@id=$aff]/address| //rsc:aff[@id=$aff]/rsc:address" mode="rsc"/>
-                    <xsl:apply-templates select="//aff[@id=$aff]/email | //rsc:aff[@id=$aff]/rsc:email"/>
                 </affiliation>
+                <!-- EMAIL -->
+                <xsl:if test="//art-front/authgrp/aff[@id=$aff]/email | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$aff]/rsc:email[string-length() &gt; 0 ]">
+                    <email>                                     
+                        <xsl:value-of select="normalize-space(//art-front/authgrp/aff[@id=$aff]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$aff]/rsc:email)"/>
+                    </email>
+                </xsl:if>   
                 <xsl:call-template name="tokenize">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
                 </xsl:call-template>
@@ -730,5 +775,14 @@
         <head>
             <xsl:apply-templates/>
         </head>
+    </xsl:template>
+    
+    <!-- footnote -->
+    <xsl:template match="footnote | rsc:footnote">
+        <note place="foot">
+            <!-- id -->
+            <xsl:attribute name="xml:id" select="@id"/>
+            <xsl:value-of select="normalize-space(.)"/>
+        </note>
     </xsl:template>
 </xsl:stylesheet>

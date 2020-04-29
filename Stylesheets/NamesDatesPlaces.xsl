@@ -164,6 +164,20 @@
                             <xsl:with-param name="country" select="@country_code"/>
                         </xsl:call-template>
                     </xsl:when>
+                    <!-- rattrapage des ecritures alambiquées -->
+                    <xsl:when test=".='P. R. China'">
+                        <xsl:variable name="change">
+                            <xsl:text>CHINA</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">
