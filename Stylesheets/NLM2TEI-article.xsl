@@ -3335,6 +3335,11 @@
     <!-- Lists -->
     <xsl:template match="list |rsc:list">
         <list>
+            <xsl:if test="@type">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@type"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="@list-type">
                 <xsl:attribute name="type">
                     <xsl:value-of select="@list-type"/>
@@ -3399,10 +3404,10 @@
         </head>
     </xsl:template>
 
-    <xsl:template match="graphic">
+    <xsl:template match="graphic | ugraphic |rsc:ugraphic">
         <xsl:choose>
-            <xsl:when test="ancestor::table-wrap"/>
-            <xsl:when test="parent::abstract">
+            <xsl:when test="ancestor::table-wrap |ancestor::rsc:table-wrap"/>
+            <xsl:when test="parent::abstract | parent::rsc:abstract">
                 <p>
                 <graphic>
                     <xsl:attribute name="url">
@@ -3415,7 +3420,7 @@
             <xsl:otherwise>
                 <graphic>
                     <xsl:attribute name="url">
-                        <xsl:value-of select="@xlink:href"/>
+                        <xsl:value-of select="@xlink:href|@src"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </graphic>

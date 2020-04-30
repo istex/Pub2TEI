@@ -90,7 +90,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="quotation">
+    <xsl:template match="quotation |rsc:quotation">
         <quote>
             <xsl:apply-templates/>
         </quote>
