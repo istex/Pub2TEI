@@ -40,13 +40,10 @@
                             </xsl:attribute>
                         </xsl:if>
                     
-                        <xsl:if test="rsc:citext | citext and not(.)">
+                        <xsl:if test="rsc:citext | citext">
                             <xsl:for-each select="rsc:citext| citext">
-                                <xsl:variable name="citext">
-                                    <xsl:apply-templates select="."/>
-                                </xsl:variable>
                                 <title>
-                                    <xsl:value-of select="normalize-space($citext)"/>
+                                    <xsl:apply-templates/>
                                 </title>
                                 <xsl:if test="rsc:url/@url[string-length() &gt; 0] | url/@url[string-length() &gt; 0]">
                                     <idno>

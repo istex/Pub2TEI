@@ -1051,4 +1051,22 @@
             <xsl:value-of select="normalize-space(.)"/>
         </biblScope>
     </xsl:template>
+    <!--compound-->
+    <xsl:template match="compoundgrp | rsc:compoundgrp">
+        <xsl:if test="compound/@id | rsc:compound/@id |compound | rsc:compound!=''">
+        <div type="compoundgrp">
+            <list type="compound">
+                <xsl:apply-templates/>
+            </list>
+        </div>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="compound |rsc:compound">
+        <item xml:id="{@id}">
+            <xsl:variable name="compound">
+                <xsl:apply-templates/>
+            </xsl:variable>
+           <xsl:value-of select="normalize-space($compound)"/>
+        </item>
+    </xsl:template>
 </xsl:stylesheet>
