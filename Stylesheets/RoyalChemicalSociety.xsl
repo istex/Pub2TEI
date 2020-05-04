@@ -348,7 +348,8 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:variable name="code">
-                            <xsl:value-of select="normalize-space(//rsc:published[@type='subsyear']/rsc:journalref/rsc:sercode | //published[@type='subsyear']/journalref/sercode)"/>
+                            <xsl:value-of select="//rsc:published[@type='subsyear']/rsc:journalref/rsc:sercode | //published[@type='subsyear']/journalref/sercode
+                                |//rsc:published[@type='print']/rsc:journalref/rsc:link | //published[@type='print']/journalref/link"/>
                         </xsl:variable>
                         <xsl:variable name="code2">
                             <xsl:choose>
@@ -532,10 +533,10 @@
                                 <xsl:when test="normalize-space($code)='TF'">Trans. Faraday Soc.</xsl:when>
                             </xsl:choose>
                         </xsl:variable>
-                        <title level="m" type="main">
+                        <title level="j" type="main">
                             <xsl:value-of select="$code2"/>
                         </title>
-                        <title level="m" type="abbreviated">
+                        <title level="j" type="abbreviated">
                             <xsl:value-of select="$code3"/> 
                         </title>
                     </xsl:otherwise>
