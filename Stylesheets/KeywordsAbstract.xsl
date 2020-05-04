@@ -211,7 +211,17 @@
                     </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="contains(.,',')">
+            <xsl:when test="contains(.,' , ')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains(.,'; ')">
                 <xsl:call-template name="ParseKeyword">
                     <xsl:with-param name="theKeyword">
                         <xsl:variable name="substringKeywords">
@@ -236,8 +246,11 @@
                 <xsl:when test="contains($theKeyword,' – ')">
                     <xsl:value-of select="normalize-space(substring-before($theKeyword,' – '))"/>
                 </xsl:when>
-                <xsl:when test="contains($theKeyword,', ')">
-                    <xsl:value-of select="normalize-space(substring-before($theKeyword,','))"/>
+                <xsl:when test="contains($theKeyword,' , ')">
+                    <xsl:value-of select="normalize-space(substring-before($theKeyword,' , '))"/>
+                </xsl:when>
+                <xsl:when test="contains($theKeyword,'; ')">
+                    <xsl:value-of select="normalize-space(substring-before($theKeyword,'; '))"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="normalize-space($theKeyword)"/>
@@ -249,8 +262,11 @@
                 <xsl:when test="contains($theKeyword,' – ')">
                     <xsl:value-of select="normalize-space(substring-after($theKeyword,' – '))"/>
                 </xsl:when>
-                <xsl:when test="contains($theKeyword,', ')">
-                    <xsl:value-of select="normalize-space(substring-after($theKeyword,','))"/>
+                <xsl:when test="contains($theKeyword,' , ')">
+                    <xsl:value-of select="normalize-space(substring-after($theKeyword,' , '))"/>
+                </xsl:when>
+                <xsl:when test="contains($theKeyword,'; ')">
+                    <xsl:value-of select="normalize-space(substring-after($theKeyword,'; '))"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="''"/>
@@ -269,6 +285,9 @@
                     <xsl:choose>
                         <xsl:when test="contains($avantTiret,'Keywords: ')">
                             <xsl:value-of select="substring-after($avantTiret,'Keywords: ')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($avantTiret,'Abbreviations: ')">
+                            <xsl:value-of select="substring-after($avantTiret,'Abbreviations: ')"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$avantTiret"/>
