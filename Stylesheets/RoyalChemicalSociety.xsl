@@ -775,14 +775,26 @@
                             <xsl:value-of select="$issue"/>
                         </biblScope>
                     </xsl:if>
-                    <xsl:apply-templates select="published[@type='print']/pubfront/fpage |published[@type='book']/pubfront/fpage
-                        | rsc:published[@type='print']/rsc:pubfront/rsc:fpage |rsc:published[@type='book']/rsc:pubfront/rsc:fpage"/>
-                    <xsl:apply-templates select="published[@type='print']/pubfront/lpage |published[@type='book']/pubfront/lpage
-                        | rsc:published[@type='print']/rsc:pubfront/rsc:lpage |rsc:published[@type='book']/rsc:pubfront/rsc:lpage"/>
-                    <xsl:apply-templates select="published[@type='print']/pubfront/no-of-pages |published[@type='book']/pubfront/no-of-pages
-                        | rsc:published[@type='print']/rsc:pubfront/rsc:no-of-pages |rsc:published[@type='book']/rsc:pubfront/rsc:no-of-pages"/>
-                    <xsl:apply-templates select="published[@type='subsyear']/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
-                        | rsc:published[@type='subsyear']/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                    <xsl:if test="published[@type='print']/pubfront/fpage |published[@type='book']/pubfront/fpage
+                        | rsc:published[@type='print']/rsc:pubfront/rsc:fpage |rsc:published[@type='book']/rsc:pubfront/rsc:fpage !=''">
+                        <xsl:apply-templates select="published[@type='print']/pubfront/fpage |published[@type='book']/pubfront/fpage
+                            | rsc:published[@type='print']/rsc:pubfront/rsc:fpage |rsc:published[@type='book']/rsc:pubfront/rsc:fpage"/>
+                    </xsl:if>
+                    <xsl:if test="published[@type='print']/pubfront/lpage |published[@type='book']/pubfront/lpage
+                        | rsc:published[@type='print']/rsc:pubfront/rsc:lpage |rsc:published[@type='book']/rsc:pubfront/rsc:lpage !=''">
+                        <xsl:apply-templates select="published[@type='print']/pubfront/lpage |published[@type='book']/pubfront/lpage
+                            | rsc:published[@type='print']/rsc:pubfront/rsc:lpage |rsc:published[@type='book']/rsc:pubfront/rsc:lpage"/>
+                    </xsl:if>
+                    <xsl:if test="published[@type='print']/pubfront/no-of-pages |published[@type='book']/pubfront/no-of-pages
+                        | rsc:published[@type='print']/rsc:pubfront/rsc:no-of-pages |rsc:published[@type='book']/rsc:pubfront/rsc:no-of-pages !=''">
+                        <xsl:apply-templates select="published[@type='print']/pubfront/no-of-pages |published[@type='book']/pubfront/no-of-pages
+                            | rsc:published[@type='print']/rsc:pubfront/rsc:no-of-pages |rsc:published[@type='book']/rsc:pubfront/rsc:no-of-pages"/>
+                    </xsl:if>
+                    <xsl:if test="published[@type='subsyear']/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
+                        | rsc:published[@type='subsyear']/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                        <xsl:apply-templates select="published[@type='subsyear']/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
+                            | rsc:published[@type='subsyear']/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                    </xsl:if>
                 </imprint>
             </monogr>
         </biblStruct>
