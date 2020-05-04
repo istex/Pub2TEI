@@ -951,9 +951,7 @@
                     </affiliation>
                     <!-- EMAIL -->
                     <xsl:if test="//art-front/authgrp/aff[@id=$text]/email | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email[string-length() &gt; 0 ]">
-                        <email>                                     
-                            <xsl:value-of select="normalize-space(//art-front/authgrp/aff[@id=$text]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email)"/>
-                        </email>
+                        <xsl:apply-templates select="//art-front/authgrp/aff[@id=$text]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email"/>
                     </xsl:if>   
                 </xsl:if>
             </xsl:when>
@@ -967,10 +965,8 @@
                 </affiliation>
                 <!-- EMAIL -->
                 <xsl:if test="//art-front/authgrp/aff[@id=$aff]/email | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$aff]/rsc:email[string-length() &gt; 0 ]">
-                    <email>                                     
-                        <xsl:value-of select="normalize-space(//art-front/authgrp/aff[@id=$aff]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$aff]/rsc:email)"/>
-                    </email>
-                </xsl:if>   
+                    <xsl:apply-templates select="//art-front/authgrp/aff[@id=$aff]/email |//rsc:art-front/rsc:authgrp/rsc:aff[@id=$aff]/rsc:email"/>
+                </xsl:if> 
                 <xsl:call-template name="tokenize">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
                 </xsl:call-template>
@@ -1016,7 +1012,12 @@
         </xsl:variable>
         <orgName>
             <xsl:attribute name="type">
-                <xsl:value-of select="$organisation"/>
+                <xsl:choose>
+                    <xsl:when test="$organisation !=''">
+                        <xsl:value-of select="$organisation"/>
+                    </xsl:when>
+                    <xsl:otherwise>institution</xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
             <xsl:value-of select="."/>
         </orgName>
