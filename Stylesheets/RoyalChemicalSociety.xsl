@@ -681,7 +681,7 @@
                             <xsl:value-of select="normalize-space(//published[@type='web']/volumeref/link |//rsc:published[@type='web']/rsc:volumeref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:choose>
-                            <xsl:when test="$print !='0'">
+                            <xsl:when test="$print !='0' and not(starts-with($print,'00'))">
                                 <xsl:if test="$print!='Unassigned'">
                                     <xsl:if test="$print!='Advance Articles'">
                                         <xsl:value-of select="$print"/>
