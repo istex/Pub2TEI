@@ -618,11 +618,18 @@
                         </xsl:for-each>
                     </xsl:when>
                 </xsl:choose>
-                <xsl:if test="//coden | //rsc:coden">
-                    <idno type="CODEN">
-                        <xsl:value-of select="//coden | //rsc:coden"/>
-                    </idno>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="//published[@type='print']/journalref/coden | //rsc:published[@type='print']/rsc:journalref/rsc:coden">
+                        <idno type="CODEN">
+                            <xsl:value-of select="//published[@type='print']/journalref/coden | //rsc:published[@type='print']/rsc:journalref/rsc:coden"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="//published[@type='subsyear']/journalref/coden | //rsc:published[@type='subsyear']/rsc:journalref/rsc:coden">
+                        <idno type="CODEN">
+                            <xsl:value-of select="//published[@type='subsyear']/journalref/coden | //rsc:published[@type='subsyear']/rsc:journalref/rsc:coden"/>
+                        </idno>
+                    </xsl:when>
+                </xsl:choose>
                 <imprint>
                     <xsl:for-each select="article-meta/pub-date | rsc:article-meta/rsc:pub-date">
                         <xsl:message>Current: <xsl:value-of select="@pub-type"/></xsl:message>
@@ -631,6 +638,34 @@
                             <xsl:apply-templates select="."/>
                         </xsl:if>
                     </xsl:for-each>
+                    <!-- publisher -->
+                    <publisher>
+                        <xsl:choose>
+                            <xsl:when test="//article/published[@type='subsyear']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                                <xsl:value-of select="//article/published[@type='subsyear']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                            </xsl:when>
+                            <xsl:when test="//article/published[@type='book']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                                <xsl:value-of select="//article/published[@type='book']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                            </xsl:when>
+                            <xsl:when test="//article/published[@type='print']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                                <xsl:value-of select="//article/published[@type='print']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                            </xsl:when>
+                            <xsl:otherwise>The Royal Society of Chemistr</xsl:otherwise>
+                        </xsl:choose>
+                    </publisher>
+                    <!-- date de publication -->
+                    <date type="published">
+                        <xsl:attribute name="when">
+                            <xsl:value-of select="//article/published[@type='subsyear']/pubfront/date/year
+                                |//article/published[@type='book']/pubfront/date/year
+                                | //rsc:article/rsc:published[@type='subsyear']/rsc:pubfront/rsc:date/rsc:year
+                                |//rsc:article/rsc:published[@type='book']/rsc:pubfront/rsc:date/rsc:year"/>
+                        </xsl:attribute>
+                        <xsl:value-of select="//article/published[@type='subsyear']/pubfront/date/year
+                            |//article/published[@type='book']/pubfront/date/year
+                            | //rsc:article/rsc:published[@type='subsyear']/rsc:pubfront/rsc:date/rsc:year
+                            |//rsc:article/rsc:published[@type='book']/rsc:pubfront/rsc:date/rsc:year"/>
+                    </date>
                     <!-- volume -->
                     <xsl:variable name="volume">
                         <xsl:variable name="book">
@@ -1062,11 +1097,22 @@
         </xsl:if>
     </xsl:template>
     <xsl:template match="compound |rsc:compound">
-        <item xml:id="{@id}">
+        <item>
+            <xsl:if test="@id !=''">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:variable name="compound">
                 <xsl:apply-templates/>
             </xsl:variable>
            <xsl:value-of select="normalize-space($compound)"/>
         </item>
+    </xsl:template>
+    
+    <xsl:template match="arttitle |rsc:arttitle">
+        <title level="a" type="main">
+            <xsl:apply-templates/>
+        </title>
     </xsl:template>
 </xsl:stylesheet>
