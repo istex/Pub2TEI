@@ -947,7 +947,11 @@
                 <xsl:if test="//art-front/authgrp/aff[@id=$text] | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]">
                     <affiliation>
                         <xsl:apply-templates select="//aff[@id=$text]/org/orgname/* | //rsc:aff[@id=$text]/rsc:org/rsc:orgname/*"/>
-                        <xsl:apply-templates select="//aff[@id=$text]/address | //rsc:aff[@id=$text]/rsc:address" mode="rsc"/>
+                        <xsl:if test="//aff[@id=$text]/address | //rsc:aff[@id=$text]/rsc:address">
+                            <address>
+                                <xsl:apply-templates select="//aff[@id=$text]/address | //rsc:aff[@id=$text]/rsc:address" mode="rsc"/>
+                            </address>
+                        </xsl:if>
                     </affiliation>
                     <!-- EMAIL -->
                     <xsl:if test="//art-front/authgrp/aff[@id=$text]/email | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$text]/rsc:email[string-length() &gt; 0 ]">
@@ -961,7 +965,12 @@
                 </xsl:variable>
                 <affiliation>
                     <xsl:apply-templates select="//aff[@id=$aff]/org/orgname/* | //rsc:aff[@id=$aff]/rsc:org/rsc:orgname/*"/>
-                    <xsl:apply-templates select="//aff[@id=$aff]/address| //rsc:aff[@id=$aff]/rsc:address" mode="rsc"/>
+                    <xsl:if test="//aff[@id=$aff]/address | //rsc:aff[@id=$aff]/rsc:address">
+                        <address>
+                            <xsl:apply-templates select="//aff[@id=$aff]/address| //rsc:aff[@id=$aff]/rsc:address" mode="rsc"/>
+                        </address>
+                    </xsl:if>
+                   
                 </affiliation>
                 <!-- EMAIL -->
                 <xsl:if test="//art-front/authgrp/aff[@id=$aff]/email | //rsc:art-front/rsc:authgrp/rsc:aff[@id=$aff]/rsc:email[string-length() &gt; 0 ]">
@@ -975,9 +984,7 @@
     </xsl:template>
     
     <xsl:template match="address | rsc:address" mode="rsc">
-        <address>
             <xsl:apply-templates/>
-        </address>
     </xsl:template>
     
     <!-- What is below has not been checked... -->
