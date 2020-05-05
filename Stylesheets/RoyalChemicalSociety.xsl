@@ -231,14 +231,27 @@
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion"/>
-                <xsl:if test="toBeCompleted | rsc:toBeCompleted">
+                
                     <profileDesc>
-						<!-- PL: abstract is moved from <front> to here -->
+                        <!-- ******************* Language / eng par défaut voir xsd ******************************-->
+                        <langUsage>
+                            <language ident="en">en</language>
+                        </langUsage>
+                        <xsl:if test="art-front/abstract | rsc:art-front/rsc:abstract |art-front/keyword | rsc:art-front/rsc:keyword">
+                        <!-- PL: abstract is moved from <front> to here -->
                         <xsl:apply-templates select="art-front/abstract | rsc:art-front/rsc:abstract"/>
-						
-                        <xsl:apply-templates select="front/article-meta/kwd-group | rsc:front/rsc:article-meta/rsc:kwd-group"/>
+                        <textClass>
+                        <xsl:if test="art-front/keyword | rsc:art-front/rsc:keyword">
+                            <keywords scheme="keyword">
+						        <list>
+						        <xsl:apply-templates select="art-front/keyword | rsc:art-front/rsc:keyword"/>
+						        </list>
+						    </keywords>
+						</xsl:if>
+                        </textClass>
+                        </xsl:if>
                     </profileDesc>
-                </xsl:if>
+                
                 <!-- traceability -->
                 <revisionDesc>
                     <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
@@ -1139,5 +1152,18 @@
         <title level="a" type="main">
             <xsl:apply-templates/>
         </title>
+    </xsl:template>
+    
+    <xsl:template match="abstract |rsc:abstract">
+        <abstract>
+            <xsl:apply-templates/>
+        </abstract>
+    </xsl:template>
+    <xsl:template match="keyword |rsc:keyword">
+        <item>
+            <term>
+                <xsl:apply-templates/>
+            </term>
+        </item>
     </xsl:template>
 </xsl:stylesheet>
