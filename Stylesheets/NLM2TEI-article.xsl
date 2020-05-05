@@ -3751,9 +3751,9 @@
                 </head>
             </xsl:when>
             <xsl:when test="ancestor::biography|ancestor::rsc:biography">
-                <bibl>
+                <persName>
                     <xsl:apply-templates/>
-                </bibl>
+                </persName>
             </xsl:when>
             <xsl:when test="ancestor::citgroup | ancestor::rsc:citgroup">
                 <title level="m" type="main">

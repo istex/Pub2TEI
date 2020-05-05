@@ -922,7 +922,9 @@
         </state>
     </xsl:template>
     <xsl:template match="plate |rsc:plate">
+        <desc>
             <xsl:apply-templates/>
+        </desc>
     </xsl:template>
     <xsl:template match="jnltrans |rsc:jnltrans">
         <bibl type="journal">

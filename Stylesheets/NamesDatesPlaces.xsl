@@ -408,35 +408,70 @@
     </xsl:template>
 
     <xsl:template match="uri | url |rsc:uri | rsc:url | URL">
+        
         <xsl:if test=". !=''">
-            <ptr type="url">
-                <xsl:attribute name="target">
-                    <xsl:choose>
-                        <xsl:when test="@url">
-                            <xsl:value-of select="@url"/>  
-                        </xsl:when>
-                        <xsl:when test="contains(.,'?ReadForm&amp;c%PS')">
-                            <xsl:value-of select="substring-before(.,'?ReadForm&amp;c%PS')"/>  
-                        </xsl:when>
-                        <xsl:when test="contains(.,'?option=')">
-                            <xsl:value-of select="substring-before(.,'?option=')"/>  
-                        </xsl:when>
-                        <xsl:when test="contains(.,'HTTP: ')">
-                            <xsl:value-of select="substring-after(.,'HTTP: ')"/>  
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates/>  
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
-                <xsl:if test=".">
-                    <xsl:attribute name="cRef">
-                        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="ancestor::citext|ancestor::rsc:citext">
+                <ref type="url">
+                    <xsl:attribute name="target">
+                        <xsl:choose>
+                            <xsl:when test="@url">
+                                <xsl:value-of select="@url"/>  
+                            </xsl:when>
+                            <xsl:when test="contains(.,'?ReadForm&amp;c%PS')">
+                                <xsl:value-of select="substring-before(.,'?ReadForm&amp;c%PS')"/>  
+                            </xsl:when>
+                            <xsl:when test="contains(.,'?option=')">
+                                <xsl:value-of select="substring-before(.,'?option=')"/>  
+                            </xsl:when>
+                            <xsl:when test="contains(.,'HTTP: ')">
+                                <xsl:value-of select="substring-after(.,'HTTP: ')"/>  
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates/>  
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:attribute>
-                </xsl:if>
-            </ptr>
+                    <xsl:if test=".">
+                        <xsl:attribute name="cRef">
+                            <xsl:apply-templates/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </ref>
+            </xsl:when>
+            <xsl:otherwise>
+                <ptr type="url">
+                    <xsl:attribute name="target">
+                        <xsl:choose>
+                            <xsl:when test="@url">
+                                <xsl:value-of select="@url"/>  
+                            </xsl:when>
+                            <xsl:when test="contains(.,'?ReadForm&amp;c%PS')">
+                                <xsl:value-of select="substring-before(.,'?ReadForm&amp;c%PS')"/>  
+                            </xsl:when>
+                            <xsl:when test="contains(.,'?option=')">
+                                <xsl:value-of select="substring-before(.,'?option=')"/>  
+                            </xsl:when>
+                            <xsl:when test="contains(.,'HTTP: ')">
+                                <xsl:value-of select="substring-after(.,'HTTP: ')"/>  
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates/>  
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:if test=".">
+                        <xsl:attribute name="cRef">
+                            <xsl:apply-templates/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </ptr>
+            </xsl:otherwise>
+        </xsl:choose>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template match="uri" mode="citation">
         <xsl:if test=". !=''">
             <idno type="url">
