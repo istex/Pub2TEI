@@ -91,17 +91,17 @@
                             <xsl:variable name="id">
                                 <xsl:value-of select="@id"/>
                             </xsl:variable>
+                            <bibl type="journal">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="normalize-space($id)"/>
+                            </xsl:attribute>
                             <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] |rsc:citation[@type='patent']
                                 | journalcit |citation[@type='book'] |citation[@type='patent']">
                                 <bibl type="journal">
-                                    <xsl:if test="$id">
-                                        <xsl:attribute name="xml:id">
-                                            <xsl:value-of select="normalize-space($id)"/>
-                                        </xsl:attribute>
-                                    </xsl:if>
                                     <xsl:apply-templates/>
                                 </bibl>
                             </xsl:for-each>
+                            </bibl>
                         </xsl:for-each>
                     </bibl>
                 </xsl:for-each>
