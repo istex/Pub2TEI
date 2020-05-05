@@ -150,7 +150,7 @@
 
     <xsl:template match="Country | country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz().','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
             <country>
                 <xsl:choose>
                     <xsl:when test="@country_code">

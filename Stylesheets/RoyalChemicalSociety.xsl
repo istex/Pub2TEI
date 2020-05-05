@@ -256,7 +256,7 @@
                 
                 <!-- traceability -->
                 <revisionDesc>
-                    <change when="{$datecreation}" who="istex" xml:id="pub2tei">formatting</change>
+                    <change when="{$releasedate}" who="istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
             </teiHeader>
             <text>
@@ -848,14 +848,7 @@
                         </sourceDesc>
                     </fileDesc>
                     <!-- versionning -->
-                    <encodingDesc>
-                        <appInfo>
-                            <application ident="pub2tei" version="" when="{$datecreation}">
-                                <label>pub2TEI</label>
-                                <desc>A set of style sheets for converting XML documents encoded in various scientific publisher formats into a common TEI format</desc>
-                            </application>
-                        </appInfo>
-                    </encodingDesc>
+                    <xsl:call-template name="insertVersion"/>
                     <profileDesc>
                         <xsl:apply-templates select="abstract | rsc:abstract"/>
                     </profileDesc>
