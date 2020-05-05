@@ -165,7 +165,7 @@
                         </xsl:call-template>
                     </xsl:when>
                     <!-- rattrapage des ecritures alambiquées -->
-                    <xsl:when test=".='P. R. China'">
+                    <xsl:when test="contains(.,'China')">
                         <xsl:variable name="change">
                             <xsl:text>CHINA</xsl:text>
                         </xsl:variable>
@@ -373,6 +373,9 @@
             <ptr type="url">
                 <xsl:attribute name="target">
                     <xsl:choose>
+                        <xsl:when test="@url">
+                            <xsl:value-of select="@url"/>  
+                        </xsl:when>
                         <xsl:when test="contains(.,'?ReadForm&amp;c%PS')">
                             <xsl:value-of select="substring-before(.,'?ReadForm&amp;c%PS')"/>  
                         </xsl:when>
@@ -382,12 +385,16 @@
                         <xsl:when test="contains(.,'HTTP: ')">
                             <xsl:value-of select="substring-after(.,'HTTP: ')"/>  
                         </xsl:when>
-                        
                         <xsl:otherwise>
                             <xsl:apply-templates/>  
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
+                <xsl:if test=".">
+                    <xsl:attribute name="cRef">
+                        <xsl:apply-templates/>
+                    </xsl:attribute>
+                </xsl:if>
             </ptr>
         </xsl:if>
     </xsl:template>

@@ -45,12 +45,6 @@
                                 <title>
                                     <xsl:apply-templates/>
                                 </title>
-                                <xsl:if test="rsc:url/@url[string-length() &gt; 0] | url/@url[string-length() &gt; 0]">
-                                    <idno>
-                                        <xsl:attribute name="type">url</xsl:attribute>
-                                        <xsl:value-of select="normalize-space(rsc:url/@url| url/@url)"/>
-                                    </idno>
-                                </xsl:if>
                             </xsl:for-each>
                         </xsl:if>
                         
