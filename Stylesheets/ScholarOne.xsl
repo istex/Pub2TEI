@@ -394,7 +394,7 @@
     
 
     <xsl:template match="comments">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
 <!--nettoyage des espaces vides dans le contenu des balises-->
             <note>
                 <xsl:apply-templates/>

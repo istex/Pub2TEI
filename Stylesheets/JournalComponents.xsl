@@ -1882,7 +1882,7 @@
 reactorsa'</title>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
+                <xsl:if test=". !=''">
                     <title level="a" type="main">
                         <xsl:apply-templates/>
                         <xsl:if test="//article/front/article-meta/title-group/article-title ='REVIEWS' and //product/source">
@@ -1969,7 +1969,7 @@ reactorsa'</title>
     <!-- EDP - trans-title-group -->
     <xsl:template
         match="trans-title-group">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="a" type="alt">
                 <xsl:if test="@xml:lang">
                     <xsl:attribute name="xml:lang">
@@ -1997,7 +1997,7 @@ reactorsa'</title>
     </xsl:template>
     <!-- BMJ: short-title -->
     <xsl:template match="short-title">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="a" type="short">
                 <xsl:if test="@Language">
                     <xsl:attribute name="xml:lang">
@@ -2012,14 +2012,14 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="subtitle | article_sub_title|art_stitle">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="a" type="sub">
                 <xsl:apply-templates/>
             </title>
         </xsl:if>
     </xsl:template>
     <xsl:template match="subtitle" mode="monogr">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="m" type="sub">
                 <xsl:apply-templates/>
             </title>
@@ -2031,7 +2031,7 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="vernacular_title">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="a" type="vernacular">
                 <xsl:apply-templates/>
             </title>
@@ -2106,7 +2106,7 @@ reactorsa'</title>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="suppttl">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="j" type="sub">
                 <xsl:apply-templates/>
             </title>
@@ -2116,7 +2116,7 @@ reactorsa'</title>
     <!-- SG - ajout des refs book -->
     <xsl:template
         match="wiley:bookTitle">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="m" type="main">
                 <xsl:apply-templates/>
             </title>
@@ -2126,7 +2126,7 @@ reactorsa'</title>
     <!-- SG - ajout des refs series -->
     <xsl:template
         match="wiley:bookSeriesTitle">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="s" type="main">
                 <xsl:apply-templates/>
             </title>
@@ -2134,7 +2134,7 @@ reactorsa'</title>
     </xsl:template>
     
     <xsl:template match="btl">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="m" type="main">
                 <xsl:apply-templates/>
             </title>
@@ -2144,7 +2144,7 @@ reactorsa'</title>
     <!-- Additional journal namings -->
 
     <xsl:template match="journal_abbreviation | abbrev-journal-title | els1:jid| els2:jid | JournalShortTitle | j-shorttitle|JournalAbbreviatedTitle">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:choose>
                 <xsl:when test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
                     <title level="m" type="abbrev">
@@ -2176,7 +2176,7 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="pubmed_abbreviation">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="j" type="pubmed">
                 <xsl:value-of select="normalize-space()"/>
             </title>
@@ -2225,7 +2225,7 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="j-edpsname | JournalEDPSName">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <title level="j" type="EDPSName">
                 <xsl:apply-templates/>
             </title>
@@ -2234,7 +2234,7 @@ reactorsa'</title>
 
     <!-- Issue titles -->
     <xsl:template match="issue_description | issue-title | IssueTitle">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:choose>
                 <xsl:when test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
                     <title level="m" type="issue">
@@ -2371,7 +2371,7 @@ reactorsa'</title>
     </xsl:template>
     <!-- SG - ajout DOI niveau book - pour matcher avec les reversement du Hub de métadonnées-->
     <xsl:template match="wiley:publicationMeta[@level='product']/wiley:doi">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:variable name="DOIValue" select="string(.)"/>
             <idno type="book-DOI">
                 <xsl:choose>
@@ -2388,7 +2388,7 @@ reactorsa'</title>
     
     <!-- SG - ajout DOI niveau book-part-->
     <xsl:template match="wiley:publicationMeta[@level='part']/wiley:doi">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:variable name="DOIValue" select="string(.)"/>
             <idno type="book-part-DOI">
                 <xsl:choose>
@@ -2433,7 +2433,7 @@ reactorsa'</title>
 
     <xsl:template
         match="article_id[@id_type='doi'] | article-id[@pub-id-type='doi'] | ArticleDOI | doi| rsc:doi | ArticleId[@IdType='doi'] | ce:doi | @doi | DOI | ChapterDOI | wiley:publicationMeta[@level='unit']/wiley:doi">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:variable name="DOIValue" select="string(.)"/>
             <idno type="DOI">
                 <xsl:choose>
@@ -2457,7 +2457,7 @@ reactorsa'</title>
     </xsl:template>
     <xsl:template
         match="ms-id | rsc:ms-id">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="ms-id">
                 <xsl:value-of select="normalize-space(.)"/>
             </idno>
@@ -2465,7 +2465,7 @@ reactorsa'</title>
     </xsl:template>
     <xsl:template
         match="pii | rsc:pii">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="pii">
                 <xsl:value-of select="normalize-space(.)"/>
             </idno>
@@ -2473,7 +2473,7 @@ reactorsa'</title>
     </xsl:template>
     <xsl:template
         match="sici| rsc:sici">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="sici">
                 <xsl:value-of select="normalize-space(.)"/>
             </idno>
@@ -2504,7 +2504,7 @@ reactorsa'</title>
 
     <xsl:template
         match="ce:pii | article_id[@id_type='pii'] | article-id[@pub-id-type='pii'] | ArticleId[@IdType='pii']">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="PII">
                 <xsl:value-of select="normalize-space(.)"/>
             </idno>
@@ -2515,7 +2515,7 @@ reactorsa'</title>
     <!-- BMJ: manuscript-number; Springer: ArticleID -->
 
     <xsl:template match="manuscript-number | @ms_no | ArticleID ">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="manuscript">
                 <xsl:value-of select="normalize-space(.)"/>
             </idno>
@@ -2605,7 +2605,7 @@ reactorsa'</title>
                                 <biblScope unit="vol">1</biblScope>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:if test="normalize-space(.)">
+                                <xsl:if test=". !=''">
                                     <biblScope unit="vol">
                                         <xsl:value-of select="normalize-space(.)"/>
                                     </biblScope>
@@ -2627,7 +2627,7 @@ reactorsa'</title>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
+                <xsl:if test=". !=''">
                     <date when="{.}">
                         <xsl:apply-templates/>
                     </date>
@@ -2639,7 +2639,7 @@ reactorsa'</title>
     <!-- 2 special rules for Springer that provides, beginning and end volume number -->
 
     <xsl:template match="VolumeIDStart">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <biblScope unit="vol" from="{normalize-space(.)}">
                 <xsl:apply-templates/>
             </biblScope>
@@ -2647,7 +2647,7 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="VolumeIDEnd">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <biblScope unit="vol" to="{normalize-space(.)}">
                 <xsl:apply-templates/>
             </biblScope>
@@ -2719,7 +2719,7 @@ reactorsa'</title>
     <!-- 2 special rules for Springer that provides, beginning and end volume number -->
 
     <xsl:template match="IssueIDStart">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <biblScope unit="issue" from="{normalize-space(.)}">
                 <xsl:apply-templates/>
             </biblScope>
@@ -2727,7 +2727,7 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="IssueIDEnd">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <biblScope unit="issue" to="{normalize-space(.)}">
                 <xsl:apply-templates/>
             </biblScope>
@@ -2833,7 +2833,7 @@ reactorsa'</title>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
+                <xsl:if test=". !=''">
                     <publisher>
                         <xsl:choose>
                             <xsl:when test="contains(.,'Springer')">
@@ -2868,7 +2868,7 @@ reactorsa'</title>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
+                <xsl:if test=". !=''">
                     <pubPlace>
                         <xsl:apply-templates/>
                     </pubPlace>

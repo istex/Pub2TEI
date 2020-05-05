@@ -76,7 +76,7 @@
                         <xsl:apply-templates/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:if test="normalize-space(.)">
+                        <xsl:if test=". !=''">
                             <figure>
                                 <figDesc>
                                     <xsl:apply-templates/>

@@ -973,7 +973,7 @@
 
     <xsl:template
         match="i  | ce:italic | Emphasis[@Type='Italic'] | italic | emph[@display='italic'] | wiley:i">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:choose>
                 <!-- nettoyage des labels dans les affiliations -->
                 <xsl:when test="parent::aff">
@@ -1014,7 +1014,7 @@
             </biblScope>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:if test="normalize-space(.)">
+            <xsl:if test=". !=''">
                 <hi rend="bold">
                     <xsl:apply-templates/>
                 </hi></xsl:if>
@@ -1026,7 +1026,7 @@
         <xsl:choose>
             <xsl:when test="ancestor::label |ancestor::rsc:label"/>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.)">
+                <xsl:if test=". !=''">
                     <hi rend="smallCaps">
                         <xsl:apply-templates/>
                     </hi>
@@ -1036,7 +1036,7 @@
     </xsl:template>
 
     <xsl:template match="Emphasis | emph">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <hi>
                 <xsl:choose>
                     <xsl:when test="@Type">
@@ -1070,7 +1070,7 @@
     </xsl:template>
     
     <xsl:template match="Superscript |rsc:Superscript | ce:sup | super| rsc:super | wiley:sup">
-        <xsl:if test="normalize-space(.)"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
+        <xsl:if test=". !=''"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
     </xsl:template>
     <xsl:template match="sup| rsc:sup">
         <xsl:if test=".!=''">

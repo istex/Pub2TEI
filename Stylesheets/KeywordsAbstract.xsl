@@ -457,7 +457,7 @@
 
 
     <!--xsl:template match="abstract | Abstract">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <div type="abstract">
                 <xsl:variable name="theLanguage">
                     <xsl:choose>

@@ -269,7 +269,7 @@
 
     <!-- PL: add st for Nature -->
     <xsl:template match="State | state| rsc:state | corresponding-author-state | province | st | named-content[@content-type = 'state']">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <region>
                 <xsl:apply-templates/>
             </region>
@@ -277,7 +277,7 @@
     </xsl:template>
     <!-- PL: add cty for Nature -->
     <xsl:template match="City | city| rsc:city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <settlement>
                 <xsl:apply-templates/>
             </settlement>
@@ -286,7 +286,7 @@
 
     <!-- PL: add zip for Nature -->
     <xsl:template match="Postcode | post_code | corresponding-author-zipcode | named-content[@content-type = 'postcode'] | postcode| rsc:postcode | zip">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <postCode>
                 <xsl:apply-templates/>
             </postCode>
@@ -294,7 +294,7 @@
     </xsl:template>
 
     <xsl:template match="Postbox">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <postBox>
                 <xsl:apply-templates/>
             </postBox>
@@ -306,7 +306,7 @@
     <!-- Springer 2: OrgAddress  -->
 
     <xsl:template match="addr-line | addr1 | addr2 | addr3 | corresponding-author-address-1 | corresponding-author-address-2 | addrelt| rsc:addrelt">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:choose>
                 <xsl:when test="*">
                  <!-- <xsl:if test="text()[. != ', ']">
@@ -358,7 +358,7 @@
 
     <!-- PL: add street or Nature -->
     <xsl:template match="Street | street | named-content[@content-type = 'street']">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <street>
                 <xsl:apply-templates/>
             </street>
@@ -392,7 +392,7 @@
     </xsl:template>
 
     <xsl:template match="phone |rsc:phone | Phone">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <note type="phone">
                 <xsl:apply-templates/>
             </note>
@@ -400,7 +400,7 @@
     </xsl:template>
 
     <xsl:template match="fax |rsc:fax | Fax">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <note type="fax">
                 <xsl:apply-templates/>
             </note>
@@ -408,7 +408,7 @@
     </xsl:template>
 
     <xsl:template match="uri | url |rsc:uri | rsc:url | URL">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <ptr type="url">
                 <xsl:attribute name="target">
                     <xsl:choose>
@@ -438,14 +438,14 @@
         </xsl:if>
     </xsl:template>
     <xsl:template match="uri" mode="citation">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="url">
                 <xsl:apply-templates/>  
             </idno>
         </xsl:if>
     </xsl:template>
     <xsl:template match="url" mode="citation">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="url">
                 <xsl:apply-templates/>  
             </idno>
@@ -460,7 +460,7 @@
     </xsl:template>
 
     <xsl:template match="room">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <note type="room">
                 <xsl:apply-templates/>
             </note>
@@ -474,7 +474,7 @@
     <!-- Springer 2/3: OrgDivision, OrgName -->
 
     <xsl:template match="institution | corresponding-author-institution | inst | OrgName | Institution">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <orgName type="institution">
                 <xsl:apply-templates/>
             </orgName>
@@ -482,14 +482,14 @@
     </xsl:template>
 
     <xsl:template match="dept | OrgDivision | Department">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <orgName type="department">
                 <xsl:apply-templates/>
             </orgName>
         </xsl:if>
     </xsl:template>
     <xsl:template match="OrgID">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <idno type="{@Type}" subtype="{@Level}">
                 <xsl:apply-templates/>
             </idno>

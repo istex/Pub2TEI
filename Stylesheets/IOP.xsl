@@ -787,7 +787,7 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="institution" mode="NLM">
-        <xsl:if test="normalize-space(.)">
+        <xsl:if test=". !=''">
             <xsl:call-template name="NLMParseOrg">
                 <xsl:with-param name="theOrg">
                     <xsl:value-of select="translate(.,'.;','')"/>
