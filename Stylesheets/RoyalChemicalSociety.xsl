@@ -240,15 +240,17 @@
                         <xsl:if test="art-front/abstract | rsc:art-front/rsc:abstract |art-front/keyword | rsc:art-front/rsc:keyword">
                         <!-- PL: abstract is moved from <front> to here -->
                         <xsl:apply-templates select="art-front/abstract | rsc:art-front/rsc:abstract"/>
-                        <textClass>
+                        
                         <xsl:if test="art-front/keyword | rsc:art-front/rsc:keyword">
+                            <textClass>
                             <keywords scheme="keyword">
 						        <list>
 						        <xsl:apply-templates select="art-front/keyword | rsc:art-front/rsc:keyword"/>
 						        </list>
 						    </keywords>
+                            </textClass>
 						</xsl:if>
-                        </textClass>
+                        
                         </xsl:if>
                     </profileDesc>
                 
