@@ -49,7 +49,7 @@
                         </xsl:if>
                         
                         <xsl:for-each select="rsc:citation[@type='other'] | citation[@type='other']">
-                            <bibl type="journal">
+                            <bibl type="other">
                                 <xsl:apply-templates/>
                             </bibl>
                         </xsl:for-each>
