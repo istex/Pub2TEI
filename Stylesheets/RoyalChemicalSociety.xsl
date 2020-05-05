@@ -1153,17 +1153,4 @@
             <xsl:apply-templates/>
         </title>
     </xsl:template>
-    
-    <xsl:template match="abstract |rsc:abstract">
-        <abstract>
-            <xsl:apply-templates/>
-        </abstract>
-    </xsl:template>
-    <xsl:template match="keyword |rsc:keyword">
-        <item>
-            <term>
-                <xsl:apply-templates/>
-            </term>
-        </item>
-    </xsl:template>
 </xsl:stylesheet>
