@@ -348,8 +348,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:variable name="code">
-                            <xsl:value-of select="//rsc:published[@type='subsyear']/rsc:journalref/rsc:sercode | //published[@type='subsyear']/journalref/sercode
-                                |//rsc:published[@type='print']/rsc:journalref/rsc:link | //published[@type='print']/journalref/link"/>
+                            <xsl:value-of select="//rsc:published[@type='print']/rsc:journalref/rsc:link | //published[@type='print']/journalref/link"/>
                         </xsl:variable>
                         <xsl:variable name="code2">
                             <xsl:choose>
