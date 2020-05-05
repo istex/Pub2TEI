@@ -862,22 +862,35 @@
             <xsl:apply-templates/>
         </ref>
     </xsl:template>
-    <xsl:template match="scheme">
+    <xsl:template match="scheme | rsc:scheme">
         <figure type="schema">
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
-            <xsl:attribute name="rendition">
-                <xsl:value-of select="@height"/>
-            </xsl:attribute>
-            <xsl:attribute name="rend">
-                <xsl:value-of select="@width"/>
-            </xsl:attribute>
-            <xsl:if test="@xsrc">
-            <figDesc>
-                <xsl:value-of select="@xsrc"/>
-            </figDesc>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
             </xsl:if>
+            <xsl:if test="@height">
+                <xsl:attribute name="rendition">
+                    <xsl:value-of select="@height"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@width">
+                <xsl:attribute name="rend">
+                    <xsl:value-of select="@width"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@xsrc">
+                    <figDesc>
+                        <xsl:value-of select="@xsrc"/>
+                    </figDesc>
+                </xsl:when>
+                <xsl:when test="title">
+                    <figDesc>
+                        <xsl:value-of select="title"/>
+                    </figDesc>
+                </xsl:when>
+            </xsl:choose>
         </figure>
     </xsl:template>
 
