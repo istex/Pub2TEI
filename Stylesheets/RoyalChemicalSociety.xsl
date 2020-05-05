@@ -1079,11 +1079,16 @@
     
     <!-- footnote -->
     <xsl:template match="footnote | rsc:footnote">
-        <note place="foot">
-            <!-- id -->
-            <xsl:attribute name="xml:id" select="@id"/>
-            <xsl:value-of select="normalize-space(.)"/>
-        </note>
+        <xsl:choose>
+            <xsl:when test="parent::surname|parent::rsc:surname"/>
+            <xsl:otherwise>
+                <note place="foot">
+                    <!-- id -->
+                    <xsl:attribute name="xml:id" select="@id"/>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </note>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- pagination linéaire dans les références -->
