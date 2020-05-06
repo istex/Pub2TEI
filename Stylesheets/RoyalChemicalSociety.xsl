@@ -690,7 +690,7 @@
                             <xsl:value-of select="normalize-space(//published[@type='subsyear']/volumeref/link |//rsc:published[@type='subsyear']/rsc:volumeref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="print">
-                            <xsl:value-of select="normalize-space(//published[@type='print']/volumeref/link |//rsc:published[@type='print']/rsc:volumeref/rsc:link)"/>
+                            <xsl:value-of select="normalize-space(//published[@type='print'][1]/volumeref/link |//rsc:published[@type='print'][1]/rsc:volumeref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="web">
                             <xsl:value-of select="normalize-space(//published[@type='web']/volumeref/link |//rsc:published[@type='web']/rsc:volumeref/rsc:link)"/>
@@ -742,7 +742,7 @@
                             <xsl:value-of select="normalize-space(//published[@type='subsyear']/issueref/link | //rsc:published[@type='subsyear']/rsc:issueref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="print">
-                            <xsl:value-of select="normalize-space(//published[@type='print']/issueref/link | //rsc:published[@type='print']/rsc:issueref/rsc:link)"/>
+                            <xsl:value-of select="normalize-space(//published[@type='print'][1]/issueref/link | //rsc:published[@type='print'][1]/rsc:issueref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="web">
                             <xsl:value-of select="normalize-space(//published[@type='web']/issueref/link | //rsc:published[@type='web']/rsc:issueref/rsc:link)"/>
@@ -1117,9 +1117,11 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="no-of-pages|rsc:no-of-pages">
+        <xsl:if test=".!=''and not(contains(.,'Unassigned'))">
         <biblScope unit="no-of-pages">
             <xsl:value-of select="normalize-space(.)"/>
         </biblScope>
+        </xsl:if>
     </xsl:template>
     <!--compound-->
     <xsl:template match="compoundgrp | rsc:compoundgrp">

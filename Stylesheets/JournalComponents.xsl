@@ -2765,7 +2765,7 @@ reactorsa'</title>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.) and not(contains(.,'n/a'))">
+                <xsl:if test="normalize-space(.) and not(contains(.,'n/a')) and  not(contains(.,'Unassigned'))">
                     <biblScope unit="page" from="{translate(.,'  p.','')}">
                         <xsl:value-of select="."/>
                     </biblScope>
@@ -2789,7 +2789,7 @@ reactorsa'</title>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="normalize-space(.) and not(contains(.,'n/a'))">
+                <xsl:if test="normalize-space(.) and not(contains(.,'n/a')) and  not(contains(.,'Unassigned'))">
                     <biblScope unit="page" to="{translate(.,' ','')}">
                         <xsl:value-of select="translate(.,' ','')"/>
                     </biblScope>
