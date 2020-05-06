@@ -179,7 +179,7 @@
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FAB'">research-article</xsl:when>
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CAR'">article</xsl:when>
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NWS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TIN'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TIN'">research-article</xsl:when>
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='PRO'">other</xsl:when>
                                     <xsl:otherwise>
                                         <xsl:choose>
