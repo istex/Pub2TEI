@@ -244,9 +244,9 @@
                         <xsl:if test="art-front/keyword | rsc:art-front/rsc:keyword">
                             <textClass>
                             <keywords scheme="keyword">
-						        <list>
+						        
 						        <xsl:apply-templates select="art-front/keyword | rsc:art-front/rsc:keyword"/>
-						        </list>
+						       
 						    </keywords>
                             </textClass>
 						</xsl:if>

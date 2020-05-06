@@ -59,6 +59,10 @@
                             <xsl:value-of select="normalize-space(.)"/>
                         </desc>
                     </xsl:when>
+                    <xsl:when test="parent::title |parent::rsc:title">
+                            <xsl:value-of select="normalize-space(.)"/>
+                        
+                    </xsl:when>
                     <xsl:otherwise>
                         <p>
                             <xsl:if test="@id">
