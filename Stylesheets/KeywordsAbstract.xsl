@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0" xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
+    xmlns:rsc="http://www.rsc.org/schema/rscart38"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd" exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
@@ -199,7 +200,7 @@
     </xsl:template>
 
     <!--springer / OUP-->
-    <xsl:template match="Keyword |keyword | kwd">
+    <xsl:template match="Keyword |keyword|rsc:keyword | kwd">
         <xsl:choose>
             <xsl:when test="contains(.,' – ')">
                 <xsl:call-template name="ParseKeyword">

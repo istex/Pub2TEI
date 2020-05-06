@@ -24,6 +24,29 @@
             <xsl:when test="//pubfm/categ/@id[string-length() &gt; 0]">
                 <xsl:value-of select="$codeGenreNature"/>
             </xsl:when>
+            <xsl:when test="//article/front/article-meta/title-group/subtitle [string-length() &gt; 0]">
+                <!-- traitement spécial RSC-ebooks -->
+                <xsl:choose>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Preface')">editorial</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Forward')">editorial</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Introduction')">editorial</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Introduction and general aspects')">editorial</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Back Cover')">other</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Front cover')">other</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Subject Index')">other</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Author Index')">other</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Contents')">other</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Front matter')">other</xsl:when>
+                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Abbreviations')">other</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            
+            
+            
+            
+            
+            
             <!-- si non présence d'article-type dans la notice d'origine -->
             <xsl:otherwise>
                 <xsl:choose>

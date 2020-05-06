@@ -1885,6 +1885,10 @@ reactorsa'</title>
                 <xsl:if test=". !=''">
                     <title level="a" type="main">
                         <xsl:apply-templates/>
+                        <xsl:if test="//article/front/article-meta/title-group/subtitle [string-length() &gt; 0]">
+                           <xsl:text> : </xsl:text>
+                            <xsl:value-of select="//article/front/article-meta/title-group/subtitle"/>
+                        </xsl:if>
                         <xsl:if test="//article/front/article-meta/title-group/article-title ='REVIEWS' and //product/source">
                             <xsl:variable name="countProduct">
                                 <xsl:value-of select="count(//product)"/>
