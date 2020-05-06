@@ -842,6 +842,11 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+    <xsl:template match="footer| rsc:footer">
+        <note type="footnote">
+            <xsl:apply-templates/>
+        </note>
+    </xsl:template>
     <xsl:template match="news-article| rsc:news-article">
         <text type="article">
             <xsl:apply-templates/>
