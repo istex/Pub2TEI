@@ -37,8 +37,8 @@
                         <authority>ISTEX</authority>
                         <publisher>
                         <xsl:choose>
-                            <xsl:when test="//article/published[@type='subsyear']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
-                                    <xsl:value-of select="//article/published[@type='subsyear']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                            <xsl:when test="//article/published[@type='subsyear'][1]/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                                    <xsl:value-of select="//article/published[@type='subsyear'][1]/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
                             </xsl:when>
                             <xsl:when test="//article/published[@type='book']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
                                     <xsl:value-of select="//article/published[@type='book']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
@@ -56,8 +56,8 @@
                             </xsl:if>
                             <p>
                                 <xsl:choose>
-                                    <xsl:when test="//article/published[@type='subsyear']/journalref/cpyrt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:cpyrt!=''">
-                                        <xsl:value-of select="//article/published[@type='subsyear']/journalref/cpyrt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:cpyrt"/>
+                                    <xsl:when test="//article/published[@type='subsyear'][1]/journalref/cpyrt | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:cpyrt!=''">
+                                        <xsl:value-of select="//article/published[@type='subsyear'][1]/journalref/cpyrt | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:cpyrt"/>
                                     </xsl:when>
                                     <xsl:when test="//article/published[@type='book']/journalref/cpyrt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:cpyrt !=''">
                                         <xsl:value-of select="//article/published[@type='book']/journalref/cpyrt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:cpyrt"/>
@@ -71,14 +71,14 @@
                         </availability>
                         <date type="published">
                             <xsl:attribute name="when">
-                                <xsl:value-of select="//article/published[@type='subsyear']/pubfront/date/year
+                                <xsl:value-of select="//article/published[@type='subsyear'][1]/pubfront/date/year
                                     |//article/published[@type='book']/pubfront/date/year
-                                    | //rsc:article/rsc:published[@type='subsyear']/rsc:pubfront/rsc:date/rsc:year
+                                    | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:pubfront/rsc:date/rsc:year
                                     |//rsc:article/rsc:published[@type='book']/rsc:pubfront/rsc:date/rsc:year"/>
                             </xsl:attribute>
-                            <xsl:value-of select="//article/published[@type='subsyear']/pubfront/date/year
+                            <xsl:value-of select="//article/published[@type='subsyear'][1]/pubfront/date/year
                                 |//article/published[@type='book']/pubfront/date/year
-                                | //rsc:article/rsc:published[@type='subsyear']/rsc:pubfront/rsc:date/rsc:year
+                                | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:pubfront/rsc:date/rsc:year
                                 |//rsc:article/rsc:published[@type='book']/rsc:pubfront/rsc:date/rsc:year"/>
                         </date>
                     </publicationStmt>
@@ -222,7 +222,7 @@
                         </note>
                         <note type="publication-type">
                             <xsl:choose>
-                                <xsl:when test="//published[@type='book']/journalref/issn[@type='isbn'] | //rsc:published[@type='book']/rsc:journalref/rsc:issn[@type='isbn'][string-length() &gt; 0] and //published[@type='subsyear']/journalref/issn[@type='print'] | //rsc:published[@type='subsyear']/rsc:journalref/rsc:issn[@type='print'][string-length() &gt; 0]">
+                                <xsl:when test="//published[@type='book']/journalref/issn[@type='isbn'] | //rsc:published[@type='book']/rsc:journalref/rsc:issn[@type='isbn'][string-length() &gt; 0] and //published[@type='subsyear'][1]/journalref/issn[@type='print'] | //rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:issn[@type='print'][string-length() &gt; 0]">
                                 <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
                                 <xsl:text>book-series</xsl:text>
                             </xsl:when>
@@ -274,9 +274,11 @@
             <text>
                 <xsl:choose>
                     <xsl:when test="//news-section | //rsc:news-section">
-                        <group type="sub-article">
+                        <body>
+                        <div type="news-section">
                             <xsl:apply-templates select="art-body/* | rsc:art-body/*"/> 
-                        </group>
+                        </div>
+                        </body>
                     </xsl:when>
                     <xsl:otherwise>
                         <body>
@@ -353,9 +355,9 @@
                             <xsl:value-of select="//article/published[@type='print']/journalref/title[@type='full']| //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='full']"/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//article/published[@type='subsyear']/journalref/title[@type='full'] | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='full'] !=''">
+                    <xsl:when test="//article/published[@type='subsyear'][1]/journalref/title[@type='full'] | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:title[@type='full'] !=''">
                         <title level="j" type="main">
-                            <xsl:value-of select="//article/published[@type='subsyear']/journalref/title[@type='full']| //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='full']"/>
+                            <xsl:value-of select="//article/published[@type='subsyear'][1]/journalref/title[@type='full']| //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:title[@type='full']"/>
                         </title>
                     </xsl:when>
                     <xsl:when test="//article/published[@type='print']/journalref/title | //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title !=''">
@@ -573,9 +575,9 @@
                             <xsl:value-of select="//article/published[@type='print']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='print']/rsc:journalref/rsc:title[@type='abbreviated']"/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//article/published[@type='subsyear']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
+                    <xsl:when test="//article/published[@type='subsyear'][1]/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
                         <title level="j" type="abbrev">
-                            <xsl:value-of select="//article/published[@type='subsyear']/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:title[@type='abbreviated']"/>
+                            <xsl:value-of select="//article/published[@type='subsyear'][1]/journalref/title[@type='abbreviated']| //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:title[@type='abbreviated']"/>
                         </title>
                     </xsl:when>
                     <xsl:when test="//article/published[@type='book']/journalref/title[@type='abbreviated'] | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:title[@type='abbreviated'] !=''">
@@ -596,8 +598,8 @@
                 </xsl:choose>
                 
                 <xsl:choose>
-                    <xsl:when test="//article/published[@type='subsyear']/journalref/issn | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:issn[string-length() &gt; 0]">
-                        <xsl:for-each select="//article/published[@type='subsyear']/journalref/issn | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:issn">
+                    <xsl:when test="//article/published[@type='subsyear'][1]/journalref/issn | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:issn[string-length() &gt; 0]">
+                        <xsl:for-each select="//article/published[@type='subsyear'][1]/journalref/issn | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:issn">
                         <idno>
                         <xsl:choose>
                             <xsl:when test=".[@type='isbn']"><xsl:attribute name="type">ISBN</xsl:attribute></xsl:when>
@@ -651,9 +653,9 @@
                             <xsl:value-of select="//published[@type='print']/journalref/coden | //rsc:published[@type='print']/rsc:journalref/rsc:coden"/>
                         </idno>
                     </xsl:when>
-                    <xsl:when test="//published[@type='subsyear']/journalref/coden | //rsc:published[@type='subsyear']/rsc:journalref/rsc:coden">
+                    <xsl:when test="//published[@type='subsyear'][1]/journalref/coden | //rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:coden">
                         <idno type="CODEN">
-                            <xsl:value-of select="//published[@type='subsyear']/journalref/coden | //rsc:published[@type='subsyear']/rsc:journalref/rsc:coden"/>
+                            <xsl:value-of select="//published[@type='subsyear'][1]/journalref/coden | //rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:coden"/>
                         </idno>
                     </xsl:when>
                 </xsl:choose>
@@ -668,8 +670,8 @@
                     <!-- publisher -->
                     <publisher>
                         <xsl:choose>
-                            <xsl:when test="//article/published[@type='subsyear']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
-                                <xsl:value-of select="//article/published[@type='subsyear']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                            <xsl:when test="//article/published[@type='subsyear'][1]/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                                <xsl:value-of select="//article/published[@type='subsyear'][1]/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
                             </xsl:when>
                             <xsl:when test="//article/published[@type='book']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
                                 <xsl:value-of select="//article/published[@type='book']/journalref/publisher/orgname/nameelt | //rsc:article/rsc:published[@type='book']/rsc:journalref/rsc:publisher/rsc:orgname/rsc:nameelt"/>
@@ -683,14 +685,14 @@
                     <!-- date de publication -->
                     <date type="published">
                         <xsl:attribute name="when">
-                            <xsl:value-of select="//article/published[@type='subsyear']/pubfront/date/year
+                            <xsl:value-of select="//article/published[@type='subsyear'][1]/pubfront/date/year
                                 |//article/published[@type='book']/pubfront/date/year
-                                | //rsc:article/rsc:published[@type='subsyear']/rsc:pubfront/rsc:date/rsc:year
+                                | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:pubfront/rsc:date/rsc:year
                                 |//rsc:article/rsc:published[@type='book']/rsc:pubfront/rsc:date/rsc:year"/>
                         </xsl:attribute>
-                        <xsl:value-of select="//article/published[@type='subsyear']/pubfront/date/year
+                        <xsl:value-of select="//article/published[@type='subsyear'][1]/pubfront/date/year
                             |//article/published[@type='book']/pubfront/date/year
-                            | //rsc:article/rsc:published[@type='subsyear']/rsc:pubfront/rsc:date/rsc:year
+                            | //rsc:article/rsc:published[@type='subsyear'][1]/rsc:pubfront/rsc:date/rsc:year
                             |//rsc:article/rsc:published[@type='book']/rsc:pubfront/rsc:date/rsc:year"/>
                     </date>
                     <!-- volume -->
@@ -699,7 +701,7 @@
                             <xsl:value-of select="normalize-space(//published[@type='book']/volumeref/link | //rsc:published[@type='book']/rsc:volumeref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="subsyear">
-                            <xsl:value-of select="normalize-space(//published[@type='subsyear']/volumeref/link |//rsc:published[@type='subsyear']/rsc:volumeref/rsc:link)"/>
+                            <xsl:value-of select="normalize-space(//published[@type='subsyear'][1]/volumeref/link |//rsc:published[@type='subsyear'][1]/rsc:volumeref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="print">
                             <xsl:value-of select="normalize-space(//published[@type='print'][1]/volumeref/link |//rsc:published[@type='print'][1]/rsc:volumeref/rsc:link)"/>
@@ -751,7 +753,7 @@
                             <xsl:value-of select="normalize-space(//published[@type='book']/issueref/link | //rsc:published[@type='book']/rsc:issueref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="subsyear">
-                            <xsl:value-of select="normalize-space(//published[@type='subsyear']/issueref/link | //rsc:published[@type='subsyear']/rsc:issueref/rsc:link)"/>
+                            <xsl:value-of select="normalize-space(//published[@type='subsyear'][1]/issueref/link | //rsc:published[@type='subsyear'][1]/rsc:issueref/rsc:link)"/>
                         </xsl:variable>
                         <xsl:variable name="print">
                             <xsl:value-of select="normalize-space(//published[@type='print'][1]/issueref/link | //rsc:published[@type='print'][1]/rsc:issueref/rsc:link)"/>
@@ -817,10 +819,10 @@
                         <xsl:apply-templates select="published[@type='print']/pubfront/no-of-pages |published[@type='book']/pubfront/no-of-pages
                             | rsc:published[@type='print']/rsc:pubfront/rsc:no-of-pages |rsc:published[@type='book']/rsc:pubfront/rsc:no-of-pages"/>
                     </xsl:if>
-                    <xsl:if test="published[@type='subsyear']/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
-                        | rsc:published[@type='subsyear']/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
-                        <xsl:apply-templates select="published[@type='subsyear']/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
-                            | rsc:published[@type='subsyear']/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt"/>
+                    <xsl:if test="published[@type='subsyear'][1]/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
+                        | rsc:published[@type='subsyear'][1]/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt !=''">
+                        <xsl:apply-templates select="published[@type='subsyear'][1]/publisher/orgname/nameelt | published[@type='book']/publisher/orgname/nameelt
+                            | rsc:published[@type='subsyear'][1]/rsc:publisher/rsc:orgname/rsc:nameelt | rsc:published[@type='book']/rsc:publisher/rsc:orgname/rsc:nameelt"/>
                     </xsl:if>
                 </imprint>
             </monogr>
@@ -836,9 +838,9 @@
         <xsl:apply-templates select="news-item | rsc:news-item"/>
     </xsl:template>
     <xsl:template match="news-item| rsc:news-item">
-        <figure type="item">
+        <div type="item">
             <xsl:apply-templates/>
-        </figure>
+        </div>
     </xsl:template>
     <xsl:template match="news-article| rsc:news-article">
         <text type="article">
