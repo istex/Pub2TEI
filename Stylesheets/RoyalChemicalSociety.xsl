@@ -179,9 +179,10 @@
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FAB'">research-article</xsl:when>
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CAR'">article</xsl:when>
                                     <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NWS'">article</xsl:when>
+                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TIN'">article</xsl:when>
                                     <xsl:otherwise>
                                         <xsl:choose>
-                                            <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and //pubfront/fpage |//rsc:pubfront/rsc:fpage &gt;0">article</xsl:when>
+                                            <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and contains(//pub-front/fpage |//rsc:pub-front/rsc:fpage,'s') or contains(//pub-front/fpage | //rsc:pub-front/rsc:fpage,'S')">article</xsl:when>
                                             <xsl:otherwise>other</xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:otherwise>
