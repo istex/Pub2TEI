@@ -150,9 +150,10 @@
 
     <xsl:template match="Country | country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz().','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz(). ','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
             <country>
                 <xsl:choose>
+                    
                     <xsl:when test="@country_code">
                         <!-- A specific test for ScholarOne -->
                         <xsl:attribute name="key">
@@ -168,6 +169,19 @@
                     <xsl:when test="contains(.,'China')">
                         <xsl:variable name="change">
                             <xsl:text>CHINA</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'England')">
+                        <xsl:variable name="change">
+                            <xsl:text>UNITED KINGDOM</xsl:text>
                         </xsl:variable>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">

@@ -83,6 +83,24 @@
                                     <p>Open Access</p>
                                 </availability>
                         </xsl:if>
+                        <!-- date -->
+                        <xsl:choose>
+                            <xsl:when test="//CoverDate/Year !=''">
+                                <date type="published" when="{//CoverDate/Year}">
+                                    <xsl:value-of select="//CoverDate/Year"/>
+                                </date>
+                            </xsl:when>
+                            <xsl:when test="number(//Issue/IssueInfo/IssueCopyright/CopyrightYear)">
+                                <date type="published" when="{//Issue/IssueInfo/IssueCopyright/CopyrightYear}">
+                                    <xsl:value-of select="//Issue/IssueInfo/IssueCopyright/CopyrightYear"/>
+                                </date>
+                            </xsl:when>
+                            <xsl:when test="number(//Book/BookInfo/BookCopyright/CopyrightYear)">
+                                <date type="published" when="{//Book/BookInfo/BookCopyright/CopyrightYear}">
+                                    <xsl:value-of select="//Book/BookInfo/BookCopyright/CopyrightYear"/>
+                                </date>
+                            </xsl:when>
+                        </xsl:choose>
                     </publicationStmt>
                     <notesStmt>
                         <!-- niveau book -->
@@ -317,37 +335,31 @@
                 <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueTitle"/>
                 <imprint>
                     <xsl:apply-templates select="../PublisherInfo/*"/>
+                    <!-- date -->
                     <xsl:choose>
-                        <xsl:when test="JournalOnlineFirst">
-                            <xsl:if
-                                test="JournalOnlineFirst/Article/ArticleInfo/ArticleHistory/OnlineDate and JournalOnlineFirst/Article/ArticleInfo/ArticleHistory/OnlineDate!=''">
-                                <xsl:apply-templates
-                                    select="JournalOnlineFirst/Article/ArticleInfo/ArticleHistory/OnlineDate"
-                                    mode="inImprint"/>
-                            </xsl:if>
-                            <xsl:apply-templates
-                                select="JournalOnlineFirst/Article/ArticleInfo/ArticleFirstPage"/>
-                            <xsl:apply-templates
-                                select="JournalOnlineFirst/Article/ArticleInfo/ArticleLastPage"/>
+                        <xsl:when test="//CoverDate/Year !=''">
+                            <date type="published" when="{//CoverDate/Year}">
+                                <xsl:value-of select="//CoverDate/Year"/>
+                            </date>
                         </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:if
-                                test="Volume/Issue/Article/ArticleInfo/ArticleHistory/OnlineDate 
-                                and Volume/Issue/Article/ArticleInfo/ArticleHistory/OnlineDate!=''">
-                                <xsl:apply-templates
-                                    select="Volume/Issue/Article/ArticleInfo/ArticleHistory/OnlineDate"
-                                    mode="inImprint"/>
-                            </xsl:if>
-                            <xsl:apply-templates
-                                select="Volume/Issue/Article/ArticleInfo/ArticleFirstPage"/>
-                            <xsl:apply-templates
-                                select="Volume/Issue/Article/ArticleInfo/ArticleLastPage"/>
-                        </xsl:otherwise>
+                        <xsl:when test="number(//Issue/IssueInfo/IssueCopyright/CopyrightYear)">
+                            <date type="published" when="{//Issue/IssueInfo/IssueCopyright/CopyrightYear}">
+                                <xsl:value-of select="//Issue/IssueInfo/IssueCopyright/CopyrightYear"/>
+                            </date>
+                        </xsl:when>
+                        <xsl:when test="number(//Book/BookInfo/BookCopyright/CopyrightYear)">
+                            <date type="published" when="{//Book/BookInfo/BookCopyright/CopyrightYear}">
+                                <xsl:value-of select="//Book/BookInfo/BookCopyright/CopyrightYear"/>
+                            </date>
+                        </xsl:when>
                     </xsl:choose>
+                    
                     <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
                     <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd"/>
                     <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
                     <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
+                    <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleFirstPage"/>
+                    <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleLastPage"/>
                 </imprint>
             </monogr>
         </biblStruct>
