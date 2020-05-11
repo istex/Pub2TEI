@@ -394,7 +394,7 @@
     <!-- PL: removed, Elsevier abstracts are processed in Elsevier.xsl -->
     <!-- Springer: Abstract, Heading, Para -->
 	<!-- PL: this could be moved to KeywordsAbstract.xsl when generalised to all publishers -->
-    <xsl:template match="abstract |trans-abstract | Abstract | els1:head/ce:abstract | els2:head/ce:abstract | head/ce:abstract | fp | abs | execsumm | websumm">
+    <xsl:template match="abstract |rsc:abstract |trans-abstract | Abstract | els1:head/ce:abstract | els2:head/ce:abstract | head/ce:abstract | fp | abs | execsumm | websumm">
 			<abstract>
 				<!-- PL: indicate the type in case of executive summary or web summary (Nature) -->
 				<!-- SG: pas encore validé par la TEI technicalBoard, je propose de mettre le type dans un titre -->
@@ -446,7 +446,7 @@
 	                <xsl:when test="ce:abstract-sec">
 	                    <xsl:apply-templates/>
 	                </xsl:when>
-	                <xsl:when test="p | Para | ce:abstract-sec | AbstractSection">
+	                <xsl:when test="p | rsc:p |Para | ce:abstract-sec | AbstractSection">
 	                    <xsl:apply-templates/>
 	                </xsl:when>
 	                <xsl:otherwise>
