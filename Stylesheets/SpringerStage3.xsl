@@ -354,10 +354,59 @@
                         </xsl:when>
                     </xsl:choose>
                     
-                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
-                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd"/>
-                    <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
-                    <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
+                    <!-- <xsl:choose>
+                        <xsl:when test="Volume/VolumeInfo/VolumeIDStart != Volume/VolumeInfo/VolumeIDEnd">
+                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart" mode="multiple"/>
+                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd" mode="multiple"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
+                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="Volume/Issue/IssueInfo/IssueIDStart != Volume/Issue/IssueInfo/IssueIDEnd">
+                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart" mode="multiple"/>
+                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd" mode="multiple"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
+                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
+                        </xsl:otherwise>
+                    </xsl:choose>-->
+                    
+                    <xsl:if test="Volume/VolumeInfo/VolumeIDStart !=''">
+                        <xsl:if test="Volume/VolumeInfo/VolumeIDStart !='0'">
+                        <biblScope unit="vol" from="{Volume/VolumeInfo/VolumeIDStart}" to="{Volume/VolumeInfo/VolumeIDEnd}">
+                            <xsl:choose>
+                                <xsl:when test="Volume/VolumeInfo/VolumeIDStart != Volume/VolumeInfo/VolumeIDEnd">
+                                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
+                                    <xsl:text>-</xsl:text>
+                                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </biblScope>
+                        </xsl:if>
+                    </xsl:if>
+                    <xsl:if test="Volume/Issue/IssueInfo/IssueIDStart !=''">
+                        <xsl:if test="Volume/Issue/IssueInfo/IssueIDStart !='0'">
+                            <biblScope unit="issue" from="{Volume/Issue/IssueInfo/IssueIDStart}" to="{Volume/Issue/IssueInfo/IssueIDEnd}">
+                                <xsl:choose>
+                                    <xsl:when test="Volume/Issue/IssueInfo/IssueIDStart != Volume/Issue/IssueInfo/IssueIDEnd">
+                                        <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
+                                        <xsl:text>-</xsl:text>
+                                        <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </biblScope>
+                        </xsl:if>
+                    </xsl:if>
                     <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleFirstPage"/>
                     <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleLastPage"/>
                 </imprint>

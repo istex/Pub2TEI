@@ -2643,19 +2643,11 @@ reactorsa'</title>
     <!-- 2 special rules for Springer that provides, beginning and end volume number -->
 
     <xsl:template match="VolumeIDStart">
-        <xsl:if test=". !=''">
-            <biblScope unit="vol" from="{normalize-space(.)}">
-                <xsl:apply-templates/>
-            </biblScope>
-        </xsl:if>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="VolumeIDEnd">
-        <xsl:if test=". !=''">
-            <biblScope unit="vol" to="{normalize-space(.)}">
-                <xsl:apply-templates/>
-            </biblScope>
-        </xsl:if>
+        <xsl:apply-templates/>
     </xsl:template>
 
 
@@ -2723,19 +2715,11 @@ reactorsa'</title>
     <!-- 2 special rules for Springer that provides, beginning and end volume number -->
 
     <xsl:template match="IssueIDStart">
-        <xsl:if test=". !=''">
-            <biblScope unit="issue" from="{normalize-space(.)}">
-                <xsl:apply-templates/>
-            </biblScope>
-        </xsl:if>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="IssueIDEnd">
-        <xsl:if test=". !=''">
-            <biblScope unit="issue" to="{normalize-space(.)}">
-                <xsl:apply-templates/>
-            </biblScope>
-        </xsl:if>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <!-- Rule for RCS data -->
