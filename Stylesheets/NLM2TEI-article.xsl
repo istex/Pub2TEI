@@ -1205,10 +1205,8 @@
                         </xsl:if>
                         <xsl:apply-templates select="front/article-meta/kwd-group"/>
                         <!-- language -->
-                            <langUsage>
-                                <language>
-                                    <xsl:attribute name="ident">
-                                        <xsl:choose>
+                        <xsl:variable name="langNLM">
+                            <xsl:choose>
                                             <xsl:when test="normalize-space(//article/@xml:lang)='IW'">he</xsl:when>
                                             <xsl:when test="normalize-space(//article/@xml:lang)='fn'">en</xsl:when>
                                             <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">en</xsl:when>
@@ -1560,10 +1558,15 @@
                                                 </xsl:choose>
                                             </xsl:otherwise>
                                         </xsl:choose>
+                        </xsl:variable>
+                            <langUsage>
+                                <language>
+                                    <xsl:attribute name="ident">
+                                        <xsl:value-of select="$langNLM"/>
                                     </xsl:attribute>
+                                    <xsl:value-of select="$langNLM"/>
                                 </language>
                             </langUsage>
-                        
                     </profileDesc>
                 </xsl:if>
                 <!-- traceability -->
