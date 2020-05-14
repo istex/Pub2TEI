@@ -2350,7 +2350,7 @@
                    <xsl:when test="addr-line and institution">
                        <!-- voir comme exemple 10.1093/jnci/13.6.1473 -->
                        <xsl:choose>
-                           <xsl:when test="xref">
+                           <xsl:when test="@id">
                                <affiliation>
                                    <xsl:apply-templates/>
                                </affiliation>

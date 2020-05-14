@@ -242,6 +242,19 @@
                         </xsl:call-template>
                     </xsl:when>
                     <!-- rattrapage des ecritures alambiquées -->
+                    <xsl:when test="contains(.,'The Netherlands')">
+                        <xsl:variable name="change">
+                            <xsl:text>THE NETHERLANDS</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
                     <xsl:when test="contains(.,'China')">
                         <xsl:variable name="change">
                             <xsl:text>CHINA</xsl:text>
