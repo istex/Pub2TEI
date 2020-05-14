@@ -1209,10 +1209,10 @@
                                 <language>
                                     <xsl:attribute name="ident">
                                         <xsl:choose>
-                                            <xsl:when test="normalize-space(//article/@xml:lang)='IW'">HE</xsl:when>
-                                            <xsl:when test="normalize-space(//article/@xml:lang)='fn'">EN</xsl:when>
-                                            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">EN</xsl:when>
-                                            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">EN</xsl:when>
+                                            <xsl:when test="normalize-space(//article/@xml:lang)='IW'">he</xsl:when>
+                                            <xsl:when test="normalize-space(//article/@xml:lang)='fn'">en</xsl:when>
+                                            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">en</xsl:when>
+                                            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">en</xsl:when>
                                             <!--OUP-->
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni221'">fr</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp063'">fr</xsl:when>
@@ -1551,7 +1551,7 @@
                                             <xsl:otherwise>
                                                 <xsl:choose>
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
-                                                        <xsl:value-of select="@xml:lang"/>
+                                                        <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                     </xsl:when>
                                                     <xsl:when test="@language[string-length()&gt; 0]">
                                                         <xsl:value-of select="translate(@language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
@@ -2352,15 +2352,6 @@
                                    <xsl:apply-templates/>
                                </affiliation>
                            </xsl:when>
-                           <xsl:otherwise>
-                               <affiliation>
-                                   <xsl:apply-templates select="institution"/>
-                                   <address>
-                                       <xsl:apply-templates select="addr-line"/>
-                                       <xsl:apply-templates select="country"/>
-                                   </address>
-                               </affiliation>
-                           </xsl:otherwise>
                        </xsl:choose>
                    </xsl:when>
                    <xsl:when test="../aff">

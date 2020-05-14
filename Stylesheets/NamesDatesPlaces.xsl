@@ -435,6 +435,12 @@
                              </addrLine>
                          </address>
                      </xsl:when>
+                     <xsl:when test="contains(//aff/addr-line,', ')">
+                         <xsl:call-template name="NLMparseAffiliation">
+                             <xsl:with-param name="theAffil" select="."/>
+                             <xsl:with-param name="inAddress" select="true()"/>
+                         </xsl:call-template>
+                     </xsl:when>
                      <xsl:otherwise>
                          <addrLine>
                              <xsl:value-of select="normalize-space($addrline)"/>
@@ -600,9 +606,30 @@
 
     <xsl:template match="institution | corresponding-author-institution | inst | OrgName | Institution">
         <xsl:if test=". !=''">
-            <orgName type="institution">
-                <xsl:apply-templates/>
-            </orgName>
+            <xsl:choose>
+                <xsl:when test="contains(.,', ')">
+                    <xsl:call-template name="NLMParseAffiliation">
+                        <xsl:with-param name="theAffil">
+                            <xsl:variable name="nettoie">
+                                <xsl:apply-templates/>
+                            </xsl:variable>
+                            <xsl:choose>
+                                <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                    <xsl:value-of select="translate($nettoie,';','')"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="translate($nettoie,';/','')"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                    <orgName type="institution">
+                        <xsl:apply-templates/>
+                    </orgName>  
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 
