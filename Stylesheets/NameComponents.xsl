@@ -49,27 +49,27 @@
     </xsl:template>
     <xsl:template name="affSSID">
         <affiliation>
-            <xsl:if test="//aff/institution">
-                <xsl:apply-templates select="//aff/institution"/>
+            <xsl:if test="institution">
+                <xsl:apply-templates select="institution"/>
             </xsl:if>
             <xsl:choose>
-                <xsl:when test="//aff/addr-line | //aff/country">
+                <xsl:when test="addr-line | country">
                     <address>
-                        <xsl:apply-templates select="//aff/addr-line"/>
-                        <xsl:apply-templates select="//aff/addr-line/named-content[@content-type='street']"/>
-                        <xsl:apply-templates select="//aff/addr-line/named-content[@content-type='state']"/>
-                        <xsl:apply-templates select="//aff/addr-line/named-content[@content-type='postcode']"/>
-                        <xsl:apply-templates select="//aff/addr-line/named-content[@content-type='city']"/>
-                        <xsl:apply-templates select="//aff/country"/>
+                        <xsl:apply-templates select="addr-line"/>
+                        <xsl:apply-templates select="addr-line/named-content[@content-type='street']"/>
+                        <xsl:apply-templates select="addr-line/named-content[@content-type='state']"/>
+                        <xsl:apply-templates select="addr-line/named-content[@content-type='postcode']"/>
+                        <xsl:apply-templates select="addr-line/named-content[@content-type='city']"/>
+                        <xsl:apply-templates select="country"/>
                     </address>
                 </xsl:when>
-                <xsl:when test="//aff/named-content">
+                <xsl:when test="named-content">
                     <address>
-                        <xsl:apply-templates select="//aff/named-content[@content-type='street']"/>
-                        <xsl:apply-templates select="//aff/named-content[@content-type='state']"/>
-                        <xsl:apply-templates select="//aff/named-content[@content-type='postcode']"/>
-                        <xsl:apply-templates select="//aff/named-content[@content-type='city']"/>
-                        <xsl:apply-templates select="//aff/country"/>
+                        <xsl:apply-templates select="named-content[@content-type='street']"/>
+                        <xsl:apply-templates select="named-content[@content-type='state']"/>
+                        <xsl:apply-templates select="named-content[@content-type='postcode']"/>
+                        <xsl:apply-templates select="named-content[@content-type='city']"/>
+                        <xsl:apply-templates select="country"/>
                     </address>
                 </xsl:when>
             </xsl:choose>

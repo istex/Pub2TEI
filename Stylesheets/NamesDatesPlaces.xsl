@@ -435,7 +435,7 @@
                              </addrLine>
                          </address>
                      </xsl:when>
-                     <xsl:when test="contains(//aff/addr-line,', ')">
+                     <xsl:when test="contains(.,', ')">
                          <xsl:call-template name="NLMparseAffiliation">
                              <xsl:with-param name="theAffil" select="."/>
                              <xsl:with-param name="inAddress" select="true()"/>
