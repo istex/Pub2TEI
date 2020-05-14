@@ -104,6 +104,7 @@
                 contains($theOrg,'Sectors') or
                 contains($theOrg,'Government of') or
                 contains($theOrg,'Council') or
+                contains($theOrg,'Max-Planck') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
@@ -144,6 +145,10 @@
                 contains($theOrg,'IFR ') or
                 contains($theOrg,'Dauphinoise de Tri ') or
                 contains($theOrg,'Systems') or
+                contains($theOrg,'DAMTP') or
+                contains($theOrg,'Sterrewacht') or
+                contains($theOrg,'Observatoire') or
+                contains($theOrg,'SISSA/ISAS') or
                 contains($theOrg,'wissenschaft')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
@@ -198,8 +203,9 @@
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
-            <xsl:when test="contains($theOrg,'Group') or
-                contains($theOrg,'Program')
+            <xsl:when test="contains($theOrg,'Group') 
+                or contains($theOrg,'Consejo')
+                or contains($theOrg,'Program')
                 ">
                 <xsl:text>group</xsl:text>
             </xsl:when>
@@ -209,6 +215,8 @@
                 contains($theOrg,'CoDebris') or
                 contains($theOrg,'Merck') or
                 contains($theOrg,'Landesstelle') or
+                contains($theOrg,'Cellectis SA') or
+                contains($theOrg,'Merus BV') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>

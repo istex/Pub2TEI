@@ -362,11 +362,15 @@
                 <xsl:when test="aff">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
-               <!-- <xsl:when test="//contrib-group/aff">
-                    <xsl:apply-templates select="//contrib-group/aff"/>
-                </xsl:when>-->
                 <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
-                    <xsl:apply-templates select="aff"/>
+                    <xsl:choose>
+                        <xsl:when test="aff">
+                            <xsl:apply-templates select="aff"/>
+                        </xsl:when>
+                        <xsl:when test="//article/front/article-meta/aff">
+                            <xsl:apply-templates select="//article/front/article-meta/aff"/>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <!-- <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="//aff"/>

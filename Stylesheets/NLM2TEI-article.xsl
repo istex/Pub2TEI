@@ -41,18 +41,12 @@
                     <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            
-            
-            
-            
-            
-            
             <!-- si non présence d'article-type dans la notice d'origine -->
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="//article/front/article-meta/abstract[string-length()&gt; 0]">
-                        <xsl:text>article</xsl:text>
-                    </xsl:when>
+                    <xsl:when test="//article/front/article-meta/article-categories/subj-group/subject='ORIGINAL RESEARCH PAPERS'">research-article</xsl:when>
+                    <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0] or contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
+                    <xsl:when test="//article/front/article-meta/abstract[string-length()&gt; 0]">article</xsl:when>
                     <xsl:otherwise>
                         <xsl:text>other</xsl:text>
                     </xsl:otherwise>
@@ -108,14 +102,27 @@
             <xsl:when test="normalize-space($codeGenre2)='experiment'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='in-brief'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='introduction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='letter'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='letter'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='lecture'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meeting-report'">conference</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='news'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='paper-read'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='obituary'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='oration'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='other' and article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='other'">
+                <xsl:choose>
+                    <xsl:when test="//article/front/article-meta/article-categories/subj-group/subject='ORIGINAL RESEARCH PAPERS'">research-article</xsl:when>
+                    <xsl:when test="//article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0] or contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='partial-retraction'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='pdf-issue'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='poster'">conference</xsl:when>
@@ -971,7 +978,7 @@
                         <xsl:when test="normalize-space(//article/@xml:lang)='IW'"><xsl:attribute name="xml:lang">HE</xsl:attribute></xsl:when>
                         <xsl:when test="normalize-space(//article/@xml:lang)='fn'"><xsl:attribute name="xml:lang">EN</xsl:attribute></xsl:when>
                         <!-- sage-->
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'"><xsl:attribute name="xml:lang">FR</xsl:attribute></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
                         <xsl:otherwise>
                             <xsl:copy-of select="@xml:lang"/>
                         </xsl:otherwise>
@@ -1207,226 +1214,340 @@
                                             <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">EN</xsl:when>
                                             <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">EN</xsl:when>
                                             <!--OUP-->
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni221'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp063'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn043'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni214'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.471'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.2.181'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp201'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl110'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl077'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/56.1.45'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn131'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.485'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp015'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp142'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp200'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq004'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm283'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp065'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm258'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl171'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn128'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.11'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp128'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.4.463'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq003'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.1.61'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm257'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni218'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.3.335'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.39'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm289'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn024'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl076'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.3.223'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn065'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp125'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn018'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.2.147'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm243'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni411'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq037'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl108'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/56.1.15'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVI.4.395'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/X.3.231'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni288'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.2.140'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IX.3.227'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.201'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp273'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIX.2.155'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.552'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp074'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp272'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq055'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq050'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp257'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq026'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.1.28'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XX.3.253'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.1.1'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.1.35'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.219'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVIII.2.146'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.362'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIV.1.34'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIII.4.405'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXI.3.294'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.1.30'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.335'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.378'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.2.167'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.4.413'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIX.2.111'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXV.3.281'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVI.4.405'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.385'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.425'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.4.293'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.1.39'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.4.293'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.2.126'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.301'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.125'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.4.499'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/ijl/ecp021'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.471'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.2.181'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp201'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl110'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl077'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn131'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.485'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp015'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp142'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp200'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq004'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm283'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp065'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm258'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl171'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn128'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.11'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl111'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp128'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.4.463'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq003'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.1.61'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm257'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni218'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.3.335'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.39'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm289'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm279'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn024'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.2.162'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.3.223'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp125'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.3.349'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni411'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq037'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl108'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/56.1.15'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVI.4.395'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni288'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.2.140'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IX.3.227'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.4.324'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.201'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp273'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIX.2.155'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq055'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq050'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp272'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq026'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.1.28'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp006'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XX.3.253'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.1.1'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.1.35'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.378'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.2.167'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.4.413'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXV.3.281'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXX.1.43'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVI.4.405'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq021'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XX.2.151'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.385'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.425'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.4.293'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.125'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.219'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVIII.2.146'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.362'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIV.1.34'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIII.4.405'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXI.3.294'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.1.30'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.1.39'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.4.293'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.2.126'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.301'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.4.499'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.135'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp242'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.113'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp117'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp087'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq091'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp170'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp054'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp255'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq081'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.3.253'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVII.3.295'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp224'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXI.3.220'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.1.40'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq009'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.4.429'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp139'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXI.2.129'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXX.4.393'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.2.142'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp024'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp134'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp133'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.3.275'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp207'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIX.1.1'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.1.27'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VIII.3.250'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIX.3.305'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIV.3.277'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.4.345'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIV.2.177'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.4.335'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn215'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IX.4.304'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVI.2.160'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.580'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.1.37'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq124'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.1.1'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.3.208'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.3.216'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.315'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVIII.4.385'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIX.3.257'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/X.1.32'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIV.2.154'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq145'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp106'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">FR</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni221'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp063'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn043'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni214'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.471'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.2.181'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp201'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl110'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl077'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/56.1.45'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn131'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.485'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp015'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp142'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp200'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq004'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm283'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp065'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm258'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl171'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.11'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.4.463'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq003'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.1.61'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm257'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni218'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.3.335'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.39'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm289'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn024'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl076'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.3.223'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn065'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp125'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn018'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.2.147'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm243'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni411'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq037'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl108'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/56.1.15'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVI.4.395'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/X.3.231'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni288'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.2.140'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IX.3.227'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.201'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp273'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIX.2.155'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.552'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp074'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp272'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq055'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq050'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp257'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq026'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.1.28'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XX.3.253'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.1.1'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.1.35'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.219'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVIII.2.146'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.362'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIV.1.34'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIII.4.405'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXI.3.294'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.1.30'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.335'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.378'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.2.167'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.4.413'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIX.2.111'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXV.3.281'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVI.4.405'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.385'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.425'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.4.293'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.1.39'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.4.293'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.2.126'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.301'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.125'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.4.499'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/ijl/ecp021'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.471'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.2.181'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp201'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl110'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl077'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn131'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.485'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp015'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp142'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp200'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq004'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm283'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp065'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm258'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl171'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.11'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl111'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.4.463'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq003'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.1.61'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm257'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni218'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.3.335'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.1.39'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm289'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm279'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn024'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.2.162'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.3.223'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp125'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/57.3.349'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni411'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq037'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl108'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/56.1.15'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVI.4.395'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni288'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.2.140'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IX.3.227'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.4.324'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.201'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp273'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIX.2.155'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq055'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq050'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp272'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq026'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.1.28'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp006'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XX.3.253'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.1.1'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.1.35'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.378'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.2.167'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.4.413'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXV.3.281'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXX.1.43'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVI.4.405'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq021'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XX.2.151'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.385'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LII.4.425'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VII.4.293'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.125'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.219'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVIII.2.146'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIII.4.362'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLIV.1.34'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIII.4.405'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXI.3.294'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.1.30'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.1.39'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XI.4.293'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.2.126'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.301'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LV.4.499'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.135'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp242'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIII.2.113'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp117'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp087'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq091'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp170'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp054'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp255'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq081'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.3.253'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVII.3.295'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp224'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXI.3.220'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.1.40'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq009'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.4.429'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp139'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXI.2.129'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXX.4.393'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XVI.2.142'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp024'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp134'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp133'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/L.3.275'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp207'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XIX.1.1'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.1.27'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/VIII.3.250'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIX.3.305'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIV.3.277'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.4.345'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIV.2.177'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/V.4.335'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn215'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IX.4.304'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XLVI.2.160'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/58.4.580'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.1.37'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq124'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVII.1.1'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.3.208'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.3.216'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.315'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXVIII.4.385'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXIX.3.257'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/X.1.32'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/LIV.2.154'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq145'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp106'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp201'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp200'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp207'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp224'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='doi:10.1093/fs/knp242'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='doi:10.1093/fs/knp255'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq004'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq003'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp273'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq021'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp257'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq026'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq009'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp272'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq037'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq055'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq081'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq091'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq050'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq145'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq124'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq152'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knq114'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn131'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn191'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn144'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn175'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp015'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp024'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn215'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp038'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp006'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp063'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp065'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp106'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp054'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp087'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp074'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp092'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp128'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp142'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp125'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp133'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp170'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp139'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp134'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp117'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm243'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm291'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm258'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm257'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm310'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm343'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm309'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm304'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn024'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn035'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn018'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn009'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn043'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knn079'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl189'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knl227'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm018'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm027'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knm043'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.1.27'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.1.37'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.2.95'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.3.218'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.3.252'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.4.343'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/1.4.350'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.3.280'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.301'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.315'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.324'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.341'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.356'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.362'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.4.370'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.1.1'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.3.223'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.3.247'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/II.3.256'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.1.67'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.1.78'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.2.101'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.2.163'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.2.166'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.201'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.212'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.3.219'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.345'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.354'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.355'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.378'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/III.4.380'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.1.38'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.1.72'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.1.80'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.1.85'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.1.89'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.2.156'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.2.159'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.2.166'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.2.171'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.3.208'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.3.216'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.4.306'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.4.355'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/IV.4.357'">fr</xsl:when>
                                             <!-- sage-->
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'">FR</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">FR</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'">fr</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">fr</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458580904300109'">IT</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458587901300403'">FR</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458587901300403'">fr</xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:choose>
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
@@ -1754,6 +1875,7 @@
                 </xsl:choose>
                 <!-- All authors are included here -->
                 <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
+                
                 <xsl:if test="/article/fm/aug | /headerx/fm/aug | /art/fm/aug">
                     <xsl:apply-templates select="/article/fm/aug/* except(//aff)| /headerx/fm/aug/* except(//aff) | /art/fm/aug/*"/>
                 </xsl:if>
@@ -2360,7 +2482,14 @@
                                <xsl:variable name="nettoie">
                                    <xsl:apply-templates/>
                                </xsl:variable>
-                               <xsl:value-of select="translate($nettoie,';/','')"/>
+                               <xsl:choose>
+                                   <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                       <xsl:value-of select="translate($nettoie,';','')"/>
+                                   </xsl:when>
+                                   <xsl:otherwise>
+                                       <xsl:value-of select="translate($nettoie,';/','')"/>
+                                   </xsl:otherwise>
+                               </xsl:choose>
                            </xsl:with-param>
                        </xsl:call-template>
                        <xsl:if test="email">
@@ -4440,6 +4569,59 @@
                                     <xsl:value-of select="$avantVirgule"/>
                                 </region>
                             </xsl:when>
+                            <!-- reprise des codes etats américains pour forcer le code pays us -->
+                            <xsl:when test="starts-with($avantVirgule,'AK ')
+                                or starts-with($avantVirgule,'AL ')
+                                or starts-with($avantVirgule,'AR ')
+                                or starts-with($avantVirgule,'AZ ')
+                                or starts-with($avantVirgule,'CA ')
+                                or starts-with($avantVirgule,'CO ')
+                                or starts-with($avantVirgule,'CT ')
+                                or starts-with($avantVirgule,'DE ')
+                                or starts-with($avantVirgule,'FL ')
+                                or starts-with($avantVirgule,'GA ')
+                                or starts-with($avantVirgule,'HI ')
+                                or starts-with($avantVirgule,'IA ')
+                                or starts-with($avantVirgule,'ID ')
+                                or starts-with($avantVirgule,'IL ')
+                                or starts-with($avantVirgule,'IN ')
+                                or starts-with($avantVirgule,'KS ')
+                                or starts-with($avantVirgule,'KY ')
+                                or starts-with($avantVirgule,'LA ')
+                                or starts-with($avantVirgule,'MA ')
+                                or starts-with($avantVirgule,'MD ')
+                                or starts-with($avantVirgule,'ME ')
+                                or starts-with($avantVirgule,'MI ')
+                                or starts-with($avantVirgule,'MN ')
+                                or starts-with($avantVirgule,'MO ')
+                                or starts-with($avantVirgule,'MS ')
+                                or starts-with($avantVirgule,'MT ')
+                                or starts-with($avantVirgule,'NC ')
+                                or starts-with($avantVirgule,'ND ')
+                                or starts-with($avantVirgule,'NE ')
+                                or starts-with($avantVirgule,'NH ')
+                                or starts-with($avantVirgule,'NJ ')
+                                or starts-with($avantVirgule,'NM ')
+                                or starts-with($avantVirgule,'NV ')
+                                or starts-with($avantVirgule,'NY ')
+                                or starts-with($avantVirgule,'OH ')
+                                or starts-with($avantVirgule,'OK ')
+                                or starts-with($avantVirgule,'OR ')
+                                or starts-with($avantVirgule,'PA ')
+                                or starts-with($avantVirgule,'RI ')
+                                or starts-with($avantVirgule,'SC ')
+                                or starts-with($avantVirgule,'SD ')
+                                or starts-with($avantVirgule,'TN ')
+                                or starts-with($avantVirgule,'TX ')
+                                or starts-with($avantVirgule,'UT ')
+                                or starts-with($avantVirgule,'VA ')
+                                or starts-with($avantVirgule,'VT ')
+                                or starts-with($avantVirgule,'WA ')
+                                or starts-with($avantVirgule,'WI ')
+                                or starts-with($avantVirgule,'WV ')
+                                or starts-with($avantVirgule,'WY ')">
+                                <country key="US" xml:lang="en">UNITED STATES</country>
+                            </xsl:when>
                             <xsl:otherwise>
                                 <country>
                                     <xsl:attribute name="key">
@@ -4499,10 +4681,144 @@
                                             <xsl:value-of select="$avantVirgule"/>
                                         </region> 
                                     </xsl:when>
+                                    <xsl:when test="starts-with($avantVirgule,'AK ')
+                                        or starts-with($avantVirgule,'AL ')
+                                        or starts-with($avantVirgule,'AR ')
+                                        or starts-with($avantVirgule,'AZ ')
+                                        or starts-with($avantVirgule,'CA ')
+                                        or starts-with($avantVirgule,'CO ')
+                                        or starts-with($avantVirgule,'CT ')
+                                        or starts-with($avantVirgule,'DE ')
+                                        or starts-with($avantVirgule,'FL ')
+                                        or starts-with($avantVirgule,'GA ')
+                                        or starts-with($avantVirgule,'HI ')
+                                        or starts-with($avantVirgule,'IA ')
+                                        or starts-with($avantVirgule,'ID ')
+                                        or starts-with($avantVirgule,'IL ')
+                                        or starts-with($avantVirgule,'IN ')
+                                        or starts-with($avantVirgule,'KS ')
+                                        or starts-with($avantVirgule,'KY ')
+                                        or starts-with($avantVirgule,'LA ')
+                                        or starts-with($avantVirgule,'MA ')
+                                        or starts-with($avantVirgule,'MD ')
+                                        or starts-with($avantVirgule,'ME ')
+                                        or starts-with($avantVirgule,'MI ')
+                                        or starts-with($avantVirgule,'MN ')
+                                        or starts-with($avantVirgule,'MO ')
+                                        or starts-with($avantVirgule,'MS ')
+                                        or starts-with($avantVirgule,'MT ')
+                                        or starts-with($avantVirgule,'NC ')
+                                        or starts-with($avantVirgule,'ND ')
+                                        or starts-with($avantVirgule,'NE ')
+                                        or starts-with($avantVirgule,'NH ')
+                                        or starts-with($avantVirgule,'NJ ')
+                                        or starts-with($avantVirgule,'NM ')
+                                        or starts-with($avantVirgule,'NV ')
+                                        or starts-with($avantVirgule,'NY ')
+                                        or starts-with($avantVirgule,'OH ')
+                                        or starts-with($avantVirgule,'OK ')
+                                        or starts-with($avantVirgule,'OR ')
+                                        or starts-with($avantVirgule,'PA ')
+                                        or starts-with($avantVirgule,'RI ')
+                                        or starts-with($avantVirgule,'SC ')
+                                        or starts-with($avantVirgule,'SD ')
+                                        or starts-with($avantVirgule,'TN ')
+                                        or starts-with($avantVirgule,'TX ')
+                                        or starts-with($avantVirgule,'UT ')
+                                        or starts-with($avantVirgule,'VA ')
+                                        or starts-with($avantVirgule,'VT ')
+                                        or starts-with($avantVirgule,'WA ')
+                                        or starts-with($avantVirgule,'WI ')
+                                        or starts-with($avantVirgule,'WV ')
+                                        or starts-with($avantVirgule,'WY ')">
+                                        <xsl:if test="not(contains($theAffil,'USA'))">
+                                            <addrLine>
+                                                <xsl:value-of select="$avantVirgule"/>
+                                            </addrLine> 
+                                            <country key="US" xml:lang="en">UNITED STATES</country>
+                                        </xsl:if>
+                                    </xsl:when>
+                                    <xsl:when test="contains($avantVirgule,'Cambridge') or contains($avantVirgule,'London')">
+                                        <xsl:if test="not(contains($theAffil,'USA'))">
+                                            <addrLine>
+                                                <xsl:value-of select="$avantVirgule"/>
+                                            </addrLine> 
+                                        <country key="UK" xml:lang="en">UNITED KINGDOM</country>
+                                        </xsl:if>
+                                    </xsl:when>
+                                    <xsl:when test="contains($avantVirgule,'Durham') 
+                                        or contains($avantVirgule,'Edinburgh') 
+                                        or contains($avantVirgule,'Nottingham') 
+                                        or contains($avantVirgule,'Canterbury') 
+                                        or contains($avantVirgule,'Oxford')
+                                        or contains($avantVirgule,'Manchester')
+                                        or contains($avantVirgule,'Cheshire')
+                                        or contains($avantVirgule,'St Andrews')
+                                        or contains($avantVirgule,'Exeter')
+                                        or contains($avantVirgule,'Halifax')
+                                        or contains($avantVirgule,'Surrey')
+                                        or contains($avantVirgule,'Fife')
+                                        or contains($avantVirgule,'Leicester')
+                                        or contains($avantVirgule,'Chester')
+                                        or contains($avantVirgule,'Chichester')
+                                        or contains($avantVirgule,'Coventry')
+                                        or contains($avantVirgule,'Derby')
+                                        or contains($avantVirgule,'East Anglia')
+                                        or contains($avantVirgule,'East London')
+                                        or contains($avantVirgule,'Essex')
+                                        or contains($avantVirgule,'Gloucestershire')
+                                        or contains($avantVirgule,'Greenwich')
+                                        or contains($avantVirgule,'Huddersfield')
+                                        or contains($avantVirgule,'Hertfordshire')
+                                        or contains($avantVirgule,'Hull')
+                                        or contains($avantVirgule,'Keele')
+                                        or contains($avantVirgule,'Kent')
+                                        or contains($avantVirgule,'Kingston')
+                                        or contains($avantVirgule,'Lancaster')
+                                        or contains($avantVirgule,'Leeds')
+                                        or contains($avantVirgule,'Liverpool')
+                                        or contains($avantVirgule,'Uxbridge')
+                                        or contains($avantVirgule,'Bournemouth')
+                                        or contains($avantVirgule,'Birmingham')
+                                        or contains($avantVirgule,'Lancashire')
+                                        or contains($avantVirgule,'Bristol')
+                                        or contains($avantVirgule,'Brighton')
+                                        or contains($avantVirgule,'Loughborough')
+                                        or contains($avantVirgule,'Middlesex')
+                                        or contains($avantVirgule,'Northampton')
+                                        or contains($avantVirgule,'Plymouth')
+                                        or contains($avantVirgule,'Portsmouth')
+                                        or contains($avantVirgule,'Reading')
+                                        or contains($avantVirgule,'Roehampton')
+                                        or contains($avantVirgule,'Salford')
+                                        or contains($avantVirgule,'Sheffield')
+                                        or contains($avantVirgule,'Southampton')
+                                        or contains($avantVirgule,'Staffordshire')
+                                        or contains($avantVirgule,'Suffolk')
+                                        or contains($avantVirgule,'Sunderland')
+                                        or contains($avantVirgule,'Surrey')
+                                        or contains($avantVirgule,'Sussex')
+                                        or contains($avantVirgule,'Teesside')
+                                        or contains($avantVirgule,'Warwick')
+                                        or contains($avantVirgule,'Westminster')
+                                        or contains($avantVirgule,'Winchester')
+                                        or contains($avantVirgule,'Wolverhampton')
+                                        or contains($avantVirgule,'Worcester')
+                                        ">
+                                        <xsl:if test="not(contains($theAffil,'UK'))">
+                                            <addrLine>
+                                                <xsl:value-of select="$avantVirgule"/>
+                                            </addrLine> 
+                                            <country key="UK" xml:lang="en">UNITED KINGDOM</country>
+                                        </xsl:if>
+                                    </xsl:when>
+                                    <xsl:when test="contains($avantVirgule,'The Netherlands') or contains($avantVirgule,'the Netherlands')">
+                                        <country key="NL" xml:lang="en">THE NETHERLANDS</country>
+                                    </xsl:when>
                                     <xsl:otherwise>
                                         <addrLine>
                                             <xsl:value-of select="$avantVirgule"/>
-                                        </addrLine>  
+                                        </addrLine> 
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:otherwise>

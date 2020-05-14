@@ -443,7 +443,7 @@
 				<!-- PL: only paragraphs are taken because <div> are not allowed under <abstract> currently -->
 				<!--<xsl:apply-templates select="*/ce:simple-para"/>-->
 	            <xsl:choose>
-	                <xsl:when test="ce:abstract-sec">
+	                <xsl:when test="ce:abstract-sec | sec">
 	                    <xsl:apply-templates/>
 	                </xsl:when>
 	                <xsl:when test="p | rsc:p |Para | ce:abstract-sec | AbstractSection">

@@ -151,9 +151,85 @@
     <xsl:template match="Country | country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
             <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz(). ','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
+            <xsl:variable name="etatsAmericains">
+                <xsl:choose>
+                    <xsl:when test=".='Alabama'">Alabama</xsl:when>
+                    <xsl:when test=".='Alaska'">Alaska</xsl:when>
+                    <xsl:when test=".='Arizona'">Arizona</xsl:when>
+                    <xsl:when test=".='Arkansas'">Arkansas</xsl:when>
+                    <xsl:when test=".='California'">California</xsl:when>
+                    <xsl:when test=".='North Carolina'">North Carolina</xsl:when>
+                    <xsl:when test=".='South Carolina'">South Carolina</xsl:when>
+                    <xsl:when test=".='Colorado'">Colorado</xsl:when>
+                    <xsl:when test=".='Connecticut'">Connecticut</xsl:when>
+                    <xsl:when test=".='North Dakota'">North Dakota</xsl:when>
+                    <xsl:when test=".='South Dakota'">South Dakota</xsl:when>
+                    <xsl:when test=".='Delaware'">Delaware</xsl:when>
+                    <xsl:when test=".='Florida'">Florida</xsl:when>
+                    <xsl:when test=".='Georgia'">Georgia</xsl:when>
+                    <xsl:when test=".='Hawaii'">Hawaii</xsl:when>
+                    <xsl:when test=".='Idaho'">Idaho</xsl:when>
+                    <xsl:when test=".='Illinois'">Illinois</xsl:when>
+                    <xsl:when test=".='Indiana'">Indiana</xsl:when>
+                    <xsl:when test=".='Iowa'">Iowa</xsl:when>
+                    <xsl:when test=".='Kansas'">Kansas</xsl:when>
+                    <xsl:when test=".='Kentucky'">Kentucky</xsl:when>
+                    <xsl:when test=".='Commonwealth of Kentucky'">Commonwealth of Kentucky</xsl:when>
+                    <xsl:when test=".='Louisiana'">Louisiana</xsl:when>
+                    <xsl:when test=".='Maine'">Maine</xsl:when>
+                    <xsl:when test=".='Maryland'">Maryland</xsl:when>
+                    <xsl:when test=".='Massachusetts'">Massachusetts</xsl:when>
+                    <xsl:when test=".='Commonwealth of Massachusetts'">Commonwealth of Massachusetts</xsl:when>
+                    <xsl:when test=".='Michigan'">Michigan</xsl:when>
+                    <xsl:when test=".='Minnesota'">Minnesota</xsl:when>
+                    <xsl:when test=".='Mississippi'">Mississippi</xsl:when>
+                    <xsl:when test=".='Missouri'">Missouri</xsl:when>
+                    <xsl:when test=".='Montana'">Montana</xsl:when>
+                    <xsl:when test=".='Nebraska'">Nebraska</xsl:when>
+                    <xsl:when test=".='Nevada'">Nevada</xsl:when>
+                    <xsl:when test=".='New Hampshire'">New Hampshire</xsl:when>
+                    <xsl:when test=".='New Jersey'">New Jersey</xsl:when>
+                    <xsl:when test=".='Nouveau-Mexique'">New Mexico</xsl:when>
+                    <xsl:when test=".='New York'">New York</xsl:when>
+                    <xsl:when test=".='Ohio'">Ohio</xsl:when>
+                    <xsl:when test=".='Oklahoma'">Oklahoma</xsl:when>
+                    <xsl:when test=".='Oregon'">Oregon</xsl:when>
+                    <xsl:when test=".='Pennsylvania'">Pennsylvania</xsl:when>
+                    <xsl:when test=".='Rhode Island'">Rhode Island</xsl:when>
+                    <xsl:when test=".='Tennessee'">Tennessee</xsl:when>
+                    <xsl:when test=".='Texas'">Texas</xsl:when>
+                    <xsl:when test=".='Utah'">Utah</xsl:when>
+                    <xsl:when test=".='Vermont'">Vermont</xsl:when>
+                    <xsl:when test=".='Virginia'">Virginia</xsl:when>
+                    <xsl:when test=".='Commonwealth of Virginia'">Commonwealth of Virginia</xsl:when>
+                    <xsl:when test=".='West Virginia'">West Virginia</xsl:when>
+                    <!-- enlever intentionnellement, peut être confondu avec Washington DC <xsl:when test=".='Washington'">Washington</xsl:when>-->
+                    <xsl:when test=".='Wisconsin'">Wisconsin</xsl:when>
+                    <xsl:when test=".='Wyoming'">Wyoming</xsl:when>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:if test="$etatsAmericains !=''">
+                <region>
+                    <xsl:value-of select="$etatsAmericains"/>
+                </region>
+            </xsl:if>
             <country>
                 <xsl:choose>
-                    
+                    <!-- signalement des états américains dans <region> -->
+                    <xsl:when test="$etatsAmericains !=''">
+                        <!-- A specific test for ScholarOne -->
+                        <xsl:variable name="change">
+                            <xsl:text>UNITED STATES</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
                     <xsl:when test="@country_code">
                         <!-- A specific test for ScholarOne -->
                         <xsl:attribute name="key">
