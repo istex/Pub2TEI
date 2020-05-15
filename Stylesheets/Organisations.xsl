@@ -50,9 +50,6 @@
                 contains($theOrg,'Univ.') or
                 contains($theOrg,'Academy') or
                 contains($theOrg,'Pasteur') or
-                contains($theOrg,'Registry') or
-                contains($theOrg,'Register') or
-                contains($theOrg,'Registro') or
                 contains($theOrg,'Eurocat') or
                 contains($theOrg,'Fundação') or
                 contains($theOrg,'Network') or
@@ -83,6 +80,7 @@
                 contains($theOrg,'CSIC') or
                 contains($theOrg,'Fondation') or
                 contains($theOrg,'Hôpital') or
+                contains($theOrg,'Ospedali') or
                 contains($theOrg,'CHU') or
                 contains($theOrg,'ParisTech') or
                 contains($theOrg,'Inra') or
@@ -167,7 +165,11 @@
                 contains($theOrg,'Abteilung') or
                 contains($theOrg,'Directorate') or
                 contains($theOrg,'Ciencias') or
+                contains($theOrg,'Clinic') or
                 starts-with($theOrg,'EA 4604') or
+                contains($theOrg,'Registry') or
+                contains($theOrg,'Register') or
+                contains($theOrg,'Registro') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>

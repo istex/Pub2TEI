@@ -409,6 +409,7 @@
     <!-- Springer 2: OrgAddress  -->
 
     <xsl:template match="addr-line | addr1 | addr2 | addr3 | corresponding-author-address-1 | corresponding-author-address-2 | addrelt| rsc:addrelt">
+        
         <xsl:if test=". !=''">
             <xsl:choose>
                 <xsl:when test="*">
@@ -440,6 +441,33 @@
                  <xsl:variable name="addrline">
                      <xsl:apply-templates/>
                  </xsl:variable>
+                 <xsl:variable name="avantVirgule">
+                     <xsl:choose>
+                         <xsl:when test="contains($addrline,',')">
+                             <xsl:value-of select="normalize-space(substring-before($addrline,','))"/>
+                         </xsl:when>
+                         <xsl:otherwise>
+                             <xsl:value-of select="normalize-space($addrline)"/>
+                         </xsl:otherwise>
+                     </xsl:choose>
+                 </xsl:variable>
+                 <xsl:variable name="apresVirgule">
+                     <xsl:choose>
+                         <xsl:when test="contains($addrline,',')">
+                             <xsl:value-of select="normalize-space(substring-after($addrline,','))"/>
+                         </xsl:when>
+                         <xsl:otherwise>
+                             <xsl:value-of select="''"/>
+                         </xsl:otherwise>
+                     </xsl:choose>
+                 </xsl:variable>
+                 <xsl:variable name="testOrganisation">
+                     <xsl:call-template name="identifyOrgLevel">
+                         <xsl:with-param name="theOrg">
+                             <xsl:value-of select="$addrline"/>
+                         </xsl:with-param>
+                     </xsl:call-template>
+                 </xsl:variable>
                  <xsl:choose>
                      <xsl:when test="ancestor::aff/xref">
                          <address>
@@ -448,11 +476,31 @@
                              </addrLine>
                          </address>
                      </xsl:when>
-                     <xsl:when test="contains(.,', ')">
+                    <xsl:when test="contains(.,', ') and not(ancestor::aff/country)">
                          <xsl:call-template name="NLMparseAffiliation">
                              <xsl:with-param name="theAffil" select="."/>
                              <xsl:with-param name="inAddress" select="true()"/>
                          </xsl:call-template>
+                     </xsl:when>
+                     <xsl:when test="$testOrganisation!=''">
+                             <orgName>
+                                 <xsl:attribute name="type">
+                                     <xsl:value-of select="$testOrganisation"/>
+                                 </xsl:attribute>
+                                 <xsl:choose>
+                                     <xsl:when test="$avantVirgule">
+                                         <xsl:apply-templates select="$avantVirgule"/>
+                                     </xsl:when>
+                                     <xsl:otherwise>
+                                         <xsl:value-of select="normalize-space($addrline)"/>
+                                     </xsl:otherwise>
+                                 </xsl:choose>
+                             </orgName>
+                         <xsl:if test="$apresVirgule !=''">
+                             <xsl:call-template name="NLMparseAffiliation">
+                                 <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                             </xsl:call-template>
+                         </xsl:if>
                      </xsl:when>
                      <xsl:otherwise>
                          <addrLine>

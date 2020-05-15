@@ -343,12 +343,18 @@
                             <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
                         </email>
                     </xsl:if>
-                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
-                </xsl:when>
-               <xsl:when test="contains(xref/@rid,' ')">
-                    <xsl:call-template name="createNLMAffiliations">
-                        <xsl:with-param name="restAff" select="xref/@rid"/>
-                    </xsl:call-template>
+                    <xsl:for-each select="xref">
+                        <xsl:choose>
+                            <xsl:when test="contains(@rid,' ')">
+                                <xsl:call-template name="createNLMAffiliations">
+                                    <xsl:with-param name="restAff" select="@rid"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/@rid]/label)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
                 </xsl:when>
                 <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
                     <!-- email -->
@@ -357,16 +363,27 @@
                             <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
                         </email>
                     </xsl:if>
-                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
+                    <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |
+                        /article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] 
+                        except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
                 </xsl:when>
                 <xsl:when test="aff">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
                 <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
-                    <xsl:apply-templates select="aff | ../aff"/>
+                    <xsl:apply-templates select="aff | //aff"/>
                 </xsl:when>
-                
-                
+                <xsl:otherwise>
+                    <xsl:for-each select="xref">
+                        <xsl:choose>
+                            <xsl:when test="contains(@rid,' ')">
+                                <xsl:call-template name="createNLMAffiliations">
+                                    <xsl:with-param name="restAff" select="@rid"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:for-each>
+                </xsl:otherwise>
                 <!-- <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>-->
