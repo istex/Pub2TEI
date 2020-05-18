@@ -45,6 +45,7 @@
             <xsl:otherwise>
                 <xsl:choose>
                     <xsl:when test="//article/front/article-meta/article-categories/subj-group/subject='ORIGINAL RESEARCH PAPERS'">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
                     <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0] or contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
                     <xsl:when test="//article/front/article-meta/abstract[string-length()&gt; 0]">article</xsl:when>
                     <xsl:otherwise>
@@ -71,7 +72,13 @@
             <xsl:when test="normalize-space($codeGenre2)='article'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='Article'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='book-review'">book-reviews</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='books-received'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='books-received'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='brief-report'">brief-communication</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='calendar'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='case-report'">case-report</xsl:when>
@@ -80,11 +87,29 @@
             <xsl:when test="normalize-space($codeGenre2)='correction'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='errata'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='dissertation'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='discussion'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='discussion'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='editorial'">editorial</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='experiment'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='in-brief'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='introduction'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='in-brief'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">brief-communication</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='introduction'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='letter'">
                 <xsl:choose>
                     <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
@@ -94,7 +119,13 @@
             </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='lecture'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meeting-report'">conference</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='news'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='news'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='paper-read'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='obituary'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='oration'">other</xsl:when>
@@ -116,9 +147,19 @@
             <xsl:when test="normalize-space($codeGenre2)='research-article'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='retraction'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='review-article'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='translation'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='translation'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
            <xsl:otherwise>
-                <xsl:text>other</xsl:text>
+               <xsl:choose>
+                   <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                   <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                   <xsl:otherwise>other</xsl:otherwise>
+               </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -782,7 +823,13 @@
             <xsl:when test="normalize-space($codeGenreNature1)='tt'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenreNature1)='wsrep'">conference</xsl:when>
             <xsl:when test="normalize-space($codeGenreNature1)='wdiag'">case-report</xsl:when>
-            <xsl:otherwise>other</xsl:otherwise>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="//article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     
@@ -2366,6 +2413,7 @@
                                <xsl:when test="addr-line">
                                    <address>
                                        <xsl:apply-templates select="addr-line"/>
+                                       <xsl:apply-templates select="country"/>
                                    </address>
                                </xsl:when>
                                <xsl:otherwise>
