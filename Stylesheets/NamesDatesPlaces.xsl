@@ -469,7 +469,7 @@
                      </xsl:call-template>
                  </xsl:variable>
                  <xsl:choose>
-                     <xsl:when test="ancestor::aff/xref">
+                     <xsl:when test="ancestor::aff/xref/addr-line">
                          <address>
                              <addrLine>
                                  <xsl:value-of select="normalize-space($addrline)"/>

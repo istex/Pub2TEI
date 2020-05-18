@@ -24,26 +24,6 @@
                         </persName>
                     </xsl:otherwise>
                 </xsl:choose>
-                
-                <xsl:choose>
-                    <xsl:when test="ancestor::contrib-group/aff or ancestor::article-meta/aff and not(ancestor::contrib-group/contrib/xref)">
-                        <xsl:if test="ancestor::contrib-group/aff/email and not(ancestor::contrib-group/contrib/xref)">
-                            <email><xsl:value-of select="ancestor::contrib-group/aff/email"/></email>
-                        </xsl:if>
-                        <xsl:for-each select="ancestor::contrib-group/aff | ancestor::article-meta/aff">
-                            <xsl:if test="not(contains(@id,'cor'))">
-                                <xsl:if test="not(break|target) and not(ancestor::contrib-group/contrib/xref)">
-                                    <xsl:choose>
-                                        <xsl:when test="addr-line">
-                                            <xsl:call-template name="affSSID"/>
-                                        </xsl:when>
-                                        <xsl:when test="xref"/>
-                                    </xsl:choose>
-                                </xsl:if>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:when>
-                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

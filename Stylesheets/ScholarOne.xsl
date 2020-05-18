@@ -370,8 +370,11 @@
                 <xsl:when test="aff">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
-                <xsl:when test="aff or ancestor::article-meta and //aff and not(//collab)">
-                    <xsl:apply-templates select="aff | //aff"/>
+                <xsl:when test="parent::contrib-group/aff and not(//collab)">
+                    <xsl:apply-templates select="parent::contrib-group/aff"/>
+                </xsl:when>
+                <xsl:when test="//article-meta/aff and not(//collab)">
+                    <xsl:apply-templates select="//article-meta/aff"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:for-each select="xref">

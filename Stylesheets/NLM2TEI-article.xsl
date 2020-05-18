@@ -2475,6 +2475,15 @@
                    </xsl:call-template>
                </affiliation>
            </xsl:when>
+           <xsl:when test="institution and country">
+               <affiliation>
+                   <xsl:apply-templates select="institution"/>
+                   <address>
+                       <xsl:apply-templates select="addr-line"/>
+                       <xsl:apply-templates select="country"/>
+                   </address>
+               </affiliation>
+           </xsl:when>
            <xsl:when test="country and not(institution)">
                <affiliation>
                    <xsl:if test="country and not(addr-line)">
@@ -2529,30 +2538,42 @@
                </affiliation>
            </xsl:when>
            <xsl:otherwise>
-               <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
-                   <affiliation>
-                       <xsl:call-template name="NLMParseAffiliation">
-                           <xsl:with-param name="theAffil">
-                               <xsl:variable name="nettoie">
-                                   <xsl:apply-templates/>
-                               </xsl:variable>
-                               <xsl:choose>
-                                   <xsl:when test="contains($nettoie,'SISSA/ISAS')">
-                                       <xsl:value-of select="translate($nettoie,';','')"/>
-                                   </xsl:when>
-                                   <xsl:otherwise>
-                                       <xsl:value-of select="translate($nettoie,';/','')"/>
-                                   </xsl:otherwise>
-                               </xsl:choose>
-                           </xsl:with-param>
-                       </xsl:call-template>
-                       <xsl:if test="email">
-                           <email>
-                           <xsl:value-of select="email"/>
-                           </email>
+               <xsl:choose>
+                   <xsl:when test="institution">
+                       <affiliation>
+                           <xsl:apply-templates select="institution"/>
+                           <xsl:apply-templates select="addr-line"/>
+                           <xsl:apply-templates select="country"/>
+                       </affiliation>
+                   </xsl:when>
+                   <xsl:otherwise>
+                       <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
+                           <affiliation>
+                               <xsl:call-template name="NLMParseAffiliation">
+                                   <xsl:with-param name="theAffil">
+                                       <xsl:variable name="nettoie">
+                                           <xsl:apply-templates/>
+                                       </xsl:variable>
+                                       <xsl:choose>
+                                           <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                               <xsl:value-of select="translate($nettoie,';','')"/>
+                                           </xsl:when>
+                                           <xsl:otherwise>
+                                               <xsl:value-of select="translate($nettoie,';/','')"/>
+                                           </xsl:otherwise>
+                                       </xsl:choose>
+                                   </xsl:with-param>
+                               </xsl:call-template>
+                               <xsl:if test="email">
+                                   <email>
+                                       <xsl:value-of select="email"/>
+                                   </email>
+                               </xsl:if>
+                           </affiliation>
                        </xsl:if>
-                   </affiliation>
-               </xsl:if>
+                   </xsl:otherwise>
+               </xsl:choose>
+               
            </xsl:otherwise>
        </xsl:choose>
     </xsl:template>
@@ -4741,7 +4762,30 @@
                                         <region>
                                             <xsl:value-of select="$avantVirgule"/>
                                         </region>
-                                        <country key="US" xml:lang="en">UNITED STATES</country>
+                                        <xsl:if test="not(contains(parent::aff,'USA'))">
+                                            <country key="US" xml:lang="en">UNITED STATES</country>
+                                        </xsl:if>
+                                    </xsl:when>
+                                    <!-- prise en charge des villes japonaises 
+                                    et ajout de leurs codes pays si manquant-->
+                                    <xsl:when test="contains($avantVirgule,'Hokkaido')
+                                        or contains($avantVirgule,'Sapporo')
+                                        or contains($avantVirgule,'Shizuoka')
+                                        or contains($avantVirgule,'Osaka')
+                                        or contains($avantVirgule,'Tokyo')
+                                        or contains($avantVirgule,'Kyoto')
+                                        or contains($avantVirgule,'Ibaraki')
+                                        or contains($avantVirgule,'Morioka')
+                                        or contains($avantVirgule,'Fukushima')
+                                        or contains($avantVirgule,'Ichihara')
+                                        or contains($avantVirgule,'Kumamoto')
+                                        ">
+                                        <settlement>
+                                            <xsl:value-of select="$avantVirgule"/>
+                                        </settlement>
+                                        <xsl:if test="not(contains(parent::aff|parent::corresp,'Japan'))">
+                                            <country key="JP" xml:lang="en">JAPAN</country>
+                                        </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="starts-with($avantVirgule,'AK ')
                                         or starts-with($avantVirgule,'AL ')
@@ -4870,8 +4914,10 @@
                                         <xsl:if test="not(contains($theAffil,'UK'))">
                                             <addrLine>
                                                 <xsl:value-of select="$avantVirgule"/>
-                                            </addrLine> 
-                                            <country key="UK" xml:lang="en">UNITED KINGDOM</country>
+                                                <xsl:if test="not(contains($theAffil,'England'))">
+                                                    <country key="GB" xml:lang="en">UNITED KINGDOM</country>
+                                                </xsl:if>
+                                            </addrLine>
                                         </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="contains($avantVirgule,'The Netherlands') or contains($avantVirgule,'the Netherlands')">
