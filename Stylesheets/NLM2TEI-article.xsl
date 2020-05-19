@@ -4806,6 +4806,7 @@
                                         or starts-with($avantVirgule,'KY ')
                                         or starts-with($avantVirgule,'LA ')
                                         or starts-with($avantVirgule,'MA ')
+                                        or starts-with($avantVirgule,'Massachusetts')
                                         or starts-with($avantVirgule,'MD ')
                                         or starts-with($avantVirgule,'ME ')
                                         or starts-with($avantVirgule,'MI ')
@@ -4821,6 +4822,7 @@
                                         or starts-with($avantVirgule,'NM ')
                                         or starts-with($avantVirgule,'NV ')
                                         or starts-with($avantVirgule,'NY ')
+                                        or starts-with($avantVirgule,'N.Y.')
                                         or starts-with($avantVirgule,'OH ')
                                         or starts-with($avantVirgule,'OK ')
                                         or starts-with($avantVirgule,'OR ')
@@ -4842,14 +4844,6 @@
                                                 <xsl:value-of select="$avantVirgule"/>
                                             </addrLine> 
                                             <country key="US" xml:lang="en">UNITED STATES</country>
-                                        </xsl:if>
-                                    </xsl:when>
-                                    <xsl:when test="contains($avantVirgule,'Cambridge') or contains($avantVirgule,'London')">
-                                        <xsl:if test="not(contains($theAffil,'USA'))">
-                                            <addrLine>
-                                                <xsl:value-of select="$avantVirgule"/>
-                                            </addrLine> 
-                                        <country key="UK" xml:lang="en">UNITED KINGDOM</country>
                                         </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="contains($avantVirgule,'Durham') and not(contains($theAffil,'North'))
@@ -4933,7 +4927,7 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <addrLine>
-                                            <xsl:value-of select="$avantVirgule"/>
+                                            <xsl:apply-templates select="$avantVirgule"/>
                                         </addrLine>
                                     </xsl:otherwise>
                                 </xsl:choose>

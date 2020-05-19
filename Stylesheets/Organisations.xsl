@@ -170,6 +170,7 @@
                 contains($theOrg,'Registry') or
                 contains($theOrg,'Register') or
                 contains($theOrg,'Registro') or
+                contains($theOrg,'Sciences') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
