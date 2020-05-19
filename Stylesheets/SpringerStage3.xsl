@@ -11,9 +11,21 @@
     <xsl:variable name="codeGenreSJ">
         <xsl:choose>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Graduate/advanced undergraduate textbook'">chapter</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='OriginalPaper'">research-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreSpringerJournal)='OriginalPaper'">
+                <xsl:choose>
+                    <xsl:when test="//Abstract and //Keyword">research-article</xsl:when>
+                    <xsl:when test="//Abstract">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Article'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Report'">research-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Report'">
+                <xsl:choose>
+                    <xsl:when test="//Abstract and //Keyword">research-article</xsl:when>
+                    <xsl:when test="//Abstract">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Letter'">review-article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Legacy'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='News'">article</xsl:when>
@@ -24,12 +36,8 @@
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='BookReview'">book-reviews</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Abstract'">abstract</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='CaseReport'">case-report</xsl:when>
-            <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="normalize-space($codeGenreSpringerJournal)='Announcement' and //Abstract[string-length()&gt; 0]">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:otherwise>
+            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Announcement' and //Abstract[string-length()&gt; 0]">article</xsl:when>
+            <xsl:otherwise>other</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="codeGenreArkSJ">
@@ -196,9 +204,9 @@
                                             <language>
                                                 <xsl:attribute name="ident">
                                                     <xsl:choose>
-                                                        <xsl:when test="//ArticleDOI='10.1007/BF02584710'">PT</xsl:when>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
                                                         <xsl:otherwise>
-                                                            <xsl:value-of select="translate(//ArticleTitle[1]/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                                            <xsl:value-of select="translate(//ArticleTitle[1]/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                         </xsl:otherwise>
                                                     </xsl:choose>
                                                 </xsl:attribute>
@@ -210,12 +218,51 @@
                                             <language>
                                                 <xsl:attribute name="ident">
                                                     <xsl:choose>
-                                                        <xsl:when test="//ArticleDOI='10.1007/BF02584710'">PT</xsl:when>
-                                                        <xsl:when test="//ArticleTitle[1]/@Language= '--'">und</xsl:when>
+                                                        <xsl:when test="contains(//ArticleTitle,'И')">ru</xsl:when>
+                                                        <xsl:when test="//City='Прага'">ru</xsl:when>
+                                                        <xsl:when test="//City='Praha'">cs</xsl:when>
+                                                        <xsl:when test="//Country='Russia'">ru</xsl:when>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02192581'
+                                                            or //ArticleDOI='10.1007/BF02334726'
+                                                            or //ArticleDOI='10.1007/BF01461250'
+                                                            or //ArticleDOI='10.1007/BF02192579'
+                                                            or //ArticleDOI='10.1007/BF02192580'
+                                                            or //ArticleDOI='10.1007/BF02314882'
+                                                            or //ArticleDOI='10.1007/BF02203888'
+                                                            or //ArticleDOI='10.1007/BF02314879'
+                                                            ">nl</xsl:when>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02935462'">cs</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Warszawa'">pl</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Akadémiai Kiadó'">ru</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Czechoslovak Academy of Sciences'">cs</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Institute of Microbiology, Academy of Sciences of the Czech Republic'">cs</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='The Society of the Nippon Dental University'">en</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='The Ichthyological Society of Japan'">en</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Państwowe Wydawnictwo Naukowe'">pl</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='De Erven F. Bohn'">nl</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Kluwer Academic Publishers'">nl</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='J. H. Gebhard &amp; Comp.'">nl</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='De Nederlandsche Boek- En Steendrukkerij'">nl</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Gedrukt BIJ H. Veeman &amp; Zonen'">nl</xsl:when>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02585119'">ru</xsl:when>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF03039150' 
+                                                            or //ArticleDOI='10.1007/BF03039153'
+                                                            or //ArticleDOI='10.1007/BF03039027'
+                                                            or //ArticleDOI='10.1007/BF03039152'
+                                                            ">en</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Аннотация'">ru</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Аннотациа'">ru</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Краткое содержание'">ru</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='--Реэюме'">ru</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Súhrn'">sk</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Souhrn'">cs</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Abstract'">en</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Conclusie'">nl</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Conclusies'">nl</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Samenvatting'">nl</xsl:when>
                                                         <xsl:when test="//ArticleInfo[1]/@Language= '--'">und</xsl:when>
-                                                        <xsl:otherwise>
-                                                            <xsl:value-of select="//ArticleInfo/@Language"/>
-                                                        </xsl:otherwise>
+                                                        <xsl:otherwise>und</xsl:otherwise>
                                                     </xsl:choose>
                                                 </xsl:attribute>
                                             </language>
@@ -242,7 +289,7 @@
                                     <langUsage>
                                         <language>
                                             <xsl:attribute name="ident">
-                                                <xsl:value-of select="translate(//Chapter/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                                <xsl:value-of select="translate(//Chapter/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                             </xsl:attribute>
                                         </language>
                                     </langUsage>

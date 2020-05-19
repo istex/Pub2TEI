@@ -148,7 +148,7 @@
     <!-- PL: Nanture: cny -->
     <!-- BMJ: corresponding-author-city, corresponding-author-country, corresponding-author-state, corresponding-author-zipcode -->
 
-    <xsl:template match="Country | country| rsc:country | corresponding-author-country | cny">
+    <xsl:template match="country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
             <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz(). ','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
             <xsl:variable name="etatsAmericains">

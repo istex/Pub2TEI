@@ -561,6 +561,7 @@
                         <cell role="a3code">ESP</cell>
                         <cell role="name" xml:lang="fr">ESPAGNE</cell>
                         <cell role="name" xml:lang="en">SPAIN</cell>
+                        <cell role="nameAlt" xml:lang="es">ESPANA</cell>
                         <cell role="nameAlt" xml:lang="en">Spain</cell>
                         <cell role="nameAlt" xml:lang="en">es</cell>
                     </row>
@@ -623,10 +624,9 @@
                         <cell role="a3code">FRA</cell>
                         <cell role="name" xml:lang="fr">FRANCE</cell>
                         <cell role="name" xml:lang="en">FRANCE</cell>
-                        <cell role="nameAlt" xml:lang="en">France</cell>
-                        <cell role="nameAlt" xml:lang="en">Francie</cell>
-                        <cell role="nameAlt" xml:lang="es">Francia</cell>
-                        <cell role="nameAlt" xml:lang="de">Frankreich</cell>
+                        <cell role="nameAlt" xml:lang="en">FRANCIE</cell>
+                        <cell role="nameAlt" xml:lang="es">FRANCIA</cell>
+                        <cell role="nameAlt" xml:lang="de">FRANKREICH</cell>
                         <cell role="nameAlt" xml:lang="en">fr</cell>
                         <cell role="nameAlt" xml:lang="en">uni</cell>
                         <cell role="nameAlt" xml:lang="en">gov</cell>
@@ -1368,9 +1368,12 @@
                         <cell role="a3code">NLD</cell>
                         <cell role="name" xml:lang="fr">PAYS-BAS</cell>
                         <cell role="name" xml:lang="en">THE NETHERLANDS</cell>
+                        <cell role="nameAlt" xml:lang="en">NETHERLANDS</cell>
                         <cell role="nameAlt" xml:lang="en">Netherlands</cell>
                         <cell role="nameAlt" xml:lang="en">The Netherlands</cell>
+                        <cell role="nameAlt" xml:lang="en">HOLLAND.</cell>
                         <cell role="nameAlt" xml:lang="en">Holland.</cell>
+                        <cell role="nameAlt" xml:lang="en">HOLLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Holland</cell>
                         <cell role="nameAlt" xml:lang="en">nl</cell>
                     </row>
@@ -1407,6 +1410,10 @@
                         <cell role="nameAlt" xml:lang="pl">Krakowie</cell>
                         <cell role="nameAlt" xml:lang="pl">Warszawie</cell>
                         <cell role="nameAlt" xml:lang="en">Warsaw</cell>
+                        <cell role="nameAlt" xml:lang="pl">POLSKA</cell>
+                        <cell role="nameAlt" xml:lang="pl">KRAKOWIE</cell>
+                        <cell role="nameAlt" xml:lang="pl">WARSZAWIE</cell>
+                        <cell role="nameAlt" xml:lang="en">WARSAW</cell>
                         <cell role="nameAlt" xml:lang="en">pl</cell>
                     </row>
                     <row>
@@ -1466,6 +1473,7 @@
                         <cell role="nameAlt" xml:lang="en">Northern Ireland, UK</cell>
                         <cell role="nameAlt" xml:lang="en">Scotland, UK</cell>
                         <cell role="nameAlt" xml:lang="en">England.</cell>
+                        <cell role="nameAlt" xml:lang="en">ENGLAND</cell>
                         <cell role="nameAlt" xml:lang="en">England</cell>
                         <cell role="nameAlt" xml:lang="en">uk</cell>
                         <cell role="nameAlt" xml:lang="en">U. K.</cell>
@@ -1477,6 +1485,7 @@
                         <cell role="name" xml:lang="en">RUSSIAN FEDERATION</cell>
                         <cell role="nameAlt" xml:lang="en">Russian Federation</cell>
                         <cell role="nameAlt" xml:lang="en">Russia</cell>
+                        <cell role="nameAlt" xml:lang="en">RUSSIA</cell>
                         <cell role="nameAlt" xml:lang="en">Russia.</cell>
                         <cell role="nameAlt" xml:lang="en">ru</cell>
                     </row>

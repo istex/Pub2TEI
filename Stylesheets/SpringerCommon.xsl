@@ -221,6 +221,11 @@
             <xsl:apply-templates/>
         </persName>
     </xsl:template>
+    <xsl:template match="Prefix">
+        <roleName>
+            <xsl:apply-templates/>
+        </roleName>
+    </xsl:template>
 
     <xsl:template match="Contact">
         <xsl:apply-templates select="Email"/>
@@ -266,7 +271,22 @@
         </ref>
     </xsl:template>
 
-
+<!-- country mode springer -->
+    <xsl:template match="Country">
+        <xsl:if test=".!=''">
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnñopqrstuvwxyz(). ','ABCDEFGHIJKLMNNOPQRSTUVWXYZ'))"/>
+            <country>
+                <xsl:attribute name="key">
+                    <xsl:call-template name="normalizeISOCountry">
+                        <xsl:with-param name="country" select="$countryWithNoSpace"/>
+                    </xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="normalizeISOCountryName">
+                    <xsl:with-param name="country" select="$countryWithNoSpace"/>
+                </xsl:call-template>
+            </country>
+        </xsl:if>
+    </xsl:template>
 
 
     <!-- Références bibliographiques à la fin d'un article -->
