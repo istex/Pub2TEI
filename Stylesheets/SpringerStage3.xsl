@@ -339,8 +339,8 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Title information related to the paper goes here -->
-                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleTitle"
-                        />
+                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleTitle"/>
+                            <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleSubTitle"/>
                         <!-- All authors are included here -->
                         <xsl:apply-templates
                         select="Volume/Issue/Article/ArticleHeader/AuthorGroup/Author"/>

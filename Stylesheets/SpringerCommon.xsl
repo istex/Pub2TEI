@@ -150,7 +150,16 @@
         </div>
     </xsl:template>
 
-
+    <xsl:template match="ArticleSubTitle">
+        <title level="a" type="sub">
+            <xsl:if test="@Language !='--'">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
     <!-- +++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- author related information -->
 
@@ -265,6 +274,23 @@
         </affiliation>
     </xsl:template>
 
+    <xsl:template match="OrgName">
+        <orgName type="institution">
+            <xsl:variable name="orgName">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($orgName)"/>
+        </orgName>
+    </xsl:template>
+    <xsl:template match="OrgDivision">
+        <orgName type="department">
+            <xsl:variable name="orgDivision">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($orgDivision)"/>
+        </orgName>
+    </xsl:template>
+    
     <xsl:template match="CitationRef">
         <ref>
             <xsl:apply-templates/>
@@ -276,14 +302,22 @@
         <xsl:if test=".!=''">
             <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnñopqrstuvwxyz(). ','ABCDEFGHIJKLMNNOPQRSTUVWXYZ'))"/>
             <country>
-                <xsl:attribute name="key">
-                    <xsl:call-template name="normalizeISOCountry">
-                        <xsl:with-param name="country" select="$countryWithNoSpace"/>
-                    </xsl:call-template>
-                </xsl:attribute>
-                <xsl:call-template name="normalizeISOCountryName">
-                    <xsl:with-param name="country" select="$countryWithNoSpace"/>
-                </xsl:call-template>
+                <xsl:choose>
+                    <xsl:when test="contains(.,'СССР')">
+                        <xsl:attribute name="key">RU</xsl:attribute>
+                        <xsl:text>RUSSIA</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$countryWithNoSpace"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$countryWithNoSpace"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </country>
         </xsl:if>
     </xsl:template>

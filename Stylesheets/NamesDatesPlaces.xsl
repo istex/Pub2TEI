@@ -376,6 +376,16 @@
             <region>
                 <xsl:apply-templates/>
             </region>
+            <xsl:if test="not(../Country)">
+                <xsl:choose>
+                    <xsl:when test=".='Praha'">
+                        <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
+                    </xsl:when>
+                    <xsl:when test=".='Baarn'">
+                        <country key="NL" xml:lang="en">THE NETHERLANDS</country>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <!-- PL: add cty for Nature -->
@@ -384,6 +394,16 @@
             <settlement>
                 <xsl:apply-templates/>
             </settlement>
+            <xsl:if test="not(../Country)">
+                <xsl:choose>
+                    <xsl:when test=".='Praha'">
+                        <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
+                    </xsl:when>
+                    <xsl:when test=".='Baarn'">
+                        <country key="NL" xml:lang="en">THE NETHERLANDS</country>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -524,7 +544,7 @@
 
     <!-- Springer -->
     <xsl:template match="OrgAddress">
-        <xsl:if test="normalize-space()">
+        <xsl:if test=".!=''">
             <address>
                 <xsl:apply-templates/>
             </address>
@@ -665,7 +685,7 @@
     <!-- ScholarOne: inst, dept -->
     <!-- Springer 2/3: OrgDivision, OrgName -->
 
-    <xsl:template match="institution | corresponding-author-institution | inst | OrgName | Institution">
+    <xsl:template match="institution | corresponding-author-institution | inst  | Institution">
         <xsl:if test=". !=''">
             <xsl:choose>
                 <xsl:when test="contains(.,', ')">
@@ -694,8 +714,8 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="dept | OrgDivision | Department">
-        <xsl:if test=". !=''">
+    <xsl:template match="dept | Department">
+        <xsl:if test=".!=''">
             <orgName type="department">
                 <xsl:apply-templates/>
             </orgName>

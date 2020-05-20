@@ -1884,6 +1884,11 @@ reactorsa'</title>
             <xsl:otherwise>
                 <xsl:if test=". !=''">
                     <title level="a" type="main">
+                        <xsl:if test="@Language !='--'">
+                            <xsl:attribute name="xml:lang">
+                                <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                            </xsl:attribute>
+                        </xsl:if>
                         <xsl:apply-templates/>
                         <xsl:if test="//article/front/article-meta/title-group/subtitle [string-length() &gt; 0]">
                            <xsl:text> : </xsl:text>

@@ -199,8 +199,8 @@
         </item>
     </xsl:template>
 
-    <!--springer / OUP-->
-    <xsl:template match="Keyword |keyword|rsc:keyword | kwd">
+    <!--OUP-->
+    <xsl:template match="keyword|rsc:keyword | kwd">
         <xsl:choose>
             <xsl:when test="contains(.,' – ')">
                 <xsl:call-template name="ParseKeyword">
@@ -234,7 +234,54 @@
             </xsl:when>
             <xsl:otherwise>
                 <term>
+                    <xsl:apply-templates/>
+                </term>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- springer -->
+    <xsl:template match="Keyword">
+        <xsl:choose>
+            <xsl:when test="contains(.,' – ')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains(.,'; ')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains(.,', ')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains(.,'\')">
+                <!-- specific Springer pb encodage dans les données source \ désigne ß -->
+                <term>
                     <xsl:value-of select="normalize-space(translate(.,'\','ß'))"/>
+                </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <term>
+                    <xsl:apply-templates/>
                 </term>
             </xsl:otherwise>
         </xsl:choose>
@@ -416,8 +463,36 @@
 				</xsl:if>
 	            <xsl:variable name="theLanguage">
 	                <xsl:choose>
-	                    <xsl:when test="@Language">
-	                        <xsl:value-of select="@Language"/>
+	                    <xsl:when test="@Language !='--'">
+	                        <xsl:choose>
+	                            <xsl:when test="Heading ='Аннотация'">ru</xsl:when>
+	                            <xsl:when test="Heading ='Аннотациа'">ru</xsl:when>
+	                            <xsl:when test="Heading ='Краткое содержание'">ru</xsl:when>
+	                            <xsl:when test="Heading ='--Реэюме'">ru</xsl:when>
+	                            <xsl:when test="Heading ='Súhrn'">sk</xsl:when>
+	                            <xsl:when test="Heading ='Souhrn'">cs</xsl:when>
+	                            <xsl:when test="Heading ='Conclusie'">nl</xsl:when>
+	                            <xsl:when test="Heading ='Conclusies'">nl</xsl:when>
+	                            <xsl:when test="Heading ='Samenvatting'">nl</xsl:when>
+	                            <xsl:when test="Heading ='Резюме'">ru</xsl:when>
+	                            <xsl:otherwise>
+	                                <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+	                            </xsl:otherwise>
+	                        </xsl:choose>
+	                    </xsl:when>
+	                    <xsl:when test="@Language ='--'">
+	                        <xsl:choose>
+	                            <xsl:when test="Heading ='Аннотация'">ru</xsl:when>
+	                            <xsl:when test="Heading ='Аннотациа'">ru</xsl:when>
+	                            <xsl:when test="Heading ='Краткое содержание'">ru</xsl:when>
+	                            <xsl:when test="Heading ='--Реэюме'">ru</xsl:when>
+	                            <xsl:when test="Heading ='Súhrn'">sk</xsl:when>
+	                            <xsl:when test="Heading ='Souhrn'">cs</xsl:when>
+	                            <xsl:when test="Heading ='Conclusie'">nl</xsl:when>
+	                            <xsl:when test="Heading ='Conclusies'">nl</xsl:when>
+	                            <xsl:when test="Heading ='Samenvatting'">nl</xsl:when>
+	                            <xsl:when test="Heading ='Резюме'">ru</xsl:when>
+	                        </xsl:choose>
 	                    </xsl:when>
 	                    <xsl:when test="@lang">
 	                        <xsl:value-of select="@lang"/>
