@@ -4926,9 +4926,23 @@
                                         </orgName>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <addrLine>
-                                            <xsl:apply-templates select="$avantVirgule"/>
-                                        </addrLine>
+                                        <xsl:choose>
+                                            <xsl:when test="$testCountry !=''">
+                                                <country xml:lang="en">
+                                                    <xsl:attribute name="key">
+                                                        <xsl:value-of select="$testCountry"/>
+                                                    </xsl:attribute>
+                                                    <xsl:call-template name="normalizeISOCountryName">
+                                                        <xsl:with-param name="country" select="$avantVirgule"/>
+                                                    </xsl:call-template>
+                                                </country>   
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <addrLine>
+                                                    <xsl:apply-templates select="$avantVirgule"/>
+                                                </addrLine>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:otherwise>

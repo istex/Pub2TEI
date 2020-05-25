@@ -625,6 +625,10 @@
                         <cell role="a3code">FRA</cell>
                         <cell role="name" xml:lang="fr">FRANCE</cell>
                         <cell role="name" xml:lang="en">FRANCE</cell>
+                        <cell role="nameAlt" xml:lang="en">France</cell>
+                        <cell role="nameAlt" xml:lang="en">Francie</cell>
+                        <cell role="nameAlt" xml:lang="es">Francia</cell>
+                        <cell role="nameAlt" xml:lang="de">Frankreich</cell>
                         <cell role="nameAlt" xml:lang="en">FRANCIE</cell>
                         <cell role="nameAlt" xml:lang="es">FRANCIA</cell>
                         <cell role="nameAlt" xml:lang="de">FRANKREICH</cell>
