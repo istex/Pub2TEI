@@ -164,20 +164,40 @@
     <!-- author related information -->
 
     <xsl:template match="AuthorGroup/Author | AuthorGroup/InstitutionalAuthor">
-        <author>
-            <xsl:if test="@corresp='yes' or @CorrespondingAffiliationID">
-                <xsl:attribute name="role">
-                    <xsl:text>corresp</xsl:text>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-            <xsl:call-template name="createSpringerAffiliations">
-                <xsl:with-param name="restAff" select="@AffiliationIDS"/>
-            </xsl:call-template>
-            <xsl:call-template name="createSpringerAffiliations2">
-                <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
-            </xsl:call-template>
-        </author>
+        <xsl:choose>
+            <xsl:when test="ancestor::SeriesHeader | ancestor::SubSeriesHeader">
+                <editor>
+                    <xsl:if test="@corresp='yes' or @CorrespondingAffiliationID">
+                        <xsl:attribute name="role">
+                            <xsl:text>corresp</xsl:text>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                    <xsl:call-template name="createSpringerAffiliations">
+                        <xsl:with-param name="restAff" select="@AffiliationIDS"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="createSpringerAffiliations2">
+                        <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
+                    </xsl:call-template>
+                </editor>
+            </xsl:when>
+            <xsl:otherwise>
+                <author>
+                    <xsl:if test="@corresp='yes' or @CorrespondingAffiliationID">
+                        <xsl:attribute name="role">
+                            <xsl:text>corresp</xsl:text>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                    <xsl:call-template name="createSpringerAffiliations">
+                        <xsl:with-param name="restAff" select="@AffiliationIDS"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="createSpringerAffiliations2">
+                        <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
+                    </xsl:call-template>
+                </author>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- Same for Editors -->
@@ -231,7 +251,7 @@
         </persName>
     </xsl:template>
     <xsl:template match="Prefix">
-        <roleName>
+        <roleName type="honorific">
             <xsl:apply-templates/>
         </roleName>
     </xsl:template>
@@ -241,27 +261,57 @@
     </xsl:template>
 
     <xsl:template match="Biography">
-        <note type="Biography">
+        <state type="Biography">
             <xsl:apply-templates/>
-        </note>
+        </state>
     </xsl:template>
 
     <xsl:template match="Biography/FormalPara">
+        <bibl>
         <xsl:apply-templates/>
+        </bibl>
     </xsl:template>
 
 
     <xsl:template match="Biography/FormalPara/Heading">
-        <name>
+        <title>
             <xsl:apply-templates/>
-        </name>
+        </title>
     </xsl:template>
-
+    
+    <xsl:template match="GivenName [position()=1]">
+        <xsl:if test=". !=''">
+            <forename type="first">
+                <xsl:variable name="normalize">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($normalize)"/>
+            </forename>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="GivenName [position()&gt;=2]">
+        <xsl:if test=". !=''">
+            <forename type="middle">
+                <xsl:variable name="normalize">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($normalize)"/>
+            </forename>
+        </xsl:if>
+    </xsl:template>
+    
 
     <xsl:template match="Biography/FormalPara/Para">
-        <p>
-            <xsl:apply-templates/>
-        </p>
+        <xsl:choose>
+            <xsl:when test="Figure">
+                <xsl:apply-templates/> 
+            </xsl:when>
+            <xsl:otherwise>
+                <p>
+                    <xsl:apply-templates/> 
+                </p>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Inline affiliation (embedded in <contrib>) -->
@@ -299,8 +349,8 @@
 
 <!-- country mode springer -->
     <xsl:template match="Country">
-        <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnñopqrstuvwxyz(). ','ABCDEFGHIJKLMNNOPQRSTUVWXYZ'))"/>
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnñopqrstuvwxyz().','ABCDEFGHIJKLMNNOPQRSTUVWXYZ'))"/>
+            <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
                     <xsl:when test="contains(.,'СССР')">
@@ -318,7 +368,12 @@
                         </xsl:call-template>
                     </xsl:otherwise>
                 </xsl:choose>
+                <xsl:value-of select="countryWithNoSpace"/>
             </country>
+            </xsl:if>
+        <!-- cas special notice cnrs -->
+        <xsl:if test="$countryWithNoSpace='' and contains(ancestor::Affiliation/OrgName,'CNRS')">
+            <country key="FR" xml:lang="en">FRANCE</country>
         </xsl:if>
     </xsl:template>
 
@@ -553,7 +608,6 @@
 
     <xsl:template match="MediaObject">
         <media mimeType="image" url="{ImageObject}"/>
-        
     </xsl:template>
     
     <xsl:template match="EquationSource">
@@ -586,6 +640,10 @@
     <!-- Copyright related information to appear in <publicationStmt> -->
     <xsl:template match="ArticleCopyright | ChapterCopyright">
         <availability>
+            <xsl:if test="//ArticleGrants/BodyPDFGrant[string(@Grant)='OpenAccess']">
+                <xsl:attribute name="status">free</xsl:attribute>
+                    <p>Open Access</p>
+            </xsl:if>
             <xsl:apply-templates select="CopyrightHolderName"/>
             <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-3XSW68JL-F">springer</p>
         </availability>
@@ -703,6 +761,10 @@
     
     <xsl:template match="VolumeInfo">
         <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="ArticleInfo">
+        <xsl:apply-templates select="ArticleTitle | ArticleSubTitle"/>
     </xsl:template>
 
 </xsl:stylesheet>

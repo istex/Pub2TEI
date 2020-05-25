@@ -65,7 +65,7 @@
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
-                        <xsl:apply-templates select="Journal//ArticleTitle | Book/BookInfo/BookTitle"/>
+                        <xsl:apply-templates select="Journal//ArticleInfo | Book/BookInfo/BookTitle"/>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -86,11 +86,7 @@
                         </xsl:choose>
                         <xsl:apply-templates
                             select="Book/descendant::Chapter/ChapterInfo/ChapterCopyright"/>
-                        <xsl:if test="//ArticleGrants/BodyPDFGrant[string(@Grant)='OpenAccess']">
-                                <availability status="free">
-                                    <p>Open Access</p>
-                                </availability>
-                        </xsl:if>
+                       
                         <!-- date -->
                         <xsl:choose>
                             <xsl:when test="//CoverDate/Year !=''">
@@ -339,8 +335,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Title information related to the paper goes here -->
-                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleTitle"/>
-                            <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleSubTitle"/>
+                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo"/>
                         <!-- All authors are included here -->
                         <xsl:apply-templates
                         select="Volume/Issue/Article/ArticleHeader/AuthorGroup/Author"/>

@@ -38,6 +38,11 @@
             <xsl:apply-templates/>
         </title>
     </xsl:template>
+    <xsl:template match="SubSeriesTitle">
+        <title level="s" type="sub" xml:lang="{translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')}">
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
     <xsl:template match="SeriesAbbreviatedTitle">
         <title level="s" type="abbrev">
             <xsl:apply-templates/>
@@ -62,6 +67,11 @@
     <!-- Numéro de la série (spécifique à Springer?) -->
     
     <xsl:template match="SeriesID">
+        <idno type="seriesID">
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="SubSeriesID">
         <idno type="seriesID">
             <xsl:apply-templates/>
         </idno>

@@ -92,7 +92,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="fname |rsc:fname |first_name | FirstName | ce:given-name | GivenName | per_aut/fn | given-names | given_name | corresponding-author-firstname | fname | fnm | wiley:givenNames">
+    <xsl:template match="fname |rsc:fname |first_name | FirstName | ce:given-name | per_aut/fn | given-names | given_name | corresponding-author-firstname | fname | fnm | wiley:givenNames">
         <xsl:if test=". !=''">
             <forename type="first">
                 <xsl:variable name="normalize">

@@ -150,7 +150,7 @@
 
     <xsl:template match="country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz(). ','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz().','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
             <xsl:variable name="etatsAmericains">
                 <xsl:choose>
                     <xsl:when test=".='Alabama'">Alabama</xsl:when>
@@ -241,20 +241,6 @@
                             <xsl:with-param name="country" select="@country_code"/>
                         </xsl:call-template>
                     </xsl:when>
-                    <!-- rattrapage des ecritures alambiquées -->
-                    <xsl:when test="contains(.,'The Netherlands')">
-                        <xsl:variable name="change">
-                            <xsl:text>THE NETHERLANDS</xsl:text>
-                        </xsl:variable>
-                        <xsl:attribute name="key">
-                            <xsl:call-template name="normalizeISOCountry">
-                                <xsl:with-param name="country" select="$change"/>
-                            </xsl:call-template>
-                        </xsl:attribute>
-                        <xsl:call-template name="normalizeISOCountryName">
-                            <xsl:with-param name="country" select="$change"/>
-                        </xsl:call-template>
-                    </xsl:when>
                     <xsl:when test="contains(.,'China')">
                         <xsl:variable name="change">
                             <xsl:text>CHINA</xsl:text>
@@ -271,45 +257,6 @@
                     <xsl:when test="contains(.,'England')">
                         <xsl:variable name="change">
                             <xsl:text>UNITED KINGDOM</xsl:text>
-                        </xsl:variable>
-                        <xsl:attribute name="key">
-                            <xsl:call-template name="normalizeISOCountry">
-                                <xsl:with-param name="country" select="$change"/>
-                            </xsl:call-template>
-                        </xsl:attribute>
-                        <xsl:call-template name="normalizeISOCountryName">
-                            <xsl:with-param name="country" select="$change"/>
-                        </xsl:call-template>
-                    </xsl:when>
-                    <xsl:when test="contains(.,'Singapore')">
-                        <xsl:variable name="change">
-                            <xsl:text>SINGAPORE</xsl:text>
-                        </xsl:variable>
-                        <xsl:attribute name="key">
-                            <xsl:call-template name="normalizeISOCountry">
-                                <xsl:with-param name="country" select="$change"/>
-                            </xsl:call-template>
-                        </xsl:attribute>
-                        <xsl:call-template name="normalizeISOCountryName">
-                            <xsl:with-param name="country" select="$change"/>
-                        </xsl:call-template>
-                    </xsl:when>
-                    <xsl:when test="contains(.,'Taiwan')">
-                        <xsl:variable name="change">
-                            <xsl:text>TAIWAN, PROVINCE OF CHINA</xsl:text>
-                        </xsl:variable>
-                        <xsl:attribute name="key">
-                            <xsl:call-template name="normalizeISOCountry">
-                                <xsl:with-param name="country" select="$change"/>
-                            </xsl:call-template>
-                        </xsl:attribute>
-                        <xsl:call-template name="normalizeISOCountryName">
-                            <xsl:with-param name="country" select="$change"/>
-                        </xsl:call-template>
-                    </xsl:when>
-                    <xsl:when test="contains(.,'Korea')">
-                        <xsl:variable name="change">
-                            <xsl:text>KOREA, REPUBLIC OF</xsl:text>
                         </xsl:variable>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">

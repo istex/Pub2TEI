@@ -2320,7 +2320,7 @@ reactorsa'</title>
         </xsl:choose>
     </xsl:template>
     <xsl:template
-        match="JournalPrintISSN | issn[@issn_type='print'][string-length()&gt;0] | issn[@pub-type='ppub'][string-length()&gt;0] | PrintISSN | issn-paper | SeriesPrintISSN | issn[@type='print'] | wiley:issn[@type='print'] ">
+        match="JournalPrintISSN | issn[@issn_type='print'][string-length()&gt;0] | issn[@pub-type='ppub'][string-length()&gt;0] | PrintISSN | issn-paper | SeriesPrintISSN| SubSeriesPrintISSN | issn[@type='print'] | wiley:issn[@type='print'] ">
         <xsl:variable name="ISSNCode">
             <xsl:choose>
                 <!-- BMJ -->
@@ -2353,7 +2353,7 @@ reactorsa'</title>
         
     </xsl:template>
 
-    <xsl:template match="JournalElectronicISSN | ElectronicISSN | issn[@issn_type='digital'] | issn[@pub-type='epub'] | issn-elec | SeriesElectronicISSN | issn[@type='electronic'] | wiley:issn[@type='electronic']|E-ISSN">
+    <xsl:template match="JournalElectronicISSN | ElectronicISSN | issn[@issn_type='digital'] | issn[@pub-type='epub'] | issn-elec | SeriesElectronicISSN| SubSeriesElectronicISSN | issn[@type='electronic'] | wiley:issn[@type='electronic']|E-ISSN">
         <xsl:variable name="ISSNCode">
             <xsl:if test=".!=''">
                 <xsl:value-of select="normalize-space(.)"/>

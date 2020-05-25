@@ -160,7 +160,7 @@
                     <langUsage>
                         <language>
                             <xsl:attribute name="ident">
-                                <xsl:value-of select="translate(//Chapter/@Language,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                                <xsl:value-of select="translate(//Chapter/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                             </xsl:attribute>
                         </language>
                     </langUsage>
@@ -239,15 +239,27 @@
                     <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
                 </imprint>
             </monogr>
-            <series>
-                <xsl:apply-templates select="SeriesInfo/SeriesTitle"/>
-                <xsl:apply-templates select="SeriesInfo/SeriesAbbreviatedTitle"/>
-                <xsl:apply-templates select="SeriesHeader/AuthorGroup/Author"/>
-                <xsl:apply-templates select="SeriesHeader/EditorGroup/Editor"/>
-                <xsl:apply-templates select="SeriesInfo/SeriesPrintISSN"/>
-                <xsl:apply-templates select="SeriesInfo/SeriesElectronicISSN"/>
-                <xsl:apply-templates select="SeriesInfo/SeriesID"/>
-            </series>
+                <series>
+                    <xsl:apply-templates select="SeriesInfo/SeriesTitle"/>
+                    <xsl:apply-templates select="SeriesInfo/SeriesAbbreviatedTitle"/>
+                    <xsl:apply-templates select="SeriesHeader/AuthorGroup/Author"/>
+                    <xsl:apply-templates select="SeriesHeader/EditorGroup/Editor"/>
+                    <xsl:apply-templates select="SeriesInfo/SeriesPrintISSN"/>
+                    <xsl:apply-templates select="SeriesInfo/SeriesElectronicISSN"/>
+                    <xsl:apply-templates select="SeriesInfo/SeriesID"/>
+                </series>
+            <xsl:apply-templates select="SubSeries" mode="sourceDesc"/>
         </biblStruct>
+    </xsl:template>
+    <xsl:template match="SubSeries" mode="sourceDesc">
+        <series>
+            <xsl:apply-templates select="SubSeriesInfo/SubSeriesTitle"/>
+            <xsl:apply-templates select="SubSeriesInfo/SeriesAbbreviatedTitle"/>
+            <xsl:apply-templates select="SubSeriesHeader/AuthorGroup/Author"/>
+            <xsl:apply-templates select="SubSeriesHeader/EditorGroup/Editor"/>
+            <xsl:apply-templates select="SubSeriesInfo/SubSeriesPrintISSN"/>
+            <xsl:apply-templates select="SubSeriesInfo/SubSeriesElectronicISSN"/>
+            <xsl:apply-templates select="SubSeriesInfo/SubSeriesID"/>
+        </series>
     </xsl:template>
 </xsl:stylesheet>
