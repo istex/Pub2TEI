@@ -249,7 +249,25 @@
                         <xsl:variable name="substringKeywords">
                             <xsl:apply-templates/>
                         </xsl:variable>
-                        <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                        <xsl:choose>
+                            <xsl:when test="contains($substringKeywords,'Keywords:')">
+                                <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains(.,' –¶')">
+                <xsl:call-template name="ParseKeyword">
+                    <xsl:with-param name="theKeyword">
+                        <xsl:variable name="substringKeywords">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="contains($substringKeywords,'Schlüsselwörter')">
+                                <xsl:value-of select="substring-after($substringKeywords,'Schlüsselwörter ')"/>
+                            </xsl:when>
+                        </xsl:choose>
                     </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
@@ -287,14 +305,13 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template name="ParseKeyword">
-        <xsl:param name="theKeyword"/>
+        <xsl:param name="theKeyword" select="translate(.,'¶',' ')"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:variable name="avantTiret">
             <xsl:choose>
                 <xsl:when test="contains($theKeyword,' – ')">
                     <xsl:value-of select="normalize-space(substring-before($theKeyword,' – '))"/>
                 </xsl:when>
-                
                 <xsl:when test="contains($theKeyword,'; ')">
                     <xsl:value-of select="normalize-space(substring-before($theKeyword,'; '))"/>
                 </xsl:when>
@@ -311,7 +328,6 @@
                 <xsl:when test="contains($theKeyword,' – ')">
                     <xsl:value-of select="normalize-space(substring-after($theKeyword,' – '))"/>
                 </xsl:when>
-                
                 <xsl:when test="contains($theKeyword,'; ')">
                     <xsl:value-of select="normalize-space(substring-after($theKeyword,'; '))"/>
                 </xsl:when>
@@ -326,7 +342,7 @@
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:call-template name="ParseKeyword">
-                    <xsl:with-param name="theKeyword" select="."/>
+                    <xsl:with-param name="theKeyword" select="translate(.,'¶',' ')"/>
                     <xsl:with-param name="inAddress" select="true()"/>
                 </xsl:call-template>
             </xsl:when>
@@ -335,6 +351,15 @@
                     <xsl:choose>
                         <xsl:when test="contains($avantTiret,'Keywords: ')">
                             <xsl:value-of select="substring-after($avantTiret,'Keywords: ')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($avantTiret,'Schlüsselwörter')">
+                            <xsl:value-of select="substring-after($avantTiret,'Schlüsselwörter ')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($avantTiret,'Schlüsselwörter')">
+                            <xsl:value-of select="substring-after($avantTiret,'Schlüsselwörter')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($avantTiret,'Key words')">
+                            <xsl:value-of select="substring-after($avantTiret,'Key words ')"/>
                         </xsl:when>
                         <xsl:when test="contains($avantTiret,'Abbreviations: ')">
                             <xsl:value-of select="substring-after($avantTiret,'Abbreviations: ')"/>

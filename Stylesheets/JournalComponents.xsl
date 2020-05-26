@@ -1836,7 +1836,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:template
-        match="fm/atl |article-title/title | ArticleTitle | article-title | atl | ce:title | art_title | rsc:art_title  | article_title | nihms-submit/title | ArticleTitle/Title | ChapterTitle |chapter-title |wiley:chapterTitle | titlegrp/title| rsc:titlegrp/rsc:title | wiley:articleTitle | wiley:otherTitle | chaptl">
+        match="fm/atl |article-title/title | article-title | atl | ce:title | art_title | rsc:art_title  | article_title | nihms-submit/title |chapter-title |wiley:chapterTitle | titlegrp/title| rsc:titlegrp/rsc:title | wiley:articleTitle | wiley:otherTitle | chaptl">
         <xsl:choose>
             <xsl:when test="ancestor::news-article/art-front/titlegrp |ancestor::rsc:news-article/rsc:art-front/rsc:titlegrp">
                     <xsl:apply-templates/>
@@ -2097,6 +2097,9 @@ reactorsa'</title>
                         <title level="m" type="main">
                             <xsl:apply-templates/>
                         </title>
+                    </xsl:when>
+                    <xsl:when test="//JournalTitle='J Biosci'">
+                        <title level="j" type="main">Journal of Biosciences</title>
                     </xsl:when>
                     <xsl:otherwise>
                         <title level="j" type="main">

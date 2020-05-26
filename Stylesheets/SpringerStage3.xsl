@@ -19,14 +19,8 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Article'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Report'">
-                <xsl:choose>
-                    <xsl:when test="//Abstract and //Keyword">research-article</xsl:when>
-                    <xsl:when test="//Abstract">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Letter'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Report'">case-report</xsl:when>
+            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Letter'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Legacy'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='News'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='ContinuingEducation'">article</xsl:when>

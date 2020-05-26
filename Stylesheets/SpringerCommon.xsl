@@ -255,6 +255,13 @@
             <xsl:apply-templates/>
         </roleName>
     </xsl:template>
+    <xsl:template match="Degrees">
+        <xsl:if test=". !=''">
+            <roleName type="degree">
+                <xsl:apply-templates/>
+            </roleName>
+        </xsl:if>
+    </xsl:template>
 
     <xsl:template match="Contact">
         <xsl:apply-templates select="Email"/>
@@ -329,7 +336,14 @@
             <xsl:variable name="orgName">
                 <xsl:apply-templates/>
             </xsl:variable>
-            <xsl:value-of select="normalize-space($orgName)"/>
+            <xsl:choose>
+                <xsl:when test="contains($orgName,' E-Mail:')">
+                    <xsl:value-of select="substring-before($orgName,' E-Mail:')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="normalize-space($orgName)"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </orgName>
     </xsl:template>
     <xsl:template match="OrgDivision">
@@ -349,7 +363,7 @@
 
 <!-- country mode springer -->
     <xsl:template match="Country">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnñopqrstuvwxyz().','ABCDEFGHIJKLMNNOPQRSTUVWXYZ'))"/>
+        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcČdefghijklmnñoÖpqrstuvwxyz().','ABCCDEFGHIJKLMNNOOPQRSTUVWXYZ'))"/>
             <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
@@ -767,4 +781,309 @@
         <xsl:apply-templates select="ArticleTitle | ArticleSubTitle"/>
     </xsl:template>
 
+<!-- title -->
+    <xsl:template
+        match="ArticleTitle | ArticleTitle/Title | ChapterTitle">
+        <title level="a" type="main">
+            <xsl:choose>
+                <xsl:when test="@Language != '--'">
+                    <xsl:attribute name="xml:lang">
+                        <xsl:choose>
+                            <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="xml:lang">
+                                <xsl:choose>
+                                    <xsl:when test="contains(.,'И')">ru</xsl:when>
+                                    <xsl:when test="//City='Прага'">ru</xsl:when>
+                                    <xsl:when test="//City='Praha'">cs</xsl:when>
+                                    <xsl:when test="//Country='Russia'">ru</xsl:when>
+                                    <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
+                                    <xsl:when test="//ArticleDOI='10.1007/BF02192581'
+                                        or //ArticleDOI='10.1007/BF02334726'
+                                        or //ArticleDOI='10.1007/BF01461250'
+                                        or //ArticleDOI='10.1007/BF02192579'
+                                        or //ArticleDOI='10.1007/BF02192580'
+                                        or //ArticleDOI='10.1007/BF02314882'
+                                        or //ArticleDOI='10.1007/BF02203888'
+                                        or //ArticleDOI='10.1007/BF02314879'
+                                        ">nl</xsl:when>
+                                    <xsl:when test="//ArticleDOI='10.1007/BF02935462'">cs</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Warszawa'">pl</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Akadémiai Kiadó'">ru</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Czechoslovak Academy of Sciences'">cs</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Institute of Microbiology, Academy of Sciences of the Czech Republic'">cs</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='The Society of the Nippon Dental University'">en</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='The Ichthyological Society of Japan'">en</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Państwowe Wydawnictwo Naukowe'">pl</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='De Erven F. Bohn'">nl</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Kluwer Academic Publishers'">nl</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='J. H. Gebhard &amp; Comp.'">nl</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='De Nederlandsche Boek- En Steendrukkerij'">nl</xsl:when>
+                                    <xsl:when test="//CopyrightHolderName='Gedrukt BIJ H. Veeman &amp; Zonen'">nl</xsl:when>
+                                    <xsl:when test="//ArticleDOI='10.1007/BF02585119'">ru</xsl:when>
+                                    <xsl:when test="//ArticleDOI='10.1007/BF03039150' 
+                                        or //ArticleDOI='10.1007/BF03039153'
+                                        or //ArticleDOI='10.1007/BF03039027'
+                                        or //ArticleDOI='10.1007/BF03039152'
+                                        ">en</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Аннотация'">ru</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Аннотациа'">ru</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Краткое содержание'">ru</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='--Реэюме'">ru</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Súhrn'">sk</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Souhrn'">cs</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Abstract'">en</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Conclusie'">nl</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Conclusies'">nl</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Samenvatting'">nl</xsl:when>
+                                    <xsl:when test="//ArticleInfo[1]/@Language= '--'">und</xsl:when>
+                                    <xsl:otherwise>und</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="@Language='De' and //ArticleDOI='10.1007/s00508-013-0350-2'">Variante des Truncus-coeliacus-Kompressionssyndroms. Reichen sagittale Bilder für die Diagnose?</xsl:when>
+            <!-- reprise titres vides -->
+            <xsl:when test="//ArticleDOI='10.1007/s00253-005-0291-4'">Acknowledgement to reviewers 2005</xsl:when>
+            <xsl:when test="//ArticleDOI='10.1023/A:1018417623867'">Reactive chemicals and cancer</xsl:when>
+            <xsl:when test="//ArticleDOI='10.1007/BF02756632'">On superfields</xsl:when>
+            <xsl:when test="(//ArticleDOI='10.1007/BF01204102') or
+                (//ArticleDOI='10.1007/BF01660811') or 
+                (//ArticleDOI='10.1007/BF00421833') or
+                (//ArticleDOI='10.1007/BF02793962') or
+                (//ArticleDOI='10.1007/BF02795571') or
+                (//ArticleDOI='10.1007/BF01520011') or
+                (//ArticleDOI='10.1007/BF01813114') or
+                (//ArticleDOI='10.1007/BF01465842') or
+                (//ArticleDOI='10.1007/BF01407224') or
+                (//ArticleDOI='10.1007/BF02822856') or
+                (//ArticleDOI='10.1007/BF00517202') or
+                (//ArticleDOI='10.1007/BF02646276') or
+                (//ArticleDOI='10.1007/BF01333375') or
+                (//ArticleDOI='10.1007/BF01648904') or
+                (//ArticleDOI='10.1007/BF02878828') or
+                (//ArticleDOI='10.1007/BF02794974') or
+                (//ArticleDOI='10.1007/BF01341587') or
+                (//ArticleDOI='10.1007/BF01340030') or
+                (//ArticleDOI='10.1007/BF00528665') or
+                (//ArticleDOI='10.1007/BF01772344') or
+                (//ArticleDOI='10.1007/BF01845143') or
+                (//ArticleDOI='10.1007/BF00515295') or
+                (//ArticleDOI='10.1007/BF02793688') or
+                (//ArticleDOI='10.1007/BF01527176') or
+                (//ArticleDOI='10.1007/BF01774482') or
+                (//ArticleDOI='10.1007/BF00997948') or
+                (//ArticleDOI='10.1007/BF01341331') or
+                (//ArticleDOI='10.1007/BF01812610') or
+                (//ArticleDOI='10.1007/BF01772427') or
+                (//ArticleDOI='10.1007/BF01428277') or
+                (//ArticleDOI='10.1007/BF01380033') or
+                (//ArticleDOI='10.1007/BF02808688') or
+                (//ArticleDOI='10.1007/BF02806690') or
+                (//ArticleDOI='10.1007/BF02808747')
+                ">
+                <xsl:value-of select="normalize-space(translate(.,'\','ß'))"/>
+            </xsl:when>
+            <xsl:when test=".='' or .=' '">
+                <xsl:value-of select="//ArticleCategory"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+        </title>
+    </xsl:template>
+    
+    <xsl:template match="State">
+        <xsl:if test=". !=''">
+            <region>
+                <xsl:apply-templates/>
+            </region>
+            <xsl:if test="not(../Country)">
+                <xsl:choose>
+                    <xsl:when test=".='AL'
+                        or .='AK'
+                        or .='AZ'
+                        or .='AR'
+                        or .='CA'
+                        or .='NC'
+                        or .='SC'
+                        or .='CO'
+                        or .='CT'
+                        or .='ND'
+                        or .='SD'
+                        or .='DE'
+                        or .='FL'
+                        or .='GA'
+                        or .='HI'
+                        or .='ID'
+                        or .='IL'
+                        or .='IN'
+                        or .='IA'
+                        or .='KS'
+                        or .='KY'
+                        or .='LA'
+                        or .='ME'
+                        or .='MD'
+                        or .='MA'
+                        or .='MI'
+                        or .='MN'
+                        or .='MS'
+                        or .='MO'
+                        or .='MT'
+                        or .='NE'
+                        or .='NV'
+                        or .='NH'
+                        or .='NJ'
+                        or .='NM'
+                        or .='NY'
+                        or .='OH'
+                        or .='OK'
+                        or .='OR'
+                        or .='PA'
+                        or .='RI'
+                        or .='TN'
+                        or .='TX'
+                        or .='UT'
+                        or .='VT'
+                        or .='VA'
+                        or .='WV'
+                        or .='WA'
+                        or .='WI'
+                        or .='WY'
+                        or .='Alabama'
+                        or .='Alaska'
+                        or .='Arizona'
+                        or .='Arkansas'
+                        or .='Californie'
+                        or .='Caroline du Nord'
+                        or .='Caroline du Sud'
+                        or .='Colorado'
+                        or .='Connecticut'
+                        or .='Dakota du Nord'
+                        or .='Dakota du Sud'
+                        or .='Delaware'
+                        or .='Floride'
+                        or .='Géorgie'
+                        or .='Hawaï'
+                        or .='Idaho'
+                        or .='Illinois'
+                        or .='Indiana'
+                        or .='Iowa'
+                        or .='Kansas'
+                        or .='Kentucky'
+                        or .='Louisiane'
+                        or .='Maine'
+                        or .='Maryland'
+                        or .='Massachusetts'
+                        or .='Michigan'
+                        or .='Minnesota'
+                        or .='Mississippi'
+                        or .='Missouri'
+                        or .='Montana'
+                        or .='Nebraska'
+                        or .='Nevada'
+                        or .='New Hampshire'
+                        or .='New Jersey'
+                        or .='Nouveau-Mexique'
+                        or .='New York'
+                        or .='Ohio'
+                        or .='Oklahoma'
+                        or .='Oregon'
+                        or .='Pennsylvanie'
+                        or .='Rhode Island'
+                        or .='Tennessee'
+                        or .='Texas'
+                        or .='Utah'
+                        or .='Vermont'
+                        or .='Virginie'
+                        or .='Virginie-Occidentale'
+                        or .='Washington'
+                        or .='Wisconsin'
+                        or .='Wyoming'">
+                        <country key="US" xml:lang="en">UNITED STATES</country>
+                    </xsl:when>
+                    <xsl:when test=".='Praha'">
+                        <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
+                    </xsl:when>
+                    <xsl:when test=".='Baarn'">
+                        <country key="NL" xml:lang="en">THE NETHERLANDS</country>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="City">
+        <xsl:if test=". !=''">
+            <settlement>
+                <xsl:apply-templates/>
+            </settlement>
+            <xsl:if test="not(../Country)">
+                <xsl:choose>
+                    <xsl:when test="contains(.,'Köln')
+                        or contains(.,'Hannover')
+                        or contains(.,'Freiburg')
+                        or contains(.,'Tübingen')
+                        or contains(.,'Berlin')
+                        or contains(.,'Frankfurt')
+                        or contains(.,'München')
+                        or contains(.,'Göttingen')
+                        or contains(.,'Stuttgart')
+                        or contains(.,'Oranienburg')
+                        or contains(.,'Leverkusen')
+                        or contains(.,'Rostock') 
+                        or contains(.,'Neuss')
+                        or contains(.,'Vogtareuth')
+                        or contains(.,'Mainz')
+                        or contains(.,'Ulm')
+                        or contains(.,'München')
+                        or contains(.,'Düsseldorf')
+                        or contains(.,'Münster')
+                        or contains(.,'Szeged')
+                        or contains(.,'Dresden')
+                        or contains(.,'Bad Neustadt')
+                        or contains(.,'Mannheim')
+                        or contains(.,'Greifswald')
+                        or contains(.,'Hamburg')
+                        or contains(.,'Stuttgart')
+                        or contains(.,'Heidelberg')
+                        or contains(.,'Ravensburg')
+                        or contains(.,'Gatersleben')
+                        or contains(.,'Essen')
+                        or contains(.,'Wuppertal')">
+                        <country key="DE" xml:lang="en">GERMANY</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Praha')">
+                        <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Baarn')">
+                        <country key="NL" xml:lang="en">THE NETHERLANDS</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Moskau')">
+                        <country key="RU" xml:lang="en">RUSSIA</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Wien')
+                        or contains(.,'Innsbruck')
+                        or contains(.,'Graz')
+                        or contains(.,'Stockerau')">
+                        <country key="AT" xml:lang="en">AUSTRIA</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Basel')
+                        or contains(.,'Zürich')">
+                        <country key="CH" xml:lang="en">SWITZERLAND</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Sidney')">
+                        <country key="AU" xml:lang="en">AUSTRALIA</country>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
 </xsl:stylesheet>

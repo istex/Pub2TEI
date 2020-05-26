@@ -318,12 +318,12 @@
     </xsl:template>
 
     <!-- PL: add st for Nature -->
-    <xsl:template match="State | state| rsc:state | corresponding-author-state | province | st | named-content[@content-type = 'state']">
+    <xsl:template match="state| rsc:state | corresponding-author-state | province | st | named-content[@content-type = 'state']">
         <xsl:if test=". !=''">
             <region>
                 <xsl:apply-templates/>
             </region>
-            <xsl:if test="not(../Country)">
+            <xsl:if test="not(../Country | ../country)">
                 <xsl:choose>
                     <xsl:when test=".='Praha'">
                         <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
@@ -336,21 +336,11 @@
         </xsl:if>
     </xsl:template>
     <!-- PL: add cty for Nature -->
-    <xsl:template match="City | city| rsc:city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
+    <xsl:template match="city| rsc:city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
         <xsl:if test=". !=''">
             <settlement>
                 <xsl:apply-templates/>
             </settlement>
-            <xsl:if test="not(../Country)">
-                <xsl:choose>
-                    <xsl:when test=".='Praha'">
-                        <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
-                    </xsl:when>
-                    <xsl:when test=".='Baarn'">
-                        <country key="NL" xml:lang="en">THE NETHERLANDS</country>
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:if>
         </xsl:if>
     </xsl:template>
 

@@ -94,7 +94,14 @@
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:apply-templates/>
+                   <xsl:choose>
+                       <xsl:when test="contains(.,'¶')">
+                           <xsl:value-of select="translate(.,'¶','')"/>
+                       </xsl:when>
+                       <xsl:otherwise>
+                           <xsl:apply-templates/>
+                       </xsl:otherwise>
+                   </xsl:choose>
                 </p>
             </xsl:otherwise>
         </xsl:choose>
