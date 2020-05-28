@@ -15,7 +15,7 @@
                 <xsl:choose>
                     <xsl:when test="//Abstract and //Keyword">research-article</xsl:when>
                     <xsl:when test="//Abstract">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
+                    <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="normalize-space($codeGenreSpringerJournal)='Article'">article</xsl:when>
@@ -197,6 +197,20 @@
                                                         <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
                                                         <xsl:otherwise>
                                                             <xsl:value-of select="translate(//ArticleTitle[1]/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:attribute>
+                                            </language>
+                                        </langUsage>
+                                    </xsl:when>
+                                    <xsl:when test="//ArticleInfo/@Language !='--'">
+                                        <langUsage>
+                                            <language>
+                                                <xsl:attribute name="ident">
+                                                    <xsl:choose>
+                                                        <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="translate(//ArticleInfo/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                         </xsl:otherwise>
                                                     </xsl:choose>
                                                 </xsl:attribute>
