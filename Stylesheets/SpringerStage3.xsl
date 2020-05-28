@@ -226,6 +226,7 @@
                                                         <xsl:when test="//CopyrightHolderName='Warszawa'">pl</xsl:when>
                                                         <xsl:when test="//CopyrightHolderName='Akadémiai Kiadó'">ru</xsl:when>
                                                         <xsl:when test="//CopyrightHolderName='Czechoslovak Academy of Sciences'">cs</xsl:when>
+                                                        <xsl:when test="//CopyrightHolderName='Academia, Publishing House of the Czechoslovak Academy of Sciences'">cs</xsl:when>
                                                         <xsl:when test="//CopyrightHolderName='Institute of Microbiology, Academy of Sciences of the Czech Republic'">cs</xsl:when>
                                                         <xsl:when test="//CopyrightHolderName='The Society of the Nippon Dental University'">en</xsl:when>
                                                         <xsl:when test="//CopyrightHolderName='The Ichthyological Society of Japan'">en</xsl:when>

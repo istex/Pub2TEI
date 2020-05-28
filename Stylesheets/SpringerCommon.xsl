@@ -625,7 +625,7 @@
     </xsl:template>
     
     <xsl:template match="EquationSource">
-                    <xsl:apply-templates/>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="Caption">
@@ -770,7 +770,7 @@
     </xsl:template>
     
     <xsl:template match="InlineMediaObject">
-        <media mimeType="image" url="{ImageObject}"/>
+        <media mimeType="image" url="{ImageObject/@FileRef}"/>
     </xsl:template>
     
     <xsl:template match="VolumeInfo">

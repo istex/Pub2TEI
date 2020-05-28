@@ -520,6 +520,7 @@
                         <xsl:attribute name="notation">
                             <xsl:value-of select="EquationSource/@Format"/>
                         </xsl:attribute>
+                        <xsl:attribute name="style">equation</xsl:attribute>
                     </xsl:if>
                     <xsl:if test="EquationNumber">
                         <xsl:attribute name="n">
