@@ -962,24 +962,20 @@
                         or .='Alaska'
                         or .='Arizona'
                         or .='Arkansas'
-                        or .='Californie'
-                        or .='Caroline du Nord'
-                        or .='Caroline du Sud'
+                        or .='California'
                         or .='Colorado'
                         or .='Connecticut'
-                        or .='Dakota du Nord'
-                        or .='Dakota du Sud'
                         or .='Delaware'
-                        or .='Floride'
-                        or .='Géorgie'
-                        or .='Hawaï'
+                        or .='Florida'
+                        or .='Georgia'
+                        or .='Hawaii'
                         or .='Idaho'
                         or .='Illinois'
                         or .='Indiana'
                         or .='Iowa'
                         or .='Kansas'
                         or .='Kentucky'
-                        or .='Louisiane'
+                        or .='Louisiana'
                         or .='Maine'
                         or .='Maryland'
                         or .='Massachusetts'
@@ -992,20 +988,24 @@
                         or .='Nevada'
                         or .='New Hampshire'
                         or .='New Jersey'
-                        or .='Nouveau-Mexique'
+                        or .='New Mexico'
                         or .='New York'
+                        or .='North Carolina'
+                        or .='North Dakota'
                         or .='Ohio'
                         or .='Oklahoma'
                         or .='Oregon'
-                        or .='Pennsylvanie'
+                        or .='Pennsylvania'
                         or .='Rhode Island'
+                        or .='South Carolina'
+                        or .='South Dakota'
                         or .='Tennessee'
                         or .='Texas'
                         or .='Utah'
                         or .='Vermont'
-                        or .='Virginie'
-                        or .='Virginie-Occidentale'
+                        or .='Virginia'
                         or .='Washington'
+                        or .='West Virginia'
                         or .='Wisconsin'
                         or .='Wyoming'">
                         <country key="US" xml:lang="en">UNITED STATES</country>
@@ -1060,13 +1060,21 @@
                         or contains(.,'Wuppertal')">
                         <country key="DE" xml:lang="en">GERMANY</country>
                     </xsl:when>
-                    <xsl:when test="contains(.,'Praha')">
+                    <xsl:when test="contains(.,'Praha')
+                        or contains(.,'Prague')">
                         <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Paris')">
+                        <country key="CZ" xml:lang="en">FRANCE</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'London')">
+                        <country key="GB" xml:lang="en">UNITED KINGDOM</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Baarn')">
                         <country key="NL" xml:lang="en">THE NETHERLANDS</country>
                     </xsl:when>
-                    <xsl:when test="contains(.,'Moskau')">
+                    <xsl:when test="contains(.,'Moskau')
+                        or (contains(.,'Frunze'))">
                         <country key="RU" xml:lang="en">RUSSIA</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Wien')

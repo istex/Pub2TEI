@@ -76,6 +76,7 @@
                         <cell role="nameAlt" xml:lang="cz">NEMECKO</cell>
                         <cell role="nameAlt" xml:lang="en">de</cell>
                         <cell role="nameAlt" xml:lang="de">DEUTSCHLAND</cell>
+                        <cell role="nameAlt" xml:lang="de">FRG</cell>
                         <cell role="nameAlt" xml:lang="de">XX</cell>
                         <cell role="nameAlt" xml:lang="de">BUNDESREPUBLIK DEUTSCHLAND</cell>
                         <cell role="nameAlt" xml:lang="de">Bundesrepublik Deutschland</cell>
@@ -309,6 +310,7 @@
                         <cell role="nameAlt" xml:lang="en">BOSNIA AND HERZEGOVINA</cell>
                         <cell role="nameAlt" xml:lang="de">BOSNIEN</cell>
                         <cell role="nameAlt" xml:lang="de">BOSNIEN UND HERZEGOWINA</cell>
+                        <cell role="nameAlt" xml:lang="de">JUGOSLAWIEN</cell>
                         <cell role="nameAlt" xml:lang="en">ba</cell>
                     </row>
                     <row>

@@ -208,7 +208,7 @@
                                             <language>
                                                 <xsl:attribute name="ident">
                                                     <xsl:choose>
-                                                        <xsl:when test="contains(//ArticleTitle,'И')">ru</xsl:when>
+                                                        <xsl:when test="contains(//ArticleTitle[1],'И')">ru</xsl:when>
                                                         <xsl:when test="//City='Прага'">ru</xsl:when>
                                                         <xsl:when test="//City='Praha'">cs</xsl:when>
                                                         <xsl:when test="//Country='Russia'">ru</xsl:when>
