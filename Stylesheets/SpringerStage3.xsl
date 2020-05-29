@@ -74,7 +74,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:apply-templates
-                                    select="Journal/Volume/Issue/Article/ArticleInfo/ArticleCopyright"
+                                    select="Journal/Volume[1]/Issue/Article/ArticleInfo/ArticleCopyright"
                                 />
                             </xsl:otherwise>
                         </xsl:choose>
@@ -83,14 +83,14 @@
                        
                         <!-- date -->
                         <xsl:choose>
-                            <xsl:when test="//CoverDate/Year !=''">
-                                <date type="published" when="{//CoverDate/Year}">
-                                    <xsl:value-of select="//CoverDate/Year"/>
+                            <xsl:when test="//Volume[1]/CoverDate/Year !=''">
+                                <date type="published" when="{//Volume[1]/CoverDate/Year}">
+                                    <xsl:value-of select="//Volume[1]/CoverDate/Year"/>
                                 </date>
                             </xsl:when>
-                            <xsl:when test="number(//Issue/IssueInfo/IssueCopyright/CopyrightYear)">
-                                <date type="published" when="{//Issue/IssueInfo/IssueCopyright/CopyrightYear}">
-                                    <xsl:value-of select="//Issue/IssueInfo/IssueCopyright/CopyrightYear"/>
+                            <xsl:when test="number(//Volume[1]/Issue/IssueInfo/IssueCopyright/CopyrightYear)">
+                                <date type="published" when="{//Volume[1]/Issue/IssueInfo/IssueCopyright/CopyrightYear}">
+                                    <xsl:value-of select="//Volume[1]/Issue/IssueInfo/IssueCopyright/CopyrightYear"/>
                                 </date>
                             </xsl:when>
                             <xsl:when test="number(//Book/BookInfo/BookCopyright/CopyrightYear)">
@@ -196,7 +196,7 @@
                                                     <xsl:choose>
                                                         <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
                                                         <xsl:otherwise>
-                                                            <xsl:value-of select="translate(//ArticleTitle[1]/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                            <xsl:value-of select="translate(//Volume[1]/Issue/Article/ArticleInfo/ArticleTitle[1]/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                         </xsl:otherwise>
                                                     </xsl:choose>
                                                 </xsl:attribute>
@@ -329,27 +329,30 @@
 
     <!-- Building the sourceDesc bibliographical representation -->
     <xsl:template match="Journal" mode="sourceDesc">
+        <xsl:apply-templates select="Volume"/>
+    </xsl:template>
+    <xsl:template match="Volume">
         <biblStruct>
             <analytic>
                 <xsl:choose>
-                    <xsl:when test="JournalOnlineFirst">
+                    <xsl:when test="//Journal/JournalOnlineFirst">
                         <!-- Title information related to the paper goes here -->
                         <xsl:apply-templates
-                            select="JournalOnlineFirst/Article/ArticleInfo/ArticleTitle"/>
+                            select="//Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleTitle"/>
                         <!-- All authors are included here -->
                         <xsl:apply-templates
-                        select="JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/Author"/>
+                            select="//Journal/JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/Author"/>
                         <xsl:apply-templates
-                            select="JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor"/>
+                            select="//Journal/JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Title information related to the paper goes here -->
-                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo"/>
+                        <xsl:apply-templates select="Issue/Article/ArticleInfo"/>
                         <!-- All authors are included here -->
                         <xsl:apply-templates
-                        select="Volume/Issue/Article/ArticleHeader/AuthorGroup/Author"/>
+                        select="Issue/Article/ArticleHeader/AuthorGroup/Author"/>
                         <xsl:apply-templates
-                            select="Volume/Issue/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor"/>
+                            select="Issue/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- ajout identifiants ISTEX et ARK -->
@@ -364,38 +367,38 @@
                     </idno>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="JournalOnlineFirst">
-                        <xsl:apply-templates select="JournalOnlineFirst/Article/@ID"/>
-                        <xsl:apply-templates select="JournalOnlineFirst/Article/ArticleInfo/ArticleDOI"/>
-                        <xsl:apply-templates select="JournalOnlineFirst/Article/ArticleInfo/ArticleID"/>
+                    <xsl:when test="//Journal/JournalOnlineFirst">
+                        <xsl:apply-templates select="//Journal/JournalOnlineFirst/Article/@ID"/>
+                        <xsl:apply-templates select="//Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleDOI"/>
+                        <xsl:apply-templates select="//Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleID"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:apply-templates select="Volume/Issue/Article/@ID"/>
-                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleDOI"/>
-                        <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleID"/>
+                        <xsl:apply-templates select="Issue/Article/@ID"/>
+                        <xsl:apply-templates select="Issue/Article/ArticleInfo/ArticleDOI"/>
+                        <xsl:apply-templates select="Issue/Article/ArticleInfo/ArticleID"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 
             </analytic>
             <monogr>
-                <xsl:apply-templates select="JournalInfo/JournalTitle"/>
-                <xsl:apply-templates select="JournalInfo/JournalAbbreviatedTitle"/>
-                <xsl:apply-templates select="JournalInfo/JournalID"/>
-                <xsl:apply-templates select="JournalInfo/JournalPrintISSN"/>
-                <xsl:apply-templates select="JournalInfo/JournalElectronicISSN"/>
-                <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueTitle"/>
+                <xsl:apply-templates select="//Journal/JournalInfo/JournalTitle"/>
+                <xsl:apply-templates select="//Journal/JournalInfo/JournalAbbreviatedTitle"/>
+                <xsl:apply-templates select="//Journal/JournalInfo/JournalID"/>
+                <xsl:apply-templates select="//Journal/JournalInfo/JournalPrintISSN"/>
+                <xsl:apply-templates select="//Journal/JournalInfo/JournalElectronicISSN"/>
+                <xsl:apply-templates select="Issue/IssueInfo/IssueTitle"/>
                 <imprint>
-                    <xsl:apply-templates select="../PublisherInfo/*"/>
+                    <xsl:apply-templates select="//Publisher/PublisherInfo/*"/>
                     <!-- date -->
                     <xsl:choose>
-                        <xsl:when test="//CoverDate/Year !=''">
-                            <date type="published" when="{//CoverDate/Year}">
-                                <xsl:value-of select="//CoverDate/Year"/>
+                        <xsl:when test="CoverDate/Year !=''">
+                            <date type="published" when="{CoverDate/Year}">
+                                <xsl:value-of select="CoverDate/Year"/>
                             </date>
                         </xsl:when>
-                        <xsl:when test="number(//Issue/IssueInfo/IssueCopyright/CopyrightYear)">
-                            <date type="published" when="{//Issue/IssueInfo/IssueCopyright/CopyrightYear}">
-                                <xsl:value-of select="//Issue/IssueInfo/IssueCopyright/CopyrightYear"/>
+                        <xsl:when test="number(Issue/IssueInfo/IssueCopyright/CopyrightYear)">
+                            <date type="published" when="{Issue/IssueInfo/IssueCopyright/CopyrightYear}">
+                                <xsl:value-of select="Issue/IssueInfo/IssueCopyright/CopyrightYear"/>
                             </date>
                         </xsl:when>
                         <xsl:when test="number(//Book/BookInfo/BookCopyright/CopyrightYear)">
@@ -405,61 +408,40 @@
                         </xsl:when>
                     </xsl:choose>
                     
-                    <!-- <xsl:choose>
-                        <xsl:when test="Volume/VolumeInfo/VolumeIDStart != Volume/VolumeInfo/VolumeIDEnd">
-                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart" mode="multiple"/>
-                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd" mode="multiple"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
-                            <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="Volume/Issue/IssueInfo/IssueIDStart != Volume/Issue/IssueInfo/IssueIDEnd">
-                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart" mode="multiple"/>
-                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd" mode="multiple"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
-                            <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
-                        </xsl:otherwise>
-                    </xsl:choose>-->
-                    
-                    <xsl:if test="Volume/VolumeInfo/VolumeIDStart !=''">
-                        <xsl:if test="Volume/VolumeInfo/VolumeIDStart !='0'">
-                        <biblScope unit="vol" from="{Volume/VolumeInfo/VolumeIDStart}" to="{Volume/VolumeInfo/VolumeIDEnd}">
+                    <xsl:if test="VolumeInfo/VolumeIDStart !=''">
+                        <xsl:if test="VolumeInfo/VolumeIDStart !='0'">
+                            <biblScope unit="vol" from="{VolumeInfo/VolumeIDStart}" to="{VolumeInfo/VolumeIDEnd}">
                             <xsl:choose>
-                                <xsl:when test="Volume/VolumeInfo/VolumeIDStart != Volume/VolumeInfo/VolumeIDEnd">
-                                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
+                                <xsl:when test="VolumeInfo/VolumeIDStart != VolumeInfo/VolumeIDEnd">
+                                    <xsl:apply-templates select="VolumeInfo/VolumeIDStart"/>
                                     <xsl:text>-</xsl:text>
-                                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDEnd"/>
+                                    <xsl:apply-templates select="VolumeInfo/VolumeIDEnd"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:apply-templates select="Volume/VolumeInfo/VolumeIDStart"/>
+                                    <xsl:apply-templates select="VolumeInfo/VolumeIDStart"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </biblScope>
                         </xsl:if>
                     </xsl:if>
-                    <xsl:if test="Volume/Issue/IssueInfo/IssueIDStart !=''">
-                        <xsl:if test="Volume/Issue/IssueInfo/IssueIDStart !='0'">
-                            <biblScope unit="issue" from="{Volume/Issue/IssueInfo/IssueIDStart}" to="{Volume/Issue/IssueInfo/IssueIDEnd}">
+                    <xsl:if test="Issue/IssueInfo/IssueIDStart !=''">
+                        <xsl:if test="Issue/IssueInfo/IssueIDStart !='0'">
+                            <biblScope unit="issue" from="{Issue/IssueInfo/IssueIDStart}" to="{Issue/IssueInfo/IssueIDEnd}">
                                 <xsl:choose>
-                                    <xsl:when test="Volume/Issue/IssueInfo/IssueIDStart != Volume/Issue/IssueInfo/IssueIDEnd">
-                                        <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
+                                    <xsl:when test="Issue/IssueInfo/IssueIDStart != Volume/Issue/IssueInfo/IssueIDEnd">
+                                        <xsl:apply-templates select="Issue/IssueInfo/IssueIDStart"/>
                                         <xsl:text>-</xsl:text>
-                                        <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDEnd"/>
+                                        <xsl:apply-templates select="Issue/IssueInfo/IssueIDEnd"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:apply-templates select="Volume/Issue/IssueInfo/IssueIDStart"/>
+                                        <xsl:apply-templates select="Issue/IssueInfo/IssueIDStart"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </biblScope>
                         </xsl:if>
                     </xsl:if>
-                    <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleFirstPage"/>
-                    <xsl:apply-templates select="Volume/Issue/Article/ArticleInfo/ArticleLastPage"/>
+                    <xsl:apply-templates select="Issue/Article/ArticleInfo/ArticleFirstPage"/>
+                    <xsl:apply-templates select="Issue/Article/ArticleInfo/ArticleLastPage"/>
                 </imprint>
             </monogr>
         </biblStruct>

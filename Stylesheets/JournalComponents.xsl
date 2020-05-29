@@ -2562,7 +2562,7 @@ reactorsa'</title>
     <!-- Elements for Imprint components in BMJ (issue-number, volume) -->
     <!-- Elements for Imprint components in Elsevier () -->
     
-    <xsl:template match="vol | Volume | VolumeID | volume | volumeref | volumeno| rsc:volumeno | sb:volume-nr | vid | wiley:numbering[@type='journalVolume'] | wiley:vol">
+    <xsl:template match="vol| VolumeID | volume | volumeref | volumeno| rsc:volumeno | sb:volume-nr | vid | wiley:numbering[@type='journalVolume'] | wiley:vol">
         <xsl:choose>
             <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0883-024X' and //wiley:component/wiley:header/wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalIssue']='4‐1'">
                     <biblScope unit="vol">
@@ -2740,7 +2740,7 @@ reactorsa'</title>
     <xsl:template match="VolumeIssueCount"/>
     
     <xsl:template match="BookVolumeNumber">
-        <biblScope unit="vol">
+        <biblScope unit="vol" from="{.}" to="{.}">
         <xsl:apply-templates/>
         </biblScope>
     </xsl:template>

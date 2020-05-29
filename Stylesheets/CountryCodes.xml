@@ -1850,6 +1850,8 @@
                         <cell role="a3code">CZE</cell>
                         <cell role="name" xml:lang="fr">TCHÈQUE, RÉPUBLIQUE</cell>
                         <cell role="name" xml:lang="en">CZECH REPUBLIC</cell>
+                        <cell role="nameAlt" xml:lang="de">Czechoslovakia</cell>
+                        <cell role="nameAlt" xml:lang="de">CZECHOSLOVAKIA</cell>
                         <cell role="nameAlt" xml:lang="en">Czech Republic</cell>
                         <cell role="nameAlt" xml:lang="en">cz</cell>
                     </row>

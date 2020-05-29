@@ -183,6 +183,26 @@
             </xsl:when>
             <xsl:otherwise>
                 <author>
+                    <xsl:variable name="i" select="position()-1"/>
+                    <xsl:variable name="authorNumber">
+                        <xsl:choose>
+                            <xsl:when test="$i &lt; 10">
+                                <xsl:value-of select="concat('author-000', $i)"/>
+                            </xsl:when>
+                            <xsl:when test="$i &lt; 100">
+                                <xsl:value-of select="concat('author-00', $i)"/>
+                            </xsl:when>
+                            <xsl:when test="$i &lt; 1000">
+                                <xsl:value-of select="concat('author-0', $i)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('author-', $i)"/>
+                            </xsl:otherwise>
+                        </xsl:choose> 
+                    </xsl:variable>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="$authorNumber"/>
+                    </xsl:attribute>
                     <xsl:if test="@corresp='yes' or @CorrespondingAffiliationID">
                         <xsl:attribute name="role">
                             <xsl:text>corresp</xsl:text>
@@ -204,6 +224,26 @@
     
     <xsl:template match="EditorGroup/Editor">
         <editor>
+            <xsl:variable name="i" select="position()-1"/>
+            <xsl:variable name="editorNumber">
+                <xsl:choose>
+                    <xsl:when test="$i &lt; 10">
+                        <xsl:value-of select="concat('editor-000', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 100">
+                        <xsl:value-of select="concat('editor-00', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 1000">
+                        <xsl:value-of select="concat('editor-0', $i)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('editor-', $i)"/>
+                    </xsl:otherwise>
+                </xsl:choose> 
+            </xsl:variable>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="$editorNumber"/>
+            </xsl:attribute>
             <xsl:apply-templates/>
             <xsl:call-template name="createSpringerAffiliations">
                 <xsl:with-param name="restAff" select="@AffiliationIDS"/>
@@ -371,6 +411,10 @@
                         <xsl:attribute name="key">RU</xsl:attribute>
                         <xsl:text>RUSSIA</xsl:text>
                     </xsl:when>
+                    <xsl:when test="contains(.,'China')">
+                        <xsl:attribute name="key">CN</xsl:attribute>
+                        <xsl:text>CHINA</xsl:text>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">
@@ -380,9 +424,9 @@
                         <xsl:call-template name="normalizeISOCountryName">
                             <xsl:with-param name="country" select="$countryWithNoSpace"/>
                         </xsl:call-template>
+                        <xsl:value-of select="countryWithNoSpace"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:value-of select="countryWithNoSpace"/>
             </country>
             </xsl:if>
         <!-- cas special notice cnrs -->
@@ -667,9 +711,14 @@
             <xsl:apply-templates/>
         </licence>
     </xsl:template>
+    <xsl:template match="CopyrightHolderName" mode="publisher">
+        <publisher>
+            <xsl:apply-templates/>
+        </publisher>
+    </xsl:template>
 
     <xsl:template match="CopyrightYear">
-        <date when="{.}">
+        <date type="published" when="{.}">
             <xsl:apply-templates/>
         </date>
     </xsl:template>
@@ -1058,7 +1107,11 @@
                         or contains(.,'Ravensburg')
                         or contains(.,'Gatersleben')
                         or contains(.,'Essen')
-                        or contains(.,'Wuppertal')">
+                        or contains(.,'Wuppertal')
+                        or contains(.,'Katlenburg-Lindau')
+                        or contains(.,'Karlsruhe')
+                        or contains(.,'Marburg')
+                        or contains(.,'Regensburg')">
                         <country key="DE" xml:lang="en">GERMANY</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Praha')
@@ -1071,7 +1124,8 @@
                     <xsl:when test="contains(.,'London')">
                         <country key="GB" xml:lang="en">UNITED KINGDOM</country>
                     </xsl:when>
-                    <xsl:when test="contains(.,'Baarn')">
+                    <xsl:when test="contains(.,'Baarn')
+                        or contains(.,'Nijmegen')">
                         <country key="NL" xml:lang="en">THE NETHERLANDS</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Moskau')

@@ -229,6 +229,8 @@
                 <xsl:apply-templates select="Book/BookHeader/EditorGroup/Editor"/>
                 <xsl:apply-templates select="Book/BookInfo/ConferenceInfo"/>
                 <imprint>
+                    <xsl:apply-templates select="Book/BookInfo/BookCopyright/CopyrightHolderName" mode="publisher"/>
+                    <xsl:apply-templates select="Book/BookInfo/BookCopyright/CopyrightYear"/>
                     <xsl:apply-templates select="Book/BookInfo/BookVolumeNumber"/>
                     <xsl:apply-templates select="Book/descendant::Chapter/ChapterInfo/ChapterFirstPage"/>
                     <xsl:apply-templates select="Book/descendant::Chapter/ChapterInfo/ChapterLastPage"/>
@@ -252,7 +254,7 @@
         </biblStruct>
     </xsl:template>
     <xsl:template match="SubSeries" mode="sourceDesc">
-        <series>
+        <series xml:id="sub-series">
             <xsl:apply-templates select="SubSeriesInfo/SubSeriesTitle"/>
             <xsl:apply-templates select="SubSeriesInfo/SeriesAbbreviatedTitle"/>
             <xsl:apply-templates select="SubSeriesHeader/AuthorGroup/Author"/>

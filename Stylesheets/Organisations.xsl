@@ -147,7 +147,8 @@
                 contains($theOrg,'Sterrewacht') or
                 contains($theOrg,'Observatoire') or
                 contains($theOrg,'SISSA/ISAS') or
-                contains($theOrg,'wissenschaft')">
+                contains($theOrg,'wissenschaft') or
+                contains($theOrg,'Ricerche')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
             <xsl:when test=" 
