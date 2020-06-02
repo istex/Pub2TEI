@@ -221,7 +221,7 @@
                         <xsl:with-param name="restAff" select="@AffiliationIDS"/>
                     </xsl:call-template>
                     <xsl:call-template name="createSpringerAffiliations2">
-                        <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
+                        <xsl:with-param name="restAff2" select="@PresentAffiliationID |@CorrespondingAffiliationID"/>
                     </xsl:call-template>
                 </author>
             </xsl:otherwise>
@@ -411,13 +411,17 @@
 
 <!-- country mode springer -->
     <xsl:template match="Country">
-        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcČdefghijklmnñoÖpqrstuvwxyz().','ABCCDEFGHIJKLMNNOOPQRSTUVWXYZ'))"/>
+        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcČdeéèfghijklmnñoÖpqrstuüvwxyz().','ABCCDEEEFGHIJKLMNNOOPQRSTUUVWXYZ'))"/>
             <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
                     <xsl:when test="contains(.,'СССР')">
-                        <xsl:attribute name="key">RU</xsl:attribute>
-                        <xsl:text>RUSSIA</xsl:text>
+                        <xsl:attribute name="key">SU</xsl:attribute>
+                        <xsl:text>UNION OF SOVIET SOCIALIST REPUBLICS (USSR)</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Taiwan, ROC')">
+                        <xsl:attribute name="key">TW</xsl:attribute>
+                        <xsl:text>TAIWAN, PROVINCE OF CHINA</xsl:text>
                     </xsl:when>
                     <xsl:when test="contains(.,'Neuchâtel')">
                         <xsl:attribute name="key">CH</xsl:attribute>
@@ -1156,6 +1160,10 @@
                     </xsl:when>
                     <xsl:when test="contains(.,'Sidney')">
                         <country key="AU" xml:lang="en">AUSTRALIA</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Veracruz')
+                        or contains(.,'México')">
+                        <country key="MX" xml:lang="en">MEXICO</country>
                     </xsl:when>
                 </xsl:choose>
             </xsl:if>

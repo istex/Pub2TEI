@@ -75,7 +75,14 @@
                         <cell role="nameAlt" xml:lang="cz">Německo</cell>
                         <cell role="nameAlt" xml:lang="cz">NEMECKO</cell>
                         <cell role="nameAlt" xml:lang="en">de</cell>
+                        <cell role="nameAlt" xml:lang="en">W. Germany</cell>
+                        <cell role="nameAlt" xml:lang="en">W GERMANY</cell>
+                        <!-- ERREUR DE FRAPPE DANS UNE DONNÉE ark:/67375/VQC-1BLQQZZ5-8 -->
+                        <cell role="nameAlt" xml:lang="en">W GERMAMY</cell>
+                        <cell role="nameAlt" xml:lang="en">W. Germamy</cell>
                         <cell role="nameAlt" xml:lang="de">DEUTSCHLAND</cell>
+                        <cell role="nameAlt" xml:lang="de">GERMAN DEMOCRATIC REPUBLIC</cell>
+                        <cell role="nameAlt" xml:lang="en">FEDERAL REPUBLIC OF GERMANY</cell>
                         <cell role="nameAlt" xml:lang="de">FRG</cell>
                         <cell role="nameAlt" xml:lang="de">XX</cell>
                         <cell role="nameAlt" xml:lang="de">BUNDESREPUBLIK DEUTSCHLAND</cell>
@@ -1494,6 +1501,8 @@
                         <cell role="name" xml:lang="en">POLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Poland</cell>
                         <cell role="nameAlt" xml:lang="en">POLAND</cell>
+                        <cell role="nameAlt" xml:lang="de">POLEN</cell>
+                        <cell role="nameAlt" xml:lang="de">Polen</cell>
                         <cell role="nameAlt" xml:lang="pl">POLSKA</cell>
                         <cell role="nameAlt" xml:lang="pl">Krakowie</cell>
                         <cell role="nameAlt" xml:lang="pl">Warszawie</cell>
@@ -1565,6 +1574,8 @@
                         <cell role="nameAlt" xml:lang="en">Northern Ireland, UK</cell>
                         <cell role="nameAlt" xml:lang="en">Scotland, UK</cell>
                         <cell role="nameAlt" xml:lang="en">ENGLAND</cell>
+                        <cell role="nameAlt" xml:lang="en">Great Britain</cell>
+                        <cell role="nameAlt" xml:lang="en">GREAT BRITAIN</cell>
                         <cell role="nameAlt" xml:lang="en">England.</cell>
                         <cell role="nameAlt" xml:lang="en">England</cell>
                         <cell role="nameAlt" xml:lang="en">uk</cell>
@@ -1773,6 +1784,8 @@
                         <cell role="name" xml:lang="fr">SUÈDE</cell>
                         <cell role="name" xml:lang="en">SWEDEN</cell>
                         <cell role="nameAlt" xml:lang="en">Sweden</cell>
+                        <cell role="nameAlt" xml:lang="de">Schweden</cell>
+                        <cell role="nameAlt" xml:lang="de">SCHWEDEN</cell>
                         <cell role="nameAlt" xml:lang="en">se</cell>
                     </row>
                     <row>
@@ -1836,6 +1849,7 @@
                         <cell role="name" xml:lang="fr">TANZANIE, RÉPUBLIQUE-UNIE DE</cell>
                         <cell role="name" xml:lang="en">TANZANIA, UNITED REPUBLIC OF</cell>
                         <cell role="nameAlt" xml:lang="en">Tanzania</cell>
+                        <cell role="nameAlt" xml:lang="en">TANZANIA</cell>
                         <cell role="nameAlt" xml:lang="en">tz</cell>
                     </row>
                     <row>
@@ -1982,6 +1996,7 @@
                         <cell role="a3code">VNM</cell>
                         <cell role="name" xml:lang="fr">VIET NAM</cell>
                         <cell role="nameAlt" xml:lang="fr">Vietnam</cell>
+                        <cell role="nameAlt" xml:lang="fr">VIETNAM</cell>
                         <cell role="name" xml:lang="en">VIET NAM</cell>
                         <cell role="nameAlt" xml:lang="en">Viet Nam</cell>
                         <cell role="nameAlt" xml:lang="en">vn</cell>
@@ -2017,6 +2032,29 @@
                         <cell role="name" xml:lang="en">ZIMBABWE</cell>
                         <cell role="nameAlt" xml:lang="en">Zimbabwe</cell>
                         <cell role="nameAlt" xml:lang="en">zw</cell>
+                    </row>
+                    <!-- AJOUT ANCIENS CODES PAYS
+                    http://documentation.abes.fr/sudoc/formats/CodesPays.htm-->
+                    <row>
+                        <cell role="a2code">YU</cell>
+                        <cell role="a3code">YUG</cell>
+                        <cell role="name" xml:lang="fr">YOUGOSLAVIE</cell>
+                        <cell role="name" xml:lang="en">YUGOSLAVIA</cell>
+                    </row>
+                    <row>
+                        <cell role="a2code">ZR</cell>
+                        <cell role="a3code">ZAR</cell>
+                        <cell role="name" xml:lang="fr">ZAIRE</cell>
+                        <cell role="name" xml:lang="en">ZAIRE</cell>
+                    </row>
+                    <row>
+                        <cell role="a2code">SU</cell>
+                        <cell role="a3code">SUR</cell>
+                        <cell role="name" xml:lang="fr">UNION DES REPUBLIQUES SOCIALISTES SOVIETIQUES(URSS)</cell>
+                        <cell role="name" xml:lang="en">UNION OF SOVIET SOCIALIST REPUBLICS (USSR)</cell>
+                        <cell role="nameAlt" xml:lang="en">Union of Soviet Socialist Republics</cell>
+                        <cell role="nameAlt" xml:lang="en">USSR</cell>
+                        <cell role="nameAlt" xml:lang="fr">URSS</cell>
                     </row>
                 </table>
             </div>
