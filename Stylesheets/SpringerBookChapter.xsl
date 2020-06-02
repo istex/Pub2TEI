@@ -197,9 +197,9 @@
                 <!-- Title information related to the chapter goes here -->
                 <xsl:apply-templates select="Book/descendant::Chapter/ChapterInfo/ChapterTitle"/>
                 <!-- All authors are included here -->
-                <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/AuthorGroup/Author"/>
+                <xsl:apply-templates select="Book/descendant::Chapter/ChapterHeader/AuthorGroup/Author" mode="springer"/>
                 <xsl:apply-templates
-                    select="Book/descendant::Chapter/ChapterHeader//AuthorGroup/InstitutionalAuthor"/>
+                    select="Book/descendant::Chapter/ChapterHeader//AuthorGroup/InstitutionalAuthor" mode="springer"/>
                 <!-- ajout identifiants ISTEX et ARK -->
                 <xsl:if test="string-length($idistex) &gt; 0 ">
                     <idno type="istex">

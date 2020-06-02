@@ -103,6 +103,7 @@
                 contains($theOrg,'Government of') or
                 contains($theOrg,'Council') or
                 contains($theOrg,'Max-Planck') or
+                contains($theOrg,'National') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or

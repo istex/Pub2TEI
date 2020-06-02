@@ -52,6 +52,9 @@
     </xsl:variable>
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="/Publisher[not(Series/Book/descendant::Chapter)]">
+        <xsl:variable name="countArticle">
+            <xsl:value-of select="count(//Article)"/>
+        </xsl:variable>
         <TEI  xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -69,18 +72,18 @@
                         <xsl:choose>
                             <xsl:when test="Journal/JournalOnlineFirst">
                                 <xsl:apply-templates
-                                    select="Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleCopyright"
+                                    select="Journal/JournalOnlineFirst/Article[1]/ArticleInfo/ArticleCopyright"
                                 />
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:apply-templates
-                                    select="Journal/Volume[1]/Issue/Article/ArticleInfo/ArticleCopyright"
+                                    select="Journal/Volume[1]/Issue/Article[1]/ArticleInfo/ArticleCopyright"
                                 />
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:apply-templates
-                            select="Book/descendant::Chapter/ChapterInfo/ChapterCopyright"/>
-                       
+                            select="Book/descendant::Chapter[1]/ChapterInfo/ChapterCopyright"/>
+                        
                         <!-- date -->
                         <xsl:choose>
                             <xsl:when test="//Volume[1]/CoverDate/Year !=''">
@@ -137,10 +140,18 @@
                         </xsl:choose>
                     </notesStmt>
                     <sourceDesc>
-                        <xsl:apply-templates select="Journal" mode="sourceDesc"/>
-                        <xsl:apply-templates select="Book" mode="sourceDesc"/>
+                        <xsl:choose>
+                            <xsl:when test="$countArticle&gt;=2">
+                                <xsl:apply-templates select="//Article[ArticleInfo]"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="Journal" mode="sourceDesc"/>
+                                <xsl:apply-templates select="Book" mode="sourceDesc"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </sourceDesc>
                 </fileDesc>
+       
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion"/>
                 <xsl:choose>
@@ -196,7 +207,7 @@
                                                     <xsl:choose>
                                                         <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
                                                         <xsl:otherwise>
-                                                            <xsl:value-of select="translate(//Volume[1]/Issue/Article/ArticleInfo/ArticleTitle[1]/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                            <xsl:value-of select="translate(//Volume[1]/Issue/Article[1]/ArticleInfo/ArticleTitle[1]/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                         </xsl:otherwise>
                                                     </xsl:choose>
                                                 </xsl:attribute>
@@ -341,18 +352,18 @@
                             select="//Journal/JournalOnlineFirst/Article/ArticleInfo/ArticleTitle"/>
                         <!-- All authors are included here -->
                         <xsl:apply-templates
-                            select="//Journal/JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/Author"/>
+                            select="//Journal/JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/Author" mode="springer"/>
                         <xsl:apply-templates
-                            select="//Journal/JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor"/>
+                            select="//Journal/JournalOnlineFirst/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor" mode="springer"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Title information related to the paper goes here -->
                         <xsl:apply-templates select="Issue/Article/ArticleInfo"/>
                         <!-- All authors are included here -->
                         <xsl:apply-templates
-                        select="Issue/Article/ArticleHeader/AuthorGroup/Author"/>
+                            select="Issue/Article/ArticleHeader/AuthorGroup/Author" mode="springer"/>
                         <xsl:apply-templates
-                            select="Issue/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor"/>
+                            select="Issue/Article/ArticleHeader/AuthorGroup/InstitutionalAuthor" mode="springer"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- ajout identifiants ISTEX et ARK -->
@@ -455,9 +466,9 @@
                 <!-- Title information related to the chapter goes here -->
                 <xsl:apply-templates select="descendant::Chapter/ChapterInfo/ChapterTitle"/>
                 <!-- All authors are included here -->
-                <xsl:apply-templates select="descendant::Chapter/ChapterHeader/AuthorGroup/Author"/>
+                <xsl:apply-templates select="descendant::Chapter/ChapterHeader/AuthorGroup/Author" mode="springer"/>
                 <xsl:apply-templates
-                    select="descendant::Chapter/ChapterHeader//AuthorGroup/InstitutionalAuthor"/>
+                    select="descendant::Chapter/ChapterHeader//AuthorGroup/InstitutionalAuthor" mode="springer"/>
                 <!-- ajout identifiants ISTEX et ARK -->
                 <xsl:if test="string-length($idistex) &gt; 0 ">
                     <idno type="istex">
@@ -483,7 +494,7 @@
                 <xsl:apply-templates select="BookInfo/BookElectronicISBN"/>
                 <xsl:apply-templates select="//Chapter"/>
                 <xsl:apply-templates select="//Part"/>
-                <xsl:apply-templates select="BookHeader/AuthorGroup/Author"/>
+                <xsl:apply-templates select="BookHeader/AuthorGroup/Author" mode="springer"/>
                 <xsl:apply-templates select="BookHeader/EditorGroup/Editor"/>
                 <xsl:apply-templates select="BookInfo/ConferenceInfo"/>
                 <imprint>

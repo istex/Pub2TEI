@@ -162,8 +162,10 @@
     </xsl:template>
     <!-- +++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- author related information -->
-
-    <xsl:template match="AuthorGroup/Author | AuthorGroup/InstitutionalAuthor">
+    <xsl:template match="Author | InstitutionalAuthor" mode="springer">
+        <xsl:variable name="countArticle">
+            <xsl:value-of select="count(//Article)"/>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="ancestor::SeriesHeader | ancestor::SubSeriesHeader">
                 <editor>
@@ -183,26 +185,32 @@
             </xsl:when>
             <xsl:otherwise>
                 <author>
-                    <xsl:variable name="i" select="position()-1"/>
-                    <xsl:variable name="authorNumber">
-                        <xsl:choose>
-                            <xsl:when test="$i &lt; 10">
-                                <xsl:value-of select="concat('author-000', $i)"/>
-                            </xsl:when>
-                            <xsl:when test="$i &lt; 100">
-                                <xsl:value-of select="concat('author-00', $i)"/>
-                            </xsl:when>
-                            <xsl:when test="$i &lt; 1000">
-                                <xsl:value-of select="concat('author-0', $i)"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="concat('author-', $i)"/>
-                            </xsl:otherwise>
-                        </xsl:choose> 
-                    </xsl:variable>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="$authorNumber"/>
-                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="$countArticle&gt;=2"/>
+                        <xsl:otherwise>
+                            <xsl:variable name="i" select="position()-1"/>
+                            <xsl:variable name="authorNumber">
+                                <xsl:choose>
+                                    <xsl:when test="$i &lt; 10">
+                                        <xsl:value-of select="concat('author-000', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 100">
+                                        <xsl:value-of select="concat('author-00', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 1000">
+                                        <xsl:value-of select="concat('author-0', $i)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('author-', $i)"/>
+                                    </xsl:otherwise>
+                                </xsl:choose> 
+                            </xsl:variable>
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="$authorNumber"/>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
                     <xsl:if test="@corresp='yes' or @CorrespondingAffiliationID">
                         <xsl:attribute name="role">
                             <xsl:text>corresp</xsl:text>
@@ -410,6 +418,10 @@
                     <xsl:when test="contains(.,'СССР')">
                         <xsl:attribute name="key">RU</xsl:attribute>
                         <xsl:text>RUSSIA</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Neuchâtel')">
+                        <xsl:attribute name="key">CH</xsl:attribute>
+                        <xsl:text>SWITZERLAND</xsl:text>
                     </xsl:when>
                     <xsl:when test="contains(.,'China')">
                         <xsl:attribute name="key">CN</xsl:attribute>
@@ -696,7 +708,7 @@
 
 
     <!-- Copyright related information to appear in <publicationStmt> -->
-    <xsl:template match="ArticleCopyright | ChapterCopyright">
+    <xsl:template match="ArticleCopyright[1] | ChapterCopyright[1]">
         <availability>
             <xsl:if test="//ArticleGrants/BodyPDFGrant[string(@Grant)='OpenAccess']">
                 <xsl:attribute name="status">free</xsl:attribute>
