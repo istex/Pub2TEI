@@ -287,10 +287,16 @@
         <xsl:variable name="resultCode">
             <xsl:value-of select="$countryCodes/descendant::tei:row[tei:cell/text() = $country]/tei:cell[@role = 'a2code']"/>
         </xsl:variable>
-        <xsl:if test="not(normalize-space($resultCode))">
-            <xsl:message>Country: <xsl:value-of select="$country"/> - Code not found</xsl:message>
-        </xsl:if>
-        <xsl:value-of select="$resultCode"/>
+        <xsl:choose>
+            <xsl:when test="$resultCode=''">
+                <xsl:if test="@Code">
+                    <xsl:value-of select="@Code"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$resultCode"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="normalizeISOCountryName">
@@ -299,10 +305,14 @@
         <xsl:variable name="resultCode">
             <xsl:value-of select="$countryCodes/descendant::tei:row[tei:cell/text() = $country]/tei:cell[@role = 'name' and @xml:lang = 'en']"/>
         </xsl:variable>
-       <xsl:if test="not(normalize-space($resultCode))">
-            <xsl:message>Country: <xsl:value-of select="$country"/> - Code not found</xsl:message>
-        </xsl:if>
-        <xsl:value-of select="$resultCode"/>
+        <xsl:choose>
+            <xsl:when test="$resultCode=''">
+                <xsl:value-of select="$country"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$resultCode"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- ajout code en français pour openEdition -->
     <xsl:template name="normalizeISOCountryNameFR">
@@ -311,10 +321,14 @@
         <xsl:variable name="resultCode">
             <xsl:value-of select="$countryCodes/descendant::tei:row[tei:cell/text() = $country]/tei:cell[@role = 'name' and @xml:lang = 'fr']"/>
         </xsl:variable>
-        <xsl:if test="not(normalize-space($resultCode))">
-            <xsl:message>Country: <xsl:value-of select="$country"/> - Code not found</xsl:message>
-        </xsl:if>
-        <xsl:value-of select="$resultCode"/>
+        <xsl:choose>
+            <xsl:when test="$resultCode=''">
+                <xsl:value-of select="$country"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$resultCode"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- PL: add st for Nature -->

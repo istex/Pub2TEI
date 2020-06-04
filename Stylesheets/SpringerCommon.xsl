@@ -220,9 +220,11 @@
                     <xsl:call-template name="createSpringerAffiliations">
                         <xsl:with-param name="restAff" select="@AffiliationIDS"/>
                     </xsl:call-template>
-                    <xsl:call-template name="createSpringerAffiliations2">
-                        <xsl:with-param name="restAff2" select="@PresentAffiliationID |@CorrespondingAffiliationID"/>
-                    </xsl:call-template>
+                    <xsl:if test="@PresentAffiliationID |@CorrespondingAffiliationID !=@AffiliationIDS">
+                        <xsl:call-template name="createSpringerAffiliations2">
+                            <xsl:with-param name="restAff2" select="@PresentAffiliationID |@CorrespondingAffiliationID"/>
+                        </xsl:call-template>
+                    </xsl:if>
                 </author>
             </xsl:otherwise>
         </xsl:choose>
@@ -411,19 +413,40 @@
 
 <!-- country mode springer -->
     <xsl:template match="Country">
-        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcČdeéèfghijklmnñoÖpqrstuüvwxyz().','ABCCDEEEFGHIJKLMNNOOPQRSTUUVWXYZ'))"/>
+        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aàbcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
+                    <xsl:when test="contains(.,'The Netherlands')">
+                        <xsl:attribute name="key">NL</xsl:attribute>
+                        <xsl:text>THE NETHERLANDS</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,', UK')">
+                        <xsl:attribute name="key">GB</xsl:attribute>
+                        <xsl:text>UNITED KINGDOM</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'USA')">
+                        <xsl:attribute name="key">US</xsl:attribute>
+                        <xsl:text>UNITED STATES</xsl:text>
+                    </xsl:when>
                     <xsl:when test="contains(.,'СССР')">
                         <xsl:attribute name="key">SU</xsl:attribute>
                         <xsl:text>UNION OF SOVIET SOCIALIST REPUBLICS (USSR)</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'India')">
+                        <xsl:attribute name="key">IN</xsl:attribute>
+                        <xsl:text>INDIA</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Scotland')">
+                        <xsl:attribute name="key">GB</xsl:attribute>
+                        <xsl:text>UNITED KINGDOM</xsl:text>
                     </xsl:when>
                     <xsl:when test="contains(.,'Taiwan, ROC')">
                         <xsl:attribute name="key">TW</xsl:attribute>
                         <xsl:text>TAIWAN, PROVINCE OF CHINA</xsl:text>
                     </xsl:when>
-                    <xsl:when test="contains(.,'Neuchâtel')">
+                    <xsl:when test="contains(.,'Neuchâtel')
+                        or contains(.,'Switzerland')">
                         <xsl:attribute name="key">CH</xsl:attribute>
                         <xsl:text>SWITZERLAND</xsl:text>
                     </xsl:when>
@@ -440,7 +463,6 @@
                         <xsl:call-template name="normalizeISOCountryName">
                             <xsl:with-param name="country" select="$countryWithNoSpace"/>
                         </xsl:call-template>
-                        <xsl:value-of select="countryWithNoSpace"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </country>
@@ -1127,6 +1149,7 @@
                         or contains(.,'Katlenburg-Lindau')
                         or contains(.,'Karlsruhe')
                         or contains(.,'Marburg')
+                        or contains(.,'Sauerland')
                         or contains(.,'Regensburg')">
                         <country key="DE" xml:lang="en">GERMANY</country>
                     </xsl:when>

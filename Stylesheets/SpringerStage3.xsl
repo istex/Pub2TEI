@@ -318,9 +318,9 @@
                 <!-- traceability -->
                 <revisionDesc>
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
-                    <xsl:if test="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory">
+                    <xsl:if test="Journal/Volume/Issue/Article[1]/ArticleInfo/ArticleHistory">
                         <xsl:apply-templates
-                            select="Journal/Volume/Issue/Article/ArticleInfo/ArticleHistory"/>
+                            select="Journal/Volume/Issue/Article[1]/ArticleInfo/ArticleHistory"/>
                     </xsl:if>
                 </revisionDesc>
             </teiHeader>
