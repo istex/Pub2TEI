@@ -150,7 +150,7 @@
 
     <xsl:template match="country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyz().','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))"/>
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aàbcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             <xsl:variable name="etatsAmericains">
                 <xsl:choose>
                     <xsl:when test=".='Alabama'">Alabama</xsl:when>
@@ -244,6 +244,19 @@
                     <xsl:when test="contains(.,'China')">
                         <xsl:variable name="change">
                             <xsl:text>CHINA</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Germany')">
+                        <xsl:variable name="change">
+                            <xsl:text>GERMANY</xsl:text>
                         </xsl:variable>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">

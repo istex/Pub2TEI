@@ -78,6 +78,8 @@
                         <cell role="nameAlt" xml:lang="en">de</cell>
                         <cell role="nameAlt" xml:lang="en">W. Germany</cell>
                         <cell role="nameAlt" xml:lang="en">W GERMANY</cell>
+                        <cell role="nameAlt" xml:lang="en">West Germany</cell>
+                        <cell role="nameAlt" xml:lang="en">WEST GERMANY</cell>
                         <!-- ERREUR DE FRAPPE DANS UNE DONNÉE ark:/67375/VQC-1BLQQZZ5-8 -->
                         <cell role="nameAlt" xml:lang="en">W GERMAMY</cell>
                         <cell role="nameAlt" xml:lang="en">W. Germamy</cell>
@@ -677,6 +679,7 @@
                         <cell role="nameAlt" xml:lang="en">United States</cell>
                         <cell role="nameAlt" xml:lang="en">U.S.A.</cell>
                         <cell role="nameAlt" xml:lang="en">U. S. A.</cell>
+                        <cell role="nameAlt" xml:lang="en">WASHINGTON, DC</cell>
                     </row>
                     <row>
                         <cell role="a2code">ET</cell>

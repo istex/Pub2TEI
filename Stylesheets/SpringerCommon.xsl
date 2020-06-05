@@ -454,6 +454,10 @@
                         <xsl:attribute name="key">CN</xsl:attribute>
                         <xsl:text>CHINA</xsl:text>
                     </xsl:when>
+                    <xsl:when test="contains(.,'México')">
+                        <xsl:attribute name="key">MX</xsl:attribute>
+                        <xsl:text>MEXICO</xsl:text>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">
