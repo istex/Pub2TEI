@@ -62,14 +62,14 @@
                         <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:accessRights">
                             <availability>
                                 <xsl:choose>
-                                    <xsl:when test="contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openaccess')">
+                                    <xsl:when test="contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openaccess') or contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openAccess')">
                                         <xsl:attribute name="status">free</xsl:attribute>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:attribute name="status">restricted</xsl:attribute>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                <p><xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:accessRights"/></p>
+                                <licence>Open Edition</licence>
                                 <xsl:if test="//mets:xmlData[dcterms:type='book']/dcterms:rights">
                                     <p><xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:rights"/></p>
                                 </xsl:if>
@@ -117,7 +117,38 @@
                                 </title>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:identifier[@scheme='URN']" mode="book"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:identifier[@scheme='URI']"/>
+                                <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:contributor"/>
                                 <xsl:choose>
+                                    <xsl:when test="//mets:xmlData[dcterms:type='book']/dcterms:creator[position() =1] = //mets:xmlData[dcterms:type='book']/dcterms:creator[position() =2]">
+                                        <xsl:variable name="parse">
+                                            <xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:creator[position() =1]"/>
+                                        </xsl:variable>
+                                        <author>
+                                            <persName>
+                                                <xsl:choose>
+                                                    <xsl:when test="contains($parse,', ')">
+                                                        <forename type="first">
+                                                            <xsl:value-of select="substring-after($parse,', ')"/>
+                                                        </forename>
+                                                        <surname>
+                                                            <xsl:value-of select="substring-before($parse,', ')"/>
+                                                        </surname> 
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <surname>
+                                                            <xsl:value-of select="$parse"/>
+                                                        </surname> 
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                                <roleName>author</roleName>
+                                            </persName>
+                                        </author>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:creator"/>
+                                    </xsl:otherwise>
+                                </xsl:choose> 
+                                <!--<xsl:choose>
                                     <xsl:when test="//mets:xmlData[dcterms:type='book']/dcterms:contributor">
                                         <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:contributor"/>
                                     </xsl:when>
@@ -152,8 +183,12 @@
                                             </xsl:otherwise>
                                         </xsl:choose> 
                                     </xsl:otherwise>
-                                </xsl:choose>
+                                </xsl:choose>-->
                                 <imprint>
+                                    <publisher>
+                                        <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:publisher"/>
+                                    </publisher>
+                                    <date type="published" when="{//mets:xmlData[dcterms:type!='book']/dcterms:issued}"/>
                                     <!--<biblScope unit="vol">73</biblScope>
                                     <biblScope unit="issue">1</biblScope>-->
                                     <xsl:variable name="pageFirst">
@@ -180,10 +215,6 @@
                                     <biblScope unit="total-page-issue">
                                         <xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:extent"/>
                                     </biblScope>
-                                    <publisher>
-                                        <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:publisher"/>
-                                    </publisher>
-                                    <date type="published" when="{//mets:xmlData[dcterms:type!='book']/dcterms:issued}"/>
                                 </imprint>
                             </monogr>
                         </biblStruct>
@@ -242,7 +273,7 @@
             <xsl:choose>
                 <!-- reprise du body dans le tei openEdition au 
                 niveau du chapitre en format TEI-->
-                <xsl:when test="$docIssueTEI/tei:text">
+                <xsl:when test="$docIssueTEI/tei:text !=''">
                     <xsl:copy-of select="$docIssueTEI/tei:text"/>
                 </xsl:when>
                 <xsl:when test="string-length($rawfulltextpath) &gt; 0">
@@ -396,7 +427,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </persName>
-            <roleName type="office">editor</roleName>
+            <roleName>editor</roleName>
         </author>
     </xsl:template>
     <xsl:template match="dcterms:identifier">
@@ -432,9 +463,9 @@
     </xsl:template>
     <xsl:template match="dcterms:description">
         <abstract ana="description">
-            <xsl:if test="@xml:lang">
+            <xsl:if test="//mets:xmlData[dcterms:type='chapter']/dcterms:language">
                 <xsl:attribute name="xml:lang">
-                    <xsl:value-of select="@xml:lang"/>
+                    <xsl:value-of select="//mets:xmlData[dcterms:type='chapter']/dcterms:language"/>
                 </xsl:attribute>
             </xsl:if>
             <p>
