@@ -55,7 +55,7 @@
                         </xsl:for-each>
                         
                         <xsl:for-each select="rsc:journalcit |rsc:citation[@type='book'] | journalcit |citation[@type='book']">
-                            <bibl type="book">
+                            <bibl type="journal">
                                 <xsl:apply-templates select="* except(journalcit/jnltrans |rsc:journalcit/rsc:jnltrans)"/>
                             </bibl>
                             

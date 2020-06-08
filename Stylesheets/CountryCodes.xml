@@ -98,6 +98,7 @@
                         <cell role="nameAlt" xml:lang="de">BUNDESREPUBLIK DEUTSCHLAND</cell>
                         <cell role="nameAlt" xml:lang="de">Bundesrepublik Deutschland</cell>
                         <cell role="nameAlt" xml:lang="de">Deutschland</cell>
+                        <cell role="nameAlt" xml:lang="de">BERLIN</cell>
                     </row>
                     <row>
                         <cell role="a2code">AD</cell>
@@ -200,6 +201,8 @@
                         <cell role="name" xml:lang="en">AUSTRALIA</cell>
                         <cell role="nameAlt" xml:lang="en">Australia</cell>
                         <cell role="nameAlt" xml:lang="en">AUSTRALIA</cell>
+                        <cell role="nameAlt" xml:lang="en">WESTERN AUSTRALIA</cell>
+                        <cell role="nameAlt" xml:lang="en">Western Australia</cell>
                         <cell role="nameAlt" xml:lang="de">Australien</cell>
                         <cell role="nameAlt" xml:lang="de">AUSTRALIEN</cell>
                         <cell role="nameAlt" xml:lang="en">au</cell>
@@ -354,6 +357,8 @@
                         <cell role="nameAlt" xml:lang="de">Brazilien</cell>
                         <cell role="nameAlt" xml:lang="de">BRASILIEN</cell>
                         <cell role="nameAlt" xml:lang="de">Brasilien</cell>
+                        <cell role="nameAlt" xml:lang="br">BRASIL</cell>
+                        <cell role="nameAlt" xml:lang="br">Brasil</cell>
                         <cell role="nameAlt" xml:lang="en">br</cell>
                     </row>
                     <row>
@@ -424,6 +429,10 @@
                         <cell role="nameAlt" xml:lang="en">Canada</cell>
                         <cell role="nameAlt" xml:lang="en">BRITISH COLUMBIA</cell>
                         <cell role="nameAlt" xml:lang="en">Que (Canada)</cell>
+                        <cell role="nameAlt" xml:lang="en">QUE CANADA</cell>
+                        <cell role="nameAlt" xml:lang="en">ON CANADA</cell>
+                        <cell role="nameAlt" xml:lang="en">Canada A1B 3X7</cell>
+                        <cell role="nameAlt" xml:lang="en">CANADA A1B 3X7</cell>
                         <cell role="nameAlt" xml:lang="de">Kanada</cell>
                         <cell role="nameAlt" xml:lang="de">KANADA</cell>
                         <cell role="nameAlt" xml:lang="en">ca</cell>
@@ -460,6 +469,7 @@
                         <cell role="nameAlt" xml:lang="en">People’s Republic China</cell>
                         <cell role="nameAlt" xml:lang="en">P.R. China</cell>
                         <cell role="nameAlt" xml:lang="en">P. R. China</cell>
+                        <cell role="nameAlt" xml:lang="en">PRC</cell>
                         <cell role="nameAlt" xml:lang="en">PR China</cell>
                         <cell role="nameAlt" xml:lang="en">Republic of China</cell>
                         <cell role="nameAlt" xml:lang="en">cn</cell>
@@ -679,6 +689,8 @@
                         <cell role="nameAlt" xml:lang="en">United States</cell>
                         <cell role="nameAlt" xml:lang="en">U.S.A.</cell>
                         <cell role="nameAlt" xml:lang="en">U. S. A.</cell>
+                        <cell role="nameAlt" xml:lang="en">USA AND</cell>
+                        <cell role="nameAlt" xml:lang="en">USA 98195-1700</cell>
                         <cell role="nameAlt" xml:lang="en">WASHINGTON, DC</cell>
                     </row>
                     <row>
@@ -987,6 +999,7 @@
                         <cell role="name" xml:lang="fr">ISRAËL</cell>
                         <cell role="name" xml:lang="en">ISRAEL</cell>
                         <cell role="nameAlt" xml:lang="en">Israel</cell>
+                        <cell role="nameAlt" xml:lang="en">91120 ISRAEL</cell>
                         <cell role="nameAlt" xml:lang="en">il</cell>
                     </row>
                     <row>
@@ -1013,6 +1026,7 @@
                         <cell role="name" xml:lang="fr">JAPON</cell>
                         <cell role="name" xml:lang="en">JAPAN</cell>
                         <cell role="nameAlt" xml:lang="en">Japan</cell>
+                        <cell role="nameAlt" xml:lang="en">980-8577 JAPAN</cell>
                         <cell role="nameAlt" xml:lang="en">jp</cell>
                     </row>
                     <row>
@@ -1598,12 +1612,15 @@
                         <cell role="nameAlt" xml:lang="en">NORTHERN IRELAND</cell>
                         <cell role="nameAlt" xml:lang="en">Scotland, UK</cell>
                         <cell role="nameAlt" xml:lang="en">SCOTLAND, UK</cell>
+                        <cell role="nameAlt" xml:lang="en">Wales, UK</cell>
+                        <cell role="nameAlt" xml:lang="en">WALES, UK</cell>
                         <cell role="nameAlt" xml:lang="en">ENGLAND</cell>
                         <cell role="nameAlt" xml:lang="en">SCOTLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Great Britain</cell>
                         <cell role="nameAlt" xml:lang="en">GREAT BRITAIN</cell>
                         <cell role="nameAlt" xml:lang="en">England.</cell>
                         <cell role="nameAlt" xml:lang="en">England</cell>
+                        <cell role="nameAlt" xml:lang="en">UK LE1 7RH</cell>
                         <cell role="nameAlt" xml:lang="en">uk</cell>
                         <cell role="nameAlt" xml:lang="en">U. K.</cell>
                    </row>
