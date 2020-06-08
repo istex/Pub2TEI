@@ -413,7 +413,7 @@
 
 <!-- country mode springer -->
     <xsl:template match="Country">
-        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aàbcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
+        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
