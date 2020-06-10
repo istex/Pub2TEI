@@ -2389,10 +2389,12 @@
                    <xsl:when test="addr-line/institution">
                        <affiliation>
                            <xsl:apply-templates select="addr-line/institution"/>
-                           <address>
-                               <xsl:apply-templates select="addr-line/named-content"/>
-                               <xsl:apply-templates select="addr-line/country"/>
-                           </address>
+                           <xsl:if test="addr-line/named-content or addr-line/country !=''">
+                               <address>
+                                   <xsl:apply-templates select="addr-line/named-content"/>
+                                   <xsl:apply-templates select="addr-line/country"/>
+                               </address>
+                           </xsl:if>
                        </affiliation>
                    </xsl:when>
                    <xsl:when test="addr-line and institution">
@@ -4784,7 +4786,9 @@
                                             <xsl:value-of select="$avantVirgule"/>
                                         </settlement>
                                         <xsl:if test="not(contains(parent::aff|parent::corresp,'Japan'))">
-                                            <country key="JP" xml:lang="en">JAPAN</country>
+                                            <xsl:if test="not(cny)">
+                                                <country key="JP" xml:lang="en">JAPAN</country>
+                                            </xsl:if>
                                         </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="starts-with($avantVirgule,'AK ')
@@ -4890,9 +4894,9 @@
                                         or starts-with($avantVirgule,'Wyoming')
                                         ">
                                         <xsl:if test="not(contains($theAffil,'USA'))">
-                                            <addrLine>
+                                            <state>
                                                 <xsl:value-of select="$avantVirgule"/>
-                                            </addrLine> 
+                                            </state> 
                                             <country key="US" xml:lang="en">UNITED STATES</country>
                                         </xsl:if>
                                     </xsl:when>
@@ -4988,9 +4992,20 @@
                                                 </country>   
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <addrLine>
-                                                    <xsl:apply-templates select="$avantVirgule"/>
-                                                </addrLine>
+                                                <xsl:choose>
+                                                    <xsl:when test="ancestor::addr-line/institution">
+                                                        <address>
+                                                            <addrLine>
+                                                                <xsl:apply-templates select="$avantVirgule"/>
+                                                            </addrLine>
+                                                        </address>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <addrLine>
+                                                            <xsl:apply-templates select="$avantVirgule"/>
+                                                        </addrLine>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:otherwise>

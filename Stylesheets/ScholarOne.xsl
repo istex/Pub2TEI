@@ -292,6 +292,7 @@
         </author>
     </xsl:template>
     <xsl:template match="contrib[@contrib-type='author' or not(@contrib-type)]">
+        <xsl:if test=".!=''">
         <author>
             <xsl:variable name="i" select="position()-1"/>
             <xsl:variable name="authorNumber">
@@ -409,6 +410,7 @@
                 </xsl:when>
             </xsl:choose>
         </author>
+        </xsl:if>
     </xsl:template>
     
 

@@ -142,6 +142,7 @@
                 contains($theOrg,'LORIA') or
                 contains($theOrg,'UMC ') or
                 contains($theOrg,'IFR ') or
+                contains($theOrg,'C.R.S.O.C.I.') or
                 contains($theOrg,'Dauphinoise de Tri ') or
                 contains($theOrg,'Systems') or
                 contains($theOrg,'DAMTP') or
@@ -171,6 +172,7 @@
                 starts-with($theOrg,'EA 4604') or
                 contains($theOrg,'Registry') or
                 contains($theOrg,'Register') or
+                contains($theOrg,'Office') or
                 contains($theOrg,'Registro') or
                 contains($theOrg,'Sciences') or
                 contains($theOrg,'Unidad') or

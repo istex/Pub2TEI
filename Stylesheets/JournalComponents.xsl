@@ -2613,9 +2613,7 @@ reactorsa'</title>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <xsl:when test=".='0'">
-                                <biblScope unit="vol">1</biblScope>
-                            </xsl:when>
+                            <xsl:when test=".='0'"/>
                             <xsl:otherwise>
                                 <xsl:if test=". !=''">
                                     <biblScope unit="vol">
