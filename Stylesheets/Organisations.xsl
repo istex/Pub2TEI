@@ -150,6 +150,7 @@
                 contains($theOrg,'Observatoire') or
                 contains($theOrg,'SISSA/ISAS') or
                 contains($theOrg,'wissenschaft') or
+                contains($theOrg,'CEN Saclay') or
                 contains($theOrg,'Ricerche')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
@@ -176,6 +177,7 @@
                 contains($theOrg,'Registro') or
                 contains($theOrg,'Sciences') or
                 contains($theOrg,'Unidad') or
+                contains($theOrg,'DPh-G/PSRM') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
@@ -225,6 +227,8 @@
                 contains($theOrg,'Landesstelle') or
                 contains($theOrg,'Cellectis SA') or
                 contains($theOrg,'Merus BV') or
+                contains($theOrg,'Taiyo Kaihatu-Kensetu Co') or
+                contains($theOrg,'B.I.S.R.A') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>

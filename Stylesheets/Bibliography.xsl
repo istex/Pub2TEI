@@ -280,20 +280,21 @@
             </xsl:when>
             <xsl:otherwise>
                 <biblStruct type="article">
-                    <xsl:attribute name="xml:id">
-                        <xsl:choose>
-                            <xsl:when test="@id">
-                                <xsl:value-of select="@id"/>
-                            </xsl:when>
-                            <xsl:when test="citation/@id">
-                                <xsl:value-of select="citation/@id"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="../@id"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:attribute>
-
+                    <xsl:if test="@id | citation/@id |../@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:choose>
+                                <xsl:when test="@id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:when>
+                                <xsl:when test="citation/@id">
+                                    <xsl:value-of select="citation/@id"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="../@id"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </xsl:if>
                     <!-- <xsl:attribute name="xml:id">
                 <xsl:apply-templates select="$entry/@id | @id"/>
             </xsl:attribute>-->
@@ -608,9 +609,11 @@
                         <xsl:value-of select="count($entry/article-title)"/>
                     </xsl:variable>
                     <biblStruct type="book">
-                        <xsl:attribute name="xml:id">
-                            <xsl:apply-templates select="$entry/@id | @id"/>
-                        </xsl:attribute>
+                        <xsl:if test="$entry/@id | @id !=''">
+                            <xsl:attribute name="xml:id">
+                                <xsl:apply-templates select="$entry/@id | @id"/>
+                            </xsl:attribute>
+                        </xsl:if>
                     <xsl:if test="$entry/article-title">
                         <analytic>
                             <xsl:apply-templates select="$entry/article-title"/>
@@ -701,7 +704,6 @@
                                     test="
                                         citation/@publication-type
                                         | citation/@citation-type
-                                        | citation/@xlink:type
                                         | nlm-citation/@publication-type
                                         | nlm-citation/@citation-type
                                         | mixed-citation/@publication-type
@@ -710,11 +712,16 @@
                                         select="
                                             citation/@publication-type
                                             | citation/@citation-type
-                                            | citation/@xlink:type
                                             | nlm-citation/@publication-type
                                             | nlm-citation/@citation-type
                                             | mixed-citation/@publication-type
                                             | mixed-citation/@citation-type"
+                                    />
+                                </xsl:when>
+                                <xsl:when
+                                    test="citation/@xlink:type">
+                                    <xsl:value-of
+                                        select="citation/@xlink:type"
                                     />
                                 </xsl:when>
                                 <xsl:otherwise>

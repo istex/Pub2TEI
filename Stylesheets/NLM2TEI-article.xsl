@@ -2613,14 +2613,7 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="apresVirgule">
-            <xsl:choose>
-                <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="''"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
         </xsl:variable>
         <xsl:variable name="testOrganisation">
             <xsl:call-template name="identifyOrgLevel">
@@ -2659,10 +2652,24 @@
                                             </xsl:call-template>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <address>
+                                            <xsl:variable name="address">
                                                 <xsl:call-template name="NLMparseAffiliation">
                                                     <xsl:with-param name="theAffil" select="$apresVirgule"/>
                                                 </xsl:call-template>
+                                            </xsl:variable>
+                                            <address>
+                                                <xsl:choose>
+                                                    <xsl:when test="$address!=''">
+                                                        <xsl:call-template name="NLMparseAffiliation">
+                                                            <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                                                        </xsl:call-template>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <addrLine>
+                                                            <xsl:value-of select="$apresVirgule"/>
+                                                        </addrLine>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
                                             </address>
                                         </xsl:otherwise>
                                     </xsl:choose>
@@ -4894,9 +4901,9 @@
                                         or starts-with($avantVirgule,'Wyoming')
                                         ">
                                         <xsl:if test="not(contains($theAffil,'USA'))">
-                                            <state>
+                                            <region>
                                                 <xsl:value-of select="$avantVirgule"/>
-                                            </state> 
+                                            </region> 
                                             <country key="US" xml:lang="en">UNITED STATES</country>
                                         </xsl:if>
                                     </xsl:when>
@@ -4962,10 +4969,10 @@
                                         <xsl:if test="not(contains($theAffil,'UK'))">
                                             <addrLine>
                                                 <xsl:value-of select="$avantVirgule"/>
-                                                <xsl:if test="not(contains($theAffil,'England'))">
-                                                    <country key="GB" xml:lang="en">UNITED KINGDOM</country>
-                                                </xsl:if>
                                             </addrLine>
+                                            <xsl:if test="not(contains($theAffil,'England'))">
+                                                <country key="GB" xml:lang="en">UNITED KINGDOM</country>
+                                            </xsl:if>
                                         </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="contains($avantVirgule,'The Netherlands') or contains($avantVirgule,'the Netherlands')">
