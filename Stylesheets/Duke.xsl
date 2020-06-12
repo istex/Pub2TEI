@@ -536,8 +536,15 @@
     <xsl:template match="affiliation" mode="Duke">
             <affiliation>
                 <xsl:if test="organization">
-                    <orgName>
-                        <xsl:value-of select="organization"/>
+                    <orgName type="institution">
+                        <xsl:choose>
+                            <xsl:when test="contains(organization,'urrent: ')">
+                                <xsl:value-of select="substring-after(organization,'urrent: ')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="organization"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </orgName>
                 </xsl:if>
                 <xsl:if test="department">
@@ -548,9 +555,7 @@
                 <xsl:if test="address">
                     <address>
                         <xsl:if test="address/addressline">
-                            <addrLine>
-                                <xsl:value-of select="address/addressline"/>
-                            </addrLine>
+                            <xsl:apply-templates select="address/addressline"/>
                         </xsl:if>
 					</address>
                 </xsl:if>

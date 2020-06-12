@@ -4978,6 +4978,9 @@
                                     <xsl:when test="contains($avantVirgule,'The Netherlands') or contains($avantVirgule,'the Netherlands')">
                                         <country key="NL" xml:lang="en">THE NETHERLANDS</country>
                                     </xsl:when>
+                                    <xsl:when test="contains($avantVirgule,'United Kingdom')">
+                                        <country key="GB" xml:lang="en">UNITED KINGDOM</country>
+                                    </xsl:when>
                                     <xsl:when test="$testOrganisation!=''">
                                         <orgName>
                                             <xsl:attribute name="type">
