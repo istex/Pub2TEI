@@ -554,14 +554,118 @@
                 </xsl:if>
                 <xsl:if test="address">
                     <address>
-                        <xsl:if test="address/addressline">
-                            <xsl:apply-templates select="address/addressline"/>
-                        </xsl:if>
-					</address>
+                        <xsl:apply-templates select="address/addressline"/>
+                    </address>
                 </xsl:if>
             </affiliation>
     </xsl:template>
     <!-- tomaison-->
+    <xsl:template match="address">
+            <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="addressline">
+        <xsl:if test=". !=''">
+                <xsl:choose>
+                    <xsl:when test="*">
+                        <!-- <xsl:if test="text()[. != ', ']">
+                        <addrLine>
+                            <xsl:for-each select="text()[. != ', ']">
+                                <xsl:value-of select="."/>
+                            </xsl:for-each>
+                        </addrLine>
+                    </xsl:if>-->
+                        <xsl:apply-templates select="*"/>
+                    </xsl:when>
+                    <xsl:when test="parent::publisher-loc">
+                        <!-- <xsl:if test="text()[. != ', ']">
+                        <addrLine>
+                            <xsl:for-each select="text()[. != ', ']">
+                                <xsl:value-of select="."/>
+                            </xsl:for-each>
+                        </addrLine>
+                    </xsl:if>-->
+                        <xsl:apply-templates/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!--  <xsl:if test="not(ancestor::corresp)">
+                    <addrLine>
+                        <xsl:apply-templates/>
+                    </addrLine>
+                 </xsl:if>-->
+                        <xsl:variable name="addrline">
+                            <xsl:apply-templates/>
+                        </xsl:variable>
+                        <xsl:variable name="avantVirgule">
+                            <xsl:choose>
+                                <xsl:when test="contains($addrline,',')">
+                                    <xsl:value-of select="normalize-space(substring-before($addrline,','))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="normalize-space($addrline)"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="apresVirgule">
+                            <xsl:choose>
+                                <xsl:when test="contains($addrline,',')">
+                                    <xsl:value-of select="normalize-space(substring-after($addrline,','))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="''"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="testOrganisation">
+                            <xsl:call-template name="identifyOrgLevel">
+                                <xsl:with-param name="theOrg">
+                                    <xsl:value-of select="$addrline"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="ancestor::aff/xref/addr-line">
+                                <address>
+                                    <addrLine>
+                                        <xsl:value-of select="normalize-space($addrline)"/>
+                                    </addrLine>
+                                </address>
+                            </xsl:when>
+                            <xsl:when test="contains(.,', ') and not(ancestor::aff/country)">
+                                <xsl:call-template name="NLMparseAffiliation">
+                                    <xsl:with-param name="theAffil" select="."/>
+                                    <xsl:with-param name="inAddress" select="true()"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:when test="$testOrganisation!=''">
+                                <orgName>
+                                    <xsl:attribute name="type">
+                                        <xsl:value-of select="$testOrganisation"/>
+                                    </xsl:attribute>
+                                    <xsl:choose>
+                                        <xsl:when test="$avantVirgule">
+                                            <xsl:apply-templates select="$avantVirgule"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="normalize-space($addrline)"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </orgName>
+                                <xsl:if test="$apresVirgule !=''">
+                                    <xsl:call-template name="NLMparseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                                    </xsl:call-template>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <addrLine>
+                                    <xsl:value-of select="normalize-space($addrline)"/>
+                                </addrLine>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:if>
+    </xsl:template>
     <xsl:template match="/euclid_issue/issue/issue_data/journal_vol_number">
         <biblScope unit="vol">
             <xsl:apply-templates/>
