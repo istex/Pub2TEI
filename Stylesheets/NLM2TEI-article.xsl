@@ -4793,7 +4793,7 @@
                                             <xsl:value-of select="$avantVirgule"/>
                                         </settlement>
                                         <xsl:if test="not(contains(parent::aff|parent::corresp,'Japan'))">
-                                            <xsl:if test="not(cny)">
+                                            <xsl:if test="not(contains($theAffil,'Japan'))">
                                                 <country key="JP" xml:lang="en">JAPAN</country>
                                             </xsl:if>
                                         </xsl:if>

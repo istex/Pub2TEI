@@ -3308,6 +3308,7 @@
                                     <xsl:when test="normalize-space($mscSubjectCode)='35J30'">Higher-order elliptic equations [See also 31A30, 31B30]</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='35J35'">Variational methods for higher-order elliptic equations</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='35J40'">Boundary value problems for higher-order elliptic equations</xsl:when>
+                                    <xsl:when test="normalize-space($mscSubjectCode)='35J45'">General theory of elliptic systems of PDE</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='35J46'">First-order elliptic systems</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='35J47'">Second-order elliptic systems</xsl:when>
                                     <xsl:when test="normalize-space($mscSubjectCode)='35J48'">Higher-order elliptic systems</xsl:when>
