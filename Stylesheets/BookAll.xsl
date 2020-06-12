@@ -232,14 +232,14 @@
                     <xsl:apply-templates select="//fn" mode="TF"/>
                     </div>
                 </xsl:if>
-               <xsl:if test="//ref-list">
+                <xsl:if test="//ref-list and not(//book/back/ref-list)">
                     <div type="references">
                         <listBibl>
                             <xsl:apply-templates select="//ref-list" mode="TF"/>
                         </listBibl>
                     </div>
                 </xsl:if>
-                <xsl:apply-templates select="//book/back/* except(//book/back/ref-list)" mode="TF"/>
+                <xsl:apply-templates select="//book/back" mode="TF"/>
             </back>
         </text>
     </xsl:template>
