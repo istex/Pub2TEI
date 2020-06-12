@@ -43,11 +43,9 @@
                         </div>
                     </xsl:when>
                     <xsl:when test="parent::notes">
-                        <div>
                             <p>
                                 <xsl:apply-templates/>
                             </p>
-                        </div>
                     </xsl:when>
                     <xsl:when test="parent::fn">
                         <p>

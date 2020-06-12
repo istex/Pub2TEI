@@ -1948,19 +1948,19 @@
                             <xsl:apply-templates select="@citation-type | @publication-type"/>
                         </xsl:attribute>
                     </xsl:if>
-                   <xsl:choose>
+                    <xsl:choose>
                         <xsl:when test="@id">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:when>
-                       <xsl:otherwise>
-                           <xsl:if test="../@id">
-                               <xsl:attribute name="xml:id">
-                                   <xsl:value-of select="../@id"/>
-                               </xsl:attribute>
-                           </xsl:if>
-                       </xsl:otherwise>
+                        <xsl:otherwise>
+                            <xsl:if test="../@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="../@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </xsl:otherwise>
                     </xsl:choose>
                     <xsl:if test="article-title|chapter-title">
                         <analytic>

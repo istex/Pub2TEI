@@ -3411,7 +3411,9 @@
     
     <xsl:template match="ref-list">
         <div type="references">
-            <xsl:apply-templates/>
+            <listBibl>
+                <xsl:apply-templates/>
+            </listBibl>
         </div>
     </xsl:template>
 
@@ -4010,7 +4012,11 @@
                 <xsl:apply-templates/>
             </title>
             </xsl:when>
-            <xsl:when test="ancestor::ref-list"/>
+            <xsl:when test="ancestor::ref-list">
+                <head>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:when>
             <xsl:when test="ancestor::notes"/>
             <xsl:otherwise>
                 <head>

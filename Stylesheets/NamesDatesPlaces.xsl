@@ -346,7 +346,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$resultCode=''">
-                <xsl:value-of select="$country"/>
+                <xsl:value-of select="(translate($country,'aàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$resultCode"/>
