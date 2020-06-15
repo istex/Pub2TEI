@@ -268,6 +268,7 @@
                                                             or //ArticleDOI='10.1007/BF03039152'
                                                             ">en</xsl:when>
                                                         <xsl:when test="//Abstract/Heading ='Аннотация'">ru</xsl:when>
+                                                        <xsl:when test="//Abstract/Heading ='Анномачuя'">ru</xsl:when>
                                                         <xsl:when test="//Abstract/Heading ='Аннотациа'">ru</xsl:when>
                                                         <xsl:when test="//Abstract/Heading ='Краткое содержание'">ru</xsl:when>
                                                         <xsl:when test="//Abstract/Heading ='--Реэюме'">ru</xsl:when>

@@ -5077,13 +5077,13 @@
         <xsl:param name="restAff2"/>
         <xsl:message>Affiliations: <xsl:value-of select="$restAff"/></xsl:message>
         <xsl:choose>
-            <xsl:when test=" contains($restAff,' ')">
+            <xsl:when test="contains($restAff,' ')">
                 <xsl:apply-templates select="//aff[@id=substring-before($restAff,' ')]"/>
                 <xsl:call-template name="createNLMAffiliations">
                     <xsl:with-param name="restAff" select="substring-after($restAff,' ')"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test=" contains($restAff2,' ')">
+            <xsl:when test="contains($restAff2,' ')">
                 <xsl:apply-templates select="//aff[@id=substring-before($restAff2,' ')]"/>
                 <xsl:call-template name="createNLMAffiliations">
                     <xsl:with-param name="restAff" select="substring-after($restAff2,' ')"/>

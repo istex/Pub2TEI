@@ -175,12 +175,16 @@
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:apply-templates/>
-                    <xsl:call-template name="createSpringerAffiliations">
-                        <xsl:with-param name="restAff" select="@AffiliationIDS"/>
-                    </xsl:call-template>
-                    <xsl:call-template name="createSpringerAffiliations2">
-                        <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
-                    </xsl:call-template>
+                    <xsl:if test="@AffiliationIDS">
+                            <xsl:call-template name="createSpringerAffiliations">
+                                <xsl:with-param name="restAff" select="@AffiliationIDS"/>
+                            </xsl:call-template>
+                        </xsl:if>
+                    <xsl:if test="@PresentAffiliationID !=@AffiliationIDS">
+                        <xsl:call-template name="createSpringerAffiliations2">
+                            <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
+                        </xsl:call-template>
+                    </xsl:if>
                 </editor>
             </xsl:when>
             <xsl:otherwise>
@@ -220,9 +224,9 @@
                     <xsl:call-template name="createSpringerAffiliations">
                         <xsl:with-param name="restAff" select="@AffiliationIDS"/>
                     </xsl:call-template>
-                    <xsl:if test="@PresentAffiliationID |@CorrespondingAffiliationID !=@AffiliationIDS">
+                    <xsl:if test="@PresentAffiliationID !=@AffiliationIDS">
                         <xsl:call-template name="createSpringerAffiliations2">
-                            <xsl:with-param name="restAff2" select="@PresentAffiliationID |@CorrespondingAffiliationID"/>
+                            <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
                         </xsl:call-template>
                     </xsl:if>
                 </author>
@@ -255,12 +259,11 @@
                 <xsl:value-of select="$editorNumber"/>
             </xsl:attribute>
             <xsl:apply-templates/>
-            <xsl:call-template name="createSpringerAffiliations">
-                <xsl:with-param name="restAff" select="@AffiliationIDS"/>
-            </xsl:call-template>
-            <xsl:call-template name="createSpringerAffiliations2">
-                <xsl:with-param name="restAff2" select="@PresentAffiliationID"/>
-            </xsl:call-template>
+            <xsl:if test="@AffiliationIDS or @PresentAffiliationID">
+                <xsl:call-template name="createSpringerAffiliations">
+                    <xsl:with-param name="restAff" select="@AffiliationIDS"/>
+                </xsl:call-template>
+            </xsl:if>
         </editor>
     </xsl:template>
 
@@ -279,6 +282,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template name="createSpringerAffiliations2">
         <xsl:param name="restAff2"/>
         <xsl:message>Affiliations: <xsl:value-of select="$restAff2"/></xsl:message>
@@ -925,6 +929,7 @@
                                         or //ArticleDOI='10.1007/BF03039152'
                                         ">en</xsl:when>
                                     <xsl:when test="//Abstract/Heading ='Аннотация'">ru</xsl:when>
+                                    <xsl:when test="//Abstract/Heading ='Анномачuя'">ru</xsl:when>
                                     <xsl:when test="//Abstract/Heading ='Аннотациа'">ru</xsl:when>
                                     <xsl:when test="//Abstract/Heading ='Краткое содержание'">ru</xsl:when>
                                     <xsl:when test="//Abstract/Heading ='--Реэюме'">ru</xsl:when>
