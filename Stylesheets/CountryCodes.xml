@@ -64,6 +64,7 @@
                         <cell role="name" xml:lang="en">ALGERIA</cell>
                         <cell role="nameAlt" xml:lang="en">Algeria</cell>
                         <cell role="nameAlt" xml:lang="fr">Algérie</cell>
+                        <cell role="nameAlt" xml:lang="fr">ALGER, ALGERIE</cell>
                         <cell role="nameAlt" xml:lang="fr">ALGERIE</cell>
                         <cell role="nameAlt" xml:lang="en">ALGERIA</cell>
                         <cell role="nameAlt" xml:lang="de">ALGERIEN</cell>
@@ -481,6 +482,7 @@
                         <cell role="nameAlt" xml:lang="en">P.R. China</cell>
                         <cell role="nameAlt" xml:lang="en">P. R. China</cell>
                         <cell role="nameAlt" xml:lang="en">PRC</cell>
+                        <cell role="nameAlt" xml:lang="en">ROC</cell>
                         <cell role="nameAlt" xml:lang="en">PR China</cell>
                         <cell role="nameAlt" xml:lang="en">Republic of China</cell>
                         <cell role="nameAlt" xml:lang="en">cn</cell>
@@ -728,6 +730,7 @@
                         <cell role="name" xml:lang="fr">ÉTATS-UNIS</cell>
                         <cell role="name" xml:lang="en">UNITED STATES</cell>
                         <cell role="nameAlt" xml:lang="en">United States</cell>
+                        <cell role="nameAlt" xml:lang="en">UNITED STATES OF AMERICA</cell>
                         <cell role="nameAlt" xml:lang="en">U.S.A.</cell>
                         <cell role="nameAlt" xml:lang="en">U. S. A.</cell>
                         <cell role="nameAlt" xml:lang="en">USA AND</cell>
@@ -793,6 +796,8 @@
                         <cell role="nameAlt" xml:lang="en">FRANCIE</cell>
                         <cell role="nameAlt" xml:lang="es">FRANCIA</cell>
                         <cell role="nameAlt" xml:lang="fr">PARIS</cell>
+                        <!-- erreur lavoisier 10.3166/ts.21.707-719 -->
+                        <cell role="nameAlt" xml:lang="fr">FANCE</cell>
                         <cell role="nameAlt" xml:lang="en">fr</cell>
                         <cell role="nameAlt" xml:lang="en">uni</cell>
                         <cell role="nameAlt" xml:lang="en">gov</cell>
@@ -1318,6 +1323,7 @@
                         <cell role="name" xml:lang="en">MOROCCO</cell>
                         <cell role="nameAlt" xml:lang="en">Morocco</cell>
                         <cell role="nameAlt" xml:lang="de">MAROKKO</cell>
+                        <cell role="nameAlt" xml:lang="fr">MARRAKECH</cell>
                         <cell role="nameAlt" xml:lang="en">ma</cell>
                     </row>
                     <row>
@@ -1780,6 +1786,8 @@
                         <cell role="nameAlt" xml:lang="en">Russian Federation</cell>
                         <cell role="nameAlt" xml:lang="en">Russia</cell>
                         <cell role="nameAlt" xml:lang="en">RUSSIA</cell>
+                        <cell role="nameAlt" xml:lang="fr">Russie</cell>
+                        <cell role="nameAlt" xml:lang="fr">RUSSIE</cell>
                         <cell role="nameAlt" xml:lang="en">Russia.</cell>
                         <cell role="nameAlt" xml:lang="de">Russland</cell>
                         <cell role="nameAlt" xml:lang="de">RUSSLAND</cell>
