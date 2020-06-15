@@ -150,7 +150,7 @@
 
     <xsl:template match="country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aÄàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             <xsl:variable name="etatsAmericains">
                 <xsl:choose>
                     <xsl:when test=".='Alabama'">Alabama</xsl:when>
@@ -346,7 +346,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$resultCode=''">
-                <xsl:value-of select="(translate($country,'aàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
+                <xsl:value-of select="(translate($country,'aãÄàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAAAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$resultCode"/>
@@ -537,6 +537,14 @@
         <xsl:if test=".!=''">
             <address>
                 <xsl:apply-templates/>
+                <xsl:if test="City='Russland'">
+                    <!-- ex:10.1007/BF01963546 -->
+                    <country key="RU" xml:lang="en">RUSSIA</country>
+                </xsl:if>
+                <xsl:if test="City='Griechenland'">
+                    <!-- ex:10.1007/BF01248857 -->
+                    <country key="GR" xml:lang="en">GREECE</country>
+                </xsl:if>
             </address>
         </xsl:if>
     </xsl:template>
