@@ -2347,6 +2347,9 @@ reactorsa'</title>
             <xsl:when test="//wiley:publicationMeta/wiley:issn[@type='print']='0009-9163' and contains(//wiley:publicationMeta/wiley:coverDate/@startDate,'2003') and  //wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type='journalVolume']='43' ">
                 <idno type="pISSN">0914-3505</idno>
             </xsl:when>
+            <xsl:when test="//issn[@pub-type='ppub']='0947-3580' and contains(//journal-id[@journal-id-type='publisher-id'],'acsm')">
+                <idno type="pISSN">0151-9107</idno>
+            </xsl:when>
             <xsl:otherwise>
                 <idno type="pISSN">
                     <xsl:value-of select="$ISSNCode"/>

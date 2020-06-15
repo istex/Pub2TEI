@@ -63,6 +63,8 @@
                         <cell role="name" xml:lang="fr">ALGÉRIE</cell>
                         <cell role="name" xml:lang="en">ALGERIA</cell>
                         <cell role="nameAlt" xml:lang="en">Algeria</cell>
+                        <cell role="nameAlt" xml:lang="fr">Algérie</cell>
+                        <cell role="nameAlt" xml:lang="fr">ALGERIE</cell>
                         <cell role="nameAlt" xml:lang="en">ALGERIA</cell>
                         <cell role="nameAlt" xml:lang="de">ALGERIEN</cell>
                         <cell role="nameAlt" xml:lang="en">dz</cell>
@@ -706,6 +708,8 @@
                         <cell role="nameAlt" xml:lang="es">ESPANA</cell>
                         <cell role="nameAlt" xml:lang="de">SPANIEN</cell>
                         <cell role="nameAlt" xml:lang="en">Spain</cell>
+                        <cell role="nameAlt" xml:lang="es">SPANA</cell>
+                        <cell role="nameAlt" xml:lang="es">SPAINA</cell>
                         <cell role="nameAlt" xml:lang="en">es</cell>
                     </row>
                     <row>

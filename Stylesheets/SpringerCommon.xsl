@@ -1004,57 +1004,60 @@
                 <xsl:apply-templates/>
             </region>
             <xsl:if test="not(../Country)">
+                <xsl:variable name="normalize">
+                    <xsl:value-of select="translate(.,'.','')"/>
+                </xsl:variable>
                 <xsl:choose>
-                    <xsl:when test=".='AL'
-                        or .='AK'
-                        or .='AZ'
-                        or .='AR'
-                        or .='CA'
-                        or .='NC'
-                        or .='SC'
-                        or .='CO'
-                        or .='CT'
-                        or .='ND'
-                        or .='SD'
-                        or .='DE'
-                        or .='FL'
-                        or .='GA'
-                        or .='HI'
-                        or .='ID'
-                        or .='IL'
-                        or .='IN'
-                        or .='IA'
-                        or .='KS'
-                        or .='KY'
-                        or .='LA'
-                        or .='ME'
-                        or .='MD'
-                        or .='MA'
-                        or .='MI'
-                        or .='MN'
-                        or .='MS'
-                        or .='MO'
-                        or .='MT'
-                        or .='NE'
-                        or .='NV'
-                        or .='NH'
-                        or .='NJ'
-                        or .='NM'
-                        or .='NY'
-                        or .='OH'
-                        or .='OK'
-                        or .='OR'
-                        or .='PA'
-                        or .='RI'
-                        or .='TN'
-                        or .='TX'
-                        or .='UT'
-                        or .='VT'
-                        or .='VA'
-                        or .='WV'
-                        or .='WA'
-                        or .='WI'
-                        or .='WY'
+                    <xsl:when test="$normalize='AL'
+                        or $normalize='AK'
+                        or $normalize='AZ'
+                        or $normalize='AR'
+                        or $normalize='CA'
+                        or $normalize='NC'
+                        or $normalize='SC'
+                        or $normalize='CO'
+                        or $normalize='CT'
+                        or $normalize='ND'
+                        or $normalize='SD'
+                        or $normalize='DE'
+                        or $normalize='FL'
+                        or $normalize='GA'
+                        or $normalize='HI'
+                        or $normalize='ID'
+                        or $normalize='IL'
+                        or $normalize='IN'
+                        or $normalize='IA'
+                        or $normalize='KS'
+                        or $normalize='KY'
+                        or $normalize='LA'
+                        or $normalize='ME'
+                        or $normalize='MD'
+                        or $normalize='MA'
+                        or $normalize='MI'
+                        or $normalize='MN'
+                        or $normalize='MS'
+                        or $normalize='MO'
+                        or $normalize='MT'
+                        or $normalize='NE'
+                        or $normalize='NV'
+                        or $normalize='NH'
+                        or $normalize='NJ'
+                        or $normalize='NM'
+                        or $normalize='NY'
+                        or $normalize='OH'
+                        or $normalize='OK'
+                        or $normalize='OR'
+                        or $normalize='PA'
+                        or $normalize='RI'
+                        or $normalize='TN'
+                        or $normalize='TX'
+                        or $normalize='UT'
+                        or $normalize='VT'
+                        or $normalize='VA'
+                        or $normalize='WV'
+                        or $normalize='WA'
+                        or $normalize='WI'
+                        or $normalize='WY'
                         or .='Alabama'
                         or .='Alaska'
                         or .='Arizona'
@@ -1113,6 +1116,9 @@
                     <xsl:when test=".='Baarn'">
                         <country key="NL" xml:lang="en">THE NETHERLANDS</country>
                     </xsl:when>
+                    <xsl:when test=".='Ontario'">
+                        <country key="CA" xml:lang="en">CANADA</country>
+                    </xsl:when>
                 </xsl:choose>
             </xsl:if>
         </xsl:if>
@@ -1166,10 +1172,15 @@
                         or contains(.,'Prague')">
                         <country key="CZ" xml:lang="en">CZECH REPUBLIC</country>
                     </xsl:when>
-                    <xsl:when test="contains(.,'Paris')">
+                    <xsl:when test="contains(.,'Tokyo')">
+                        <country key="JP" xml:lang="en">JAPAN</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Paris')
+                        or contains(.,'St Etienne')">
                         <country key="CZ" xml:lang="en">FRANCE</country>
                     </xsl:when>
-                    <xsl:when test="contains(.,'London')">
+                    <xsl:when test="contains(.,'London')
+                        or contains(.,'Aberystwyth')">
                         <country key="GB" xml:lang="en">UNITED KINGDOM</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Baarn')
@@ -1196,6 +1207,15 @@
                     <xsl:when test="contains(.,'Veracruz')
                         or contains(.,'México')">
                         <country key="MX" xml:lang="en">MEXICO</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Madrid')
+                        or contains(.,'Málaga')
+                        or contains(.,'Valencia')
+                        or contains(.,'Bilbao')">
+                        <country key="ES" xml:lang="en">SPAIN</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Riverside')">
+                        <country key="US" xml:lang="en">UNITED STATES</country>
                     </xsl:when>
                 </xsl:choose>
             </xsl:if>
