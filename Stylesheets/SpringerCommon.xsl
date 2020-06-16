@@ -1176,8 +1176,9 @@
                         <country key="JP" xml:lang="en">JAPAN</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Paris')
-                        or contains(.,'St-Étienne')">
-                        <country key="CZ" xml:lang="en">FRANCE</country>
+                        or contains(.,'St-Étienne')
+                        or contains(.,'Clermont-Ferrand')">
+                        <country key="FR" xml:lang="en">FRANCE</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'London')
                         or contains(.,'Aberystwyth')">

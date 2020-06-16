@@ -213,6 +213,16 @@
                     <xsl:value-of select="$etatsAmericains"/>
                 </region>
             </xsl:if>
+            <xsl:variable name="ville">
+                <xsl:value-of select="."/>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$ville='Nogent-sur-Marne'">
+                    <settlement>
+                        <xsl:value-of select="$ville"/>
+                    </settlement>
+                </xsl:when>
+            </xsl:choose>
             <country>
                 <xsl:choose>
                     <!-- signalement des états américains dans <region> -->

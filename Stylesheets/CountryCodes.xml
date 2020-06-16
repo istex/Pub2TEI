@@ -796,6 +796,7 @@
                         <cell role="nameAlt" xml:lang="en">FRANCIE</cell>
                         <cell role="nameAlt" xml:lang="es">FRANCIA</cell>
                         <cell role="nameAlt" xml:lang="fr">PARIS</cell>
+                        <cell role="nameAlt" xml:lang="fr">NOGENT-SUR-MARNE</cell>
                         <!-- erreur lavoisier 10.3166/ts.21.707-719 -->
                         <cell role="nameAlt" xml:lang="fr">FANCE</cell>
                         <cell role="nameAlt" xml:lang="en">fr</cell>
@@ -2155,6 +2156,7 @@
                         <cell role="name" xml:lang="fr">TUNISIE</cell>
                         <cell role="name" xml:lang="en">TUNISIA</cell>
                         <cell role="nameAlt" xml:lang="fr">Tunisie</cell>
+                        <cell role="nameAlt" xml:lang="fr">TUNIS</cell>
                         <cell role="nameAlt" xml:lang="en">Tunisia</cell>
                         <cell role="nameAlt" xml:lang="de">Tunisien</cell>
                         <cell role="nameAlt" xml:lang="de">TUNISIEN</cell>
