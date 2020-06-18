@@ -2,13 +2,18 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:oai="http://www.openarchives.org/OAI/2.0/" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:mets="http://www.loc.gov/METS/" exclude-result-prefixes="#all">
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:m="http://www.w3.org/1998/Math/MathML" 
+    xmlns:tei="http://www.tei-c.org/ns/1.0" 
+    xmlns:dcterms="http://purl.org/dc/terms/" 
+    xmlns:mets="http://www.loc.gov/METS/"
+    exclude-result-prefixes="#all">
     
     <xsl:output encoding="UTF-8" method="xml"/>
     <!-- Feuille de style concernant les données:
     - Open Edition ebooks
     -->
-    <xsl:variable name="docIssueTEI" select="document($partOfSetXmlPath)"/>
     <xsl:variable name="codeGenreOE">
         <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:type"/>
     </xsl:variable>
@@ -39,7 +44,7 @@
     </xsl:variable>
     
     
-    <xsl:template match="oai:OAI-PMH">
+    <xsl:template match="mets:mets">
         <TEI  xmlns:ns1="http://standoff.proposal">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -273,8 +278,8 @@
             <xsl:choose>
                 <!-- reprise du body dans le tei openEdition au 
                 niveau du chapitre en format TEI-->
-                <xsl:when test="$docIssueTEI/tei:text !=''">
-                    <xsl:copy-of select="$docIssueTEI/tei:text"/>
+                <xsl:when test="//tei:text !=''">
+                        <xsl:apply-templates select="//tei:text" mode="openEditionBook"/> 
                 </xsl:when>
                 <xsl:when test="string-length($rawfulltextpath) &gt; 0">
                     <text>
@@ -295,6 +300,7 @@
             </xsl:choose>
         </TEI>
     </xsl:template>
+    
     <xsl:template match="dcterms:title">
         <title level="a" type="main">
             <xsl:if test="@xml:lang">

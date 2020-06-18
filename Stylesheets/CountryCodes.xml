@@ -539,10 +539,6 @@
                         <cell role="a3code">COG</cell>
                         <cell role="name" xml:lang="fr">CONGO</cell>
                         <cell role="name" xml:lang="en">CONGO</cell>
-                        <cell role="nameAlt" xml:lang="de">Kongo</cell>
-                        <cell role="nameAlt" xml:lang="de">KONGO</cell>
-                        <cell role="nameAlt" xml:lang="de">Republik Kongo</cell>
-                        <cell role="nameAlt" xml:lang="de">REPUBLIK KONGO</cell>
                         <cell role="nameAlt" xml:lang="en">cg</cell>
                     </row>
                     <row>
@@ -552,6 +548,11 @@
                         <cell role="name" xml:lang="en">CONGO, THE DEMOCRATIC REPUBLIC OF THE</cell>
                         <cell role="nameAlt" xml:lang="de">Demokratische Republik Kongo</cell>
                         <cell role="nameAlt" xml:lang="de">DEMOKRATISCHE REPUBLIK KONGO</cell>
+                        <cell role="nameAlt" xml:lang="de">Kongo</cell>
+                        <cell role="nameAlt" xml:lang="de">KONGO</cell>
+                        <cell role="nameAlt" xml:lang="de">Republik Kongo</cell>
+                        <cell role="nameAlt" xml:lang="de">REPUBLIK KONGO</cell>
+                        <cell role="nameAlt" xml:lang="fr">CONGO-BRAZZAVILLE</cell>
                         <cell role="nameAlt" xml:lang="en">cd</cell>
                     </row>
                     <row>

@@ -399,11 +399,34 @@
         </xsl:if>
     </xsl:template>
     <!-- PL: add cty for Nature -->
-    <xsl:template match="city| rsc:city | corresponding-author-city | named-content[@content-type = 'city'] | cty">
+    <xsl:template match="city| rsc:city | corresponding-author-city  | cty">
         <xsl:if test=". !=''">
             <settlement>
                 <xsl:apply-templates/>
             </settlement>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- SG: rattrapage code pays ex lavoisier ark:/67375/HT0-BJ13F041-M-->
+    <xsl:template match="named-content[@content-type = 'city']">
+        <xsl:if test=". !=''">
+            <settlement>
+                <xsl:apply-templates/>
+            </settlement>
+            <xsl:if test="not(../country)">
+                <xsl:choose>
+                    <xsl:when test="contains(.,'Sidi Bel Abbes')
+                        or contains(.,'Tiaret')
+                        or contains(.,'Alger')">
+                        <country key="DZ" xml:lang="en">ALGERIA</country>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Reims')
+                        or contains(.,'St-Étienne')
+                        or contains(.,'Paris')">
+                        <country key="FR" xml:lang="en">FRANCE</country>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 

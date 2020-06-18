@@ -469,9 +469,16 @@
     </xsl:template>
     <xsl:template match="tei:item">
         <item>
-            <term>
-                <xsl:apply-templates/>
-            </term>
+            <xsl:choose>
+                <xsl:when test="tei:p">
+                    <xsl:apply-templates/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <term>
+                        <xsl:apply-templates/>
+                    </term>
+                </xsl:otherwise>
+            </xsl:choose>
         </item>
     </xsl:template>
     <xsl:template match="tei:text">
