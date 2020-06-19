@@ -67,7 +67,9 @@
                         <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:accessRights">
                             <availability>
                                 <xsl:choose>
-                                    <xsl:when test="contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openaccess') or contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openAccess')">
+                                    <xsl:when test="contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openaccess') 
+                                        or contains(//mets:xmlData[dcterms:type!='book']/dcterms:accessRights,'openAccess') 
+                                        or contains(//mets:mdWrap/mets:xmlData[dcterms:type='book']/dcterms:accessRights,'freemium')">
                                         <xsl:attribute name="status">free</xsl:attribute>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -99,7 +101,7 @@
                         <biblStruct type="article">
                             <analytic>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:title"/>
-                                <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:alternative"/>
+                                <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:alternative" mode="article"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:creator" mode="analytic"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:contributor"/>
                                 <!-- ajout identifiants ISTEX et ARK -->
@@ -120,6 +122,7 @@
                                 <title level="m" type="main">
                                     <xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:title"/>
                                 </title>
+                                <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:alternative" mode="book"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:identifier[@scheme='URN']" mode="book"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:identifier[@scheme='URI']"/>
                                 <xsl:apply-templates select="//mets:xmlData[dcterms:type='book']/dcterms:contributor"/>
@@ -217,7 +220,7 @@
                                             <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:extent"/>
                                         </biblScope>
                                     </xsl:if>
-                                    <biblScope unit="total-page-issue">
+                                    <biblScope unit="total-page-book">
                                         <xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:extent"/>
                                     </biblScope>
                                 </imprint>
@@ -229,7 +232,11 @@
                 <profileDesc>
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:description"/>
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:abstract"/>
+                    <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:spatial">
+                        <textClass ana="geo">
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:spatial"/>
+                        </textClass>
+                    </xsl:if>
                     <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:subject[@scheme='keywords']">
                         <textClass>
                             <xsl:attribute name="ana">keyword</xsl:attribute>
@@ -311,7 +318,17 @@
             <xsl:apply-templates/>
         </title>
     </xsl:template>
-    <xsl:template match="dcterms:alternative">
+    <xsl:template match="dcterms:alternative" mode="book">
+        <title level="m" type="alt">
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
+    <xsl:template match="dcterms:alternative" mode="article">
         <title level="a" type="alt">
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="xml:lang">
@@ -492,10 +509,8 @@
         </abstract>
     </xsl:template>
     <xsl:template match="dcterms:spatial">
-        <textClass ana="geo">
-            <classCode scheme="spatial">
-                <xsl:apply-templates/>
-            </classCode>
-        </textClass>
+        <classCode scheme="spatial">
+            <xsl:apply-templates/>
+        </classCode>
     </xsl:template>
 </xsl:stylesheet>
