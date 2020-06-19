@@ -553,6 +553,7 @@
                         <cell role="nameAlt" xml:lang="de">Republik Kongo</cell>
                         <cell role="nameAlt" xml:lang="de">REPUBLIK KONGO</cell>
                         <cell role="nameAlt" xml:lang="fr">CONGO-BRAZZAVILLE</cell>
+                        <cell role="nameAlt" xml:lang="fr">REPUBLIQUE DEMOCRATIQUE DU CONGO</cell>
                         <cell role="nameAlt" xml:lang="en">cd</cell>
                     </row>
                     <row>
@@ -605,6 +606,7 @@
                         <cell role="nameAlt" xml:lang="en">IVORY COAST</cell>
                         <cell role="nameAlt" xml:lang="de">Elfenbeinküste</cell>
                         <cell role="nameAlt" xml:lang="de">ELFENBEINKUSTE</cell>
+                        <cell role="nameAlt" xml:lang="fr">CÔTE-D’IVOIRE</cell>
                         <cell role="nameAlt" xml:lang="en">ci</cell>
                     </row>
                     <row>
@@ -737,6 +739,8 @@
                         <cell role="nameAlt" xml:lang="en">USA AND</cell>
                         <cell role="nameAlt" xml:lang="en">USA 98195-1700</cell>
                         <cell role="nameAlt" xml:lang="en">WASHINGTON, DC</cell>
+                        <cell role="nameAlt" xml:lang="fr">ETATS-UNIS</cell>
+                        <cell role="nameAlt" xml:lang="fr">Etats-Unis</cell>
                     </row>
                     <row>
                         <cell role="a2code">ET</cell>
@@ -800,6 +804,7 @@
                         <cell role="nameAlt" xml:lang="fr">NOGENT-SUR-MARNE</cell>
                         <!-- erreur lavoisier 10.3166/ts.21.707-719 -->
                         <cell role="nameAlt" xml:lang="fr">FANCE</cell>
+                        <cell role="nameAlt" xml:lang="fr">FUTUROSCOPE CEDEX</cell>
                         <cell role="nameAlt" xml:lang="en">fr</cell>
                         <cell role="nameAlt" xml:lang="en">uni</cell>
                         <cell role="nameAlt" xml:lang="en">gov</cell>
@@ -1326,6 +1331,7 @@
                         <cell role="nameAlt" xml:lang="en">Morocco</cell>
                         <cell role="nameAlt" xml:lang="de">MAROKKO</cell>
                         <cell role="nameAlt" xml:lang="fr">MARRAKECH</cell>
+                        <cell role="nameAlt" xml:lang="fr">CASABLANCA</cell>
                         <cell role="nameAlt" xml:lang="en">ma</cell>
                     </row>
                     <row>
@@ -1767,6 +1773,8 @@
                         <cell role="nameAlt" xml:lang="en">SCOTLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Great Britain</cell>
                         <cell role="nameAlt" xml:lang="en">GREAT BRITAIN</cell>
+                        <cell role="nameAlt" xml:lang="en">Great - Britain</cell>
+                        <cell role="nameAlt" xml:lang="en">GREAT - BRITAIN</cell>
                         <cell role="nameAlt" xml:lang="en">England.</cell>
                         <cell role="nameAlt" xml:lang="en">England</cell>
                         <cell role="nameAlt" xml:lang="de">Nordirland</cell>
@@ -1777,6 +1785,8 @@
                         <cell role="nameAlt" xml:lang="de">GRO\BRITANNIEN</cell>
                         <cell role="nameAlt" xml:lang="de">Vereinigtes Königreich</cell>
                         <cell role="nameAlt" xml:lang="de">VEREINIGTES KONIGREICH</cell>
+                        <cell role="nameAlt" xml:lang="fr">GRANDE BRETAGNE</cell>
+                        <cell role="nameAlt" xml:lang="fr">Grande Bretagne</cell>
                         <cell role="nameAlt" xml:lang="en">U. K.</cell>
                    </row>
                     <row>

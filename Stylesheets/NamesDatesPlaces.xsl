@@ -149,8 +149,8 @@
     <!-- BMJ: corresponding-author-city, corresponding-author-country, corresponding-author-state, corresponding-author-zipcode -->
 
     <xsl:template match="country| rsc:country | corresponding-author-country | cny">
-        <xsl:if test=".!=''">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aÄàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
+        <xsl:if test=".!='' and .!='H2X 3P2'">
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aÄàábcČdeéèfghijklmnñoôÖöpqrstuüúvwxyz().','AAAABCCDEEEFGHIJKLMNNOÔOOPQRSTUUUVWXYZ'))"/>
             <xsl:variable name="etatsAmericains">
                 <xsl:choose>
                     <xsl:when test=".='Alabama'">Alabama</xsl:when>
@@ -422,6 +422,7 @@
                     </xsl:when>
                     <xsl:when test="contains(.,'Reims')
                         or contains(.,'St-Étienne')
+                        or contains(.,'Angers')
                         or contains(.,'Paris')">
                         <country key="FR" xml:lang="en">FRANCE</country>
                     </xsl:when>
