@@ -417,7 +417,7 @@
 
 <!-- country mode springer -->
     <xsl:template match="Country">
-        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aãÄàábcČdeéèfghijklmnñoôÖöpqrstuüúvwxyz().','AAAAABCCDEEEFGHIJKLMNNOÔOOPQRSTUUUVWXYZ'))"/>
+        <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aãÄàábcČdeéèfghiïjklmnñoôÖöpqrsŠtuüúvwxyýz().','AAAAABCCDEÉÈFGHIÏJKLMNNOÔOOPQRSSTUUUVWXYYZ'))"/>
             <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
@@ -461,6 +461,14 @@
                     <xsl:when test="contains(.,'México')">
                         <xsl:attribute name="key">MX</xsl:attribute>
                         <xsl:text>MEXICO</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'Africa') and //ArticleDOI='10.1007/s13149-010-0062-z'">
+                        <xsl:attribute name="key">GA</xsl:attribute>
+                        <xsl:text>GABON</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(../City,'Cocody-Abidjan') and //ArticleDOI='10.1007/s10298-008-0347-6'">
+                        <xsl:attribute name="key">CI</xsl:attribute>
+                        <xsl:text>IVORY COAST</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="key">
@@ -1199,7 +1207,8 @@
                         <country key="AT" xml:lang="en">AUSTRIA</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Basel')
-                        or contains(.,'Zürich')">
+                        or contains(.,'Zürich')
+                        or contains(.,'Genève')">
                         <country key="CH" xml:lang="en">SWITZERLAND</country>
                     </xsl:when>
                     <xsl:when test="contains(.,'Sidney')">

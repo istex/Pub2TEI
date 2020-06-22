@@ -68,6 +68,9 @@
                         <cell role="nameAlt" xml:lang="fr">ALGERIE</cell>
                         <cell role="nameAlt" xml:lang="en">ALGERIA</cell>
                         <cell role="nameAlt" xml:lang="de">ALGERIEN</cell>
+                        <cell role="nameAlt" xml:lang="fr">ALGER ALGÉRIE</cell>
+                        <cell role="nameAlt" xml:lang="fr">ALGER</cell>
+                        <cell role="nameAlt" xml:lang="fr">GGA ALGÉRIE</cell>
                         <cell role="nameAlt" xml:lang="en">dz</cell>
                     </row>
                     <row>
@@ -101,6 +104,8 @@
                         <cell role="nameAlt" xml:lang="de">BUNDESREPUBLIK DEUTSCHLAND</cell>
                         <cell role="nameAlt" xml:lang="de">Bundesrepublik Deutschland</cell>
                         <cell role="nameAlt" xml:lang="de">Deutschland</cell>
+                        <cell role="nameAlt" xml:lang="de">SCHORNDORF</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE FÉDÉRALE ALLEMAGNE</cell>
                         <cell role="nameAlt" xml:lang="de">BERLIN</cell>
                     </row>
                     <row>
@@ -166,6 +171,7 @@
                         <cell role="nameAlt" xml:lang="en">Saudi Arabia</cell>
                         <cell role="nameAlt" xml:lang="de">SAUDI ARABIEN</cell>
                         <cell role="nameAlt" xml:lang="de">Saudi Arabien</cell>
+                        <cell role="nameAlt" xml:lang="fr">KSA</cell>
                         <cell role="nameAlt" xml:lang="en">sa</cell>
                     </row>
                     <row>
@@ -286,6 +292,8 @@
                         <cell role="nameAlt" xml:lang="en">Belgium</cell>
                         <cell role="nameAlt" xml:lang="de">Belgien</cell>
                         <cell role="nameAlt" xml:lang="de">BELGIEN</cell>
+                        <!-- erreur éditeur CE20E87371BF50D8A95B3DD871666CCFBA96BF24 -->
+                        <cell role="nameAlt" xml:lang="fr">BELGIQUES</cell>
                         <cell role="nameAlt" xml:lang="en">be</cell>
                     </row>
                     <row>
@@ -366,6 +374,7 @@
                         <cell role="nameAlt" xml:lang="de">BRASILIEN</cell>
                         <cell role="nameAlt" xml:lang="de">Brasilien</cell>
                         <cell role="nameAlt" xml:lang="br">BRASIL</cell>
+                        <cell role="nameAlt" xml:lang="fr">BRESIL</cell>
                         <cell role="nameAlt" xml:lang="br">Brasil</cell>
                         <cell role="nameAlt" xml:lang="en">br</cell>
                     </row>
@@ -393,6 +402,7 @@
                         <cell role="name" xml:lang="en">BURKINA FASO</cell>
                         <cell role="nameAlt" xml:lang="en">BURKINA</cell>
                         <cell role="nameAlt" xml:lang="de">Burkina</cell>
+                        <cell role="nameAlt" xml:lang="fr">BURKINA-FASO</cell>
                         <cell role="nameAlt" xml:lang="en">bf</cell>
                     </row>
                     <row>
@@ -429,6 +439,7 @@
                         <cell role="nameAlt" xml:lang="en">Cameroon</cell>
                         <cell role="nameAlt" xml:lang="de">Kamerun</cell>
                         <cell role="nameAlt" xml:lang="de">KAMERUN</cell>
+                        <cell role="nameAlt" xml:lang="fr">CAMEROUN – AFRIQUE</cell>
                         <cell role="nameAlt" xml:lang="en">cm</cell>
                     </row>
                     <row>
@@ -445,6 +456,8 @@
                         <cell role="nameAlt" xml:lang="en">CANADA A1B 3X7</cell>
                         <cell role="nameAlt" xml:lang="de">Kanada</cell>
                         <cell role="nameAlt" xml:lang="de">KANADA</cell>
+                        <cell role="nameAlt" xml:lang="fr">QC</cell>
+                        <cell role="nameAlt" xml:lang="fr">QUÉBEC</cell>
                         <cell role="nameAlt" xml:lang="en">ca</cell>
                     </row>
                     <row>
@@ -461,6 +474,9 @@
                         <cell role="name" xml:lang="en">CENTRAL AFRICAN REPUBLIC</cell>
                         <cell role="nameAlt" xml:lang="de">Zentralafrikanische Republik</cell>
                         <cell role="nameAlt" xml:lang="de">ZENTRALAFRIKANISCHE REPUBLIK</cell>
+                        <cell role="nameAlt" xml:lang="fr">République Centrafricaine</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE CENTRAFRICAINE</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE CENTRAFRICAINE, BANGUI, RCA</cell>
                         <cell role="nameAlt" xml:lang="en">cf</cell>
                     </row>
                     <row>
@@ -485,6 +501,7 @@
                         <cell role="nameAlt" xml:lang="en">ROC</cell>
                         <cell role="nameAlt" xml:lang="en">PR China</cell>
                         <cell role="nameAlt" xml:lang="en">Republic of China</cell>
+                        <cell role="nameAlt" xml:lang="en">BEIJING</cell>
                         <cell role="nameAlt" xml:lang="en">cn</cell>
                         <cell role="nameAlt" xml:lang="en">系</cell>
                     </row>
@@ -553,7 +570,9 @@
                         <cell role="nameAlt" xml:lang="de">Republik Kongo</cell>
                         <cell role="nameAlt" xml:lang="de">REPUBLIK KONGO</cell>
                         <cell role="nameAlt" xml:lang="fr">CONGO-BRAZZAVILLE</cell>
-                        <cell role="nameAlt" xml:lang="fr">REPUBLIQUE DEMOCRATIQUE DU CONGO</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE DEMOCRATIQUE DU CONGO</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE DU CONGO</cell>
+                        <cell role="nameAlt" xml:lang="fr">RD CONGO</cell>
                         <cell role="nameAlt" xml:lang="en">cd</cell>
                     </row>
                     <row>
@@ -606,7 +625,13 @@
                         <cell role="nameAlt" xml:lang="en">IVORY COAST</cell>
                         <cell role="nameAlt" xml:lang="de">Elfenbeinküste</cell>
                         <cell role="nameAlt" xml:lang="de">ELFENBEINKUSTE</cell>
+                        <cell role="nameAlt" xml:lang="fr">COTE D’IVOIRE</cell>
                         <cell role="nameAlt" xml:lang="fr">CÔTE-D’IVOIRE</cell>
+                        <cell role="nameAlt" xml:lang="fr">CÔTE-D’IVOIRE, AFRIQUE</cell>
+                        <cell role="nameAlt" xml:lang="fr">CóTE D’IVOIRE</cell>
+                        <cell role="nameAlt" xml:lang="fr">CÔTE-D’IVOIRE, AFRIQUE</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE DE CÔTE-D’IVOIRE</cell>
+                        <cell role="nameAlt" xml:lang="fr">D’IVOIRE</cell>
                         <cell role="nameAlt" xml:lang="en">ci</cell>
                     </row>
                     <row>
@@ -715,6 +740,7 @@
                         <cell role="nameAlt" xml:lang="en">Spain</cell>
                         <cell role="nameAlt" xml:lang="es">SPANA</cell>
                         <cell role="nameAlt" xml:lang="es">SPAINA</cell>
+                        <cell role="nameAlt" xml:lang="fr">BARCELONE</cell>
                         <cell role="nameAlt" xml:lang="en">es</cell>
                     </row>
                     <row>
@@ -741,6 +767,7 @@
                         <cell role="nameAlt" xml:lang="en">WASHINGTON, DC</cell>
                         <cell role="nameAlt" xml:lang="fr">ETATS-UNIS</cell>
                         <cell role="nameAlt" xml:lang="fr">Etats-Unis</cell>
+                        <cell role="nameAlt" xml:lang="fr">USA — États-Unis</cell>
                     </row>
                     <row>
                         <cell role="a2code">ET</cell>
@@ -802,9 +829,41 @@
                         <cell role="nameAlt" xml:lang="es">FRANCIA</cell>
                         <cell role="nameAlt" xml:lang="fr">PARIS</cell>
                         <cell role="nameAlt" xml:lang="fr">NOGENT-SUR-MARNE</cell>
+                        <!-- ark:/67375/HT0-V83J3ZP3-G -->
+                        <cell role="nameAlt" xml:lang="fr">VILLEJUIF, FRANCE</cell>
+                        <cell role="nameAlt" xml:lang="fr">TALENCE FRANCE</cell>
+                        <cell role="nameAlt" xml:lang="fr">STRASBOURG</cell>
+                        <cell role="nameAlt" xml:lang="fr">TAUTAVEL</cell>
+                        <cell role="nameAlt" xml:lang="fr">TOULOUSE CEDEX 4</cell>
+                        <cell role="nameAlt" xml:lang="fr">CLERMONT-FERRAND</cell>
+                        <cell role="nameAlt" xml:lang="fr">CEDEX 13</cell>
+                        <cell role="nameAlt" xml:lang="fr">BREST NAVAL</cell>
+                        <cell role="nameAlt" xml:lang="fr">CLAMART CEDEX</cell>
+                        <cell role="nameAlt" xml:lang="fr">CORSE</cell>
+                        <cell role="nameAlt" xml:lang="fr">GRASSE</cell>
+                        <cell role="nameAlt" xml:lang="fr">GRENOBLE CEDEX 9</cell>
+                        <cell role="nameAlt" xml:lang="fr">LORIENT CEDEX</cell>
+                        <cell role="nameAlt" xml:lang="fr">NANTES CEDEX 03</cell>
+                        <cell role="nameAlt" xml:lang="fr">MORNE-A-L’EAU, GUADELOUPE</cell>
+                        <cell role="nameAlt" xml:lang="fr">RENNES CEDEX</cell>
+                        <cell role="nameAlt" xml:lang="fr">STRASBOURG</cell>
+                        <cell role="nameAlt" xml:lang="fr">PLOUFRAGAN</cell>
+                        <cell role="nameAlt" xml:lang="fr">MONTBONNOT</cell>
+                        <cell role="nameAlt" xml:lang="fr">F-38330</cell>
+                        <!-- erreur éditeur ark:/67375/HT0-T7JWL1SB-N/ -->
+                        <cell role="nameAlt" xml:lang="fr">ENSBANA</cell>
                         <!-- erreur lavoisier 10.3166/ts.21.707-719 -->
                         <cell role="nameAlt" xml:lang="fr">FANCE</cell>
+                        <!-- erreur editeur ark:/67375/HT0-ZB17FPCM-T-->
+                        <cell role="nameAlt" xml:lang="fr">FRACE</cell>
                         <cell role="nameAlt" xml:lang="fr">FUTUROSCOPE CEDEX</cell>
+                        <cell role="nameAlt" xml:lang="fr">FRANCE CEDEX 1</cell>
+                        <cell role="nameAlt" xml:lang="fr">FRANCE CEDEX 9</cell>
+                        <cell role="nameAlt" xml:lang="fr">FRANCE ET GEPOG-FRANCE</cell>
+                        <cell role="nameAlt" xml:lang="fr">FRANCE GDR INFORMATION</cell>
+                        <cell role="nameAlt" xml:lang="fr">FRANCE-MACÉDOINE</cell>
+                        <cell role="nameAlt" xml:lang="fr">FRANCE, IRCCYN, UMR N°6597 CNRS</cell>
+                        <cell role="nameAlt" xml:lang="fr">SUD EUROPE AND, FRANCE</cell>
                         <cell role="nameAlt" xml:lang="en">fr</cell>
                         <cell role="nameAlt" xml:lang="en">uni</cell>
                         <cell role="nameAlt" xml:lang="en">gov</cell>
@@ -915,6 +974,9 @@
                         <cell role="name" xml:lang="fr">GUINÉE</cell>
                         <cell role="name" xml:lang="en">GUINEA</cell>
                         <cell role="nameAlt" xml:lang="de">FRANZOSICH-GUINEA</cell>
+                        <cell role="nameAlt" xml:lang="fr">REPUBLIQUE DE GUINEE</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE DE GUINÉE</cell>
+                        <cell role="nameAlt" xml:lang="fr">République de Guinée</cell>
                         <cell role="nameAlt" xml:lang="en">gn</cell>
                     </row>
                     <row>
@@ -1104,6 +1166,7 @@
                         <cell role="name" xml:lang="en">JAPAN</cell>
                         <cell role="nameAlt" xml:lang="en">Japan</cell>
                         <cell role="nameAlt" xml:lang="en">980-8577 JAPAN</cell>
+                        <cell role="nameAlt" xml:lang="en">TOKYO</cell>
                         <cell role="nameAlt" xml:lang="en">jp</cell>
                     </row>
                     <row>
@@ -1173,6 +1236,8 @@
                         <cell role="a3code">LAO</cell>
                         <cell role="name" xml:lang="fr">LAO, RÉPUBLIQUE DÉMOCRATIQUE POPULAIRE</cell>
                         <cell role="name" xml:lang="en">LAO PEOPLE'S DEMOCRATIC REPUBLIC</cell>
+                        <cell role="nameAlt" xml:lang="en">LAOS</cell>
+                        <cell role="nameAlt" xml:lang="en">RDP LAO</cell>
                         <cell role="nameAlt" xml:lang="en">la</cell>
                     </row>
                     <row>
@@ -1243,6 +1308,9 @@
                         <cell role="nameAlt" xml:lang="en">Luxemburg</cell>
                         <cell role="nameAlt" xml:lang="en">LUXEMBURG</cell>
                         <cell role="nameAlt" xml:lang="fr">Luxembourg</cell>
+                        <cell role="nameAlt" xml:lang="fr">GRAND DUCHÉ DE LUXEMBOURG</cell>
+                        <cell role="nameAlt" xml:lang="fr">Grand Duché de Luxembourg</cell>
+                        <cell role="nameAlt" xml:lang="fr">LUXEMBOURG LUXEMBOURG</cell>
                         <cell role="nameAlt" xml:lang="en">lu</cell>
                     </row>
                     <row>
@@ -1258,6 +1326,7 @@
                         <cell role="name" xml:lang="fr">MACÉDOINE, L'EX-RÉPUBLIQUE YOUGOSLAVE DE</cell>
                         <cell role="name" xml:lang="en">MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</cell>
                         <cell role="nameAlt" xml:lang="de">MAZEDONIEN</cell>
+                        <cell role="nameAlt" xml:lang="fr">MACÉDOINE</cell>
                         <cell role="nameAlt" xml:lang="en">mk</cell>
                     </row>
                     <row>
@@ -1303,6 +1372,8 @@
                         <cell role="name" xml:lang="fr">MALI</cell>
                         <cell role="name" xml:lang="en">MALI</cell>
                         <cell role="nameAlt" xml:lang="en">Mali</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE DU MALI</cell>
+                        <cell role="nameAlt" xml:lang="fr">ROCARE-MALI</cell>
                         <cell role="nameAlt" xml:lang="en">ml</cell>
                     </row>
                     <row>
@@ -1330,8 +1401,21 @@
                         <cell role="name" xml:lang="en">MOROCCO</cell>
                         <cell role="nameAlt" xml:lang="en">Morocco</cell>
                         <cell role="nameAlt" xml:lang="de">MAROKKO</cell>
+                        <!-- erreur editeur ark:/67375/HT0-BKGQGCN1-W -->
+                        <cell role="nameAlt" xml:lang="fr">MAOC</cell>
                         <cell role="nameAlt" xml:lang="fr">MARRAKECH</cell>
                         <cell role="nameAlt" xml:lang="fr">CASABLANCA</cell>
+                        <!-- erreur editeur D5D5441745E6DCCCAF2BAB785D174612C800A924 -->
+                        <cell role="nameAlt" xml:lang="fr">MOROC</cell>
+                        <cell role="nameAlt" xml:lang="fr">RABAT-INSTITUTS, MAROC</cell>
+                        <cell role="nameAlt" xml:lang="fr">RABAT, MAROC</cell>
+                        <cell role="nameAlt" xml:lang="fr">TAOUNATE, MAROC</cell>
+                        <cell role="nameAlt" xml:lang="fr">MARRAKECH, MAROC</cell>
+                        <cell role="nameAlt" xml:lang="fr">MEKNES, MAROC</cell>
+                        <cell role="nameAlt" xml:lang="fr">MAROC I</cell>
+                        <cell role="nameAlt" xml:lang="fr">FES, MAROC</cell>
+                        <!-- erreur editeur ark:/67375/HT0-4TGQ1L41-D -->
+                        <cell role="nameAlt" xml:lang="fr">MAMAROCROC</cell>
                         <cell role="nameAlt" xml:lang="en">ma</cell>
                     </row>
                     <row>
@@ -1383,7 +1467,9 @@
                         <cell role="nameAlt" xml:lang="en">Mexico</cell>
                         <cell role="nameAlt" xml:lang="es">DISTRITO FEDERAL, MEXICO</cell>
                         <cell role="nameAlt" xml:lang="es">México</cell>
-                        <cell role="nameAlt" xml:lang="de">MEXIKO</cell>
+                        <cell role="nameAlt" xml:lang="de">MÉXICO</cell>
+                        <cell role="nameAlt" xml:lang="fr">MÉXICO MEXIQUE</cell>
+                        <cell role="nameAlt" xml:lang="fr">D F, MÉXICO</cell>
                         <cell role="nameAlt" xml:lang="de">Méxiko</cell>
                         <cell role="nameAlt" xml:lang="en">mx</cell>
                     </row>
@@ -1409,6 +1495,8 @@
                         <cell role="name" xml:lang="fr">MONACO</cell>
                         <cell role="name" xml:lang="en">MONACO</cell>
                         <cell role="nameAlt" xml:lang="en">PRINCIPALITY OF MONACO</cell>
+                        <cell role="nameAlt" xml:lang="fr">MONTÉ-CARLO</cell>
+                        <cell role="nameAlt" xml:lang="fr">PRINCIPAUTÉ DE MONACO</cell>
                         <cell role="nameAlt" xml:lang="en">mc</cell>
                     </row>
                     <row>
@@ -1519,6 +1607,7 @@
                         <cell role="nameAlt" xml:lang="en">Norway</cell>
                         <cell role="nameAlt" xml:lang="de">Norwegen</cell>
                         <cell role="nameAlt" xml:lang="de">NORWEGEN</cell>
+                        <cell role="nameAlt" xml:lang="en">OSLO</cell>
                         <cell role="nameAlt" xml:lang="en">no</cell>
                     </row>
                     <row>
@@ -1537,6 +1626,8 @@
                         <cell role="name" xml:lang="fr">NOUVELLE-ZÉLANDE</cell>
                         <cell role="name" xml:lang="en">NEW ZEALAND</cell>
                         <cell role="nameAlt" xml:lang="en">New Zealand</cell>
+                        <cell role="nameAlt" xml:lang="en">New-Zealand</cell>
+                        <cell role="nameAlt" xml:lang="en">NEW-ZEALAND</cell>
                         <cell role="nameAlt" xml:lang="de">Neuseeland</cell>
                         <cell role="nameAlt" xml:lang="de">NEUSEELAND</cell>
                         <cell role="nameAlt" xml:lang="en">nz</cell>
@@ -1633,6 +1724,7 @@
                         <cell role="name" xml:lang="fr">PAYS-BAS</cell>
                         <cell role="name" xml:lang="en">THE NETHERLANDS</cell>
                         <cell role="nameAlt" xml:lang="en">NETHERLANDS</cell>
+                        <cell role="nameAlt" xml:lang="en">NETHERLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Netherlands</cell>
                         <cell role="nameAlt" xml:lang="en">THE NETHERLANDS</cell>
                         <cell role="nameAlt" xml:lang="en">The Netherlands</cell>
@@ -1722,6 +1814,7 @@
                         <cell role="name" xml:lang="en">PORTUGAL</cell>
                         <cell role="nameAlt" xml:lang="en">PORTUGAL</cell>
                         <cell role="nameAlt" xml:lang="en">Portugal</cell>
+                        <cell role="nameAlt" xml:lang="en">PORTO PORTUGAL</cell>
                         <cell role="nameAlt" xml:lang="en">pt</cell>
                     </row>
                     <row>
@@ -1775,6 +1868,8 @@
                         <cell role="nameAlt" xml:lang="en">GREAT BRITAIN</cell>
                         <cell role="nameAlt" xml:lang="en">Great - Britain</cell>
                         <cell role="nameAlt" xml:lang="en">GREAT - BRITAIN</cell>
+                        <cell role="nameAlt" xml:lang="en">Great-Britain</cell>
+                        <cell role="nameAlt" xml:lang="en">GREAT-BRITAIN</cell>
                         <cell role="nameAlt" xml:lang="en">England.</cell>
                         <cell role="nameAlt" xml:lang="en">England</cell>
                         <cell role="nameAlt" xml:lang="de">Nordirland</cell>
@@ -1787,6 +1882,12 @@
                         <cell role="nameAlt" xml:lang="de">VEREINIGTES KONIGREICH</cell>
                         <cell role="nameAlt" xml:lang="fr">GRANDE BRETAGNE</cell>
                         <cell role="nameAlt" xml:lang="fr">Grande Bretagne</cell>
+                        <cell role="nameAlt" xml:lang="fr">GRANDE-BRETAGNE</cell>
+                        <cell role="nameAlt" xml:lang="fr">Grande-Bretagne</cell>
+                        <cell role="nameAlt" xml:lang="fr">ANGLETERRE</cell>
+                        <cell role="nameAlt" xml:lang="en">THE UNITED KINGDOM</cell>
+                        <cell role="nameAlt" xml:lang="en">The United Kingdom</cell>
+                        <cell role="nameAlt" xml:lang="en">LONDON</cell>
                         <cell role="nameAlt" xml:lang="en">U. K.</cell>
                    </row>
                     <row>
@@ -1937,6 +2038,8 @@
                         <cell role="name" xml:lang="fr">SERBIE</cell>
                         <cell role="name" xml:lang="en">SERBIA</cell>
                         <cell role="nameAlt" xml:lang="en">Serbia</cell>
+                        <cell role="nameAlt" xml:lang="en">Serbia&amp;Montenegro</cell>
+                        <cell role="nameAlt" xml:lang="en">SERBIA&amp;MONTENEGRO</cell>
                         <cell role="nameAlt" xml:lang="en">rs</cell>
                     </row>
                     <row>
@@ -1945,6 +2048,8 @@
                         <cell role="name" xml:lang="fr">SEYCHELLES</cell>
                         <cell role="name" xml:lang="en">SEYCHELLES</cell>
                         <cell role="nameAlt" xml:lang="en">Seychelles</cell>
+                        <cell role="nameAlt" xml:lang="en">The Republic of Seychelles</cell>
+                        <cell role="nameAlt" xml:lang="en">THE REPUBLIC OF SEYCHELLES</cell>
                         <cell role="nameAlt" xml:lang="de">Seychellen</cell>
                         <cell role="nameAlt" xml:lang="de">SEYCHELLEN</cell>
                         <cell role="nameAlt" xml:lang="en">sc</cell>
@@ -1982,6 +2087,8 @@
                         <cell role="name" xml:lang="fr">SLOVÉNIE</cell>
                         <cell role="name" xml:lang="en">SLOVENIA</cell>
                         <cell role="nameAlt" xml:lang="en">Slovenia</cell>
+                        <cell role="nameAlt" xml:lang="fr">Slovénie</cell>
+                        <cell role="nameAlt" xml:lang="fr">SLOVENIE</cell>
                         <cell role="nameAlt" xml:lang="de">SLOWENIEN</cell>
                         <cell role="nameAlt" xml:lang="en">si</cell>
                     </row>
@@ -2023,9 +2130,15 @@
                         <cell role="name" xml:lang="fr">SUISSE</cell>
                         <cell role="name" xml:lang="en">SWITZERLAND</cell>
                         <cell role="nameAlt" xml:lang="en">Switzerland</cell>
+                        <cell role="nameAlt" xml:lang="en">SWITZELAND</cell>
                         <cell role="nameAlt" xml:lang="de">Schweiz</cell>
                         <cell role="nameAlt" xml:lang="de">SCHWEIZ</cell>
                         <cell role="nameAlt" xml:lang="cz">Švýcarsko</cell>
+                        <cell role="nameAlt" xml:lang="cz">SVYCARSKO</cell>
+                        <cell role="nameAlt" xml:lang="">SWISSE</cell>
+                        <cell role="nameAlt" xml:lang="ch">GENOVA</cell>
+                        <cell role="nameAlt" xml:lang="ch">GENÈVE</cell>
+                        <cell role="nameAlt" xml:lang="ch">GENÈVE 4</cell>
                         <cell role="nameAlt" xml:lang="en">ch</cell>
                     </row>
                     <row>
@@ -2059,6 +2172,8 @@
                         <cell role="name" xml:lang="en">SYRIAN ARAB REPUBLIC</cell>
                         <cell role="nameAlt" xml:lang="de">Syrien</cell>
                         <cell role="nameAlt" xml:lang="de">SYRIEN</cell>
+                        <cell role="nameAlt" xml:lang="en">SYRIAN</cell>
+                        <cell role="nameAlt" xml:lang="fr">SYRIE</cell>
                         <cell role="nameAlt" xml:lang="en">sy</cell>
                     </row>
                     <row>
@@ -2106,6 +2221,9 @@
                         <cell role="name" xml:lang="fr">TCHÈQUE, RÉPUBLIQUE</cell>
                         <cell role="name" xml:lang="en">CZECH REPUBLIC</cell>
                         <cell role="nameAlt" xml:lang="en">Czech Republic</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉPUBLIQUE TCHÈQUE</cell>
+                        <cell role="nameAlt" xml:lang="fr">RÉP TCHÈQUE</cell>
+                        <cell role="nameAlt" xml:lang="fr">République Tchèque</cell>
                         <cell role="nameAlt" xml:lang="en">cz</cell>
                     </row>
                     <row>
@@ -2121,6 +2239,7 @@
                         <cell role="name" xml:lang="fr">THAÏLANDE</cell>
                         <cell role="name" xml:lang="en">THAILAND</cell>
                         <cell role="nameAlt" xml:lang="en">Thailand</cell>
+                        <cell role="nameAlt" xml:lang="fr">THAILANDE</cell>
                         <cell role="nameAlt" xml:lang="en">th</cell>
                     </row>
                     <row>
@@ -2168,6 +2287,13 @@
                         <cell role="name" xml:lang="en">TUNISIA</cell>
                         <cell role="nameAlt" xml:lang="fr">Tunisie</cell>
                         <cell role="nameAlt" xml:lang="fr">TUNIS</cell>
+                        <cell role="nameAlt" xml:lang="fr">TUNIS TUNISIE</cell>
+                        <cell role="nameAlt" xml:lang="fr">Tunis Tunisie</cell>
+                        <cell role="nameAlt" xml:lang="fr">TUNIS, TUNISIE</cell>
+                        <cell role="nameAlt" xml:lang="fr">Tunis, Tunisie</cell>
+                        <cell role="nameAlt" xml:lang="en">TUNIS, TUNISIA</cell>
+                        <cell role="nameAlt" xml:lang="en">Tunis, Tunisia</cell>
+                        <cell role="nameAlt" xml:lang="en">JEBBARI, TUNIS, TUNISIE</cell>
                         <cell role="nameAlt" xml:lang="en">Tunisia</cell>
                         <cell role="nameAlt" xml:lang="de">Tunisien</cell>
                         <cell role="nameAlt" xml:lang="de">TUNISIEN</cell>

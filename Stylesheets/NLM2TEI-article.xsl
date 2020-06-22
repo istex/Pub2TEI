@@ -2898,6 +2898,11 @@
                         <xsl:choose>
                             <xsl:when test="addr-line | country">
                                 <xsl:choose>
+                                    <xsl:when test="contains(.,'@') and //article-id[@pub-id-type='doi']='10.3166/rig.21.267-295'">
+                                       <email>
+                                           <xsl:value-of select="normalize-space(translate(.,'*',''))"/>
+                                       </email>
+                                    </xsl:when>
                                     <xsl:when test="addr-line/named-content/email">
                                         <xsl:apply-templates select="addr-line/named-content/email"/>
                                     </xsl:when>

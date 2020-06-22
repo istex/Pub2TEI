@@ -150,7 +150,8 @@
 
     <xsl:template match="country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!='' and .!='H2X 3P2'">
-            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aÄàábcČdeéèfghijklmnñoôÖöpqrstuüúvwxyz().','AAAABCCDEEEFGHIJKLMNNOÔOOPQRSTUUUVWXYZ'))"/>
+            <xsl:if test=".!='' and .!='H3C 3J7'">
+            <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aÄàábcČdeéèfghiïjklmnñoôÖöpqrsŠtuüúvwxyýz().','AAAABCCDEÉÈFGHIÏJKLMNNOÔOOPQRSSTUUUVWXYYZ'))"/>
             <xsl:variable name="etatsAmericains">
                 <xsl:choose>
                     <xsl:when test=".='Alabama'">Alabama</xsl:when>
@@ -222,8 +223,20 @@
                         <xsl:value-of select="$ville"/>
                     </settlement>
                 </xsl:when>
+                <xsl:when test="$ville='Villeurbanne cedex'
+                    or $ville='Talence (France)'">
+                    <settlement>
+                        <xsl:value-of select="$ville"/>
+                    </settlement>
+                </xsl:when>
             </xsl:choose>
-            <country>
+            <xsl:choose>
+                <xsl:when test="//article-id[@pub-id-type='doi']='10.3166/rcma.16.209-219'">
+                    <orgName type="institution">D&#x00E9;partement de Mécanique, Université Ibn Badis Mostaganem</orgName>
+                    <country key="DZ" xml:lang="en">ALGERIA</country>
+                </xsl:when>
+                <xsl:otherwise>
+                    <country>
                 <xsl:choose>
                     <!-- signalement des états américains dans <region> -->
                     <xsl:when test="$etatsAmericains !=''">
@@ -316,6 +329,19 @@
                             <xsl:with-param name="country" select="$change"/>
                         </xsl:call-template>
                     </xsl:when>
+                    <xsl:when test="contains(.,'Villeurbanne')">
+                        <xsl:variable name="change">
+                            <xsl:text>FRANCE</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">
@@ -327,7 +353,10 @@
                         </xsl:call-template>
                     </xsl:otherwise>
                 </xsl:choose>
-            </country>
+                    </country>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -356,7 +385,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$resultCode=''">
-                <xsl:value-of select="(translate($country,'aãÄàábcČdeéèfghijklmnñoÖöpqrstuüúvwxyz().','AAAAABCCDEEEFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
+                <xsl:value-of select="(translate($country,'aãÄàábcČdeéèëfghijklmnñoÖöpqrstuüúvwxyz().','AAAAABCCDEEEËFGHIJKLMNNOOOPQRSTUUUVWXYZ'))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$resultCode"/>

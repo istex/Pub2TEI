@@ -55,19 +55,19 @@
     
     <xsl:template match="tei:text" mode="openEditionBook">
         <text>
-            <xsl:apply-templates select="tei:*"/>
+            <xsl:apply-templates select="tei:*" mode="tei"/>
         </text>
     </xsl:template>
-    <xsl:template match="tei:*"> 
+    <xsl:template match="tei:*" mode="tei"> 
         <xsl:element name="{local-name()}">
-            <xsl:apply-templates select="node()|@*"/>
+            <xsl:apply-templates select="node()|@*" mode="tei"/>
         </xsl:element>
     </xsl:template>
     
     
-    <xsl:template match="node() | @*">
+    <xsl:template match="node() | @*" mode="tei">
         <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="node() | @*" mode="tei"/>
         </xsl:copy>
     </xsl:template>
 
