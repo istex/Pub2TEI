@@ -163,6 +163,7 @@
                     <xsl:when test=".='South Carolina'">South Carolina</xsl:when>
                     <xsl:when test=".='Colorado'">Colorado</xsl:when>
                     <xsl:when test=".='Connecticut'">Connecticut</xsl:when>
+                    <xsl:when test=".='CT'">Connecticut</xsl:when>
                     <xsl:when test=".='North Dakota'">North Dakota</xsl:when>
                     <xsl:when test=".='South Dakota'">South Dakota</xsl:when>
                     <xsl:when test=".='Delaware'">Delaware</xsl:when>
