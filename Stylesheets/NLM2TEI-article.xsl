@@ -1222,7 +1222,7 @@
                     </notesStmt>
                    
                     <sourceDesc>
-                        <xsl:apply-templates select="front | pubfm | suppfm |fm" mode="sourceDesc"/>
+                        <xsl:apply-templates select="front | pubfm | suppfm" mode="sourceDesc"/>
                     </sourceDesc>
                 </fileDesc>
                 <!-- versionning -->
@@ -1905,13 +1905,14 @@
                             <xsl:value-of select="$repriseTitreVide"/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//article-title |//atl">
-                        <xsl:apply-templates select="article-meta/title-group/*"/>
-                        <!--<xsl:apply-templates select="article-meta/title-group/fn-group/*"/>-->
-                        <!-- SG - informations book-reviews-->
+                    <xsl:when test="//fm/atl">
+                        <xsl:apply-templates select="//fm/atl"/>
                         <xsl:if test="//fm/rvwinfo">
                             <xsl:apply-templates select="//fm/rvwinfo"/>
                         </xsl:if>
+                    </xsl:when>
+                    <xsl:when test="//article-title">
+                        <xsl:apply-templates select="article-meta/title-group/*"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Title information related to the paper goes here -->

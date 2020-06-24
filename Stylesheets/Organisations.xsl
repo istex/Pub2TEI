@@ -11,6 +11,46 @@
     <xsl:template name="identifyOrgLevel">
         <xsl:param name="theOrg"/>
         <xsl:choose>
+            <xsl:when test="contains($theOrg,'Research') or
+                contains($theOrg,'LIX') or
+                contains($theOrg,'Unit') or
+                contains($theOrg,'Products') or
+                contains($theOrg,'Sylvadour') or
+                contains($theOrg,'Biotechnologie') or
+                contains($theOrg,'Labo') or
+                contains($theOrg,'LABO') or
+                contains($theOrg,'GIPSA-Lab') or
+                contains($theOrg,'LERFOB') or
+                contains($theOrg,'bioMérieux') or
+                contains($theOrg,'LEGOS/OMP') or
+                contains($theOrg,'UMR') or
+                contains($theOrg,'UPR') or
+                contains($theOrg,'CTP') or
+                contains($theOrg,'labo') or
+                contains($theOrg,' Inc') or
+                contains($theOrg,'Estación') or
+                contains($theOrg,'Servic') or
+                contains($theOrg,'Biol') or
+                contains($theOrg,'Pracownia') or
+                contains($theOrg,'Survey of') or
+                contains($theOrg,'EcoFoG') or
+                contains($theOrg,'LGMT') or
+                contains($theOrg,'INRA-LORIA') or
+                contains($theOrg,'LORIA') or
+                contains($theOrg,'UMC ') or
+                contains($theOrg,'IFR ') or
+                contains($theOrg,'C.R.S.O.C.I.') or
+                contains($theOrg,'Dauphinoise de Tri ') or
+                contains($theOrg,'Systems') or
+                contains($theOrg,'DAMTP') or
+                contains($theOrg,'Sterrewacht') or
+                contains($theOrg,'Observatoire') or
+                contains($theOrg,'SISSA/ISAS') or
+                contains($theOrg,'wissenschaft') or
+                contains($theOrg,'CEN Saclay') or
+                contains($theOrg,'Ricerche')">
+                <xsl:text>laboratory</xsl:text>
+            </xsl:when>
             <xsl:when test="contains($theOrg,'IB')  or
                 contains($theOrg,'Study') or
                 contains($theOrg,'CCS') or
@@ -113,46 +153,6 @@
                 starts-with($theOrg,'Supreme Court') or
                 starts-with($theOrg,'Ministr')">
                 <xsl:text>institution</xsl:text>
-            </xsl:when>
-            <xsl:when test="contains($theOrg,'Research') or
-                contains($theOrg,'LIX') or
-                contains($theOrg,'Unit') or
-                contains($theOrg,'Products') or
-                contains($theOrg,'Sylvadour') or
-                contains($theOrg,'Biotechnologie') or
-                contains($theOrg,'Labo') or
-                contains($theOrg,'LABO') or
-                contains($theOrg,'GIPSA-Lab') or
-                contains($theOrg,'LERFOB') or
-                contains($theOrg,'bioMérieux') or
-                contains($theOrg,'LEGOS/OMP') or
-                contains($theOrg,'UMR') or
-                contains($theOrg,'UPR') or
-                contains($theOrg,'CTP') or
-                contains($theOrg,'labo') or
-                contains($theOrg,' Inc') or
-                contains($theOrg,'Estación') or
-                contains($theOrg,'Servic') or
-                contains($theOrg,'Biol') or
-                contains($theOrg,'Pracownia') or
-                contains($theOrg,'Survey of') or
-                contains($theOrg,'EcoFoG') or
-                contains($theOrg,'LGMT') or
-                contains($theOrg,'INRA-LORIA') or
-                contains($theOrg,'LORIA') or
-                contains($theOrg,'UMC ') or
-                contains($theOrg,'IFR ') or
-                contains($theOrg,'C.R.S.O.C.I.') or
-                contains($theOrg,'Dauphinoise de Tri ') or
-                contains($theOrg,'Systems') or
-                contains($theOrg,'DAMTP') or
-                contains($theOrg,'Sterrewacht') or
-                contains($theOrg,'Observatoire') or
-                contains($theOrg,'SISSA/ISAS') or
-                contains($theOrg,'wissenschaft') or
-                contains($theOrg,'CEN Saclay') or
-                contains($theOrg,'Ricerche')">
-                <xsl:text>laboratory</xsl:text>
             </xsl:when>
             <xsl:when test=" 
                 ends-with($theOrg,'ogy') or
