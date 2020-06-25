@@ -151,6 +151,7 @@
     <xsl:template match="country| rsc:country | corresponding-author-country | cny">
         <xsl:if test=".!='' and .!='H2X 3P2'">
             <xsl:if test=".!='' and .!='H3C 3J7'">
+                <xsl:if test=".!='' and .!='K1A 0R6'">
             <xsl:variable name="countryWithNoSpace" select="normalize-space(translate(.,'aÄàábcČdeéèfghiïjklmnñoôÖöpqrsŠtuüúvwxyýz().','AAAABCCDEÉÈFGHIÏJKLMNNOÔOOPQRSSTUUUVWXYYZ'))"/>
             <xsl:variable name="etatsAmericains">
                 <xsl:choose>
@@ -236,6 +237,10 @@
                     <orgName type="institution">D&#x00E9;partement de Mécanique, Université Ibn Badis Mostaganem</orgName>
                     <country key="DZ" xml:lang="en">ALGERIA</country>
                 </xsl:when>
+                <xsl:when test=".='862-0973'">
+                    <postCode>862-0973</postCode>
+                </xsl:when>
+                <xsl:when test="contains(.,'@')"/>
                 <xsl:otherwise>
                     <country>
                 <xsl:choose>
@@ -317,7 +322,8 @@
                             <xsl:with-param name="country" select="$change"/>
                         </xsl:call-template>
                     </xsl:when>
-                    <xsl:when test="contains(.,'England')">
+                    <xsl:when test="contains(.,'England')
+                        or contains(.,'Nature replies')">
                         <xsl:variable name="change">
                             <xsl:text>UNITED KINGDOM</xsl:text>
                         </xsl:variable>
@@ -357,6 +363,7 @@
                     </country>
                 </xsl:otherwise>
             </xsl:choose>
+        </xsl:if>
         </xsl:if>
         </xsl:if>
     </xsl:template>

@@ -70,6 +70,7 @@
                 contains($theOrg,'Institut') or
                 contains($theOrg,'institut') or
                 contains($theOrg,'Instytut') or
+                contains($theOrg,'Instituut') or
                 contains($theOrg,'Istituto') or
                 contains($theOrg,'Campus') or
                 contains($theOrg,'Hemosystem') or

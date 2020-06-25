@@ -661,6 +661,7 @@
                         <cell role="name" xml:lang="fr">CROATIE</cell>
                         <cell role="name" xml:lang="en">CROATIA</cell>
                         <cell role="nameAlt" xml:lang="en">Croatia</cell>
+                        <cell role="nameAlt" xml:lang="en">REPUBLIC OF CROATIA</cell>
                         <cell role="nameAlt" xml:lang="de">KROATIEN</cell>
                         <cell role="nameAlt" xml:lang="en">hr</cell>
                     </row>
@@ -798,6 +799,7 @@
                         <cell role="nameAlt" xml:lang="en">NEW MEXICO</cell>
                         <cell role="nameAlt" xml:lang="en">ANCHORAGE</cell>
                         <cell role="nameAlt" xml:lang="en">BOULDER</cell>
+                        <cell role="nameAlt" xml:lang="en">CLEVELAND</cell>
                         <cell role="nameAlt" xml:lang="en">LONG BEACH</cell>
                         <cell role="nameAlt" xml:lang="en">AMHERST</cell>
                         <!-- Erreur editeur ark:/67375/HXZ-BH3MRZF6-W -->
@@ -2329,6 +2331,7 @@
                         <cell role="name" xml:lang="en">THAILAND</cell>
                         <cell role="nameAlt" xml:lang="en">Thailand</cell>
                         <cell role="nameAlt" xml:lang="fr">THAILANDE</cell>
+                        <cell role="nameAlt" xml:lang="en">73170 THAILAND</cell>
                         <cell role="nameAlt" xml:lang="en">th</cell>
                     </row>
                     <row>
