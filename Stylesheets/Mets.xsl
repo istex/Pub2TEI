@@ -20,15 +20,8 @@
     <xsl:variable name="codeGenreOE2">
         <xsl:choose>
             <xsl:when test="normalize-space($codeGenreOE)='chapter'">chapter</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='avantpropos'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='index'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='bibliography'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='annexe'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='pageliminaire'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenreOE)='preface'">editorial</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='annexe'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='annexe'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='annexe'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreOE)='editorial'">editorial</xsl:when>
             <xsl:otherwise>
                 <xsl:text>other</xsl:text>
             </xsl:otherwise>
@@ -87,10 +80,10 @@
                     <notesStmt>
                         <note type="content-type">
                             <xsl:attribute name="subtype">
-                                <xsl:value-of select="$codeGenreOE"/>
+                                <xsl:value-of select="$codeGenreOE2"/>
                             </xsl:attribute>
                             <xsl:attribute name="source">
-                                <xsl:value-of select="$codeGenreOE2"/>
+                                <xsl:value-of select="$codeGenreOE"/>
                             </xsl:attribute>
                             <xsl:attribute name="scheme"><xsl:value-of select="$codeGenreArkOE"/></xsl:attribute>
                             <xsl:value-of select="$codeGenreOE2"/>
@@ -230,6 +223,9 @@
                 </fileDesc>
                 <xsl:call-template name="insertVersion"/>
                 <profileDesc>
+                    <!-- concernant les abstracts j'ai fait le choix de ne pas reprendre ceux décrivant le book
+                    mais ne reprendre que ceux propres au chapitre (même si celui ci représente les premieres lignes 
+                    du chapitre-->
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:description"/>
                     <xsl:apply-templates select="//mets:xmlData[dcterms:type!='book']/dcterms:abstract"/>
                     <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:spatial">
