@@ -986,11 +986,18 @@
                     <xsl:with-param name="restAff4" select="translate(@noteRef,'#','')"/>
                 </xsl:call-template>
             </xsl:if>-->
-            <!-- affiliation nomade sans lien auteurs/affiliations -->
+            
+            <!-- affiliation nomade sans lien auteurs/affiliations
+            je teste si présence de 1 affiliation mais pas plus sinon trop d'incohérence-->
             <xsl:if test="//contentMeta/affiliationGroup/affiliation and not(@affiliationRef|@currentRef|@correspondenceRef|@noteRef)">
-                <affiliation>
-                    <xsl:apply-templates select="//contentMeta/affiliationGroup/affiliation"/>
-                </affiliation>
+                <xsl:variable name="countAff">
+                    <xsl:value-of select="count(//contentMeta/affiliationGroup/affiliation)"/>
+                </xsl:variable>
+                <xsl:if test="$countAff ='1'">
+                    <affiliation>
+                        <xsl:apply-templates select="//contentMeta/affiliationGroup/affiliation"/>
+                    </affiliation>
+                </xsl:if>
             </xsl:if>
         </author>
             </xsl:when>

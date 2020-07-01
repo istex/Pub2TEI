@@ -48,6 +48,7 @@
                 contains($theOrg,'SISSA/ISAS') or
                 contains($theOrg,'wissenschaft') or
                 contains($theOrg,'CEN Saclay') or
+                contains($theOrg,'EMBL ') or
                 contains($theOrg,'Ricerche')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
