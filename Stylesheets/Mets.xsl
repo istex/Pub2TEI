@@ -57,6 +57,7 @@
                         <publisher>
                             <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:publisher"/>
                         </publisher>
+                        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-HT67RJ3J-K">Open Edition</publisher>
                         <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:accessRights">
                             <availability>
                                 <xsl:choose>
@@ -73,6 +74,7 @@
                                 <xsl:if test="//mets:xmlData[dcterms:type='book']/dcterms:rights">
                                     <p><xsl:value-of select="//mets:xmlData[dcterms:type='book']/dcterms:rights"/></p>
                                 </xsl:if>
+                                <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-Z4364Z68-Q">open-edition-ebooks</p>
                             </availability>
                         </xsl:if>
                         <date type="published" when="{//mets:xmlData[dcterms:type!='book']/dcterms:issued}"/>
