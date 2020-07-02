@@ -430,7 +430,7 @@
         <xsl:variable name="contributor">
             <xsl:apply-templates/>
         </xsl:variable>
-        <author>
+        <editor>
             <persName>
                 <xsl:choose>
                     <xsl:when test="contains($contributor,', ')">
@@ -449,7 +449,7 @@
                 </xsl:choose>
             </persName>
             <roleName>editor</roleName>
-        </author>
+        </editor>
     </xsl:template>
     <xsl:template match="dcterms:identifier">
         <xsl:if test="contains(@scheme,'URI')">
