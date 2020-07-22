@@ -55,7 +55,7 @@
         <xsl:variable name="countArticle">
             <xsl:value-of select="count(//Article)"/>
         </xsl:variable>
-        <TEI  xmlns:ns1="http://standoff.proposal">
+        <TEI  xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>

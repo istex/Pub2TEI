@@ -15,7 +15,7 @@
         <xsl:variable name="journalDescription"
             select="$journalList/descendant::tei:row[tei:cell/text()=$localISSN]"/>
 
-        <TEI xmlns:ns1="http://standoff.proposal">
+        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:if test="ArticleID/Language">
                 <xsl:attribute name="xml:lang">
                     <xsl:value-of select="ArticleID/Language"/>

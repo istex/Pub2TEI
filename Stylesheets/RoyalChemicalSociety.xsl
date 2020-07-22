@@ -8,7 +8,7 @@
     <!-- Le format de la RCS utilise essentiellement des composant NLM en ayant pris le soin (!) de définir ses propres constructions ici el là. -->
     <!-- On sent le travail visionaire du grouillot... -->
     <xsl:template match="article[art-admin] | rsc:article[rsc:art-admin]">
-        <TEI xmlns:ns1="http://standoff.proposal">
+        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>

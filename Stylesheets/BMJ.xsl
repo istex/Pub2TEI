@@ -7,7 +7,7 @@
 
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="metadata">
-        <TEI xmlns:ns1="http://standoff.proposal">
+        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>

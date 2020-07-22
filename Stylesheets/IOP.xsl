@@ -42,7 +42,7 @@
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
     <xsl:template match="article | header">
-        <TEI xmlns:ns1="http://standoff.proposal">
+        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>

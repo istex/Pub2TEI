@@ -10,7 +10,7 @@
     -->
    
     <xsl:template match="tei:TEI">
-        <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="http://standoff.proposal">
+        <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:apply-templates select="tei:teiHeader"/>
             <xsl:apply-templates select="tei:text"/>
         </TEI>
