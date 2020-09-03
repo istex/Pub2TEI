@@ -26,9 +26,7 @@
                             <xsl:attribute name="subtype">
                                 <xsl:choose>
                                     <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'body')">chapter</xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:text>other</xsl:text>
-                                    </xsl:otherwise>
+                                    <xsl:otherwise>other</xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="source">
@@ -38,6 +36,7 @@
                                     <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'home')">home</xsl:when>
                                     <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'home')">home</xsl:when>
                                     <xsl:when test="contains(//tei:idno[@type='nom_pdf'],'back')">back</xsl:when>
+                                    <xsl:otherwise>cover</xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="scheme">
@@ -102,15 +101,35 @@
                                                         </xsl:choose>
                                                     </xsl:attribute>
                                                     <xsl:copy-of select="@* except(@role,@ref)"/>
+                                                    
                                                     <persName>
-                                                        <xsl:if test="substring-after(@key,', ')[string-length()&gt; 0]">
-                                                            <forename type="first">
-                                                                <xsl:value-of select="substring-after(@key,', ')"/>
-                                                            </forename>
-                                                        </xsl:if>
-                                                        <surname>
-                                                            <xsl:value-of select="substring-before(@key,',')"/>
-                                                        </surname>
+                                                        <xsl:choose>
+                                                            <xsl:when test="contains(@key,', ')">
+                                                                <forename type="first">
+                                                                    <xsl:value-of select="substring-after(@key,', ')"/>
+                                                                </forename>
+                                                                <surname>
+                                                                    <xsl:value-of select="normalize-space(substring-before(@key,','))"/>
+                                                                </surname>
+                                                            </xsl:when>
+                                                            <xsl:otherwise>
+                                                                <xsl:choose>
+                                                                    <xsl:when test="contains(.,', ')">
+                                                                        <forename type="first">
+                                                                            <xsl:value-of select="substring-after(.,', ')"/>
+                                                                        </forename>
+                                                                        <surname>
+                                                                            <xsl:value-of select="normalize-space(substring-before(.,','))"/>
+                                                                        </surname>
+                                                                    </xsl:when>
+                                                                    <xsl:otherwise>
+                                                                        <surname>
+                                                                            <xsl:apply-templates/>
+                                                                        </surname>
+                                                                    </xsl:otherwise>
+                                                                </xsl:choose>
+                                                            </xsl:otherwise>
+                                                        </xsl:choose>
                                                     </persName>
                                                 </author>
                                         </xsl:for-each>
@@ -138,12 +157,33 @@
                                                 </xsl:attribute>
                                                 <xsl:copy-of select="@* except(@role,@ref)"/>
                                                 <persName>
-                                                    <forename type="first">
-                                                        <xsl:value-of select="substring-after(@key,', ')"/>
-                                                    </forename>
-                                                    <surname>
-                                                        <xsl:value-of select="substring-before(@key,',')"/>
-                                                    </surname>
+                                                    <xsl:choose>
+                                                        <xsl:when test="contains(@key,', ')">
+                                                            <forename type="first">
+                                                                <xsl:value-of select="substring-after(@key,', ')"/>
+                                                            </forename>
+                                                            <surname>
+                                                                <xsl:value-of select="normalize-space(substring-before(@key,','))"/>
+                                                            </surname>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:choose>
+                                                                <xsl:when test="contains(.,', ')">
+                                                                    <forename type="first">
+                                                                        <xsl:value-of select="substring-after(.,', ')"/>
+                                                                    </forename>
+                                                                    <surname>
+                                                                        <xsl:value-of select="normalize-space(substring-before(.,','))"/>
+                                                                    </surname>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <surname>
+                                                                        <xsl:apply-templates/>
+                                                                    </surname>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
                                                 </persName>
                                             </author>
                                             </xsl:if>
@@ -190,14 +230,21 @@
                                             <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub']"/>
                                         </title>
                                     </xsl:if>
-                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']">
-                                        <idno type="ISBN">
-                                            <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']"/>
-                                        </idno>
-                                    </xsl:if>
+                                    <xsl:choose>
+                                        <xsl:when test="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']">
+                                            <idno type="ISBN">
+                                                <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']"/>
+                                            </idno>
+                                        </xsl:when>
+                                        <xsl:when test="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13'] and not(contains(//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13'],'-'))">
+                                            <idno type="ISBN">
+                                                <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13']"/>
+                                            </idno>
+                                        </xsl:when>
+                                    </xsl:choose>
                                     <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno"/>
                                     <xsl:if test="//tei:sourceDesc/tei:bibl/tei:author">
-                                        <xsl:for-each select="//tei:sourceDesc/tei:bibl/tei:author">
+                                        <xsl:for-each select="//tei:sourceDesc/tei:bibl/tei:author/@key">
                                             <author>
                                                 <persName>
                                                     <xsl:if test="substring-after(.,', ')[string-length()&gt; 0]">
@@ -234,12 +281,33 @@
                                                 </xsl:attribute>
                                                     <xsl:copy-of select="@* except(@ref)"/>
                                                 <persName>
-                                                    <forename type="first">
-                                                        <xsl:value-of select="substring-after(@key,', ')"/>
-                                                    </forename>
-                                                    <surname>
-                                                        <xsl:value-of select="substring-before(@key,',')"/>
-                                                    </surname>
+                                                    <xsl:choose>
+                                                        <xsl:when test="contains(@key,', ')">
+                                                            <forename type="first">
+                                                                <xsl:value-of select="substring-after(@key,', ')"/>
+                                                            </forename>
+                                                            <surname>
+                                                                <xsl:value-of select="normalize-space(substring-before(@key,','))"/>
+                                                            </surname>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:choose>
+                                                                <xsl:when test="contains(.,', ')">
+                                                                    <forename type="first">
+                                                                        <xsl:value-of select="substring-after(.,', ')"/>
+                                                                    </forename>
+                                                                    <surname>
+                                                                        <xsl:value-of select="normalize-space(substring-before(.,','))"/>
+                                                                    </surname>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <surname>
+                                                                        <xsl:apply-templates/>
+                                                                    </surname>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
                                                 </persName>
                                             </editor>
                                         </xsl:for-each>
@@ -248,6 +316,309 @@
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:publisher"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:pubPlace"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                   <!-- ajout des tomaisons quand seulement présente dans le titre de l'ouvrage -->
+                            <xsl:choose>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031660'
+                                    or //tei:idno[@type='EAN-13']='9782600029896'
+                                    or //tei:idno[@type='EAN-13']='9782600029827'
+                                    or //tei:idno[@type='EAN-13']='9782600014465'
+                                    or //tei:idno[@type='EAN-13']='9782600032636'
+                                    or //tei:idno[@type='EAN-13']='9782600032186'
+                                    or //tei:idno[@type='EAN-13']='9782600031592'
+                                    or //tei:idno[@type='EAN-13']='9782600031981'
+                                    or //tei:idno[@type='EAN-13']='9782600006750'
+                                    or //tei:idno[@type='EAN-13']='9782600001670'
+                                    or //tei:idno[@type='EAN-13']='9782600030564'">
+                                    <biblScope unit="volume">Tome I</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031998'
+                                    or //tei:idno[@type='EAN-13']='9782600032629'
+                                    or //tei:idno[@type='EAN-13']='9782600000130'
+                                    or //tei:idno[@type='EAN-13']='9782600029919'
+                                    or //tei:idno[@type='EAN-13']='9782600030854'
+                                    or //tei:idno[@type='EAN-13']='9782600019408'
+                                    or //tei:idno[@type='EAN-13']='9782600032643'
+                                    or //tei:idno[@type='EAN-13']='9782600029940'
+                                    or //tei:idno[@type='EAN-13']='9782600019712'
+                                    or //tei:idno[@type='EAN-13']='9782600031998'
+                                    or //tei:idno[@type='EAN-13']='9782600009003'
+                                    or //tei:idno[@type='EAN-13']='9782600006385'
+                                    or //tei:idno[@type='EAN-13']='9782600031431'">
+                                    <biblScope unit="volume">Tome II</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600004275'
+                                    or //tei:idno[@type='EAN-13']='9782600029964'
+                                    or //tei:idno[@type='EAN-13']='9782600032650'
+                                    or //tei:idno[@type='EAN-13']='9782600019729'
+                                    or //tei:idno[@type='EAN-13']='9782600030298'
+                                    or //tei:idno[@type='EAN-13']='9782600009263'
+                                    or //tei:idno[@type='EAN-13']='9782600009393'">
+                                    <biblScope unit="volume">Tome III</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030045'
+                                    or //tei:idno[@type='EAN-13']='9782600019736'
+                                    or //tei:idno[@type='EAN-13']='9782600030526'
+                                    or //tei:idno[@type='EAN-13']='9782600012973'
+                                    or //tei:idno[@type='EAN-13']='9782600011693'
+                                    or //tei:idno[@type='EAN-13']='9782600012867'">
+                                    <biblScope unit="volume">Tome IV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030199'
+                                    or //tei:idno[@type='EAN-13']='9782600019743'
+                                    or //tei:idno[@type='EAN-13']='9782600030663'
+                                    or //tei:idno[@type='EAN-13']='9782600014694'
+                                    or //tei:idno[@type='EAN-13']='9782600014298'
+                                    or //tei:idno[@type='EAN-13']='9782600029995'">
+                                    <biblScope unit="volume">Tome V</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030328'
+                                    or //tei:idno[@type='EAN-13']='9782600032131'
+                                    or //tei:idno[@type='EAN-13']='9782600019750'
+                                    or //tei:idno[@type='EAN-13']='9782600030922'
+                                    or //tei:idno[@type='EAN-13']='9782600015677'
+                                    or //tei:idno[@type='EAN-13']='9782600030038'">
+                                    <biblScope unit="volume">Tome VI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030519'
+                                    or //tei:idno[@type='EAN-13']='9782600019767'
+                                    or //tei:idno[@type='EAN-13']='9782600031097'
+                                    or //tei:idno[@type='EAN-13']='9782600017237'
+                                    or //tei:idno[@type='EAN-13']='9782600030151'">
+                                    <biblScope unit="volume">Tome VII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030601'
+                                    or //tei:idno[@type='EAN-13']='9782600019774'
+                                    or //tei:idno[@type='EAN-13']='9782600031264'
+                                    or //tei:idno[@type='EAN-13']='9782600017787'
+                                    or //tei:idno[@type='EAN-13']='9782600015134'
+                                    or //tei:idno[@type='EAN-13']='9782600030229'">
+                                    <biblScope unit="volume">Tome VIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030762'
+                                    or //tei:idno[@type='EAN-13']='9782600019781'
+                                    or //tei:idno[@type='EAN-13']='9782600031479'
+                                    or //tei:idno[@type='EAN-13']='9782600018470'
+                                    or //tei:idno[@type='EAN-13']='9782600030366'">
+                                    <biblScope unit="volume">Tome IX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600030939'
+                                    or //tei:idno[@type='EAN-13']='9782600019798'
+                                    or //tei:idno[@type='EAN-13']='9782600031639'
+                                    or //tei:idno[@type='EAN-13']='9782600047104'">
+                                    <biblScope unit="volume">Tome X</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031066'
+                                    or //tei:idno[@type='EAN-13']='9782600019804'
+                                    or //tei:idno[@type='EAN-13']='9782600031851'
+                                    or //tei:idno[@type='EAN-13']='9782600030540'">
+                                    <biblScope unit="volume">Tome XI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031233'
+                                    or //tei:idno[@type='EAN-13']='9782600019811'
+                                    or //tei:idno[@type='EAN-13']='9782600000765'">
+                                    <biblScope unit="volume">Tome XII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031400'
+                                    or //tei:idno[@type='EAN-13']='9782600019828'
+                                    or //tei:idno[@type='EAN-13']='9782600006514'
+                                    or //tei:idno[@type='EAN-13']='9782600030588'">
+                                    <biblScope unit="volume">Tome XIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031530'
+                                    or //tei:idno[@type='EAN-13']='9782600019835'
+                                    or //tei:idno[@type='EAN-13']='9782600016438'
+                                    or //tei:idno[@type='EAN-13']='9782600030748'">
+                                    <biblScope unit="volume">Tome XIV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600031653'
+                                    or //tei:idno[@type='EAN-13']='9782600019842'
+                                    or //tei:idno[@type='EAN-13']='9782600030878'">
+                                    <biblScope unit="volume">Tome XV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019859'
+                                    or //tei:idno[@type='EAN-13']='9782600001625'">
+                                    <biblScope unit="volume">Tome XVI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019866'
+                                    or //tei:idno[@type='EAN-13']='9782600000253'">
+                                    <biblScope unit="volume">Tome XVII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019873'
+                                    or //tei:idno[@type='EAN-13']='9782600031172'
+                                    or //tei:idno[@type='EAN-13']='9782600000833'">
+                                    <biblScope unit="volume">Tome XVIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019880'
+                                    or //tei:idno[@type='EAN-13']='9782600001625'">
+                                    <biblScope unit="volume">Tome XIX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019897'
+                                    or //tei:idno[@type='EAN-13']='9782600002493'">
+                                    <biblScope unit="volume">Tome XX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019903'
+                                    or //tei:idno[@type='EAN-13']='9782600003216'">
+                                    <biblScope unit="volume">Tome XXI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019910'
+                                    or //tei:idno[@type='EAN-13']='9782600031394'
+                                    or //tei:idno[@type='EAN-13']='9782600004015'">
+                                    <biblScope unit="volume">Tome XXII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019927'
+                                    or //tei:idno[@type='EAN-13']='9782600004879'">
+                                    <biblScope unit="volume">Tome XXIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019934'
+                                    or //tei:idno[@type='EAN-13']='9782600006941'">
+                                    <biblScope unit="volume">Tome XXIV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019941'
+                                    or //tei:idno[@type='EAN-13']='9782600031646'
+                                    or //tei:idno[@type='EAN-13']='9782600008877'">
+                                    <biblScope unit="volume">Tome XXV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019958'
+                                    or //tei:idno[@type='EAN-13']='9782600009256'">
+                                    <biblScope unit="volume">Tome XXVI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019965'
+                                    or //tei:idno[@type='EAN-13']='9782600010191'">
+                                    <biblScope unit="volume">Tome XXVII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019972'
+                                    or //tei:idno[@type='EAN-13']='9782600010818'">
+                                    <biblScope unit="volume">Tome XXVIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019989'
+                                    or //tei:idno[@type='EAN-13']='9782600031905'
+                                    or //tei:idno[@type='EAN-13']='9782600011686'">
+                                    <biblScope unit="volume">Tome XXIX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019996'
+                                    or //tei:idno[@type='EAN-13']='9782600000611'
+                                    or //tei:idno[@type='EAN-13']='9782600012362'">
+                                    <biblScope unit="volume">Tome XXX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020008'
+                                    or //tei:idno[@type='EAN-13']='9782600012775'">
+                                    <biblScope unit="volume">Tome XXXI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020015'
+                                    or //tei:idno[@type='EAN-13']='9782600013307'">
+                                    <biblScope unit="volume">Tome XXXII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020022'
+                                    or //tei:idno[@type='EAN-13']='9782600014335'">
+                                    <biblScope unit="volume">Tome XXXIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020039'
+                                    or //tei:idno[@type='EAN-13']='9782600014687'">
+                                    <biblScope unit="volume">Tome XXXIV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020046'
+                                    or //tei:idno[@type='EAN-13']='9782600002615'
+                                    or //tei:idno[@type='EAN-13']='9782600015509'">
+                                    <biblScope unit="volume">Tome XXXV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020053'
+                                    or //tei:idno[@type='EAN-13']='9782600015912'
+                                    or //tei:idno[@type='EAN-13']='9782600018128'">
+                                    <biblScope unit="volume">Tome XXXVI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020060'
+                                    or //tei:idno[@type='EAN-13']='9782600017411'">
+                                    <biblScope unit="volume">Tome XXXVII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020077'">
+                                    <biblScope unit="volume">Tome XXXVIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020084'
+                                    or //tei:idno[@type='EAN-13']='9782600004787'
+                                    or //tei:idno[@type='EAN-13']='9782600018593'">
+                                    <biblScope unit="volume">Tome XXXIX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020091'">
+                                    <biblScope unit="volume">Tome XL</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020107'">
+                                    <biblScope unit="volume">Tome XLI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020114'">
+                                    <biblScope unit="volume">Tome XLII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020138'">
+                                    <biblScope unit="volume">Tome XLIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020145'">
+                                    <biblScope unit="volume">Tome XLIV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020152'">
+                                    <biblScope unit="volume">Tome XLV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600019682'">
+                                    <biblScope unit="volume">Tome XLVI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020169'">
+                                    <biblScope unit="volume">Tome XLVII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020176'">
+                                    <biblScope unit="volume">Tome XLVIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020183'">
+                                    <biblScope unit="volume">Tome XLIX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020190'
+                                    or //tei:idno[@type='EAN-13']='9782600014267'">
+                                    <biblScope unit="volume">Tome L</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020206'">
+                                    <biblScope unit="volume">Tome LI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020213'
+                                    or //tei:idno[@type='EAN-13']='9782600008693'">
+                                    <biblScope unit="volume">Tome LII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020220'">
+                                    <biblScope unit="volume">Tome LIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020237'
+                                    or //tei:idno[@type='EAN-13']='9782600010467'">
+                                    <biblScope unit="volume">Tome LIV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020244'
+                                    or //tei:idno[@type='EAN-13']='9782600011105'">
+                                    <biblScope unit="volume">Tome LV</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020251'
+                                    or //tei:idno[@type='EAN-13']='9782600012065'">
+                                    <biblScope unit="volume">Tome LVI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020268'">
+                                    <biblScope unit="volume">Tome LVII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600020275'">
+                                    <biblScope unit="volume">Tome LVIII-LVIX</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600018920'">
+                                    <biblScope unit="volume">Tome XL</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600047197'">
+                                    <biblScope unit="volume">Tome XLI</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600047661'">
+                                    <biblScope unit="volume">Tome XLII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600058100'">
+                                    <biblScope unit="volume">Tome XLIII</biblScope>
+                                </xsl:when>
+                                <xsl:when test="//tei:idno[@type='EAN-13']='9782600006767'
+                                    or //tei:idno[@type='EAN-13']='9782600002226'
+                                    or //tei:idno[@type='EAN-13']='9782600015929'">
+                                    <biblScope unit="volume">2</biblScope>
+                                </xsl:when>
+                            </xsl:choose> 
+                                    
                                     <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']">
                                         <biblScope unit="issue">
                                             <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']"/>
@@ -550,7 +921,7 @@
     </xsl:template>
     <xsl:template match="tei:title" mode="mono">
         <xsl:variable name="recupTitMono">
-            <xsl:value-of select="substring-after(//idno[@type='url'],'http://books.openedition.org/')"/>
+            <xsl:value-of select="substring-after(//tei:idno[@type='url'],'http://books.openedition.org/')"/>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="contains(//tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'],'alpara')">
@@ -584,6 +955,12 @@
                 <xsl:when test="contains(tei:availability/tei:licence,'Droz')">
                     <availability status="{tei:availability/@status}">
                         <xsl:copy-of select="tei:availability/tei:licence"/>
+                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
+                    </availability>
+                </xsl:when>
+                <xsl:when test="contains(tei:publisher,'Librairie Droz')">
+                    <availability status="restricted">
+                        <licence>Copyright <date><xsl:value-of select="tei:date/@when"/></date> Librairie Droz S.A.</licence>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
