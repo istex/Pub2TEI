@@ -14,7 +14,7 @@
                 </application>
             </appInfo>
             <!-- reprise du stylage QUE pour openEdition -->
-            <xsl:if test="//tei:TEI">
+            <xsl:if test="//tei:distributor='OpenEdition'">
                 <tagsDecl>
                     <rendition xml:id="style01" scheme="css">font-style:italic;</rendition>
                     <rendition xml:id="style02" scheme="css">font-variant:small-caps;</rendition>

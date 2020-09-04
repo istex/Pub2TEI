@@ -244,17 +244,36 @@
                                     </xsl:choose>
                                     <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno"/>
                                     <xsl:if test="//tei:sourceDesc/tei:bibl/tei:author">
-                                        <xsl:for-each select="//tei:sourceDesc/tei:bibl/tei:author/@key">
+                                        <xsl:for-each select="//tei:sourceDesc/tei:bibl/tei:author">
                                             <author>
                                                 <persName>
-                                                    <xsl:if test="substring-after(.,', ')[string-length()&gt; 0]">
-                                                        <forename type="first">
-                                                            <xsl:value-of select="substring-after(.,', ')"/>
-                                                        </forename>
-                                                    </xsl:if>
-                                                    <surname>
-                                                        <xsl:value-of select="substring-before(.,',')"/>
-                                                    </surname>
+                                                    <xsl:choose>
+                                                        <xsl:when test="contains(@key,', ')">
+                                                            <forename type="first">
+                                                                <xsl:value-of select="substring-after(@key,', ')"/>
+                                                            </forename>
+                                                            <surname>
+                                                                <xsl:value-of select="normalize-space(substring-before(@key,','))"/>
+                                                            </surname>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:choose>
+                                                                <xsl:when test="contains(.,', ')">
+                                                                    <forename type="first">
+                                                                        <xsl:value-of select="substring-after(.,', ')"/>
+                                                                    </forename>
+                                                                    <surname>
+                                                                        <xsl:value-of select="normalize-space(substring-before(.,','))"/>
+                                                                    </surname>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <surname>
+                                                                        <xsl:apply-templates/>
+                                                                    </surname>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
                                                 </persName>
                                             </author>
                                         </xsl:for-each>
@@ -795,18 +814,48 @@
                         </xsl:for-each>
                     </profileDesc>
                 </xsl:when>
-                <!-- pour enlever les cas particuliers comme:
-                 <profileDesc>
-                          <langUsage>
-                                 <language ident="fr">fr</language>
-                           </langUsage>
-
-                           <textClass> </textClass>
-                   </profileDesc>
-                -->
+                <!--Droz  nettoyage de données erronées de la part de l'éditeur-->
+                <xsl:when test="//tei:idno[@type='EAN-13']='9782600001922'">
+                    <profileDesc>
+                        <abstract xml:lang="de">
+                            <xsl:copy-of select="//tei:abstract/tei:p"/>
+                        </abstract>
+                        <xsl:copy-of select="//tei:creation"/>
+                        <langUsage>
+                            <language ident="la">Latin</language>
+                        </langUsage>
+                        <xsl:copy-of select="//tei:textClass"/>
+                    </profileDesc>
+                </xsl:when>
+                <xsl:when test="//tei:idno[@type='EAN-13']='9782600000215'">
+                    <profileDesc>
+                        <abstract xml:lang="de">
+                            <xsl:copy-of select="//tei:abstract/tei:p"/>
+                        </abstract>
+                        <xsl:copy-of select="//tei:creation"/>
+                        <xsl:copy-of select="//tei:langUsage"/>
+                        <xsl:copy-of select="//tei:textClass"/>
+                    </profileDesc>
+                </xsl:when>
+                <!-- Droz nettoyage de données erronnées type langue 
+                    <langUsage>
+                       <language ident="la">Lao People's Democratic Republic</language>
+                    </langUsage>
+                    au lieu de latin -->
+                <xsl:when test="//tei:langUsage/tei:language[@ident='la']">
+                    <profileDesc>
+                            <xsl:copy-of select="//tei:abstract"/>
+                        <xsl:copy-of select="//tei:creation"/>
+                        <langUsage>
+                            <language ident="la">Latin</language>
+                        </langUsage>
+                        <xsl:copy-of select="//tei:textClass"/>
+                    </profileDesc>
+                </xsl:when>
                 <xsl:when test="not(//tei:profileDesc/tei:textClass/tei:keywords)">
                     <profileDesc>
                         <xsl:copy-of select="//tei:langUsage"/>
+                        <xsl:copy-of select="//tei:abstract"/>
                     </profileDesc>
                 </xsl:when>
                 <xsl:otherwise>
