@@ -241,6 +241,11 @@
                                                 <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13']"/>
                                             </idno>
                                         </xsl:when>
+                                        <xsl:when test="//tei:publicationStmt/tei:idno[@type='nom_pdf']">
+                                            <idno type="ISBN">
+                                                <xsl:value-of select="substring-before(//tei:publicationStmt/tei:idno[@type='nom_pdf'],'_')"/>
+                                            </idno>
+                                        </xsl:when>
                                     </xsl:choose>
                                     <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno"/>
                                     <xsl:if test="//tei:sourceDesc/tei:bibl/tei:author">
