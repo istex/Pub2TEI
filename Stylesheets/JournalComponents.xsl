@@ -2752,14 +2752,14 @@ reactorsa'</title>
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::product/. |ancestor::p">
                 <bibl>
-                    <biblScope unit="page" from="{normalize-space(.)}">
+                    <biblScope unit="page" from="{translate(normalize-space(.),' ','')}">
                         <xsl:value-of select="normalize-space(.)"/>
                     </biblScope>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and not(contains(.,'n/a')) and  not(contains(.,'Unassigned'))">
-                    <biblScope unit="page" from="{translate(.,'  p.','')}">
+                    <biblScope unit="page" from="{translate(normalize-space(.),'  p.','')}">
                         <xsl:value-of select="."/>
                     </biblScope>
                 </xsl:if>
@@ -2776,15 +2776,15 @@ reactorsa'</title>
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation |ancestor::p">
                 <bibl>
-                    <biblScope unit="page" to="{translate(.,'normalize-space(.)','')}">
-                        <xsl:value-of select="translate(.,'normalize-space(.)','')"/>
+                    <biblScope unit="page" to="{translate(normalize-space(.),' ','')}">
+                        <xsl:value-of select="translate(normalize-space(.),' ','')"/>
                     </biblScope>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and not(contains(.,'n/a')) and  not(contains(.,'Unassigned'))">
-                    <biblScope unit="page" to="{translate(.,' ','')}">
-                        <xsl:value-of select="translate(.,' ','')"/>
+                    <biblScope unit="page" to="{translate(normalize-space(.),' ','')}">
+                        <xsl:value-of select="normalize-space(.)"/>
                     </biblScope>
                 </xsl:if>
             </xsl:otherwise>
