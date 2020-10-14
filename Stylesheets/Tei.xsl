@@ -967,6 +967,8 @@
                 <xsl:when test="//tei:idno[@type='nom_pdf']='9782600002882_front-2.pdf'"><xsl:text>Citations</xsl:text></xsl:when>
                 <xsl:when test="//tei:idno[@type='nom_pdf']='9782600002288_front-1.pdf'"><xsl:text>NOUVELLES FRANÇAISES DU XVIe SIÈCLE - IMAGES DE LA VIE DU TEMPS</xsl:text></xsl:when>
                 <xsl:when test="//tei:idno[@type='nom_pdf']='9782600003551_front-1.pdf'"><xsl:text>Cliché Bibliothèque nationale de France, Paris.</xsl:text></xsl:when>
+                <xsl:when test="//tei:idno[@type='nom_pdf']='9782600032421_body-2-1.pdf'"><xsl:text>CHAPITRE XVI - La Poésie mondaine pendant les premières guerres civiles</xsl:text></xsl:when>
+                <xsl:when test=".=''"><xsl:text>--------------------- NO TITLE ---------------------</xsl:text></xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates/>
                 </xsl:otherwise>
