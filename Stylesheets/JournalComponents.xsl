@@ -2932,7 +2932,7 @@ reactorsa'</title>
         </title>
     </xsl:template>
     <xsl:template match="ConfEventAbbreviation">
-        <title type="abbr">
+        <title type="abbrev">
             <xsl:apply-templates/>
         </title>
     </xsl:template>

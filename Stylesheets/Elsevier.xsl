@@ -2705,7 +2705,7 @@
                                         </xsl:attribute>
                                         <xsl:value-of select="$codeTitle"/>
                                     </title>
-                                    <title type="abbr">
+                                    <title type="abbrev">
                                         <xsl:attribute name="level">
                                             <xsl:choose>
                                                 <xsl:when test="$docIssueEls//s1:issue-info/s1:jid">s</xsl:when>

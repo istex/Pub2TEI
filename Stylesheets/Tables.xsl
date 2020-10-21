@@ -195,10 +195,7 @@
 
     <xsl:template match="table-entry/title|rsc:table-entry/rsc:title| ce:table/ce:caption">
         <head>
-            <xsl:variable name="normalize">
-                <xsl:apply-templates/>
-            </xsl:variable>
-            <xsl:value-of select="normalize-space($normalize)"/>
+            <xsl:apply-templates/>
         </head>
     </xsl:template>
     <xsl:template match="ce:legend">

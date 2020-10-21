@@ -563,7 +563,7 @@
                         <title level="j" type="main">
                             <xsl:value-of select="$code2"/>
                         </title>
-                        <title level="j" type="abbreviated">
+                        <title level="j" type="abbrev">
                             <xsl:value-of select="$code3"/> 
                         </title>
                     </xsl:otherwise>
