@@ -349,7 +349,7 @@
     <!-- ISSN
         ex: "0022-3727" -->
     <xsl:template match="jnl-data/jnl-issn">
-        <idno type="ISSN">
+        <idno type="pISSN">
             <xsl:value-of select="."/>
         </idno>
     </xsl:template>

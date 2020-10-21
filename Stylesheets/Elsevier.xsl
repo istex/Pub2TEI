@@ -2561,10 +2561,10 @@
                             <xsl:choose>
                                 <xsl:when test="//@docsubtype[string-length() &gt; 0]">
                                     <xsl:attribute name="subtype">
-                                        <xsl:value-of select="$codeGenre1Elsevier"/>
+                                        <xsl:value-of select="$codeGenre2Elsevier"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:value-of select="$codeGenre2Elsevier"/>
+                                        <xsl:value-of select="$codeGenre1Elsevier"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
                                         <xsl:value-of select="$codeGenreArkElsevier"/>
@@ -2573,7 +2573,6 @@
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:if test="not(//@docsubtype)">
-                                        <xsl:attribute name="subtype">other</xsl:attribute>
                                         <xsl:attribute name="subtype">N/A</xsl:attribute>
                                         <xsl:attribute name="source">ISTEX</xsl:attribute>
                                         <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
@@ -2626,8 +2625,7 @@
                                 </note>
                             </xsl:when>
                             <xsl:otherwise>
-                                <note type="publication-type">
-                                    <xsl:attribute name="type">journal</xsl:attribute>
+                                <note type="publication-type" subtype="journal">
                                     <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0GLKJH51-B</xsl:attribute>
                                     <xsl:text>journal</xsl:text>
                                 </note>
@@ -2735,7 +2733,7 @@
                                 </xsl:if>
                                 <xsl:if test="$docIssueEls//issue-info/ce:issn[string-length() &gt; 0] | $docIssueEls//s1:issue-info/ce:issn[string-length() &gt; 0] and not($docIssueEls//issue-info/ce:isbn|$docIssueEls//s1:issue-info/ce:isbn)">
                                     <xsl:for-each select="$docIssueEls//issue-info/ce:issn | $docIssueEls//s1:issue-info/ce:issn">
-                                        <idno type="ISSN">
+                                        <idno type="pISSN">
                                             <xsl:value-of select="normalize-space(.)"/>
                                         </idno>
                                     </xsl:for-each>
@@ -2906,10 +2904,10 @@
                                             <xsl:value-of select="$docIssueEls//suppl | $docIssueEls//s1:suppl"/>
                                         </biblScope>
                                     </xsl:if>
-                                    <!-- pages totales facsicules -->
+                                    <!-- pagination totale fascicule -->
                                     <xsl:if test="$docIssueEls//issue-data/ce:pages/ce:first-page[string-length()&gt; 0] |$docIssueEls//s1:issue-data/ce:pages/ce:first-page[string-length()&gt; 0]">
                                         <xsl:for-each select="$docIssueEls//issue-data/ce:pages | $docIssueEls//s1:issue-data/ce:pages">
-                                            <biblScope unit="page" from="{ce:first-page}">
+                                            <biblScope unit="total-issue-pages" from="{ce:first-page}">
                                                 <xsl:if test="ce:last-page[string-length()&gt; 0]">
                                                     <xsl:attribute name="to">
                                                         <xsl:value-of select="ce:last-page"/> 
@@ -2917,6 +2915,15 @@
                                                 </xsl:if>
                                             </biblScope>
                                         </xsl:for-each>
+                                    </xsl:if>
+                                    <!-- pagination article -->
+                                    <xsl:if test="$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]">
+                                        <biblScope unit="page" from="{$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:first-page}">
+                                            <xsl:value-of select="$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:first-page"/>
+                                        </biblScope>
+                                        <biblScope unit="page" to="{$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:last-page}">
+                                            <xsl:value-of select="$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:last-page"/>
+                                        </biblScope>
                                     </xsl:if>
                                 </imprint>
                             </monogr>

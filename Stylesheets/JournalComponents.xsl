@@ -2205,7 +2205,7 @@ reactorsa'</title>
             <xsl:otherwise>
                 <xsl:choose>
                     <xsl:when test="@journal-id-type='print'">
-                        <idno type="ISSN">
+                        <idno type="pISSN">
                             <xsl:apply-templates/>
                         </idno>
                     </xsl:when>
@@ -2295,7 +2295,7 @@ reactorsa'</title>
             <xsl:message>ISSN: <xsl:value-of select="$ISSNCode"/></xsl:message>
             <xsl:message>Journal: <xsl:value-of select="$journalEntry/tei:cell[@role='Journal']"
                 /></xsl:message>
-            <idno type="ISSN">
+            <idno type="pISSN">
                 <xsl:choose>
                     <xsl:when test="$ISSNCode or normalize-space(.)">
                         <xsl:value-of select="$ISSNCode"/>
@@ -2540,7 +2540,7 @@ reactorsa'</title>
     <!-- Publisher IDs when different from above -->
     <!-- NLM 2.2: article-id[@pub-id-type='publisher-id'] -->
 
-    <xsl:template match="els1:aid  |els2:aid  | EDPSRef | edps-ref | Article/@ID">
+    <xsl:template match="EDPSRef | edps-ref | Article/@ID">
         <xsl:if test="normalize-space(.) and not(//publisher-name = 'Cambridge University Press')">
             <idno type="publisher-id">
                 <xsl:value-of select="."/>

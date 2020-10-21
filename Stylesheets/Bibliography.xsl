@@ -13,18 +13,27 @@
 
     <xsl:template match="biblist |rsc:biblist | ce:bibliography | bibl | wiley:bibliography">
         <xsl:choose>
-            <xsl:when test="ref  | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection">
+            <xsl:when test="ce:bibliography-sec">
                 <div type="references">
-                    <xsl:apply-templates select="title | rsc:title |ce:section-title"/>
-                    
-                        <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
+                    <xsl:apply-templates select="ce:section-title"/>
+                    <listBibl>
                         <xsl:apply-templates
-                            select="ref | citgroup| rsc:citgroup | ce:bibliography-sec | bib | wiley:bib | wiley:bibSection"
+                            select="ce:bibliography-sec"
                         /> 
+                    </listBibl>
+                </div>
+            </xsl:when>
+            <xsl:when test="ref  | bib | wiley:bib | wiley:bibSection">
+                <div type="references">
+                    <xsl:apply-templates select="title | rsc:title"/>
+                    
+                    <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
+                    <xsl:apply-templates
+                        select="ref | citgroup| rsc:citgroup| bib | wiley:bib | wiley:bibSection"
+                    /> 
                     
                 </div>
             </xsl:when>
-            
             
             <!-- rsc references / citations -->
             <xsl:when test="citgroup| rsc:citgroup">
