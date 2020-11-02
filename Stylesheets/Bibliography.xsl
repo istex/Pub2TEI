@@ -26,18 +26,19 @@
             <xsl:when test="ref  | bib | wiley:bib | wiley:bibSection">
                 <div type="references">
                     <xsl:apply-templates select="title | rsc:title"/>
-                    
+                    <listBibl>
                     <!-- SG - attention parfois 2 voir 3 citations par <bibl> pour Wiley -->
                     <xsl:apply-templates
                         select="ref | citgroup| rsc:citgroup| bib | wiley:bib | wiley:bibSection"
                     /> 
-                    
+                    </listBibl>
                 </div>
             </xsl:when>
             
             <!-- rsc references / citations -->
             <xsl:when test="citgroup| rsc:citgroup">
                 <div type="references">
+                    <listBibl>
                 <xsl:for-each select="rsc:citgroup| citgroup">
                       <xsl:variable name="id">
                           <xsl:value-of select="normalize-space(@id)"/>
@@ -114,6 +115,7 @@
                         </xsl:for-each>
                     </bibl>
                 </xsl:for-each>
+                        </listBibl>
                 </div>
             </xsl:when>
             <xsl:when test="p">
