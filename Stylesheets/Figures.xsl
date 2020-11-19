@@ -67,6 +67,9 @@
         <xsl:choose>
             <xsl:when test="ancestor::table-wrap">
                 <head>
+                    <xsl:if test="@xml:lang!=''">
+                        <xsl:copy-of select="@xml:lang"/>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </head>
             </xsl:when>

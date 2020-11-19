@@ -322,6 +322,7 @@
             <xsl:when test="contains($theOrg,'Group') 
                 or contains($theOrg,'Consejo')
                 or contains($theOrg,'Program')
+                or contains($theOrg,'Team')
                 ">
                 <xsl:text>group</xsl:text>
             </xsl:when>
@@ -343,6 +344,10 @@
                 starts-with($theOrg,'nke')
                 ">
                 <xsl:text>society</xsl:text>
+            </xsl:when>
+            <xsl:when test="contains($theOrg,'EA7290') or
+                contains($theOrg,'Virulence Bactérienne Précoce')">
+                <xsl:text>other</xsl:text>
             </xsl:when>
 <xsl:otherwise>
                 <xsl:message>Org inconnue: <xsl:value-of select="$theOrg"/></xsl:message>
