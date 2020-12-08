@@ -170,6 +170,383 @@
     </xsl:variable>
     <xsl:variable name="codeTitle">
        <xsl:choose>
+           <!--ajouts 2020-->
+            <xsl:when test="normalize-space($codeTitle1)='ACCFOR'">Accounting Forum</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AAS'">Accounting ForumActa Automatica Sinica</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ACTBIO'">Acta Biomaterialia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CHNAES'">Acta Ecologica Sinica</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AMASCI'">Acta Mathematica Scientia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ASTSIN'">Acta Metallurgica Sinica (English Letters)</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='APCS'">Acta Physico-Chimica Sinica</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ADHOC'">Ad Hoc Networks</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ADVEI'">Ad Hoc NetworksAdvanced Engineering Informatics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ADIAC'">Advances in Accounting</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ARR'">Ageing Research Reviews</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AGCHIN'">Agricultural Sciences in China</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AODF'">Alpha Omegan</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ALTER'">Alter</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JALZ'">Alzheimer's &amp; Dementia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YAJOT'">American Journal of Otolaryngology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MPAIC'">Anaesthesia &amp; Intensive Care Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ANNCHA'">Annales des Ponts et Chaussées</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AMEPSY'">Annales Médico-psychologiques, revue psychiatrique</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AANAT'">Annals of Anatomy - Anatomischer Anzeiger</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AEAE'">Archaeology, Ethnology and Anthropology of Eurasia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ACVD'">Archives of Cardiovascular Diseases</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ARTRES'">Artery Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ASJSUR'">Asian Journal of Surgery</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AUTREV'">Autoimmunity Reviews</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBABIO'">Biochimica et Biophysica Acta (BBA) - Bioenergetics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAMEM'">Biochimica et Biophysica Acta (BBA) - Biomembranes</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAGRM'">Biochimica et Biophysica Acta (BBA) - Gene Regulatory Mechanisms</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAEXP'">Biochimica et Biophysica Acta (BBA) - Gene Structure and Expression</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAGEN'">Biochimica et Biophysica Acta (BBA) - General Subjects</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAMCB'">Biochimica et Biophysica Acta (BBA) - Molecular and Cell Biology of Lipids</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBADIS'">Biochimica et Biophysica Acta (BBA) - Molecular Basis of Disease</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAMCR'">Biochimica et Biophysica Acta (BBA) - Molecular Cell Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBAPAP'">Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BBACAN'">Biochimica et Biophysica Acta (BBA) - Reviews on Cancer</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BES'">Biomedical and Environmental Sciences</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BSPC'">Biomedical Signal Processing and Control</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YBENG'">Biosystems Engineering</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BJOGYN'">BJOG: An International Journal of Obstetrics and Gynaecology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BODYIM'">Body Image</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BRACHY'">Brachytherapy</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BRS'">Brain Stimulation</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CDP'">Cancer Detection and Prevention</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CARREV'">Cardiovascular Revascularization Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CPART'">China Particuology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CPRE'">China Population, Resources and Environment</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CCLET'">Chinese Chemical Letters</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CJA'">Chinese Journal of Aeronautics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CJAC'">Chinese Journal of Analytical Chemistry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CHNJB'">Chinese Journal of Biotechnology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CHNJC'">Chinese Journal of Catalysis</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CJCHE'">Chinese Journal of Chemical Engineering</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CJCHRM'">Chinese Journal of Chromatography</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CIRP'">CIRP Annals</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CIRPJ'">CIRP Journal of Manufacturing Science and Technology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CLCHIR'">Clinical Chiropractic</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YCLNUS'">Clinical Nutrition Supplements</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YCRAE'">Clinical Radiology Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YCTEP'">Clinical Techniques in Equine Practice</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMCU'">Clinical Update</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CMCONL'">CMIG Extra: Cases</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CBC'">Comparative Biochemistry and Physiology Part C: Toxicology &amp; Pharmacology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CBD'">Comparative Biochemistry and Physiology Part D: Genomics and Proteomics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CTCP'">Complementary Therapies in Clinical Practice</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CRASS3'">Comptes Rendus Biologies</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CRAS2C'">Comptes Rendus Chimie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CRAS2A'">Comptes Rendus Geoscience</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CRASS1'">Comptes Rendus Mathematique</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CRAS2B'">Comptes Rendus Mecanique</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PALEVO'">Comptes Rendus Palevol</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='COMREN'">Comptes Rendus Physique</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CBAC'">Computational Biology and Chemistry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='COMLAN'">Computer Languages, Systems &amp; Structures</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='COSREV'">Computer Science Review</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YCSLA'">Computer Speech &amp; Language</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CSI'">Computer Standards &amp; Interfaces</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CONCLI'">Contemporary Clinical Trials</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMPS'">Current Problems in Pediatric and Adolescent Health Care</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NEULAB'">Das Neurophysiologie-Labor</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DENDRO'">Dendrochronologia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMDE'">Dental Abstracts</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DSX'">Diabetes &amp; Metabolic Syndrome: Clinical Research and Reviews</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DIABET'">Diabetes &amp; Metabolism</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MPDHP'">Diagnostic Histopathology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DIIN'">Digital Investigation</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMMD'">Disaster Management &amp; Response</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DISOPT'">Discrete Optimization</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DNAREP'">DNA Repair</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BSO'">Drug Discovery Today: BIOSILICO</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DDMEC'">Drug Discovery Today:Disease Mechanisms</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DDMOD'">Drug Discovery Today:Disease Models</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TAR'">Drug Discovery Today:TARGETS</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DDTEC'">Drug Discovery Today:Technologies</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DDSTR'">Drug Discovery Today:Therapeutic Strategies</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ESF'">Earth Science Frontiers</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EUUS'">EAU Update Series</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EEUS'">EAU-EBU Update Series</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ECOCOM'">Ecological Complexity</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ECOINF'">Ecological Informatics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EHB'">Economics &amp; Human Biology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ECE'">Education for Chemical Engineers</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EDUREV'">Educational Research Review</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YEJVX'">EJVES Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ELERAP'">Electronic Commerce Research and Applications</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCAA'">EMC - Cardiologie-Angéiologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCCHI'">EMC - Chirurgie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCDEN'">EMC - Dentisterie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCDC'">EMC - Dermatologie-Cosmétologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCEND'">EMC - Endocrinologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCH'">EMC - Hématologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCHG'">EMC - Hépato-Gastroenterologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCHEP'">EMC - Hépatologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCKNS'">EMC - Kinésithérapie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCMI'">EMC - Maladies Infectieuses</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCMED'">EMC - Médecine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCNEP'">EMC - Néphrologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCN'">EMC - Neurologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCODO'">EMC - Odontologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCOP'">EMC - Ophtalmologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCORL'">EMC - Oto-rhino-laryngologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCPED'">EMC - Pédiatrie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCPN'">EMC - Pneumologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCPOL'">EMC - Podologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCPS'">EMC - Psychiatrie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCRAD'">EMC - Radiologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCRHO'">EMC - Rhumatologie-Orthopédie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCSTO'">EMC - Stomatologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCTP'">EMC - Toxicologie-Pathologie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCVET'">EMC - Vétérinaire</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMOSPA'">Emotion, Space and Society</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YECLNM'">e-SPEN, the European e-Journal of Clinical Nutrition and Metabolism</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EJCSUP'">European Journal of Cancer Supplements</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EJMG'">European Journal of Medical Genetics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YEUJPS'">European Journal of Pain Supplements</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EJREX'">European Journal of Radiology Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EURURO'">European Urology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EURSUP'">European Urology Supplements</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EBHPH'">Evidence-based Healthcare and Public Health</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JSCH'">EXPLORE</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FRL'">Finance Research Letters</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FLORA'">Flora</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FOCAT'">Focus on Catalysts</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FOP'">Focus on Pigments</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FOPC'">Focus on Polyvinyl Chloride</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FOPOW'">Focus on Powder Coatings</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FOS'">Focus on Surfactants</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FSIGEN'">Forensic Science International: Genetics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FBR'">Fungal Biology Reviews</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='FUNECO'">Fungal Ecology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='GENM'">Gender Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='GPB'">Genomics, Proteomics &amp; Bioinformatics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='HARALG'">Harmful Algae</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='HRTHM'">Heart Rhythm</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='HEDP'">High Energy Density Physics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YHOMP'">Homeopathy</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJMSC'">ICES Journal of Marine Science</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IMPLAN'">Implantodontie</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='INFSEC'">Infosecurity</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='INFTOD'">Infosecurity Today</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='INEXT'">Injury Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='INSU'">Insulin</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IENJ'">International Emergency Nursing</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IJCIP'">International Journal of Critical Infrastructure Protection</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IJGGC'">International Journal of Greenhouse Gas Control</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IJLCJ'">International Journal of Law, Crime and Justice</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IJOSM'">International Journal of Osteopathic Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PEDEX'">International Journal of Pediatric Otorhinolaryngology Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='IJSU'">International Journal of Surgery</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TRAMAN'">International Journal of Transport Management</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RBMRET'">IRBM</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MYCMED'">Journal de Mycologie Médicale</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JNC'">Journal for Nature Conservation</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMAI'">Journal of Allergy and Clinical Immunology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMPA'">Journal of American Association for Pediatric Ophthalmology and Strabismus</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JAL'">Journal of Applied Logic</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='BIONIC'">Journal of Bionic Engineering</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JJCC'">Journal of Cardiology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCRR'">Journal of Cardiothoracic-Renal Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCHAS'">Journal of Chemical Health and Safety</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCUG'">Journal of China University of Geosciences</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCUMT'">Journal of China University of Mining and Technology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCM'">Journal of Chiropractic Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CHROMB'">Journal of Chromatography B</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JACL'">Journal of Clinical Lipidology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CROHNS'">Journal of Crohn’s and Colitis</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CROSUP'">Journal of Crohn’s and Colitis Supplements</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCF'">Journal of Cystic Fibrosis</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='DESCS'">Journal of Dermatological Science Supplement</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JDA'">Journal of Discrete Algorithms</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JEAP'">Journal of English for Academic Purposes</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JES'">Journal of Environmental Sciences</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JEPM'">Journal of Exotic Pet Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JFS'">Journal of Financial Stability</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJFLM'">Journal of Forensic and Legal Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JFE'">Journal of Forest Economics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JFCT'">Journal of Fuel Chemistry and Technology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JGG'">Journal of Genetics and Genomics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='HYDROD'">Journal of Hydrodynamics, Ser. B</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JHER'">Journal of Hydro-environment Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JIEC'">Journal of Industrial and Engineering Chemistry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JOI'">Journal of Informetrics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JISRI'">Journal of Iron and Steel Research, International</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JMCPLA'">Journal of Medical Colleges of PLA</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JNMU'">Journal of Nanjing Medical University</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JNGC'">Journal of Natural Gas Chemistry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JNN'">Journal of Neonatal Nursing</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JNEB'">Journal of Nutrition Education and Behavior</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JPUROL'">Journal of Pediatric Urology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PRAS'">Journal of Plastic, Reconstructive &amp; Aesthetic Surgery</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JPROT'">Journal of Proteomics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PURSUP'">Journal of Purchasing and Supply Management</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='XJRN'">Journal of Radiology Nursing</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JRE'">Journal of Rare Earths</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JRC'">Journal of Reproduction and Contraception</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JSURG'">Journal of Surgical Education</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JSS'">Journal of Systems and Software</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JACR'">Journal of the American College of Radiology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJADA'">Journal of the American Dietetic Association</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AMIA'">Journal of the American Medical Informatics Association</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJSSH'">Journal of the American Society for Surgery of the Hand</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='XYJALA'">Journal of the Association for Laboratory Automation</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCICE'">Journal of the Chinese Institute of Chemical Engineers</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCMA'">Journal of the Chinese Medical Association</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JFMA'">Journal of the Formosan Medical Association</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JKSS'">Journal of the Korean Statistical Society</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JMBBM'">Journal of the Mechanical Behavior of Biomedical Materials</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JTV'">Journal of Tissue Viability</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JTCM'">Journal of Traditional Chinese Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JTSEIT'">Journal of Transportation Systems Engineering and Information Technology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JUSTB'">Journal of University of Science and Technology Beijing, Mineral, Metallurgy, Material</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JVEB'">Journal of Veterinary Behavior</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='WEBSEM'">Journal of Web Semantics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='KIM'">Komplementäre und Integrative Medizin</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='KHINF'">Krankenhaus-Hygiene + Infektionsverhütung</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='LIVSCI'">Livestock Science</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MAMBIO'">Mammalian Biology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MARGEN'">Marine Genomics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MEDNUC'">Médecine Nucléaire</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MPMED'">Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MHPA'">Mental Health and Physical Activity</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='METMAT'">Metamaterials</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MIB'">Molecular Imaging &amp; Biology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MOLONC'">Molecular Oncology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMTHE'">Molecular Therapy</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MUT'">Mutation Research/Fundamental and Molecular Mechanisms of Mutagenesis</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MUTGEN'">Mutation Research/Genetic Toxicology and Environmental Mutagenesis</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NANTOD'">Nano Today</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NANO'">Nanomedicine: Nanotechnology, Biology and Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NEPHRO'">Néphrologie &amp; Thérapeutique</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NRR'">Neural Regeneration Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NURT'">Neurotherapeutics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NBT'">New Biotechnology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CNM'">New Carbon Materials</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NAHS'">Nonlinear Analysis: Hybrid Systems</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NST'">Nuclear Science and Techniques</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YMNL'">Nurse Leader</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NUMECD'">Nutrition, Metabolism and Cardiovascular Diseases</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ORCP'">Obesity Research &amp; Clinical Practice</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='OGRM'">Obstetrics, Gynaecology &amp; Reproductive Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='OSN'">Optical Switching and Networking</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PXOB'">Option/Bio</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='OPTM'">Optometry - Journal of the American Optometric Association</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='OOE'">Oral Oncology Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='OOS'">Oral Oncology Supplement</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ODW'">Orthodontic Waves</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PAED'">Paediatrics and Child Health</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PALWOR'">Palaeoworld</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PEDOBI'">Pedobiologia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PEDSPH'">Pedosphere</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PPEES'">Perspectives in Plant Ecology, Evolution and Systematics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PMCJ'">Pervasive and Mobile Computing</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PBB'">Pharmacology Biochemistry and Behavior</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PDPDT'">Photodiagnosis and Photodynamic Therapy</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PNFA'">Photonics and Nanostructures - Fundamentals and Applications</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PHOVOL'">Photovoltaics Bulletin</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EJMP'">Physica Medica</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PHYCOM'">Physical Communication</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PHYSME'">Physical Mesomechanics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PLREV'">Physics of Life Reviews</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PHYTOL'">Phytochemistry Letters</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PHYMED'">Phytomedicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PLAADD'">Plastics, Additives and Compounding</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='POLAR'">Polar Science</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PRPS'">Pratiques Psychologiques</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PRECON'">Prevention and Control</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PCD'">Primary Care Diabetes</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PCRJ'">Primary Care Respiratory Journal</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PNSC'">Progress in Natural Science: Materials International</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YPLEF'">Prostaglandins, Leukotrienes and Essential Fatty Acids</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MPPSY'">Psychiatry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PTO'">Psychologie du Travail et des Organisations</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PSFR'">Psychologie Française</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='PUBHEF'">Public Health Forum</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='QUAGEO'">Quaternary Geochronology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RARMET'">Rare Metals</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RASD'">Research in Autism Spectrum Disorders</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RIBAF'">Research in International Business and Finance</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RSAP'">Research in Social and Administrative Pharmacy</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RMEDC'">Respiratory Medicine CME</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RMEDX'">Respiratory Medicine Extra</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RMEDU'">Respiratory Medicine: COPD Update</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RESPNB'">Respiratory Physiology &amp; Neurobiology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RIGAPP'">Reviews in Gynaecological and Perinatal Practice</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ERAP'">Revue Européenne de Psychologie Appliquée</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RFL'">Revue Francophone des Laboratoires</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RSCI'">Rice Science</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RONTGE'">Röntgenpraxis</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='RGG'">Russian Geology and Geophysics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SAUENF'">Sauvegarde de l'Enfance</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YSEIZ'">Seizure</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YSANE'">Seminars in Anesthesia, Perioperative Medicine and Pain</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SFNM'">Seminars in Fetal and Neonatal Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SIGM'">Seminars in Integrative Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SPMD'">Seminars in Pain Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YSPEN'">Seminars in Pediatric Neurology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YSPSU'">Seminars in Pediatric Surgery</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YPCSU'">Seminars in Thoracic and Cardiovascular Surgery: Pediatric Cardiac Surgery Annual</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YSULT'">Seminars in Ultrasound, CT and MRI</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YSVAS'">Seminars in Vascular Surgery</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SEXOL'">Sexologies</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SRAM'">Sexuality, Reproduction and Menopause</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SIMPAT'">Simulation Modelling Practice and Theory</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SAJB'">South African Journal of Botany</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SRT'">Space Research Today</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ORTHTR'">Sports Orthopaedics and Traumatology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='STAMET'">Statistical Methodology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SCR'">Stem Cell Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SHPMP'">Studies in History and Philosophy of Biol &amp; Biomed Sci</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SHPSC'">Studies in History and Philosophy of Modern Physics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MPSUR'">Surgery (Oxford)</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SOARD'">Surgery for Obesity and Related Diseases</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TJOG'">Taiwanese Journal of Obstetrics and Gynecology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TELN'">Teaching and Learning in Nursing</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YAJEM'">The American Journal of Emergency Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AMEEVA'">The American Journal of Evaluation</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AJMS'">The American Journal of Medicine Supplements</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CHQ'">The Cornell Hotel and Restaurant Administration Quarterly</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='MPFOU'">The Foundation Years</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TJNP'">The Journal for Nurse Practitioners</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JCUPT'">The Journal of China Universities of Posts and Telecommunications</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JEM'">The Journal of Emergency Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJHSB'">The Journal of Hand Surgery</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJHSU'">The Journal of Hand Surgery: British &amp; European Volume</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJHSE'">The Journal of Hand Surgery: European Volume</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='HEALUN'">The Journal of Heart and Lung Transplantation</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='HIGTEC'">The Journal of High Technology Management Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JLAP'">The Journal of Logic and Algebraic Programming</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JMHG'">The Journal of Men's Health &amp; Gender</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='YJPAI'">The Journal of Pain</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SOCECO'">The Journal of Socio-Economics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SBMB'">The Journal of Steroid Biochemistry and Molecular Biology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='STRINF'">The Journal of Strategic Information Systems</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='KJMS'">The Kaohsiung Journal of Medical Sciences</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='LANEUR'">The Lancet Neurology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='LANONC'">The Lancet Oncology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ECOFIN'">The North American Journal of Economics and Finance</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='QUAECO'">The Quarterly Review of Economics and Finance</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SPINEE'">The Spine Journal</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TSC'">Thinking Skills and Creativity</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TCAM'">Topics in Companion Animal Medicine</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TRAC'">Trends in Analytical Chemistry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NOFERR'">Transactions of Nonferrous Metals Society of China</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TRSL'">Translational Research</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TMAID'">Travel Medicine and Infectious Disease</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='TSIST'">Tsinghua Science &amp; Technology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='UCT'">Update on Cancer Therapeutics</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='UFUG'">Urban Forestry &amp; Urban Greening</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='VPH'">Vascular Pharmacology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='WOMBI'">Women and Birth</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ZGESUN'">Zeitschrift für ärztliche Fortbildung und Qualität im Gesundheitswesen</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ZEMEDI'">Zeitschrift für Medizinische Physik</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ARBR'">Archivos de Bronconeumología (English Edition)</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='CHEMER'">Geochemistry</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ACCOUN'">International Journal of Accounting</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='REC'">Revista Española de Cardiología (English Edition)</xsl:when>
+            <!--fin ajouts 2020-->
             <xsl:when test="normalize-space($codeTitle1)='AA'">Acta Astronautica</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AADE'">Agricultural Administration and Extension</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AAETH'">Applied Animal Ethology</xsl:when>
