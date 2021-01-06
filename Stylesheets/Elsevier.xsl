@@ -3294,14 +3294,26 @@
                                         </xsl:for-each>
                                     </xsl:if>
                                     <!-- pagination article -->
-                                    <xsl:if test="$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]">
-                                        <biblScope unit="page" from="{$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:first-page}">
-                                            <xsl:value-of select="$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:first-page"/>
-                                        </biblScope>
-                                        <biblScope unit="page" to="{$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:last-page}">
-                                            <xsl:value-of select="$docIssueEls//ce:include-item[//ce:doi=current()//ce:doi]/ce:pages/ce:last-page"/>
-                                        </biblScope>
-                                    </xsl:if>
+                                    <xsl:choose>
+                                        <xsl:when test="$docIssueEls//ce:include-item[ce:doi=current()//ce:doi]">
+                                            <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:doi=current()//ce:doi]/ce:pages/ce:first-page}">
+                                                <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=current()//ce:doi]/ce:pages/ce:first-page"/>
+                                            </biblScope>
+                                            <biblScope unit="page" to="{$docIssueEls//ce:include-item[ce:doi=current()//ce:doi]/ce:pages/ce:last-page}">
+                                                <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=current()//ce:doi]/ce:pages/ce:last-page"/>
+                                            </biblScope>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:if test="$docIssueEls//ce:include-item[ce:pii=current()//ce:pii]">
+                                                <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:pii=current()//ce:pii]/ce:pages/ce:first-page}">
+                                                    <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=current()//ce:pii]/ce:pages/ce:first-page"/>
+                                                </biblScope>
+                                                <biblScope unit="page" to="{$docIssueEls//ce:include-item[ce:pii=current()//ce:pii]/ce:pages/ce:last-page}">
+                                                    <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=current()//ce:pii]/ce:pages/ce:last-page"/>
+                                                </biblScope>
+                                            </xsl:if>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </imprint>
                             </monogr>
                         </biblStruct>

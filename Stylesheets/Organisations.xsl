@@ -302,6 +302,7 @@
                 contains($theOrg,'Dept') or
                 contains($theOrg,'Dipart') or
                 contains($theOrg,'Oficina') or
+                contains($theOrg,'Partners') or
                 contains($theOrg,'Départ')">
                 <xsl:text>division</xsl:text>
             </xsl:when>
@@ -319,7 +320,8 @@
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
-            <xsl:when test="contains($theOrg,'Group') 
+            <xsl:when test="contains($theOrg,'Group')
+                or contains($theOrg,'GROUP')
                 or contains($theOrg,'Consejo')
                 or contains($theOrg,'Program')
                 or contains($theOrg,'Team')
