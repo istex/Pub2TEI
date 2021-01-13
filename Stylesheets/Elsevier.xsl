@@ -3682,14 +3682,31 @@
     <!-- Fin de la bibliographie -->
 
     <xsl:template match="ce:bib-reference">
-        <biblStruct>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </biblStruct>
+        <xsl:choose>
+            <xsl:when test="../sb:reference">
+                <biblStruct>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="@id"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </biblStruct>
+            </xsl:when>
+            <xsl:otherwise>
+                <bibl>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="@id"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
-
+    <xsl:template match="ce:note">
+       <note>
+            <xsl:apply-templates/>
+       </note>
+    </xsl:template>
     <xsl:template match="els1:conf-name |els2:conf-name">
         <meeting>
             <xsl:apply-templates/>
