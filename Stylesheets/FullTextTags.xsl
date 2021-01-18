@@ -59,7 +59,23 @@
                     </xsl:when>
                     <xsl:when test="parent::title |parent::rsc:title">
                             <xsl:value-of select="normalize-space(.)"/>
-                        
+                    </xsl:when>
+                    <xsl:when test="preceding-sibling::ce:section">
+                        <div>
+                            <p>
+                                <xsl:if test="@id">
+                                    <xsl:attribute name="xml:id">
+                                        <xsl:value-of select="@id"/>
+                                    </xsl:attribute>
+                                </xsl:if>
+                                <xsl:if test="@xml:lang">
+                                    <xsl:attribute name="xml:lang">
+                                        <xsl:value-of select="@xml:lang"/>
+                                    </xsl:attribute>
+                                </xsl:if>
+                                <xsl:apply-templates/>
+                            </p>
+                        </div>  
                     </xsl:when>
                     <xsl:otherwise>
                         <p>
