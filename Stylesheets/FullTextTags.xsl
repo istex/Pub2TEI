@@ -576,7 +576,9 @@
     <xsl:template match="els1:nu |els2:nu | nu">
         <xsl:choose>
             <xsl:when test="els1:fen |els2:fen | fen">
-                <xsl:apply-templates/>
+                <m:msup xmlns:m="http://www.w3.org/1998/Math/MathML">
+                    <xsl:apply-templates/>
+                </m:msup>
             </xsl:when>
             <xsl:otherwise>
                 <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
@@ -592,9 +594,18 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="els1:de |els2:de | de">
-        <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
-            <xsl:apply-templates/>
-        </m:mi>
+        <xsl:choose>
+            <xsl:when test="els1:fen |els2:fen | fen">
+                <m:msub xmlns:m="http://www.w3.org/1998/Math/MathML">
+                    <xsl:apply-templates/>
+                </m:msub>
+            </xsl:when>
+            <xsl:otherwise>
+                <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
+                    <xsl:apply-templates/>
+                </m:mi>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- SG - WILEY ajout élément latex -->

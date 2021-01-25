@@ -43,12 +43,7 @@
         </hi>
     </xsl:template>
         
-    <xsl:template match="els1:fen">
-        <m:mfenced>
-            <xsl:apply-templates/>
-        </m:mfenced>
-    </xsl:template>
-    <xsl:template match="els2:fen">
+    <xsl:template match="els1:fen | els2:fen |fen">
         <m:mfenced>
             <xsl:apply-templates/>
         </m:mfenced>
