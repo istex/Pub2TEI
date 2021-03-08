@@ -120,7 +120,11 @@
             </xsl:when>
             <xsl:when test="p">
                 <div type="references">
-                    <xsl:apply-templates select="p"/>
+                    <listBibl>
+                        <bibl>
+                            <xsl:value-of select="p"/>
+                        </bibl>
+                    </listBibl>
                 </div>
             </xsl:when>
         </xsl:choose>
@@ -699,9 +703,9 @@
                 <xsl:apply-templates select="element-citation"/>
                 <xsl:choose>
                     <xsl:when test="count(mixed-citation) &gt;= 2">
-                        <listBibl xml:id="{@id}">
+                        <bibl xml:id="{@id}">
                             <xsl:apply-templates select="mixed-citation" mode="multiple"/>
-                        </listBibl>
+                        </bibl>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:apply-templates select="mixed-citation"/>
