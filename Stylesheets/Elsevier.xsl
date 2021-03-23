@@ -170,8 +170,8 @@
     </xsl:variable>
     <xsl:variable name="codeTitle">
        <xsl:choose>
-           <!--ajouts liste des titres unifiée 2021-->
-           <xsl:when test="normalize-space($codeTitle1)='AA'">Acta Astronautica</xsl:when>
+           <!--ajouts liste unifiée des titres 2021-->
+            <xsl:when test="normalize-space($codeTitle1)='AA'">Acta Astronautica</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AADE'">Agricultural Administration and Extension</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AAETH'">Applied Animal Ethology</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AAMJ'">Asia-Australia Marketing Journal</xsl:when>
@@ -198,6 +198,7 @@
             <xsl:when test="normalize-space($codeTitle1)='ACTOEC'">Acta Oecologica</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='ACTPSY'">Acta Psychologica</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='ACTROP'">Acta Tropica</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='ACTSIN'">Acta Metallurgica Sinica (English Letters)</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='ACURO'">Actas Urologicas Espanolas</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='ACVD'">Archives of Cardiovascular Diseases</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AD'">Actas Dermo-Sifiliograficas</xsl:when>
@@ -216,6 +217,7 @@
             <xsl:when test="normalize-space($codeTitle1)='AEA'">Atmospheric Environment</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AEAE'">Archaeology, Ethnology and Anthropology of Eurasia</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AEC'">Advanced Energy Conversion</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AENJ'">Australasian Emergency Nursing Journal</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AEP'">Annals of Epidemiology</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AES'">Journal of African Earth Sciences</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AESCTE'">Aerospace Science and Technology</xsl:when>
@@ -243,6 +245,7 @@
             <xsl:when test="normalize-space($codeTitle1)='AIPV'">Annales de lInstitut Pasteur / Virologie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AIRDES'">Aircraft Design</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AJC'">The American Journal of Cardiology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='AJGP'">The American Journal of Geriatric Pharmacotherapy</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AJH'">American Journal of Hypertension</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AJHG'">The American Journal of Human Genetics</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='AJM'">The American Journal of Medicine</xsl:when>
@@ -850,6 +853,7 @@
             <xsl:when test="normalize-space($codeTitle1)='EMCAA'">EMC - Cardiologie-Angéiologie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCAAR'">EMC - Anestesia-Reanimación</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCAOL'">EMC - Aparato Locomotor</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCAR'">EMC - Anesthésie-Réanimation</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCCG'">EMC - Cirugia general</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCCHI'">EMC - Chirurgie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCCOC'">EMC - Cirugia otorrinolaringológica y cervicofacial</xsl:when>
@@ -858,6 +862,7 @@
             <xsl:when test="normalize-space($codeTitle1)='EMCDEN'">EMC - Dentisterie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCEND'">EMC - Endocrinologie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCGIN'">EMC - Ginecologia-Obstetricia</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='EMCGO'">EMC - Gynécologie-Obstétrique</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCH'">EMC - Hématologie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCHEP'">EMC - Hépatologie</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='EMCHG'">EMC - Hépato-Gastroenterologie</xsl:when>
@@ -1483,6 +1488,7 @@
             <xsl:when test="normalize-space($codeTitle1)='JULTR'">Journal of Ultrastructure Research</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='JURMSR'">Journal of Ultrastructure Research and Molecular Structure Research</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='JURO'">The Journal of Urology</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='JUS'">Journal of Ultrasound</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='JUSTB'">Journal of University of Science and Technology Beijing, Mineral, Metallurgy, Material</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='JVA'">Vistas in Astronomy</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='JVAC'">Vaccine</xsl:when>
