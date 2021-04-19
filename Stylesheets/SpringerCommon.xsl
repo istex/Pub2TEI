@@ -255,9 +255,6 @@
                     </xsl:otherwise>
                 </xsl:choose> 
             </xsl:variable>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="$editorNumber"/>
-            </xsl:attribute>
             <xsl:apply-templates/>
             <xsl:if test="@AffiliationIDS or @PresentAffiliationID">
                 <xsl:call-template name="createSpringerAffiliations">
@@ -466,7 +463,7 @@
                         <xsl:attribute name="key">GA</xsl:attribute>
                         <xsl:text>GABON</xsl:text>
                     </xsl:when>
-                    <xsl:when test="contains(../City,'Cocody-Abidjan') and //ArticleDOI='10.1007/s10298-008-0347-6'">
+                    <xsl:when test="contains(../City[1],'Cocody-Abidjan') and //ArticleDOI='10.1007/s10298-008-0347-6'">
                         <xsl:attribute name="key">CI</xsl:attribute>
                         <xsl:text>IVORY COAST</xsl:text>
                     </xsl:when>
