@@ -1685,7 +1685,7 @@
             <xsl:when test="normalize-space($codeTitle1)='NEL'">Journal of Neurolinguistics</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='NEPHRO'">Néphrologie &amp; Thérapeutique</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='NESE'">Network Security</xsl:when>
-            <xsl:when test="normalize-space($codeTitle1)='NEUADO'">Neuropsychiatrie de lenfance et de ladolescence</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NEUADO'">Neuropsychiatrie de l'enfance et de l'adolescence</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='NEUCIR'">Neurocirugia</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='NEUCLI'">Neurophysiologie Clinique / Clinical Neurophysiology</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='NEUCOM'">Neurocomputing</xsl:when>
@@ -2073,7 +2073,7 @@
             <xsl:when test="normalize-space($codeTitle1)='SAMES'">Journal of South American Earth Sciences</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='SAS'">International Journal of Solids and Structures</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='SAT'">Journal of Substance Abuse Treatment</xsl:when>
-            <xsl:when test="normalize-space($codeTitle1)='SAUENF'">Sauvegarde de lEnfance</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='SAUENF'">Sauvegarde de l'Enfance</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='SBB'">Soil Biology and Biochemistry</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='SBMB'">Journal of Steroid Biochemistry and Molecular Biology</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='SCAMAN'">Scandinavian Journal of Management</xsl:when>
