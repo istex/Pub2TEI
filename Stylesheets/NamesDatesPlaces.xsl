@@ -629,10 +629,13 @@
         <xsl:choose>
             <xsl:when test="parent::aff"/>
             <xsl:when test="parent::corresp"/>
+            <xsl:when test="parent::publisher-loc"/>
             <xsl:otherwise>
+                <xsl:if test=".">
                 <email>
                     <xsl:apply-templates/>
                 </email>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

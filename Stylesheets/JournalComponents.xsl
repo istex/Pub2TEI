@@ -2226,7 +2226,15 @@ reactorsa'</title>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:if test=".!=''">
-                            <idno type="{@journal-id-type}">
+                            <idno>
+                                <xsl:attribute name="type">
+                                    <xsl:choose>
+                                        <xsl:when test="@journal-id-type='doi'">DOI</xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="@journal-id-type"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
                                 <xsl:apply-templates/>
                             </idno>
                         </xsl:if>
@@ -2357,6 +2365,20 @@ reactorsa'</title>
             </xsl:otherwise>
         </xsl:choose>
         
+    </xsl:template>
+    
+    <xsl:template match="isbn">
+        <xsl:if test=".!=''">
+            <idno>
+                <xsl:attribute name="type">
+                    <xsl:choose>
+                        <xsl:when test="@content-type='e-isbn'">eISBN</xsl:when>
+                        <xsl:otherwise>ISBN</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:apply-templates/>
+            </idno>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="JournalElectronicISSN | ElectronicISSN | issn[@issn_type='digital'] | issn[@pub-type='epub'] | issn-elec | SeriesElectronicISSN| SubSeriesElectronicISSN | issn[@type='electronic'] | wiley:issn[@type='electronic']|E-ISSN">

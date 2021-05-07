@@ -1926,8 +1926,15 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- All authors are included here -->
-                <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
-                
+                <xsl:choose>
+                    <xsl:when test="article-meta/contrib-group/contrib[@contrib-type='author']">
+                        <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='author']"/>
+                    </xsl:when>
+                    <xsl:when test="//article-meta/contrib-group/contrib[@contrib-type='editor']"/>
+                    <xsl:otherwise>
+                                <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:if test="/article/fm/aug | /headerx/fm/aug | /art/fm/aug">
                     <xsl:apply-templates select="/article/fm/aug/* except(//aff)| /headerx/fm/aug/* except(//aff) | /art/fm/aug/*"/>
                 </xsl:if>
@@ -2015,12 +2022,17 @@
                     <idno type="pISSN">0080-4606</idno>
                     <idno type="eISSN">1748-8494</idno>
                 </xsl:if>
-                
+
                 <xsl:apply-templates select="journal-meta/journal-title |journal-meta/journal-title-group/journal-title | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
                 <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
                 <xsl:apply-templates select="journal-meta/journal-id"/>
                 <xsl:apply-templates select="journal-meta/issue-title"/>
                 <xsl:choose>
+                    <!-- Karger series-->
+                    <xsl:when test="journal-meta/isbn">
+                        <xsl:apply-templates select="journal-meta/isbn"/>
+                    </xsl:when>
+                    <xsl:when test="journal-meta/isbn and journal-meta/issn"/>
                     <!-- OUP -->
                     <!-- JJCO -->
                     <xsl:when test="//issn[@pub-type='epub']='1465-3621'">
@@ -2079,6 +2091,7 @@
                         <xsl:value-of select="//volume-id[@pub-id-type='isbn']"/>
                     </idno>
                 </xsl:if>
+                <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='editor']"/>
                 <xsl:apply-templates select="//conference"/>
                 <imprint>
                     <!-- Bloc RSL version dtd highWire -->
@@ -2203,6 +2216,10 @@
                                 <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='online']"/>
                             </idno>
                         </xsl:if>
+                    </xsl:if>
+                    
+                    <xsl:if test="journal-meta/isbn and journal-meta/issn">
+                        <xsl:apply-templates select="journal-meta/issn"/>
                     </xsl:if>
                 </series>
             </xsl:if>
@@ -2368,10 +2385,14 @@
             </xsl:if>
         </author>
     </xsl:template>
+    
    <xsl:template match="aff">
        <xsl:if test="email">
            <xsl:apply-templates select="email"/>
        </xsl:if>
+       <xsl:variable name="countSup">
+           <xsl:value-of select="count(//aff/sup)"/>
+       </xsl:variable>
        <xsl:choose>
            <xsl:when test="./org">
                <affiliation>
@@ -3779,6 +3800,7 @@
 
     <!-- References in main text -->
     <xsl:template match="xref">
+        <xsl:if test=".!=''">
         <xsl:choose>
             <xsl:when test="@rid and ancestor::contrib">
                 <xsl:variable name="numberedIndex">
@@ -3872,6 +3894,7 @@
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="ext-link">
@@ -4576,6 +4599,9 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="countSup">
+            <xsl:value-of select="count(//aff/sup)"/>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:choose>
@@ -4726,14 +4752,31 @@
                                 <country key="US" xml:lang="en">UNITED STATES</country>
                             </xsl:when>
                             <xsl:otherwise>
-                                <country>
-                                    <xsl:attribute name="key">
-                                        <xsl:value-of select="$testCountry"/>
-                                    </xsl:attribute>
-                                    <xsl:call-template name="normalizeISOCountryName">
-                                        <xsl:with-param name="country" select="$avantVirgule"/>
-                                    </xsl:call-template>
-                                </country>
+                                <xsl:choose>
+                                    <xsl:when test="$countSup">
+                                        <address>
+                                            <country>
+                                                <xsl:attribute name="key">
+                                                    <xsl:value-of select="$testCountry"/>
+                                                </xsl:attribute>
+                                                <xsl:call-template name="normalizeISOCountryName">
+                                                    <xsl:with-param name="country" select="$avantVirgule"/>
+                                                </xsl:call-template>
+                                            </country>
+                                        </address>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <country>
+                                            <xsl:attribute name="key">
+                                                <xsl:value-of select="$testCountry"/>
+                                            </xsl:attribute>
+                                            <xsl:call-template name="normalizeISOCountryName">
+                                                <xsl:with-param name="country" select="$avantVirgule"/>
+                                            </xsl:call-template>
+                                        </country>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
@@ -5023,9 +5066,20 @@
                                                         </address>
                                                     </xsl:when>
                                                     <xsl:otherwise>
-                                                        <addrLine>
-                                                            <xsl:apply-templates select="$avantVirgule"/>
-                                                        </addrLine>
+                                                        <xsl:choose>
+                                                            <xsl:when test="$countSup">
+                                                                <address>
+                                                                    <addrLine>
+                                                                        <xsl:apply-templates select="$avantVirgule"/>
+                                                                    </addrLine>
+                                                                </address>
+                                                            </xsl:when>
+                                                            <xsl:otherwise>
+                                                                <addrLine>
+                                                                    <xsl:apply-templates select="$avantVirgule"/>
+                                                                </addrLine>
+                                                            </xsl:otherwise>
+                                                        </xsl:choose>
                                                     </xsl:otherwise>
                                                 </xsl:choose>
                                             </xsl:otherwise>
@@ -5097,6 +5151,145 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="//aff[@id=$restAff]"/>
+                <xsl:apply-templates select="//aff[@id=$restAff2]"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- affiliation JATS -->
+    <xsl:template match="xref" mode="karger">
+        <xsl:param name="restxref" select="."/>
+        <toto>
+            <xsl:value-of select="$restxref"/>
+        </toto>
+    </xsl:template>
+    
+    <xsl:template match="sup" mode="karger">
+        <xsl:param name="restSup" select="."/>
+        <titi type="{.}">
+            <!--<xsl:value-of select="$restSup/following-sibling:: text()[position()=1]"/>  -->
+            
+            <xsl:value-of select="$restSup"/>
+        </titi>
+    </xsl:template>
+    
+    <!-- reformatage des données karger et en général les données contenant des <sup> dans les affiliations-->
+    <!-- ce que nous avons en entrée : doi: 10.1159/000485060-->
+    <!-- 
+        <contrib contrib-type="author">
+          <name>
+            <surname>Ko</surname>
+            <given-names>Jih-Yang</given-names>
+          </name>
+          <xref ref-type="aff" rid="A">a-d</xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Wang</surname>
+            <given-names>Feng-Sheng</given-names>
+          </name>
+          <xref ref-type="aff" rid="A">c,e,f</xref>
+        </contrib>
+        
+        <aff id="A">
+             <sup>a</sup>Center for Shockwave Medicine and Tissue Engineering, 
+             <sup>b</sup>Department of Orthopedic Surgery, and 
+             <sup>c</sup>Graduate Institute of Clinical Medical Sciences, Chang Gung University College of Medicine, Kaohsiung Chang Gung Memorial Hospital, Kaohsiung, Taiwan; 
+             <sup>d</sup>Department of Orthopaedic Surgery, Xiamen Chang Gung Hospital, Xiamen, China; 
+             <sup>e</sup>Department of Medical Research, and 
+             <sup>f</sup>Core Laboratory for Phenomics and Diagonistics, Kaohsiung Chang Gung Memorial Hospital, Kaohsiung, Taiwan
+        </aff> 
+    -->
+    <xsl:template name="supAffil">
+        <xsl:call-template name="tokenizeJats"/>
+    </xsl:template>
+    <xsl:template match="xref" name="tokenizeJats" mode="karger">
+        <xsl:param name="text" select="xref"/>
+        <xsl:param name="separator" select="','"/>
+        <xsl:choose>
+            <xsl:when test="contains($text,'-')">
+                <xsl:variable name="replaceText">
+                    <xsl:choose>
+                        <xsl:when test="contains($text,'a-d')">
+                            <xsl:value-of select="replace($text,'a-d','a,b,c,d')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'a-c')">
+                            <xsl:value-of select="replace($text,'a-c','a,b,c')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'a-f')">
+                            <xsl:value-of select="replace($text,'a-f','a,b,c,d,e,f')"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:call-template name="tokenizeJats">
+                    <xsl:with-param name="text" select="$replaceText"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="not(contains($text, $separator))">
+                <xsl:choose>
+                    <xsl:when test="//aff/sup[.=$text]">
+                        <xsl:variable name="supNettoie">
+                            <xsl:value-of select="normalize-space(//aff/sup[.=$text]/following-sibling::text()[position()=1])"/>
+                        </xsl:variable>
+                        <xsl:variable name="supNettoie2">
+                            <xsl:choose>
+                                <xsl:when test="contains($supNettoie,', and')">
+                                    <xsl:value-of select="normalize-space(replace($supNettoie,', and',''))"/>
+                                </xsl:when>
+                                <xsl:when test="contains($supNettoie,';')">
+                                    <xsl:value-of select="normalize-space(replace($supNettoie,';',''))"/>
+                                </xsl:when>
+                                <xsl:when test="ends-with($supNettoie,',')">
+                                    <xsl:value-of select="normalize-space(replace($supNettoie,',',''))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="normalize-space($supNettoie)"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <affiliation>
+                            <xsl:call-template name="NLMparseAffiliation">
+                                <xsl:with-param name="theAffil">
+                                    <xsl:value-of select="$supNettoie2"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </affiliation>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="aff">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <xsl:variable name="supNettoie">
+                    <xsl:value-of select="normalize-space(//aff/sup[.=$aff]/following-sibling::text()[position()=1])"/>
+                </xsl:variable>
+                <xsl:variable name="supNettoie2">
+                    <xsl:choose>
+                        <xsl:when test="contains($supNettoie,', and')">
+                            <xsl:value-of select="normalize-space(replace($supNettoie,', and',''))"/>
+                        </xsl:when>
+                        <xsl:when test="contains($supNettoie,';')">
+                            <xsl:value-of select="normalize-space(replace($supNettoie,';',''))"/>
+                        </xsl:when>
+                        <xsl:when test="ends-with($supNettoie,',')">
+                            <xsl:value-of select="normalize-space(replace($supNettoie,',',''))"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="normalize-space($supNettoie)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:call-template name="tokenizeJats">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+                <affiliation>
+                    <xsl:call-template name="NLMparseAffiliation">
+                        <xsl:with-param name="theAffil">
+                            <xsl:value-of select="$supNettoie2"/>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </affiliation>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

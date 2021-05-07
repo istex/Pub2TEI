@@ -65,7 +65,10 @@
     </xsl:template>
     <xsl:template match="caption/p">
         <xsl:choose>
-            <xsl:when test="ancestor::table-wrap">
+            <xsl:when test="fn">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:when test="ancestor::table-wrap and not(ancestor::table-wrap/label)">
                 <head>
                     <xsl:if test="@xml:lang!=''">
                         <xsl:copy-of select="@xml:lang"/>
@@ -74,20 +77,13 @@
                 </head>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="fn">
-                        <xsl:apply-templates/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:if test=". !=''">
-                            <figure>
-                                <figDesc>
-                                    <xsl:apply-templates/>
-                                </figDesc>
-                            </figure>
-                        </xsl:if>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:if test=". !=''">
+                    <figure>
+                        <figDesc>
+                            <xsl:apply-templates/>
+                        </figDesc>
+                    </figure>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

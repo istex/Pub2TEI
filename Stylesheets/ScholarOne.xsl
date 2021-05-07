@@ -227,7 +227,7 @@
     <!-- Generic rules for IDs -->
     <xsl:template match="article_id">
         <idno type="{@id_type}">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </idno>
     </xsl:template>
 
@@ -334,9 +334,15 @@
             <xsl:variable name="countRef">
                 <xsl:value-of select="count(xref)"/>
             </xsl:variable>
+            <xsl:variable name="countSup">
+                <xsl:value-of select="count(//aff/sup)"/>
+            </xsl:variable>
             <xsl:choose>
                 <xsl:when test="$count &gt;1">
                     <xsl:apply-templates select="//aff"/>
+                </xsl:when>
+                <xsl:when test="$countSup &gt;1">
+                    <xsl:call-template name="supAffil"/>
                 </xsl:when>
                 <xsl:when test="$countRef &gt;1">
                     <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
@@ -486,6 +492,4 @@
     </xsl:template>
 
     <xsl:template match="flags"/>
-
-
 </xsl:stylesheet>
