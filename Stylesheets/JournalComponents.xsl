@@ -2124,6 +2124,20 @@ reactorsa'</title>
             </title>
         </xsl:if>
     </xsl:template>
+    <xsl:template match="journal-subtitle">
+        <xsl:choose>
+                <xsl:when test="//journal-meta/isbn[string-length() &gt; 0] and not(//publicationMeta/issn)">
+                    <title level="m" type="sub">
+                        <xsl:apply-templates/>
+                    </title>
+                </xsl:when>
+            <xsl:otherwise>
+                <title level="j" type="sub">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     
     <!-- SG - ajout des refs book -->
     <xsl:template

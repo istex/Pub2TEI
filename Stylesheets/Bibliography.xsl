@@ -2268,6 +2268,14 @@
                             <xsl:when test="contains($text2,', pp') and not(contains($text2,'vol'))">
                                 <date type="published">
                                     <xsl:choose>
+                                        <xsl:when test="contains(substring-before(substring-after($text2,','),', pp'),', 20')">
+                                            <xsl:text>20</xsl:text>
+                                            <xsl:value-of select="substring-after(substring-before(substring-after($text2,','),', pp'),', 20')"/>
+                                        </xsl:when>
+                                        <xsl:when test="contains($text2,' 20')">
+                                            <xsl:text>20</xsl:text>
+                                            <xsl:value-of select="substring-after(substring-before($text2,', pp'),'20')"/>
+                                        </xsl:when>
                                         <xsl:when test="contains(substring-before(substring-after($text2,','),', pp'),', 19')">
                                             <xsl:text>19</xsl:text>
                                             <xsl:value-of select="substring-after(substring-before(substring-after($text2,','),', pp'),', 19')"/>
@@ -2285,25 +2293,66 @@
                                     </xsl:choose>
                                 </date>
                             </xsl:when>
-                            <xsl:when test="contains($text2,'19') and contains($text2,';') or contains($text2,'.')">
+                            <xsl:when test="(contains($text2,'19') or contains($text2,'20')) and contains($text2,';') or contains($text2,'.')">
                                 <date type="published">
-                                    <xsl:text>19</xsl:text>
                                     <xsl:choose>
-                                        <xsl:when test="contains(substring-after($text2,'19'),';')">
-                                            <xsl:value-of select="substring-before(substring-after($text2,'19'),';')"/>
+                                        <xsl:when test="contains($text2,'19')">
+                                            <xsl:text>19</xsl:text>
+                                            <xsl:choose>
+                                                <xsl:when test="contains(substring-after($text2,'19'),';')">
+                                                    <xsl:value-of select="substring-before(substring-after($text2,'19'),';')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 19'),';')">
+                                                    <xsl:value-of select="substring-before(substring-after($text2,', 19'),';')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 19'),',')">
+                                                    <xsl:value-of select="substring-before(substring-after($text2,'19'),',')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 19'),'.')">
+                                                    <xsl:value-of select="substring-before(substring-after($text2,', 19'),'.')"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,'19'),',')"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
                                         </xsl:when>
-                                        <xsl:when test="contains(substring-after($text2,', 19'),';')">
-                                            <xsl:value-of select="substring-before(substring-after($text2,', 19'),';')"/>
+                                        <xsl:when test="contains($text2,'20')">
+                                            <xsl:choose>
+                                                <xsl:when test="contains(substring-after($text2,', 20'),', vol')">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,', 20'),', vol')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-before(substring-after($text2,', 20'),':'),'2013')">2013</xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 20'),':') and not(contains($text2,'http'))">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,', 20'),':')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 20'),'http')">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="normalize-space(translate(substring-before(substring-after($text2,', 20'),'http'),'.',''))"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 20'),'.')">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="translate(substring-before(substring-after($text2,', 20'),'.'),')','')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 20'),',')">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,'20'),',')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,'20'),';')">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,'20'),';')"/>
+                                                </xsl:when>
+                                                <xsl:when test="contains(substring-after($text2,', 20'),';')">
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,', 20'),';')"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:text>20</xsl:text>
+                                                    <xsl:value-of select="substring-before(substring-after($text2,'20'),',')"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
                                         </xsl:when>
-                                        <xsl:when test="contains(substring-after($text2,', 19'),',')">
-                                            <xsl:value-of select="substring-before(substring-after($text2,'19'),',')"/>
-                                        </xsl:when>
-                                        <xsl:when test="contains(substring-after($text2,', 19'),'.')">
-                                            <xsl:value-of select="substring-before(substring-after($text2,', 19'),'.')"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:value-of select="substring-before(substring-after($text2,'19'),',')"/>
-                                        </xsl:otherwise>
                                     </xsl:choose>
                                     <!--<xsl:value-of select="substring-before(substring-after($text2,'19'),',')"/>-->
                                    <!-- <xsl:value-of select="normalize-space(substring-before(substring-after($text2,','),', 19'))"/>-->
@@ -2322,15 +2371,24 @@
     <!-- volume de la revue -->
     <xsl:template name="volInLine" match="mixed-citation" mode="inLine">
         <xsl:param name="text" select="normalize-space(substring-before(substring-after(.,';'),':'))"/>
+        <xsl:param name="text2" select="substring-after(substring-after(.,';'),';')"/>
         <xsl:param name="separator" select="';'"/>
         <xsl:variable name="volInLine">
             <xsl:value-of select="normalize-space($text)"/>
-        </xsl:variable>        
+        </xsl:variable>
+        <!--<volume>
+            <xsl:value-of select="$text2"/>
+        </volume>-->
         <xsl:choose>
+            <xsl:when test="contains($text2,':')">
+                <biblScope unit="vol">
+                    <xsl:value-of select="substring-before($text2,':')"/>
+                </biblScope>
+            </xsl:when>
             <xsl:when test="contains($volInLine,'vol')">
-                <test>
+                <biblScope unit="vol">
                     <xsl:value-of select="$volInLine"/>
-                </test>
+                </biblScope>
             </xsl:when>
             <xsl:when test="contains($volInLine,' ')"/>
             <xsl:otherwise>
@@ -2354,10 +2412,123 @@
         <xsl:variable name="pageInLine2">
             <xsl:value-of select="normalize-space($text2)"/>
         </xsl:variable>
+        <xsl:variable name="nettoiePage1">
+            <xsl:value-of select="substring-after(substring-after($pageInLine2,';'),':')"/>
+        </xsl:variable>
+        <xsl:variable name="nettoiePage3">
+            <xsl:value-of select="substring-after(substring-after($nettoiePage1,';'),':')"/>
+        </xsl:variable>
         <!--<page>
             <xsl:value-of select="$text2"/>
         </page>-->
         <xsl:choose>
+            <xsl:when test="contains($pageInLine2,';') and contains($pageInLine2,':')">
+                <xsl:choose>
+                    <xsl:when test="contains($nettoiePage1,'pp')">
+                        <xsl:variable name="nettoiePage2">
+                            <xsl:value-of select="substring-after($nettoiePage1,'pp ')"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="contains($nettoiePage2,'-')">
+                                <biblScope unit="page" from="{substring-before($nettoiePage2,'-')}">
+                                    <xsl:value-of select="substring-before($nettoiePage2,'-')"/>
+                                </biblScope>
+                                <biblScope unit="page" to="{translate(substring-after($nettoiePage2,'-'),'.','')}">
+                                    <xsl:value-of select="translate(substring-after($nettoiePage2,'-'),'.','')"/>
+                                </biblScope>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="contains($pageInLine,';')">
+                                        <xsl:variable name="nettoiePage3">
+                                            <xsl:value-of select="substring-after(substring-after($pageInLine,';'),':')"/>
+                                        </xsl:variable>
+                                        <biblScope unit="page" from="{substring-before($nettoiePage3,'-')}">
+                                            <xsl:value-of select="substring-before($nettoiePage3,'-')"/>
+                                        </biblScope>
+                                        <biblScope unit="page" to="{translate(substring-after($nettoiePage3,'-'),'.','')}">
+                                            <xsl:value-of select="translate(substring-after($nettoiePage3,'-'),'.','')"/>
+                                        </biblScope>  
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <biblScope unit="page">
+                                            <xsl:value-of select="$pageInLine"/>
+                                        </biblScope>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="contains($nettoiePage1,':')">
+                        <xsl:choose>
+                            <xsl:when test="contains($nettoiePage3,'-')">
+                                <biblScope unit="page" from="{substring-before($nettoiePage3,'-')}">
+                                    <xsl:value-of select="substring-before($nettoiePage3,'-')"/>
+                                </biblScope>
+                                <biblScope unit="page" to="{translate(substring-after($nettoiePage3,'-'),'.','')}">
+                                    <xsl:value-of select="translate(substring-after($nettoiePage3,'-'),'.','')"/>
+                                </biblScope>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="contains($nettoiePage1,';')">
+                                        <xsl:variable name="nettoiePage4">
+                                            <xsl:value-of select="substring-after($nettoiePage1,';')"/>
+                                        </xsl:variable>
+                                        <xsl:choose>
+                                            <xsl:when test="contains($nettoiePage4,'-')">
+                                                <biblScope unit="page" from="{substring-before($nettoiePage4,'-')}">
+                                                    <xsl:value-of select="substring-before($nettoiePage4,'-')"/>
+                                                </biblScope>
+                                                <biblScope unit="page" to="{translate(substring-after($nettoiePage4,'-'),'.','')}">
+                                                    <xsl:value-of select="translate(substring-after($nettoiePage4,'-'),'.','')"/>
+                                                </biblScope>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <biblScope unit="page">
+                                                    <xsl:value-of select="translate(substring-after($nettoiePage4,':'),'.','')"/>
+                                                </biblScope>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <biblScope unit="page">
+                                            <xsl:value-of select="$nettoiePage1"/>
+                                        </biblScope>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:choose>
+                            <xsl:when test="contains($nettoiePage1,'-')">
+                                <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
+                                    <xsl:value-of select="substring-before($nettoiePage1,'-')"/>
+                                </biblScope>
+                                <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
+                                    <xsl:value-of select="translate(substring-after($nettoiePage1,'-'),'.','')"/>
+                                </biblScope>
+                            </xsl:when>
+                            <xsl:when test="contains($nettoiePage1,'.')">
+                                <biblScope unit="page">
+                                    <xsl:value-of select="substring-before($nettoiePage1,'.')"/>
+                                </biblScope>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="contains($pageInLine2,'http')"/>
+                                    <xsl:otherwise>
+                                        <biblScope unit="page">
+                                            <xsl:value-of select="$pageInLine2"/>
+                                        </biblScope>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="contains($pageInLine,':')">
                 <xsl:variable name="nettoiePage">
                     <xsl:value-of select="substring-after(substring-after($pageInLine,':'),':')"/>
@@ -2392,9 +2563,11 @@
                         </biblScope>
                     </xsl:when>
                     <xsl:otherwise>
-                        <biblScope unit="page">
-                            <xsl:value-of select="$pageInLine"/>
-                        </biblScope>
+                        <xsl:if test="$pageInLine [string-length()&gt; 0]">
+                            <biblScope unit="page">
+                                <xsl:value-of select="$pageInLine"/>
+                            </biblScope>
+                        </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>

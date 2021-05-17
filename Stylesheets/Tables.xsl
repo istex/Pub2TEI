@@ -26,7 +26,7 @@
                             <xsl:value-of select="label"/>
                         </head>
                     </xsl:if>
-                    <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                    <!--<xsl:apply-templates select="* except tgroup"/>-->
                     <xsl:apply-templates/>
                 </figure>
             </xsl:when>

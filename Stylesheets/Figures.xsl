@@ -78,11 +78,9 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test=". !=''">
-                    <figure>
-                        <figDesc>
-                            <xsl:apply-templates/>
-                        </figDesc>
-                    </figure>
+                    <figDesc>
+                        <xsl:apply-templates/>
+                    </figDesc>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>

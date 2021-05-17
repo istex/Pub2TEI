@@ -18,6 +18,9 @@
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[@content-type='original'],'Case reports')">
                 <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[@content-type='original']"/>
             </xsl:when>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject,'Chapter')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject"/>
+            </xsl:when>
             <xsl:when test="//article/@article-type[string-length() &gt; 0]">
                 <xsl:value-of select="//article/@article-type"/>
             </xsl:when>
@@ -57,6 +60,7 @@
     </xsl:variable>
     <xsl:variable name="codeGenre">
         <xsl:choose>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject,'Chapter')">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meteorological-observation'">research-article</xsl:when>
@@ -2023,7 +2027,7 @@
                     <idno type="eISSN">1748-8494</idno>
                 </xsl:if>
 
-                <xsl:apply-templates select="journal-meta/journal-title |journal-meta/journal-title-group/journal-title | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
+                <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
                 <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
                 <xsl:apply-templates select="journal-meta/journal-id"/>
                 <xsl:apply-templates select="journal-meta/issue-title"/>
@@ -2679,7 +2683,7 @@
                                                     <xsl:with-param name="theAffil" select="$apresVirgule"/>
                                                 </xsl:call-template>
                                             </xsl:variable>
-                                            <address>
+                                            
                                                 <xsl:choose>
                                                     <xsl:when test="$address!=''">
                                                         <xsl:call-template name="NLMparseAffiliation">
@@ -2687,12 +2691,14 @@
                                                         </xsl:call-template>
                                                     </xsl:when>
                                                     <xsl:otherwise>
-                                                        <addrLine>
-                                                            <xsl:value-of select="$apresVirgule"/>
-                                                        </addrLine>
+                                                        <address>
+                                                            <addrLine>
+                                                                <xsl:value-of select="$apresVirgule"/>
+                                                            </addrLine>
+                                                        </address>
                                                     </xsl:otherwise>
                                                 </xsl:choose>
-                                            </address>
+                                            
                                         </xsl:otherwise>
                                     </xsl:choose>
                         </xsl:if>
@@ -4544,19 +4550,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <!-- 
-    <xsl:template match="notes">
-        <xsl:choose>
-            <xsl:when test="ancestor::back">
-                <note>
-                    <xsl:apply-templates/>
-                </note>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:apply-templates/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template> -->
    
    <!-- parseAffiliation -->
     <xsl:template name="NLMaffiliation">
@@ -4693,7 +4686,8 @@
                                 or $avantVirgule='NM'
                                 or $avantVirgule='PA'
                                 or $avantVirgule='TN'
-                                or $avantVirgule='VA'">
+                                or $avantVirgule='VA'
+                                or $avantVirgule='N.Y.'">
                                 <region>
                                     <xsl:value-of select="$avantVirgule"/>
                                 </region>
@@ -4730,6 +4724,7 @@
                                 or starts-with($avantVirgule,'NE ')
                                 or starts-with($avantVirgule,'NH ')
                                 or starts-with($avantVirgule,'NJ ')
+                                or starts-with($avantVirgule,'N.J.')
                                 or starts-with($avantVirgule,'NM ')
                                 or starts-with($avantVirgule,'NV ')
                                 or starts-with($avantVirgule,'NY ')
@@ -4822,7 +4817,9 @@
                                         or $avantVirgule='WV'
                                         or $avantVirgule='WA'
                                         or $avantVirgule='WI'
-                                        or $avantVirgule='WY'">
+                                        or $avantVirgule='WY'
+                                        or $avantVirgule='N.J.'
+                                        or $avantVirgule='N.Y.'">
                                         <region>
                                             <xsl:value-of select="$avantVirgule"/>
                                         </region>
@@ -5069,9 +5066,9 @@
                                                         <xsl:choose>
                                                             <xsl:when test="$countSup">
                                                                 <address>
-                                                                    <addrLine>
+                                                                    <settlement>
                                                                         <xsl:apply-templates select="$avantVirgule"/>
-                                                                    </addrLine>
+                                                                    </settlement>
                                                                 </address>
                                                             </xsl:when>
                                                             <xsl:otherwise>
@@ -5157,21 +5154,6 @@
     </xsl:template>
     
     <!-- affiliation JATS -->
-    <xsl:template match="xref" mode="karger">
-        <xsl:param name="restxref" select="."/>
-        <toto>
-            <xsl:value-of select="$restxref"/>
-        </toto>
-    </xsl:template>
-    
-    <xsl:template match="sup" mode="karger">
-        <xsl:param name="restSup" select="."/>
-        <titi type="{.}">
-            <!--<xsl:value-of select="$restSup/following-sibling:: text()[position()=1]"/>  -->
-            
-            <xsl:value-of select="$restSup"/>
-        </titi>
-    </xsl:template>
     
     <!-- reformatage des données karger et en général les données contenant des <sup> dans les affiliations-->
     <!-- ce que nous avons en entrée : doi: 10.1159/000485060-->
@@ -5204,7 +5186,7 @@
         <xsl:call-template name="tokenizeJats"/>
     </xsl:template>
     <xsl:template match="xref" name="tokenizeJats" mode="karger">
-        <xsl:param name="text" select="xref"/>
+        <xsl:param name="text" select="translate(xref,' ','')"/>
         <xsl:param name="separator" select="','"/>
         <xsl:choose>
             <xsl:when test="contains($text,'-')">
@@ -5254,7 +5236,7 @@
                                 </xsl:with-param>
                             </xsl:call-template>
                         </affiliation>
-                    </xsl:when>
+                        </xsl:when>
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>

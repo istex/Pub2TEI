@@ -105,6 +105,7 @@
                 contains($theOrg,'Council') or
                 contains($theOrg,'Max-Planck') or
                 contains($theOrg,'National') or
+                contains($theOrg,'Medicine') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
@@ -284,6 +285,7 @@
                 contains($theOrg,'Sciences') or
                 contains($theOrg,'Unidad') or
                 contains($theOrg,'DPh-G/PSRM') or
+                contains($theOrg,'IMSS') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
@@ -317,6 +319,7 @@
                 contains($theOrg,'Assessor') or
                 contains($theOrg,'PhD ') or
                 contains($theOrg,'konzultant') or
+                contains($theOrg,'Postgrado') or
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
@@ -338,6 +341,7 @@
                 contains($theOrg,'Merus BV') or
                 contains($theOrg,'Taiyo Kaihatu-Kensetu Co') or
                 contains($theOrg,'B.I.S.R.A') or
+                contains($theOrg,'ACRIA') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>
