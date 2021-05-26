@@ -2503,11 +2503,31 @@
                     <xsl:otherwise>
                         <xsl:choose>
                             <xsl:when test="contains($nettoiePage1,'-')">
-                                <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
-                                    <xsl:value-of select="substring-before($nettoiePage1,'-')"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($nettoiePage1,' ')">
+                                        <biblScope unit="page" from="{substring-after(substring-before($nettoiePage1,'-'),' ')}">
+                                            <xsl:value-of select="substring-after(substring-before($nettoiePage1,'-'),' ')"/>
+                                        </biblScope>
+                                        <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
+                                            <xsl:value-of select="translate(substring-after($nettoiePage1,'-'),'.','')"/>
+                                        </biblScope>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
+                                            <xsl:value-of select="substring-before($nettoiePage1,'-')"/>
+                                        </biblScope>
+                                        <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
+                                            <xsl:value-of select="translate(substring-after($nettoiePage1,'-'),'.','')"/>
+                                        </biblScope>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:when>
+                            <xsl:when test="contains($nettoiePage1,'–')">
+                                <biblScope unit="page" from="{substring-before($nettoiePage1,'–')}">
+                                    <xsl:value-of select="substring-before($nettoiePage1,'–')"/>
                                 </biblScope>
-                                <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
-                                    <xsl:value-of select="translate(substring-after($nettoiePage1,'-'),'.','')"/>
+                                <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'–'),'.','')}">
+                                    <xsl:value-of select="translate(substring-after($nettoiePage1,'–'),'.','')"/>
                                 </biblScope>
                             </xsl:when>
                             <xsl:when test="contains($nettoiePage1,'.')">

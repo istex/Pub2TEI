@@ -338,6 +338,10 @@
                 <xsl:value-of select="count(//aff/sup)"/>
             </xsl:variable>
             <xsl:choose>
+                <!-- cas particulier Karger doi 10.1159/000493063  -->
+                <xsl:when test="//article-meta/aff/@id='aff_ '">
+                        <xsl:apply-templates select="//article-meta/aff"/>
+                </xsl:when>
                 <xsl:when test="$count &gt;1">
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>

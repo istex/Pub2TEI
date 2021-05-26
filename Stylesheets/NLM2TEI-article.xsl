@@ -4605,7 +4605,7 @@
                             </xsl:attribute>
                             <xsl:value-of select="$avantVirgule"/>
                         </orgName>
-                        <xsl:if test="$apresVirgule !=''">
+                       <xsl:if test="$apresVirgule !=''">
                             <xsl:call-template name="NLMparseAffiliation">
                                 <xsl:with-param name="theAffil" select="$apresVirgule"/>
                             </xsl:call-template>
@@ -4688,9 +4688,12 @@
                                 or $avantVirgule='TN'
                                 or $avantVirgule='VA'
                                 or $avantVirgule='N.Y.'">
-                                <region>
-                                    <xsl:value-of select="$avantVirgule"/>
-                                </region>
+                                <address>
+                                    <region>
+                                        <xsl:value-of select="$avantVirgule"/>
+                                    </region>
+                                    <country key="US" xml:lang="en">UNITED STATES</country>
+                                </address>
                             </xsl:when>
                             <!-- reprise des codes etats américains pour forcer le code pays us -->
                             <xsl:when test="starts-with($avantVirgule,'AK ')

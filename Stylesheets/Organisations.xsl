@@ -165,6 +165,7 @@
                 contains($theOrg,'College') or
                 contains($theOrg,'Universidad') or
                 contains($theOrg,'Hospi') or
+                contains($theOrg,'Hôpital') or
                 contains($theOrg,'Krankenhaus') or
                 contains($theOrg,'szpital') or
                 contains($theOrg,'больница') or
@@ -286,6 +287,7 @@
                 contains($theOrg,'Unidad') or
                 contains($theOrg,'DPh-G/PSRM') or
                 contains($theOrg,'IMSS') or
+                contains($theOrg,'UFR') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
