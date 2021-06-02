@@ -468,25 +468,11 @@
 	<!-- PL: this could be moved to KeywordsAbstract.xsl when generalised to all publishers -->
     <xsl:template match="abstract |rsc:abstract |trans-abstract | Abstract | els1:head/ce:abstract | els2:head/ce:abstract | head/ce:abstract | fp | abs | execsumm | websumm">
 			<abstract>
-				<!-- PL: indicate the type in case of executive summary or web summary (Nature) -->
-				<!-- SG: pas encore validé par la TEI technicalBoard, je propose de mettre le type dans un titre -->
-			    <xsl:if test="name() = 'execsumm'">
-					<!--<xsl:attribute name="type">
-						<xsl:text>executive-summary</xsl:text>
-					</xsl:attribute>-->
-			        <p>
-			            <title>Executive-summary</title>
-			        </p>
-				</xsl:if> 
-				<xsl:if test="name() = 'websumm'">
-					<!--<xsl:attribute name="type">
-						<xsl:text>web-summary</xsl:text>
-					</xsl:attribute>-->
-				    <p>
-				        <title>Web-summary</title>
-				    </p>
-				</xsl:if>
-	            <xsl:variable name="theLanguage">
+			    <!-- Karger ebooks tous les abstracts sont en anglais-->
+			    <xsl:if test="//publisher-name='S. Karger AG'">
+			        <xsl:attribute name="xml:lang">en</xsl:attribute>
+			    </xsl:if>
+			    <xsl:variable name="theLanguage">
 	                <xsl:choose>
 	                    <xsl:when test="@Language !='--'">
 	                        <xsl:choose>
