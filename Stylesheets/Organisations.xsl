@@ -288,6 +288,7 @@
                 contains($theOrg,'DPh-G/PSRM') or
                 contains($theOrg,'IMSS') or
                 contains($theOrg,'UFR') or
+                contains($theOrg,'Development') or
                 contains($theOrg,'EES')">
                 <xsl:text>department</xsl:text>
             </xsl:when>
@@ -329,6 +330,7 @@
                 or contains($theOrg,'GROUP')
                 or contains($theOrg,'Consejo')
                 or contains($theOrg,'Program')
+                or contains($theOrg,'Corporation')
                 or contains($theOrg,'Team')
                 ">
                 <xsl:text>group</xsl:text>

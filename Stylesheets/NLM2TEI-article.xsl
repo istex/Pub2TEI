@@ -15,6 +15,8 @@
     <!-- code genre -->
     <xsl:variable name="codeGenre2">
         <xsl:choose>
+            <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
+            <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[@content-type='original'],'Case reports')">
                 <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[@content-type='original']"/>
             </xsl:when>
@@ -60,6 +62,8 @@
     </xsl:variable>
     <xsl:variable name="codeGenre">
         <xsl:choose>
+            <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
+            <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject,'Chapter')">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
@@ -1195,10 +1199,22 @@
                                     <xsl:text>book-series</xsl:text>
                                 </note>
                             </xsl:when>
-                            <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
+                            <xsl:when test="//article-meta/isbn[string-length() &gt; 0] and //journal-meta/issn[string-length() &gt; 0]">
                                 <note type="publication-type">
                                     <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
                                     <xsl:text>book-series</xsl:text>
+                                </note>
+                            </xsl:when>
+                            <xsl:when test="//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn [string-length() &gt; 0]">
+                                <note type="publication-type">
+                                    <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
+                                    <xsl:text>book-series</xsl:text>
+                                </note>
+                            </xsl:when>
+                            <xsl:when test="//journal-meta/isbn[string-length() &gt; 0] and not(//journal-meta/issn)">
+                                <note type="publication-type">
+                                    <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F</xsl:attribute>
+                                    <xsl:text>book</xsl:text>
                                 </note>
                             </xsl:when>
                             <xsl:when test="//journal-meta/issn[@pub-type='isbn'][string-length() &gt; 0] and contains(//journal-meta/issn/@pub-type,'pub')[string-length() &gt; 0]">
@@ -1234,6 +1250,7 @@
                 <!-- ProfileDesc -->
                 <xsl:if test="front/article-meta/abstract or front/article-meta/kwd-group or bdy/fp or fm/abs or fm/fp or //pubfm/subject or //suppfm/subject or @xml:lang or front/article-meta/article-categories">
                     <profileDesc>
+                        <!-- karger -->
                         <!-- PL: abstract is moved from <front> to here -->
                         <xsl:apply-templates select="front/article-meta/abstract | bdy/fp | fm/abs"/>
                         <xsl:apply-templates select="front/article-meta/trans-abstract| fm/fp | fm/execsumm | fm/websumm"/>
@@ -2019,6 +2036,10 @@
                 </xsl:if>
             </analytic>
             <monogr>
+                <!-- titre manquant Karger-ebooks-->
+                <xsl:if test="//isbn='978-3-318-05934-2'">
+                    <title level="m" type="main">History of the Basel Institute for Immunology</title>
+                </xsl:if>
                 <!-- Bloc RSL version dtd highWire -->
                 <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
                     <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
@@ -2094,6 +2115,15 @@
                         <xsl:attribute name="type">ISBN</xsl:attribute>
                         <xsl:value-of select="//volume-id[@pub-id-type='isbn']"/>
                     </idno>
+                </xsl:if>
+                <!-- titre manquant Karger-ebooks suite-->
+                <xsl:if test="//isbn='978-3-318-05934-2'">
+                    <author>
+                        <persName>
+                            <surname>Lefkovits</surname>
+                            <forename type="first">Ivan</forename>
+                        </persName>
+                    </author>
                 </xsl:if>
                 <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='editor']"/>
                 <xsl:apply-templates select="//conference"/>
@@ -2661,7 +2691,17 @@
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
                             </xsl:attribute>
-                            <xsl:value-of select="$avantVirgule"/>
+                            <xsl:choose>
+                                <xsl:when test="contains($avantVirgule,'aDepartment')">
+                                    <xsl:value-of select="replace($avantVirgule,'aDepartment','Department')"/>
+                                </xsl:when>
+                                <xsl:when test="contains($avantVirgule,'bDepartment')">
+                                    <xsl:value-of select="replace($avantVirgule,'bDepartment','Department')"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$avantVirgule"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </orgName>
                         <xsl:if test="$apresVirgule !=''">
                             <!--<address><addrLine>
@@ -5069,9 +5109,18 @@
                                                         <xsl:choose>
                                                             <xsl:when test="$countSup">
                                                                 <address>
-                                                                    <settlement>
-                                                                        <xsl:apply-templates select="$avantVirgule"/>
-                                                                    </settlement>
+                                                                    <xsl:choose>
+                                                                        <xsl:when test="contains($avantVirgule,'.')">
+                                                                            <region>
+                                                                                <xsl:apply-templates select="$avantVirgule"/>
+                                                                            </region>
+                                                                        </xsl:when>
+                                                                        <xsl:otherwise>
+                                                                            <settlement>
+                                                                                <xsl:apply-templates select="$avantVirgule"/>
+                                                                            </settlement>
+                                                                        </xsl:otherwise>
+                                                                    </xsl:choose>
                                                                 </address>
                                                             </xsl:when>
                                                             <xsl:otherwise>
@@ -5195,14 +5244,38 @@
             <xsl:when test="contains($text,'-')">
                 <xsl:variable name="replaceText">
                     <xsl:choose>
-                        <xsl:when test="contains($text,'a-d')">
-                            <xsl:value-of select="replace($text,'a-d','a,b,c,d')"/>
+                        <xsl:when test="contains($text,'a b')">
+                            <xsl:value-of select="replace($text,'a b','a,b')"/>
                         </xsl:when>
                         <xsl:when test="contains($text,'a-c')">
                             <xsl:value-of select="replace($text,'a-c','a,b,c')"/>
                         </xsl:when>
+                        <xsl:when test="contains($text,'a-cd')">
+                            <xsl:value-of select="replace($text,'a-cd','a,c,d')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'a-d')">
+                            <xsl:value-of select="replace($text,'a-d','a,b,c,d')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'a-df')">
+                            <xsl:value-of select="replace($text,'a-df','a,d,e,f')"/>
+                        </xsl:when>
                         <xsl:when test="contains($text,'a-f')">
                             <xsl:value-of select="replace($text,'a-f','a,b,c,d,e,f')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'b-e')">
+                            <xsl:value-of select="replace($text,'b-e','b,c,d,e')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'b-g')">
+                            <xsl:value-of select="replace($text,'b-g','a,b,c,d,e,f,g')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'c-e')">
+                            <xsl:value-of select="replace($text,'c-e','c,d,e')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'d-f')">
+                            <xsl:value-of select="replace($text,'d-f','d,e,f')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'e-g')">
+                            <xsl:value-of select="replace($text,'e-g','e,f,g')"/>
                         </xsl:when>
                     </xsl:choose>
                 </xsl:variable>

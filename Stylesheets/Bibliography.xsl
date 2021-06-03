@@ -2382,7 +2382,7 @@
         <xsl:choose>
             <xsl:when test="contains($text2,':')">
                 <biblScope unit="vol">
-                    <xsl:value-of select="substring-before($text2,':')"/>
+                    <xsl:value-of select="normalize-space(substring-before($text2,':'))"/>
                 </biblScope>
             </xsl:when>
             <xsl:when test="contains($volInLine,'vol')">
@@ -2486,7 +2486,7 @@
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <biblScope unit="page">
-                                                    <xsl:value-of select="translate(substring-after($nettoiePage4,':'),'.','')"/>
+                                                    <xsl:value-of select="normalize-space(translate(substring-after($nettoiePage4,':'),'.',''))"/>
                                                 </biblScope>
                                             </xsl:otherwise>
                                         </xsl:choose>
@@ -2523,11 +2523,11 @@
                                 </xsl:choose>
                             </xsl:when>
                             <xsl:when test="contains($nettoiePage1,'–')">
-                                <biblScope unit="page" from="{substring-before($nettoiePage1,'–')}">
-                                    <xsl:value-of select="substring-before($nettoiePage1,'–')"/>
+                                <biblScope unit="page" from="{normalize-space(substring-before($nettoiePage1,'–'))}">
+                                    <xsl:value-of select="normalize-space(substring-before($nettoiePage1,'–'))"/>
                                 </biblScope>
-                                <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'–'),'.','')}">
-                                    <xsl:value-of select="translate(substring-after($nettoiePage1,'–'),'.','')"/>
+                                <biblScope unit="page" to="{normalize-space(translate(substring-after($nettoiePage1,'–'),'.',''))}">
+                                    <xsl:value-of select="normalize-space(translate(substring-after($nettoiePage1,'–'),'.',''))"/>
                                 </biblScope>
                             </xsl:when>
                             <xsl:when test="contains($nettoiePage1,'.')">
