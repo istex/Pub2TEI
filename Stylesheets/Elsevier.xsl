@@ -2822,7 +2822,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:template match="els1:article[els1:item-info] |els2:article[els2:item-info] | els1:converted-article[els1:item-info] | els2:converted-article[els2:item-info] | converted-article[item-info] | article[item-info] | simple-article | els1:simple-article | els2:simple-article">
+    <xsl:template match="els1:article[els1:item-info] |els2:article[els2:item-info] | els1:converted-article[els1:item-info] | els2:converted-article[els2:item-info] | converted-article[item-info] | article[item-info] | simple-article[item-info]| book-review[item-info] | els1:simple-article[els1:item-info] | els2:simple-article[els2:item-info] | els1:book-review[els1:item-info] |els2:book-review[els2:item-info]">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -2842,6 +2842,16 @@
                                 <xsl:if test="simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
                                     <title level="a" type="sub">
                                         <xsl:value-of select="simple-head/ce:dochead/ce:textfn | els1:simple-head/ce:dochead/ce:textfn | els2:simple-head/ce:dochead/ce:textfn"/>
+                                    </title>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:when test="els1:book-review-head/ce:title | els2:book-review-head/ce:title |book-review-head/ce:title !=''">
+                                <title level="a" type="main">
+                                    <xsl:value-of select="els1:book-review-head/ce:title | els2:book-review-head/ce:title |book-review-head/ce:title"/>
+                                </title>
+                                <xsl:if test="book-review-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:book-review-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:book-review-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
+                                    <title level="a" type="sub">
+                                        <xsl:value-of select="book-review-head/ce:dochead/ce:textfn | els1:book-review-head/ce:dochead/ce:textfn | els2:book-review-head/ce:dochead/ce:textfn"/>
                                     </title>
                                 </xsl:if>
                             </xsl:when>
@@ -2974,6 +2984,16 @@
                                     </xsl:if>
                                 </xsl:if>
                                 <xsl:choose>
+                                    <xsl:when test="els1:book-review-head/ce:title | els2:book-review-head/ce:title |book-review-head/ce:title !=''">
+                                        <title level="a" type="main">
+                                            <xsl:value-of select="els1:book-review-head/ce:title | els2:book-review-head/ce:title |book-review-head/ce:title"/>
+                                        </title>
+                                        <xsl:if test="book-review-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:book-review-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:book-review-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
+                                            <title level="a" type="sub">
+                                                <xsl:value-of select="book-review-head/ce:dochead/ce:textfn | els1:book-review-head/ce:dochead/ce:textfn | els2:book-review-head/ce:dochead/ce:textfn"/>
+                                            </title>
+                                        </xsl:if>
+                                    </xsl:when>
                                     <xsl:when test="simple-head/ce:title | els1:head/ce:title 
                                         |els2:head/ce:title 
                                         | head/ce:title ='' 
@@ -2997,9 +3017,8 @@
                                     </title>
                                 </xsl:if>
                                 <!-- All authors are included here -->
-                                <xsl:apply-templates
-                                    select="simple-head/ce:author-group/ce:author|els1:head/ce:author-group/ce:author |els2:head/ce:author-group/ce:author | head/ce:author-group/ce:author"/>
-                                <xsl:apply-templates
+                                <xsl:apply-templates select="simple-head/ce:author-group/ce:author | els1:simple-head/ce:author-group/ce:author| els2:simple-head/ce:author-group/ce:author | els1:head/ce:author-group/ce:author | els2:head/ce:author-group/ce:author | head/ce:author-group/ce:author | book-review-head/ce:author-group/ce:author | els1:book-review-head/ce:author-group/ce:author| els2:book-review-head/ce:author-group/ce:author"/>
+                                 <xsl:apply-templates
                                     select="els1:head/ce:author-group/ce:collaboration |els2:head/ce:author-group/ce:collaboration | head/ce:author-group/ce:collaboration"/>
                                 <!-- identifier -->
                                 <!-- ajout identifiants ISTEX et ARK -->
@@ -3015,8 +3034,7 @@
                                 </xsl:if>
                                 <xsl:apply-templates select="els1:item-info/ce:doi |els2:item-info/ce:doi | item-info/ce:doi"/>
                                 <xsl:apply-templates select="els1:item-info/ce:pii |els2:item-info/ce:pii | item-info/ce:pii"/>
-                                <xsl:apply-templates select="els1:item-info/els1:aid |els2:item-info/els2:aid | item-info/els1:aid| item-info/els2:aid"
-                                />
+                                <xsl:apply-templates select="els1:item-info/els1:aid |els2:item-info/els2:aid | item-info/els1:aid| item-info/els2:aid"/>
                                 <xsl:apply-templates select="els1:item-info/ce:document-thread |els2:item-info/ce:document-thread | item-info/ce:document-thread"/>
                             </analytic>
                             <monogr>
@@ -3138,32 +3156,7 @@
                                 
                                 <imprint>
                                     <publisher scheme="https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G">ELSEVIER</publisher>
-                                  <!--  <xsl:choose>
-                                        <xsl:when
-                                            test="els1:head/ce:miscellaneous |els2:head/ce:miscellaneous | head/ce:miscellaneous">
-                                            <xsl:apply-templates select="els1:head/ce:miscellaneous |els2:head/ce:miscellaneous"
-                                                mode="inImprint"/>
-                                            <xsl:apply-templates select="head/ce:miscellaneous"
-                                                mode="inImprint"/>
-                                        </xsl:when>
-                                        <xsl:when
-                                            test="els1:head/ce:date-accepted |els2:head/ce:date-accepted | head/ce:date-accepted">
-                                            <xsl:apply-templates select="els1:head/ce:date-accepted |els2:head/ce:date-accepted"
-                                                mode="inImprint"/>
-                                            <xsl:apply-templates select="head/ce:date-accepted"
-                                                mode="inImprint"/>
-                                        </xsl:when>
-                                        <xsl:when
-                                            test="els1:head/ce:date-received |els2:head/ce:date-received | head/ce:date-received">
-                                            <xsl:apply-templates select="els1:head/ce:date-received |els2:head/ce:date-received"
-                                                mode="inImprint"/>
-                                            <xsl:apply-templates select="head/ce:date-received"
-                                                mode="inImprint"/>
-                                        </xsl:when>
-                                    </xsl:choose>-->
-                                    <!-- lien vers la donnée externe header -->
-                                    <!-- date de publication -->
-                                    <xsl:choose>
+                                  <xsl:choose>
                                         <xsl:when test="$date">
                                             <date type="published">
                                                 <xsl:attribute name="when">
@@ -3265,6 +3258,36 @@
                                     </xsl:choose>
                                 </imprint>
                             </monogr>
+                            <!-- book-reviews -->
+                            <xsl:if test="//book-review-head/sb:reference | els1:book-review-head/sb:reference| els2:book-review-head/sb:reference">
+                                <relatedItem type="review-of">
+                                    <biblStruct>
+                                        <monogr>
+                                            <author>
+                                                <xsl:value-of select="//book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:surname | //els1:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:surname| //els2:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:surname"/>, <xsl:value-of select="//book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:given-name | //els1:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:given-name| //els2:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:given-name"/>
+                                            </author>
+                                            <title type="main" level="m">
+                                                <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle"/>
+                                            </title>
+                                            <idno type="ISBN">
+                                                <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:isbn | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:isbn| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:isbn"/>
+                                            </idno>
+                                            <imprint>
+                                                <pubPlace>
+                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location"/>
+                                                </pubPlace>
+                                                <publisher>
+                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name"/>
+                                                </publisher>
+                                                <date when="{//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date}">
+                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date"/>
+                                                </date>
+                                            </imprint>
+                                            <extent>78 p.</extent>
+                                        </monogr>
+                                    </biblStruct>
+                                </relatedItem>
+                            </xsl:if>
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
