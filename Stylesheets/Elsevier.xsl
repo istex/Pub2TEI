@@ -3283,7 +3283,6 @@
                                                     <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date"/>
                                                 </date>
                                             </imprint>
-                                            <extent>78 p.</extent>
                                         </monogr>
                                     </biblStruct>
                                 </relatedItem>
