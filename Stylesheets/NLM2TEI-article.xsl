@@ -2050,6 +2050,18 @@
                 <xsl:if test="//isbn='978-3-318-06379-0'">
                     <title level="m" type="main">Peritoneal Dialysis Manual : A Guide for Understanding the Treatment</title>
                 </xsl:if>
+                <xsl:if test="//isbn='978-3-318-06085-0'">
+                    <title level="m" type="main">Graves' Orbitopathy</title>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-06302-8'">
+                    <title level="m" type="main">Gastrix</title>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-02697-9'">
+                    <title level="m" type="main">The Craniocervical Syndrome and MRI</title>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-03004-4'">
+                    <title level="m" type="main">Congenital Heart Disease</title>
+                </xsl:if>
                 <!-- Bloc RSL version dtd highWire -->
                 <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
                     <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
@@ -2169,6 +2181,38 @@
                         <persName>
                             <surname>van Esch</surname>
                             <forename type="first">S.</forename>
+                        </persName>
+                    </author>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-06302-8'">
+                    <author>
+                        <persName>
+                            <surname>Rogler</surname>
+                            <forename type="first">G.</forename>
+                        </persName>
+                    </author>
+                    <author>
+                        <persName>
+                            <surname>Bauerfeind</surname>
+                            <forename type="first">P.</forename>
+                        </persName>
+                    </author>
+                    <author>
+                        <persName>
+                            <surname>Fried</surname>
+                            <forename type="first">M.</forename>
+                        </persName>
+                    </author>
+                    <author>
+                        <persName>
+                            <surname>Gubler</surname>
+                            <forename type="first">C.</forename>
+                        </persName>
+                    </author>
+                    <author>
+                        <persName>
+                            <surname>Müllhaupt</surname>
+                            <forename type="first">B.</forename>
                         </persName>
                     </author>
                 </xsl:if>
