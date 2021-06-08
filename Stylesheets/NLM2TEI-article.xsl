@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -1143,6 +1143,10 @@
                                         </xsl:attribute>
                                     </xsl:if>
                                 </xsl:if>
+                                <xsl:if test="//permissions/ali:free_to_read">
+                                    <xsl:attribute name="status">free</xsl:attribute>
+                                    <licence>Open Access</licence>
+                                </xsl:if>
                                 <xsl:apply-templates select="front/article-meta/permissions/copyright-statement"/>
                                 <xsl:apply-templates select="front/article-meta/permissions/copyright-holder | pubfm/cpg/cpn"/>
                                 <xsl:if test="//permissions/license/license-p">
@@ -2040,6 +2044,12 @@
                 <xsl:if test="//isbn='978-3-318-05934-2'">
                     <title level="m" type="main">History of the Basel Institute for Immunology</title>
                 </xsl:if>
+                <xsl:if test="//isbn='978-3-318-05822-2'">
+                    <title level="m" type="main">Well-Being Therapy : Treatment Manual and Clinical Applications</title>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-06379-0'">
+                    <title level="m" type="main">Peritoneal Dialysis Manual : A Guide for Understanding the Treatment</title>
+                </xsl:if>
                 <!-- Bloc RSL version dtd highWire -->
                 <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
                     <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
@@ -2116,12 +2126,49 @@
                         <xsl:value-of select="//volume-id[@pub-id-type='isbn']"/>
                     </idno>
                 </xsl:if>
-                <!-- titre manquant Karger-ebooks suite-->
+                <!-- Karger reconstruction des DOI au niveau monographie-->
+                <xsl:if test="//publisher/publisher-name='S. Karger AG'">
+                    <xsl:if test="//journal-meta/isbn[@content-type='e-isbn']">
+                        <idno type="DOI">
+                            <xsl:text>10.1159/isbn.</xsl:text>
+                            <xsl:value-of select="//journal-meta/isbn[@content-type='e-isbn']"/>
+                        </idno>
+                    </xsl:if>
+                </xsl:if>
+                <!-- author manquant Karger-ebooks suite-->
                 <xsl:if test="//isbn='978-3-318-05934-2'">
                     <author>
                         <persName>
                             <surname>Lefkovits</surname>
                             <forename type="first">Ivan</forename>
+                        </persName>
+                    </author>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-05822-2'">
+                    <author>
+                        <persName>
+                            <surname>Fava</surname>
+                            <forename type="first">Giovanni A.</forename>
+                        </persName>
+                    </author>
+                </xsl:if>
+                <xsl:if test="//isbn='978-3-318-06379-0'">
+                    <author>
+                        <persName>
+                            <surname>Krediet</surname>
+                            <forename type="first">R.T.</forename>
+                        </persName>
+                    </author>
+                    <author>
+                        <persName>
+                            <surname>Struijk</surname>
+                            <forename type="first">D.G.</forename>
+                        </persName>
+                    </author>
+                    <author>
+                        <persName>
+                            <surname>van Esch</surname>
+                            <forename type="first">S.</forename>
                         </persName>
                     </author>
                 </xsl:if>
@@ -2251,7 +2298,11 @@
                             </idno>
                         </xsl:if>
                     </xsl:if>
-                    
+                    <xsl:if test="//issn and //isbn and //journal-id[@journal-id-type='doi']">
+                        <idno type="DOI">
+                            <xsl:value-of select="//journal-id[@journal-id-type='doi']"/>
+                        </idno>
+                    </xsl:if>
                     <xsl:if test="journal-meta/isbn and journal-meta/issn">
                         <xsl:apply-templates select="journal-meta/issn"/>
                     </xsl:if>
@@ -3726,7 +3777,7 @@
 
     <xsl:template match="graphic | ugraphic |rsc:ugraphic">
         <xsl:choose>
-            <xsl:when test="ancestor::table-wrap |ancestor::rsc:table-wrap"/>
+            <!--<xsl:when test="ancestor::table-wrap |ancestor::rsc:table-wrap"/>-->
             <xsl:when test="parent::abstract | parent::rsc:abstract">
                 <p>
                 <graphic>
@@ -5116,9 +5167,18 @@
                                                                             </region>
                                                                         </xsl:when>
                                                                         <xsl:otherwise>
-                                                                            <settlement>
-                                                                                <xsl:apply-templates select="$avantVirgule"/>
-                                                                            </settlement>
+                                                                            <xsl:choose>
+                                                                                <xsl:when test="contains($avantVirgule,' ')">
+                                                                                    <addrLine>
+                                                                                        <xsl:apply-templates select="$avantVirgule"/>
+                                                                                    </addrLine>
+                                                                                </xsl:when>
+                                                                                <xsl:otherwise>
+                                                                                    <settlement>
+                                                                                        <xsl:apply-templates select="$avantVirgule"/>
+                                                                                    </settlement>
+                                                                                </xsl:otherwise>
+                                                                            </xsl:choose>
                                                                         </xsl:otherwise>
                                                                     </xsl:choose>
                                                                 </address>
@@ -5270,6 +5330,9 @@
                         </xsl:when>
                         <xsl:when test="contains($text,'c-e')">
                             <xsl:value-of select="replace($text,'c-e','c,d,e')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($text,'c-f')">
+                            <xsl:value-of select="replace($text,'c-f','c,d,e,f')"/>
                         </xsl:when>
                         <xsl:when test="contains($text,'d-f')">
                             <xsl:value-of select="replace($text,'d-f','d,e,f')"/>

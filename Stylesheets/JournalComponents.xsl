@@ -2238,6 +2238,7 @@ reactorsa'</title>
                             <xsl:apply-templates/>
                         </idno>
                     </xsl:when>
+                    <xsl:when test="@journal-id-type='doi' and //journal-meta/issn and //journal-meta/isbn"/>
                     <xsl:otherwise>
                         <xsl:if test=".!=''">
                             <idno>
@@ -2378,7 +2379,6 @@ reactorsa'</title>
                 </idno>
             </xsl:otherwise>
         </xsl:choose>
-        
     </xsl:template>
     
     <xsl:template match="isbn">
