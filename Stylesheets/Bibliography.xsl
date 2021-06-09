@@ -2191,6 +2191,9 @@
                                         <xsl:value-of select="$authorInLine"/>
                                     </orgName>
                                 </xsl:when>
+                                <xsl:when test="contains($authorInLine, 'et al')">
+                                        <xsl:value-of select="$authorInLine"/>
+                                </xsl:when>
                                 <xsl:otherwise>
                                     <persName>
                                         <surname>
@@ -2487,6 +2490,25 @@
                         test="(contains($text2, '19') or contains($text2, '20')) and contains($text2, ';') or contains($text2, '.')">
                         <date type="published">
                             <xsl:choose>
+                                <xsl:when test="contains($text2, 'http')">
+                                    <xsl:variable name="text3">
+                                        <xsl:value-of select="substring-before($text2, ' http')"/>
+                                    </xsl:variable>
+                                   <xsl:choose>
+                                       <xsl:when test="contains($text3, '18')">
+                                           <xsl:text>18</xsl:text>
+                                           <xsl:value-of select="translate(substring-after($text3, '18'),'.,;','')" />
+                                       </xsl:when>
+                                       <xsl:when test="contains($text3, '19')">
+                                           <xsl:text>19</xsl:text>
+                                           <xsl:value-of select="translate(substring-after($text3, '19'),'.,;','')" />
+                                       </xsl:when>
+                                       <xsl:when test="contains($text3, '20')">
+                                           <xsl:text>20</xsl:text>
+                                           <xsl:value-of select="translate(substring-after($text3, '20'),'.,;','')" />
+                                       </xsl:when>
+                                   </xsl:choose>
+                                </xsl:when>
                                 <xsl:when test="contains($text2, '19')">
                                     <xsl:text>19</xsl:text>
                                     <xsl:choose>
@@ -2694,6 +2716,22 @@
                                             />
                                         </biblScope>
                                     </xsl:when>
+                                    <xsl:when test="contains($pageInLine, '(suppl)')">
+                                        <xsl:variable name="nettoiePage3">
+                                            <xsl:value-of select="normalize-space(translate(replace($pageInLine,'(suppl)',''),'()',''))"/>
+                                        </xsl:variable>
+                                        <biblScope unit="page"
+                                            from="{substring-before($nettoiePage3,'-')}">
+                                            <xsl:value-of
+                                                select="substring-before($nettoiePage3, '-')"/>
+                                        </biblScope>
+                                        <biblScope unit="page"
+                                            to="{translate(substring-after($nettoiePage3,'-'),'.','')}">
+                                            <xsl:value-of
+                                                select="translate(substring-after($nettoiePage3, '-'), '.', '')"
+                                            />
+                                        </biblScope>
+                                    </xsl:when>
                                     <xsl:otherwise>
                                         <biblScope unit="page">
                                             <xsl:value-of select="$pageInLine"/>
@@ -2842,6 +2880,7 @@
                             <xsl:otherwise>
                                 <xsl:choose>
                                     <xsl:when test="contains($pageInLine2, 'http')"/>
+                                    <xsl:when test="not(contains($pageInLine2, ';'))"/>
                                     <xsl:otherwise>
                                         <biblScope unit="page">
                                             <xsl:value-of select="$pageInLine2"/>
