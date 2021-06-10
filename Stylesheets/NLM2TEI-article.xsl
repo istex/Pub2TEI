@@ -2138,14 +2138,19 @@
                         <xsl:value-of select="//volume-id[@pub-id-type='isbn']"/>
                     </idno>
                 </xsl:if>
-                <!-- Karger reconstruction des DOI au niveau monographie-->
+                <!-- Karger reconstruction des DOI au niveau monographie sauf pour 3 ressources-->
                 <xsl:if test="//publisher/publisher-name='S. Karger AG'">
-                    <xsl:if test="//journal-meta/isbn[@content-type='e-isbn']">
-                        <idno type="DOI">
-                            <xsl:text>10.1159/isbn.</xsl:text>
-                            <xsl:value-of select="//journal-meta/isbn[@content-type='e-isbn']"/>
-                        </idno>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="//journal-meta/isbn[@content-type='e-isbn']='978-3-318-05445-3'"></xsl:when>
+                        <xsl:when test="//journal-meta/isbn[@content-type='e-isbn']='978-3-318-05867-3'"></xsl:when>
+                        <xsl:when test="//journal-meta/isbn[@content-type='e-isbn']='978-3-318-06362-2'"></xsl:when>
+                        <xsl:otherwise>
+                            <idno type="DOI">
+                                <xsl:text>10.1159/isbn.</xsl:text>
+                                <xsl:value-of select="//journal-meta/isbn[@content-type='e-isbn']"/>
+                            </idno>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:if>
                 <!-- author manquant Karger-ebooks suite-->
                 <xsl:if test="//isbn='978-3-318-05934-2'">
@@ -4305,6 +4310,9 @@
                             <xsl:when test="@pub-type = 'epub'">
                                 <xsl:attribute name="type">e-published</xsl:attribute>
                             </xsl:when>
+                            <xsl:when test="@pub-type = 'subscription-year'">
+                                <xsl:attribute name="type">subscription-year</xsl:attribute>
+                            </xsl:when>
                             <xsl:when test="@publication-format='print'">
                                 <xsl:attribute name="type">published</xsl:attribute>
                             </xsl:when>
@@ -4384,49 +4392,7 @@
         </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
-        
-      <!--  <xsl:if test="year!='0'">
-        <date>
-            <xsl:choose>
-                <xsl:when test="@pub-type = 'epub'">
-                    <xsl:attribute name="type">e-published</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@publication-format='print'">
-                    <xsl:attribute name="type">published</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@publication-format='electronic'">
-                    <xsl:attribute name="type">e-published</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@pub-type = 'epub-original'">
-                    <xsl:attribute name="type">original-e-published</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@pub-type = 'collection'">
-                    <xsl:attribute name="type">collection-published</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@pub-type = 'final'">
-                    <xsl:attribute name="type">final-published</xsl:attribute>
-                </xsl:when>
-            </xsl:choose>
-            <xsl:attribute name="when">
-                <xsl:call-template name="makeISODateFromComponents">
-                    <xsl:with-param name="oldDay" select="day"/>
-                    <xsl:with-param name="oldMonth" select="month"/>
-                    <xsl:with-param name="oldYear" select="year"/>
-                </xsl:call-template>
-            </xsl:attribute>
-            <xsl:call-template name="makeISODateFromComponents">
-                <xsl:with-param name="oldYear" select="year"/>
-            </xsl:call-template>
-        </date>
-        </xsl:if>-->
     </xsl:template>
-
-    <!-- Revision information 
-    <xsl:template match="history">
-        <revisionDesc>
-            <xsl:apply-templates/>
-        </revisionDesc>
-    </xsl:template>-->
 
     <xsl:template match="date[@date-type = 'received']">
         <change>
@@ -4961,7 +4927,7 @@
                                         <region>
                                             <xsl:value-of select="$avantVirgule"/>
                                         </region>
-                                        <xsl:if test="not(contains(parent::aff,'USA'))">
+                                        <xsl:if test="not(contains(//aff,'USA'))">
                                             <country key="US" xml:lang="en">UNITED STATES</country>
                                         </xsl:if>
                                     </xsl:when>
