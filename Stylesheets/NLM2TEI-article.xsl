@@ -2157,7 +2157,7 @@
                     <author>
                         <persName>
                             <surname>Lefkovits</surname>
-                            <forename type="first">Ivan</forename>
+                            <forename type="first">I</forename>
                         </persName>
                     </author>
                 </xsl:if>
@@ -2165,7 +2165,7 @@
                     <author>
                         <persName>
                             <surname>Fava</surname>
-                            <forename type="first">Giovanni A.</forename>
+                            <forename type="first">GA</forename>
                         </persName>
                     </author>
                 </xsl:if>
@@ -2173,19 +2173,19 @@
                     <author>
                         <persName>
                             <surname>Krediet</surname>
-                            <forename type="first">R.T.</forename>
+                            <forename type="first">RT</forename>
                         </persName>
                     </author>
                     <author>
                         <persName>
                             <surname>Struijk</surname>
-                            <forename type="first">D.G.</forename>
+                            <forename type="first">DG</forename>
                         </persName>
                     </author>
                     <author>
                         <persName>
                             <surname>van Esch</surname>
-                            <forename type="first">S.</forename>
+                            <forename type="first">S</forename>
                         </persName>
                     </author>
                 </xsl:if>
@@ -2193,31 +2193,31 @@
                     <author>
                         <persName>
                             <surname>Rogler</surname>
-                            <forename type="first">G.</forename>
+                            <forename type="first">G</forename>
                         </persName>
                     </author>
                     <author>
                         <persName>
                             <surname>Bauerfeind</surname>
-                            <forename type="first">P.</forename>
+                            <forename type="first">P</forename>
                         </persName>
                     </author>
                     <author>
                         <persName>
                             <surname>Fried</surname>
-                            <forename type="first">M.</forename>
+                            <forename type="first">M</forename>
                         </persName>
                     </author>
                     <author>
                         <persName>
                             <surname>Gubler</surname>
-                            <forename type="first">C.</forename>
+                            <forename type="first">C</forename>
                         </persName>
                     </author>
                     <author>
                         <persName>
                             <surname>Müllhaupt</surname>
-                            <forename type="first">B.</forename>
+                            <forename type="first">B</forename>
                         </persName>
                     </author>
                 </xsl:if>
@@ -5123,12 +5123,14 @@
                                         or contains($avantVirgule,'Worcester')
                                         ">
                                         <xsl:if test="not(contains($theAffil,'UK'))">
-                                            <addrLine>
-                                                <xsl:value-of select="$avantVirgule"/>
-                                            </addrLine>
-                                            <xsl:if test="not(contains($theAffil,'England'))">
-                                                <country key="GB" xml:lang="en">UNITED KINGDOM</country>
-                                            </xsl:if>
+                                            <address>
+                                                <settlement>
+                                                    <xsl:value-of select="$avantVirgule"/>
+                                                </settlement>
+                                                <xsl:if test="not(contains($theAffil,'England'))">
+                                                    <country key="GB" xml:lang="en">UNITED KINGDOM</country>
+                                                </xsl:if>
+                                            </address>
                                         </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="contains($avantVirgule,'The Netherlands') or contains($avantVirgule,'the Netherlands')">
