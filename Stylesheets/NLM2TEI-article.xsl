@@ -3916,7 +3916,7 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="@id">
-                <xsl:attribute name="n">
+                <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
@@ -4159,6 +4159,11 @@
         <xsl:choose>
             <xsl:when test="ancestor::record">
                 <title level="a" type="main" xml:lang="{translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')}">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:when test="ancestor::collection-meta">
+                <title level="s" type="main">
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>

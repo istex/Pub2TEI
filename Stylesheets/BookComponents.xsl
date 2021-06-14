@@ -30,7 +30,11 @@
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
-    
+    <xsl:template match="book-id">
+        <idno type="{@pub-id-type}" >
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
     <!-- Titres des séries (Springer: SeriesTitle) -->
     
     <xsl:template match="SeriesTitle">

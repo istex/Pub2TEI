@@ -117,29 +117,32 @@
                                     <xsl:when test="//body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="//body/book-part/book-part-meta/title-group/title"/>
                                     </xsl:when>
-                                    <!-- <xsl:when test="book-meta/book-title-group/book-title[string-length()&gt; 0]">
-                                <xsl:if test="@xml:lang">
-                                    <xsl:attribute name="xml:lang">
-                                        <xsl:value-of select="translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                    </xsl:attribute>
-                                </xsl:if>
-                                <xsl:apply-templates select="book-meta/book-title-group/book-title"/>
-                            </xsl:when>-->
+                                    <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                        <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
+                                    </xsl:when>
                                 </xsl:choose>
-                                <!-- <xsl:if test="book-meta/book-title-group/subtitle[string-length()&gt; 0]">
-                            <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
-                        </xsl:if>-->
                             </titleStmt>
                             <publicationStmt>
                                 <authority>ISTEX</authority>
                                 <xsl:choose>
+                                    <xsl:when test="book-meta/publisher/publisher-name='De Gruyter'">
+                                        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-1JLL5NJT-J">
+                                            <xsl:value-of select="book-meta/publisher/publisher-name"/></publisher>
+                                    </xsl:when>
                                     <xsl:when test="//body/book-part/book-part-meta">
                                         <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-N14T76M9-6">Brepols Publishers</publisher>
                                     </xsl:when>
                                     <xsl:when test="book-meta/publisher/publisher-name[string-length() &gt; 0]">
                                         <xsl:choose>
-                                            <xsl:when test="book-meta/publisher/publisher-name[string-length() &gt; 0]">
-                                                <publisher><xsl:value-of select="book-meta/publisher/publisher-name"/></publisher>
+                                            <xsl:when test="book-meta/publisher[1]/publisher-name[string-length() &gt; 0]">
+                                                <publisher>
+                                                    <xsl:if test="book-meta/publisher[1]/publisher-name='Cambridge University Press'">
+                                                        <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-7XSK0Q94-6</xsl:attribute>
+                                                    </xsl:if>
+                                                    <xsl:value-of select="normalize-space(book-meta/publisher[1]/publisher-name)"/></publisher>
+                                            </xsl:when>
+                                            <xsl:when test="book-meta/publisher[1]/publisher-loc[string-length() &gt; 0]">
+                                                <pubPlace><xsl:value-of select="normalize-space(book-meta/publisher[1]/publisher-loc)"/></pubPlace>
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:if test="contains(//self-uri/@xlink:href,'numeriquepremium')">
@@ -153,8 +156,13 @@
                                     <availability>
                                         <licence>
                                             <xsl:choose>
+                                                <xsl:when test="book-meta/permissions/copyright-statement[string-length() &gt; 0]">
+                                                    <p>
+                                                    <xsl:value-of select="book-meta/permissions/copyright-statement"/>
+                                                    </p>
+                                                </xsl:when>
                                                 <xsl:when test="book-meta/pub-date/year[string-length() &gt; 0]">
-                                                    <p>©<xsl:value-of select="book-meta/pub-date/year"/> Numérique Premium</p>
+                                                    <p>©<xsl:value-of select="book-meta/pub-date[1]/year"/> Numérique Premium</p>
                                                 </xsl:when>
                                                 <xsl:otherwise>
                                                     <xsl:if test="$docIssue//pub-date/year">
@@ -166,6 +174,22 @@
                                     </availability>
                                 </xsl:if>
                                 <xsl:choose>
+                                    <xsl:when test="book-meta/pub-date[@pub-type='ppub']/year[string-length() &gt; 0]">
+                                        <date type="published">
+                                            <xsl:attribute name="when">
+                                                <xsl:value-of select="book-meta/pub-date[@pub-type='ppub']/year"/>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="book-meta/pub-date[@pub-type='ppub']/year"/>
+                                        </date>
+                                    </xsl:when>
+                                    <xsl:when test="book-meta/pub-date[@pub-type='epub']/year[string-length() &gt; 0]">
+                                        <date type="epublished">
+                                            <xsl:attribute name="when">
+                                                <xsl:value-of select="book-meta/pub-date[@pub-type='epub']/year"/>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="book-meta/pub-date[@pub-type='epub']/year"/>
+                                        </date>
+                                    </xsl:when>
                                     <xsl:when test="book-meta/pub-date/year[string-length() &gt; 0]">
                                         <date type="published">
                                             <xsl:attribute name="when">
@@ -232,7 +256,7 @@
                                         <xsl:apply-templates select="//book-part" mode="sourceDesc"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:apply-templates select="//book" mode="NP"/>
+                                        <xsl:apply-templates select="//book" mode="editor"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </sourceDesc>
@@ -267,16 +291,17 @@
                                         <xsl:apply-templates select="$docIssue//book-meta/pub-date | //book-meta/pub-date"/>
                                     </creation>
                                     <!-- PL: abstract is moved from <front> to here -->
-                                    <xsl:for-each select="book-meta/abstract[string-length() &gt; 0]">
-                                        <abstract>
-                                            <xsl:if test="@xml:lang">
-                                                <xsl:attribute name="xml:lang">
-                                                    <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                                </xsl:attribute>
+                                    <xsl:choose>
+                                        <!-- ne pas reprendre les abstracts du livre si on traite les chapitres-->
+                                        <xsl:when test="/book/book-meta/abstract and /book/body/book-part/book-part-meta/title-group/title"/>
+                                        
+                                        <xsl:otherwise>
+                                            <xsl:if test="book-meta/abstract[string-length() &gt; 0]">
+                                                <xsl:apply-templates select="book-meta/abstract"/>
                                             </xsl:if>
-                                            <xsl:apply-templates/>
-                                        </abstract>
-                                    </xsl:for-each>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                    
                                     <!-- NPremium - book_collection -->
                                     <xsl:if test="collection-meta[@collection-type='book collection']/title-group/title[string-length() &gt; 0]">
                                         <textClass ana="collection">
@@ -337,18 +362,39 @@
                                             </xsl:for-each>
                                         </textClass>
                                     </xsl:if>
+                                    <xsl:if test="book-meta/book-categories[string-length() &gt; 0]">
+                                        <textClass ana="book-subject">
+                                            <xsl:for-each select="book-meta/book-categories/subj-group">
+                                                <keywords scheme="book-subject">
+                                                    <list>
+                                                        <xsl:apply-templates select="subject" mode="degruyter"/>
+                                                    </list>
+                                                </keywords>
+                                            </xsl:for-each>
+                                        </textClass>
+                                    </xsl:if>
                                     <xsl:if test="book-meta/kwd-group[string-length() &gt; 0]">
                                         <xsl:apply-templates select="book-meta/kwd-group"/>
                                     </xsl:if>
-                                    <xsl:if test="book-meta/abstract/@xml:lang">
-                                        <langUsage>
-                                            <language>
-                                                <xsl:attribute name="ident">
-                                                    <xsl:value-of select="translate(book-meta/abstract/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                                </xsl:attribute>
-                                            </language>
-                                        </langUsage>
-                                    </xsl:if>
+                                    <xsl:choose>
+                                        <xsl:when test="book-meta/volume[1]/@xml:lang">
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">
+                                                        <xsl:value-of select="translate(book-meta/volume[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                    </xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:when>
+                                        <xsl:when test="book-meta/abstract[1]/@xml:lang">
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">
+                                                        <xsl:value-of select="translate(book-meta/abstract[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                    </xsl:attribute>
+                                                </language>
+                                            </langUsage></xsl:when>
+                                    </xsl:choose>
                                 </profileDesc>
                             </xsl:when>
                             <xsl:otherwise>
@@ -393,17 +439,39 @@
                     </teiHeader>
                     <text>
                         <body>
-                            <div>
-                                <xsl:choose>
-                                    <xsl:when test="string-length($rawfulltextpath) &gt; 0">
-                                        <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <p></p>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </div>
+                            <xsl:choose>
+                                <xsl:when test="//book/body/book-part/body">
+                                    <xsl:apply-templates select="/book/body/book-part/body"/>
+                                </xsl:when>
+                                <xsl:when test="//book/book-body/book-part/body">
+                                    <xsl:apply-templates select="//book/book-body/book-part/body"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <div>
+                                        <xsl:choose>
+                                            <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                                                <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <p></p>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </div>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </body>
+                        <xsl:choose>
+                            <xsl:when test="//book/body/book-part/back">
+                                <back>
+                                    <xsl:apply-templates select="//book/body/book-part/back/*"/>
+                                </back>
+                            </xsl:when>
+                            <xsl:when test="//book/book-body/book-part/back">
+                                <back>
+                                    <xsl:apply-templates select="//book/book-body/book-part/back/*"/>
+                                </back>
+                            </xsl:when>
+                        </xsl:choose>
                     </text>
                 </xsl:otherwise>
             </xsl:choose>
@@ -445,15 +513,14 @@
             <monogr>
                 <xsl:apply-templates select="//book/book-meta/book-title-group/book-title"/>
                 <xsl:apply-templates select="//book/book-meta/book-title-group/subtitle" mode="monogr"/>
-                <xsl:apply-templates select="$docIssue//book-meta/contrib-group/contrib"/>
-                <xsl:if test="$docIssue//book-meta/isbn[@pub-type='ppub']">
+                <xsl:if test="$docIssue//book-meta/isbn[@pub-type='ppub'] | //book/book-meta/isbn[@pub-type='ppub']">
                     <idno type="ISBN">
-                        <xsl:value-of select="$docIssue//book-meta/isbn[@pub-type='ppub']"/>
+                        <xsl:value-of select="$docIssue//book-meta/isbn[@pub-type='ppub'] | //book/book-meta/isbn[@pub-type='ppub']"/>
                     </idno>
                 </xsl:if>
-                <xsl:if test="$docIssue//book-meta/isbn[@pub-type='epub']">
+                <xsl:if test="$docIssue//book-meta/isbn[@pub-type='epub'] | //book/book-meta/isbn[@pub-type='epub']">
                     <idno type="eISBN">
-                        <xsl:value-of select="$docIssue//book-meta/isbn[@pub-type='epub']"/>
+                        <xsl:value-of select="$docIssue//book-meta/isbn[@pub-type='epub'] | //book/book-meta/isbn[@pub-type='epub']"/>
                     </idno>
                 </xsl:if>
                 <xsl:if test="//book/book-meta/book-id[@pub-id-type='doi']">
@@ -463,8 +530,10 @@
                 </xsl:if>
                 <xsl:apply-templates select="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi']"/>
                 <xsl:apply-templates select="$docIssue//book-meta/counts/page-count"/>
+                <xsl:apply-templates select="//body/book-part/book-part-meta/counts"/>
+                <xsl:apply-templates select="$docIssue//book-meta/contrib-group/contrib"/>
+                <xsl:apply-templates select="//book/book-meta/contrib-group/contrib"/>
                 <imprint>
-                    
                     <!-- publisher-->
                     <xsl:apply-templates select="$docIssue//book-meta/publisher"/>
                     <!-- traiter volume numéro pubdate depuis fichier externe -->
@@ -477,6 +546,9 @@
                         </xsl:when>
                     </xsl:choose>
                     <xsl:choose>
+                        <xsl:when test="//book/book-meta/volume[1]">
+                            <xsl:apply-templates select="//book/book-meta/volume [1]"/>
+                        </xsl:when>
                         <xsl:when test="$docIssue//book-meta/volume">
                             <xsl:apply-templates select="$docIssue//book-meta/volume"/>
                         </xsl:when>
@@ -489,21 +561,26 @@
                 </imprint>
             </monogr>
             <!-- faire un if et gérer le niveau série dans fichier externe -->
-            <xsl:if test="$docIssue//book-series-meta/book-title-group/book-title">
-                <series>
-                    <xsl:apply-templates select="$docIssue//book-series-meta/book-title-group/book-title"/>
-                    
-                    <xsl:apply-templates select="SeriesInfo/SeriesTitle"/>
-                    <xsl:apply-templates select="SeriesInfo/SeriesPrintISSN"/>
-                    <xsl:apply-templates select="SeriesInfo/SeriesElectronicISSN"/>
-                    <xsl:apply-templates select="$docIssue//book-series-meta/book-id[@pub-id-type='doi']"/>
-                    <xsl:apply-templates select="$docIssue//book-series-meta/book-id[@pub-id-type='publisher-id']"/>
-                </series>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$docIssue//book-series-meta/book-title-group/book-title">
+                    <series>
+                        <xsl:apply-templates select="$docIssue//book-series-meta/book-title-group/book-title"/>
+                        <xsl:apply-templates select="SeriesInfo/SeriesTitle"/>
+                        <xsl:apply-templates select="SeriesInfo/SeriesPrintISSN"/>
+                        <xsl:apply-templates select="SeriesInfo/SeriesElectronicISSN"/>
+                        <xsl:apply-templates select="$docIssue//book-series-meta/book-id[@pub-id-type='doi']"/>
+                    </series>
+                </xsl:when>
+                <xsl:when test="//book/book-series-meta/book-id">
+                    <series>
+                        <xsl:apply-templates select="//book/book-series-meta/book-id[@pub-id-type='doi']"/>
+                    </series>
+                </xsl:when>
+            </xsl:choose>
         </biblStruct>
     </xsl:template>
     <!-- Building the sourceDesc bibliographical representation -->
-    <xsl:template match="book" mode="NP">
+    <xsl:template match="book" mode="editor">
         <biblStruct>
             <!-- Genre     -->
             <xsl:if test="@type[string-length()&gt; 0]">
@@ -513,7 +590,15 @@
             </xsl:if>
             <analytic>
                 <!-- Title information related to the paper goes here -->
-                <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="analytic"/>
+                <xsl:choose>
+                    <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
+                        <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
+                    </xsl:when>
+                    <xsl:when test="book-meta/book-title-group/book-title">
+                        <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="analytic"/>
+                    </xsl:when>
+                </xsl:choose>
+                
                 
                 <!-- All authors are included here -->
                 <xsl:choose>
@@ -539,16 +624,16 @@
                 </xsl:if>
                 <xsl:if test="book-meta/book-id[string-length() &gt; 0]">
                     <xsl:for-each select="book-meta/book-id">
-                        <idno type="{@book-id-type}">
+                        <idno type="{translate(@book-id-type,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')}">
                             <xsl:choose>
-                                <xsl:when test="//book-id[@book-id-type='doi'][string-length() &gt; 0]">
+                                <xsl:when test="@book-id-type='doi'[string-length() &gt; 0]">
                                     <xsl:choose>
-                                        <xsl:when test="starts-with(//book-id[@book-id-type='doi'],'10')">
-                                            <xsl:value-of select="normalize-space(//book-id[@book-id-type='doi'])"/>
+                                        <xsl:when test="starts-with(.,'10')">
+                                            <xsl:value-of select="normalize-space(.)"/>
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:text>10.14375/NP.</xsl:text>
-                                            <xsl:value-of select="normalize-space(//book-id[@book-id-type='doi'])"/>
+                                            <xsl:value-of select="normalize-space(@book-id-type)"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -561,16 +646,32 @@
                 </xsl:if>
                 <xsl:if test="book-meta/self-uri">
                     <xsl:for-each select="book-meta/self-uri">
-                        <idno type="{@content-type}">
-                            <xsl:value-of select="normalize-space(@xlink:href)"/>
-                        </idno>
+                            <idno>
+                                <xsl:if test="@content-type">
+                                    <xsl:attribute name="type">
+                                        <xsl:value-of select="normalize-space(@content-type)"/>
+                                    </xsl:attribute>
+                                </xsl:if>
+                                <xsl:if test="contains(.,'http://dx.doi.org/')">
+                                    <xsl:attribute name="type">URI-DOI</xsl:attribute>
+                                </xsl:if>
+                                <xsl:choose>
+                                    <xsl:when test="@xlink:href">
+                                        <xsl:value-of select="normalize-space(@xlink:href)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="."/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </idno>
+                        
+                       
                     </xsl:for-each>
                 </xsl:if>
             </analytic>
             <monogr>
-                <!-- All authors are included here -->
-                <xsl:apply-templates select="book-meta/contrib-group/contrib" mode="NP"/>
                 <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
+                <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
                 <!-- ********************************** Identifier *******************************-->
                 <xsl:if test="book-meta/isbn[string-length() &gt; 0]">
                     <xsl:for-each select="book-meta/isbn">
@@ -579,6 +680,9 @@
                         </idno>
                     </xsl:for-each>
                 </xsl:if>
+                
+                <!-- All authors are included here -->
+                <xsl:apply-templates select="book-meta/contrib-group/contrib" mode="editor"/>
                 <imprint>
                     <xsl:apply-templates select="book-meta/counts/book-page-count"/>
                     <xsl:if test="book-meta/pub-date/year">
@@ -589,8 +693,24 @@
                             <xsl:value-of select="normalize-space(book-meta/pub-date/year)"/>
                         </date>
                     </xsl:if>
+                    <xsl:if test="book-meta/publisher[1]/publisher-name">
+                        <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name"/></publisher>
+                    </xsl:if>
+                    <xsl:if test="book-meta/publisher[1]/publisher-loc">
+                        <pubPlace><xsl:value-of select="book-meta/publisher[1]/publisher-loc"/></pubPlace>
+                    </xsl:if>
                 </imprint>
             </monogr>
+            <xsl:if test="//collection-meta">
+                <series>
+                    <xsl:apply-templates select="/book/collection-meta/title-group/title"/>
+                    <xsl:apply-templates select="/book/collection-meta/title-group/subtitle"/>
+                    <xsl:apply-templates select="/book/collection-meta/contrib-group/contrib" mode="editorSeries"/>
+                </series>
+            </xsl:if>
+            <xsl:if test="/book/book-meta/related-object">
+                <xsl:apply-templates select="/book/book-meta/related-object"/>
+            </xsl:if>
         </biblStruct>
     </xsl:template>
     <xsl:template match="//book-categories/subj-group">
@@ -651,6 +771,20 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template match="//book-categories/subj-group/subject" mode="degruyter">
+        <item>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="."/>
+            </xsl:attribute>
+            <term>
+            <xsl:call-template name="identifySubjectCode">
+                <xsl:with-param name="theCode">
+                    <xsl:value-of select="."/>
+                </xsl:with-param>
+            </xsl:call-template>
+            </term>
+        </item>
+    </xsl:template>
     
     <!-- Numérique Premium -->
     <!-- author related information -->
@@ -666,7 +800,17 @@
         </biblScope>
     </xsl:template>
     
-    <xsl:template match="contrib" mode="NP">
+    <xsl:template match="contrib" mode="editorSeries">
+        <editor>
+            <xsl:apply-templates/>
+            <xsl:if test="@contrib-type[string-length() &gt; 0]">
+                <roleName>
+                    <xsl:value-of select="@contrib-type"/>
+                </roleName>
+            </xsl:if>
+        </editor>
+    </xsl:template>
+    <xsl:template match="contrib" mode="editor">
         <editor>
             <xsl:variable name="i" select="position()-1"/>
             <xsl:variable name="editorNumber">
@@ -764,11 +908,36 @@
     </xsl:template>
     <xsl:template match="page-count">
         <idno type="page-count">
-        <xsl:apply-templates select="@count"/>
+            <xsl:apply-templates select="@count"/>
         </idno>
     </xsl:template>
     <xsl:template match="publisher">
         <xsl:apply-templates select="publisher-name"/>
         <xsl:apply-templates select="publisher-loc"/>
+    </xsl:template>
+    
+    <!-- liens vers images externes en relation chez Cambridge ebooks -->
+    <xsl:template match="related-object">
+        <relatedItem>
+            <xsl:if test="@content-type">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@content-type"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@object-type">
+                <xsl:attribute name="subtype">
+                    <xsl:value-of select="@object-type"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@xlink:href">
+                <ref>
+                    <xsl:value-of select="@xlink:href"/>
+                </ref>
+            </xsl:if>
+        </relatedItem>
+    </xsl:template>
+    
+    <xsl:template match="target">
+        <ptr target="#{@id}"/>
     </xsl:template>
 </xsl:stylesheet>

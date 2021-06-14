@@ -2021,11 +2021,18 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="subtitle | article_sub_title|art_stitle">
-        <xsl:if test=". !=''">
-            <title level="a" type="sub">
-                <xsl:apply-templates/>
-            </title>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="ancestor::collection-meta">
+                <title level="s" type="sub">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:otherwise>
+                <title level="a" type="sub">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="subtitle" mode="monogr">
         <xsl:if test=". !=''">
@@ -2048,21 +2055,35 @@ reactorsa'</title>
     </xsl:template>
 
     <xsl:template match="alt-title">
-        <title level="a" type="{@alt-title-type}">
-            <xsl:choose>
-                <xsl:when test="@alt-title-type">
-                    <xsl:attribute name="type">
-                        <xsl:value-of select="@alt-title-type"/>
-                    </xsl:attribute>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="type">
-                        <xsl:text>alt</xsl:text>
-                    </xsl:attribute>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:apply-templates/>
-        </title>
+        <xsl:choose>
+            <xsl:when test="ancestor::sec">
+                <head>
+                    <xsl:if test="@alt-title-type">
+                        <xsl:attribute name="rend">
+                            <xsl:value-of select="@alt-title-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:when>
+            <xsl:otherwise>
+                <title level="a" type="{@alt-title-type}">
+                    <xsl:choose>
+                        <xsl:when test="@alt-title-type">
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="@alt-title-type"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="type">
+                                <xsl:text>alt</xsl:text>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Elements for general Journal components in ScholarOne (full_journal_title, journal_abbreviation) -->
@@ -2756,6 +2777,7 @@ reactorsa'</title>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <!-- 2 special rules for Springer that provides, beginning and end volume number -->
 

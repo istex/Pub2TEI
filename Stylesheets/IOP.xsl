@@ -3363,9 +3363,6 @@
         ==============
         
     -->
-    <xsl:template match="body">
-            <xsl:apply-templates/>
-    </xsl:template>
     <xsl:template match="sec-level1">
         <div>
             <!-- id -->

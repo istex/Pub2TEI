@@ -11,6 +11,13 @@
     <xsl:output encoding="UTF-8" method="xml"/>
 
     <!-- Macrostructure -->
+    
+    <xsl:template match="body">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="back">
+        <xsl:apply-templates/>
+    </xsl:template>
     <!-- Springer: Para, SimplePara -->
 
     <xsl:template match="p| rsc:p| ce:simple-para | ce:note-para | ce:para">
