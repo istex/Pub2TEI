@@ -814,10 +814,69 @@
         <xsl:apply-templates select="other-ref"/>
         <xsl:apply-templates select="conference-ref"/>
     </xsl:template>
+    
     <xsl:template match="note">
-        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="ancestor::ref"/>
+            <xsl:otherwise>
+                <note>
+                    <xsl:if test="@id[string-length() &gt; 0]">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-
+    
+    <xsl:template match="pb">
+        <xsl:choose>
+            <xsl:when test="parent::div1">
+                <ab>
+                    <ptr>
+                        <xsl:if test="@id[string-length() &gt; 0]">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@n[string-length() &gt; 0]">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="@n"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@ref[string-length() &gt; 0]">
+                            <xsl:attribute name="cRef">
+                                <xsl:value-of select="@ref"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:apply-templates/>
+                    </ptr>
+                </ab>
+            </xsl:when>
+            <xsl:otherwise>
+                <ptr>
+                    <xsl:if test="@id[string-length() &gt; 0]">
+                        <xsl:attribute name="target">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@n[string-length() &gt; 0]">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="@n"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@ref[string-length() &gt; 0]">
+                        <xsl:attribute name="cRef">
+                            <xsl:value-of select="@ref"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </ptr>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     <!-- Unspecified reference (3.0 style) -->
     <!-- <xsl:template match="ref[mixed-citation]">
         <bibl>

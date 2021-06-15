@@ -48,6 +48,8 @@
     <xsl:include href="Tei.xsl"/>
     <!-- SG: ajout du format METS - openEditon Books-->
     <xsl:include href="Mets.xsl"/>
+    <!-- SG: ajout du format ASP - proquest theologiens-->
+    <xsl:include href="Asp.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
@@ -105,6 +107,9 @@
             </xsl:when>
             <xsl:when test="euclid_issue">
                 <xsl:message>Converting a Duke article</xsl:message>
+            </xsl:when>
+            <xsl:when test="asp">
+                <xsl:message>Converting a proquest TCRT article</xsl:message>
             </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(

@@ -244,17 +244,7 @@
             </text>
         </TEI>
     </xsl:template>
-
-    <xsl:template match="note/p">
-        <xsl:choose>
-            <xsl:when test="ancestor::ref"/>
-            <xsl:otherwise>
-                <note>
-                    <xsl:apply-templates/>
-                </note>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
+    
     <!-- traitement des references -->
     <xsl:template match="references">
             <xsl:apply-templates select="citation" mode="sage"/>

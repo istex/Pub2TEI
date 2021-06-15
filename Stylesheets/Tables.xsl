@@ -68,7 +68,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="not(oasis:table | table | rsc:table)">
+                    <xsl:when test="not(oasis:table | table | rsc:table| ancestor::div1)">
                         <figure>
                             <xsl:if test="@id">
                                 <xsl:attribute name="xml:id">

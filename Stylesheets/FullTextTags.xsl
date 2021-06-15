@@ -102,6 +102,9 @@
                                     <xsl:value-of select="@id"/>
                                 </xsl:attribute>
                             </xsl:if>
+                            <xsl:if test="@align='c'">
+                                <xsl:attribute name="rend">align(center)</xsl:attribute>
+                            </xsl:if>
                             <xsl:if test="@xml:lang">
                                 <xsl:attribute name="xml:lang">
                                     <xsl:value-of select="@xml:lang"/>

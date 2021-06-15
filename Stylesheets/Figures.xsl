@@ -37,9 +37,11 @@
 	<!-- IOP -->
     <xsl:template match="figure | rsc:figure">
         <figure>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="@height">
             <xsl:attribute name="rendition">
                 <xsl:value-of select="@height"/>
@@ -53,6 +55,11 @@
             <xsl:if test="@xsrc">
                 <xsl:attribute name="corresp">
                     <xsl:value-of select="@xsrc"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@ref">
+                <xsl:attribute name="corresp">
+                    <xsl:value-of select="@ref"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
