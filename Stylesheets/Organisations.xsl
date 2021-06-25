@@ -118,6 +118,7 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Research') or
                 contains($theOrg,'LIX') or
+                contains($theOrg,'Stress') or
                 contains($theOrg,'Unit') or
                 contains($theOrg,'Products') or
                 contains($theOrg,'Sylvadour') or
@@ -323,6 +324,7 @@
                 contains($theOrg,'PhD ') or
                 contains($theOrg,'konzultant') or
                 contains($theOrg,'Postgrado') or
+                contains($theOrg,'Consultant') or
                 contains($theOrg,'Rechtsanwalt')">
                 <xsl:text>function</xsl:text>
             </xsl:when>
