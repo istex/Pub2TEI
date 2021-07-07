@@ -1093,9 +1093,6 @@
                                         </xsl:choose>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                <xsl:if test="//article-meta/article-id[@pub-id-type='publisher-id'][string-length()&gt; 0] and //publisher-name='Oxford University Press'">
-                                    <xsl:value-of select="normalize-space(//article-meta/article-id[@pub-id-type='publisher-id'])"/>
-                                </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:if test="//art/fm/atl/sbt">
