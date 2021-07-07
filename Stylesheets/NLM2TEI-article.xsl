@@ -1052,25 +1052,45 @@
                                 <!--cambridge : reprise du titre dans product/source  -->
                                 <xsl:choose>
                                     <xsl:when test="//front/article-meta/product/source[string-length() &gt; 0]">
+                                        <title level="a" type="main">
                                         <xsl:text>Review of "</xsl:text>
                                         <xsl:value-of select="//front/article-meta/product/source"/>
                                         <xsl:text>"</xsl:text>
+                                        </title>
                                     </xsl:when>
                                     <xsl:otherwise>
+                                        <title level="a" type="main">
                                         <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='left-running']"/>
+                                        </title>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:if test="//front/article-meta/title-group/alt-title[@alt-title-type='right-running'][string-length() &gt; 0]">
+                                    <title level="a" type="main">
                                     <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='right-running']"/>
+                                    </title>
                                 </xsl:if>
                                 <xsl:choose>
                                     <xsl:when test="//fm/atl ='' and //pubfm/categtxt[string-length() &gt; 0]">
+                                        <title level="a" type="main">
                                         <xsl:value-of select="//pubfm/categtxt"/>
+                                        </title>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="$codeGenreNature"/>
+                                        <xsl:choose>
+                                            <xsl:when test="$codeGenreNature[string-length() &gt; 0]">
+                                                <title level="a" type="main">
+                                                <xsl:value-of select="$codeGenreNature"/>
+                                                </title>
+                                            </xsl:when>
+                                            <xsl:when test="//article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[string-length() &gt; 0]">
+                                                <title level="a" type="main">
+                                                    <xsl:value-of select="//article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject"/>
+                                                </title>
+                                            </xsl:when>
+                                            <xsl:otherwise><title/></xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:otherwise>
                                 </xsl:choose>
                                 <xsl:if test="//article-meta/article-id[@pub-id-type='publisher-id'][string-length()&gt; 0] and //publisher-name='Oxford University Press'">
@@ -2005,14 +2025,14 @@
                 <xsl:apply-templates select="journal-id[@journal-id-type='isbn']"/>
                 <xsl:apply-templates select="doi"/>
                 <!-- BMJ rattrapage DOI -->
-                <xsl:if test="//article-meta/article-id[@pub-id-type='url'][string-length() &gt; 0] and not(//article-meta/article-id[@pub-id-type='doi'][string-length() &gt; 0])">
+                <xsl:if test="article-meta/article-id[@pub-id-type='url'][string-length() &gt; 0] and not(//article-meta/article-id[@pub-id-type='doi'][string-length() &gt; 0])">
                     <idno>
                         <xsl:attribute name="type">DOI</xsl:attribute>
-                        <xsl:value-of select="normalize-space(substring-after(//article-meta/article-id[@pub-id-type='url'],'abs/'))"/>
+                        <xsl:value-of select="normalize-space(substring-after(article-meta/article-id[@pub-id-type='url'],'abs/'))"/>
                     </idno>
                 </xsl:if>
                 <xsl:apply-templates select="article-meta/article-id"/>
-                <xsl:apply-templates select="//article/@id"/>
+                <xsl:apply-templates select="article/@id"/>
                 <!-- lien vers les articles corrigés -->
                 <xsl:if test="article-meta/related-article/name">
                     <ref type="corrected-article">
@@ -2394,7 +2414,7 @@
             <xsl:attribute name="type">
                 <xsl:value-of select="@pub-id-type"/>
             </xsl:attribute>
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </idno>
     </xsl:template>
     
@@ -2403,7 +2423,7 @@
             <xsl:attribute name="type">
                 <xsl:value-of select="ArticleId"/>
             </xsl:attribute>
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </idno>
     </xsl:template>
 
