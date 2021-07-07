@@ -17,11 +17,11 @@
         <xsl:choose>
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[@content-type='original'],'Case reports')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[@content-type='original']"/>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject[@content-type='original'],'Case reports')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject[@content-type='original']"/>
             </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject,'Chapter')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject"/>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject"/>
             </xsl:when>
             <xsl:when test="//article/@article-type[string-length() &gt; 0]">
                 <xsl:value-of select="//article/@article-type"/>
@@ -64,7 +64,7 @@
         <xsl:choose>
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject,'Chapter')">chapter</xsl:when>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meteorological-observation'">research-article</xsl:when>
@@ -4914,9 +4914,6 @@
                                         <region>
                                             <xsl:value-of select="$avantVirgule"/>
                                         </region>
-                                        <xsl:if test="not(contains(//aff,'USA'))">
-                                            <country key="US" xml:lang="en">UNITED STATES</country>
-                                        </xsl:if>
                                     </xsl:when>
                                     <!-- prise en charge des villes japonaises 
                                     et ajout de leurs codes pays si manquant-->
@@ -4940,6 +4937,10 @@
                                                 <country key="JP" xml:lang="en">JAPAN</country>
                                             </xsl:if>
                                         </xsl:if>
+                                    </xsl:when>
+                                    <xsl:when test="contains($avantVirgule,'Pisa Italy')">
+                                        <settlement>Pisa</settlement>
+                                        <country key="IT" xml:lang="en">ITALY</country>
                                     </xsl:when>
                                     <xsl:when test="starts-with($avantVirgule,'AK ')
                                         or starts-with($avantVirgule,'AL ')
