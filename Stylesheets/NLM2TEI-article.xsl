@@ -63,9 +63,7 @@
     
     <xsl:variable name="codeGenre">
         <xsl:choose>
-            <xsl:when test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bcr-2012-007240'">case-report</xsl:when>
-            <xsl:when test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bcr-2012-007264'">case-report</xsl:when>
-            <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
+           <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
@@ -1087,9 +1085,9 @@
                                                 <xsl:value-of select="$codeGenreNature"/>
                                                 </title>
                                             </xsl:when>
-                                            <xsl:when test="//article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[string-length() &gt; 0]">
+                                            <xsl:when test="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[string-length() &gt; 0]">
                                                 <title level="a" type="main">
-                                                    <xsl:value-of select="//article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject"/>
+                                                    <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject[1]"/>
                                                 </title>
                                             </xsl:when>
                                             <xsl:otherwise><title/></xsl:otherwise>
