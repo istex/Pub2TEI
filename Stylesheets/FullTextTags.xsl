@@ -42,10 +42,15 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
+                    <xsl:when test="parent::fn |parent::list-item ">
+                        <p>
+                            <xsl:value-of select="normalize-space(.)"/>
+                        </p>
+                    </xsl:when>
                     <xsl:when test="ancestor::boxed-text/sec and not(parent::list-item)">
                         <div>
                             <p>
-                            <xsl:apply-templates/>
+                                <xsl:apply-templates/>
                             </p>
                         </div>
                     </xsl:when>
@@ -64,11 +69,6 @@
                                 </p>
                             </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:when>
-                    <xsl:when test="parent::fn">
-                        <p>
-                            <xsl:value-of select="normalize-space(.)"/>
-                        </p>
                     </xsl:when>
                     <xsl:when test="ancestor::biography/section |ancestor::rsc:biography/rsc:section">
                         <desc>

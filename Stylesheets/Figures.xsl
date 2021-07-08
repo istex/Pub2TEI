@@ -85,9 +85,20 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test=". !=''">
-                    <figDesc>
-                        <xsl:apply-templates/>
-                    </figDesc>
+                    <xsl:choose>
+                        <xsl:when test="ancestor::table-wrap">
+                            <figure>
+                                <figDesc>
+                                    <xsl:apply-templates/>
+                                </figDesc>
+                            </figure>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <figDesc>
+                                <xsl:apply-templates/>
+                            </figDesc>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
