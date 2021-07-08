@@ -63,9 +63,8 @@
     
     <xsl:variable name="codeGenre">
         <xsl:choose>
-           <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
+            <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meteorological-observation'">research-article</xsl:when>
@@ -163,6 +162,7 @@
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">chapter</xsl:when>
            <xsl:otherwise>
                <xsl:choose>
                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
@@ -1087,7 +1087,7 @@
                                             </xsl:when>
                                             <xsl:when test="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[string-length() &gt; 0]">
                                                 <title level="a" type="main">
-                                                    <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject[1]"/>
+                                                    <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject"/>
                                                 </title>
                                             </xsl:when>
                                             <xsl:otherwise><title/></xsl:otherwise>
