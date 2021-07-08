@@ -19,11 +19,11 @@
             <xsl:when test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bcr-2012-007264'">case-report-type</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group/subject[@content-type='original'],'Case reports')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group/subject[@content-type='original']"/>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original'],'Case reports')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original']"/>
             </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group/subject,'Chapter')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group/subject"/>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject,'Chapter')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject"/>
             </xsl:when>
             <xsl:when test="//article/@article-type[string-length() &gt; 0]">
                 <xsl:value-of select="//article/@article-type"/>
