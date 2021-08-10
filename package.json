@@ -1,6 +1,6 @@
 {
   "name": "pub2tei",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "description": "set of XSLT stylesheets for convert scientific documents from publisher formats (jats, A++, ...) to a unique TEI customized for ISTEX",
   "main": "index.js",
   "scripts": {
