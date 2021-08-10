@@ -264,7 +264,7 @@
     </xsl:template>
 
     <xsl:template match="thead/tr |rsc:thead/rsc:tr | cals:thead/cals:row |els1:thead|els2:thead">
-        <row>
+        <row role="label">
             <xsl:apply-templates/>
         </row>
     </xsl:template>
@@ -277,7 +277,7 @@
         <xsl:apply-templates select="wiley:row"/>
     </xsl:template>
     <xsl:template match="wiley:row">
-        <row>
+        <row role="data">
             <xsl:if test="@rowsep">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
@@ -305,7 +305,7 @@
     
 
     <xsl:template match="tr | cals:row">
-        <row>
+        <row role="data">
             <xsl:apply-templates/>
         </row>
     </xsl:template>
@@ -476,7 +476,7 @@
         <xsl:apply-templates select="oasis:row"/>
     </xsl:template>
     <xsl:template match="oasis:row">
-        <row>
+        <row role="data">
             <xsl:if test="@rowsep or parent::oasis:thead">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>

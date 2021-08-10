@@ -68,12 +68,8 @@
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meteorological-observation'">research-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='abstract'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>abstract</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='abstract'">abstract</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='Abstract'">abstract</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='addendum'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='announcement'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='article-commentary'">review-article</xsl:when>

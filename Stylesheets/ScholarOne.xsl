@@ -372,7 +372,7 @@
                 <xsl:value-of select="count(xref)"/>
             </xsl:variable>
            <xsl:variable name="countSup">
-                <xsl:value-of select="count(sup)"/>
+                <xsl:value-of select="count(//aff/sup)"/>
             </xsl:variable>
             <xsl:choose>
                 <!-- cas particulier Karger doi 10.1159/000493063  -->

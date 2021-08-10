@@ -75,7 +75,7 @@
             <xsl:when test="fn">
                 <xsl:apply-templates/>
             </xsl:when>
-            <xsl:when test="ancestor::table-wrap and not(ancestor::table-wrap/label)">
+            <xsl:when test="ancestor::table-wrap">
                 <head>
                     <xsl:if test="@xml:lang!=''">
                         <xsl:copy-of select="@xml:lang"/>
