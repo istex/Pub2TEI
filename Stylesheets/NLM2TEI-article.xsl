@@ -43,6 +43,7 @@
                     <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Contents')">other</xsl:when>
                     <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Front matter')">other</xsl:when>
                     <xsl:when test="contains(/article/front/article-meta/title-group/subtitle | /article/front/article-meta/title-group/title,'Abbreviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
                     <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
@@ -65,6 +66,7 @@
         <xsl:choose>
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
+            <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meteorological-observation'">research-article</xsl:when>
@@ -2541,9 +2543,6 @@
        <xsl:if test="email">
            <xsl:apply-templates select="email"/>
        </xsl:if>
-       <xsl:variable name="countSup">
-           <xsl:value-of select="count(//aff/sup)"/>
-       </xsl:variable>
        <xsl:choose>
            <xsl:when test="./org">
                <affiliation>
@@ -2585,6 +2584,10 @@
                  <xsl:when test="../aff">
                        <affiliation>
                            <xsl:choose>
+                               <xsl:when test="addr-line and contains(addr-line,',')">
+                                       <xsl:apply-templates select="addr-line"/>
+                                       <xsl:apply-templates select="country"/>
+                               </xsl:when>
                                <xsl:when test="addr-line">
                                    <address>
                                        <xsl:apply-templates select="addr-line"/>
@@ -4797,7 +4800,9 @@
                                     <region>
                                         <xsl:value-of select="$avantVirgule"/>
                                     </region>
-                                    <country key="US" xml:lang="en">UNITED STATES</country>
+                                    <xsl:if test="not(contains(//aff,'USA'))">
+                                        <country key="US" xml:lang="en">UNITED STATES</country>
+                                    </xsl:if>
                                 </address>
                             </xsl:when>
                             <!-- reprise des codes etats américains pour forcer le code pays us -->
@@ -4852,7 +4857,9 @@
                                 or starts-with($avantVirgule,'WI ')
                                 or starts-with($avantVirgule,'WV ')
                                 or starts-with($avantVirgule,'WY ')">
-                                <country key="US" xml:lang="en">UNITED STATES</country>
+                                <xsl:if test="not(contains(//aff,'USA'))">
+                                    <country key="US" xml:lang="en">UNITED STATES</country>
+                                </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:choose>

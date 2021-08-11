@@ -371,9 +371,6 @@
             <xsl:variable name="countRef">
                 <xsl:value-of select="count(xref)"/>
             </xsl:variable>
-           <xsl:variable name="countSup">
-                <xsl:value-of select="count(//aff/sup)"/>
-            </xsl:variable>
             <xsl:choose>
                 <!-- cas particulier Karger doi 10.1159/000493063  -->
                 <xsl:when test="//article-meta/aff/@id='aff_ '">
@@ -382,7 +379,8 @@
                 <xsl:when test="$count &gt;1">
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>
-                <xsl:when test="$countSup &gt;1">
+                <!-- cas Karger -->
+                <xsl:when test="not(//xref/sup)">
                     <xsl:call-template name="supAffil"/>
                 </xsl:when>
                 <xsl:when test="$countRef &gt;1">
