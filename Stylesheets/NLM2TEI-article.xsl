@@ -4800,7 +4800,7 @@
                                     <region>
                                         <xsl:value-of select="$avantVirgule"/>
                                     </region>
-                                    <xsl:if test="not(contains(//aff,'USA'))">
+                                    <xsl:if test="not(contains($apresVirgule,'USA'))">
                                         <country key="US" xml:lang="en">UNITED STATES</country>
                                     </xsl:if>
                                 </address>
