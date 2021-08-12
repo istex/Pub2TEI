@@ -2584,10 +2584,6 @@
                  <xsl:when test="../aff">
                        <affiliation>
                            <xsl:choose>
-                               <xsl:when test="addr-line and contains(addr-line,',')">
-                                       <xsl:apply-templates select="addr-line"/>
-                                       <xsl:apply-templates select="country"/>
-                               </xsl:when>
                                <xsl:when test="addr-line">
                                    <address>
                                        <xsl:apply-templates select="addr-line"/>

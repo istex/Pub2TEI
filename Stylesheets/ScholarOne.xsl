@@ -380,7 +380,7 @@
                     <xsl:apply-templates select="//aff"/>
                 </xsl:when>
                 <!-- cas Karger -->
-                <xsl:when test="not(//xref/sup) and //aff/sup">
+                <xsl:when test="contains(/article/front/journal-meta/publisher/publisher-name,'S. Karger AG')">
                     <xsl:call-template name="supAffil"/>
                 </xsl:when>
                 <xsl:when test="$countRef &gt;1">
