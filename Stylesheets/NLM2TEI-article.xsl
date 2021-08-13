@@ -2711,6 +2711,8 @@
                    </xsl:choose>
                </affiliation>
            </xsl:when>
+           <!-- cas particulier ACS -->
+           <xsl:when test="//author-notes/fn/label='†'"/>
            <xsl:otherwise>
                <xsl:choose>
                    <xsl:when test="institution">
@@ -4044,7 +4046,13 @@
     <xsl:template match="ext-link">
         <ref>
             <xsl:attribute name="type">
-                <xsl:value-of select="translate(@ext-link-type,' ','')"/>
+                <xsl:choose>
+                    <xsl:when test="@ext-link-type">
+                        <xsl:value-of select="translate(@ext-link-type,' ','')"/>
+                    </xsl:when>
+                    <xsl:otherwise>doi</xsl:otherwise>
+                </xsl:choose>
+
             </xsl:attribute>
 
             <xsl:choose>
@@ -5097,7 +5105,6 @@
                                         or contains($avantVirgule,'Hertfordshire')
                                         or contains($avantVirgule,'Hull')
                                         or contains($avantVirgule,'Keele')
-                                        or contains($avantVirgule,'Kent')
                                         or contains($avantVirgule,'Kingston')
                                         or contains($avantVirgule,'Lancaster')
                                         or contains($avantVirgule,'Leeds')

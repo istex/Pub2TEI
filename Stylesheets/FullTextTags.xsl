@@ -42,6 +42,75 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
+                    <!-- cas particulier affiliation acs -->
+                    <xsl:when test="parent::fn and ../label='†' and /article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
+                            <xsl:call-template name="NLMParseAffiliation">
+                                <xsl:with-param name="theAffil">
+                                    <xsl:variable name="nettoie">
+                                        <xsl:apply-templates/>
+                                    </xsl:variable>
+                                    <xsl:choose>
+                                        <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                            <xsl:value-of select="translate($nettoie,';','')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="translate($nettoie,';/','')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="parent::fn and ../label='‡' and /article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
+                        <xsl:call-template name="NLMParseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:variable name="nettoie">
+                                    <xsl:apply-templates/>
+                                </xsl:variable>
+                                <xsl:choose>
+                                    <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                        <xsl:value-of select="translate($nettoie,';','')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="translate($nettoie,';/','')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="parent::fn and ../label='⊥' and /article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
+                        <xsl:call-template name="NLMParseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:variable name="nettoie">
+                                    <xsl:apply-templates/>
+                                </xsl:variable>
+                                <xsl:choose>
+                                    <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                        <xsl:value-of select="translate($nettoie,';','')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="translate($nettoie,';/','')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="parent::fn and ../label='§' and /article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
+                        <xsl:call-template name="NLMParseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:variable name="nettoie">
+                                    <xsl:apply-templates/>
+                                </xsl:variable>
+                                <xsl:choose>
+                                    <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                        <xsl:value-of select="translate($nettoie,';','')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="translate($nettoie,';/','')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
                     <xsl:when test="parent::fn |parent::list-item ">
                         <p>
                             <xsl:value-of select="normalize-space(.)"/>
@@ -1200,6 +1269,14 @@
             </xsl:if>
             <xsl:apply-templates/>
         </note>
+    </xsl:template>
+    
+    <!-- ACS les footnotes contiennent parfois les véritables affiliations 
+    exemple: ISTEX ark _67375_TPS-GS6LWBRQ-7.xml-->
+    <xsl:template match="fn | Footnote" mode="acs">
+        <affiliation>
+            <xsl:apply-templates select="p"/>
+        </affiliation>
     </xsl:template>
 
     <!-- Citation en ligne:

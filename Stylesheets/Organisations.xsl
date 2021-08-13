@@ -335,6 +335,7 @@
                 or contains($theOrg,'Corporation')
                 or contains($theOrg,'Team')
                 or contains($theOrg,'Private')
+                or contains($theOrg,' Co.')
                 ">
                 <xsl:text>group</xsl:text>
             </xsl:when>

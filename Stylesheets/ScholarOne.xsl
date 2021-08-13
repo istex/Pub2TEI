@@ -416,7 +416,7 @@
                 <xsl:when test="aff">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
-                <xsl:when test="parent::contrib-group/aff and not(//collab)">
+                <xsl:when test="parent::contrib-group/aff and not(//collab) and not(author-notes/fn='†')">
                     <xsl:apply-templates select="parent::contrib-group/aff"/>
                 </xsl:when>
                 <xsl:when test="//article-meta/aff and not(//collab)">
@@ -438,7 +438,22 @@
                 </xsl:when>-->
             </xsl:choose>
             <!-- appelle les affiliations complementaires -->
+            <!-- pour ACS -->
+            <xsl:if test="//article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
+                <xsl:choose>
+                    <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
+                        <xsl:if test="//contrib-group/aff">
+                            <xsl:apply-templates select="//contrib-group/aff"/>
+                        </xsl:if>
+                        <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="acs"/>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
+            <!-- Pour le reste de la production -->
             <xsl:choose>
+                <!-- ne pas faire sortir les author-footnotes dans les données ACS car elles sont repris 
+                dans les affiliations principales-->
+                <xsl:when test="/article/front/journal-meta/publisher/publisher-name='American Chemical Society'"/>
                 <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
                     <xsl:if test="//contrib-group/aff">
                         <xsl:apply-templates select="//contrib-group/aff"/>
