@@ -97,7 +97,7 @@
                 <xsl:choose>
                     <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
                     <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
+                    <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='editorial'">editorial</xsl:when>
@@ -124,6 +124,12 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='lecture'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='magazine'">
+                <xsl:choose>
+                    <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meeting-report'">conference</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='news'">
                 <xsl:choose>
@@ -139,6 +145,7 @@
                 <xsl:choose>
                     <xsl:when test="//article/front/article-meta/article-categories/subj-group/subject='ORIGINAL RESEARCH PAPERS'">research-article</xsl:when>
                     <xsl:when test="//article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
+                    <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
                     <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0] or contains(//article/front/article-meta/fpage,'s') or contains(//article/front/article-meta/fpage,'S')">article</xsl:when>
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
@@ -146,7 +153,7 @@
             <xsl:when test="normalize-space($codeGenre2)='partial-retraction'">other</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='pdf-issue'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='poster'">conference</xsl:when>
-            <xsl:when test="normalize-space($codeGenre2)='product-review'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenre2)='product-review'">review-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='rapid-communication'">brief-communication</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='reply'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='reprint'">article</xsl:when>

@@ -113,7 +113,8 @@
                 starts-with($theOrg,'INSERM') or
                 starts-with($theOrg,'CSIC') or
                 starts-with($theOrg,'Supreme Court') or
-                starts-with($theOrg,'Ministr')">
+                starts-with($theOrg,'Ministr') or
+                contains($theOrg,'faculté')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Research') or

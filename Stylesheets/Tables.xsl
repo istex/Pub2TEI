@@ -14,7 +14,7 @@
     <!-- Royal Chemical Society: table-entry; NLM: table-wrap -->
     <xsl:template match="table-entry |rsc:table-entry | table-wrap | table">
         <xsl:choose>
-            <xsl:when test="oasis:table">
+            <xsl:when test="oasis:table or contains(label,'Table')">
                 <table>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
