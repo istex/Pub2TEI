@@ -93,6 +93,7 @@
             <xsl:when test="normalize-space($codeGenre2)='correction'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='errata'">article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='dissertation'">other</xsl:when>
+            <!-- pour ACS -->
             <xsl:when test="normalize-space($codeGenre2)='discussion'">
                 <xsl:choose>
                     <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
