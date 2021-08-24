@@ -1968,7 +1968,18 @@ reactorsa'</title>
     </xsl:template>
     <xsl:template match="book-title">
         <title level="m">
-        <xsl:apply-templates/>
+            <xsl:choose>
+                <!-- traitement degruyter ebooks special 
+                exemple 10.1515/9781501504396-->
+                <xsl:when test=".='Homer’s Iliad'">
+                    <xsl:value-of select="/book/book-meta/volume[@xml:lang='de']"/>
+                    <xsl:text> - </xsl:text>
+                    <xsl:apply-templates/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </title>
     </xsl:template>
     <xsl:template match="ce:subtitle">
@@ -2677,7 +2688,7 @@ reactorsa'</title>
                             <xsl:otherwise>
                                 <xsl:if test=". !=''">
                                     <biblScope unit="vol">
-                                        <xsl:value-of select="normalize-space(.)"/>
+                                        <xsl:value-of select="normalize-space(replace(.,'Band',''))"/>
                                     </biblScope>
                                 </xsl:if>
                             </xsl:otherwise>

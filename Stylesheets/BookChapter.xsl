@@ -154,7 +154,17 @@
                                 </xsl:choose>
                                 <xsl:if test="book-meta/pub-date/year[string-length() &gt; 0] |$docIssue//pub-date/year[string-length() &gt; 0]">
                                     <availability>
+                                        <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/@license-type='free'">
+                                            <xsl:attribute name="status">free</xsl:attribute>
+                                        </xsl:if>
                                         <licence>
+                                            <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/@license-type='free'">
+                                                <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/license-p[string-length() &gt; 0]">
+                                                <p>
+                                                    <xsl:value-of select="/book/body/book-part/book-part-meta/permissions/license/license-p"/>
+                                                </p>
+                                                </xsl:if>
+                                            </xsl:if>
                                             <xsl:choose>
                                                 <xsl:when test="book-meta/permissions/copyright-statement[string-length() &gt; 0]">
                                                     <p>
@@ -440,7 +450,8 @@
                     <text>
                         <body>
                             <xsl:choose>
-                                <xsl:when test="//book/body/book-part/body">
+                                <!-- sauf degruyter ebooks -->
+                                <xsl:when test="//book/body/book-part/body and not(contains(/book/book-meta/book-id[@pub-id-type='doi'],'10.1515/'))">
                                     <xsl:apply-templates select="/book/body/book-part/body"/>
                                 </xsl:when>
                                 <xsl:when test="//book/book-body/book-part/body">
@@ -562,6 +573,27 @@
             </monogr>
             <!-- faire un if et gérer le niveau série dans fichier externe -->
             <xsl:choose>
+                <!-- traitement degruyter ebooks special 
+                exemple 10.1515/9781501504396-->
+                <xsl:when test="contains(/book/book-meta/book-title-group/book-title,'Homer’s Iliad')">
+                    <series>
+                        <title level="s" type="main">
+                            <xsl:value-of select="/book/book-meta/book-title-group/book-title"/>
+                        </title>
+                        <editor>
+                            <persName>
+                                <surname>Bierl</surname>
+                                <forename type="first">Anton</forename>
+                            </persName>
+                        </editor>
+                        <editor>
+                            <persName>
+                                <surname>Joachim Latacz</surname>
+                                <forename type="first">Joachim</forename>
+                            </persName>
+                        </editor>
+                    </series>
+                </xsl:when>
                 <xsl:when test="$docIssue//book-series-meta/book-title-group/book-title">
                     <series>
                         <xsl:apply-templates select="$docIssue//book-series-meta/book-title-group/book-title"/>
@@ -573,6 +605,34 @@
                 </xsl:when>
                 <xsl:when test="//book/book-series-meta/book-id">
                     <series>
+                        <xsl:variable name="titreSerieDG">
+                            <xsl:choose>
+                                <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/ba'">Byzantinisches Archiv</xsl:when>
+                                <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/icon'">Image &amp; Context</xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="issnSerieDG">
+                            <xsl:choose>
+                                <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/ba'">1864-9785</xsl:when>
+                                <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/icon'">1868-4777</xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="eissnSerieDG">
+                            <xsl:choose>
+                                <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/ba'">2366-7052</xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:if test="contains(/book/book-series-meta/book-id[@pub-id-type='doi'],'10.1515/')">
+                            <title level="s" type="main">
+                                <xsl:value-of select="$titreSerieDG"/>
+                            </title>
+                            <idno type="ISSN">
+                                <xsl:value-of select="$issnSerieDG"/>
+                            </idno>
+                            <idno type="eISSN">
+                                <xsl:value-of select="$eissnSerieDG"/>
+                            </idno>
+                       </xsl:if>
                         <xsl:apply-templates select="//book/book-series-meta/book-id[@pub-id-type='doi']"/>
                     </series>
                 </xsl:when>

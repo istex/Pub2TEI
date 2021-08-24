@@ -201,6 +201,7 @@
 
     <!--OUP-->
     <xsl:template match="keyword|rsc:keyword | kwd">
+        <xsl:if test=".!=''">
         <xsl:choose>
             <xsl:when test="contains(.,' – ')">
                 <xsl:call-template name="ParseKeyword">
@@ -238,6 +239,7 @@
                 </term>
             </xsl:otherwise>
         </xsl:choose>
+        </xsl:if>
     </xsl:template>
     
     <!-- springer -->

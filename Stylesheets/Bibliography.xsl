@@ -2051,6 +2051,67 @@
                     </xsl:choose>
                 </biblStruct>
             </xsl:when>
+            <xsl:when test="source|person-group|year">
+                <biblStruct>
+                    <xsl:if test="@citation-type | @publication-type">
+                        <xsl:attribute name="type">
+                            <xsl:apply-templates select="@citation-type | @publication-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="../@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="../@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:if test="article-title | chapter-title">
+                        <analytic>
+                            <xsl:apply-templates select="article-title | chapter-title"/>
+                            <xsl:apply-templates select="name"/>
+                            <xsl:apply-templates select="string-name"/>
+                            <xsl:apply-templates select="person-group"/>
+                            <xsl:apply-templates select="elocation-id"/>
+                        </analytic>
+                    </xsl:if>
+                    <monogr>
+                        <xsl:apply-templates select="source"/>
+                        <!-- cas particulier chez ACS le titre de la 
+                        ressource est contenue parfois dans italic@toggle
+                        dans les mixed-citation-->
+                        <xsl:apply-templates select="italic" mode="toggle"/>
+                        <xsl:if test="not(article-title | chapter-title)">
+                            <xsl:apply-templates select="name"/>
+                            <xsl:apply-templates select="string-name"/>
+                            <xsl:apply-templates select="person-group"/>
+                            <xsl:apply-templates select="elocation-id"/>
+                        </xsl:if>
+                        <imprint>
+                            <xsl:choose>
+                                <xsl:when test="publisher-name | publisher-loc | year">
+                                    <xsl:apply-templates select="publisher-name"/>
+                                    <xsl:apply-templates select="publisher-loc"/>
+                                    <xsl:apply-templates select="year"/>
+                                    <xsl:apply-templates select="volume"/>
+                                    <xsl:apply-templates select="fpage"/>
+                                    <xsl:apply-templates select="lpage"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <!-- imprint ne doit pas rester vide de contenu -->
+                                    <publisher/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </imprint>
+                    </monogr>
+                </biblStruct>
+            </xsl:when>
             <xsl:when test="not(contains(., ':'))">
                 <bibl>
                     <xsl:attribute name="type">

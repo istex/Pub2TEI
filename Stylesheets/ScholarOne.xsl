@@ -419,6 +419,18 @@
                 <xsl:when test="parent::contrib-group/aff and not(//collab) and not(author-notes/fn='†')">
                     <xsl:apply-templates select="parent::contrib-group/aff"/>
                 </xsl:when>
+                <!-- ajout 20/08/2021 sgreg pour données rsc-ebooks -->
+                <xsl:when test="contains(xref/@rid,' ')">
+                    <xsl:for-each select="xref">
+                        <xsl:choose>
+                            <xsl:when test="contains(@rid,' ')">
+                                <xsl:call-template name="createNLMAffiliations">
+                                    <xsl:with-param name="restAff" select="@rid"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:for-each>
+                </xsl:when>
                 <xsl:when test="//article-meta/aff and not(//collab)">
                     <xsl:apply-templates select="//article-meta/aff"/>
                 </xsl:when>

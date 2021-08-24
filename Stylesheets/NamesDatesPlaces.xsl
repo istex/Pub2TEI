@@ -349,6 +349,19 @@
                             <xsl:with-param name="country" select="$change"/>
                         </xsl:call-template>
                     </xsl:when>
+                    <xsl:when test="contains(.,'Spain')">
+                        <xsl:variable name="change">
+                            <xsl:text>SPAIN</xsl:text>
+                        </xsl:variable>
+                        <xsl:attribute name="key">
+                            <xsl:call-template name="normalizeISOCountry">
+                                <xsl:with-param name="country" select="$change"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                        <xsl:call-template name="normalizeISOCountryName">
+                            <xsl:with-param name="country" select="$change"/>
+                        </xsl:call-template>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="key">
                             <xsl:call-template name="normalizeISOCountry">
