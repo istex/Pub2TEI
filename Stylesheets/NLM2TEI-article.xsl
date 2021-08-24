@@ -20,6 +20,67 @@
             </xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
+            <!-- RSC ebooks -->
+            <xsl:when test="contains(/article/front/journal-meta/publisher/publisher-name,'The Royal Society of Chemistry')">
+                <xsl:choose>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Appendix')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CD-ROM information')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conclusion')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contents')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conversion factor')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Epilogue')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front Cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Glossary')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Introduction')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Learning outcomes')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Subject index')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summarised contents')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summary of')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Tutorial chemistry texts')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of tables')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abbreviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Acknowledgements')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abberviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The future')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Authors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Editors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Answers to exercises')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Author index')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Bibliography')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Biographical Notes')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Boxes')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Concluding remarks')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CONTENTS')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contributors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial announcement')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Errata')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Erratum')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Foreword')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Forword')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Further reading')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Symbols and abbreviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Table of Contents')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The molecular world course team')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The target: β-Aminoalcohols')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Volume preface')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Recommended reading')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Questions: Answers and comments')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'books and reviews')">book-reviews</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original'],'Case reports')">
                 <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original']"/>
             </xsl:when>
@@ -67,6 +128,66 @@
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
             <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
+            <xsl:when test="/article/front/journal-meta/publisher/publisher-name='The Royal Society of Chemistry' and not(//article/@article-type)">
+                <xsl:choose>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Appendix')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CD-ROM information')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conclusion')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contents')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conversion factor')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Epilogue')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front Cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Glossary')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Introduction')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Learning outcomes')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Subject index')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summarised contents')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summary of')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Tutorial chemistry texts')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of tables')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abbreviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Acknowledgements')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abberviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The future')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Authors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Editors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Answers to exercises')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Author index')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back matter')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Bibliography')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Biographical Notes')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Boxes')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Concluding remarks')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CONTENTS')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contributors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial announcement')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Cover')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Errata')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Erratum')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Foreword')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Forword')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Further reading')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Symbols and abbreviations')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Table of Contents')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The molecular world course team')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The target: β-Aminoalcohols')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Volume preface')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Recommended reading')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Questions: Answers and comments')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editors')">other</xsl:when>
+                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'books and reviews')">book-reviews</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='astronomical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='magnetical-observation'">research-article</xsl:when>
             <xsl:when test="normalize-space($codeGenre2)='meteorological-observation'">research-article</xsl:when>
@@ -169,7 +290,7 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">chapter</xsl:when>
-           <xsl:otherwise>
+            <xsl:otherwise>
                <xsl:choose>
                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
@@ -1024,6 +1145,15 @@
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1955.0162'">Cover</xsl:when>
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rspa.1948.0046'">Cover</xsl:when>
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstl.1670.0073'">Figures</xsl:when>
+        <!-- rsc-ebooks -->
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781849734578-00463'">Conclusions</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781847559869-00246'">Appendix</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781849730952-00388'">Glossary</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781849735346-FP017'">Introduction</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781849734660-00001'">Introduction</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781847558329-00188'">Epilogue</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781849735490-FP001'">Publication Details</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781847550125-00117'">Spectral coincidence profiles</xsl:when>
         </xsl:choose>
     </xsl:variable>
    
