@@ -914,10 +914,10 @@
                     <!-- ******************* pagination ******************************-->
                     <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0]">
                         <biblScope unit="page" from="{//book/entryGroup/entry/@startpage}">
-                            <xsl:value-of select="@startpage"/>
+                            <xsl:value-of select="//book/entryGroup/entry/@startpage"/>
                         </biblScope>
                         <biblScope unit="page" to="{//book/entryGroup/entry/@endpage}">
-                            <xsl:value-of select="@endpage"/>
+                            <xsl:value-of select="//book/entryGroup/entry/@endpage"/>
                         </biblScope>
                     </xsl:if>
                     <xsl:if test="book-meta/publisher[1]/publisher-name | metadata/publisher">
