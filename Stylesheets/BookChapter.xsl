@@ -323,7 +323,7 @@
                             <xsl:when test="//book/entryGroup/keywordGroup | //book[metadata]/../abstract| /book/metadata/title/@lang">
                                 <profileDesc>
                                     <xsl:apply-templates select="//book[metadata]/../abstract"/>
-                                    <xsl:if test="//book/entryGroup/keywordGroup[string-length() &gt; 0]">
+                                    <xsl:if test="//book/entryGroup/keywordGroup/keyword[string-length() &gt; 0]">
                                         <xsl:for-each select="//book/entryGroup/keywordGroup">
                                         <textClass ana="subject">
                                             <xsl:if test="@type">
@@ -892,7 +892,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:choose>
-                        <xsl:when test="//series/@n[string-length() &gt; 0]">
+                        <xsl:when test="//series/@n[string-length() &gt; 0] and not(contains(//series/@n,'978'))">
                             <biblScope unit="vol">
                                 <xsl:choose>
                                     <xsl:when test="starts-with(//series[1]/@n, '00')">
@@ -935,7 +935,7 @@
                     <xsl:apply-templates select="/book/collection-meta/contrib-group/contrib" mode="editorSeries"/>
                 </series>
             </xsl:if>
-            <xsl:if test="//metadata/series">
+            <xsl:if test="//metadata/series[string-length() &gt; 0]">
                 <series>
                     <xsl:apply-templates select="//metadata/series"/>
                 </series>
