@@ -1337,15 +1337,25 @@
                     <!-- SG - ajout du codeGenre article et revue -->
                     <notesStmt>
                         <!-- niveau article / chapter -->
-                        <note type="content-type">
-                            <xsl:attribute name="source">
-                                <xsl:value-of select="$codeGenre2"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="scheme">
-                                <xsl:value-of select="$codeGenreArk2"/>
-                            </xsl:attribute>
-                            <xsl:value-of select="$codeGenre"/>
-                        </note>
+                        <xsl:choose>
+                            <!-- karger -->
+                            <xsl:when test="/article/front/article-meta/article-categories/subj-group/subject[1]='Chapter'">
+                                <note type="content-type"
+                                    source="Chapter"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6">chapter</note>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <note type="content-type">
+                                    <xsl:attribute name="source">
+                                        <xsl:value-of select="$codeGenre2"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="scheme">
+                                        <xsl:value-of select="$codeGenreArk2"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$codeGenre"/>
+                                </note>
+                            </xsl:otherwise>
+                        </xsl:choose>
                         <!-- niveau revue / book -->
                         <xsl:choose>
                             <xsl:when test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
@@ -4303,6 +4313,11 @@
         <xsl:choose>
             <xsl:when test="ancestor::record">
                 <title level="a" type="main" xml:lang="{translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')}">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when> 
+            <xsl:when test="parent::metadata">
+                <title level="m" type="main" xml:lang="{@lang}">
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
