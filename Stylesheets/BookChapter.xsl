@@ -892,7 +892,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:choose>
-                        <xsl:when test="//series/@n[string-length() &gt; 0] and not(contains(//series/@n,'978'))">
+                        <xsl:when test="//series[1]/@n[string-length() &gt; 0] and not(contains(//series[1]/@n,'978'))">
                             <biblScope unit="vol">
                                 <xsl:choose>
                                     <xsl:when test="starts-with(//series[1]/@n, '00')">
