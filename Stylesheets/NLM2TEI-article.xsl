@@ -2245,9 +2245,15 @@
                     <idno type="pISSN">0080-4606</idno>
                     <idno type="eISSN">1748-8494</idno>
                 </xsl:if>
-
-                <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
-                <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
+                <xsl:choose>
+                    <xsl:when test="//publisher-name='S. Karger AG' and //issn[string-length() &gt; 0] and //isbn[string-length() &gt; 0]">
+                        <xsl:apply-templates select="article-meta/issue-title"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
+                        <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:apply-templates select="journal-meta/journal-id"/>
                 <xsl:apply-templates select="journal-meta/issue-title"/>
                 <xsl:choose>
@@ -2533,6 +2539,15 @@
                     </xsl:if>
                 </series>
             </xsl:if>
+            <xsl:choose>
+                <xsl:when test="//publisher-name='S. Karger AG' and //issn[string-length() &gt; 0] and //isbn[string-length() &gt; 0]">
+                    <series>
+                        <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
+                        <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
+                        <xsl:apply-templates select="journal-meta/issn"/>
+                    </series>
+                </xsl:when>
+            </xsl:choose>
         </biblStruct>
     </xsl:template>
 <!-- SG information book-reviews -->

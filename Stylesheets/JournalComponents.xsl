@@ -2116,7 +2116,7 @@ reactorsa'</title>
                         </title>
                     </xsl:when>
                     <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
-                        <title level="m" type="main">
+                        <title level="s" type="main">
                             <xsl:apply-templates/>
                         </title>
                     </xsl:when>
@@ -2210,7 +2210,7 @@ reactorsa'</title>
                     </title>
                 </xsl:when>
                 <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
-                    <title level="m" type="abbrev">
+                    <title level="s" type="abbrev">
                         <xsl:apply-templates/>
                     </title>
                 </xsl:when>
@@ -2309,7 +2309,7 @@ reactorsa'</title>
                     </title>
                 </xsl:when>
                 <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
-                    <title level="m" type="issue">
+                    <title level="m" type="main">
                         <xsl:apply-templates/>
                     </title>
                 </xsl:when>
