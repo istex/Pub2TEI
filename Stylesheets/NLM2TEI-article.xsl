@@ -2252,10 +2252,10 @@
                     <xsl:otherwise>
                         <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
                         <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
+                        <xsl:apply-templates select="journal-meta/journal-id"/>
+                        <xsl:apply-templates select="journal-meta/issue-title"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:apply-templates select="journal-meta/journal-id"/>
-                <xsl:apply-templates select="journal-meta/issue-title"/>
                 <xsl:choose>
                     <!-- Karger series-->
                     <xsl:when test="journal-meta/isbn">
@@ -2545,6 +2545,12 @@
                         <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
                         <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
                         <xsl:apply-templates select="journal-meta/issn"/>
+                        <xsl:if test="journal-meta/journal-id/@journal-id-type='doi'[string-length() &gt; 0]">
+                            <idno type="DOI">
+                                <xsl:value-of select="journal-meta/journal-id[@journal-id-type='doi']"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:apply-templates select="journal-meta/journal-id"/>
                     </series>
                 </xsl:when>
             </xsl:choose>
