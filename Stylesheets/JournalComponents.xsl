@@ -2038,6 +2038,11 @@ reactorsa'</title>
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="//issue-title">
+                <title level="m" type="sub">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
             <xsl:otherwise>
                 <title level="a" type="sub">
                     <xsl:apply-templates/>
@@ -2115,8 +2120,13 @@ reactorsa'</title>
                             <xsl:apply-templates/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
+                    <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn and //issue-title">
                         <title level="s" type="main">
+                            <xsl:apply-templates/>
+                        </title>
+                    </xsl:when>
+                    <xsl:when test="//article-meta/isbn[string-length() &gt; 0] |//journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
+                        <title level="m" type="main">
                             <xsl:apply-templates/>
                         </title>
                     </xsl:when>
@@ -2245,6 +2255,8 @@ reactorsa'</title>
         <xsl:choose>
             <!-- rsc-ebooks -->
             <xsl:when test="@journal-id-type='book_series'"/>
+            <xsl:when test="@journal-id-type='publisher-id'"/>
+            <xsl:when test="@journal-id-type='nlm-ta'"/>
             <xsl:when test="@journal-id-type='series'"/>
             <xsl:when test="@journal-id-type='print' and //journal-meta/issn !=''"/>
             <xsl:when test="@journal-id-type='online' and //@journal-id-type='series'"/>
@@ -2904,6 +2916,10 @@ reactorsa'</title>
                         <xsl:choose>
                             <xsl:when test="contains(.,'Springer')">
                                 <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-SWLMH5L1-1</xsl:attribute>
+                                <xsl:apply-templates/>
+                            </xsl:when>
+                            <xsl:when test="contains(.,'S. Karger AG')">
+                                <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-C761LTQC-4</xsl:attribute>
                                 <xsl:apply-templates/>
                             </xsl:when>
                             <xsl:otherwise>

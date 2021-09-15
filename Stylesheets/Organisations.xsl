@@ -105,7 +105,6 @@
                 contains($theOrg,'Council') or
                 contains($theOrg,'Max-Planck') or
                 contains($theOrg,'National') or
-                contains($theOrg,'Medicine') or
                 starts-with($theOrg,'CN') or
                 starts-with($theOrg,'MA') or
                 starts-with($theOrg,'UJ') or
@@ -114,7 +113,15 @@
                 starts-with($theOrg,'CSIC') or
                 starts-with($theOrg,'Supreme Court') or
                 starts-with($theOrg,'Ministr') or
-                contains($theOrg,'faculté')">
+                contains($theOrg,'faculté') or
+                contains($theOrg,'School') or
+                contains($theOrg,'Ecole') or
+                contains($theOrg,'Scuola') or
+                contains($theOrg,'Szkoła') or
+                contains($theOrg,'Wydział') or
+                contains($theOrg,'Schule') or
+                contains($theOrg,'Facul') or
+                contains($theOrg,'Fakult')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Research') or
@@ -159,123 +166,23 @@
                 contains($theOrg,'Ricerche')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
-            <xsl:when test="contains($theOrg,'IB')  or
-                contains($theOrg,'Study') or
-                contains($theOrg,'CCS') or
-                contains($theOrg,'CNRS') or
-                contains($theOrg,'College of') or
-                contains($theOrg,'College') or
-                contains($theOrg,'Universidad') or
-                contains($theOrg,'Hospi') or
-                contains($theOrg,'Hôpital') or
-                contains($theOrg,'Krankenhaus') or
-                contains($theOrg,'szpital') or
-                contains($theOrg,'больница') or
-                contains($theOrg,'Osservatorio') or
-                contains($theOrg,'Museum') or
-                contains($theOrg,'Center') or
-                contains($theOrg,'Inst.') or
-                contains($theOrg,'Institute') or
-                contains($theOrg,'Institut') or
-                contains($theOrg,'institut') or
-                contains($theOrg,'Instytut') or
-                contains($theOrg,'Instituut') or
-                contains($theOrg,'Istituto') or
-                contains($theOrg,'Campus') or
-                contains($theOrg,'Hemosystem') or
-                contains($theOrg,'校区') or
-                contains($theOrg,'Campus') or
-                contains($theOrg,'University') or
-                contains($theOrg,'Universität') or
-                contains($theOrg,'Università') or
-                contains($theOrg,'Uniwersytet') or
-                contains($theOrg,'Uniwersytet') or
-                contains($theOrg,'Université ') or
-                contains($theOrg,'Universidade') or
-                contains($theOrg,'University of') or
-                contains($theOrg,'universit') or
-                contains($theOrg,'Universit') or
-                contains($theOrg,'univerzita') or
-                contains($theOrg,'大学') or
-                contains($theOrg,'Univ.') or
-                contains($theOrg,'Academy') or
-                contains($theOrg,'Pasteur') or
-                contains($theOrg,'Eurocat') or
-                contains($theOrg,'Fundação') or
-                contains($theOrg,'Network') or
-                contains($theOrg,'BASF AG') or
-                contains($theOrg,'Chemie') or
-                contains($theOrg,'chemie') or
-                contains($theOrg,'C.N.R.S.') or
-                contains($theOrg,'MIT') or
-                contains($theOrg,'GmhH') or
-                contains($theOrg,'GbR') or
-                contains($theOrg,'Gabinetto') or
-                contains($theOrg,'Observatory') or
-                contains($theOrg,'Engineering') or
-                contains($theOrg,' Haus') or
-                contains($theOrg,' akademi') or
-                contains($theOrg,' Akademi') or
-                contains($theOrg,' Sportu') or
-                contains($theOrg,' Polonistyki') or
-                contains($theOrg,'Katedra') or
-                contains($theOrg,'logii') or
-                contains($theOrg,'zofii') or
-                contains($theOrg,'grafii') or
-                contains($theOrg,' AWF') or
-                contains($theOrg,' GmbH') or
-                contains($theOrg,' VŠCHT') or
-                contains($theOrg,'Edificio') or
-                contains($theOrg,'Ústav') or
-                contains($theOrg,'CSIC') or
-                contains($theOrg,'Fondation') or
-                contains($theOrg,'Hôpital') or
-                contains($theOrg,'Ospedali') or
-                contains($theOrg,'CHU') or
-                contains($theOrg,'ParisTech') or
-                contains($theOrg,'Inra') or
-                contains($theOrg,'INRA') or
-                contains($theOrg,'Conservatoire') or
-                contains($theOrg,'IUT') or
-                contains($theOrg,'Inserm') or
-                contains($theOrg,'INSERM') or
-                contains($theOrg,'CIRAD') or
-                contains($theOrg,'Direction') or
-                contains($theOrg,'Agenc') or
-                contains($theOrg,'Cnam ') or
-                contains($theOrg,'Lara-Spiral SA') or
-                contains($theOrg,'Clinic of') or
-                contains($theOrg,'Chemistry') or
-                contains($theOrg,'Engineering') or
-                contains($theOrg,'Health') or
-                contains($theOrg,'OMNI') or
-                contains($theOrg,'Sectors') or
-                contains($theOrg,'Government of') or
-                contains($theOrg,'Council') or
-                contains($theOrg,'Max-Planck') or
-                contains($theOrg,'National') or
-                starts-with($theOrg,'CN') or
-                starts-with($theOrg,'MA') or
-                starts-with($theOrg,'UJ') or
-                starts-with($theOrg,'Inserm') or
-                starts-with($theOrg,'INSERM') or
-                starts-with($theOrg,'CSIC') or
-                starts-with($theOrg,'Supreme Court') or
-                starts-with($theOrg,'Ministr')">
-                <xsl:text>institution</xsl:text>
+            <xsl:when test="contains($theOrg,'Branch') or
+                contains($theOrg,'Centre') or
+                contains($theOrg,'centrum') or
+                contains($theOrg,'zentrum') or
+                contains($theOrg,'Zentrum') or
+                contains($theOrg,'Centro') or
+                contains($theOrg,'Section') or
+                contains($theOrg,'Seksjon') or
+                contains($theOrg,'Division') or
+                contains($theOrg,'Oficina') or
+                contains($theOrg,'Partners')">
+                <xsl:text>division</xsl:text>
             </xsl:when>
             <xsl:when test=" 
                 ends-with($theOrg,'ogy') or
-                contains($theOrg,'School') or
                 contains($theOrg,'DSHS Köln') or
                 contains($theOrg,'校') or
-                contains($theOrg,'Ecole') or
-                contains($theOrg,'Scuola') or
-                contains($theOrg,'Szkoła') or
-                contains($theOrg,'Wydział') or
-                contains($theOrg,'Schule') or
-                contains($theOrg,'Facul') or
-                contains($theOrg,'Fakult') or
                 contains($theOrg,'Abteilung') or
                 contains($theOrg,'Directorate') or
                 contains($theOrg,'Ciencias') or
@@ -291,27 +198,14 @@
                 contains($theOrg,'IMSS') or
                 contains($theOrg,'UFR') or
                 contains($theOrg,'Development') or
-                contains($theOrg,'EES')">
-                <xsl:text>department</xsl:text>
-            </xsl:when>
-            <xsl:when test="contains($theOrg,'Branch') or
-                contains($theOrg,'Centre') or
-                contains($theOrg,'centrum') or
-                contains($theOrg,'zentrum') or
-                contains($theOrg,'Zentrum') or
-                contains($theOrg,'Centro') or
-                contains($theOrg,'Section') or
-                contains($theOrg,'Seksjon') or
-                contains($theOrg,'Division') or
+                contains($theOrg,'EES') or
+                contains($theOrg,'Départ') or
                 contains($theOrg,'Dpto') or
                 contains($theOrg,'depart') or
                 contains($theOrg,'Depart') or
                 contains($theOrg,'Dept') or
-                contains($theOrg,'Dipart') or
-                contains($theOrg,'Oficina') or
-                contains($theOrg,'Partners') or
-                contains($theOrg,'Départ')">
-                <xsl:text>division</xsl:text>
+                contains($theOrg,'Dipart')">
+                <xsl:text>department</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Doctoral') or
                 contains($theOrg,'Lecturer') or

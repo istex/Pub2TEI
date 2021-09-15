@@ -2246,8 +2246,9 @@
                     <idno type="eISSN">1748-8494</idno>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="//publisher-name='S. Karger AG' and //issn[string-length() &gt; 0] and //isbn[string-length() &gt; 0]">
+                    <xsl:when test="//publisher-name='S. Karger AG' and //issn[string-length() &gt; 0] and //isbn[string-length() &gt; 0] and //issue-title[string-length() &gt; 0]">
                         <xsl:apply-templates select="article-meta/issue-title"/>
+                        <xsl:apply-templates select="article-meta/subtitle"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
@@ -2517,6 +2518,21 @@
                     <title level="s" type="main">
                         <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='book_series']"/>
                     </title>
+                    <xsl:if test="//journal-meta/journal-id[@journal-id-type='nlm-ta']">
+                        <title level="s" type="short">
+                            <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='nlm-ta']"/>
+                        </title>
+                    </xsl:if>
+                    <xsl:if test="//journal-meta/journal-id[@journal-id-type='nlm-ta']">
+                        <idno type="nlm-ta">
+                            <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='nlm-ta']"/>
+                        </idno>
+                    </xsl:if>
+                    <xsl:if test="//journal-meta/journal-id[@journal-id-type='publisher-id']">
+                        <idno type="publisher-id">
+                            <xsl:value-of select="//journal-meta/journal-id[@journal-id-type='publisher-id']"/>
+                        </idno>
+                    </xsl:if>
                     <xsl:if test="//journal-meta/journal-id[@journal-id-type='series']">
                         <xsl:if test="//journal-meta/journal-id[@journal-id-type='print']">
                             <idno type="pISSN">
@@ -2540,7 +2556,7 @@
                 </series>
             </xsl:if>
             <xsl:choose>
-                <xsl:when test="//publisher-name='S. Karger AG' and //issn[string-length() &gt; 0] and //isbn[string-length() &gt; 0]">
+                <xsl:when test="//publisher-name='S. Karger AG' and //issn[string-length() &gt; 0] and //isbn[string-length() &gt; 0] and //issue-title">
                     <series>
                         <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
                         <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
@@ -4898,7 +4914,14 @@
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
                             </xsl:attribute>
-                            <xsl:value-of select="$avantVirgule"/>
+                            <xsl:choose>
+                                <xsl:when test="starts-with($avantVirgule,'and ')">
+                                    <xsl:value-of select="substring-after($avantVirgule,'and ')"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$avantVirgule"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </orgName>
                        <xsl:if test="$apresVirgule !=''">
                             <xsl:call-template name="NLMparseAffiliation">
@@ -5517,7 +5540,14 @@
         </aff> 
     -->
     <xsl:template name="supAffil">
-        <xsl:call-template name="tokenizeJats"/>
+        <xsl:choose>
+            <xsl:when test="xref">
+                <xsl:call-template name="tokenizeJats"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="//aff"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="xref" name="tokenizeJats" mode="karger">
         <xsl:param name="text" select="translate(xref,' ','')"/>
