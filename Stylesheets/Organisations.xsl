@@ -176,7 +176,11 @@
                 contains($theOrg,'Seksjon') or
                 contains($theOrg,'Division') or
                 contains($theOrg,'Oficina') or
-                contains($theOrg,'Partners')">
+                contains($theOrg,'Partners') or
+                contains($theOrg,'MBBCH') or
+                contains($theOrg,'MPhil') or
+                contains($theOrg,'FRCS') or
+                contains($theOrg,'DLO')">
                 <xsl:text>division</xsl:text>
             </xsl:when>
             <xsl:when test=" 

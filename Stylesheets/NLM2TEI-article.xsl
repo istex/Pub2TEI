@@ -2216,6 +2216,20 @@
                 </xsl:if>
             </analytic>
             <monogr>
+                <!-- titre manquant Karger-ebooks-->
+                <xsl:if test="not(//issue-title[string-length() &gt; 0]) and not(//journal-meta/journal-title-group/journal-title[string-length() &gt; 0])">
+                    <title level="m" type="main">
+                        <xsl:choose>
+                            <xsl:when test="//isbn='978-3-318-05934-2'">History of the Basel Institute for Immunology</xsl:when>
+                            <xsl:when test="//isbn='978-3-318-05822-2'">Well-Being Therapy : Treatment Manual and Clinical Applications</xsl:when>
+                            <xsl:when test="//isbn='978-3-318-06379-0'">Peritoneal Dialysis Manual : A Guide for Understanding the Treatment</xsl:when>
+                            <xsl:when test="//isbn='978-3-318-06085-0'">Graves' Orbitopathy</xsl:when>
+                            <xsl:when test="//isbn='978-3-318-06302-8'">Gastrix</xsl:when>
+                            <xsl:when test="//isbn='978-3-318-02697-9'">The Craniocervical Syndrome and MRI</xsl:when>
+                            <xsl:when test="//isbn='978-3-318-03004-4'">Congenital Heart Disease</xsl:when>
+                        </xsl:choose>
+                    </title>
+                </xsl:if>
                 <!-- Bloc RSL version dtd highWire -->
                 <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
                     <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
