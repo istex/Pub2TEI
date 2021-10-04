@@ -2216,28 +2216,6 @@
                 </xsl:if>
             </analytic>
             <monogr>
-                <!-- titre manquant Karger-ebooks-->
-                <xsl:if test="//isbn='978-3-318-05934-2'">
-                    <title level="m" type="main">History of the Basel Institute for Immunology</title>
-                </xsl:if>
-                <xsl:if test="//isbn='978-3-318-05822-2'">
-                    <title level="m" type="main">Well-Being Therapy : Treatment Manual and Clinical Applications</title>
-                </xsl:if>
-                <xsl:if test="//isbn='978-3-318-06379-0'">
-                    <title level="m" type="main">Peritoneal Dialysis Manual : A Guide for Understanding the Treatment</title>
-                </xsl:if>
-                <xsl:if test="//isbn='978-3-318-06085-0'">
-                    <title level="m" type="main">Graves' Orbitopathy</title>
-                </xsl:if>
-                <xsl:if test="//isbn='978-3-318-06302-8'">
-                    <title level="m" type="main">Gastrix</title>
-                </xsl:if>
-                <xsl:if test="//isbn='978-3-318-02697-9'">
-                    <title level="m" type="main">The Craniocervical Syndrome and MRI</title>
-                </xsl:if>
-                <xsl:if test="//isbn='978-3-318-03004-4'">
-                    <title level="m" type="main">Congenital Heart Disease</title>
-                </xsl:if>
                 <!-- Bloc RSL version dtd highWire -->
                 <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
                     <title level="j" type="main">Biographical Memoirs of Fellows of the Royal Society</title>
@@ -2906,7 +2884,7 @@
                </affiliation>
            </xsl:when>
            <!-- cas particulier ACS -->
-           <xsl:when test="//author-notes/fn/label='†'"/>
+           <!--<xsl:when test="//author-notes/fn/label='†'"/>-->
            <xsl:otherwise>
                <xsl:choose>
                    <xsl:when test="institution">
@@ -4539,7 +4517,7 @@
                                 <xsl:attribute name="type">final-published</xsl:attribute>
                             </xsl:when>
                         </xsl:choose>
-                                <xsl:value-of select="normalize-space(year)"/>
+                                <xsl:value-of select="normalize-space(year[1])"/>
                     </date>
                 </xsl:if>
             </xsl:when>

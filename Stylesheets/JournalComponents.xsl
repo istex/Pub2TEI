@@ -2335,6 +2335,14 @@ reactorsa'</title>
                         <xsl:apply-templates/>
                     </title>
                 </xsl:when>
+                <xsl:when test="//isbn[string-length() &gt; 0]">
+                    <title level="m" type="main">
+                        <xsl:apply-templates/>
+                    </title>
+                    <xsl:if test="//subtitle">
+                        <xsl:apply-templates select="//subtitle"/>
+                    </xsl:if>
+                </xsl:when>
                 <xsl:otherwise>
                     <title level="j" type="issue">
                         <xsl:apply-templates/>

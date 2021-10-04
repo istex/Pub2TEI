@@ -454,9 +454,6 @@
             <xsl:if test="//article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
                 <xsl:choose>
                     <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
-                        <xsl:if test="//contrib-group/aff">
-                            <xsl:apply-templates select="//contrib-group/aff"/>
-                        </xsl:if>
                         <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="acs"/>
                     </xsl:when>
                 </xsl:choose>
@@ -467,9 +464,7 @@
                 dans les affiliations principales-->
                 <xsl:when test="/article/front/journal-meta/publisher/publisher-name='American Chemical Society'"/>
                 <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
-                    <xsl:if test="//contrib-group/aff">
-                        <xsl:apply-templates select="//contrib-group/aff"/>
-                    </xsl:if>
+                    <xsl:apply-templates select="//contrib-group/aff"/>
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
                 </xsl:when>
             </xsl:choose>
