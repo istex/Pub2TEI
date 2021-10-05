@@ -2217,7 +2217,7 @@
             </analytic>
             <monogr>
                 <!-- titre manquant Karger-ebooks-->
-                <xsl:if test="not(//issue-title[string-length() &gt; 0]) and not(//journal-meta/journal-title-group/journal-title[string-length() &gt; 0])">
+                <xsl:if test="//publisher-name='S. Karger AG' and not(//issue-title[string-length() &gt; 0]) and not(//journal-meta/journal-title-group/journal-title[string-length() &gt; 0])">
                     <title level="m" type="main">
                         <xsl:choose>
                             <xsl:when test="//isbn='978-3-318-05934-2'">History of the Basel Institute for Immunology</xsl:when>
@@ -5007,6 +5007,7 @@
                                     </xsl:if>
                                 </address>
                             </xsl:when>
+                            <xsl:when test="email"/>
                             <!-- reprise des codes etats américains pour forcer le code pays us -->
                             <xsl:when test="starts-with($avantVirgule,'AK ')
                                 or starts-with($avantVirgule,'AL ')
