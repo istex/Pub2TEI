@@ -238,12 +238,9 @@
                         <xsl:value-of select="$arkistex"/>
                     </idno>
                 </xsl:if>
-                <xsl:if test="identifiers/identifier[string-length() &gt; 0]">
-                    <xsl:for-each select="identifiers/identifier">
-                        <idno type="{@type}">
-                            <xsl:value-of select="normalize-space(.)"/>
-                        </idno>
-                    </xsl:for-each>
+                <!-- SG correction 12102021 doi et pii en majuscule -->
+                <xsl:if test="/euclid_issue/issue/record/identifiers/identifier[string-length() &gt; 0]">
+                    <xsl:apply-templates select="/euclid_issue/issue/record/identifiers/identifier"/>
                 </xsl:if>
                 <xsl:if test="/euclid_issue/header/issue_identifier[string-length() &gt; 0]">
                     <idno type="issue-identifier">
@@ -267,11 +264,7 @@
                     </idno>
                 </xsl:if>
                 <xsl:if test="/euclid_issue/issue/issue_data/identifiers/identifier[string-length() &gt; 0]">
-                    <xsl:for-each select="/euclid_issue/issue/issue_data/identifiers/identifier">
-                        <idno type="{@type}">
-                            <xsl:value-of select="normalize-space(.)"/>
-                        </idno>
-                    </xsl:for-each>
+                    <xsl:apply-templates select="/euclid_issue/issue/issue_data/identifiers/identifier"></xsl:apply-templates>
                 </xsl:if>
                 <xsl:if test="/euclid_issue/header/euclid_journal_id[string-length() &gt; 0]">
                     <idno type="publisher-id">
@@ -6990,5 +6983,24 @@
 							                </keywords>
 							
 						
+    </xsl:template>
+    <xsl:template match="identifier">
+        <xsl:choose>
+            <xsl:when test="@type='doi'">
+                <idno type="DOI">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </idno>
+            </xsl:when>
+            <xsl:when test="@type='pii'">
+                <idno type="PII">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </idno>
+            </xsl:when>
+            <xsl:otherwise>
+                <idno type="{@type}">
+                    <xsl:apply-templates/>
+                </idno>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>
