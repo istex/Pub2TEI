@@ -18,18 +18,31 @@ The resulting TEI documents follow a TEI custumisation documented under the sub-
 
 ## Coverage
 
-The following publisher's formats should be properly processed: 
+The following publisher's formats should be properly processed:
+- ACS: metadata, header, bibliography, body
 - BMJ: metadata, header, bibliography, body
+- Brepols: metadata, header, bibliography, body
+- Brill: metadata, header, bibliography, body
+- Cambridge: metadata, header, bibliography, body
+- De Gruyter: metadata, header, bibliography, body
+- Droz: metadata, header, bibliography, body
+- Duke: metadata, header, bibliography, body
 - Elsevier (journals and conferences): metadata, header, bibliography, body
-- IOP: metadata, header, bibliography. 
+- Emerald: metadata, header, bibliography, body
+- GSL: metadata, header, bibliography, body
+- IOP: metadata, header, bibliography.
+- Lavoisier: metadata, header, bibliography, body 
 - NPG (Nature): metadata, header, bibliography, body 
-- NLM: metadata, header, bibliography, body 
-- OUP: ?
+- NLM: metadata, header, bibliography, body
+- Numerique-premium: metadata, header, bibliography, body
+- Open Edition Ebooks: metadata, header, bibliography, body
+- OUP: metadata, header, bibliography, body
 - PNAS: metadata, header, bibliography, body
 - RSC: metadata, header, bibliography, body
 - Sage: metadata, header
 - ScholarOne: metadata, header
 - Springer: metadata, header, bibliography, body
+- Taylor & Francis: metadata, header, bibliography, body
 - Wiley: metadata, header, bibliography, body
 
 ## License
