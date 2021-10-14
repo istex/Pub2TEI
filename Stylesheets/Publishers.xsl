@@ -19,7 +19,7 @@
     
     <xsl:include href="Imports.xsl"/>
     <xsl:include href="Templates.xsl"/>
-
+    
     <xsl:include href="BMJ.xsl"/>
     <xsl:include href="EDPSArticle.xsl"/>
     <xsl:include href="EDPSedp-article.xsl"/>
@@ -29,8 +29,8 @@
     <xsl:include href="Nature.xsl"/>
     <xsl:include href="ArticleSetNLMV2.0.xsl"/>
     <xsl:include href="Sage.xsl"/>
-
-	<!-- RL: ajout de mon cas IOP.xsl-->
+    
+    <!-- RL: ajout de mon cas IOP.xsl-->
     <xsl:include href="IOP.xsl"/>
     <!--
 	<xsl:include href="IOPPatch.xsl"/>
@@ -40,10 +40,10 @@
     <xsl:include href="SpringerStage3.xsl"/>
     <xsl:include href="SpringerBookChapter.xsl"/>
     <xsl:include href="RoyalChemicalSociety.xsl"/>
-	<xsl:include href="Wiley.xsl"/>
+    <xsl:include href="Wiley.xsl"/>
     <xsl:include href="BookChapter.xsl"/>
     <xsl:include href="BookAll.xsl"/>
-    <xsl:include href="Duke.xsl"/>
+    <xsl:include href="Euclid.xsl"/>
     <!-- SG: ajout du format TEI vers TEI (DROZ / openEdition revues-->
     <xsl:include href="Tei.xsl"/>
     <!-- SG: ajout du format METS - openEditon Books-->
@@ -113,11 +113,11 @@
             </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(
-                               contains(/article/article-metadata/article-data/copyright, 'IOP')
-                            or contains(/article/article-metadata/jnl-data/jnl-imprint, 'IOP')
-                            or contains(/article/article-metadata/jnl-data/jnl-imprint, 'Institute of Physics')
-                            )
-                            and /article/article-metadata/article-data/article-type[@sort='regular']">
+                contains(/article/article-metadata/article-data/copyright, 'IOP')
+                or contains(/article/article-metadata/jnl-data/jnl-imprint, 'IOP')
+                or contains(/article/article-metadata/jnl-data/jnl-imprint, 'Institute of Physics')
+                )
+                and /article/article-metadata/article-data/article-type[@sort='regular']">
                 <xsl:message>Converting an IOP regular article</xsl:message>
             </xsl:when>
             
@@ -128,8 +128,8 @@
                 </xsl:message>
             </xsl:otherwise>
         </xsl:choose>
-
+        
         <xsl:apply-templates/>
     </xsl:template>
-
+    
 </xsl:stylesheet>
