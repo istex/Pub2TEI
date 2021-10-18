@@ -2011,7 +2011,7 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="contains(., ':') and $count">
+            <xsl:when test="contains(., ':') and $count and //publisher-name='S. Karger AG'">
                 <biblStruct>
                     <xsl:choose>
                         <xsl:when test="@id">
@@ -2113,6 +2113,28 @@
                 </biblStruct>
             </xsl:when>
             <xsl:when test="not(contains(., ':'))">
+                <bibl>
+                    <xsl:attribute name="type">
+                        <xsl:text>in-line</xsl:text>
+                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="../@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="../@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
+            <xsl:when test="not(//publisher-name='S. Karger AG')">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>

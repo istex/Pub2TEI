@@ -1331,6 +1331,23 @@
                                 <xsl:value-of select="pubfm/cpg/cpy"/>
                             </date>
                         </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="/article/front/article-meta/pub-date[@pub-type='ppub']/year='' and //history/date[1]/year[string-length() &gt; 0]">
+                                <date type="published">
+                                    <xsl:value-of select="normalize-space(//history/date[1]/year)"/>
+                                </date>
+                            </xsl:when>
+                            <xsl:when test="//history/date[1]/year[string-length() &gt; 0]">
+                                <date type="published">
+                                    <xsl:value-of select="normalize-space(//history/date[1]/year)"/>
+                                </date>
+                            </xsl:when>
+                        </xsl:choose>
+                        <xsl:choose>
+                            <xsl:when test="front/article-meta/article-id[@pub-id-type='doi']='10.2478/v10247-012-0060-4'">
+                                <date type="published">2012</date>
+                            </xsl:when>
+                        </xsl:choose>
                         <xsl:apply-templates select="front/article-meta/pub-date"/>
                         <xsl:apply-templates select="front/article-meta/permissions/copyright-year"/>
                     </publicationStmt>
@@ -1833,6 +1850,14 @@
                 </xsl:if-->
                 <!-- No test if made for body since it is considered a mandatory element -->
                 <xsl:choose>
+                    <!-- quand seul des <p> sont présents sous <body> -->
+                    <xsl:when test="body/p and not(body/sec)">
+                        <body>
+                            <div>
+                                <xsl:apply-templates select="body/*"/>
+                            </div>
+                        </body>
+                    </xsl:when>
                     <xsl:when test="body/* | bdy/p | bdy/sec | bdy/corres/*|article/floats-group">
                         <body>
                             <xsl:apply-templates select="body/*"/>
@@ -2457,8 +2482,13 @@
                     </xsl:for-each>
                     <xsl:choose>
                         <!-- RSL rattrapage dates de publication erronées-->
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rspa.1991.0136'"><date type="published">1991</date></xsl:when>
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1920.0006'"><date type="published">1920</date></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rspa.1991.0136'"><date type="published" when="1991">1991</date></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1920.0006'"><date type="published" when="1920">1920</date></xsl:when>
+                        <xsl:when test="//history/date[1]/year[string-length() &gt; 0]">
+                            <date type="published" when="{//history/date[1]/year}">
+                                <xsl:value-of select="normalize-space(//history/date[1]/year)"/>
+                            </date>
+                        </xsl:when>
                     </xsl:choose>
                     <!-- the special date notation <idt>201211</idt> -->
                     <xsl:apply-templates select="idtidt | suppmast/idt"/>
@@ -4320,9 +4350,19 @@
     <xsl:template match="copyright-year | cpy">
         <date type="Copyright">
             <xsl:attribute name="when">
-                <xsl:apply-templates/>
+                <xsl:choose>
+                    <xsl:when test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1021/ef700306j'">2008</xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1021/ef700306j'">2008</xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </date>
     </xsl:template>
 
