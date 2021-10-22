@@ -1337,11 +1337,6 @@
                                     <xsl:value-of select="normalize-space(//history/date[1]/year)"/>
                                 </date>
                             </xsl:when>
-                            <xsl:when test="//history/date[1]/year[string-length() &gt; 0]">
-                                <date type="published">
-                                    <xsl:value-of select="normalize-space(//history/date[1]/year)"/>
-                                </date>
-                            </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
                             <xsl:when test="front/article-meta/article-id[@pub-id-type='doi']='10.2478/v10247-012-0060-4'">
@@ -2484,7 +2479,7 @@
                         <!-- RSL rattrapage dates de publication erronées-->
                         <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rspa.1991.0136'"><date type="published" when="1991">1991</date></xsl:when>
                         <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1920.0006'"><date type="published" when="1920">1920</date></xsl:when>
-                        <xsl:when test="//history/date[1]/year[string-length() &gt; 0]">
+                        <xsl:when test="/article/front/article-meta/pub-date ='' and //history/date[1]/year[string-length() &gt; 0]">
                             <date type="published" when="{//history/date[1]/year}">
                                 <xsl:value-of select="normalize-space(//history/date[1]/year)"/>
                             </date>
