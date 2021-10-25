@@ -5569,6 +5569,12 @@
     -->
     <xsl:template name="supAffil">
         <xsl:choose>
+            <xsl:when test="xref[@ref-type='corresp']"/>
+            <xsl:when test="contains(xref/@rid,'aff_')">
+                <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid]
+                    except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/sub)"/>
+                
+            </xsl:when>
             <xsl:when test="xref">
                 <xsl:call-template name="tokenizeJats"/>
             </xsl:when>
