@@ -5641,7 +5641,7 @@
                                       <sup>a</sup>Department of Neurological Surgery, and 
                                       <sup>a</sup>Department of Radiology, University of California, San Francisco, CA, USA</aff>
                                 -->
-                                <xsl:when test="//article-meta/article-id[@pub-id-type = 'doi']='10.1159/000481103'">
+                                <xsl:when test="//article-meta/article-id[@pub-id-type = 'doi']='10.1159/000481103' or //article-meta/article-id[@pub-id-type = 'doi']='10.1159/000493249'">
                                     <xsl:value-of select="//aff"/> 
                                 </xsl:when>
                                 <xsl:otherwise>
