@@ -2011,6 +2011,14 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
+            <xsl:when test="contains(., 'guidelines')">
+                <bibl>
+                    <xsl:attribute name="type">
+                        <xsl:text>in-line</xsl:text>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
             <xsl:when test="contains(., ':') and $count and //publisher-name='S. Karger AG'">
                 <biblStruct>
                     <xsl:choose>
@@ -3048,9 +3056,7 @@
                                 <xsl:choose>
                                     <xsl:when test="contains($pageInLine, ';')">
                                         <xsl:variable name="nettoiePage3">
-                                            <xsl:value-of
-                                                select="substring-after(substring-after($pageInLine, ';'), ':')"
-                                            />
+                                            <xsl:value-of select="substring-after(substring-after($pageInLine, ';'), ':')"/>
                                         </xsl:variable>
                                         <biblScope unit="page"
                                             from="{substring-before($nettoiePage3,'-')}">

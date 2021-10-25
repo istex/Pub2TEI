@@ -5569,12 +5569,11 @@
     -->
     <xsl:template name="supAffil">
         <xsl:choose>
-            <xsl:when test="xref[@ref-type='corresp']"/>
-            <xsl:when test="contains(xref/@rid,'aff_')">
+            <xsl:when test="contains(xref[1]/@rid,'aff_')">
                 <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid]
                     except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/sub)"/>
-                
             </xsl:when>
+            <xsl:when test="xref[@ref-type='corresp']"/>
             <xsl:when test="xref">
                 <xsl:call-template name="tokenizeJats"/>
             </xsl:when>
@@ -5636,7 +5635,20 @@
                 <xsl:choose>
                     <xsl:when test="//aff/sup[.=$text]">
                         <xsl:variable name="supNettoie">
-                            <xsl:value-of select="normalize-space(//aff/sup[.=$text]/following-sibling::text()[position()=1])"/>
+                            <xsl:choose>
+                                <!-- affiliation particulière Karger PNS481103, 2 <sup>a</sup> dans la même donnée 
+                                      <aff id="A">
+                                      <sup>a</sup>Department of Neurological Surgery, and 
+                                      <sup>a</sup>Department of Radiology, University of California, San Francisco, CA, USA</aff>
+                                -->
+                                <xsl:when test="//article-meta/article-id[@pub-id-type = 'doi']='10.1159/000481103'">
+                                    <xsl:value-of select="//aff"/> 
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="normalize-space(//aff/sup[.=$text]/following-sibling::text()[position()=1])"/> 
+                                </xsl:otherwise>
+                            </xsl:choose>
+
                         </xsl:variable>
                         <xsl:variable name="supNettoie2">
                             <xsl:choose>
@@ -5645,9 +5657,6 @@
                                 </xsl:when>
                                 <xsl:when test="contains($supNettoie,';')">
                                     <xsl:value-of select="normalize-space(replace($supNettoie,';',''))"/>
-                                </xsl:when>
-                                <xsl:when test="ends-with($supNettoie,',')">
-                                    <xsl:value-of select="normalize-space(replace($supNettoie,',',''))"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="normalize-space($supNettoie)"/>
