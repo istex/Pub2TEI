@@ -1355,10 +1355,20 @@
                                     source="other"
                                     scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
                             </xsl:when>
-                            <xsl:when test="/article/@article-type='editorial' or /article/@article-type='introduction'">
+                            <xsl:when test="/article/@article-type='editorial' or /article/@article-type='editorial'">
                                 <note type="content-type"
                                     source="editorial"
                                     scheme="https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K">editorial</note>
+                            </xsl:when>
+                            <xsl:when test="/article/@article-type='introduction' or /article/@article-type='introduction'">
+                                <note type="content-type"
+                                    source="introduction"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
+                            </xsl:when>
+                            <xsl:when test="/article/@article-type='in-brief' or /article/@article-type='in-brief'">
+                                <note type="content-type"
+                                    source="in-brief"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
                             </xsl:when>
                             <xsl:when test="/article/front/article-meta/article-categories/subj-group/subject[1]='Chapter'">
                                 <note type="content-type"
