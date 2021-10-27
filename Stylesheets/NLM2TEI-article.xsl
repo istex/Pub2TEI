@@ -1185,7 +1185,7 @@
                                 <xsl:apply-templates select="//article/front/article-meta/title-group/article-title | //fm/atl "/>
                             </xsl:when>
                             <!-- SG: reprise du titre principal dans left si seulement indication 'Book Reviews/Comptes rendus' dans right -->
-                            <xsl:when test="contains(//front/article-meta/title-group/alt-title[@alt-title-type='right-running'],'Book Reviews/Comptes rendus') or contains(//front/article-meta/title-group/alt-title[@alt-title-type='right-running'],'Book Reviews / Comptes rendus')">
+                            <xsl:when test="//front/article-meta/title-group/alt-title[@alt-title-type='right-running']='Book Reviews/Comptes rendus' or //front/article-meta/title-group/alt-title[@alt-title-type='right-running']='Book Reviews / Comptes rendus'">
                                 <!--cambridge : reprise du titre dans product/source  -->
                                 <xsl:choose>
                                     <xsl:when test="//front/article-meta/product/source[string-length() &gt; 0]">
