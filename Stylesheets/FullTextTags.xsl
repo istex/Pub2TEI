@@ -1133,10 +1133,15 @@
         <xsl:when test="parent::aff">
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:when>
-        <xsl:when test="ancestor::label">
-                <head type="label">
+        <xsl:when test="ancestor::list-item and parent::label">
+                <title type="label">
                     <hi rend="italic"><xsl:apply-templates/></hi>
-                </head>
+                </title>
+        </xsl:when>
+        <xsl:when test="ancestor::label">
+            <head type="label">
+                <hi rend="italic"><xsl:apply-templates/></hi>
+            </head>
         </xsl:when>
         <xsl:when test="child::volume">
             <biblScope unit="vol">
