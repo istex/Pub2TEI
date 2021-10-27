@@ -972,157 +972,157 @@
     <!-- SG ajout corrections des titres vides -->
     <xsl:variable name="repriseTitreVide">
         <xsl:choose>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='pii']='S0883769400055172'"><title level="a" type="main">Semiconductor Materials and Process Technology Handbook</title></xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='pii']='S0883769400055160'"><title level="a" type="main">Rapidly Solidified Metals - A Technological Overview</title></xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='pii']='S0883769400055172'"><title level="a" type="main">Semiconductor Materials and Process Technology Handbook</title></xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='pii']='S0883769400055160'"><title level="a" type="main">Rapidly Solidified Metals - A Technological Overview</title></xsl:when>
             <!-- OUP -->
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/yiel/yvs021'">8. Western Europe B. Germany</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/litthe/10.2.148'">ON THE MARGINS OF THE ACCEPTABLE: CHARLOTTE BRONTE'S VILLETTE</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/litthe/10.2.171'">NO 'ELSEWHERE': FISH, SOLOVEITCHIK, AND THE UNAVOIDABILITY OF INTERPRETATION</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/litthe/10.2.160'">THE BODY'S SACRED: ROMANCE AND SACRIFICE IN RELIGIOUS AND JUNGIAN NARRATIVES</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M616'">Authors’ Response to Commentaries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/infdis/106.2.116'">Coagulase Production by Staphylococcus Aureus I. GROWTH AND COAGULASE PRODUCTION IN COMPLEX AND CHEMICALLY DEFINED MEDIUMS-COMPARISON OF CHEMICALLY DEFINED MEDIUMS</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/brain/awq317'">Metaphysics Resurgent</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M603'">Commentary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/jnci/90.19.1489'">CALENDAR OF EVENTS</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M609'">Measuring Functional Decline in Population Aging in a Changing World and an Evolving Biology</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/infdis/104.2.203'">THE ROLE OF MACROPHAGES IN NATURAL IMMUNITY TO SALMONELLAE</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/jnci/89.8.589-a'">Notes</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M606'">Population Aging Across Time and Cultures: Can We Move From Theory to Evidence?</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M611'">Commentary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M601'">Population Aging: A Clinician's View</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M602'">Incorporating Disability Into Population-Level Models of Health Change at Older Ages</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M608'">Commentary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/rpd/ncm134'">Fourteenth International Symposium on Microdosimetry</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M599'">Commentary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M600'">Population Aging: The Benefit of Global Versus Local Theory</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M605'">Commentary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/nq/s11-XII.298.201-e'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/notesj/12.298.201-d'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/notesj/s6-I.13.265-f'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/brain/awg161'">Reply</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/jnci/djm161'">In this issue</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/llc/10.4.304'">Treasurer's Report Financial Year 1 January 1994 to 31 December 1994</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/notesj/s6-I.24.474-d'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/library/s4-IX.3.325'">CAXTON'S SON-IN-LAW</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/ejo/cjm030'">Editorial</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/mnras/201.2.401'">The gravitational evolution of structure in a scale-free universe</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/occmed/kqi148'">Research Methods in Occupational Epidemiology, 2nd edition.</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1093/cje/ben002'">Erratum : The economics of New Labour: policy and performance</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='6 Series II.28.38g'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='7 Series VI.145.263b'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='6 Series XII.298.204a'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='5 Series XI.270.174b'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='6 Series II.40.277c'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='7 Series VI.145.263a'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='s12-VIII.158.334h'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='5 Series XI.270.174b'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='6 Series II.40.277c'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='7 Series VI.145.263a'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id='s12-VIII.158.334h'">Notes and queries</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='pii']='S0714980800010242'">The Work of the Hamburg Research Center in Entrepreneurial History</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.2178/bsl/1305810914'">Gao Su . Invariant descriptive set theory. Pure and applied mathematics. Chapman &amp; Hall/CRC, Boca Raton, 2009, xiv + 392 pp.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/yiel/yvs021'">8. Western Europe B. Germany</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/litthe/10.2.148'">ON THE MARGINS OF THE ACCEPTABLE: CHARLOTTE BRONTE'S VILLETTE</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/litthe/10.2.171'">NO 'ELSEWHERE': FISH, SOLOVEITCHIK, AND THE UNAVOIDABILITY OF INTERPRETATION</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/litthe/10.2.160'">THE BODY'S SACRED: ROMANCE AND SACRIFICE IN RELIGIOUS AND JUNGIAN NARRATIVES</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M616'">Authors’ Response to Commentaries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/infdis/106.2.116'">Coagulase Production by Staphylococcus Aureus I. GROWTH AND COAGULASE PRODUCTION IN COMPLEX AND CHEMICALLY DEFINED MEDIUMS-COMPARISON OF CHEMICALLY DEFINED MEDIUMS</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/brain/awq317'">Metaphysics Resurgent</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M603'">Commentary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/jnci/90.19.1489'">CALENDAR OF EVENTS</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M609'">Measuring Functional Decline in Population Aging in a Changing World and an Evolving Biology</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/infdis/104.2.203'">THE ROLE OF MACROPHAGES IN NATURAL IMMUNITY TO SALMONELLAE</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/jnci/89.8.589-a'">Notes</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M606'">Population Aging Across Time and Cultures: Can We Move From Theory to Evidence?</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M611'">Commentary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M601'">Population Aging: A Clinician's View</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M602'">Incorporating Disability Into Population-Level Models of Health Change at Older Ages</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M608'">Commentary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/rpd/ncm134'">Fourteenth International Symposium on Microdosimetry</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M599'">Commentary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M600'">Population Aging: The Benefit of Global Versus Local Theory</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/gerona/59.6.M605'">Commentary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/nq/s11-XII.298.201-e'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/notesj/12.298.201-d'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/notesj/s6-I.13.265-f'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/brain/awg161'">Reply</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/jnci/djm161'">In this issue</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/llc/10.4.304'">Treasurer's Report Financial Year 1 January 1994 to 31 December 1994</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/notesj/s6-I.24.474-d'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/library/s4-IX.3.325'">CAXTON'S SON-IN-LAW</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/ejo/cjm030'">Editorial</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/mnras/201.2.401'">The gravitational evolution of structure in a scale-free universe</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/occmed/kqi148'">Research Methods in Occupational Epidemiology, 2nd edition.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1093/cje/ben002'">Erratum : The economics of New Labour: policy and performance</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='6 Series II.28.38g'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='7 Series VI.145.263b'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='6 Series XII.298.204a'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='5 Series XI.270.174b'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='6 Series II.40.277c'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='7 Series VI.145.263a'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='s12-VIII.158.334h'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='5 Series XI.270.174b'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='6 Series II.40.277c'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='7 Series VI.145.263a'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id='s12-VIII.158.334h'">Notes and queries</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='pii']='S0714980800010242'">The Work of the Hamburg Research Center in Entrepreneurial History</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.2178/bsl/1305810914'">Gao Su . Invariant descriptive set theory. Pure and applied mathematics. Chapman &amp; Hall/CRC, Boca Raton, 2009, xiv + 392 pp.</xsl:when>
             <!-- cambridge -->
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2046164X00055897'">Reviews of New Works : On the Mortality of Master Mariners. By F. G. P. NEISON, Esq.</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1017/S0714980800007790'">Reviews of: "Cole Thomas R., Van Tassel David D. and Kastenbaum Robert (eds.). Handbook of the Humanities and Aging" and "Kenyon Gary M., Birren James E. and Schroots Johannes J.F. (eds.). Metaphors of Aging in Science and the Humanities"</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2046164X00055897'">Reviews of New Works : On the Mortality of Master Mariners. By F. G. P. NEISON, Esq.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S0714980800007790'">Reviews of: "Cole Thomas R., Van Tassel David D. and Kastenbaum Robert (eds.). Handbook of the Humanities and Aging" and "Kenyon Gary M., Birren James E. and Schroots Johannes J.F. (eds.). Metaphors of Aging in Science and the Humanities"</xsl:when>
             <!-- elsevier -->
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1016/0266-7681(90)90076-G'">Picture - JOHN TURNER HUESTON B.A. (Fine Arts), M.D., M.S., F.R.C.S., F.R.A.C.S.</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1016/0266-7681(89)90002-8'">Picture - J. WILLIAM LITTLER, M.D., F.A.C.S. </xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1016/0266-7681(90)90076-G'">Picture - JOHN TURNER HUESTON B.A. (Fine Arts), M.D., M.S., F.R.C.S., F.R.A.C.S.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1016/0266-7681(89)90002-8'">Picture - J. WILLIAM LITTLER, M.D., F.A.C.S. </xsl:when>
             <!-- BMJ -->
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.9.suppl_1.i76'">1999 MANAGED CARE ACHIEVEMENTS IN TOBACCO CONTROL AWARDS PROGRAM</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.890.775'">Book Reviews</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.4.445'">Calendar of Events</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.2.236'">Calendar of Events</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.9.1.116a'">Calendar of Events</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.67.5.701'">CORRECTION : Basal forebrain amnesia: does the nucleus accumbens contribute to human memory?</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.67.1.133'">CORRECTION : Comparison of mouse bioassay and immunoprecipation assay for botulinum toxin antibodies.</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.67.4.559'">CORRECTION : Focal (segmental) dyshidrosis in syringomyelia.</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/gut.45.4.630d'">CORRECTIONS</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.66.1.1'">Editorial</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.64.1.1'">Editorial announcement</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.5.450'">From the library</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.76.1.83'">Instructions to Authors</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.881.192'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.882.256'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.883.320'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.886.512'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.887.576'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.888.640'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pmj.76.891.64'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/pmj.76.892.128'">International Postgraduate Diary</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.76.3.292'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.76.5.484'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.77.1.96'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.77.3.278'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.77.5.470'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.78.1.99'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.79.1.96'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.79.3.294'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.79.5.468'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.80.1.104'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.80.3.304'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.80.5.496'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.81.1.100'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.81.5.462'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.82.1.91'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.82.3.274'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.82.5.434'">Lucina</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.81.3.286'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.11.934'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.12.1030'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.5.342'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.6.430'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.7.526'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.8.624'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.9.718'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.1.8'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.10.1106'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.11.1230'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.12.1356'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.2.109'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.3.212'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.4.341'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.5.472'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.6.599'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.7.724'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.8.861'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.9.987'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.1.5'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.10.1105'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.11.1214'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.12.1319'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.2.136'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.3.260'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.4.389'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.5.513'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.6.642'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.7.766'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.8.892'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.9.1001'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.1.3'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.2.129'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.3.238'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.4.346'">Newsdesk</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.1.78'">Play It Again</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.2.184'">Play It Again</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.3.304'">Play It Again</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.2.204'">Play It Again</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.3.340'">Play It Again</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.4.426'">Play It Again</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.1.80'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.2.183'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.3.299'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.4.424'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.2.202'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.3.339'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.4.425'">The Lighter Side</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1136/ard.58.9.523'">Unusual and memorable</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">CORRECTION : Effects of stimulant medication on the lateralisation of line bisection judgements of children with attention deficit hyperactivity disorder.</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.9.suppl_1.i76'">1999 MANAGED CARE ACHIEVEMENTS IN TOBACCO CONTROL AWARDS PROGRAM</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.890.775'">Book Reviews</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.4.445'">Calendar of Events</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.2.236'">Calendar of Events</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.9.1.116a'">Calendar of Events</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.67.5.701'">CORRECTION : Basal forebrain amnesia: does the nucleus accumbens contribute to human memory?</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.67.1.133'">CORRECTION : Comparison of mouse bioassay and immunoprecipation assay for botulinum toxin antibodies.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.67.4.559'">CORRECTION : Focal (segmental) dyshidrosis in syringomyelia.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/gut.45.4.630d'">CORRECTIONS</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.66.1.1'">Editorial</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/jnnp.64.1.1'">Editorial announcement</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.5.450'">From the library</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.76.1.83'">Instructions to Authors</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.881.192'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.882.256'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.883.320'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.886.512'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.887.576'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pgmj.75.888.640'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pmj.76.891.64'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/pmj.76.892.128'">International Postgraduate Diary</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.76.3.292'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.76.5.484'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.77.1.96'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.77.3.278'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.77.5.470'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.78.1.99'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.79.1.96'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.79.3.294'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.79.5.468'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.80.1.104'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.80.3.304'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.80.5.496'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.81.1.100'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.81.5.462'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.82.1.91'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.82.3.274'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.82.5.434'">Lucina</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/adc.81.3.286'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.11.934'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.12.1030'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.5.342'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.6.430'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.7.526'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.8.624'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.81.9.718'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.1.8'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.10.1106'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.11.1230'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.12.1356'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.2.109'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.3.212'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.4.341'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.5.472'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.6.599'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.7.724'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.8.861'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.82.9.987'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.1.5'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.10.1105'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.11.1214'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.12.1319'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.2.136'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.3.260'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.4.389'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.5.513'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.6.642'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.7.766'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.8.892'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.83.9.1001'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.1.3'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.2.129'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.3.238'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/bjo.84.4.346'">Newsdesk</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.1.78'">Play It Again</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.2.184'">Play It Again</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.3.304'">Play It Again</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.2.204'">Play It Again</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.3.340'">Play It Again</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.4.426'">Play It Again</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.1.80'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.2.183'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.3.299'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.7.4.424'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.2.202'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.3.339'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/tc.8.4.425'">The Lighter Side</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1136/ard.58.9.523'">Unusual and memorable</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">CORRECTION : Effects of stimulant medication on the lateralisation of line bisection judgements of children with attention deficit hyperactivity disorder.</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">International Postgraduate Diary</xsl:when>
             <!-- EDP -->
-            <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='pii'])='S0883769400055172'">Semiconductor Materials and Process Technology Handbook</xsl:when>
-            <xsl:when test="normalize-space(//front/article-meta/article-id[@pub-id-type='pii'])='S0883769400055160'">Rapidly Solidified Metals— A Technological Overview</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1051/jp3:1992124'">Erratum</xsl:when>
-            <xsl:when test="//front/article-meta/article-id[@pub-id-type='doi']='10.1051/jphyscol:1982832'">Note - J. Steinberger</xsl:when>
+            <xsl:when test="normalize-space(//article/front/article-meta/article-id[@pub-id-type='pii'])='S0883769400055172'">Semiconductor Materials and Process Technology Handbook</xsl:when>
+            <xsl:when test="normalize-space(//article/front/article-meta/article-id[@pub-id-type='pii'])='S0883769400055160'">Rapidly Solidified Metals— A Technological Overview</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1051/jp3:1992124'">Erratum</xsl:when>
+            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1051/jphyscol:1982832'">Note - J. Steinberger</xsl:when>
        <!-- RSL -->
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rsnr.2005.0103'">Editorial - Terry Quinn</xsl:when>
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1098/rstb.1949.0002'">The filamentous bacteria Sphaerotilus, Leptothrix, Cladothrix, and their relation to iron and manganese</xsl:when>
@@ -1180,32 +1180,36 @@
                 <fileDesc>
                     <titleStmt>
                         <xsl:choose>
-                            <xsl:when test="$repriseTitreVide!=''"><title level="a" type="main"><xsl:value-of select="$repriseTitreVide"/></title></xsl:when>
+                            <xsl:when test="$repriseTitreVide!=''">
+                                <title level="a" type="main">
+                                    <xsl:value-of select="$repriseTitreVide"/>
+                                </title>
+                            </xsl:when>
                             <xsl:when test="//article/front/article-meta/title-group/article-title[string-length() &gt; 0] |//fm/atl[string-length() &gt; 0]">
                                 <xsl:apply-templates select="//article/front/article-meta/title-group/article-title | //fm/atl "/>
                             </xsl:when>
                             <!-- SG: reprise du titre principal dans left si seulement indication 'Book Reviews/Comptes rendus' dans right -->
-                            <xsl:when test="//front/article-meta/title-group/alt-title[@alt-title-type='right-running']='Book Reviews/Comptes rendus' or //front/article-meta/title-group/alt-title[@alt-title-type='right-running']='Book Reviews / Comptes rendus'">
+                            <xsl:when test="//article/front/article-meta/title-group/alt-title[@alt-title-type='right-running']='Book Reviews/Comptes rendus' or //article/front/article-meta/title-group/alt-title[@alt-title-type='right-running']='Book Reviews / Comptes rendus'">
                                 <!--cambridge : reprise du titre dans product/source  -->
                                 <xsl:choose>
-                                    <xsl:when test="//front/article-meta/product/source[string-length() &gt; 0]">
+                                    <xsl:when test="//article/front/article-meta/product/source[string-length() &gt; 0]">
                                         <title level="a" type="main">
                                         <xsl:text>Review of "</xsl:text>
-                                        <xsl:value-of select="//front/article-meta/product/source"/>
+                                        <xsl:value-of select="//article/front/article-meta/product/source"/>
                                         <xsl:text>"</xsl:text>
                                         </title>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <title level="a" type="main">
-                                        <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='left-running']"/>
+                                        <xsl:value-of select="//article/front/article-meta/title-group/alt-title[@alt-title-type='left-running']"/>
                                         </title>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:if test="//front/article-meta/title-group/alt-title[@alt-title-type='right-running'][string-length() &gt; 0]">
+                                <xsl:if test="//article/front/article-meta/title-group/alt-title[@alt-title-type='right-running'][string-length() &gt; 0]">
                                     <title level="a" type="main">
-                                    <xsl:value-of select="//front/article-meta/title-group/alt-title[@alt-title-type='right-running']"/>
+                                    <xsl:value-of select="//article/front/article-meta/title-group/alt-title[@alt-title-type='right-running']"/>
                                     </title>
                                 </xsl:if>
                                 <xsl:choose>
@@ -1478,8 +1482,8 @@
                             <xsl:choose>
                                             <xsl:when test="normalize-space(//article/@xml:lang)='IW'">he</xsl:when>
                                             <xsl:when test="normalize-space(//article/@xml:lang)='fn'">en</xsl:when>
-                                            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">en</xsl:when>
-                                            <xsl:when test="//front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">en</xsl:when>
+                                            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='other']='jnnp;68/2/256b'">en</xsl:when>
+                                            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='other']='postgradmedj;76/891/64a'">en</xsl:when>
                                             <!--OUP-->
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/kni221'">fr</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/knp063'">fr</xsl:when>
