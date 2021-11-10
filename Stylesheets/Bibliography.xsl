@@ -2011,7 +2011,7 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="contains(., 'guidelines')">
+            <xsl:when test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
@@ -2654,6 +2654,19 @@
                                     />
                                 </xsl:when>
                                 <xsl:when
+                                    test="contains(substring-before(substring-after($text2, ','), ', pp'), ', 18')">
+                                    <xsl:text>18</xsl:text>
+                                    <xsl:value-of
+                                        select="substring-after(substring-before(substring-after($text2, ','), ', pp'), ', 18')"
+                                    />
+                                </xsl:when>
+                                <xsl:when test="contains($text2, ' 18')">
+                                    <xsl:text>18</xsl:text>
+                                    <xsl:value-of
+                                        select="substring-after(substring-before($text2, ', pp'), '18')"
+                                    />
+                                </xsl:when>
+                                <xsl:when
                                     test="contains(substring-before(substring-after($text2, ','), ', pp'), ', ')">
                                     <xsl:value-of
                                         select="substring-after(substring-before(substring-after($text2, ','), ', pp'), ', ')"
@@ -2668,7 +2681,7 @@
                         </date>
                     </xsl:when>
                     <xsl:when
-                        test="(contains($text2, '19') or contains($text2, '20')) and contains($text2, ';') or contains($text2, '.')">
+                        test="(contains($text2, '18') or contains($text2, '19') or contains($text2, '20')) and contains($text2, ';') or contains($text2, '.')">
                         <date type="published">
                             <xsl:choose>
                                 <xsl:when test="contains($text2, 'http')">
@@ -2676,6 +2689,10 @@
                                         <xsl:value-of select="substring-before($text2, ' http')"/>
                                     </xsl:variable>
                                    <xsl:choose>
+                                       <xsl:when test="contains($text3, '17')">
+                                           <xsl:text>17</xsl:text>
+                                           <xsl:value-of select="translate(substring-after($text3, '17'),'.,;','')" />
+                                       </xsl:when>
                                        <xsl:when test="contains($text3, '18')">
                                            <xsl:text>18</xsl:text>
                                            <xsl:value-of select="translate(substring-after($text3, '18'),'.,;','')" />
@@ -2785,6 +2802,76 @@
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="substring-before(substring-after($text2, '19'), ',')" />
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:when>
+                                <xsl:when test="contains($text2, '18')">
+                                    <xsl:text>18</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, '18'), ';')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '18'), ';')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, ', 18'), ';')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, ', 18'), ';')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, ', 18'), ',')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '18'), ',')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, ', 18'), '.')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, ', 18'), '.')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when test="contains($text2, '18')">
+                                            <xsl:value-of select="translate(substring-after($text2, '18'),'.','')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="substring-before(substring-after($text2, '18'), ',')" />
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:when>
+                                <xsl:when test="contains($text2, '17')">
+                                    <xsl:text>17</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, '17'), ';')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '17'), ';')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, ', 17'), ';')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, ', 17'), ';')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, ', 17'), ',')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '17'), ',')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when
+                                            test="contains(substring-after($text2, ', 17'), '.')">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, ', 17'), '.')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when test="contains($text2, '17')">
+                                            <xsl:value-of select="translate(substring-after($text2, '17'),'.','')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="substring-before(substring-after($text2, '17'), ',')" />
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
