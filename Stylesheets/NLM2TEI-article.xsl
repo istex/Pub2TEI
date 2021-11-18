@@ -1379,6 +1379,11 @@
                                     source="Chapter"
                                     scheme="https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6">chapter</note>
                             </xsl:when>
+                            <xsl:when test="not(//abstract) and not(article/@articleType)">
+                                <note type="content-type"
+                                    source="other"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
+                            </xsl:when>
                             <xsl:otherwise>
                                 <note type="content-type">
                                     <xsl:attribute name="source">
