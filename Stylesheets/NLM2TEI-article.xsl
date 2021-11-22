@@ -1166,8 +1166,13 @@
             <xsl:choose>
                 <xsl:when test="@xml:lang">
                     <xsl:choose>
-                        <xsl:when test="normalize-space(//article/@xml:lang)='IW'"><xsl:attribute name="xml:lang">HE</xsl:attribute></xsl:when>
-                        <xsl:when test="normalize-space(//article/@xml:lang)='fn'"><xsl:attribute name="xml:lang">EN</xsl:attribute></xsl:when>
+                        <xsl:when test="normalize-space(//article/@xml:lang)='IW'"><xsl:attribute name="xml:lang">he</xsl:attribute></xsl:when>
+                        <xsl:when test="normalize-space(//article/@xml:lang)='fn'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                        <!-- karger-ebooks-->
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446123'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000443598'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000445337'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446124'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
                         <!-- sage-->
                         <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
                         <xsl:otherwise>
@@ -1822,8 +1827,13 @@
                                             <!-- sage-->
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'">fr</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1093/fs/XXXIV.2.168'">fr</xsl:when>
-                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458580904300109'">IT</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458580904300109'">it</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/001458587901300403'">fr</xsl:when>
+                                            <!-- karger-ebooks-->
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446123'">en</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000443598'">en</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000445337'">en</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446124'">en</xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:choose>
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
