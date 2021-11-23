@@ -1966,6 +1966,22 @@ reactorsa'</title>
             </title>
         </xsl:if>
     </xsl:template>
+    <xsl:template match="book-title" mode="article">
+        <title level="a">
+            <xsl:choose>
+                <!-- traitement degruyter ebooks special 
+                exemple 10.1515/9781501504396-->
+                <xsl:when test=".='Homer’s Iliad'">
+                    <xsl:value-of select="/book/book-meta/volume[@xml:lang='de']"/>
+                    <xsl:text> - </xsl:text>
+                    <xsl:apply-templates/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </title>
+    </xsl:template>
     <xsl:template match="book-title">
         <title level="m">
             <xsl:choose>

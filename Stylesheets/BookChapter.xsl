@@ -130,6 +130,10 @@
                                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
                                     </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates select="//book-title-group/book-title" mode="article"></xsl:apply-templates>
+                                        <xsl:apply-templates select="//book-title-group/subtitle"></xsl:apply-templates>
+                                    </xsl:otherwise>
                                 </xsl:choose>
                             </titleStmt>
                             <publicationStmt>
