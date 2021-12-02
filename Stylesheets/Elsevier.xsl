@@ -635,7 +635,7 @@
             <xsl:when test="normalize-space($codeTitle1)='CMN'">Clinical Microbiology Newsletter</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='CMQ'">Canadian Metallurgical Quarterly</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='CNF'">Combustion and Flame</xsl:when>
-            <xsl:when test="normalize-space($codeTitle1)='CNM'">New Carbon Materials</xsl:when>
+            <xsl:when test="normalize-space($codeTitle1)='NCM'">New Carbon Materials</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='CNSAJ'">CNSA Journal</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='CNSNS'">Communications in Nonlinear Science and Numerical Simulation</xsl:when>
             <xsl:when test="normalize-space($codeTitle1)='COBIOT'">Current Opinion in Biotechnology</xsl:when>
