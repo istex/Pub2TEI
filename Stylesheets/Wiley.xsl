@@ -151,28 +151,34 @@
                     <!-- SG - titre brut -->
                     <titleStmt>
                         <!-- redressement des titres vides -->
-                        <title level="a" type="main">
-                            <xsl:choose>
-                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1046/j.1523-1739.1997.0110051265.x'">
+                        <xsl:choose>
+                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1046/j.1523-1739.1997.0110051265.x'">
+                                <title level="a" type="main">
                                     <xsl:text>Erratum: Diploid expected heterozygosity and haploid allelic diversity equations misprinted</xsl:text>
-                                </xsl:when>
-                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-401X(199809)26:5&lt;253::AID-AHEH253&gt;3.0.CO;2-S'">
+                                </title></xsl:when>
+                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-401X(199809)26:5&lt;253::AID-AHEH253&gt;3.0.CO;2-S'">
+                                <title level="a" type="main">
                                     <xsl:text>Vertical and Annual Distribution of Ferric and Ferrous Iron in Acid Mining Lakes</xsl:text> 
-                                </xsl:when>
-                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-4133(199811)100:11&lt;513::AID-LIPI513&gt;3.0.CO;2-I'">
+                                </title></xsl:when>
+                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-4133(199811)100:11&lt;513::AID-LIPI513&gt;3.0.CO;2-I'">
+                                <title level="a" type="main">
                                     <xsl:text>Die Bleichung von Speisefetten und Ölen V Aus dem Arbeitskreis "Technologien der industriellen"</xsl:text> 
-                                </xsl:when>
-                                <xsl:when test="//publicationMeta[@level='unit']/doi='10.1111/insr.12044'">
-                                    <xsl:text>Table of contents</xsl:text> 
-                                </xsl:when>
-                                <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/sres.2200'">
-                                    <xsl:text>Editorial</xsl:text> 
-                                </xsl:when>
-                                <xsl:otherwise>
+                                </title>
+                            </xsl:when>
+                            <xsl:when test="//publicationMeta[@level='unit']/doi='10.1111/insr.12044'">
+                                <title level="a" type="main">
+                                    <xsl:text>Table of contents</xsl:text>
+                                </title>
+                            </xsl:when>
+                            <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/sres.2200'">
+                                <title level="a" type="main">
+                                    <xsl:text>Editorial</xsl:text>
+                                </title>
+                            </xsl:when>
+                            <xsl:otherwise>
                                     <xsl:apply-templates select="//titleGroup"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </title>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </titleStmt>
                     <!-- SG - ajout <enrichedObject> -->
                     <xsl:if test="header/contentMeta/enrichedObjectGroup | //fundingInfo">
@@ -586,29 +592,34 @@
             <analytic>
                 <!-- Title information related to the paper goes here -->
                 <!-- redressement des titres vides -->
-                <title level="a" type="main">
                     <xsl:choose>
                         <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1046/j.1523-1739.1997.0110051265.x'">
-                            <xsl:text>Erratum: Diploid expected heterozygosity and haploid allelic diversity equations misprinted</xsl:text>
-                        </xsl:when>
+                            <title level="a" type="main">
+                                <xsl:text>Erratum: Diploid expected heterozygosity and haploid allelic diversity equations misprinted</xsl:text>
+                            </title></xsl:when>
                         <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-401X(199809)26:5&lt;253::AID-AHEH253&gt;3.0.CO;2-S'">
-                            <xsl:text>Vertical and Annual Distribution of Ferric and Ferrous Iron in Acid Mining Lakes</xsl:text> 
-                        </xsl:when>
+                            <title level="a" type="main">
+                                <xsl:text>Vertical and Annual Distribution of Ferric and Ferrous Iron in Acid Mining Lakes</xsl:text> 
+                            </title></xsl:when>
                         <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-4133(199811)100:11&lt;513::AID-LIPI513&gt;3.0.CO;2-I'">
-                            <xsl:text>Die Bleichung von Speisefetten und Ölen V Aus dem Arbeitskreis "Technologien der industriellen"</xsl:text> 
+                            <title level="a" type="main">
+                                <xsl:text>Die Bleichung von Speisefetten und Ölen V Aus dem Arbeitskreis "Technologien der industriellen"</xsl:text> 
+                            </title>
                         </xsl:when>
                         <xsl:when test="//publicationMeta[@level='unit']/doi='10.1111/insr.12044'">
-                            <xsl:text>Table of contents</xsl:text> 
+                            <title level="a" type="main">
+                                <xsl:text>Table of contents</xsl:text>
+                            </title>
                         </xsl:when>
                         <xsl:when test="//header/publicationMeta[@level='unit']/doi='10.1002/sres.2200'">
-                            <xsl:text>Editorial</xsl:text> 
+                            <title level="a" type="main">
+                                <xsl:text>Editorial</xsl:text>
+                            </title>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:apply-templates select="contentMeta/titleGroup"/>
+                                <xsl:apply-templates select="//titleGroup"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                </title>
-				
                 <!-- All authors are included here -->
 				<xsl:if test="contentMeta/creators">
 					<xsl:apply-templates select="contentMeta/creators"/>
