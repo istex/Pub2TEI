@@ -776,9 +776,6 @@
 	<!-- title group -->
     <xsl:template match="//header/contentMeta/titleGroup">
 	    <xsl:choose>
-	        <xsl:when test="title">
-	            <xsl:apply-templates select="title"/>
-	        </xsl:when>
 	        <xsl:when test="contains(title[@type='main'],'Abstracts') or title[@type='main']/citation[@type='book']">
 	            <xsl:choose>
 	                <xsl:when test="contains(title[@type='main'],'Abstracts')">
@@ -894,6 +891,9 @@
 	                        </title>
 	                </xsl:otherwise>
 	            </xsl:choose>
+	        </xsl:when>
+	        <xsl:when test="title">
+	            <xsl:apply-templates select="title"/>
 	        </xsl:when>
 	    </xsl:choose>
 	    <!-- SG - ajout conditionnel -->
