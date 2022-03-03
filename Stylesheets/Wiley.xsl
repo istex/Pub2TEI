@@ -1414,7 +1414,6 @@
         </term>
     </xsl:template>
     <xsl:template match="title">
-        <title level="a" type="main" lang="{@xml:lang}">
             <xsl:choose>
                 <xsl:when test="contains(.[@type='main'],'Abstracts') or .[@type='main']/citation[@type='book']">
                     <xsl:choose>
@@ -1455,6 +1454,7 @@
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:otherwise>
+                            <title level="a" type="main">
                                 <xsl:choose>
                                     <xsl:when test="//component/header/publicationMeta/issn[@type='print']='0378-5599'">
                                         <xsl:attribute name="xml:lang">fr</xsl:attribute>
@@ -1506,38 +1506,55 @@
                                         </xsl:if>
                                     </xsl:otherwise>
                                 </xsl:choose>
+                            </title>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates/>
+                    <xsl:choose>
+                        <xsl:when test="@type='subtitle'">
+                            <xsl:apply-templates select="." mode="subtitle"/>
+                        </xsl:when>
+                        <xsl:when test="@type='short'">
+                            <xsl:apply-templates select="." mode="short"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <title level= "a" type="main">
+                                <xsl:if test="@xml:lang">
+                                    <xsl:attribute name="xml:lang">
+                                        <xsl:value-of select="translate(@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                    </xsl:attribute>
+                                </xsl:if>
+                                <xsl:apply-templates/>
+                            </title>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="title" mode="subtitle">
+        <title level= "a" type="sub">
+            <!-- SG - ajout de la langue du titre -->
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="."/>
         </title>
-        
-        <!-- SG - ajout conditionnel -->
-        <xsl:if test="@type='subtitle'">
-            <title level= "a" type="sub">
-                <!-- SG - ajout de la langue du titre -->
-                <xsl:if test="@xml:lang">
-                    <xsl:attribute name="xml:lang">
-                        <xsl:value-of select="@xml:lang"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates select=".[@type='subtitle']"/>
-            </title>
-        </xsl:if>
-        <xsl:if test="@type='short'">
-            <title level= "a" type="short">
-                <!-- SG - ajout de la langue du titre -->
-                <xsl:if test="@xml:lang">
-                    <xsl:attribute name="xml:lang">
-                        <xsl:value-of select="@xml:lang"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates select=".[@type='subtitle']"/>
-            </title>
-        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="title" mode="short">
+        <title level= "a" type="short">
+            <!-- SG - ajout de la langue du titre -->
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="."/>
+        </title>
     </xsl:template>
     
 </xsl:stylesheet>
