@@ -777,6 +777,9 @@
     <xsl:template match="//header/contentMeta/titleGroup">
 	    <xsl:choose>
 	        <xsl:when test="title">
+	            <xsl:apply-templates select="title"/>
+	        </xsl:when>
+	        <xsl:when test="contains(title[@type='main'],'Abstracts') or title[@type='main']/citation[@type='book']">
 	            <xsl:choose>
 	                <xsl:when test="contains(title[@type='main'],'Abstracts')">
 	                    <xsl:choose>
@@ -1498,4 +1501,10 @@
             <xsl:apply-templates/>
         </term>
     </xsl:template>
+    <xsl:template match="title">
+        <title level="a" type="main" lang="{@xml:lang}">
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
+    
 </xsl:stylesheet>
