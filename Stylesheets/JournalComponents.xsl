@@ -2054,7 +2054,7 @@ reactorsa'</title>
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
-            <xsl:when test="//issue-title">
+            <xsl:when test="//issue-title | parent::book-title-group">
                 <title level="m" type="sub">
                     <xsl:apply-templates/>
                 </title>
@@ -2377,38 +2377,40 @@ reactorsa'</title>
 
     <xsl:template match="Issn | ISSN | issn | ce:issn">
         <xsl:choose>
+            <xsl:when test="@publication-format='print'"><idno type="pISSN"><xsl:apply-templates/></idno></xsl:when>
+            <xsl:when test="@publication-format='online'"><idno type="eISSN"><xsl:apply-templates/></idno></xsl:when>
             <xsl:when test="normalize-space(.)">
-            <xsl:variable name="ISSNCode">
-                <xsl:value-of select="normalize-space(.)"/>
-            </xsl:variable>
-            <xsl:variable name="journalEntry"
-                select="$journalList/descendant::tei:row[tei:cell/text()=$ISSNCode]"/>
-            <xsl:message>ISSN: <xsl:value-of select="$ISSNCode"/></xsl:message>
-            <xsl:message>Journal: <xsl:value-of select="$journalEntry/tei:cell[@role='Journal']"
+                <xsl:variable name="ISSNCode">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </xsl:variable>
+                <xsl:variable name="journalEntry"
+                    select="$journalList/descendant::tei:row[tei:cell/text()=$ISSNCode]"/>
+                <xsl:message>ISSN: <xsl:value-of select="$ISSNCode"/></xsl:message>
+                <xsl:message>Journal: <xsl:value-of select="$journalEntry/tei:cell[@role='Journal']"
                 /></xsl:message>
-            <idno type="pISSN">
-                <xsl:choose>
-                    <xsl:when test="$ISSNCode or normalize-space(.)">
-                        <xsl:value-of select="$ISSNCode"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- SAGE - ajout des issns -->
-                        <xsl:value-of select="$repriseISSNCode"/>
-                        <xsl:value-of select="$REPRISEeISSNCode"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </idno>
+                <idno type="pISSN">
+                    <xsl:choose>
+                        <xsl:when test="$ISSNCode or normalize-space(.)">
+                            <xsl:value-of select="$ISSNCode"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- SAGE - ajout des issns -->
+                            <xsl:value-of select="$repriseISSNCode"/>
+                            <xsl:value-of select="$REPRISEeISSNCode"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </idno>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="$repriseISSNCode or $REPRISEeISSNCode">
-                <idno type="pISSN">
-                    <!-- SAGE - ajout des pissns -->
-                    <xsl:value-of select="$repriseISSNCode"/>
-                </idno>
-                <idno type="eISSN">
-                    <!-- SAGE - ajout des eissns -->
-                    <xsl:value-of select="$REPRISEeISSNCode"/>
-                </idno>
+                    <idno type="pISSN">
+                        <!-- SAGE - ajout des pissns -->
+                        <xsl:value-of select="$repriseISSNCode"/>
+                    </idno>
+                    <idno type="eISSN">
+                        <!-- SAGE - ajout des eissns -->
+                        <xsl:value-of select="$REPRISEeISSNCode"/>
+                    </idno>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
