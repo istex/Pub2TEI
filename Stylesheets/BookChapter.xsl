@@ -246,6 +246,12 @@
                                 <!-- niveau chapter -->
                                 <note type="content-type">
                                     <xsl:choose>
+                                        <!-- Brill-ebooks -->
+                                        <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title">
+                                            <xsl:attribute name="source">chapter</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
+                                            <xsl:text>chapter</xsl:text>
+                                        </xsl:when>
                                         <!-- Numérique premium -->
                                         <xsl:when test="collection-meta">
                                             <xsl:attribute name="source">book</xsl:attribute>
@@ -273,6 +279,13 @@
                                 <!-- niveau revue / book -->
                                 <xsl:choose>
                                     <xsl:when test="$docIssue//book/book-series-meta">
+                                        <note type="publication-type">
+                                            <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
+                                            <xsl:text>book-series</xsl:text>
+                                        </note>
+                                    </xsl:when>
+                                    <!-- Brill-ebooks-->
+                                    <xsl:when test="//book/collection-meta">
                                         <note type="publication-type">
                                             <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
                                             <xsl:text>book-series</xsl:text>
@@ -851,8 +864,17 @@
                 </xsl:if>
             </analytic>
             <monogr>
-                <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
-                <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
+                <xsl:choose>
+                    <xsl:when test="//book/collection-meta[2]">
+                        <title level="m" type="main">
+                            <xsl:apply-templates select="//book/collection-meta[2]" mode="brill-ebooks"/>
+                        </title>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
+                        <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
                 <!-- ********************************** Identifier *******************************-->
@@ -951,7 +973,16 @@
                             </xsl:if>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:apply-templates select="/book/collection-meta[1]/volume-in-collection/volume-number"/>
+                    <xsl:choose>
+                        <xsl:when test="/book/collection-meta[2]/volume-in-collection/volume-number">
+                            <biblScope unit="vol">
+                                <xsl:value-of select="/book/collection-meta[2]/volume-in-collection/volume-number"/>
+                            </biblScope>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="/book/collection-meta/volume-in-collection/volume-number"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:choose>
                         <xsl:when test="//series[1]/@n[string-length() &gt; 0] and not(contains(//series[1]/@n,'978'))">
                             <biblScope unit="vol">
@@ -985,16 +1016,9 @@
                     <xsl:apply-templates select="book-body/book-part/book-part-meta/counts/book-page-count"/>
                 </imprint>
             </monogr>
-            <xsl:if test="//collection-meta">
-                <series>
-                    <xsl:apply-templates select="/book/collection-meta[1]/title-group/title"/>
-                    <xsl:apply-templates select="/book/collection-meta[1]/title-group/subtitle"/>
-                    <xsl:apply-templates select="/book/collection-meta/contrib-group/contrib" mode="editorSeries"/>
-                    <xsl:apply-templates select="/book/collection-meta[1]/issn"/>
-                    <xsl:apply-templates select="/book/collection-meta[1]/collection-id"/>
-                    <xsl:apply-templates select="/book/collection-meta[1]/volume-in-collection/volume-number"/>
-                </series>
-            </xsl:if>
+                
+            <xsl:apply-templates select="collection-meta"/>
+            
             <xsl:if test="//metadata/series[string-length() &gt; 0]">
                 <series>
                     <xsl:apply-templates select="//metadata/series"/>
@@ -1291,5 +1315,28 @@
         <idno type="collection-id">
             <xsl:apply-templates/>
         </idno>
+    </xsl:template>
+    <xsl:template match="collection-meta">
+        <series>
+            <xsl:choose>
+                <xsl:when test="@collection-type='series'">
+                    <xsl:attribute name="ana">series</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@collection-type='book-set'">
+                    <xsl:attribute name="ana">sub-series</xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:apply-templates select="title-group/title"/>
+            <xsl:apply-templates select="title-group/subtitle"/>
+            <xsl:apply-templates select="contrib-group/contrib" mode="editorSeries"/>
+            <xsl:apply-templates select="issn"/>
+            <xsl:apply-templates select="collection-id"/>
+            <xsl:apply-templates select="volume-in-collection/volume-number"/>
+        </series>
+    </xsl:template>
+    <xsl:template match="collection-meta[2]" mode="brill-ebooks">
+            <xsl:value-of select=".[@collection-type='book-set']/title-group/title"/>
+            <xsl:text> : </xsl:text>
+            <xsl:value-of select="//book/book-meta/book-title-group/book-title[1]"/>
     </xsl:template>
 </xsl:stylesheet>

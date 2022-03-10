@@ -2375,7 +2375,7 @@ reactorsa'</title>
     <!-- Elsevier: ce:issn -->
     <!-- Rem.: @pub-typr not considered -->
 
-    <xsl:template match="Issn | ISSN | issn | ce:issn">
+    <xsl:template match="Issn[string-length() &gt; 0] | ISSN[string-length() &gt; 0] | issn[string-length() &gt; 0] | ce:issn [string-length() &gt; 0]">
         <xsl:choose>
             <xsl:when test="@publication-format='print'"><idno type="pISSN"><xsl:apply-templates/></idno></xsl:when>
             <xsl:when test="@publication-format='online'"><idno type="eISSN"><xsl:apply-templates/></idno></xsl:when>
