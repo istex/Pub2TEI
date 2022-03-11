@@ -78,14 +78,122 @@
             <xsl:when test="normalize-space($codeGenreBrepols)='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
         </xsl:choose>
     </xsl:variable>
-    <xsl:template match="//book">
+    
+    <xsl:variable name="langBrill">
+        <xsl:choose>
+            <xsl:when test="//isbn[@publication-format='online']='9789004294967'
+                or //isbn[@publication-format='online']='9789004295261'
+                or //isbn[@publication-format='online']='9789004295476'
+                or //isbn[@publication-format='online']='9789004295568'
+                or //isbn[@publication-format='online']='9789004295643'
+                or //isbn[@publication-format='online']='9789004295667'
+                or //isbn[@publication-format='online']='9789004295704'
+                or //isbn[@publication-format='online']='9789004296497'
+                or //isbn[@publication-format='online']='9789004296565'
+                or //isbn[@publication-format='online']='9789004296541'
+                or //isbn[@publication-format='online']='9789004296640'
+                or //isbn[@publication-format='online']='9789004295780'
+                or //isbn[@publication-format='online']='9789004295797'">
+                <xsl:text>it</xsl:text>
+            </xsl:when>
+            <xsl:when test="//isbn[@publication-format='online']='9789004296138'
+                or //isbn[@publication-format='online']='9789004296145'
+                or //isbn[@publication-format='online']='9789004296152'
+                or //isbn[@publication-format='online']='9789004294769'
+                or //isbn[@publication-format='online']='9789004294790'
+                or //isbn[@publication-format='online']='9789004296213'
+                or //isbn[@publication-format='online']='9789004294806'
+                or //isbn[@publication-format='online']='9789004294813'
+                or //isbn[@publication-format='online']='9789004294820'
+                or //isbn[@publication-format='online']='9789004296237'
+                or //isbn[@publication-format='online']='9789004296244'
+                or //isbn[@publication-format='online']='9789004294899'
+                or //isbn[@publication-format='online']='9789004294912'
+                or //isbn[@publication-format='online']='9789004294929'
+                or //isbn[@publication-format='online']='9789004294950'
+                or //isbn[@publication-format='online']='9789004296275'
+                or //isbn[@publication-format='online']='9789004296329'
+                or //isbn[@publication-format='online']='9789004296282'
+                or //isbn[@publication-format='online']='9789004296305'
+                or //isbn[@publication-format='online']='9789004294981'
+                or //isbn[@publication-format='online']='9789004295032'
+                or //isbn[@publication-format='online']='9789004295124'
+                or //isbn[@publication-format='online']='9789004295131'
+                or //isbn[@publication-format='online']='9789004295148'
+                or //isbn[@publication-format='online']='9789004295186'
+                or //isbn[@publication-format='online']='9789004295247'
+                or //isbn[@publication-format='online']='9789004295278'
+                or //isbn[@publication-format='online']='9789004295285'
+                or //isbn[@publication-format='online']='9789004301672'
+                or //isbn[@publication-format='online']='9789004295308'
+                or //isbn[@publication-format='online']='9789004295315'
+                or //isbn[@publication-format='online']='9789004295322'
+                or //isbn[@publication-format='online']='9789004296404'
+                or //isbn[@publication-format='online']='9789004295339'
+                or //isbn[@publication-format='online']='9789004295421'
+                or //isbn[@publication-format='online']='9789004295438'
+                or //isbn[@publication-format='online']='9789004295452'
+                or //isbn[@publication-format='online']='9789004295469'
+                or //isbn[@publication-format='online']='9789004295483'
+                or //isbn[@publication-format='online']='9789004295490'
+                or //isbn[@publication-format='online']='9789004295551'
+                or //isbn[@publication-format='online']='9789004295544'
+                or //isbn[@publication-format='online']='9789004295636'
+                or //isbn[@publication-format='online']='9789004295650'
+                or //isbn[@publication-format='online']='9789004296459'
+                or //isbn[@publication-format='online']='9789004296466'
+                or //isbn[@publication-format='online']='9789004295728'
+                or //isbn[@publication-format='online']='9789004296480'
+                or //isbn[@publication-format='online']='9789004301412'
+                or //isbn[@publication-format='online']='9789004295933'
+                or //isbn[@publication-format='online']='9789004301504'
+                or //isbn[@publication-format='online']='9789004295988'
+                or //isbn[@publication-format='online']='9789047412328'
+                or //isbn[@publication-format='online']='9789047415855'
+                or //isbn[@publication-format='online']='9789047408277'
+                or //isbn[@publication-format='online']='9789047410331'
+                or //isbn[@publication-format='online']='9789004210912'
+                or //isbn[@publication-format='online']='9789004263246'">
+                <xsl:text>fr</xsl:text>
+            </xsl:when>
+            <xsl:when test="//isbn[@publication-format='online']='9789004296077'
+                or //isbn[@publication-format='online']='9789004296091'
+                or //isbn[@publication-format='online']='9789004294738'
+                or //isbn[@publication-format='online']='9789004294776'
+                or //isbn[@publication-format='online']='9789004294974'
+                or //isbn[@publication-format='online']='9789004294998'
+                or //isbn[@publication-format='online']='9789004295001'
+                or //isbn[@publication-format='online']='9789004301344'
+                or //isbn[@publication-format='online']='9789004295087'
+                or //isbn[@publication-format='online']='9789004295292'
+                or //isbn[@publication-format='online']='9789004301689'
+                or //isbn[@publication-format='online']='9789004295377'
+                or //isbn[@publication-format='online']='9789004295407'
+                or //isbn[@publication-format='online']='9789004295506'
+                or //isbn[@publication-format='online']='9789004295513'
+                or //isbn[@publication-format='online']='9789004295537'
+                or //isbn[@publication-format='online']='9789004296435'
+                or //isbn[@publication-format='online']='9789004296442'
+                or //isbn[@publication-format='online']='9789004295711'
+                or //isbn[@publication-format='online']='9789004301375'
+                or //isbn[@publication-format='online']='9789004295742'
+                or //isbn[@publication-format='online']='9789004295858'
+                or //isbn[@publication-format='online']='9789004295896'">
+                <xsl:text>de</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>en</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:template match="book">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
             <xsl:choose>
                <!-- traitement spécial TaylorFrancis -->
-                <xsl:when test="starts-with(book-meta/book-id[@pub-id-type='doi'],'10.4324/') or contains(.,'Routledge')">
+                <xsl:when test="starts-with(book-meta/book-id[@pub-id-type='doi'],'10.4324/') or contains(book/book-meta/publisher/publisher-name,'Routledge')">
                     <xsl:apply-templates select="book-meta" mode="TF"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -142,9 +250,6 @@
                                     <xsl:when test="book-meta/publisher/publisher-name='De Gruyter'">
                                         <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-1JLL5NJT-J">
                                             <xsl:value-of select="book-meta/publisher/publisher-name"/></publisher>
-                                    </xsl:when>
-                                    <xsl:when test="//body/book-part/book-part-meta">
-                                        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-N14T76M9-6">Brepols Publishers</publisher>
                                     </xsl:when>
                                     <xsl:when test="book-meta/publisher/publisher-name[string-length() &gt; 0]">
                                         <xsl:choose>
@@ -313,6 +418,9 @@
                             </notesStmt>
                             <sourceDesc>
                                 <xsl:choose>
+                                    <xsl:when test="//body/book-part[@book-part-type='chapter']/book-part-meta">
+                                        <xsl:apply-templates select="//book" mode="editor"/>
+                                    </xsl:when>
                                     <xsl:when test="//body/book-part/book-part-meta">
                                         <xsl:apply-templates select="//book-part" mode="sourceDesc"/>
                                     </xsl:when>
@@ -328,20 +436,34 @@
                         <xsl:choose>
                             <xsl:when test="//body/book-part/book-part-meta/abstract |$docIssue//subj-group/subject">
                                 <profileDesc>
+                                    <langUsage>
+                                        <language>
+                                            <xsl:attribute name="ident">
+                                                <xsl:choose>
+                                                    <xsl:when test="//body/book-part/@xml:lang">
+                                                        <xsl:value-of select="//body/book-part/@xml:lang"/>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <xsl:value-of select="$langBrill"/>
+                                                    </xsl:otherwise>
+                                                </xsl:choose> 
+                                            </xsl:attribute>
+                                        </language>
+                                    </langUsage>
+                                    
                                     <xsl:apply-templates select="//body/book-part/book-part-meta/abstract"/>
                                     <xsl:if test="$docIssue//subj-group/subject[string-length() &gt; 0]">
                                         <textClass ana="subject">
                                             <xsl:apply-templates select="$docIssue//book-categories/subj-group"/>
                                         </textClass>
                                     </xsl:if>
-                                    <xsl:if test="//body/book-part/@xml:lang[string-length()&gt; 0]">
-                                        <langUsage>
-                                            <language>
-                                                <xsl:attribute name="ident">
-                                                    <xsl:value-of select="//body/book-part/@xml:lang"/>
-                                                </xsl:attribute>
-                                            </language>
-                                        </langUsage>
+                                    <!-- brill-ebooks -->
+                                    <xsl:if test="//book-part[@book-part-type='chapter']/book-part-meta/kwd-group">
+                                        <textClass ana="keyword">
+                                            <keywords>
+                                                <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/kwd-group/kwd"/>
+                                            </keywords>
+                                        </textClass>
                                     </xsl:if>
                                 </profileDesc>
                             </xsl:when>
@@ -383,7 +505,6 @@
                                     <xsl:choose>
                                         <!-- ne pas reprendre les abstracts du livre si on traite les chapitres-->
                                         <xsl:when test="/book/book-meta/abstract and /book/body/book-part/book-part-meta/title-group/title"/>
-                                        
                                         <xsl:otherwise>
                                             <xsl:if test="book-meta/abstract[string-length() &gt; 0]">
                                                 <xsl:apply-templates select="book-meta/abstract"/>
@@ -491,6 +612,114 @@
                             <xsl:otherwise>
                                 <profileDesc>
                                     <xsl:choose>
+                                        <!-- brill-ebooks -->
+                                        <xsl:when test="//isbn[@publication-format='online']='9789004294967'
+                                            or //isbn[@publication-format='online']='9789004295261'
+                                            or //isbn[@publication-format='online']='9789004295476'
+                                            or //isbn[@publication-format='online']='9789004295568'
+                                            or //isbn[@publication-format='online']='9789004295643'
+                                            or //isbn[@publication-format='online']='9789004295667'
+                                            or //isbn[@publication-format='online']='9789004295704'
+                                            or //isbn[@publication-format='online']='9789004296497'
+                                            or //isbn[@publication-format='online']='9789004296565'
+                                            or //isbn[@publication-format='online']='9789004296541'
+                                            or //isbn[@publication-format='online']='9789004296640'
+                                            or //isbn[@publication-format='online']='9789004295780'
+                                            or //isbn[@publication-format='online']='9789004295797'">
+                                            <langUsage>
+                                                <language ident="it"/>
+                                            </langUsage>
+                                        </xsl:when>
+                                        <xsl:when test="//isbn[@publication-format='online']='9789004296138'
+                                            or //isbn[@publication-format='online']='9789004296145'
+                                            or //isbn[@publication-format='online']='9789004296152'
+                                            or //isbn[@publication-format='online']='9789004294769'
+                                            or //isbn[@publication-format='online']='9789004294790'
+                                            or //isbn[@publication-format='online']='9789004296213'
+                                            or //isbn[@publication-format='online']='9789004294806'
+                                            or //isbn[@publication-format='online']='9789004294813'
+                                            or //isbn[@publication-format='online']='9789004294820'
+                                            or //isbn[@publication-format='online']='9789004296237'
+                                            or //isbn[@publication-format='online']='9789004296244'
+                                            or //isbn[@publication-format='online']='9789004294899'
+                                            or //isbn[@publication-format='online']='9789004294912'
+                                            or //isbn[@publication-format='online']='9789004294929'
+                                            or //isbn[@publication-format='online']='9789004294950'
+                                            or //isbn[@publication-format='online']='9789004296275'
+                                            or //isbn[@publication-format='online']='9789004296329'
+                                            or //isbn[@publication-format='online']='9789004296282'
+                                            or //isbn[@publication-format='online']='9789004296305'
+                                            or //isbn[@publication-format='online']='9789004294981'
+                                            or //isbn[@publication-format='online']='9789004295032'
+                                            or //isbn[@publication-format='online']='9789004295124'
+                                            or //isbn[@publication-format='online']='9789004295131'
+                                            or //isbn[@publication-format='online']='9789004295148'
+                                            or //isbn[@publication-format='online']='9789004295186'
+                                            or //isbn[@publication-format='online']='9789004295247'
+                                            or //isbn[@publication-format='online']='9789004295278'
+                                            or //isbn[@publication-format='online']='9789004295285'
+                                            or //isbn[@publication-format='online']='9789004301672'
+                                            or //isbn[@publication-format='online']='9789004295308'
+                                            or //isbn[@publication-format='online']='9789004295315'
+                                            or //isbn[@publication-format='online']='9789004295322'
+                                            or //isbn[@publication-format='online']='9789004296404'
+                                            or //isbn[@publication-format='online']='9789004295339'
+                                            or //isbn[@publication-format='online']='9789004295421'
+                                            or //isbn[@publication-format='online']='9789004295438'
+                                            or //isbn[@publication-format='online']='9789004295452'
+                                            or //isbn[@publication-format='online']='9789004295469'
+                                            or //isbn[@publication-format='online']='9789004295483'
+                                            or //isbn[@publication-format='online']='9789004295490'
+                                            or //isbn[@publication-format='online']='9789004295551'
+                                            or //isbn[@publication-format='online']='9789004295544'
+                                            or //isbn[@publication-format='online']='9789004295636'
+                                            or //isbn[@publication-format='online']='9789004295650'
+                                            or //isbn[@publication-format='online']='9789004296459'
+                                            or //isbn[@publication-format='online']='9789004296466'
+                                            or //isbn[@publication-format='online']='9789004295728'
+                                            or //isbn[@publication-format='online']='9789004296480'
+                                            or //isbn[@publication-format='online']='9789004301412'
+                                            or //isbn[@publication-format='online']='9789004295933'
+                                            or //isbn[@publication-format='online']='9789004301504'
+                                            or //isbn[@publication-format='online']='9789004295988'
+                                            or //isbn[@publication-format='online']='9789047412328'
+                                            or //isbn[@publication-format='online']='9789047415855'
+                                            or //isbn[@publication-format='online']='9789047408277'
+                                            or //isbn[@publication-format='online']='9789047410331'
+                                            or //isbn[@publication-format='online']='9789004210912'
+                                            or //isbn[@publication-format='online']='9789004263246'">
+                                            <langUsage>
+                                                <language ident="fr"/>
+                                            </langUsage>
+                                        </xsl:when>
+                                        <xsl:when test="//isbn[@publication-format='online']='9789004296077'
+                                            or //isbn[@publication-format='online']='9789004296091'
+                                            or //isbn[@publication-format='online']='9789004294738'
+                                            or //isbn[@publication-format='online']='9789004294776'
+                                            or //isbn[@publication-format='online']='9789004294974'
+                                            or //isbn[@publication-format='online']='9789004294998'
+                                            or //isbn[@publication-format='online']='9789004295001'
+                                            or //isbn[@publication-format='online']='9789004301344'
+                                            or //isbn[@publication-format='online']='9789004295087'
+                                            or //isbn[@publication-format='online']='9789004295292'
+                                            or //isbn[@publication-format='online']='9789004301689'
+                                            or //isbn[@publication-format='online']='9789004295377'
+                                            or //isbn[@publication-format='online']='9789004295407'
+                                            or //isbn[@publication-format='online']='9789004295506'
+                                            or //isbn[@publication-format='online']='9789004295513'
+                                            or //isbn[@publication-format='online']='9789004295537'
+                                            or //isbn[@publication-format='online']='9789004296435'
+                                            or //isbn[@publication-format='online']='9789004296442'
+                                            or //isbn[@publication-format='online']='9789004295711'
+                                            or //isbn[@publication-format='online']='9789004301375'
+                                            or //isbn[@publication-format='online']='9789004295742'
+                                            or //isbn[@publication-format='online']='9789004295858'
+                                            or //isbn[@publication-format='online']='9789004295896'">
+                                            <langUsage>
+                                                <language ident="de"/>
+                                            </langUsage>
+                                        </xsl:when>
+                                       <!-- fin brill-ebooks -->
                                         <xsl:when test="/book/metadata/title/@lang">
                                             <langUsage>
                                                 <language>
@@ -538,8 +767,27 @@
                         </revisionDesc>
                     </teiHeader>
                     <text>
+                        <xsl:if test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
+                            <front>
+                                <titlePage>
+                                    <docTitle>
+                                        <titlePart>
+                                            <xsl:if test="//book-part[@book-part-type='part']/book-part-meta/title-group/label[string-length()&gt; 0]">
+                                                <xsl:value-of select="normalize-space(//book-part[@book-part-type='part']/book-part-meta/title-group/label)"/>
+                                                <xsl:text> - </xsl:text>
+                                            </xsl:if>
+                                            <xsl:value-of select="normalize-space(//book-part[@book-part-type='part']/book-part-meta/title-group/title)"/>
+                                        </titlePart>
+                                    </docTitle>
+                                </titlePage>
+                            </front>
+                        </xsl:if>
                         <body>
                             <xsl:choose>
+                                <!-- brill-ebooks -->
+                                <xsl:when test="//book-part[@book-part-type='chapter']/body">
+                                    <xsl:apply-templates select="//book-part[@book-part-type='chapter']/body"/>
+                                </xsl:when>
                                 <!-- sauf degruyter ebooks -->
                                 <xsl:when test="//book/body/book-part/body and not(contains(/book/book-meta/book-id[@pub-id-type='doi'],'10.1515/'))">
                                     <xsl:apply-templates select="/book/body/book-part/body"/>
@@ -562,6 +810,12 @@
                             </xsl:choose>
                         </body>
                         <xsl:choose>
+                            <!-- brill-ebooks -->
+                            <xsl:when test="//book-part[@book-part-type='chapter']/back">
+                                <back>
+                                <xsl:apply-templates select="//book-part[@book-part-type='chapter']/back"/>
+                                </back>
+                            </xsl:when>
                             <xsl:when test="//book/body/book-part/back">
                                 <back>
                                     <xsl:apply-templates select="//book/body/book-part/back/*"/>
@@ -598,9 +852,9 @@
                         <xsl:value-of select="$arkistex"/>
                     </idno>
                 </xsl:if>
-                <xsl:if test="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi']">
+                <xsl:if test="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'] | //book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi']">
                     <idno type="DOI">
-                        <xsl:value-of select="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi']"/>
+                        <xsl:value-of select="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'] | //book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi']"/>
                     </idno>
                 </xsl:if>
                 <xsl:if test="//book-part-meta/alternate-form">
@@ -729,6 +983,7 @@
             </xsl:choose>
         </biblStruct>
     </xsl:template>
+    
     <!-- Building the sourceDesc bibliographical representation -->
     <xsl:template match="book" mode="editor">
         <biblStruct>
@@ -750,6 +1005,9 @@
                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                         </title>
                     </xsl:when>
+                    <xsl:when test="//book-part[@book-part-type='chapter']/book-part-meta/title-group/title[string-length()&gt; 0]">
+                        <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/title-group/title"/>
+                    </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
                     </xsl:when>
@@ -761,8 +1019,8 @@
                 
                 <!-- All authors are included here -->
                 <xsl:choose>
-                    <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='author']">
-                        <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='author']" mode="author"/>
+                    <xsl:when test="//book-part[@book-part-type='chapter']/book-part-meta/contrib-group/contrib[@contrib-type='author'][string-length()&gt; 0]">
+                        <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/contrib-group/contrib[@contrib-type='author']"/>
                     </xsl:when>
                     <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='editor']">
                         <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor']" mode="analytic"/>
@@ -803,6 +1061,11 @@
                     </idno>
                 </xsl:if>
                 <xsl:choose>
+                    <xsl:when test="//book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi']">
+                        <idno type="DOI">
+                            <xsl:value-of select="normalize-space(//book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
+                        </idno>
+                    </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi']">
                         <idno type="DOI">
                             <xsl:value-of select="normalize-space(/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
@@ -877,6 +1140,8 @@
                 </xsl:choose>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
+                
+
                 <!-- ********************************** Identifier *******************************-->
                 <xsl:if test="book-meta/isbn[string-length() &gt; 0]">
                     <xsl:for-each select="book-meta/isbn">
@@ -924,12 +1189,9 @@
                     </idno>
                 </xsl:if>
                 <!-- All authors are included here -->
-                <xsl:choose>
-                    <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='editor']">
-                        <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor']" mode="editor"/>       
-                    </xsl:when>
-                </xsl:choose>
-
+                <xsl:apply-templates select="/book/book-meta/contrib-group/contrib"/>
+                <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor']" mode="editor"/>       
+                
                 <imprint>
                     <xsl:if test="book-meta/publisher[1]/publisher-name | metadata/publisher">
                         <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
@@ -1004,12 +1266,12 @@
                         </xsl:when>
                     </xsl:choose>
                     <!-- ******************* pagination ******************************-->
-                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0]">
-                        <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage}">
-                            <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage"/>
+                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[@book-part-type='chapter']/book-part-meta/fpage[string-length() &gt; 0]">
+                        <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[@book-part-type='chapter']/book-part-meta/fpage}">
+                            <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[@book-part-type='chapter']/book-part-meta/fpage"/>
                         </biblScope>
-                        <biblScope unit="page" to="{//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage}">
-                            <xsl:value-of select="//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage"/>
+                        <biblScope unit="page" to="{//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[@book-part-type='chapter']/book-part-meta/lpage}">
+                            <xsl:value-of select="//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[@book-part-type='chapter']/book-part-meta/lpage"/>
                         </biblScope>
                     </xsl:if>
                     <xsl:apply-templates select="book-meta/counts/book-page-count"/>
@@ -1156,6 +1418,11 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
+            <xsl:if test="@contrib-type[string-length() &gt; 0]">
+                <roleName>
+                    <xsl:value-of select="@contrib-type"/>
+                </roleName>
+            </xsl:if>
         </editor>
     </xsl:template>
     <xsl:template match="contrib" mode="author">
@@ -1183,6 +1450,11 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
+            <xsl:if test="@contrib-type[string-length() &gt; 0]">
+                <roleName>
+                    <xsl:value-of select="@contrib-type"/>
+                </roleName>
+            </xsl:if>
         </author>
     </xsl:template>
     <xsl:template match="book-title" mode="analytic">

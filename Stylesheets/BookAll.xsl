@@ -198,7 +198,6 @@
         </teiHeader>
         <!-- body -->
         <text>
-            
             <xsl:if test="//book/book-front[string-length() &gt; 0 ]">
                 <xsl:apply-templates select="//book/book-front" mode="TF"/>
             </xsl:if>

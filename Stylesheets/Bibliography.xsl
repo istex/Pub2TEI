@@ -1014,6 +1014,25 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template match="string-name" mode="editors">
+        <xsl:choose>
+            <xsl:when test="ancestor::ref">
+                <xsl:apply-templates select="."/>
+                <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
+                    <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <editor>
+                    <xsl:apply-templates select="."/>
+                    <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
+                        <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"
+                        />
+                    </xsl:if>
+                </editor>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     <xsl:template match="collab" mode="authors">
         <author role="collab">
             <name>
@@ -2103,9 +2122,10 @@
                         </xsl:if>
                         <imprint>
                             <xsl:choose>
-                                <xsl:when test="publisher-name | publisher-loc | year">
+                                <xsl:when test="publisher-name | publisher-loc | year| date/year">
                                     <xsl:apply-templates select="publisher-name"/>
                                     <xsl:apply-templates select="publisher-loc"/>
+                                    <xsl:apply-templates select="date/year"/>
                                     <xsl:apply-templates select="year"/>
                                     <xsl:apply-templates select="volume"/>
                                     <xsl:apply-templates select="fpage"/>
@@ -3487,6 +3507,9 @@
                 <xsl:value-of select="$articleInLine"/>
             </xsl:otherwise>
         </xsl:choose>
-        
+    </xsl:template>
+    
+    <xsl:template match="roman">
+        <xsl:apply-templates/>
     </xsl:template>
 </xsl:stylesheet>

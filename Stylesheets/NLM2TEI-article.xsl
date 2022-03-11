@@ -4413,6 +4413,11 @@
 
     <xsl:template match="title | rsc:title">
         <xsl:choose>
+            <xsl:when test="parent::abstract">
+                <head>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:when>
             <xsl:when test="ancestor::record">
                 <title level="a" type="main" xml:lang="{translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')}">
                     <xsl:apply-templates/>
@@ -4450,6 +4455,7 @@
             </xsl:when>
             <xsl:when test="ancestor::book-part-meta">
             <title level="a" type="main">
+                <xsl:apply-templates select="parent::title-group/label" mode="brill-ebooks"/>
                 <xsl:apply-templates/>
             </title>
             </xsl:when>
@@ -5778,5 +5784,10 @@
                 </affiliation>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="label" mode="brill-ebooks">
+        <xsl:apply-templates/>
+        <xsl:text> - </xsl:text>
     </xsl:template>
 </xsl:stylesheet>
