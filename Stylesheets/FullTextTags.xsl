@@ -1440,4 +1440,14 @@
             <xsl:apply-templates/>
         </term>
     </xsl:template>
+    <xsl:template match="verse-group">
+        <lg>
+            <xsl:apply-templates/>
+        </lg>
+    </xsl:template>
+    <xsl:template match="verse-line">
+        <l>
+        <xsl:apply-templates/>
+        </l>
+    </xsl:template>
 </xsl:stylesheet>

@@ -551,9 +551,16 @@
 
     <!-- Reference to a conference paper (3.0 style) -->
     <xsl:template match="ref[*/@publication-type = 'confproc']">
-        <xsl:call-template name="createInConf">
-            <xsl:with-param name="entry" select="*[@publication-type = 'confproc']"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when test="not(ref[*/source])">
+                    <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="createInConf">
+                    <xsl:with-param name="entry" select="*[@publication-type = 'confproc']"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Book - generic -->

@@ -5787,7 +5787,7 @@
     </xsl:template>
     
     <xsl:template match="label" mode="brill-ebooks">
-        <xsl:apply-templates/>
+        <xsl:value-of select="normalize-space(.)"/>
         <xsl:text> - </xsl:text>
     </xsl:template>
 </xsl:stylesheet>

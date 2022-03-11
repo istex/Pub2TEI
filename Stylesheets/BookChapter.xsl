@@ -93,7 +93,8 @@
                 or //isbn[@publication-format='online']='9789004296541'
                 or //isbn[@publication-format='online']='9789004296640'
                 or //isbn[@publication-format='online']='9789004295780'
-                or //isbn[@publication-format='online']='9789004295797'">
+                or //isbn[@publication-format='online']='9789004295797'
+                or //isbn[@publication-format='online']='9789004296107'">
                 <xsl:text>it</xsl:text>
             </xsl:when>
             <xsl:when test="//isbn[@publication-format='online']='9789004296138'
@@ -153,7 +154,15 @@
                 or //isbn[@publication-format='online']='9789047408277'
                 or //isbn[@publication-format='online']='9789047410331'
                 or //isbn[@publication-format='online']='9789004210912'
-                or //isbn[@publication-format='online']='9789004263246'">
+                or //isbn[@publication-format='online']='9789004263246'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.63'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.9'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.13'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.39'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.52'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.53'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.57'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.69'">
                 <xsl:text>fr</xsl:text>
             </xsl:when>
             <xsl:when test="//isbn[@publication-format='online']='9789004296077'
@@ -178,7 +187,8 @@
                 or //isbn[@publication-format='online']='9789004301375'
                 or //isbn[@publication-format='online']='9789004295742'
                 or //isbn[@publication-format='online']='9789004295858'
-                or //isbn[@publication-format='online']='9789004295896'">
+                or //isbn[@publication-format='online']='9789004295896'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.56'">
                 <xsl:text>de</xsl:text>
             </xsl:when>
             <xsl:otherwise>
@@ -232,6 +242,10 @@
                                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                                         </title>
                                     </xsl:when>
+                                    <!-- brill-ebooks -->
+                                    <xsl:when test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                        <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/title-group/title"/>
+                                    </xsl:when>
                                     <xsl:when test="//body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="//body/book-part/book-part-meta/title-group/title"/>
                                     </xsl:when>
@@ -273,10 +287,11 @@
                                 </xsl:choose>
                                 <xsl:if test="book-meta/pub-date/year[string-length() &gt; 0] |$docIssue//pub-date/year[string-length() &gt; 0] | /book/metadata/pubDate[string-length() &gt; 0]">
                                     <availability>
-                                        <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/@license-type='free'">
+                                        <xsl:if test="/book/body/book-part/book-part-meta/permissions/license[@license-type='free'] |//license[@license-type='open-access']">
                                             <xsl:attribute name="status">free</xsl:attribute>
                                         </xsl:if>
                                         <licence>
+                                           
                                             <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/@license-type='free'">
                                                 <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/license-p[string-length() &gt; 0]">
                                                 <p>
@@ -285,6 +300,12 @@
                                                 </xsl:if>
                                             </xsl:if>
                                             <xsl:choose>
+                                                <!-- brill-ebooks -->
+                                                <xsl:when test="//license[@license-type='open-access']">
+                                                    <p>
+                                                        <xsl:value-of select="//license[@license-type='open-access']/license-p"/>
+                                                    </p>
+                                                </xsl:when>
                                                 <xsl:when test="book-meta/permissions/copyright-statement[string-length() &gt; 0] |//book/metadata/copyright[string-length() &gt; 0]">
                                                     <p>
                                                         <xsl:value-of select="book-meta/permissions/copyright-statement |//book/metadata/copyright[string-length() &gt; 0]"/>
@@ -351,32 +372,6 @@
                                 <!-- niveau chapter -->
                                 <note type="content-type">
                                     <xsl:choose>
-                                        <!-- Brill-ebooks -->
-                                        <xsl:when test="contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Preliminary')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDEX')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDA')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CORRIGENDA')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDUM')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ACKNOWLEDGEMENTS')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Plates')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDICES')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TAFEL')">
-                                            <xsl:attribute name="source">other</xsl:attribute>
-                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
-                                            <xsl:text>other</xsl:text>
-                                        </xsl:when>
-                                        <!-- Numérique premium -->
-                                        <xsl:when test="collection-meta">
-                                            <xsl:attribute name="source">book</xsl:attribute>
-                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:attribute>
-                                            <xsl:text>book</xsl:text>
-                                        </xsl:when>
-                                        <!-- Brill-hacco -->
-                                        <xsl:when test="//book[metadata]/@type">
-                                            <xsl:attribute name="source"><xsl:value-of select="//book[metadata]/@type"/></xsl:attribute>
-                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-36WXPZKG-C</xsl:attribute>
-                                            <xsl:text>collected-courses</xsl:text>
-                                        </xsl:when>
                                         <!-- brepols -->
                                         <xsl:when test="$codeGenreBrepolsBook">
                                             <xsl:attribute name="source">
@@ -386,6 +381,67 @@
                                                 <xsl:value-of select="$codeGenreArkBrepolsBook"/>
                                             </xsl:attribute>
                                             <xsl:value-of select="$codeGenreBrepolsBook"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <xsl:choose>
+                                        <!-- Brill-ebooks -->
+                                        <xsl:when test="contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Preliminary')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDEX')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ABRÉVIATIONS')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Abbreviations')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ANNEXE')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'BIBLIOGRAPHIE')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'BIBLIOGRAPHY')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Bibliography')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Commentary')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'COMMENTARY')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Bibliography')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDA')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDUM')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Errata')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ACKNOWLEDGEMENTS')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ÉTUDES PRÉLIMINAIRES')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'RELIGIONS IN THE GRAECO')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CORRIGENDA')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CONCORDANCE')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Figures')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'FIGURES')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'GLOSSARY')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Glossary')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'LIST')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'MAPS')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Maps')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'NOTES')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Plates')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PLATE')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PUTE I')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDICES')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Index')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDEX')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Inscription')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INSCRIPTION')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TAFEL')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TABLE')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Table')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'STUDIES')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'SVPPLEMENTVM')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'REFERENCES')
+                                            ">
+                                            <xsl:attribute name="source">other</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                            <xsl:text>other</xsl:text>
+                                        </xsl:when>
+                                        <!-- Numérique premium -->
+                                        <xsl:when test="collection-meta[@collection-type='book collection']">
+                                            <xsl:attribute name="source">book</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:attribute>
+                                            <xsl:text>book</xsl:text>
+                                        </xsl:when>
+                                        <!-- Brill-hacco -->
+                                        <xsl:when test="//book[metadata]/@type">
+                                            <xsl:attribute name="source"><xsl:value-of select="//book[metadata]/@type"/></xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-36WXPZKG-C</xsl:attribute>
+                                            <xsl:text>collected-courses</xsl:text>
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:attribute name="source">chapter</xsl:attribute>
@@ -638,7 +694,8 @@
                                             or //isbn[@publication-format='online']='9789004296541'
                                             or //isbn[@publication-format='online']='9789004296640'
                                             or //isbn[@publication-format='online']='9789004295780'
-                                            or //isbn[@publication-format='online']='9789004295797'">
+                                            or //isbn[@publication-format='online']='9789004295797'
+                                            or //isbn[@publication-format='online']='9789004296107'">
                                             <langUsage>
                                                 <language ident="it"/>
                                             </langUsage>
@@ -700,7 +757,15 @@
                                             or //isbn[@publication-format='online']='9789047408277'
                                             or //isbn[@publication-format='online']='9789047410331'
                                             or //isbn[@publication-format='online']='9789004210912'
-                                            or //isbn[@publication-format='online']='9789004263246'">
+                                            or //isbn[@publication-format='online']='9789004263246'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.63'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.9'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.13'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.39'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.52'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.53'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.57'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.69'">
                                             <langUsage>
                                                 <language ident="fr"/>
                                             </langUsage>
@@ -727,7 +792,8 @@
                                             or //isbn[@publication-format='online']='9789004301375'
                                             or //isbn[@publication-format='online']='9789004295742'
                                             or //isbn[@publication-format='online']='9789004295858'
-                                            or //isbn[@publication-format='online']='9789004295896'">
+                                            or //isbn[@publication-format='online']='9789004295896'
+                                            or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.56'">
                                             <langUsage>
                                                 <language ident="de"/>
                                             </langUsage>
