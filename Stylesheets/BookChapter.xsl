@@ -352,10 +352,18 @@
                                 <note type="content-type">
                                     <xsl:choose>
                                         <!-- Brill-ebooks -->
-                                        <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title">
-                                            <xsl:attribute name="source">chapter</xsl:attribute>
-                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
-                                            <xsl:text>chapter</xsl:text>
+                                        <xsl:when test="contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Preliminary')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDEX')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDA')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CORRIGENDA')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDUM')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ACKNOWLEDGEMENTS')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Plates')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDICES')
+                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TAFEL')">
+                                            <xsl:attribute name="source">other</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                            <xsl:text>other</xsl:text>
                                         </xsl:when>
                                         <!-- Numérique premium -->
                                         <xsl:when test="collection-meta">
@@ -379,6 +387,11 @@
                                             </xsl:attribute>
                                             <xsl:value-of select="$codeGenreBrepolsBook"/>
                                         </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="source">chapter</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6"</xsl:attribute>
+                                            <xsl:text>chapter</xsl:text>
+                                        </xsl:otherwise>
                                     </xsl:choose>
                                 </note>
                                 <!-- niveau revue / book -->
