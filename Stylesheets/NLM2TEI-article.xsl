@@ -3823,11 +3823,22 @@
     </xsl:template>
     
     <xsl:template match="ref-list">
-        <div type="references">
-            <listBibl>
-                <xsl:apply-templates/>
-            </listBibl>
-        </div>
+        <xsl:choose>
+            <xsl:when test="def-list">
+                <div type="definition">
+                    <listBibl>
+                        <xsl:apply-templates/>
+                    </listBibl>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <div type="references">
+                    <listBibl>
+                        <xsl:apply-templates/>
+                    </listBibl>
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="statement">

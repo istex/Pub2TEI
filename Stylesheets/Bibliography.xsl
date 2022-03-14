@@ -1141,11 +1141,10 @@
             <xsl:attribute name="level">
                 <xsl:choose>
                     <xsl:when
-                        test="ancestor::citation/@citation-type = 'journal' or ancestor::mixed-citation/@publication-type = 'journal'"
-                        >j</xsl:when>
+                        test="ancestor::citation/@citation-type = 'journal' or ancestor::mixed-citation/@publication-type = 'journal'
+                        or ancestor::*/@publication-type='journal'">j</xsl:when>
                     <xsl:when
-                        test="ancestor::citation/@citation-type = 'book' or ancestor::nlm-citation/@citation-type = 'book' or ancestor::mixed-citation/@publication-type = 'journal'"
-                        >m</xsl:when>
+                        test="ancestor::citation/@citation-type = 'book' or ancestor::nlm-citation/@citation-type = 'book' or ancestor::mixed-citation/@publication-type = 'book'">m</xsl:when>
                     <xsl:otherwise>j</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
@@ -2037,13 +2036,15 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
+            <xsl:when test="not(source)">
+                <xsl:if test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </bibl>
+                </xsl:if>
             </xsl:when>
             <xsl:when test="contains(., ':') and $count and //publisher-name='S. Karger AG'">
                 <biblStruct>
@@ -2111,7 +2112,7 @@
                             <xsl:apply-templates select="article-title | chapter-title"/>
                             <xsl:apply-templates select="name"/>
                             <xsl:apply-templates select="string-name"/>
-                            <xsl:apply-templates select="person-group"/>
+                            <xsl:apply-templates select="person-group[@person-group-type='author']"/>
                             <xsl:apply-templates select="elocation-id"/>
                         </analytic>
                     </xsl:if>
@@ -2126,6 +2127,9 @@
                             <xsl:apply-templates select="string-name"/>
                             <xsl:apply-templates select="person-group"/>
                             <xsl:apply-templates select="elocation-id"/>
+                        </xsl:if>
+                        <xsl:if test="person-group[@person-group-type='editor']">
+                            <xsl:apply-templates select="person-group[@person-group-type='editor']"/>
                         </xsl:if>
                         <imprint>
                             <xsl:choose>

@@ -911,13 +911,8 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </body>
+                           
                         <xsl:choose>
-                            <!-- brill-ebooks -->
-                            <xsl:when test="//book-part[@book-part-type='chapter']/back">
-                                <back>
-                                <xsl:apply-templates select="//book-part[@book-part-type='chapter']/back"/>
-                                </back>
-                            </xsl:when>
                             <xsl:when test="//book/body/book-part/back">
                                 <back>
                                     <xsl:apply-templates select="//book/body/book-part/back/*"/>
@@ -925,6 +920,10 @@
                             </xsl:when>
                             <xsl:when test="//book/book-body/book-part/back">
                                 <back>
+                                    <!-- brill-ebooks -->
+                                    <xsl:if test="//book-back/ref-list/ref">
+                                        <xsl:apply-templates select="//book-back"/>
+                                    </xsl:if>
                                     <xsl:apply-templates select="//book/book-body/book-part/back/*"/>
                                 </back>
                             </xsl:when>
@@ -1291,7 +1290,6 @@
                     </idno>
                 </xsl:if>
                 <!-- All authors are included here -->
-                <xsl:apply-templates select="/book/book-meta/contrib-group/contrib"/>
                 <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor']" mode="editor"/>       
                 
                 <imprint>

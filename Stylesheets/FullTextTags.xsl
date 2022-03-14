@@ -18,6 +18,10 @@
     <xsl:template match="back">
         <xsl:apply-templates/>
     </xsl:template>
+    
+    <xsl:template match="book-back">
+        <xsl:apply-templates/>
+    </xsl:template>
     <!-- Springer: Para, SimplePara -->
 
     <xsl:template match="p| rsc:p| ce:simple-para | ce:note-para | ce:para">
