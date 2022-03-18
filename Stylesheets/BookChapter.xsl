@@ -918,13 +918,10 @@
                                     <xsl:apply-templates select="//book/body/book-part/back/*"/>
                                 </back>
                             </xsl:when>
-                            <xsl:when test="//book/book-body/book-part/back">
+                            <xsl:when test="//back">
                                 <back>
                                     <!-- brill-ebooks -->
-                                    <xsl:if test="//book-back/ref-list/ref">
-                                        <xsl:apply-templates select="//book-back"/>
-                                    </xsl:if>
-                                    <xsl:apply-templates select="//book/book-body/book-part/back/*"/>
+                                    <xsl:apply-templates select="//back/*"/>
                                 </back>
                             </xsl:when>
                         </xsl:choose>
@@ -1228,17 +1225,8 @@
                 </xsl:if>
             </analytic>
             <monogr>
-                <xsl:choose>
-                    <xsl:when test="//book/collection-meta[2]">
-                        <title level="m" type="main">
-                            <xsl:apply-templates select="//book/collection-meta[2]" mode="brill-ebooks"/>
-                        </title>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
-                        <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
+                <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
                 
@@ -1290,7 +1278,7 @@
                     </idno>
                 </xsl:if>
                 <!-- All authors are included here -->
-                <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor']" mode="editor"/>       
+                <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']" mode="editor"/>       
                 
                 <imprint>
                     <xsl:if test="book-meta/publisher[1]/publisher-name | metadata/publisher">
@@ -1705,11 +1693,6 @@
             <xsl:apply-templates select="collection-id"/>
             <xsl:apply-templates select="volume-in-collection/volume-number"/>
         </series>
-    </xsl:template>
-    <xsl:template match="collection-meta[2]" mode="brill-ebooks">
-            <xsl:value-of select=".[@collection-type='book-set']/title-group/title"/>
-            <xsl:text> : </xsl:text>
-            <xsl:value-of select="//book/book-meta/book-title-group/book-title[1]"/>
     </xsl:template>
     <!-- appendix -->
     <xsl:template match="app">
