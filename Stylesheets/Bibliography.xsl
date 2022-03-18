@@ -3521,6 +3521,8 @@
     </xsl:template>
     
     <xsl:template match="roman">
-        <xsl:apply-templates/>
+        <hi rend="roman">
+            <xsl:apply-templates/>
+        </hi>
     </xsl:template>
 </xsl:stylesheet>

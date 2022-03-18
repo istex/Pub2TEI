@@ -18,44 +18,44 @@
     </xsl:variable>
     <xsl:variable name="codeGenreBrepols">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='abstract'">abstract</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='addendum'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='announcement'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='article-commentary'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='book-review'">book-reviews</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='books-received'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='brief-report'">brief-communication</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='calendar'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='case-report'">case-report</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='chapter'">chapter</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='collection'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='correction'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='dissertation'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='discussion'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='editorial'">editorial</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='in-brief'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='introduction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='letter'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='meeting-report'">conference</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='news'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='obituary'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='oration'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='other'">
+            <xsl:when test="$codeGenreBrepolsBook='abstract'">abstract</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='addendum'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='announcement'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='article-commentary'">review-article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='book-review'">book-reviews</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='books-received'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='brief-report'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='calendar'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='case-report'">case-report</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='chapter'">chapter</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='collection'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='correction'">article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='dissertation'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='discussion'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='editorial'">editorial</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='in-brief'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='introduction'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='letter'">article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='meeting-report'">conference</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='news'">article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='obituary'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='oration'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='other'">
                 <xsl:choose>
                     <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0] and contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='partial-retraction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='poster'">conference</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='product-review'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='rapid-communication'">brief-communication</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='reply'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='reprint'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='research-article'">research-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='retraction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='review-article'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepolsBook)='translation'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='partial-retraction'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='poster'">conference</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='product-review'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='rapid-communication'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='reply'">article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='reprint'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='research-article'">research-article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='retraction'">other</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='review-article'">review-article</xsl:when>
+            <xsl:when test="$codeGenreBrepolsBook='translation'">other</xsl:when>
             <xsl:otherwise>
                 <xsl:text>other</xsl:text>
             </xsl:otherwise>
@@ -64,18 +64,18 @@
     <!-- lien vers data.istex.fr -->
     <xsl:variable name="codeGenreArkBrepolsBook">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreBrepols)='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="normalize-space($codeGenreBrepols)='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+            <xsl:when test="$codeGenreBrepols='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
+            <xsl:when test="$codeGenreBrepols='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
+            <xsl:when test="$codeGenreBrepols='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
+            <xsl:when test="$codeGenreBrepols='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
+            <xsl:when test="$codeGenreBrepols='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
+            <xsl:when test="$codeGenreBrepols='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
+            <xsl:when test="$codeGenreBrepols='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
+            <xsl:when test="$codeGenreBrepols='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
+            <xsl:when test="$codeGenreBrepols='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
+            <xsl:when test="$codeGenreBrepols='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
+            <xsl:when test="$codeGenreBrepols='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
+            <xsl:when test="$codeGenreBrepols='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
         </xsl:choose>
     </xsl:variable>
     
@@ -388,7 +388,7 @@
                                                     <xsl:if test="book-meta/publisher[1]/publisher-name='Cambridge University Press'">
                                                         <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-7XSK0Q94-6</xsl:attribute>
                                                     </xsl:if>
-                                                    <xsl:value-of select="normalize-space(book-meta/publisher[1]/publisher-name)"/></publisher>
+                                                    <xsl:value-of select="book-meta/publisher[1]/publisher-name"/></publisher>
                                             </xsl:when>
                                             <xsl:when test="book-meta/publisher[1]/publisher-loc[string-length() &gt; 0]">
                                                 <pubPlace><xsl:value-of select="normalize-space(book-meta/publisher[1]/publisher-loc)"/></pubPlace>
