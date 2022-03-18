@@ -345,13 +345,6 @@ reactorsa'</title>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:if test="$SageJournalTitle">
-                    <title level="j" type="main">
-                        <xsl:value-of select="$SageJournalTitle"/>
-                    </title>
-                </xsl:if>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="suppttl">
