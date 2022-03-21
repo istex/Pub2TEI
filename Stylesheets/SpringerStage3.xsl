@@ -6,48 +6,48 @@
 
     <xsl:output encoding="UTF-8" method="xml"/>
     <xsl:variable name="codeGenreSpringerJournal">
-        <xsl:value-of select="//ArticleInfo/@ArticleType | //BookInfo/@BookProductType"/>
+        <xsl:value-of select="normalize-space(//ArticleInfo/@ArticleType | //BookInfo/@BookProductType)"/>
     </xsl:variable>
     <xsl:variable name="codeGenreSJ">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Graduate/advanced undergraduate textbook'">chapter</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='OriginalPaper'">
+            <xsl:when test="$codeGenreSpringerJournal='Graduate/advanced undergraduate textbook'">chapter</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='OriginalPaper'">
                 <xsl:choose>
                     <xsl:when test="//Abstract and //Keyword">research-article</xsl:when>
                     <xsl:when test="//Abstract">article</xsl:when>
                     <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Article'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Report'">case-report</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Letter'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Legacy'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='News'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='ContinuingEducation'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='ReviewPaper'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='BriefCommunication'">brief-communication</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='EditorialNotes'">editorial</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='BookReview'">book-reviews</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Abstract'">abstract</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='CaseReport'">case-report</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSpringerJournal)='Announcement' and //Abstract[string-length()&gt; 0]">article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='Article'">article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='Report'">case-report</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='Letter'">article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='Legacy'">article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='News'">article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='ContinuingEducation'">article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='ReviewPaper'">review-article</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='BriefCommunication'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='EditorialNotes'">editorial</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='BookReview'">book-reviews</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='Abstract'">abstract</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='CaseReport'">case-report</xsl:when>
+            <xsl:when test="$codeGenreSpringerJournal='Announcement' and //Abstract[string-length()&gt; 0]">article</xsl:when>
             <xsl:otherwise>other</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="codeGenreArkSJ">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreSJ)='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="normalize-space($codeGenreSJ)='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+            <xsl:when test="$codeGenreSJ='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
+            <xsl:when test="$codeGenreSJ='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
+            <xsl:when test="$codeGenreSJ='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
+            <xsl:when test="$codeGenreSJ='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
+            <xsl:when test="$codeGenreSJ='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
+            <xsl:when test="$codeGenreSJ='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
+            <xsl:when test="$codeGenreSJ='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
+            <xsl:when test="$codeGenreSJ='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
+            <xsl:when test="$codeGenreSJ='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
+            <xsl:when test="$codeGenreSJ='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
+            <xsl:when test="$codeGenreSJ='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
+            <xsl:when test="$codeGenreSJ='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
         </xsl:choose>
     </xsl:variable>
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->

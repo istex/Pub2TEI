@@ -84,103 +84,103 @@
                     </publicationStmt>
                     <notesStmt>
                         <note type="content-type">
-                            <xsl:variable name="articleType" select="//articletype/@pubmedForm |//rsc:articletype/@pubmedForm"/>
+                            <xsl:variable name="articleType" select="normalize-space(//articletype/@pubmedForm |//rsc:articletype/@pubmedForm)"/>
                             <xsl:variable name="codeGenreRSCSource">
                                 <xsl:choose>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ART'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='REV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EDI'">editorial</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EDG'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FEA'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CVR'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='BKR'">book-reviews</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ASU'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='COM'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ESS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NTP'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='RES'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='KEY'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='PER'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='LET'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TEC'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='HIG'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='INV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FOC'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='DIS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='HOT'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='OTH'">other</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='SAB'">abstract</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EMA'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CMT'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='OPN'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='APP'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FRO'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='AFO'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CRP'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='EDU'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='MET'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='IRE'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='VPT'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FOR'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ILN'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='MES'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='AMS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ESS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='WAT'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NTP'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='RES'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='KEY'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='ANL'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TWA'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='MRV'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='FAB'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='CAR'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='NWS'">article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='TIN'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space(//article/@type | //rsc:article/@type)='PRO'">other</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='ART'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='REV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='EDI'">editorial</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='EDG'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='FEA'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='TRV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='CRV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='CVR'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='CRV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='BKR'">book-reviews</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='ASU'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='COM'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='ESS'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='NTP'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='RES'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='KEY'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='PER'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='LET'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='TRV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='TEC'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='HIG'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='INV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='FOC'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='DIS'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='HOT'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='OTH'">other</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='SAB'">abstract</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='EMA'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='CMT'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='OPN'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='APP'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='FRO'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='AFO'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='CRP'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='EDU'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='MET'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='IRE'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='VPT'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='FOR'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='ILN'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='MES'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='AMS'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='ESS'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='WAT'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='NTP'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='RES'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='KEY'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='ANL'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='TWA'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='MRV'">review-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='FAB'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='CAR'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='NWS'">article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='TIN'">research-article</xsl:when>
+                                    <xsl:when test="//article/@type | //rsc:article/@type='PRO'">other</xsl:when>
                                     <!-- pubmed mis en second plan car non fiable!-->
-                                    <xsl:when test="normalize-space($articleType)='abstract'">abstract</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='addendum'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='announcement'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='article-commentary'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='book-review'">book-reviews</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='books-received'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='other'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='brief-report'">brief-communication</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='calendar'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='case-report'">case-report</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='collection'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='correction'">article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='dissertation'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='discussion'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='editorial'">editorial</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='in-brief'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='introduction'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='letter'">article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='meeting-report'">conference</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='news'">article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='obituary'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='oration'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='other'">
+                                    <xsl:when test="$articleType='abstract'">abstract</xsl:when>
+                                    <xsl:when test="$articleType='addendum'">other</xsl:when>
+                                    <xsl:when test="$articleType='announcement'">other</xsl:when>
+                                    <xsl:when test="$articleType='article-commentary'">review-article</xsl:when>
+                                    <xsl:when test="$articleType='book-review'">book-reviews</xsl:when>
+                                    <xsl:when test="$articleType='books-received'">other</xsl:when>
+                                    <xsl:when test="$articleType='other'">other</xsl:when>
+                                    <xsl:when test="$articleType='brief-report'">brief-communication</xsl:when>
+                                    <xsl:when test="$articleType='calendar'">other</xsl:when>
+                                    <xsl:when test="$articleType='case-report'">case-report</xsl:when>
+                                    <xsl:when test="$articleType='collection'">other</xsl:when>
+                                    <xsl:when test="$articleType='correction'">article</xsl:when>
+                                    <xsl:when test="$articleType='dissertation'">other</xsl:when>
+                                    <xsl:when test="$articleType='discussion'">other</xsl:when>
+                                    <xsl:when test="$articleType='editorial'">editorial</xsl:when>
+                                    <xsl:when test="$articleType='in-brief'">other</xsl:when>
+                                    <xsl:when test="$articleType='introduction'">other</xsl:when>
+                                    <xsl:when test="$articleType='letter'">article</xsl:when>
+                                    <xsl:when test="$articleType='meeting-report'">conference</xsl:when>
+                                    <xsl:when test="$articleType='news'">article</xsl:when>
+                                    <xsl:when test="$articleType='obituary'">other</xsl:when>
+                                    <xsl:when test="$articleType='oration'">other</xsl:when>
+                                    <xsl:when test="$articleType='other'">
                                         <xsl:choose>
                                             <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and contains(//article-meta/fpage |//rsc:article-meta/rsc:fpage,'s') or contains(//article-meta/fpage | //rsc:article-meta/rsc:fpage,'S')">article</xsl:when>
                                             <xsl:otherwise>other</xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='partial-retraction'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='poster'">conference</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='product-review'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='rapid-communication'">brief-communication</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='reply'">article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='reprint'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='research-article'">research-article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='retraction'">other</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='review-article'">review-article</xsl:when>
-                                    <xsl:when test="normalize-space($articleType)='translation'">other</xsl:when>
+                                    <xsl:when test="$articleType='partial-retraction'">other</xsl:when>
+                                    <xsl:when test="$articleType='poster'">conference</xsl:when>
+                                    <xsl:when test="$articleType='product-review'">other</xsl:when>
+                                    <xsl:when test="$articleType='rapid-communication'">brief-communication</xsl:when>
+                                    <xsl:when test="$articleType='reply'">article</xsl:when>
+                                    <xsl:when test="$articleType='reprint'">other</xsl:when>
+                                    <xsl:when test="$articleType='research-article'">research-article</xsl:when>
+                                    <xsl:when test="$articleType='retraction'">other</xsl:when>
+                                    <xsl:when test="$articleType='review-article'">review-article</xsl:when>
+                                    <xsl:when test="$articleType='translation'">other</xsl:when>
                                     <xsl:otherwise>
                                         <xsl:choose>
                                             <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0]">article</xsl:when>
@@ -191,18 +191,18 @@
                             </xsl:variable>
                             <xsl:variable name="codeGenreRSCArk">
                                 <xsl:choose>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-                                    <xsl:when test="normalize-space($codeGenreRSCSource)='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
+                                    <xsl:when test="$codeGenreRSCSource='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
                                 </xsl:choose>
                             </xsl:variable>
                             <!-- niveau article / chapter -->
@@ -376,188 +376,188 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:variable name="code">
-                            <xsl:value-of select="//rsc:published[@type='print']/rsc:journalref/rsc:link | //published[@type='print']/journalref/link"/>
+                            <xsl:value-of select="normalize-space(//rsc:published[@type='print']/rsc:journalref/rsc:link | //published[@type='print']/journalref/link)"/>
                         </xsl:variable>
                         <xsl:variable name="code2">
                             <xsl:choose>
-                                <xsl:when test="normalize-space($code)='AA'">Annual Reports on Analytical Atomic Spectroscopy</xsl:when>
-                                <xsl:when test="normalize-space($code)='AC'">Analytical Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='AD'">Proceedings of the Analytical Division of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='AP'">Analytical Proceedings</xsl:when>
-                                <xsl:when test="normalize-space($code)='AI'">Analytical Proceedings including Analytical Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='AN'">The Analyst</xsl:when>
-                                <xsl:when test="normalize-space($code)='AR'">Annual Reports on the Progress of Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='AS'">Selected Annual Reviews of the Analytical Sciences</xsl:when>
-                                <xsl:when test="normalize-space($code)='AY'">Analytical Methods</xsl:when>
-                                <xsl:when test="normalize-space($code)='C1'">Chemical Communications (London)</xsl:when>
-                                <xsl:when test="normalize-space($code)='C2'">Journal of the Chemical Society D: Chemical Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='C3'">Journal of the Chemical Society, Chemical Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='CA'">Journal of the Chemical Society, Abstracts</xsl:when>
-                                <xsl:when test="normalize-space($code)='CC'">Chemical Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='CE'">Crystal Engineering Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='CO'">Contemporary Organic Synthesis</xsl:when>
-                                <xsl:when test="normalize-space($code)='CP'">Physical Chemistry Chemical Physics</xsl:when>
-                                <xsl:when test="normalize-space($code)='CS'">Chemical Society Reviews</xsl:when>
-                                <xsl:when test="normalize-space($code)='CT'">Journal of the Chemical Society, Transactions</xsl:when>
-                                <xsl:when test="normalize-space($code)='CW'">Chemistry World</xsl:when>
-                                <xsl:when test="normalize-space($code)='CY'">Catalysis Science &amp; Technology</xsl:when>
-                                <xsl:when test="normalize-space($code)='DC'">Faraday Discussions of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='DF'">Discussions of the Faraday Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='DT'">Dalton Transactions</xsl:when>
-                                <xsl:when test="normalize-space($code)='EC'">Education in Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='EE'">Energy &amp; Environmental Science</xsl:when>
-                                <xsl:when test="normalize-space($code)='EM'">Journal of Environmental Monitoring</xsl:when>
-                                <xsl:when test="normalize-space($code)='ET'">Issues in Environmental Science and Technology</xsl:when>
-                                <xsl:when test="normalize-space($code)='F1'">Journal of the Chemical Society, Faraday Transactions 1: Physical Chemistry in Condensed Phases</xsl:when>
-                                <xsl:when test="normalize-space($code)='F2'">Journal of the Chemical Society, Faraday Transactions 2: Molecular and Chemical Physics</xsl:when>
-                                <xsl:when test="normalize-space($code)='FD'">Faraday Discussions</xsl:when>
-                                <xsl:when test="normalize-space($code)='FO'">Food &amp; Function</xsl:when>
-                                <xsl:when test="normalize-space($code)='FS'">Faraday Symposia of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='FT'">Journal of the Chemical Society, Faraday Transactions</xsl:when>
-                                <xsl:when test="normalize-space($code)='GC'">Green Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='GR'">Annual Reports on the Progress of Chemistry, Sect. A: General Physical and Inorganic Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='GT'">Geochemical Transactions</xsl:when>
-                                <xsl:when test="normalize-space($code)='IB'">Integrative Biology</xsl:when>
-                                <xsl:when test="normalize-space($code)='IC'">Annual Reports Section "A" (Inorganic Chemistry)</xsl:when>
-                                <xsl:when test="normalize-space($code)='J1'">Journal of the Chemical Society A: Inorganic, Physical, Theoretical</xsl:when>
-                                <xsl:when test="normalize-space($code)='J2'">Journal of the Chemical Society B: Physical Organic</xsl:when>
-                                <xsl:when test="normalize-space($code)='J3'">Journal of the Chemical Society C: Organic</xsl:when>
-                                <xsl:when test="normalize-space($code)='JA'">Journal of Analytical Atomic Spectrometry</xsl:when>
-                                <xsl:when test="normalize-space($code)='JC'">Journal of Chemical Research, Synopses</xsl:when>
-                                <xsl:when test="normalize-space($code)='JG'">Journal and Proceedings of the Institute of Chemistry of Great Britain and Ireland</xsl:when>
-                                <xsl:when test="normalize-space($code)='JI'">Journal of the Royal Institute of Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='JM'">Journal of Materials Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='JP'">Journal and Proceedings of the Royal Institute of Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='JR'">Journal of the Chemical Society (Resumed)</xsl:when>
-                                <xsl:when test="normalize-space($code)='JS'">Journal of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='LC'">Lab on a Chip</xsl:when>
-                                <xsl:when test="normalize-space($code)='M1'">Jubilee of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='MB'">Molecular BioSystems</xsl:when>
-                                <xsl:when test="normalize-space($code)='MC'">Mendeleev Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='MD'">Medicinal Chemistry Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='MP'">Memoirs and Proceedings of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='MT'">Metallomics</xsl:when>
-                                <xsl:when test="normalize-space($code)='NJ'">New Journal of Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='NP'">Natural Product Reports</xsl:when>
-                                <xsl:when test="normalize-space($code)='NR'">Nanoscale</xsl:when>
-                                <xsl:when test="normalize-space($code)='OB'">Organic &amp; Biomolecular Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='OC'">Annual Reports Section "B" (Organic Chemistry)</xsl:when>
-                                <xsl:when test="normalize-space($code)='P1'">Journal of the Chemical Society, Perkin Transactions 1</xsl:when>
-                                <xsl:when test="normalize-space($code)='P2'">Journal of the Chemical Society, Perkin Transactions 2</xsl:when>
-                                <xsl:when test="normalize-space($code)='PC'">Annual Reports Section "C" (Physical Chemistry)</xsl:when>
-                                <xsl:when test="normalize-space($code)='PG'">Proceedings of the Institute of Chemistry of Great Britain and Ireland</xsl:when>
-                                <xsl:when test="normalize-space($code)='PL'">Proceedings of the Chemical Society, London</xsl:when>
-                                <xsl:when test="normalize-space($code)='PO'">Pesticide Outlook</xsl:when>
-                                <xsl:when test="normalize-space($code)='PP'">Photochemical &amp; Photobiological Sciences</xsl:when>
-                                <xsl:when test="normalize-space($code)='PR'">Annual Reports on the Progress of Chemistry, Sect. A: Physical and Inorganic Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='PS'">Proceedings of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='PY'">Polymer Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='QJ'">Quarterly Journal of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='QR'">Quarterly Review of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='QU'">Physical Chemistry Communications</xsl:when>
-                                <xsl:when test="normalize-space($code)='RA'">RSC Advances</xsl:when>
-                                <xsl:when test="normalize-space($code)='RC'">Russian Chemical Reviews</xsl:when>
-                                <xsl:when test="normalize-space($code)='RG'">Journal and Proceedings of the Royal Institute of Chemistry of Great Britain and Ireland</xsl:when>
-                                <xsl:when test="normalize-space($code)='RP'">Chemistry Education Research and Practice</xsl:when>
-                                <xsl:when test="normalize-space($code)='RR'">Royal Institute of Chemistry Reviews</xsl:when>
-                                <xsl:when test="normalize-space($code)='S1'">Faraday Special Discussions of the Chemical Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='SA'">Proceedings of the Society for Analytical Chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='SC'">Chemical Science</xsl:when>
-                                <xsl:when test="normalize-space($code)='SD'">Special Discussions of the Faraday Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='SF'">Symposia of the Faraday Society</xsl:when>
-                                <xsl:when test="normalize-space($code)='SM'">Soft Matter</xsl:when>
-                                <xsl:when test="normalize-space($code)='TF'">Transactions of the Faraday Society</xsl:when>
+                                <xsl:when test="$code='AA'">Annual Reports on Analytical Atomic Spectroscopy</xsl:when>
+                                <xsl:when test="$code='AC'">Analytical Communications</xsl:when>
+                                <xsl:when test="$code='AD'">Proceedings of the Analytical Division of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='AP'">Analytical Proceedings</xsl:when>
+                                <xsl:when test="$code='AI'">Analytical Proceedings including Analytical Communications</xsl:when>
+                                <xsl:when test="$code='AN'">The Analyst</xsl:when>
+                                <xsl:when test="$code='AR'">Annual Reports on the Progress of Chemistry</xsl:when>
+                                <xsl:when test="$code='AS'">Selected Annual Reviews of the Analytical Sciences</xsl:when>
+                                <xsl:when test="$code='AY'">Analytical Methods</xsl:when>
+                                <xsl:when test="$code='C1'">Chemical Communications (London)</xsl:when>
+                                <xsl:when test="$code='C2'">Journal of the Chemical Society D: Chemical Communications</xsl:when>
+                                <xsl:when test="$code='C3'">Journal of the Chemical Society, Chemical Communications</xsl:when>
+                                <xsl:when test="$code='CA'">Journal of the Chemical Society, Abstracts</xsl:when>
+                                <xsl:when test="$code='CC'">Chemical Communications</xsl:when>
+                                <xsl:when test="$code='CE'">Crystal Engineering Communications</xsl:when>
+                                <xsl:when test="$code='CO'">Contemporary Organic Synthesis</xsl:when>
+                                <xsl:when test="$code='CP'">Physical Chemistry Chemical Physics</xsl:when>
+                                <xsl:when test="$code='CS'">Chemical Society Reviews</xsl:when>
+                                <xsl:when test="$code='CT'">Journal of the Chemical Society, Transactions</xsl:when>
+                                <xsl:when test="$code='CW'">Chemistry World</xsl:when>
+                                <xsl:when test="$code='CY'">Catalysis Science &amp; Technology</xsl:when>
+                                <xsl:when test="$code='DC'">Faraday Discussions of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='DF'">Discussions of the Faraday Society</xsl:when>
+                                <xsl:when test="$code='DT'">Dalton Transactions</xsl:when>
+                                <xsl:when test="$code='EC'">Education in Chemistry</xsl:when>
+                                <xsl:when test="$code='EE'">Energy &amp; Environmental Science</xsl:when>
+                                <xsl:when test="$code='EM'">Journal of Environmental Monitoring</xsl:when>
+                                <xsl:when test="$code='ET'">Issues in Environmental Science and Technology</xsl:when>
+                                <xsl:when test="$code='F1'">Journal of the Chemical Society, Faraday Transactions 1: Physical Chemistry in Condensed Phases</xsl:when>
+                                <xsl:when test="$code='F2'">Journal of the Chemical Society, Faraday Transactions 2: Molecular and Chemical Physics</xsl:when>
+                                <xsl:when test="$code='FD'">Faraday Discussions</xsl:when>
+                                <xsl:when test="$code='FO'">Food &amp; Function</xsl:when>
+                                <xsl:when test="$code='FS'">Faraday Symposia of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='FT'">Journal of the Chemical Society, Faraday Transactions</xsl:when>
+                                <xsl:when test="$code='GC'">Green Chemistry</xsl:when>
+                                <xsl:when test="$code='GR'">Annual Reports on the Progress of Chemistry, Sect. A: General Physical and Inorganic Chemistry</xsl:when>
+                                <xsl:when test="$code='GT'">Geochemical Transactions</xsl:when>
+                                <xsl:when test="$code='IB'">Integrative Biology</xsl:when>
+                                <xsl:when test="$code='IC'">Annual Reports Section "A" (Inorganic Chemistry)</xsl:when>
+                                <xsl:when test="$code='J1'">Journal of the Chemical Society A: Inorganic, Physical, Theoretical</xsl:when>
+                                <xsl:when test="$code='J2'">Journal of the Chemical Society B: Physical Organic</xsl:when>
+                                <xsl:when test="$code='J3'">Journal of the Chemical Society C: Organic</xsl:when>
+                                <xsl:when test="$code='JA'">Journal of Analytical Atomic Spectrometry</xsl:when>
+                                <xsl:when test="$code='JC'">Journal of Chemical Research, Synopses</xsl:when>
+                                <xsl:when test="$code='JG'">Journal and Proceedings of the Institute of Chemistry of Great Britain and Ireland</xsl:when>
+                                <xsl:when test="$code='JI'">Journal of the Royal Institute of Chemistry</xsl:when>
+                                <xsl:when test="$code='JM'">Journal of Materials Chemistry</xsl:when>
+                                <xsl:when test="$code='JP'">Journal and Proceedings of the Royal Institute of Chemistry</xsl:when>
+                                <xsl:when test="$code='JR'">Journal of the Chemical Society (Resumed)</xsl:when>
+                                <xsl:when test="$code='JS'">Journal of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='LC'">Lab on a Chip</xsl:when>
+                                <xsl:when test="$code='M1'">Jubilee of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='MB'">Molecular BioSystems</xsl:when>
+                                <xsl:when test="$code='MC'">Mendeleev Communications</xsl:when>
+                                <xsl:when test="$code='MD'">Medicinal Chemistry Communications</xsl:when>
+                                <xsl:when test="$code='MP'">Memoirs and Proceedings of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='MT'">Metallomics</xsl:when>
+                                <xsl:when test="$code='NJ'">New Journal of Chemistry</xsl:when>
+                                <xsl:when test="$code='NP'">Natural Product Reports</xsl:when>
+                                <xsl:when test="$code='NR'">Nanoscale</xsl:when>
+                                <xsl:when test="$code='OB'">Organic &amp; Biomolecular Chemistry</xsl:when>
+                                <xsl:when test="$code='OC'">Annual Reports Section "B" (Organic Chemistry)</xsl:when>
+                                <xsl:when test="$code='P1'">Journal of the Chemical Society, Perkin Transactions 1</xsl:when>
+                                <xsl:when test="$code='P2'">Journal of the Chemical Society, Perkin Transactions 2</xsl:when>
+                                <xsl:when test="$code='PC'">Annual Reports Section "C" (Physical Chemistry)</xsl:when>
+                                <xsl:when test="$code='PG'">Proceedings of the Institute of Chemistry of Great Britain and Ireland</xsl:when>
+                                <xsl:when test="$code='PL'">Proceedings of the Chemical Society, London</xsl:when>
+                                <xsl:when test="$code='PO'">Pesticide Outlook</xsl:when>
+                                <xsl:when test="$code='PP'">Photochemical &amp; Photobiological Sciences</xsl:when>
+                                <xsl:when test="$code='PR'">Annual Reports on the Progress of Chemistry, Sect. A: Physical and Inorganic Chemistry</xsl:when>
+                                <xsl:when test="$code='PS'">Proceedings of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='PY'">Polymer Chemistry</xsl:when>
+                                <xsl:when test="$code='QJ'">Quarterly Journal of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='QR'">Quarterly Review of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='QU'">Physical Chemistry Communications</xsl:when>
+                                <xsl:when test="$code='RA'">RSC Advances</xsl:when>
+                                <xsl:when test="$code='RC'">Russian Chemical Reviews</xsl:when>
+                                <xsl:when test="$code='RG'">Journal and Proceedings of the Royal Institute of Chemistry of Great Britain and Ireland</xsl:when>
+                                <xsl:when test="$code='RP'">Chemistry Education Research and Practice</xsl:when>
+                                <xsl:when test="$code='RR'">Royal Institute of Chemistry Reviews</xsl:when>
+                                <xsl:when test="$code='S1'">Faraday Special Discussions of the Chemical Society</xsl:when>
+                                <xsl:when test="$code='SA'">Proceedings of the Society for Analytical Chemistry</xsl:when>
+                                <xsl:when test="$code='SC'">Chemical Science</xsl:when>
+                                <xsl:when test="$code='SD'">Special Discussions of the Faraday Society</xsl:when>
+                                <xsl:when test="$code='SF'">Symposia of the Faraday Society</xsl:when>
+                                <xsl:when test="$code='SM'">Soft Matter</xsl:when>
+                                <xsl:when test="$code='TF'">Transactions of the Faraday Society</xsl:when>
                             </xsl:choose>
                         </xsl:variable>
                         <xsl:variable name="code3">
                             <xsl:choose>
-                                <xsl:when test="normalize-space($code)='AA'">Annu. Rep. Anal. At. Spectrosc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AC'">Anal. Commun.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AD'">Proc. Anal. Div. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AP'">Anal. Proc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AI'">Anal. Proc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AN'">Analyst</xsl:when>
-                                <xsl:when test="normalize-space($code)='AR'">Annu. Rep. Prog. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AS'">Sel. Annu. Rev. Anal.</xsl:when>
-                                <xsl:when test="normalize-space($code)='AY'">Anal. Methods</xsl:when>
-                                <xsl:when test="normalize-space($code)='C1'">Chem. Commun. (London)</xsl:when>
-                                <xsl:when test="normalize-space($code)='C2'">J. Chem. Soc. D</xsl:when>
-                                <xsl:when test="normalize-space($code)='C3'">J. Chem. Soc., Chem. Commun.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CA'">J. Chem. Soc., Abstr.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CC'">Chem. Commun.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CE'">CrystEngComm</xsl:when>
-                                <xsl:when test="normalize-space($code)='CO'">Contemp. Org. Synth.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CP'">Phys. Chem. Chem. Phys.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CS'">Chem. Soc. Rev.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CT'">J. Chem. Soc., Trans.</xsl:when>
-                                <xsl:when test="normalize-space($code)='CW'">Chemistry world</xsl:when>
-                                <xsl:when test="normalize-space($code)='CY'">Catal. Sci. Technol.</xsl:when>
-                                <xsl:when test="normalize-space($code)='DC'">Faraday Discuss. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='DF'">Discuss. Faraday Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='DT'">Dalton Trans.</xsl:when>
-                                <xsl:when test="normalize-space($code)='EC'">Education in chemistry</xsl:when>
-                                <xsl:when test="normalize-space($code)='EE'">Energy Environ. Sci.</xsl:when>
-                                <xsl:when test="normalize-space($code)='EM'">J. Environ. Monit.</xsl:when>
-                                <xsl:when test="normalize-space($code)='ET'">Issues in environmental science and technology</xsl:when>
-                                <xsl:when test="normalize-space($code)='F1'">J. Chem. Soc., Faraday Trans. 1</xsl:when>
-                                <xsl:when test="normalize-space($code)='F2'">J. Chem. Soc., Faraday Trans. 2</xsl:when>
-                                <xsl:when test="normalize-space($code)='FD'">Faraday Discuss.</xsl:when>
-                                <xsl:when test="normalize-space($code)='FO'">Food Funct.</xsl:when>
-                                <xsl:when test="normalize-space($code)='FS'">Faraday Symp. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='FT'">J. Chem. Soc., Faraday Trans.</xsl:when>
-                                <xsl:when test="normalize-space($code)='GC'">Green Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='GR'">Annu. Rep. Prog. Chem., Sect. A. Gen. Phys and Inorg. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='GT'">Geochem. Trans.</xsl:when>
-                                <xsl:when test="normalize-space($code)='IB'">Integr. Biol.</xsl:when>
-                                <xsl:when test="normalize-space($code)='IC'">Annu. Rep. Prog. Chem., Sect. A: Inorg. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='J1'">J. Chem. Soc. A</xsl:when>
-                                <xsl:when test="normalize-space($code)='J2'">J. Chem. Soc. B</xsl:when>
-                                <xsl:when test="normalize-space($code)='J3'">J. Chem. Soc. C</xsl:when>
-                                <xsl:when test="normalize-space($code)='JA'">J. Anal. At. Spectrom.</xsl:when>
-                                <xsl:when test="normalize-space($code)='JC'">J. Chem. Res. (S)</xsl:when>
-                                <xsl:when test="normalize-space($code)='JG'">J. Proc. Inst. Chem. GB Irel.</xsl:when>
-                                <xsl:when test="normalize-space($code)='JI'">J. R. Inst. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='JM'">J. Mater. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='JP'">J. Proc. R. Inst. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='JR'">J. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='JS'">J. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='LC'">Lab Chip</xsl:when>
-                                <xsl:when test="normalize-space($code)='M1'">Jubilee Chem. Soc. London</xsl:when>
-                                <xsl:when test="normalize-space($code)='MB'">Mol. BioSyst.</xsl:when>
-                                <xsl:when test="normalize-space($code)='MC'">Mendeleev Commun.</xsl:when>
-                                <xsl:when test="normalize-space($code)='MD'">Med. Chem. Commun.</xsl:when>
-                                <xsl:when test="normalize-space($code)='MP'">Mem. Proc. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='MT'">Metallomics</xsl:when>
-                                <xsl:when test="normalize-space($code)='NJ'">NewJ. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='NP'">Nat. Prod. Rep.</xsl:when>
-                                <xsl:when test="normalize-space($code)='NR'">Nanoscale</xsl:when>
-                                <xsl:when test="normalize-space($code)='OB'">Org. Biomol. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='OC'">Annu. Rep. Prog. Chem., Sect. B: Org. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='P1'">J. Chem. Soc., Perkin Trans. 1</xsl:when>
-                                <xsl:when test="normalize-space($code)='P2'">J. Chem. Soc., Perkin Trans. 2</xsl:when>
-                                <xsl:when test="normalize-space($code)='PC'">Annu. Rep. Prog. Chem., Sect. C: Phys. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='PG'">Proc. Inst. Chem. GB Irel.</xsl:when>
-                                <xsl:when test="normalize-space($code)='PL'">Proc. Chem. Soc., London</xsl:when>
-                                <xsl:when test="normalize-space($code)='PO'">Pest. Outlook</xsl:when>
-                                <xsl:when test="normalize-space($code)='PP'">Photochem. Photobiol. Sci.</xsl:when>
-                                <xsl:when test="normalize-space($code)='PR'">Annu. Rep. Prog. Chem., Sect. A. Inorg. and Phys. Chem</xsl:when>
-                                <xsl:when test="normalize-space($code)='PS'">Proc. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='PY'">Polym. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='QJ'">Q.J. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='QR'">Q. Rev. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='QU'">PhysChemComm</xsl:when>
-                                <xsl:when test="normalize-space($code)='RA'">RSC Adv.</xsl:when>
-                                <xsl:when test="normalize-space($code)='RC'">Russ. Chem. Rev.</xsl:when>
-                                <xsl:when test="normalize-space($code)='RG'">J. Proc. R. Inst. Chem. GB Irel.</xsl:when>
-                                <xsl:when test="normalize-space($code)='RP'">Chem. Educ. Res. Pract.</xsl:when>
-                                <xsl:when test="normalize-space($code)='RR'">R. Inst. Chem., Rev.</xsl:when>
-                                <xsl:when test="normalize-space($code)='S1'">Faraday Spec. Discuss. Chem. Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='SA'">Proc. Soc. Anal. Chem.</xsl:when>
-                                <xsl:when test="normalize-space($code)='SC'">Chem. Sci.</xsl:when>
-                                <xsl:when test="normalize-space($code)='SD'">Spec. Discuss. Faraday Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='SF'">Symp. Faraday Soc.</xsl:when>
-                                <xsl:when test="normalize-space($code)='SM'">Soft Matter</xsl:when>
-                                <xsl:when test="normalize-space($code)='TF'">Trans. Faraday Soc.</xsl:when>
+                                <xsl:when test="$code='AA'">Annu. Rep. Anal. At. Spectrosc.</xsl:when>
+                                <xsl:when test="$code='AC'">Anal. Commun.</xsl:when>
+                                <xsl:when test="$code='AD'">Proc. Anal. Div. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='AP'">Anal. Proc.</xsl:when>
+                                <xsl:when test="$code='AI'">Anal. Proc.</xsl:when>
+                                <xsl:when test="$code='AN'">Analyst</xsl:when>
+                                <xsl:when test="$code='AR'">Annu. Rep. Prog. Chem.</xsl:when>
+                                <xsl:when test="$code='AS'">Sel. Annu. Rev. Anal.</xsl:when>
+                                <xsl:when test="$code='AY'">Anal. Methods</xsl:when>
+                                <xsl:when test="$code='C1'">Chem. Commun. (London)</xsl:when>
+                                <xsl:when test="$code='C2'">J. Chem. Soc. D</xsl:when>
+                                <xsl:when test="$code='C3'">J. Chem. Soc., Chem. Commun.</xsl:when>
+                                <xsl:when test="$code='CA'">J. Chem. Soc., Abstr.</xsl:when>
+                                <xsl:when test="$code='CC'">Chem. Commun.</xsl:when>
+                                <xsl:when test="$code='CE'">CrystEngComm</xsl:when>
+                                <xsl:when test="$code='CO'">Contemp. Org. Synth.</xsl:when>
+                                <xsl:when test="$code='CP'">Phys. Chem. Chem. Phys.</xsl:when>
+                                <xsl:when test="$code='CS'">Chem. Soc. Rev.</xsl:when>
+                                <xsl:when test="$code='CT'">J. Chem. Soc., Trans.</xsl:when>
+                                <xsl:when test="$code='CW'">Chemistry world</xsl:when>
+                                <xsl:when test="$code='CY'">Catal. Sci. Technol.</xsl:when>
+                                <xsl:when test="$code='DC'">Faraday Discuss. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='DF'">Discuss. Faraday Soc.</xsl:when>
+                                <xsl:when test="$code='DT'">Dalton Trans.</xsl:when>
+                                <xsl:when test="$code='EC'">Education in chemistry</xsl:when>
+                                <xsl:when test="$code='EE'">Energy Environ. Sci.</xsl:when>
+                                <xsl:when test="$code='EM'">J. Environ. Monit.</xsl:when>
+                                <xsl:when test="$code='ET'">Issues in environmental science and technology</xsl:when>
+                                <xsl:when test="$code='F1'">J. Chem. Soc., Faraday Trans. 1</xsl:when>
+                                <xsl:when test="$code='F2'">J. Chem. Soc., Faraday Trans. 2</xsl:when>
+                                <xsl:when test="$code='FD'">Faraday Discuss.</xsl:when>
+                                <xsl:when test="$code='FO'">Food Funct.</xsl:when>
+                                <xsl:when test="$code='FS'">Faraday Symp. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='FT'">J. Chem. Soc., Faraday Trans.</xsl:when>
+                                <xsl:when test="$code='GC'">Green Chem.</xsl:when>
+                                <xsl:when test="$code='GR'">Annu. Rep. Prog. Chem., Sect. A. Gen. Phys and Inorg. Chem.</xsl:when>
+                                <xsl:when test="$code='GT'">Geochem. Trans.</xsl:when>
+                                <xsl:when test="$code='IB'">Integr. Biol.</xsl:when>
+                                <xsl:when test="$code='IC'">Annu. Rep. Prog. Chem., Sect. A: Inorg. Chem.</xsl:when>
+                                <xsl:when test="$code='J1'">J. Chem. Soc. A</xsl:when>
+                                <xsl:when test="$code='J2'">J. Chem. Soc. B</xsl:when>
+                                <xsl:when test="$code='J3'">J. Chem. Soc. C</xsl:when>
+                                <xsl:when test="$code='JA'">J. Anal. At. Spectrom.</xsl:when>
+                                <xsl:when test="$code='JC'">J. Chem. Res. (S)</xsl:when>
+                                <xsl:when test="$code='JG'">J. Proc. Inst. Chem. GB Irel.</xsl:when>
+                                <xsl:when test="$code='JI'">J. R. Inst. Chem.</xsl:when>
+                                <xsl:when test="$code='JM'">J. Mater. Chem.</xsl:when>
+                                <xsl:when test="$code='JP'">J. Proc. R. Inst. Chem.</xsl:when>
+                                <xsl:when test="$code='JR'">J. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='JS'">J. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='LC'">Lab Chip</xsl:when>
+                                <xsl:when test="$code='M1'">Jubilee Chem. Soc. London</xsl:when>
+                                <xsl:when test="$code='MB'">Mol. BioSyst.</xsl:when>
+                                <xsl:when test="$code='MC'">Mendeleev Commun.</xsl:when>
+                                <xsl:when test="$code='MD'">Med. Chem. Commun.</xsl:when>
+                                <xsl:when test="$code='MP'">Mem. Proc. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='MT'">Metallomics</xsl:when>
+                                <xsl:when test="$code='NJ'">NewJ. Chem.</xsl:when>
+                                <xsl:when test="$code='NP'">Nat. Prod. Rep.</xsl:when>
+                                <xsl:when test="$code='NR'">Nanoscale</xsl:when>
+                                <xsl:when test="$code='OB'">Org. Biomol. Chem.</xsl:when>
+                                <xsl:when test="$code='OC'">Annu. Rep. Prog. Chem., Sect. B: Org. Chem.</xsl:when>
+                                <xsl:when test="$code='P1'">J. Chem. Soc., Perkin Trans. 1</xsl:when>
+                                <xsl:when test="$code='P2'">J. Chem. Soc., Perkin Trans. 2</xsl:when>
+                                <xsl:when test="$code='PC'">Annu. Rep. Prog. Chem., Sect. C: Phys. Chem.</xsl:when>
+                                <xsl:when test="$code='PG'">Proc. Inst. Chem. GB Irel.</xsl:when>
+                                <xsl:when test="$code='PL'">Proc. Chem. Soc., London</xsl:when>
+                                <xsl:when test="$code='PO'">Pest. Outlook</xsl:when>
+                                <xsl:when test="$code='PP'">Photochem. Photobiol. Sci.</xsl:when>
+                                <xsl:when test="$code='PR'">Annu. Rep. Prog. Chem., Sect. A. Inorg. and Phys. Chem</xsl:when>
+                                <xsl:when test="$code='PS'">Proc. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='PY'">Polym. Chem.</xsl:when>
+                                <xsl:when test="$code='QJ'">Q.J. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='QR'">Q. Rev. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='QU'">PhysChemComm</xsl:when>
+                                <xsl:when test="$code='RA'">RSC Adv.</xsl:when>
+                                <xsl:when test="$code='RC'">Russ. Chem. Rev.</xsl:when>
+                                <xsl:when test="$code='RG'">J. Proc. R. Inst. Chem. GB Irel.</xsl:when>
+                                <xsl:when test="$code='RP'">Chem. Educ. Res. Pract.</xsl:when>
+                                <xsl:when test="$code='RR'">R. Inst. Chem., Rev.</xsl:when>
+                                <xsl:when test="$code='S1'">Faraday Spec. Discuss. Chem. Soc.</xsl:when>
+                                <xsl:when test="$code='SA'">Proc. Soc. Anal. Chem.</xsl:when>
+                                <xsl:when test="$code='SC'">Chem. Sci.</xsl:when>
+                                <xsl:when test="$code='SD'">Spec. Discuss. Faraday Soc.</xsl:when>
+                                <xsl:when test="$code='SF'">Symp. Faraday Soc.</xsl:when>
+                                <xsl:when test="$code='SM'">Soft Matter</xsl:when>
+                                <xsl:when test="$code='TF'">Trans. Faraday Soc.</xsl:when>
                             </xsl:choose>
                         </xsl:variable>
                         <title level="j" type="main">

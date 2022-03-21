@@ -15,13 +15,13 @@
     - Open Edition ebooks
     -->
     <xsl:variable name="codeGenreOE">
-        <xsl:value-of select="//mets:xmlData[dcterms:type!='book']/dcterms:type"/>
+        <xsl:value-of select="normalize-space(//mets:xmlData[dcterms:type!='book']/dcterms:type)"/>
     </xsl:variable>
     <xsl:variable name="codeGenreOE2">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreOE)='chapter'">chapter</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='preface'">editorial</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE)='editorial'">editorial</xsl:when>
+            <xsl:when test="$codeGenreOE='chapter'">chapter</xsl:when>
+            <xsl:when test="$codeGenreOE='preface'">editorial</xsl:when>
+            <xsl:when test="$codeGenreOE='editorial'">editorial</xsl:when>
             <xsl:otherwise>
                 <xsl:text>other</xsl:text>
             </xsl:otherwise>
@@ -30,12 +30,11 @@
     <!-- lien vers data.istex.fr -->
     <xsl:variable name="codeGenreArkOE">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreOE2)='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE2)='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="normalize-space($codeGenreOE2)='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
+            <xsl:when test="$codeGenreOE2='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
+            <xsl:when test="$codeGenreOE2='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
+            <xsl:when test="$codeGenreOE2='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
         </xsl:choose>
     </xsl:variable>
-    
     
     <xsl:template match="mets:mets">
         <TEI  xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">

@@ -1287,608 +1287,608 @@
     <xsl:variable name="SageJournalTitle">
         <xsl:choose>
             <xsl:when test="$codePublisherID1='AAF'">Adoption &amp; fostering</xsl:when>
-<xsl:when test="$codePublisherID1='AAS'">Administration &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='ABS'">American behavioral scientist (Beverly Hills)</xsl:when>
-<xsl:when test="$codePublisherID1='ACD'">Australian journal of career development</xsl:when>
-<xsl:when test="$codePublisherID1='ACH'">Accounting history (Geelong)</xsl:when>
-<xsl:when test="$codePublisherID1='ADB'">Adaptive behavior</xsl:when>
-<xsl:when test="$codePublisherID1='ADH'">Advances in developing human resources</xsl:when>
-<xsl:when test="$codePublisherID1='AED'">Australian journal of education</xsl:when>
-<xsl:when test="$codePublisherID1='AEI'">Assessment for effective intervention</xsl:when>
-<xsl:when test="$codePublisherID1='AEQ'">Adult education (Chapel Hill)</xsl:when>
-<xsl:when test="$codePublisherID1='AER'">American educational research journal</xsl:when>
-<xsl:when test="$codePublisherID1='AES'">Aesthetic surgery journal</xsl:when>
-<xsl:when test="$codePublisherID1='AFF'">Affilia</xsl:when>
-<xsl:when test="$codePublisherID1='AFS'">Armed forces and society</xsl:when>
-<xsl:when test="$codePublisherID1='AHH'">Arts and humanities in higher education</xsl:when>
-<xsl:when test="$codePublisherID1='AJA'">American journal of Alzheimer's disease and other dementias</xsl:when>
-<xsl:when test="$codePublisherID1='AJC'">Asian Journal of Management Cases</xsl:when>
-<xsl:when test="$codePublisherID1='AJE'">The American journal of evaluation</xsl:when>
-<xsl:when test="$codePublisherID1='AJH'">The American journal of hospice &amp; palliative care</xsl:when>
-<xsl:when test="$codePublisherID1='AJL'">American journal of lifestyle medicine</xsl:when>
-<xsl:when test="$codePublisherID1='AJM'">American journal of medical quality</xsl:when>
-<xsl:when test="$codePublisherID1='AJS'">American journal of sports medicine</xsl:when>
-<xsl:when test="$codePublisherID1='ALH'">Active learning in higher education</xsl:when>
-<xsl:when test="$codePublisherID1='ALT'">Alternatives (Amsterdam)</xsl:when>
-<xsl:when test="$codePublisherID1='ANG'">Vascular Diseases</xsl:when>
-<xsl:when test="$codePublisherID1='ANJ'">Australian &amp; New Zealand journal of criminology</xsl:when>
-<xsl:when test="$codePublisherID1='ANM'">Animation (London. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='ANN'">The Annals of the American Academy of Political and Social Science</xsl:when>
-<xsl:when test="$codePublisherID1='ANP'">Australian and New Zealand journal of psychiatry</xsl:when>
-<xsl:when test="$codePublisherID1='ANT'">Anthropological theory</xsl:when>
-<xsl:when test="$codePublisherID1='APA'">Journal of the American Psychoanalytic Association</xsl:when>
-<xsl:when test="$codePublisherID1='APH'">Asia-Pacific journal of public health</xsl:when>
-<xsl:when test="$codePublisherID1='APM'">Applied psychological measurement</xsl:when>
-<xsl:when test="$codePublisherID1='APR'">American politics research</xsl:when>
-<xsl:when test="$codePublisherID1='APY'">Australasian psychiatry</xsl:when>
-<xsl:when test="$codePublisherID1='ARJ'">Action research (London. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='ARP'">American review of public administration</xsl:when>
-<xsl:when test="$codePublisherID1='ASJ'">Acta sociologica (Trykt utg.)</xsl:when>
-<xsl:when test="$codePublisherID1='ASM'">Assessment (Odessa, Fla.)</xsl:when>
-<xsl:when test="$codePublisherID1='ASQ'">Administrative science quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='ASR'">American sociological review</xsl:when>
-<xsl:when test="$codePublisherID1='AUM'">Australian journal of management</xsl:when>
-<xsl:when test="$codePublisherID1='AUT'">Autism (London)</xsl:when>
-<xsl:when test="$codePublisherID1='BAS'">Business &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='BCQ'">Business communication quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='BIR'">Business information review</xsl:when>
-<xsl:when test="$codePublisherID1='BJI'">Journal of infection prevention</xsl:when>
-<xsl:when test="$codePublisherID1='BJP'">British journal of pain</xsl:when>
-<xsl:when test="$codePublisherID1='BJR'">British journalism review</xsl:when>
-<xsl:when test="$codePublisherID1='BMO'">Behavior modification</xsl:when>
-<xsl:when test="$codePublisherID1='BMS'">BMS. Bulletin de méthodologie sociologique</xsl:when>
-<xsl:when test="$codePublisherID1='BOD'">Body &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='BOS'">Bulletin of the atomic scientists</xsl:when>
-<xsl:when test="$codePublisherID1='BRN'">Biological research for nursing</xsl:when>
-<xsl:when test="$codePublisherID1='BSE'">Building services engineering research &amp; technology</xsl:when>
-<xsl:when test="$codePublisherID1='BST'">Bulletin of science, technology &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='BTB'">Biblical theology bulletin</xsl:when>
-<xsl:when test="$codePublisherID1='BUL'">NASSP bulletin</xsl:when>
-<xsl:when test="$codePublisherID1='CAC'">Cooperation and conflict</xsl:when>
-<xsl:when test="$codePublisherID1='CAD'">Crime and delinquency</xsl:when>
-<xsl:when test="$codePublisherID1='CAN'">Infant, child &amp; adolescent nutrition</xsl:when>
-<xsl:when test="$codePublisherID1='CAP'">Culture &amp; psychology</xsl:when>
-<xsl:when test="$codePublisherID1='CAT'">Clinical and applied thrombosis/hemostasis</xsl:when>
-<xsl:when test="$codePublisherID1='CBI'">Currents in biblical research</xsl:when>
-<xsl:when test="$codePublisherID1='CBR'">Compensation and benefits review</xsl:when>
-<xsl:when test="$codePublisherID1='CCJ'">Journal of contemporary criminal justice</xsl:when>
-<xsl:when test="$codePublisherID1='CCM'">International journal of cross cultural management</xsl:when>
-<xsl:when test="$codePublisherID1='CCP'">Clinical child psychology and psychiatry</xsl:when>
-<xsl:when test="$codePublisherID1='CCR'">Cross-cultural research</xsl:when>
-<xsl:when test="$codePublisherID1='CCS'">Clinical case studies</xsl:when>
-<xsl:when test="$codePublisherID1='CDE'">Career development and transition for exceptional individuals</xsl:when>
-<xsl:when test="$codePublisherID1='CDP'">Current directions in psychological science</xsl:when>
-<xsl:when test="$codePublisherID1='CDQ'">Communication disorders quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='CDY'">Cultural dynamics</xsl:when>
-<xsl:when test="$codePublisherID1='CED'">Education Dialogue (Bangalore)</xsl:when>
-<xsl:when test="$codePublisherID1='CEL'">Journal of cellular plastics</xsl:when>
-<xsl:when test="$codePublisherID1='CEP'">Cephalalgia (Oslo)</xsl:when>
-<xsl:when test="$codePublisherID1='CER'">Concurrent engineering, research and applications</xsl:when>
-<xsl:when test="$codePublisherID1='CGJ'">Cultural geographies</xsl:when>
-<xsl:when test="$codePublisherID1='CHC'">Journal of child health care</xsl:when>
-<xsl:when test="$codePublisherID1='CHD'">Childhood (Copenhagen)</xsl:when>
-<xsl:when test="$codePublisherID1='CHI'">Chronic illness</xsl:when>
-<xsl:when test="$codePublisherID1='CHP'">Journal of evidence-based complementary &amp; alternative medicine</xsl:when>
-<xsl:when test="$codePublisherID1='CHR'">China report (New Delhi)</xsl:when>
-<xsl:when test="$codePublisherID1='CIN'">China information</xsl:when>
-<xsl:when test="$codePublisherID1='CIS'">Contributions to Indian sociology</xsl:when>
-<xsl:when test="$codePublisherID1='CJB'">Criminal justice and behavior</xsl:when>
-<xsl:when test="$codePublisherID1='CJO'">Canadian journal of occupational therapy and physiotherapy</xsl:when>
-<xsl:when test="$codePublisherID1='CJP'">Criminal justice policy review</xsl:when>
-<xsl:when test="$codePublisherID1='CJR'">Criminal justice review (Atlanta, Ga.)</xsl:when>
-<xsl:when test="$codePublisherID1='CJS'">Canadian journal of school psychology</xsl:when>
-<xsl:when test="$codePublisherID1='CLA'">Clin-alert</xsl:when>
-<xsl:when test="$codePublisherID1='CLT'">Child language teaching and therapy</xsl:when>
-<xsl:when test="$codePublisherID1='CMC'">Crime, media, culture</xsl:when>
-<xsl:when test="$codePublisherID1='CMP'">Conflict management and peace science</xsl:when>
-<xsl:when test="$codePublisherID1='CMX'">Child maltreatment</xsl:when>
-<xsl:when test="$codePublisherID1='CNC'">Capital &amp; class</xsl:when>
-<xsl:when test="$codePublisherID1='CNR'">Clinical nursing research</xsl:when>
-<xsl:when test="$codePublisherID1='CNU'">European journal of cardiovascular nursing</xsl:when>
-<xsl:when test="$codePublisherID1='COA'">Critique of anthropology</xsl:when>
-<xsl:when test="$codePublisherID1='CON'">Convergence (London)</xsl:when>
-<xsl:when test="$codePublisherID1='CPJ'">Clinical pediatrics</xsl:when>
-<xsl:when test="$codePublisherID1='CPR'">European journal of preventive cardiology</xsl:when>
-<xsl:when test="$codePublisherID1='CPS'">Comparative political studies</xsl:when>
-<xsl:when test="$codePublisherID1='CPT'">Journal of cardiovascular pharmacology and therapeutics</xsl:when>
-<xsl:when test="$codePublisherID1='CQX'">Cornell hospitality quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='CRC'">Journal of Creative Communications</xsl:when>
-<xsl:when test="$codePublisherID1='CRD'">Chronic respiratory disease</xsl:when>
-<xsl:when test="$codePublisherID1='CRE'">Clinical rehabilitation</xsl:when>
-<xsl:when test="$codePublisherID1='CRJ'">Criminology &amp; criminal justice</xsl:when>
-<xsl:when test="$codePublisherID1='CRS'">Critical sociology</xsl:when>
-<xsl:when test="$codePublisherID1='CRW'">Community college review</xsl:when>
-<xsl:when test="$codePublisherID1='CRX'">Communication research</xsl:when>
-<xsl:when test="$codePublisherID1='CSC'">Cultural studies, critical methodologies</xsl:when>
-<xsl:when test="$codePublisherID1='CSI'">Current sociology</xsl:when>
-<xsl:when test="$codePublisherID1='CSP'">CSP. Critical social policy</xsl:when>
-<xsl:when test="$codePublisherID1='CSX'">Contemporary sociology (Washington)</xsl:when>
-<xsl:when test="$codePublisherID1='CTJ'">Clinical trials (London. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='CTR'">Clothing and textiles research journal</xsl:when>
-<xsl:when test="$codePublisherID1='CTX'">Contexts (Berkeley, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='CUS'">Cultural sociology</xsl:when>
-<xsl:when test="$codePublisherID1='DAS'">Discourse &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='DCM'">Discourse &amp; communication</xsl:when>
-<xsl:when test="$codePublisherID1='DEM'">Dementia (London)</xsl:when>
-<xsl:when test="$codePublisherID1='DIO'">Diogenes (English ed.)</xsl:when>
-<xsl:when test="$codePublisherID1='DIS'">Discourse studies</xsl:when>
-<xsl:when test="$codePublisherID1='DMS'">Journal of defense modeling and simulation</xsl:when>
-<xsl:when test="$codePublisherID1='DPS'">Journal of disability policy studies</xsl:when>
-<xsl:when test="$codePublisherID1='EAB'">Environment and behavior</xsl:when>
-<xsl:when test="$codePublisherID1='EAQ'">Educational administration quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='EAU'">Environment and urbanization</xsl:when>
-<xsl:when test="$codePublisherID1='EBX'">Journal of emotional and behavioral disorders</xsl:when>
-<xsl:when test="$codePublisherID1='ECL'">Journal of early childhood literacy</xsl:when>
-<xsl:when test="$codePublisherID1='ECR'">Journal of early childhood research</xsl:when>
-<xsl:when test="$codePublisherID1='ECS'">European journal of cultural studies</xsl:when>
-<xsl:when test="$codePublisherID1='EDM'">Journal of cognitive engineering and decision making</xsl:when>
-<xsl:when test="$codePublisherID1='EDQ'">Economic development quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='EDR'">Educational researcher</xsl:when>
-<xsl:when test="$codePublisherID1='EEG'">Clinical EEG and neuroscience</xsl:when>
-<xsl:when test="$codePublisherID1='EEP'">Eastern European politics and societies</xsl:when>
-<xsl:when test="$codePublisherID1='EHP'">Evaluation &amp; the health professions</xsl:when>
-<xsl:when test="$codePublisherID1='EHQ'">European history quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='EID'">Economic and industrial democracy</xsl:when>
-<xsl:when test="$codePublisherID1='EIM'">Engineering in medicine</xsl:when>
-<xsl:when test="$codePublisherID1='EJC'">European journal of communication (London)</xsl:when>
-<xsl:when test="$codePublisherID1='EJD'">European journal of industrial relations</xsl:when>
-<xsl:when test="$codePublisherID1='EJT'">European journal of international relations</xsl:when>
-<xsl:when test="$codePublisherID1='EJW'">European journal of women's studies</xsl:when>
-<xsl:when test="$codePublisherID1='EMA'">Educational management administration &amp; leadership</xsl:when>
-<xsl:when test="$codePublisherID1='EME'">Global journal of emerging market economies</xsl:when>
-<xsl:when test="$codePublisherID1='EMF'">Journal of Emerging Market Finance</xsl:when>
-<xsl:when test="$codePublisherID1='EMR'">Emotion review</xsl:when>
-<xsl:when test="$codePublisherID1='ENG'">Journal of English linguistics</xsl:when>
-<xsl:when test="$codePublisherID1='ENX'">Electronic news (Mahwah, N.J.)</xsl:when>
-<xsl:when test="$codePublisherID1='EPA'">Educational evaluation and policy analysis</xsl:when>
-<xsl:when test="$codePublisherID1='EPE'">European physical education review</xsl:when>
-<xsl:when test="$codePublisherID1='EPM'">Educational and psychological measurement</xsl:when>
-<xsl:when test="$codePublisherID1='EPT'">European journal of political theory</xsl:when>
-<xsl:when test="$codePublisherID1='EPX'">Educational policy (Los Altos, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='ERG'">Ergonomics in design</xsl:when>
-<xsl:when test="$codePublisherID1='ERX'">Evaluation review</xsl:when>
-<xsl:when test="$codePublisherID1='ESJ'">Education, citizenship and social justice</xsl:when>
-<xsl:when test="$codePublisherID1='ESP'">Journal of European social policy</xsl:when>
-<xsl:when test="$codePublisherID1='EST'">European journal of social theory</xsl:when>
-<xsl:when test="$codePublisherID1='ETH'">Ethnography (London)</xsl:when>
-<xsl:when test="$codePublisherID1='ETN'">Ethnicities (London)</xsl:when>
-<xsl:when test="$codePublisherID1='EUC'">European journal of criminology</xsl:when>
-<xsl:when test="$codePublisherID1='EUP'">European Union politics</xsl:when>
-<xsl:when test="$codePublisherID1='EUR'">European urban and regional studies</xsl:when>
-<xsl:when test="$codePublisherID1='EUS'">Education and urban society</xsl:when>
-<xsl:when test="$codePublisherID1='EVI'">Evaluation (London. 1995)</xsl:when>
-<xsl:when test="$codePublisherID1='EXT'">Expository times</xsl:when>
-<xsl:when test="$codePublisherID1='FAP'">Feminism &amp; psychology</xsl:when>
-<xsl:when test="$codePublisherID1='FAS'">Foot &amp; ankle specialist</xsl:when>
-<xsl:when test="$codePublisherID1='FBR'">Family business review</xsl:when>
-<xsl:when test="$codePublisherID1='FCX'">Feminist criminology</xsl:when>
-<xsl:when test="$codePublisherID1='FLA'">First language</xsl:when>
-<xsl:when test="$codePublisherID1='FMX'">Field methods.</xsl:when>
-<xsl:when test="$codePublisherID1='FOA'">Focus on autism and other developmental disabilities</xsl:when>
-<xsl:when test="$codePublisherID1='FOI'">Forum italicum</xsl:when>
-<xsl:when test="$codePublisherID1='FRC'">French cultural studies (Chalfont St. Giles)</xsl:when>
-<xsl:when test="$codePublisherID1='FST'">Food science and technology international</xsl:when>
-<xsl:when test="$codePublisherID1='FTH'">Feminist theology</xsl:when>
-<xsl:when test="$codePublisherID1='FTY'">Feminist theory</xsl:when>
-<xsl:when test="$codePublisherID1='GAC'">Games and culture</xsl:when>
-<xsl:when test="$codePublisherID1='GAQ'">Group analysis</xsl:when>
-<xsl:when test="$codePublisherID1='GAS'">Gender &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='GAZ'">The international communication gazette</xsl:when>
-<xsl:when test="$codePublisherID1='GBR'">Global Business Review</xsl:when>
-<xsl:when test="$codePublisherID1='GCQ'">The Gifted child quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='GCT'">Gifted child today magazine</xsl:when>
-<xsl:when test="$codePublisherID1='GEI'">Gifted education international</xsl:when>
-<xsl:when test="$codePublisherID1='GMC'">Global media and communication</xsl:when>
-<xsl:when test="$codePublisherID1='GMT'">General music today</xsl:when>
-<xsl:when test="$codePublisherID1='GOM'">Group &amp; organization management</xsl:when>
-<xsl:when test="$codePublisherID1='GPI'">Group processes &amp; intergroup relations</xsl:when>
-<xsl:when test="$codePublisherID1='GSP'">Global social policy</xsl:when>
-<xsl:when test="$codePublisherID1='GTD'">Gender, Technology and Development</xsl:when>
-<xsl:when test="$codePublisherID1='HAS'">Humanity &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='HEA'">Health (London. 1997)</xsl:when>
-<xsl:when test="$codePublisherID1='HEJ'">Health education journal</xsl:when>
-<xsl:when test="$codePublisherID1='HET'">Human &amp; experimental toxicology</xsl:when>
-<xsl:when test="$codePublisherID1='HFS'">Human factors</xsl:when>
-<xsl:when test="$codePublisherID1='HHC'">Home health care management &amp; practice</xsl:when>
-<xsl:when test="$codePublisherID1='HHS'">History of the human sciences</xsl:when>
-<xsl:when test="$codePublisherID1='HIJ'">The international journal of press/politics</xsl:when>
-<xsl:when test="$codePublisherID1='HIP'">High performance polymers</xsl:when>
-<xsl:when test="$codePublisherID1='HJB'">Hispanic journal of behavioral sciences</xsl:when>
-<xsl:when test="$codePublisherID1='HOL'">Holocene (Sevenoaks)</xsl:when>
-<xsl:when test="$codePublisherID1='HPC'">The international journal of high performance computing applications</xsl:when>
-<xsl:when test="$codePublisherID1='HPP'">Health promotion practice</xsl:when>
-<xsl:when test="$codePublisherID1='HPQ'">Journal of health psychology</xsl:when>
-<xsl:when test="$codePublisherID1='HPY'">History of psychiatry</xsl:when>
-<xsl:when test="$codePublisherID1='HRD'">Human resource development review (Thousand Oaks, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='HSB'">Journal of health and social behavior</xsl:when>
-<xsl:when test="$codePublisherID1='HSX'">Homicide studies</xsl:when>
-<xsl:when test="$codePublisherID1='HUM'">Human relations (New York)</xsl:when>
-<xsl:when test="$codePublisherID1='IAB'">International political science abstracts</xsl:when>
-<xsl:when test="$codePublisherID1='IAS'">International area studies review</xsl:when>
-<xsl:when test="$codePublisherID1='IBE'">Indoor + built environment</xsl:when>
-<xsl:when test="$codePublisherID1='ICJ'">International criminal justice review</xsl:when>
-<xsl:when test="$codePublisherID1='ICS'">International journal of cultural studies</xsl:when>
-<xsl:when test="$codePublisherID1='ICT'">Integrative cancer therapies</xsl:when>
-<xsl:when test="$codePublisherID1='IDV'">Information development</xsl:when>
-<xsl:when test="$codePublisherID1='IER'">Indian economic and social history review</xsl:when>
-<xsl:when test="$codePublisherID1='IFL'">IFLA journal</xsl:when>
-<xsl:when test="$codePublisherID1='IHR'">Indian historical review</xsl:when>
-<xsl:when test="$codePublisherID1='IJB'">International journal of bilingualism</xsl:when>
-<xsl:when test="$codePublisherID1='IJD'">International journal of damage mechanics</xsl:when>
-<xsl:when test="$codePublisherID1='IJL'">International journal of lower extremity wounds</xsl:when>
-<xsl:when test="$codePublisherID1='IJM'">International journal of music education</xsl:when>
-<xsl:when test="$codePublisherID1='IJO'">International journal of offender therapy</xsl:when>
-<xsl:when test="$codePublisherID1='IJR'">The international journal of robotics research</xsl:when>
-<xsl:when test="$codePublisherID1='IJS'">International journal of surgical pathology</xsl:when>
-<xsl:when test="$codePublisherID1='IJT'">International journal of toxicology</xsl:when>
-<xsl:when test="$codePublisherID1='IMP'">Improving schools</xsl:when>
-<xsl:when test="$codePublisherID1='INI'">Innate immunity</xsl:when>
-<xsl:when test="$codePublisherID1='INT'">Interpretation (Richmond)</xsl:when>
-<xsl:when test="$codePublisherID1='IOC'">Index on censorship</xsl:when>
-<xsl:when test="$codePublisherID1='IPS'">International political science review</xsl:when>
-<xsl:when test="$codePublisherID1='IRE'">International relations (London)</xsl:when>
-<xsl:when test="$codePublisherID1='IRM'">International Journal of Rural Management</xsl:when>
-<xsl:when test="$codePublisherID1='IRS'">International review for the sociology of sport</xsl:when>
-<xsl:when test="$codePublisherID1='IRV'">International review of victimology</xsl:when>
-<xsl:when test="$codePublisherID1='IRX'">International regional science review</xsl:when>
-<xsl:when test="$codePublisherID1='ISB'">International small business journal</xsl:when>
-<xsl:when test="$codePublisherID1='ISC'">Intervention in school and clinic</xsl:when>
-<xsl:when test="$codePublisherID1='ISP'">International journal of social psychiatry</xsl:when>
-<xsl:when test="$codePublisherID1='ISQ'">International Studies (New Delhi)</xsl:when>
-<xsl:when test="$codePublisherID1='ISS'">International sociology</xsl:when>
-<xsl:when test="$codePublisherID1='ISW'">International social work</xsl:when>
-<xsl:when test="$codePublisherID1='ITQ'">The Irish theological quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='IVI'">Information visualization</xsl:when>
-<xsl:when test="$codePublisherID1='JAB'">The Journal of applied behavioral science</xsl:when>
-<xsl:when test="$codePublisherID1='JAD'">Journal of attention disorders</xsl:when>
-<xsl:when test="$codePublisherID1='JAF'">Journal of accounting, auditing &amp; finance</xsl:when>
-<xsl:when test="$codePublisherID1='JAG'">Journal of applied gerontology</xsl:when>
-<xsl:when test="$codePublisherID1='JAH'">Journal of aging and health</xsl:when>
-<xsl:when test="$codePublisherID1='JAP'">Journal of the American Psychiatric Nurses Association</xsl:when>
-<xsl:when test="$codePublisherID1='JAR'">Journal of adolescent research</xsl:when>
-<xsl:when test="$codePublisherID1='JAS'">Journal of Asian and African studies (Leiden)</xsl:when>
-<xsl:when test="$codePublisherID1='JAX'">Journal of applied social science</xsl:when>
-<xsl:when test="$codePublisherID1='JBA'">Journal of biomaterials applications</xsl:when>
-<xsl:when test="$codePublisherID1='JBC'">Journal of bioactive and compatible polymers</xsl:when>
-<xsl:when test="$codePublisherID1='JBD'">International journal of behavioral development</xsl:when>
-<xsl:when test="$codePublisherID1='JBP'">Journal of black psychology</xsl:when>
-<xsl:when test="$codePublisherID1='JBR'">Journal of biological rhythms</xsl:when>
-<xsl:when test="$codePublisherID1='JBS'">Journal of black studies</xsl:when>
-<xsl:when test="$codePublisherID1='JBX'">Journal of biomolecular screening</xsl:when>
-<xsl:when test="$codePublisherID1='JCA'">Journal of career assessment</xsl:when>
-<xsl:when test="$codePublisherID1='JCC'">Journal of cross-cultural psychology</xsl:when>
-<xsl:when test="$codePublisherID1='JCD'">Journal of career development</xsl:when>
-<xsl:when test="$codePublisherID1='JCE'">Journal of contemporary ethnography</xsl:when>
-<xsl:when test="$codePublisherID1='JCH'">Journal of contemporary history</xsl:when>
-<xsl:when test="$codePublisherID1='JCI'">The Journal of communication inquiry</xsl:when>
-<xsl:when test="$codePublisherID1='JCL'">Journal of Commonwealth literature</xsl:when>
-<xsl:when test="$codePublisherID1='JCM'">Journal of composite materials</xsl:when>
-<xsl:when test="$codePublisherID1='JCN'">Journal of child neurology</xsl:when>
-<xsl:when test="$codePublisherID1='JCR'">Conflict resolution</xsl:when>
-<xsl:when test="$codePublisherID1='JCS'">Journal of classical sociology</xsl:when>
-<xsl:when test="$codePublisherID1='JCX'">Journal of correctional health care</xsl:when>
-<xsl:when test="$codePublisherID1='JDI'">International journal of discrimination and the law</xsl:when>
-<xsl:when test="$codePublisherID1='JDM'">Journal of diagnostic medical sonography</xsl:when>
-<xsl:when test="$codePublisherID1='JDS'">Journal of developing societies</xsl:when>
-<xsl:when test="$codePublisherID1='JEA'">The Journal of early adolescence</xsl:when>
-<xsl:when test="$codePublisherID1='JEB'">Journal of educational and behavioral statistics</xsl:when>
-<xsl:when test="$codePublisherID1='JED'">The Journal of environment &amp; development</xsl:when>
-<xsl:when test="$codePublisherID1='JEG'">Journal for the education of the gifted</xsl:when>
-<xsl:when test="$codePublisherID1='JEI'">Journal of early intervention</xsl:when>
-<xsl:when test="$codePublisherID1='JEN'">Journal of building physics</xsl:when>
-<xsl:when test="$codePublisherID1='JEP'">Journal of elastomers and plastics</xsl:when>
-<xsl:when test="$codePublisherID1='JES'">Journal of european studies</xsl:when>
-<xsl:when test="$codePublisherID1='JFE'">Journal of fire protection engineering</xsl:when>
-<xsl:when test="$codePublisherID1='JFH'">Journal of family history</xsl:when>
-<xsl:when test="$codePublisherID1='JFI'">Journal of family issues</xsl:when>
-<xsl:when test="$codePublisherID1='JFM'">Journal of feline medicine and surgery</xsl:when>
-<xsl:when test="$codePublisherID1='JFN'">Journal of family nursing</xsl:when>
-<xsl:when test="$codePublisherID1='JFS'">Journal of fire sciences</xsl:when>
-<xsl:when test="$codePublisherID1='JGM'">Journal of generic medicines</xsl:when>
-<xsl:when test="$codePublisherID1='JGP'">Journal of geriatric psychiatry and neurology</xsl:when>
-<xsl:when test="$codePublisherID1='JHH'">Journal of Hispanic higher education</xsl:when>
-<xsl:when test="$codePublisherID1='JHI'">Health informatics journal</xsl:when>
-<xsl:when test="$codePublisherID1='JHL'">Journal of human lactation</xsl:when>
-<xsl:when test="$codePublisherID1='JHM'">Journal of health management. (New Delhi. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='JHN'">Journal of holistic nursing</xsl:when>
-<xsl:when test="$codePublisherID1='JHP'">Journal of humanistic psychology</xsl:when>
-<xsl:when test="$codePublisherID1='JHS'">Journal of hand surgery. European volume</xsl:when>
-<xsl:when test="$codePublisherID1='JHT'">Journal of hospitality &amp; tourism research (Washington, D.C. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='JHV'">Journal of Human Values (New Delhi)</xsl:when>
-<xsl:when test="$codePublisherID1='JIA'">Journal of the International Association of Providers of AIDS Care</xsl:when>
-<xsl:when test="$codePublisherID1='JIC'">Journal of intensive care medicine</xsl:when>
-<xsl:when test="$codePublisherID1='JID'">Journal of intellectual disabilities</xsl:when>
-<xsl:when test="$codePublisherID1='JIL'">Journal of the Institution of Locomotive Engineers</xsl:when>
-<xsl:when test="$codePublisherID1='JIM'">Journal of intelligent material systems and structures</xsl:when>
-<xsl:when test="$codePublisherID1='JIR'">Journal of industrial relations</xsl:when>
-<xsl:when test="$codePublisherID1='JIS'">Journal of information science</xsl:when>
-<xsl:when test="$codePublisherID1='JIT'">Journal of industrial textiles</xsl:when>
-<xsl:when test="$codePublisherID1='JIV'">Journal of interpersonal violence</xsl:when>
-<xsl:when test="$codePublisherID1='JLO'">Journal of leadership &amp; organizational studies</xsl:when>
-<xsl:when test="$codePublisherID1='JLS'">Journal of language and social psychology</xsl:when>
-<xsl:when test="$codePublisherID1='JMC'">Journalism &amp; mass communication educator</xsl:when>
-<xsl:when test="$codePublisherID1='JMD'">Journal of marketing education</xsl:when>
-<xsl:when test="$codePublisherID1='JME'">Journal of management education (Newbury Park, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='JMH'">American journal of men's health</xsl:when>
-<xsl:when test="$codePublisherID1='JMI'">Journal of management inquiry</xsl:when>
-<xsl:when test="$codePublisherID1='JMK'">Journal of macromarketing</xsl:when>
-<xsl:when test="$codePublisherID1='JMM'">Men and masculinities</xsl:when>
-<xsl:when test="$codePublisherID1='JMO'">Journalism &amp; communication monographs</xsl:when>
-<xsl:when test="$codePublisherID1='JMQ'">Journalism &amp; mass communication quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='JMS'">Journal of Mechanical Engineering Science</xsl:when>
-<xsl:when test="$codePublisherID1='JMT'">Journal of music teacher education</xsl:when>
-<xsl:when test="$codePublisherID1='JNT'">Journal for the study of the New Testament</xsl:when>
-<xsl:when test="$codePublisherID1='JOA'">Journal of advanced academics</xsl:when>
-<xsl:when test="$codePublisherID1='JOB'">Journal of business communication (1973)</xsl:when>
-<xsl:when test="$codePublisherID1='JOC'">Journal of consumer culture</xsl:when>
-<xsl:when test="$codePublisherID1='JOD'">Journal of drug issues</xsl:when>
-<xsl:when test="$codePublisherID1='JOE'">Journal of Entrepreneurship</xsl:when>
-<xsl:when test="$codePublisherID1='JOI'">Journal of infrastructure development</xsl:when>
-<xsl:when test="$codePublisherID1='JOM'">Journal of management</xsl:when>
-<xsl:when test="$codePublisherID1='JOP'">Journal of psychopharmacology (Oxford)</xsl:when>
-<xsl:when test="$codePublisherID1='JOS'">Journal of sociology (South Melbourne. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='JOT'">Journal for the study of the Old Testament</xsl:when>
-<xsl:when test="$codePublisherID1='JOU'">Journalism (London)</xsl:when>
-<xsl:when test="$codePublisherID1='JPA'">Journal of psychoeducational assessment</xsl:when>
-<xsl:when test="$codePublisherID1='JPE'">Journal of planning education and research</xsl:when>
-<xsl:when test="$codePublisherID1='JPF'">Journal of plastic film &amp; sheeting</xsl:when>
-<xsl:when test="$codePublisherID1='JPH'">Journal of planning history</xsl:when>
-<xsl:when test="$codePublisherID1='JPL'">Journal of planning literature</xsl:when>
-<xsl:when test="$codePublisherID1='JPO'">Journal of pediatric oncology nursing</xsl:when>
-<xsl:when test="$codePublisherID1='JPP'">Journal of pharmacy practice</xsl:when>
-<xsl:when test="$codePublisherID1='JPR'">Journal of peace research</xsl:when>
-<xsl:when test="$codePublisherID1='JRC'">Journal of research in crime and delinquency</xsl:when>
-<xsl:when test="$codePublisherID1='JRI'">Journal of research in international education</xsl:when>
-<xsl:when test="$codePublisherID1='JRM'">Journal of research in music education</xsl:when>
-<xsl:when test="$codePublisherID1='JRN'">Journal of research in nursing</xsl:when>
-<xsl:when test="$codePublisherID1='JRP'">Journal of reinforced plastics and composites</xsl:when>
-<xsl:when test="$codePublisherID1='JSA'">Journal of social archaeology</xsl:when>
-<xsl:when test="$codePublisherID1='JSD'">Journal of education for sustainable development</xsl:when>
-<xsl:when test="$codePublisherID1='JSE'">Journal of sports economics</xsl:when>
-<xsl:when test="$codePublisherID1='JSI'">Journal of studies in international education</xsl:when>
-<xsl:when test="$codePublisherID1='JSM'">The journal of sandwich structures &amp; materials</xsl:when>
-<xsl:when test="$codePublisherID1='JSP'">Journal for the study of the pseudepigrapha</xsl:when>
-<xsl:when test="$codePublisherID1='JSR'">Journal of service research</xsl:when>
-<xsl:when test="$codePublisherID1='JSS'">Journal of sport and social issues</xsl:when>
-<xsl:when test="$codePublisherID1='JSW'">Journal of social work</xsl:when>
-<xsl:when test="$codePublisherID1='JTC'">Journal of thermoplastic composite materials</xsl:when>
-<xsl:when test="$codePublisherID1='JTD'">Journal of transformative education</xsl:when>
-<xsl:when test="$codePublisherID1='JTE'">Journal of teacher education</xsl:when>
-<xsl:when test="$codePublisherID1='JTP'">Journal of theoretical politics</xsl:when>
-<xsl:when test="$codePublisherID1='JTR'">Journal of travel research</xsl:when>
-<xsl:when test="$codePublisherID1='JUH'">Journal of urban history</xsl:when>
-<xsl:when test="$codePublisherID1='JVC'">Journal of vibration and control</xsl:when>
-<xsl:when test="$codePublisherID1='JVM'">Journal of vacation marketing</xsl:when>
-<xsl:when test="$codePublisherID1='LAL'">Language and literature (Harlow)</xsl:when>
-<xsl:when test="$codePublisherID1='LAP'">Latin American perspectives</xsl:when>
-<xsl:when test="$codePublisherID1='LAS'">Language and speech</xsl:when>
-<xsl:when test="$codePublisherID1='LCH'">Law, culture and the humanities</xsl:when>
-<xsl:when test="$codePublisherID1='LDQ'">Learning disability quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='LDX'">Journal of learning disabilities</xsl:when>
-<xsl:when test="$codePublisherID1='LEA'">Leadership (London. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='LEC'">Local economy</xsl:when>
-<xsl:when test="$codePublisherID1='LIS'">Journal of librarianship and information science</xsl:when>
-<xsl:when test="$codePublisherID1='LRT'">Lighting research and technology (2001. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='LSJ'">Labor studies journal</xsl:when>
-<xsl:when test="$codePublisherID1='LTJ'">Language testing</xsl:when>
-<xsl:when test="$codePublisherID1='LTR'">Language teaching research</xsl:when>
-<xsl:when test="$codePublisherID1='LUP'">Lupus (Basingstoke)</xsl:when>
-<xsl:when test="$codePublisherID1='MAR'">Margin - the journal of applied economic research</xsl:when>
-<xsl:when test="$codePublisherID1='MCQ'">Management communication quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='MCR'">Medical care research and review</xsl:when>
-<xsl:when test="$codePublisherID1='MCS'">Media, culture &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='MCU'">Journal of material culture</xsl:when>
-<xsl:when test="$codePublisherID1='MCX'">Modern China</xsl:when>
-<xsl:when test="$codePublisherID1='MDM'">Medical decision making</xsl:when>
-<xsl:when test="$codePublisherID1='MEC'">Measurement and evaluation in counseling and development</xsl:when>
-<xsl:when test="$codePublisherID1='MEJ'">Music educators journal</xsl:when>
-<xsl:when test="$codePublisherID1='MHJ'">The Medieval History Journal</xsl:when>
-<xsl:when test="$codePublisherID1='MIE'">Management in education</xsl:when>
-<xsl:when test="$codePublisherID1='MIL'">Millennium</xsl:when>
-<xsl:when test="$codePublisherID1='MLI'">Medical law international</xsl:when>
-<xsl:when test="$codePublisherID1='MLQ'">Management learning</xsl:when>
-<xsl:when test="$codePublisherID1='MLS'">Management and labour studies</xsl:when>
-<xsl:when test="$codePublisherID1='MMD'">Music and medicine</xsl:when>
-<xsl:when test="$codePublisherID1='MMJ'">Journal of medical marketing</xsl:when>
-<xsl:when test="$codePublisherID1='MMR'">Journal of mixed methods research</xsl:when>
-<xsl:when test="$codePublisherID1='MMS'">Mathematics and mechanics of solids</xsl:when>
-<xsl:when test="$codePublisherID1='MSJ'">Multiple sclerosis</xsl:when>
-<xsl:when test="$codePublisherID1='MSS'">Memory studies</xsl:when>
-<xsl:when test="$codePublisherID1='MSX'">Musicae scientiae</xsl:when>
-<xsl:when test="$codePublisherID1='MTQ'">Marketing theory</xsl:when>
-<xsl:when test="$codePublisherID1='MWC'">Media, war &amp; conflict</xsl:when>
-<xsl:when test="$codePublisherID1='NAH'">Nutrition and health (Berkhamstead)</xsl:when>
-<xsl:when test="$codePublisherID1='NCP'">Nutrition in clinical practice</xsl:when>
-<xsl:when test="$codePublisherID1='NEJ'">Nursing ethics</xsl:when>
-<xsl:when test="$codePublisherID1='NER'">National Institute economic review</xsl:when>
-<xsl:when test="$codePublisherID1='NMS'">New media &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='NNR'">Neurorehabilitation and neural repair</xsl:when>
-<xsl:when test="$codePublisherID1='NRO'">The Neuroscientist (Baltimore, Md.)</xsl:when>
-<xsl:when test="$codePublisherID1='NSQ'">Nursing science quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='NVS'">Nonprofit and voluntary sector quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='OAE'">Organization &amp; environment</xsl:when>
-<xsl:when test="$codePublisherID1='OPP'">Journal of oncology pharmacy practice</xsl:when>
-<xsl:when test="$codePublisherID1='ORG'">Organization (London)</xsl:when>
-<xsl:when test="$codePublisherID1='ORM'">Organizational research methods</xsl:when>
-<xsl:when test="$codePublisherID1='OSS'">Organization studies</xsl:when>
-<xsl:when test="$codePublisherID1='PAA'">Pacifica (Brunswick)</xsl:when>
-<xsl:when test="$codePublisherID1='PAD'">Proceedings of the Institution of Mechanical Engineers, Automobile Division</xsl:when>
-<xsl:when test="$codePublisherID1='PAS'">Politics &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='PAU'">Proceedings - Institution of Automobile Engineers; London</xsl:when>
-<xsl:when test="$codePublisherID1='PBI'">Journal of positive behavior interventions</xsl:when>
-<xsl:when test="$codePublisherID1='PCP'">Proceedings of the Institution of Mechanical Engineers Conference Proceedings Volumes 178-184</xsl:when>
-<xsl:when test="$codePublisherID1='PDS'">Psychology and developing societies</xsl:when>
-<xsl:when test="$codePublisherID1='PED'">Global health promotion</xsl:when>
-<xsl:when test="$codePublisherID1='PEN'">JPEN. Journal of parenteral and enteral nutrition</xsl:when>
-<xsl:when test="$codePublisherID1='PFR'">Public finance review</xsl:when>
-<xsl:when test="$codePublisherID1='PIA'">Progress in development studies</xsl:when>
-<xsl:when test="$codePublisherID1='PIB'">Proceedings of the Institution of Mechanical Engineers. Part B: Journal of engineering manufacture</xsl:when>
-<xsl:when test="$codePublisherID1='PIC'">Proceedings of the Institution of Mechanical Engineers. Part C: Journal of mechanical engineering science</xsl:when>
-<xsl:when test="$codePublisherID1='PID'">Proceedings of the Institution of Mechanical Engineers. Part D: Journal of automobile engineering</xsl:when>
-<xsl:when test="$codePublisherID1='PIE'">Proceedings of the Institution of Mechanical Engineers. Part E: Journal of process mechanical engineering</xsl:when>
-<xsl:when test="$codePublisherID1='PIF'">Proceedings of the Institution of Mechanical Engineers. Part F: Journal of rail and rapid transit</xsl:when>
-<xsl:when test="$codePublisherID1='PIG'">Proceedings of the Institution of Mechanical Engineers. Part G: Journal of aerospace engineering</xsl:when>
-<xsl:when test="$codePublisherID1='PIH'">Proceedings of the Institution of Mechanical Engineers. Part H: Journal of engineering in medicine</xsl:when>
-<xsl:when test="$codePublisherID1='PII'">Proceedings of the Institution of Mechanical Engineers. Part I: Journal of systems and control engineering</xsl:when>
-<xsl:when test="$codePublisherID1='PIJ'">Proceedings of the Institution of Mechanical Engineers. Part J: Journal of engineering tribology</xsl:when>
-<xsl:when test="$codePublisherID1='PIK'">Proceedings of the Institution of Mechanical Engineers, Part K: Journal of Multi-body Dynamics</xsl:when>
-<xsl:when test="$codePublisherID1='PIL'">Proceedings of the Institution of Mechanical Engineers, Part L: Journal of Materials: Design and Applications</xsl:when>
-<xsl:when test="$codePublisherID1='PIM'">Proceedings of the Institution of Mechanical Engineers, Part M: Journal of Engineering for the Maritime Environment</xsl:when>
-<xsl:when test="$codePublisherID1='PIN'">Proceedings of the Institution of Mechanical Engineers, Part N: Journal of Nanoengineering and Nanosystems</xsl:when>
-<xsl:when test="$codePublisherID1='PIO'">Proceedings of the Institution of Mechanical Engineers, Part O: Journal of Risk and Reliability</xsl:when>
-<xsl:when test="$codePublisherID1='PIP'">Proceedings of the Institution of Mechanical Engineers, Part P: Journal of Sports Engineering and Technology</xsl:when>
-<xsl:when test="$codePublisherID1='PLT'">Planning theory</xsl:when>
-<xsl:when test="$codePublisherID1='PME'">Proceedings - Institution of Mechanical Engineers</xsl:when>
-<xsl:when test="$codePublisherID1='PMJ'">Palliative medicine</xsl:when>
-<xsl:when test="$codePublisherID1='PNZ'">Political science</xsl:when>
-<xsl:when test="$codePublisherID1='POM'">Psychology of music</xsl:when>
-<xsl:when test="$codePublisherID1='POS'">Philosophy of the social sciences</xsl:when>
-<xsl:when test="$codePublisherID1='PPA'">Public policy and administration</xsl:when>
-<xsl:when test="$codePublisherID1='PPE'">Politics, philosophy &amp; economics</xsl:when>
-<xsl:when test="$codePublisherID1='PPG'">Progress in physical geography</xsl:when>
-<xsl:when test="$codePublisherID1='PPN'">Policy, politics &amp; nursing practice</xsl:when>
-<xsl:when test="$codePublisherID1='PPQ'">Party politics</xsl:when>
-<xsl:when test="$codePublisherID1='PPS'">Perspectives on psychological science</xsl:when>
-<xsl:when test="$codePublisherID1='PQX'">Police quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='PRB'">Probation journal</xsl:when>
-<xsl:when test="$codePublisherID1='PRF'">Perfusion</xsl:when>
-<xsl:when test="$codePublisherID1='PRQ'">Political research quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='PSC'">Philosophy &amp; social criticism</xsl:when>
-<xsl:when test="$codePublisherID1='PSP'">Personality &amp; social psychology bulletin</xsl:when>
-<xsl:when test="$codePublisherID1='PSR'">Personality and social psychology review</xsl:when>
-<xsl:when test="$codePublisherID1='PSS'">Psychological science</xsl:when>
-<xsl:when test="$codePublisherID1='PTX'">Political theory</xsl:when>
-<xsl:when test="$codePublisherID1='PUN'">Punishment &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='PUS'">Public understanding of science</xsl:when>
-<xsl:when test="$codePublisherID1='PVS'">Perspectives in vascular surgery and endovascular therapy</xsl:when>
-<xsl:when test="$codePublisherID1='PWM'">Public works management &amp; policy</xsl:when>
-<xsl:when test="$codePublisherID1='PWQ'">Psychology of Women Quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='QHR'">Qualitative health research</xsl:when>
-<xsl:when test="$codePublisherID1='QIX'">Qualitative inquiry</xsl:when>
-<xsl:when test="$codePublisherID1='QRJ'">Qualitative research</xsl:when>
-<xsl:when test="$codePublisherID1='QSW'">Qualitative social work</xsl:when>
-<xsl:when test="$codePublisherID1='RAC'">Race &amp; class</xsl:when>
-<xsl:when test="$codePublisherID1='RAS'">International review of administrative sciences</xsl:when>
-<xsl:when test="$codePublisherID1='RCB'">Rehabilitation counseling bulletin</xsl:when>
-<xsl:when test="$codePublisherID1='REA'">Research ethics review</xsl:when>
-<xsl:when test="$codePublisherID1='REL'">RELC journal</xsl:when>
-<xsl:when test="$codePublisherID1='RER'">Review of educational research</xsl:when>
-<xsl:when test="$codePublisherID1='REV'">Review of human factors and ergonomics</xsl:when>
-<xsl:when test="$codePublisherID1='RMI'">Review of market integration</xsl:when>
-<xsl:when test="$codePublisherID1='ROA'">Research on aging</xsl:when>
-<xsl:when test="$codePublisherID1='ROP'">Review of public personnel administration</xsl:when>
-<xsl:when test="$codePublisherID1='RRE'">Review of research in education</xsl:when>
-<xsl:when test="$codePublisherID1='RRP'">The Review of radical political economics</xsl:when>
-<xsl:when test="$codePublisherID1='RSH'">Perspectives in public health</xsl:when>
-<xsl:when test="$codePublisherID1='RSM'">Research studies in music education</xsl:when>
-<xsl:when test="$codePublisherID1='RSS'">Rationality and society</xsl:when>
-<xsl:when test="$codePublisherID1='RSW'">Research on social work practice</xsl:when>
-<xsl:when test="$codePublisherID1='RSX'">Reproductive sciences (Thousand Oaks, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='SAC'">Space and culture</xsl:when>
-<xsl:when test="$codePublisherID1='SAD'">Journal of South Asian Development</xsl:when>
-<xsl:when test="$codePublisherID1='SAE'">South Asia Economic Journal</xsl:when>
-<xsl:when test="$codePublisherID1='SAG'">Simulation &amp; gaming</xsl:when>
-<xsl:when test="$codePublisherID1='SAR'">South Asia research</xsl:when>
-<xsl:when test="$codePublisherID1='SAS'">South Asia survey</xsl:when>
-<xsl:when test="$codePublisherID1='SAX'">Sexual abuse</xsl:when>
-<xsl:when test="$codePublisherID1='SCE'">Studies in Christian ethics</xsl:when>
-<xsl:when test="$codePublisherID1='SCH'">Social change (New Delhi)</xsl:when>
-<xsl:when test="$codePublisherID1='SCP'">Social Compass</xsl:when>
-<xsl:when test="$codePublisherID1='SCV'">Seminars in cardiothoracic and vascular anesthesia</xsl:when>
-<xsl:when test="$codePublisherID1='SCX'">Science communication</xsl:when>
-<xsl:when test="$codePublisherID1='SDI'">Security dialogue</xsl:when>
-<xsl:when test="$codePublisherID1='SDJ'">Progress in human geography</xsl:when>
-<xsl:when test="$codePublisherID1='SED'">The Journal of special education</xsl:when>
-<xsl:when test="$codePublisherID1='SEX'">Sexualities (London)</xsl:when>
-<xsl:when test="$codePublisherID1='SGR'">International journal of small group research</xsl:when>
-<xsl:when test="$codePublisherID1='SHM'">Structural health monitoring</xsl:when>
-<xsl:when test="$codePublisherID1='SIH'">Studies in History</xsl:when>
-<xsl:when test="$codePublisherID1='SIM'">Transactions of the Society for Computer Simulation</xsl:when>
-<xsl:when test="$codePublisherID1='SIR'">Studies in religion</xsl:when>
-<xsl:when test="$codePublisherID1='SJP'">Scandinavian journal of public health</xsl:when>
-<xsl:when test="$codePublisherID1='SLG'">State &amp; local government review</xsl:when>
-<xsl:when test="$codePublisherID1='SLR'">Second language research</xsl:when>
-<xsl:when test="$codePublisherID1='SLS'">Social &amp; legal studies</xsl:when>
-<xsl:when test="$codePublisherID1='SMJ'">Statistical modelling</xsl:when>
-<xsl:when test="$codePublisherID1='SMM'">Statistical methods in medical research</xsl:when>
-<xsl:when test="$codePublisherID1='SMQ'">Social marketing quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='SMR'">Sociological methods &amp; research</xsl:when>
-<xsl:when test="$codePublisherID1='SMX'">Sociological methodology</xsl:when>
-<xsl:when test="$codePublisherID1='SOC'">Sociology (Oxford. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='SOE'">Sociology of education</xsl:when>
-<xsl:when test="$codePublisherID1='SOQ'">Strategic organization</xsl:when>
-<xsl:when test="$codePublisherID1='SPA'">State politics &amp; policy quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='SPH'">Sports health (Thousand Oaks, CA)</xsl:when>
-<xsl:when test="$codePublisherID1='SPI'">School psychology international</xsl:when>
-<xsl:when test="$codePublisherID1='SPQ'">Social psychology quarterly</xsl:when>
-<xsl:when test="$codePublisherID1='SPR'">Journal of social and personal relationships</xsl:when>
-<xsl:when test="$codePublisherID1='SRI'">Surgical innovation</xsl:when>
-<xsl:when test="$codePublisherID1='SSC'">Social science computer review</xsl:when>
-<xsl:when test="$codePublisherID1='SSI'">Information sur les sciences sociales (Paris)</xsl:when>
-<xsl:when test="$codePublisherID1='SSS'">Social studies of science</xsl:when>
-<xsl:when test="$codePublisherID1='STH'">Science, technology, &amp; human values</xsl:when>
-<xsl:when test="$codePublisherID1='STS'">Science, Technology and Society</xsl:when>
-<xsl:when test="$codePublisherID1='STX'">Sociological theory</xsl:when>
-<xsl:when test="$codePublisherID1='TAB'">Therapeutic advances in musculoskeletal disease</xsl:when>
-<xsl:when test="$codePublisherID1='TAG'">Therapeutic advances in gastroenterology</xsl:when>
-<xsl:when test="$codePublisherID1='TAK'">Therapeutic advances in cardiovascular disease</xsl:when>
-<xsl:when test="$codePublisherID1='TAM'">Therapeutic advances in medical oncology</xsl:when>
-<xsl:when test="$codePublisherID1='TAN'">Therapeutic advances in neurological disorders</xsl:when>
-<xsl:when test="$codePublisherID1='TAP'">Theory &amp; psychology</xsl:when>
-<xsl:when test="$codePublisherID1='TAR'">Therapeutic advances in respiratory disease</xsl:when>
-<xsl:when test="$codePublisherID1='TAS'">Time &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='TAU'">Therapeutic advances in urology</xsl:when>
-<xsl:when test="$codePublisherID1='TCN'">Journal of transcultural nursing</xsl:when>
-<xsl:when test="$codePublisherID1='TCP'">The Counseling psychologist</xsl:when>
-<xsl:when test="$codePublisherID1='TCR'">Theoretical criminology</xsl:when>
-<xsl:when test="$codePublisherID1='TCS'">Theory, culture &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='TDE'">The Diabetes educator</xsl:when>
-<xsl:when test="$codePublisherID1='TEC'">Topics in early childhood special education</xsl:when>
-<xsl:when test="$codePublisherID1='TES'">Teacher education and special education</xsl:when>
-<xsl:when test="$codePublisherID1='TFJ'">The Family journal (Alexandria, Va.)</xsl:when>
-<xsl:when test="$codePublisherID1='THE'">Thesis eleven</xsl:when>
-<xsl:when test="$codePublisherID1='THR'">Tourism and hospitality research</xsl:when>
-<xsl:when test="$codePublisherID1='TIA'">Trends in amplification</xsl:when>
-<xsl:when test="$codePublisherID1='TIH'">Toxicology and industrial health</xsl:when>
-<xsl:when test="$codePublisherID1='TIM'">Transactions of the Institute of Measurement and Control</xsl:when>
-<xsl:when test="$codePublisherID1='TJX'">Theology (Norwich)</xsl:when>
-<xsl:when test="$codePublisherID1='TMT'">Traumatology (Tallahassee, Fla. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='TOP'">Teaching of psychology</xsl:when>
-<xsl:when test="$codePublisherID1='TOU'">Tourist studies</xsl:when>
-<xsl:when test="$codePublisherID1='TPA'">Teaching public administration</xsl:when>
-<xsl:when test="$codePublisherID1='TPJ'">The Prison journal (Philadelphia, Pa.)</xsl:when>
-<xsl:when test="$codePublisherID1='TPS'">Transcultural psychiatry</xsl:when>
-<xsl:when test="$codePublisherID1='TRA'">Trauma (London)</xsl:when>
-<xsl:when test="$codePublisherID1='TRE'">Theory and research in education</xsl:when>
-<xsl:when test="$codePublisherID1='TRJ'">Textile research journal</xsl:when>
-<xsl:when test="$codePublisherID1='TRN'">Transformation (Exeter)</xsl:when>
-<xsl:when test="$codePublisherID1='TRS'">Transfer (Brussels)</xsl:when>
-<xsl:when test="$codePublisherID1='TSO'">Teaching sociology</xsl:when>
-<xsl:when test="$codePublisherID1='TTJ'">Theology today (Princeton, N.J.)</xsl:when>
-<xsl:when test="$codePublisherID1='TVA'">Trauma, violence &amp; abuse</xsl:when>
-<xsl:when test="$codePublisherID1='TVN'">Television &amp; new media</xsl:when>
-<xsl:when test="$codePublisherID1='UAR'">Urban affairs review (Thousand Oaks, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='UEX'">Urban education (Beverly Hills, Calif.)</xsl:when>
-<xsl:when test="$codePublisherID1='UIX'">Ultrasonic imaging</xsl:when>
-<xsl:when test="$codePublisherID1='UPD'">Update: Applications of Research in Music Education</xsl:when>
-<xsl:when test="$codePublisherID1='USJ'">Urban studies (Harlow. Print)</xsl:when>
-<xsl:when test="$codePublisherID1='VAW'">Violence against women</xsl:when>
-<xsl:when test="$codePublisherID1='VCJ'">Visual communication</xsl:when>
-<xsl:when test="$codePublisherID1='VCU'">Journal of visual culture</xsl:when>
-<xsl:when test="$codePublisherID1='VES'">Vascular and endovascular surgery</xsl:when>
-<xsl:when test="$codePublisherID1='VIS'">Vision (New Delhi)</xsl:when>
-<xsl:when test="$codePublisherID1='WCX'">Written communication</xsl:when>
-<xsl:when test="$codePublisherID1='WES'">Work, employment and society</xsl:when>
-<xsl:when test="$codePublisherID1='WIH'">War in history</xsl:when>
-<xsl:when test="$codePublisherID1='WJN'">Western journal of nursing research</xsl:when>
-<xsl:when test="$codePublisherID1='WOM'">Word of mouth (San Antonio, Tex.)</xsl:when>
-<xsl:when test="$codePublisherID1='WOX'">Work and occupations</xsl:when>
-<xsl:when test="$codePublisherID1='WPJ'">World policy journal</xsl:when>
-<xsl:when test="$codePublisherID1='YAS'">Youth &amp; society</xsl:when>
-<xsl:when test="$codePublisherID1='YEC'">Young exceptional children</xsl:when>
-<xsl:when test="$codePublisherID1='YJJ'">Youth justice</xsl:when>
-<xsl:when test="$codePublisherID1='YOU'">Young (Stockholm. 1993)</xsl:when>
-<xsl:when test="$codePublisherID1='YVJ'">Youth violence and juvenile justice</xsl:when>
+            <xsl:when test="$codePublisherID1='AAS'">Administration &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='ABS'">American behavioral scientist (Beverly Hills)</xsl:when>
+            <xsl:when test="$codePublisherID1='ACD'">Australian journal of career development</xsl:when>
+            <xsl:when test="$codePublisherID1='ACH'">Accounting history (Geelong)</xsl:when>
+            <xsl:when test="$codePublisherID1='ADB'">Adaptive behavior</xsl:when>
+            <xsl:when test="$codePublisherID1='ADH'">Advances in developing human resources</xsl:when>
+            <xsl:when test="$codePublisherID1='AED'">Australian journal of education</xsl:when>
+            <xsl:when test="$codePublisherID1='AEI'">Assessment for effective intervention</xsl:when>
+            <xsl:when test="$codePublisherID1='AEQ'">Adult education (Chapel Hill)</xsl:when>
+            <xsl:when test="$codePublisherID1='AER'">American educational research journal</xsl:when>
+            <xsl:when test="$codePublisherID1='AES'">Aesthetic surgery journal</xsl:when>
+            <xsl:when test="$codePublisherID1='AFF'">Affilia</xsl:when>
+            <xsl:when test="$codePublisherID1='AFS'">Armed forces and society</xsl:when>
+            <xsl:when test="$codePublisherID1='AHH'">Arts and humanities in higher education</xsl:when>
+            <xsl:when test="$codePublisherID1='AJA'">American journal of Alzheimer's disease and other dementias</xsl:when>
+            <xsl:when test="$codePublisherID1='AJC'">Asian Journal of Management Cases</xsl:when>
+            <xsl:when test="$codePublisherID1='AJE'">The American journal of evaluation</xsl:when>
+            <xsl:when test="$codePublisherID1='AJH'">The American journal of hospice &amp; palliative care</xsl:when>
+            <xsl:when test="$codePublisherID1='AJL'">American journal of lifestyle medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='AJM'">American journal of medical quality</xsl:when>
+            <xsl:when test="$codePublisherID1='AJS'">American journal of sports medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='ALH'">Active learning in higher education</xsl:when>
+            <xsl:when test="$codePublisherID1='ALT'">Alternatives (Amsterdam)</xsl:when>
+            <xsl:when test="$codePublisherID1='ANG'">Vascular Diseases</xsl:when>
+            <xsl:when test="$codePublisherID1='ANJ'">Australian &amp; New Zealand journal of criminology</xsl:when>
+            <xsl:when test="$codePublisherID1='ANM'">Animation (London. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='ANN'">The Annals of the American Academy of Political and Social Science</xsl:when>
+            <xsl:when test="$codePublisherID1='ANP'">Australian and New Zealand journal of psychiatry</xsl:when>
+            <xsl:when test="$codePublisherID1='ANT'">Anthropological theory</xsl:when>
+            <xsl:when test="$codePublisherID1='APA'">Journal of the American Psychoanalytic Association</xsl:when>
+            <xsl:when test="$codePublisherID1='APH'">Asia-Pacific journal of public health</xsl:when>
+            <xsl:when test="$codePublisherID1='APM'">Applied psychological measurement</xsl:when>
+            <xsl:when test="$codePublisherID1='APR'">American politics research</xsl:when>
+            <xsl:when test="$codePublisherID1='APY'">Australasian psychiatry</xsl:when>
+            <xsl:when test="$codePublisherID1='ARJ'">Action research (London. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='ARP'">American review of public administration</xsl:when>
+            <xsl:when test="$codePublisherID1='ASJ'">Acta sociologica (Trykt utg.)</xsl:when>
+            <xsl:when test="$codePublisherID1='ASM'">Assessment (Odessa, Fla.)</xsl:when>
+            <xsl:when test="$codePublisherID1='ASQ'">Administrative science quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='ASR'">American sociological review</xsl:when>
+            <xsl:when test="$codePublisherID1='AUM'">Australian journal of management</xsl:when>
+            <xsl:when test="$codePublisherID1='AUT'">Autism (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='BAS'">Business &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='BCQ'">Business communication quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='BIR'">Business information review</xsl:when>
+            <xsl:when test="$codePublisherID1='BJI'">Journal of infection prevention</xsl:when>
+            <xsl:when test="$codePublisherID1='BJP'">British journal of pain</xsl:when>
+            <xsl:when test="$codePublisherID1='BJR'">British journalism review</xsl:when>
+            <xsl:when test="$codePublisherID1='BMO'">Behavior modification</xsl:when>
+            <xsl:when test="$codePublisherID1='BMS'">BMS. Bulletin de méthodologie sociologique</xsl:when>
+            <xsl:when test="$codePublisherID1='BOD'">Body &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='BOS'">Bulletin of the atomic scientists</xsl:when>
+            <xsl:when test="$codePublisherID1='BRN'">Biological research for nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='BSE'">Building services engineering research &amp; technology</xsl:when>
+            <xsl:when test="$codePublisherID1='BST'">Bulletin of science, technology &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='BTB'">Biblical theology bulletin</xsl:when>
+            <xsl:when test="$codePublisherID1='BUL'">NASSP bulletin</xsl:when>
+            <xsl:when test="$codePublisherID1='CAC'">Cooperation and conflict</xsl:when>
+            <xsl:when test="$codePublisherID1='CAD'">Crime and delinquency</xsl:when>
+            <xsl:when test="$codePublisherID1='CAN'">Infant, child &amp; adolescent nutrition</xsl:when>
+            <xsl:when test="$codePublisherID1='CAP'">Culture &amp; psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='CAT'">Clinical and applied thrombosis/hemostasis</xsl:when>
+            <xsl:when test="$codePublisherID1='CBI'">Currents in biblical research</xsl:when>
+            <xsl:when test="$codePublisherID1='CBR'">Compensation and benefits review</xsl:when>
+            <xsl:when test="$codePublisherID1='CCJ'">Journal of contemporary criminal justice</xsl:when>
+            <xsl:when test="$codePublisherID1='CCM'">International journal of cross cultural management</xsl:when>
+            <xsl:when test="$codePublisherID1='CCP'">Clinical child psychology and psychiatry</xsl:when>
+            <xsl:when test="$codePublisherID1='CCR'">Cross-cultural research</xsl:when>
+            <xsl:when test="$codePublisherID1='CCS'">Clinical case studies</xsl:when>
+            <xsl:when test="$codePublisherID1='CDE'">Career development and transition for exceptional individuals</xsl:when>
+            <xsl:when test="$codePublisherID1='CDP'">Current directions in psychological science</xsl:when>
+            <xsl:when test="$codePublisherID1='CDQ'">Communication disorders quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='CDY'">Cultural dynamics</xsl:when>
+            <xsl:when test="$codePublisherID1='CED'">Education Dialogue (Bangalore)</xsl:when>
+            <xsl:when test="$codePublisherID1='CEL'">Journal of cellular plastics</xsl:when>
+            <xsl:when test="$codePublisherID1='CEP'">Cephalalgia (Oslo)</xsl:when>
+            <xsl:when test="$codePublisherID1='CER'">Concurrent engineering, research and applications</xsl:when>
+            <xsl:when test="$codePublisherID1='CGJ'">Cultural geographies</xsl:when>
+            <xsl:when test="$codePublisherID1='CHC'">Journal of child health care</xsl:when>
+            <xsl:when test="$codePublisherID1='CHD'">Childhood (Copenhagen)</xsl:when>
+            <xsl:when test="$codePublisherID1='CHI'">Chronic illness</xsl:when>
+            <xsl:when test="$codePublisherID1='CHP'">Journal of evidence-based complementary &amp; alternative medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='CHR'">China report (New Delhi)</xsl:when>
+            <xsl:when test="$codePublisherID1='CIN'">China information</xsl:when>
+            <xsl:when test="$codePublisherID1='CIS'">Contributions to Indian sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='CJB'">Criminal justice and behavior</xsl:when>
+            <xsl:when test="$codePublisherID1='CJO'">Canadian journal of occupational therapy and physiotherapy</xsl:when>
+            <xsl:when test="$codePublisherID1='CJP'">Criminal justice policy review</xsl:when>
+            <xsl:when test="$codePublisherID1='CJR'">Criminal justice review (Atlanta, Ga.)</xsl:when>
+            <xsl:when test="$codePublisherID1='CJS'">Canadian journal of school psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='CLA'">Clin-alert</xsl:when>
+            <xsl:when test="$codePublisherID1='CLT'">Child language teaching and therapy</xsl:when>
+            <xsl:when test="$codePublisherID1='CMC'">Crime, media, culture</xsl:when>
+            <xsl:when test="$codePublisherID1='CMP'">Conflict management and peace science</xsl:when>
+            <xsl:when test="$codePublisherID1='CMX'">Child maltreatment</xsl:when>
+            <xsl:when test="$codePublisherID1='CNC'">Capital &amp; class</xsl:when>
+            <xsl:when test="$codePublisherID1='CNR'">Clinical nursing research</xsl:when>
+            <xsl:when test="$codePublisherID1='CNU'">European journal of cardiovascular nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='COA'">Critique of anthropology</xsl:when>
+            <xsl:when test="$codePublisherID1='CON'">Convergence (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='CPJ'">Clinical pediatrics</xsl:when>
+            <xsl:when test="$codePublisherID1='CPR'">European journal of preventive cardiology</xsl:when>
+            <xsl:when test="$codePublisherID1='CPS'">Comparative political studies</xsl:when>
+            <xsl:when test="$codePublisherID1='CPT'">Journal of cardiovascular pharmacology and therapeutics</xsl:when>
+            <xsl:when test="$codePublisherID1='CQX'">Cornell hospitality quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='CRC'">Journal of Creative Communications</xsl:when>
+            <xsl:when test="$codePublisherID1='CRD'">Chronic respiratory disease</xsl:when>
+            <xsl:when test="$codePublisherID1='CRE'">Clinical rehabilitation</xsl:when>
+            <xsl:when test="$codePublisherID1='CRJ'">Criminology &amp; criminal justice</xsl:when>
+            <xsl:when test="$codePublisherID1='CRS'">Critical sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='CRW'">Community college review</xsl:when>
+            <xsl:when test="$codePublisherID1='CRX'">Communication research</xsl:when>
+            <xsl:when test="$codePublisherID1='CSC'">Cultural studies, critical methodologies</xsl:when>
+            <xsl:when test="$codePublisherID1='CSI'">Current sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='CSP'">CSP. Critical social policy</xsl:when>
+            <xsl:when test="$codePublisherID1='CSX'">Contemporary sociology (Washington)</xsl:when>
+            <xsl:when test="$codePublisherID1='CTJ'">Clinical trials (London. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='CTR'">Clothing and textiles research journal</xsl:when>
+            <xsl:when test="$codePublisherID1='CTX'">Contexts (Berkeley, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='CUS'">Cultural sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='DAS'">Discourse &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='DCM'">Discourse &amp; communication</xsl:when>
+            <xsl:when test="$codePublisherID1='DEM'">Dementia (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='DIO'">Diogenes (English ed.)</xsl:when>
+            <xsl:when test="$codePublisherID1='DIS'">Discourse studies</xsl:when>
+            <xsl:when test="$codePublisherID1='DMS'">Journal of defense modeling and simulation</xsl:when>
+            <xsl:when test="$codePublisherID1='DPS'">Journal of disability policy studies</xsl:when>
+            <xsl:when test="$codePublisherID1='EAB'">Environment and behavior</xsl:when>
+            <xsl:when test="$codePublisherID1='EAQ'">Educational administration quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='EAU'">Environment and urbanization</xsl:when>
+            <xsl:when test="$codePublisherID1='EBX'">Journal of emotional and behavioral disorders</xsl:when>
+            <xsl:when test="$codePublisherID1='ECL'">Journal of early childhood literacy</xsl:when>
+            <xsl:when test="$codePublisherID1='ECR'">Journal of early childhood research</xsl:when>
+            <xsl:when test="$codePublisherID1='ECS'">European journal of cultural studies</xsl:when>
+            <xsl:when test="$codePublisherID1='EDM'">Journal of cognitive engineering and decision making</xsl:when>
+            <xsl:when test="$codePublisherID1='EDQ'">Economic development quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='EDR'">Educational researcher</xsl:when>
+            <xsl:when test="$codePublisherID1='EEG'">Clinical EEG and neuroscience</xsl:when>
+            <xsl:when test="$codePublisherID1='EEP'">Eastern European politics and societies</xsl:when>
+            <xsl:when test="$codePublisherID1='EHP'">Evaluation &amp; the health professions</xsl:when>
+            <xsl:when test="$codePublisherID1='EHQ'">European history quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='EID'">Economic and industrial democracy</xsl:when>
+            <xsl:when test="$codePublisherID1='EIM'">Engineering in medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='EJC'">European journal of communication (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='EJD'">European journal of industrial relations</xsl:when>
+            <xsl:when test="$codePublisherID1='EJT'">European journal of international relations</xsl:when>
+            <xsl:when test="$codePublisherID1='EJW'">European journal of women's studies</xsl:when>
+            <xsl:when test="$codePublisherID1='EMA'">Educational management administration &amp; leadership</xsl:when>
+            <xsl:when test="$codePublisherID1='EME'">Global journal of emerging market economies</xsl:when>
+            <xsl:when test="$codePublisherID1='EMF'">Journal of Emerging Market Finance</xsl:when>
+            <xsl:when test="$codePublisherID1='EMR'">Emotion review</xsl:when>
+            <xsl:when test="$codePublisherID1='ENG'">Journal of English linguistics</xsl:when>
+            <xsl:when test="$codePublisherID1='ENX'">Electronic news (Mahwah, N.J.)</xsl:when>
+            <xsl:when test="$codePublisherID1='EPA'">Educational evaluation and policy analysis</xsl:when>
+            <xsl:when test="$codePublisherID1='EPE'">European physical education review</xsl:when>
+            <xsl:when test="$codePublisherID1='EPM'">Educational and psychological measurement</xsl:when>
+            <xsl:when test="$codePublisherID1='EPT'">European journal of political theory</xsl:when>
+            <xsl:when test="$codePublisherID1='EPX'">Educational policy (Los Altos, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='ERG'">Ergonomics in design</xsl:when>
+            <xsl:when test="$codePublisherID1='ERX'">Evaluation review</xsl:when>
+            <xsl:when test="$codePublisherID1='ESJ'">Education, citizenship and social justice</xsl:when>
+            <xsl:when test="$codePublisherID1='ESP'">Journal of European social policy</xsl:when>
+            <xsl:when test="$codePublisherID1='EST'">European journal of social theory</xsl:when>
+            <xsl:when test="$codePublisherID1='ETH'">Ethnography (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='ETN'">Ethnicities (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='EUC'">European journal of criminology</xsl:when>
+            <xsl:when test="$codePublisherID1='EUP'">European Union politics</xsl:when>
+            <xsl:when test="$codePublisherID1='EUR'">European urban and regional studies</xsl:when>
+            <xsl:when test="$codePublisherID1='EUS'">Education and urban society</xsl:when>
+            <xsl:when test="$codePublisherID1='EVI'">Evaluation (London. 1995)</xsl:when>
+            <xsl:when test="$codePublisherID1='EXT'">Expository times</xsl:when>
+            <xsl:when test="$codePublisherID1='FAP'">Feminism &amp; psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='FAS'">Foot &amp; ankle specialist</xsl:when>
+            <xsl:when test="$codePublisherID1='FBR'">Family business review</xsl:when>
+            <xsl:when test="$codePublisherID1='FCX'">Feminist criminology</xsl:when>
+            <xsl:when test="$codePublisherID1='FLA'">First language</xsl:when>
+            <xsl:when test="$codePublisherID1='FMX'">Field methods.</xsl:when>
+            <xsl:when test="$codePublisherID1='FOA'">Focus on autism and other developmental disabilities</xsl:when>
+            <xsl:when test="$codePublisherID1='FOI'">Forum italicum</xsl:when>
+            <xsl:when test="$codePublisherID1='FRC'">French cultural studies (Chalfont St. Giles)</xsl:when>
+            <xsl:when test="$codePublisherID1='FST'">Food science and technology international</xsl:when>
+            <xsl:when test="$codePublisherID1='FTH'">Feminist theology</xsl:when>
+            <xsl:when test="$codePublisherID1='FTY'">Feminist theory</xsl:when>
+            <xsl:when test="$codePublisherID1='GAC'">Games and culture</xsl:when>
+            <xsl:when test="$codePublisherID1='GAQ'">Group analysis</xsl:when>
+            <xsl:when test="$codePublisherID1='GAS'">Gender &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='GAZ'">The international communication gazette</xsl:when>
+            <xsl:when test="$codePublisherID1='GBR'">Global Business Review</xsl:when>
+            <xsl:when test="$codePublisherID1='GCQ'">The Gifted child quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='GCT'">Gifted child today magazine</xsl:when>
+            <xsl:when test="$codePublisherID1='GEI'">Gifted education international</xsl:when>
+            <xsl:when test="$codePublisherID1='GMC'">Global media and communication</xsl:when>
+            <xsl:when test="$codePublisherID1='GMT'">General music today</xsl:when>
+            <xsl:when test="$codePublisherID1='GOM'">Group &amp; organization management</xsl:when>
+            <xsl:when test="$codePublisherID1='GPI'">Group processes &amp; intergroup relations</xsl:when>
+            <xsl:when test="$codePublisherID1='GSP'">Global social policy</xsl:when>
+            <xsl:when test="$codePublisherID1='GTD'">Gender, Technology and Development</xsl:when>
+            <xsl:when test="$codePublisherID1='HAS'">Humanity &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='HEA'">Health (London. 1997)</xsl:when>
+            <xsl:when test="$codePublisherID1='HEJ'">Health education journal</xsl:when>
+            <xsl:when test="$codePublisherID1='HET'">Human &amp; experimental toxicology</xsl:when>
+            <xsl:when test="$codePublisherID1='HFS'">Human factors</xsl:when>
+            <xsl:when test="$codePublisherID1='HHC'">Home health care management &amp; practice</xsl:when>
+            <xsl:when test="$codePublisherID1='HHS'">History of the human sciences</xsl:when>
+            <xsl:when test="$codePublisherID1='HIJ'">The international journal of press/politics</xsl:when>
+            <xsl:when test="$codePublisherID1='HIP'">High performance polymers</xsl:when>
+            <xsl:when test="$codePublisherID1='HJB'">Hispanic journal of behavioral sciences</xsl:when>
+            <xsl:when test="$codePublisherID1='HOL'">Holocene (Sevenoaks)</xsl:when>
+            <xsl:when test="$codePublisherID1='HPC'">The international journal of high performance computing applications</xsl:when>
+            <xsl:when test="$codePublisherID1='HPP'">Health promotion practice</xsl:when>
+            <xsl:when test="$codePublisherID1='HPQ'">Journal of health psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='HPY'">History of psychiatry</xsl:when>
+            <xsl:when test="$codePublisherID1='HRD'">Human resource development review (Thousand Oaks, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='HSB'">Journal of health and social behavior</xsl:when>
+            <xsl:when test="$codePublisherID1='HSX'">Homicide studies</xsl:when>
+            <xsl:when test="$codePublisherID1='HUM'">Human relations (New York)</xsl:when>
+            <xsl:when test="$codePublisherID1='IAB'">International political science abstracts</xsl:when>
+            <xsl:when test="$codePublisherID1='IAS'">International area studies review</xsl:when>
+            <xsl:when test="$codePublisherID1='IBE'">Indoor + built environment</xsl:when>
+            <xsl:when test="$codePublisherID1='ICJ'">International criminal justice review</xsl:when>
+            <xsl:when test="$codePublisherID1='ICS'">International journal of cultural studies</xsl:when>
+            <xsl:when test="$codePublisherID1='ICT'">Integrative cancer therapies</xsl:when>
+            <xsl:when test="$codePublisherID1='IDV'">Information development</xsl:when>
+            <xsl:when test="$codePublisherID1='IER'">Indian economic and social history review</xsl:when>
+            <xsl:when test="$codePublisherID1='IFL'">IFLA journal</xsl:when>
+            <xsl:when test="$codePublisherID1='IHR'">Indian historical review</xsl:when>
+            <xsl:when test="$codePublisherID1='IJB'">International journal of bilingualism</xsl:when>
+            <xsl:when test="$codePublisherID1='IJD'">International journal of damage mechanics</xsl:when>
+            <xsl:when test="$codePublisherID1='IJL'">International journal of lower extremity wounds</xsl:when>
+            <xsl:when test="$codePublisherID1='IJM'">International journal of music education</xsl:when>
+            <xsl:when test="$codePublisherID1='IJO'">International journal of offender therapy</xsl:when>
+            <xsl:when test="$codePublisherID1='IJR'">The international journal of robotics research</xsl:when>
+            <xsl:when test="$codePublisherID1='IJS'">International journal of surgical pathology</xsl:when>
+            <xsl:when test="$codePublisherID1='IJT'">International journal of toxicology</xsl:when>
+            <xsl:when test="$codePublisherID1='IMP'">Improving schools</xsl:when>
+            <xsl:when test="$codePublisherID1='INI'">Innate immunity</xsl:when>
+            <xsl:when test="$codePublisherID1='INT'">Interpretation (Richmond)</xsl:when>
+            <xsl:when test="$codePublisherID1='IOC'">Index on censorship</xsl:when>
+            <xsl:when test="$codePublisherID1='IPS'">International political science review</xsl:when>
+            <xsl:when test="$codePublisherID1='IRE'">International relations (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='IRM'">International Journal of Rural Management</xsl:when>
+            <xsl:when test="$codePublisherID1='IRS'">International review for the sociology of sport</xsl:when>
+            <xsl:when test="$codePublisherID1='IRV'">International review of victimology</xsl:when>
+            <xsl:when test="$codePublisherID1='IRX'">International regional science review</xsl:when>
+            <xsl:when test="$codePublisherID1='ISB'">International small business journal</xsl:when>
+            <xsl:when test="$codePublisherID1='ISC'">Intervention in school and clinic</xsl:when>
+            <xsl:when test="$codePublisherID1='ISP'">International journal of social psychiatry</xsl:when>
+            <xsl:when test="$codePublisherID1='ISQ'">International Studies (New Delhi)</xsl:when>
+            <xsl:when test="$codePublisherID1='ISS'">International sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='ISW'">International social work</xsl:when>
+            <xsl:when test="$codePublisherID1='ITQ'">The Irish theological quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='IVI'">Information visualization</xsl:when>
+            <xsl:when test="$codePublisherID1='JAB'">The Journal of applied behavioral science</xsl:when>
+            <xsl:when test="$codePublisherID1='JAD'">Journal of attention disorders</xsl:when>
+            <xsl:when test="$codePublisherID1='JAF'">Journal of accounting, auditing &amp; finance</xsl:when>
+            <xsl:when test="$codePublisherID1='JAG'">Journal of applied gerontology</xsl:when>
+            <xsl:when test="$codePublisherID1='JAH'">Journal of aging and health</xsl:when>
+            <xsl:when test="$codePublisherID1='JAP'">Journal of the American Psychiatric Nurses Association</xsl:when>
+            <xsl:when test="$codePublisherID1='JAR'">Journal of adolescent research</xsl:when>
+            <xsl:when test="$codePublisherID1='JAS'">Journal of Asian and African studies (Leiden)</xsl:when>
+            <xsl:when test="$codePublisherID1='JAX'">Journal of applied social science</xsl:when>
+            <xsl:when test="$codePublisherID1='JBA'">Journal of biomaterials applications</xsl:when>
+            <xsl:when test="$codePublisherID1='JBC'">Journal of bioactive and compatible polymers</xsl:when>
+            <xsl:when test="$codePublisherID1='JBD'">International journal of behavioral development</xsl:when>
+            <xsl:when test="$codePublisherID1='JBP'">Journal of black psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='JBR'">Journal of biological rhythms</xsl:when>
+            <xsl:when test="$codePublisherID1='JBS'">Journal of black studies</xsl:when>
+            <xsl:when test="$codePublisherID1='JBX'">Journal of biomolecular screening</xsl:when>
+            <xsl:when test="$codePublisherID1='JCA'">Journal of career assessment</xsl:when>
+            <xsl:when test="$codePublisherID1='JCC'">Journal of cross-cultural psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='JCD'">Journal of career development</xsl:when>
+            <xsl:when test="$codePublisherID1='JCE'">Journal of contemporary ethnography</xsl:when>
+            <xsl:when test="$codePublisherID1='JCH'">Journal of contemporary history</xsl:when>
+            <xsl:when test="$codePublisherID1='JCI'">The Journal of communication inquiry</xsl:when>
+            <xsl:when test="$codePublisherID1='JCL'">Journal of Commonwealth literature</xsl:when>
+            <xsl:when test="$codePublisherID1='JCM'">Journal of composite materials</xsl:when>
+            <xsl:when test="$codePublisherID1='JCN'">Journal of child neurology</xsl:when>
+            <xsl:when test="$codePublisherID1='JCR'">Conflict resolution</xsl:when>
+            <xsl:when test="$codePublisherID1='JCS'">Journal of classical sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='JCX'">Journal of correctional health care</xsl:when>
+            <xsl:when test="$codePublisherID1='JDI'">International journal of discrimination and the law</xsl:when>
+            <xsl:when test="$codePublisherID1='JDM'">Journal of diagnostic medical sonography</xsl:when>
+            <xsl:when test="$codePublisherID1='JDS'">Journal of developing societies</xsl:when>
+            <xsl:when test="$codePublisherID1='JEA'">The Journal of early adolescence</xsl:when>
+            <xsl:when test="$codePublisherID1='JEB'">Journal of educational and behavioral statistics</xsl:when>
+            <xsl:when test="$codePublisherID1='JED'">The Journal of environment &amp; development</xsl:when>
+            <xsl:when test="$codePublisherID1='JEG'">Journal for the education of the gifted</xsl:when>
+            <xsl:when test="$codePublisherID1='JEI'">Journal of early intervention</xsl:when>
+            <xsl:when test="$codePublisherID1='JEN'">Journal of building physics</xsl:when>
+            <xsl:when test="$codePublisherID1='JEP'">Journal of elastomers and plastics</xsl:when>
+            <xsl:when test="$codePublisherID1='JES'">Journal of european studies</xsl:when>
+            <xsl:when test="$codePublisherID1='JFE'">Journal of fire protection engineering</xsl:when>
+            <xsl:when test="$codePublisherID1='JFH'">Journal of family history</xsl:when>
+            <xsl:when test="$codePublisherID1='JFI'">Journal of family issues</xsl:when>
+            <xsl:when test="$codePublisherID1='JFM'">Journal of feline medicine and surgery</xsl:when>
+            <xsl:when test="$codePublisherID1='JFN'">Journal of family nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='JFS'">Journal of fire sciences</xsl:when>
+            <xsl:when test="$codePublisherID1='JGM'">Journal of generic medicines</xsl:when>
+            <xsl:when test="$codePublisherID1='JGP'">Journal of geriatric psychiatry and neurology</xsl:when>
+            <xsl:when test="$codePublisherID1='JHH'">Journal of Hispanic higher education</xsl:when>
+            <xsl:when test="$codePublisherID1='JHI'">Health informatics journal</xsl:when>
+            <xsl:when test="$codePublisherID1='JHL'">Journal of human lactation</xsl:when>
+            <xsl:when test="$codePublisherID1='JHM'">Journal of health management. (New Delhi. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='JHN'">Journal of holistic nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='JHP'">Journal of humanistic psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='JHS'">Journal of hand surgery. European volume</xsl:when>
+            <xsl:when test="$codePublisherID1='JHT'">Journal of hospitality &amp; tourism research (Washington, D.C. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='JHV'">Journal of Human Values (New Delhi)</xsl:when>
+            <xsl:when test="$codePublisherID1='JIA'">Journal of the International Association of Providers of AIDS Care</xsl:when>
+            <xsl:when test="$codePublisherID1='JIC'">Journal of intensive care medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='JID'">Journal of intellectual disabilities</xsl:when>
+            <xsl:when test="$codePublisherID1='JIL'">Journal of the Institution of Locomotive Engineers</xsl:when>
+            <xsl:when test="$codePublisherID1='JIM'">Journal of intelligent material systems and structures</xsl:when>
+            <xsl:when test="$codePublisherID1='JIR'">Journal of industrial relations</xsl:when>
+            <xsl:when test="$codePublisherID1='JIS'">Journal of information science</xsl:when>
+            <xsl:when test="$codePublisherID1='JIT'">Journal of industrial textiles</xsl:when>
+            <xsl:when test="$codePublisherID1='JIV'">Journal of interpersonal violence</xsl:when>
+            <xsl:when test="$codePublisherID1='JLO'">Journal of leadership &amp; organizational studies</xsl:when>
+            <xsl:when test="$codePublisherID1='JLS'">Journal of language and social psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='JMC'">Journalism &amp; mass communication educator</xsl:when>
+            <xsl:when test="$codePublisherID1='JMD'">Journal of marketing education</xsl:when>
+            <xsl:when test="$codePublisherID1='JME'">Journal of management education (Newbury Park, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='JMH'">American journal of men's health</xsl:when>
+            <xsl:when test="$codePublisherID1='JMI'">Journal of management inquiry</xsl:when>
+            <xsl:when test="$codePublisherID1='JMK'">Journal of macromarketing</xsl:when>
+            <xsl:when test="$codePublisherID1='JMM'">Men and masculinities</xsl:when>
+            <xsl:when test="$codePublisherID1='JMO'">Journalism &amp; communication monographs</xsl:when>
+            <xsl:when test="$codePublisherID1='JMQ'">Journalism &amp; mass communication quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='JMS'">Journal of Mechanical Engineering Science</xsl:when>
+            <xsl:when test="$codePublisherID1='JMT'">Journal of music teacher education</xsl:when>
+            <xsl:when test="$codePublisherID1='JNT'">Journal for the study of the New Testament</xsl:when>
+            <xsl:when test="$codePublisherID1='JOA'">Journal of advanced academics</xsl:when>
+            <xsl:when test="$codePublisherID1='JOB'">Journal of business communication (1973)</xsl:when>
+            <xsl:when test="$codePublisherID1='JOC'">Journal of consumer culture</xsl:when>
+            <xsl:when test="$codePublisherID1='JOD'">Journal of drug issues</xsl:when>
+            <xsl:when test="$codePublisherID1='JOE'">Journal of Entrepreneurship</xsl:when>
+            <xsl:when test="$codePublisherID1='JOI'">Journal of infrastructure development</xsl:when>
+            <xsl:when test="$codePublisherID1='JOM'">Journal of management</xsl:when>
+            <xsl:when test="$codePublisherID1='JOP'">Journal of psychopharmacology (Oxford)</xsl:when>
+            <xsl:when test="$codePublisherID1='JOS'">Journal of sociology (South Melbourne. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='JOT'">Journal for the study of the Old Testament</xsl:when>
+            <xsl:when test="$codePublisherID1='JOU'">Journalism (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='JPA'">Journal of psychoeducational assessment</xsl:when>
+            <xsl:when test="$codePublisherID1='JPE'">Journal of planning education and research</xsl:when>
+            <xsl:when test="$codePublisherID1='JPF'">Journal of plastic film &amp; sheeting</xsl:when>
+            <xsl:when test="$codePublisherID1='JPH'">Journal of planning history</xsl:when>
+            <xsl:when test="$codePublisherID1='JPL'">Journal of planning literature</xsl:when>
+            <xsl:when test="$codePublisherID1='JPO'">Journal of pediatric oncology nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='JPP'">Journal of pharmacy practice</xsl:when>
+            <xsl:when test="$codePublisherID1='JPR'">Journal of peace research</xsl:when>
+            <xsl:when test="$codePublisherID1='JRC'">Journal of research in crime and delinquency</xsl:when>
+            <xsl:when test="$codePublisherID1='JRI'">Journal of research in international education</xsl:when>
+            <xsl:when test="$codePublisherID1='JRM'">Journal of research in music education</xsl:when>
+            <xsl:when test="$codePublisherID1='JRN'">Journal of research in nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='JRP'">Journal of reinforced plastics and composites</xsl:when>
+            <xsl:when test="$codePublisherID1='JSA'">Journal of social archaeology</xsl:when>
+            <xsl:when test="$codePublisherID1='JSD'">Journal of education for sustainable development</xsl:when>
+            <xsl:when test="$codePublisherID1='JSE'">Journal of sports economics</xsl:when>
+            <xsl:when test="$codePublisherID1='JSI'">Journal of studies in international education</xsl:when>
+            <xsl:when test="$codePublisherID1='JSM'">The journal of sandwich structures &amp; materials</xsl:when>
+            <xsl:when test="$codePublisherID1='JSP'">Journal for the study of the pseudepigrapha</xsl:when>
+            <xsl:when test="$codePublisherID1='JSR'">Journal of service research</xsl:when>
+            <xsl:when test="$codePublisherID1='JSS'">Journal of sport and social issues</xsl:when>
+            <xsl:when test="$codePublisherID1='JSW'">Journal of social work</xsl:when>
+            <xsl:when test="$codePublisherID1='JTC'">Journal of thermoplastic composite materials</xsl:when>
+            <xsl:when test="$codePublisherID1='JTD'">Journal of transformative education</xsl:when>
+            <xsl:when test="$codePublisherID1='JTE'">Journal of teacher education</xsl:when>
+            <xsl:when test="$codePublisherID1='JTP'">Journal of theoretical politics</xsl:when>
+            <xsl:when test="$codePublisherID1='JTR'">Journal of travel research</xsl:when>
+            <xsl:when test="$codePublisherID1='JUH'">Journal of urban history</xsl:when>
+            <xsl:when test="$codePublisherID1='JVC'">Journal of vibration and control</xsl:when>
+            <xsl:when test="$codePublisherID1='JVM'">Journal of vacation marketing</xsl:when>
+            <xsl:when test="$codePublisherID1='LAL'">Language and literature (Harlow)</xsl:when>
+            <xsl:when test="$codePublisherID1='LAP'">Latin American perspectives</xsl:when>
+            <xsl:when test="$codePublisherID1='LAS'">Language and speech</xsl:when>
+            <xsl:when test="$codePublisherID1='LCH'">Law, culture and the humanities</xsl:when>
+            <xsl:when test="$codePublisherID1='LDQ'">Learning disability quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='LDX'">Journal of learning disabilities</xsl:when>
+            <xsl:when test="$codePublisherID1='LEA'">Leadership (London. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='LEC'">Local economy</xsl:when>
+            <xsl:when test="$codePublisherID1='LIS'">Journal of librarianship and information science</xsl:when>
+            <xsl:when test="$codePublisherID1='LRT'">Lighting research and technology (2001. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='LSJ'">Labor studies journal</xsl:when>
+            <xsl:when test="$codePublisherID1='LTJ'">Language testing</xsl:when>
+            <xsl:when test="$codePublisherID1='LTR'">Language teaching research</xsl:when>
+            <xsl:when test="$codePublisherID1='LUP'">Lupus (Basingstoke)</xsl:when>
+            <xsl:when test="$codePublisherID1='MAR'">Margin - the journal of applied economic research</xsl:when>
+            <xsl:when test="$codePublisherID1='MCQ'">Management communication quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='MCR'">Medical care research and review</xsl:when>
+            <xsl:when test="$codePublisherID1='MCS'">Media, culture &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='MCU'">Journal of material culture</xsl:when>
+            <xsl:when test="$codePublisherID1='MCX'">Modern China</xsl:when>
+            <xsl:when test="$codePublisherID1='MDM'">Medical decision making</xsl:when>
+            <xsl:when test="$codePublisherID1='MEC'">Measurement and evaluation in counseling and development</xsl:when>
+            <xsl:when test="$codePublisherID1='MEJ'">Music educators journal</xsl:when>
+            <xsl:when test="$codePublisherID1='MHJ'">The Medieval History Journal</xsl:when>
+            <xsl:when test="$codePublisherID1='MIE'">Management in education</xsl:when>
+            <xsl:when test="$codePublisherID1='MIL'">Millennium</xsl:when>
+            <xsl:when test="$codePublisherID1='MLI'">Medical law international</xsl:when>
+            <xsl:when test="$codePublisherID1='MLQ'">Management learning</xsl:when>
+            <xsl:when test="$codePublisherID1='MLS'">Management and labour studies</xsl:when>
+            <xsl:when test="$codePublisherID1='MMD'">Music and medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='MMJ'">Journal of medical marketing</xsl:when>
+            <xsl:when test="$codePublisherID1='MMR'">Journal of mixed methods research</xsl:when>
+            <xsl:when test="$codePublisherID1='MMS'">Mathematics and mechanics of solids</xsl:when>
+            <xsl:when test="$codePublisherID1='MSJ'">Multiple sclerosis</xsl:when>
+            <xsl:when test="$codePublisherID1='MSS'">Memory studies</xsl:when>
+            <xsl:when test="$codePublisherID1='MSX'">Musicae scientiae</xsl:when>
+            <xsl:when test="$codePublisherID1='MTQ'">Marketing theory</xsl:when>
+            <xsl:when test="$codePublisherID1='MWC'">Media, war &amp; conflict</xsl:when>
+            <xsl:when test="$codePublisherID1='NAH'">Nutrition and health (Berkhamstead)</xsl:when>
+            <xsl:when test="$codePublisherID1='NCP'">Nutrition in clinical practice</xsl:when>
+            <xsl:when test="$codePublisherID1='NEJ'">Nursing ethics</xsl:when>
+            <xsl:when test="$codePublisherID1='NER'">National Institute economic review</xsl:when>
+            <xsl:when test="$codePublisherID1='NMS'">New media &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='NNR'">Neurorehabilitation and neural repair</xsl:when>
+            <xsl:when test="$codePublisherID1='NRO'">The Neuroscientist (Baltimore, Md.)</xsl:when>
+            <xsl:when test="$codePublisherID1='NSQ'">Nursing science quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='NVS'">Nonprofit and voluntary sector quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='OAE'">Organization &amp; environment</xsl:when>
+            <xsl:when test="$codePublisherID1='OPP'">Journal of oncology pharmacy practice</xsl:when>
+            <xsl:when test="$codePublisherID1='ORG'">Organization (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='ORM'">Organizational research methods</xsl:when>
+            <xsl:when test="$codePublisherID1='OSS'">Organization studies</xsl:when>
+            <xsl:when test="$codePublisherID1='PAA'">Pacifica (Brunswick)</xsl:when>
+            <xsl:when test="$codePublisherID1='PAD'">Proceedings of the Institution of Mechanical Engineers, Automobile Division</xsl:when>
+            <xsl:when test="$codePublisherID1='PAS'">Politics &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='PAU'">Proceedings - Institution of Automobile Engineers; London</xsl:when>
+            <xsl:when test="$codePublisherID1='PBI'">Journal of positive behavior interventions</xsl:when>
+            <xsl:when test="$codePublisherID1='PCP'">Proceedings of the Institution of Mechanical Engineers Conference Proceedings Volumes 178-184</xsl:when>
+            <xsl:when test="$codePublisherID1='PDS'">Psychology and developing societies</xsl:when>
+            <xsl:when test="$codePublisherID1='PED'">Global health promotion</xsl:when>
+            <xsl:when test="$codePublisherID1='PEN'">JPEN. Journal of parenteral and enteral nutrition</xsl:when>
+            <xsl:when test="$codePublisherID1='PFR'">Public finance review</xsl:when>
+            <xsl:when test="$codePublisherID1='PIA'">Progress in development studies</xsl:when>
+            <xsl:when test="$codePublisherID1='PIB'">Proceedings of the Institution of Mechanical Engineers. Part B: Journal of engineering manufacture</xsl:when>
+            <xsl:when test="$codePublisherID1='PIC'">Proceedings of the Institution of Mechanical Engineers. Part C: Journal of mechanical engineering science</xsl:when>
+            <xsl:when test="$codePublisherID1='PID'">Proceedings of the Institution of Mechanical Engineers. Part D: Journal of automobile engineering</xsl:when>
+            <xsl:when test="$codePublisherID1='PIE'">Proceedings of the Institution of Mechanical Engineers. Part E: Journal of process mechanical engineering</xsl:when>
+            <xsl:when test="$codePublisherID1='PIF'">Proceedings of the Institution of Mechanical Engineers. Part F: Journal of rail and rapid transit</xsl:when>
+            <xsl:when test="$codePublisherID1='PIG'">Proceedings of the Institution of Mechanical Engineers. Part G: Journal of aerospace engineering</xsl:when>
+            <xsl:when test="$codePublisherID1='PIH'">Proceedings of the Institution of Mechanical Engineers. Part H: Journal of engineering in medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='PII'">Proceedings of the Institution of Mechanical Engineers. Part I: Journal of systems and control engineering</xsl:when>
+            <xsl:when test="$codePublisherID1='PIJ'">Proceedings of the Institution of Mechanical Engineers. Part J: Journal of engineering tribology</xsl:when>
+            <xsl:when test="$codePublisherID1='PIK'">Proceedings of the Institution of Mechanical Engineers, Part K: Journal of Multi-body Dynamics</xsl:when>
+            <xsl:when test="$codePublisherID1='PIL'">Proceedings of the Institution of Mechanical Engineers, Part L: Journal of Materials: Design and Applications</xsl:when>
+            <xsl:when test="$codePublisherID1='PIM'">Proceedings of the Institution of Mechanical Engineers, Part M: Journal of Engineering for the Maritime Environment</xsl:when>
+            <xsl:when test="$codePublisherID1='PIN'">Proceedings of the Institution of Mechanical Engineers, Part N: Journal of Nanoengineering and Nanosystems</xsl:when>
+            <xsl:when test="$codePublisherID1='PIO'">Proceedings of the Institution of Mechanical Engineers, Part O: Journal of Risk and Reliability</xsl:when>
+            <xsl:when test="$codePublisherID1='PIP'">Proceedings of the Institution of Mechanical Engineers, Part P: Journal of Sports Engineering and Technology</xsl:when>
+            <xsl:when test="$codePublisherID1='PLT'">Planning theory</xsl:when>
+            <xsl:when test="$codePublisherID1='PME'">Proceedings - Institution of Mechanical Engineers</xsl:when>
+            <xsl:when test="$codePublisherID1='PMJ'">Palliative medicine</xsl:when>
+            <xsl:when test="$codePublisherID1='PNZ'">Political science</xsl:when>
+            <xsl:when test="$codePublisherID1='POM'">Psychology of music</xsl:when>
+            <xsl:when test="$codePublisherID1='POS'">Philosophy of the social sciences</xsl:when>
+            <xsl:when test="$codePublisherID1='PPA'">Public policy and administration</xsl:when>
+            <xsl:when test="$codePublisherID1='PPE'">Politics, philosophy &amp; economics</xsl:when>
+            <xsl:when test="$codePublisherID1='PPG'">Progress in physical geography</xsl:when>
+            <xsl:when test="$codePublisherID1='PPN'">Policy, politics &amp; nursing practice</xsl:when>
+            <xsl:when test="$codePublisherID1='PPQ'">Party politics</xsl:when>
+            <xsl:when test="$codePublisherID1='PPS'">Perspectives on psychological science</xsl:when>
+            <xsl:when test="$codePublisherID1='PQX'">Police quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='PRB'">Probation journal</xsl:when>
+            <xsl:when test="$codePublisherID1='PRF'">Perfusion</xsl:when>
+            <xsl:when test="$codePublisherID1='PRQ'">Political research quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='PSC'">Philosophy &amp; social criticism</xsl:when>
+            <xsl:when test="$codePublisherID1='PSP'">Personality &amp; social psychology bulletin</xsl:when>
+            <xsl:when test="$codePublisherID1='PSR'">Personality and social psychology review</xsl:when>
+            <xsl:when test="$codePublisherID1='PSS'">Psychological science</xsl:when>
+            <xsl:when test="$codePublisherID1='PTX'">Political theory</xsl:when>
+            <xsl:when test="$codePublisherID1='PUN'">Punishment &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='PUS'">Public understanding of science</xsl:when>
+            <xsl:when test="$codePublisherID1='PVS'">Perspectives in vascular surgery and endovascular therapy</xsl:when>
+            <xsl:when test="$codePublisherID1='PWM'">Public works management &amp; policy</xsl:when>
+            <xsl:when test="$codePublisherID1='PWQ'">Psychology of Women Quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='QHR'">Qualitative health research</xsl:when>
+            <xsl:when test="$codePublisherID1='QIX'">Qualitative inquiry</xsl:when>
+            <xsl:when test="$codePublisherID1='QRJ'">Qualitative research</xsl:when>
+            <xsl:when test="$codePublisherID1='QSW'">Qualitative social work</xsl:when>
+            <xsl:when test="$codePublisherID1='RAC'">Race &amp; class</xsl:when>
+            <xsl:when test="$codePublisherID1='RAS'">International review of administrative sciences</xsl:when>
+            <xsl:when test="$codePublisherID1='RCB'">Rehabilitation counseling bulletin</xsl:when>
+            <xsl:when test="$codePublisherID1='REA'">Research ethics review</xsl:when>
+            <xsl:when test="$codePublisherID1='REL'">RELC journal</xsl:when>
+            <xsl:when test="$codePublisherID1='RER'">Review of educational research</xsl:when>
+            <xsl:when test="$codePublisherID1='REV'">Review of human factors and ergonomics</xsl:when>
+            <xsl:when test="$codePublisherID1='RMI'">Review of market integration</xsl:when>
+            <xsl:when test="$codePublisherID1='ROA'">Research on aging</xsl:when>
+            <xsl:when test="$codePublisherID1='ROP'">Review of public personnel administration</xsl:when>
+            <xsl:when test="$codePublisherID1='RRE'">Review of research in education</xsl:when>
+            <xsl:when test="$codePublisherID1='RRP'">The Review of radical political economics</xsl:when>
+            <xsl:when test="$codePublisherID1='RSH'">Perspectives in public health</xsl:when>
+            <xsl:when test="$codePublisherID1='RSM'">Research studies in music education</xsl:when>
+            <xsl:when test="$codePublisherID1='RSS'">Rationality and society</xsl:when>
+            <xsl:when test="$codePublisherID1='RSW'">Research on social work practice</xsl:when>
+            <xsl:when test="$codePublisherID1='RSX'">Reproductive sciences (Thousand Oaks, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='SAC'">Space and culture</xsl:when>
+            <xsl:when test="$codePublisherID1='SAD'">Journal of South Asian Development</xsl:when>
+            <xsl:when test="$codePublisherID1='SAE'">South Asia Economic Journal</xsl:when>
+            <xsl:when test="$codePublisherID1='SAG'">Simulation &amp; gaming</xsl:when>
+            <xsl:when test="$codePublisherID1='SAR'">South Asia research</xsl:when>
+            <xsl:when test="$codePublisherID1='SAS'">South Asia survey</xsl:when>
+            <xsl:when test="$codePublisherID1='SAX'">Sexual abuse</xsl:when>
+            <xsl:when test="$codePublisherID1='SCE'">Studies in Christian ethics</xsl:when>
+            <xsl:when test="$codePublisherID1='SCH'">Social change (New Delhi)</xsl:when>
+            <xsl:when test="$codePublisherID1='SCP'">Social Compass</xsl:when>
+            <xsl:when test="$codePublisherID1='SCV'">Seminars in cardiothoracic and vascular anesthesia</xsl:when>
+            <xsl:when test="$codePublisherID1='SCX'">Science communication</xsl:when>
+            <xsl:when test="$codePublisherID1='SDI'">Security dialogue</xsl:when>
+            <xsl:when test="$codePublisherID1='SDJ'">Progress in human geography</xsl:when>
+            <xsl:when test="$codePublisherID1='SED'">The Journal of special education</xsl:when>
+            <xsl:when test="$codePublisherID1='SEX'">Sexualities (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='SGR'">International journal of small group research</xsl:when>
+            <xsl:when test="$codePublisherID1='SHM'">Structural health monitoring</xsl:when>
+            <xsl:when test="$codePublisherID1='SIH'">Studies in History</xsl:when>
+            <xsl:when test="$codePublisherID1='SIM'">Transactions of the Society for Computer Simulation</xsl:when>
+            <xsl:when test="$codePublisherID1='SIR'">Studies in religion</xsl:when>
+            <xsl:when test="$codePublisherID1='SJP'">Scandinavian journal of public health</xsl:when>
+            <xsl:when test="$codePublisherID1='SLG'">State &amp; local government review</xsl:when>
+            <xsl:when test="$codePublisherID1='SLR'">Second language research</xsl:when>
+            <xsl:when test="$codePublisherID1='SLS'">Social &amp; legal studies</xsl:when>
+            <xsl:when test="$codePublisherID1='SMJ'">Statistical modelling</xsl:when>
+            <xsl:when test="$codePublisherID1='SMM'">Statistical methods in medical research</xsl:when>
+            <xsl:when test="$codePublisherID1='SMQ'">Social marketing quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='SMR'">Sociological methods &amp; research</xsl:when>
+            <xsl:when test="$codePublisherID1='SMX'">Sociological methodology</xsl:when>
+            <xsl:when test="$codePublisherID1='SOC'">Sociology (Oxford. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='SOE'">Sociology of education</xsl:when>
+            <xsl:when test="$codePublisherID1='SOQ'">Strategic organization</xsl:when>
+            <xsl:when test="$codePublisherID1='SPA'">State politics &amp; policy quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='SPH'">Sports health (Thousand Oaks, CA)</xsl:when>
+            <xsl:when test="$codePublisherID1='SPI'">School psychology international</xsl:when>
+            <xsl:when test="$codePublisherID1='SPQ'">Social psychology quarterly</xsl:when>
+            <xsl:when test="$codePublisherID1='SPR'">Journal of social and personal relationships</xsl:when>
+            <xsl:when test="$codePublisherID1='SRI'">Surgical innovation</xsl:when>
+            <xsl:when test="$codePublisherID1='SSC'">Social science computer review</xsl:when>
+            <xsl:when test="$codePublisherID1='SSI'">Information sur les sciences sociales (Paris)</xsl:when>
+            <xsl:when test="$codePublisherID1='SSS'">Social studies of science</xsl:when>
+            <xsl:when test="$codePublisherID1='STH'">Science, technology, &amp; human values</xsl:when>
+            <xsl:when test="$codePublisherID1='STS'">Science, Technology and Society</xsl:when>
+            <xsl:when test="$codePublisherID1='STX'">Sociological theory</xsl:when>
+            <xsl:when test="$codePublisherID1='TAB'">Therapeutic advances in musculoskeletal disease</xsl:when>
+            <xsl:when test="$codePublisherID1='TAG'">Therapeutic advances in gastroenterology</xsl:when>
+            <xsl:when test="$codePublisherID1='TAK'">Therapeutic advances in cardiovascular disease</xsl:when>
+            <xsl:when test="$codePublisherID1='TAM'">Therapeutic advances in medical oncology</xsl:when>
+            <xsl:when test="$codePublisherID1='TAN'">Therapeutic advances in neurological disorders</xsl:when>
+            <xsl:when test="$codePublisherID1='TAP'">Theory &amp; psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='TAR'">Therapeutic advances in respiratory disease</xsl:when>
+            <xsl:when test="$codePublisherID1='TAS'">Time &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='TAU'">Therapeutic advances in urology</xsl:when>
+            <xsl:when test="$codePublisherID1='TCN'">Journal of transcultural nursing</xsl:when>
+            <xsl:when test="$codePublisherID1='TCP'">The Counseling psychologist</xsl:when>
+            <xsl:when test="$codePublisherID1='TCR'">Theoretical criminology</xsl:when>
+            <xsl:when test="$codePublisherID1='TCS'">Theory, culture &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='TDE'">The Diabetes educator</xsl:when>
+            <xsl:when test="$codePublisherID1='TEC'">Topics in early childhood special education</xsl:when>
+            <xsl:when test="$codePublisherID1='TES'">Teacher education and special education</xsl:when>
+            <xsl:when test="$codePublisherID1='TFJ'">The Family journal (Alexandria, Va.)</xsl:when>
+            <xsl:when test="$codePublisherID1='THE'">Thesis eleven</xsl:when>
+            <xsl:when test="$codePublisherID1='THR'">Tourism and hospitality research</xsl:when>
+            <xsl:when test="$codePublisherID1='TIA'">Trends in amplification</xsl:when>
+            <xsl:when test="$codePublisherID1='TIH'">Toxicology and industrial health</xsl:when>
+            <xsl:when test="$codePublisherID1='TIM'">Transactions of the Institute of Measurement and Control</xsl:when>
+            <xsl:when test="$codePublisherID1='TJX'">Theology (Norwich)</xsl:when>
+            <xsl:when test="$codePublisherID1='TMT'">Traumatology (Tallahassee, Fla. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='TOP'">Teaching of psychology</xsl:when>
+            <xsl:when test="$codePublisherID1='TOU'">Tourist studies</xsl:when>
+            <xsl:when test="$codePublisherID1='TPA'">Teaching public administration</xsl:when>
+            <xsl:when test="$codePublisherID1='TPJ'">The Prison journal (Philadelphia, Pa.)</xsl:when>
+            <xsl:when test="$codePublisherID1='TPS'">Transcultural psychiatry</xsl:when>
+            <xsl:when test="$codePublisherID1='TRA'">Trauma (London)</xsl:when>
+            <xsl:when test="$codePublisherID1='TRE'">Theory and research in education</xsl:when>
+            <xsl:when test="$codePublisherID1='TRJ'">Textile research journal</xsl:when>
+            <xsl:when test="$codePublisherID1='TRN'">Transformation (Exeter)</xsl:when>
+            <xsl:when test="$codePublisherID1='TRS'">Transfer (Brussels)</xsl:when>
+            <xsl:when test="$codePublisherID1='TSO'">Teaching sociology</xsl:when>
+            <xsl:when test="$codePublisherID1='TTJ'">Theology today (Princeton, N.J.)</xsl:when>
+            <xsl:when test="$codePublisherID1='TVA'">Trauma, violence &amp; abuse</xsl:when>
+            <xsl:when test="$codePublisherID1='TVN'">Television &amp; new media</xsl:when>
+            <xsl:when test="$codePublisherID1='UAR'">Urban affairs review (Thousand Oaks, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='UEX'">Urban education (Beverly Hills, Calif.)</xsl:when>
+            <xsl:when test="$codePublisherID1='UIX'">Ultrasonic imaging</xsl:when>
+            <xsl:when test="$codePublisherID1='UPD'">Update: Applications of Research in Music Education</xsl:when>
+            <xsl:when test="$codePublisherID1='USJ'">Urban studies (Harlow. Print)</xsl:when>
+            <xsl:when test="$codePublisherID1='VAW'">Violence against women</xsl:when>
+            <xsl:when test="$codePublisherID1='VCJ'">Visual communication</xsl:when>
+            <xsl:when test="$codePublisherID1='VCU'">Journal of visual culture</xsl:when>
+            <xsl:when test="$codePublisherID1='VES'">Vascular and endovascular surgery</xsl:when>
+            <xsl:when test="$codePublisherID1='VIS'">Vision (New Delhi)</xsl:when>
+            <xsl:when test="$codePublisherID1='WCX'">Written communication</xsl:when>
+            <xsl:when test="$codePublisherID1='WES'">Work, employment and society</xsl:when>
+            <xsl:when test="$codePublisherID1='WIH'">War in history</xsl:when>
+            <xsl:when test="$codePublisherID1='WJN'">Western journal of nursing research</xsl:when>
+            <xsl:when test="$codePublisherID1='WOM'">Word of mouth (San Antonio, Tex.)</xsl:when>
+            <xsl:when test="$codePublisherID1='WOX'">Work and occupations</xsl:when>
+            <xsl:when test="$codePublisherID1='WPJ'">World policy journal</xsl:when>
+            <xsl:when test="$codePublisherID1='YAS'">Youth &amp; society</xsl:when>
+            <xsl:when test="$codePublisherID1='YEC'">Young exceptional children</xsl:when>
+            <xsl:when test="$codePublisherID1='YJJ'">Youth justice</xsl:when>
+            <xsl:when test="$codePublisherID1='YOU'">Young (Stockholm. 1993)</xsl:when>
+            <xsl:when test="$codePublisherID1='YVJ'">Youth violence and juvenile justice</xsl:when>
             <xsl:when test="//journal-id[@journal-id-type='isbn']='978-0-85404-169-5'"><title>Nanotechnologies in Food</title></xsl:when>
             <xsl:when test="//journal-id[@journal-id-type='isbn']='978-1-84755-916-6'"><title>Handbook of Culture Media for Food and Water Microbiology (3rd Edition)</title></xsl:when>
         </xsl:choose>

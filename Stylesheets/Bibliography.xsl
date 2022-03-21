@@ -981,7 +981,7 @@
         </editor>
     </xsl:template>
     <xsl:template match="role">
-        <xsl:if test="ancestor::contrib">
+        <xsl:if test="ancestor::contrib | parent::editor| parent::author">
             <roleName>
                 <xsl:apply-templates/>
             </roleName>
