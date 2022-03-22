@@ -2896,9 +2896,9 @@
                     <xsl:if test="not(break)">
                         <affiliation>
                             <xsl:choose>
-                                <xsl:when test="institution | addr-line">
-                                    <xsl:if test="institution">
-                                        <xsl:for-each select="institution">
+                                <xsl:when test="institution | addr-line |institution-wrap/institution">
+                                    <xsl:if test="institution|institution-wrap/institution">
+                                        <xsl:for-each select="institution|institution-wrap/institution">
                                             <orgName type="institution">
                                                 <xsl:value-of select="."/>
                                             </orgName>
@@ -3845,7 +3845,9 @@
             </xsl:when>
             <xsl:when test="ancestor::book-part-meta">
             <title level="a" type="main">
-                <xsl:apply-templates select="parent::title-group/label" mode="brill-ebooks"/>
+                <xsl:if test="/book/book-meta/publisher/publisher-name = 'Brill'">
+                    <xsl:apply-templates select="parent::title-group/label" mode="brill-ebooks"/>
+                </xsl:if>
                 <xsl:apply-templates/>
             </title>
             </xsl:when>

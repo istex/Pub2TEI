@@ -91,59 +91,6 @@
                 or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_046'">
                 <xsl:text>en</xsl:text>
             </xsl:when>
-            <xsl:when test="//isbn[@publication-format='online']='9789004294967'
-                or //isbn[@publication-format='online']='9789004295261'
-                or //isbn[@publication-format='online']='9789004295476'
-                or //isbn[@publication-format='online']='9789004295568'
-                or //isbn[@publication-format='online']='9789004295643'
-                or //isbn[@publication-format='online']='9789004295667'
-                or //isbn[@publication-format='online']='9789004296497'
-                or //isbn[@publication-format='online']='9789004296565'
-                or //isbn[@publication-format='online']='9789004296541'
-                or //isbn[@publication-format='online']='9789004296640'
-                or //isbn[@publication-format='online']='9789004295780'
-                or //isbn[@publication-format='online']='9789004295797'
-                or //isbn[@publication-format='online']='9789004296107'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_004'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_005'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_006'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_007'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_008'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_009'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_010'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_011'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_012'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_013'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_014'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_015'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_016'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_017'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_018'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_019'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_020'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_022'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_023'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_024'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_025'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_027'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_029'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_032'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_038'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_039'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_040'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_045'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_052'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_053'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_054'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_055'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_056'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_058'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_061'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_062'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_022'
-                or //isbn[@publication-format='online']='9789004295704'">
-                <xsl:text>it</xsl:text>
-            </xsl:when>
             <xsl:when test="//isbn[@publication-format='online']='9789004296138'
                 or //isbn[@publication-format='online']='9789004296145'
                 or //isbn[@publication-format='online']='9789004296152'
@@ -307,6 +254,59 @@
                 or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_045'">
                 <xsl:text>de</xsl:text>
             </xsl:when>
+            <xsl:when test="//isbn[@publication-format='online']='9789004294967'
+                or //isbn[@publication-format='online']='9789004295261'
+                or //isbn[@publication-format='online']='9789004295476'
+                or //isbn[@publication-format='online']='9789004295568'
+                or //isbn[@publication-format='online']='9789004295643'
+                or //isbn[@publication-format='online']='9789004295667'
+                or //isbn[@publication-format='online']='9789004296497'
+                or //isbn[@publication-format='online']='9789004296565'
+                or //isbn[@publication-format='online']='9789004296541'
+                or //isbn[@publication-format='online']='9789004296640'
+                or //isbn[@publication-format='online']='9789004295780'
+                or //isbn[@publication-format='online']='9789004295797'
+                or //isbn[@publication-format='online']='9789004296107'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_004'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_005'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_006'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_007'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_008'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_009'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_010'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_011'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_012'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_013'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_014'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_015'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_016'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_017'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_018'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_019'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_020'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_022'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_023'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_024'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_025'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_027'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_029'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_032'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_038'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_039'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_040'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_045'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_052'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_053'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_054'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_055'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_056'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_058'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_061'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_062'
+                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_022'
+                or //isbn[@publication-format='online']='9789004295704'">
+                <xsl:text>it</xsl:text>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:text>en</xsl:text>
             </xsl:otherwise>
@@ -360,7 +360,7 @@
                                     </xsl:when>
                                     <!-- brill-ebooks -->
                                     <xsl:when test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                        <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/title-group/title"/>
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
                                     </xsl:when>
                                     <xsl:when test="//body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="//body/book-part/book-part-meta/title-group/title"/>
@@ -499,75 +499,73 @@
                                             <xsl:value-of select="$codeGenreBrepols"/>
                                         </xsl:when>
                                         <!-- Brill-ebooks -->
-                                        <xsl:when test="contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Preliminary')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDEX')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ABRÉVIATIONS')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'AUTEURS MODERNES')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Abbreviations')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ANNEXE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'BIBLIOGRAPHIE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'BIBLIOGRAPHY')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'BIBLIOGRAFIA')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Bibliography')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Bibliographie')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Commentary')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'COMMENTARY')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Bibliography')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDA')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ADDENDUM')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Errata')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ACKNOWLEDGEMENTS')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ABBILDUNGEN')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Abbildungen')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'REGISTER')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'NACHTRÄGE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'ÉTUDES PRÉLIMINAIRES')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'RELIGIONS IN THE GRAECO')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CORRIGENDA')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CONCORDANCE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INTRODUZIONE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Introduzione')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Introduction')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INTRODUCTION')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'LITERATURVERZEICHNIS')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PLANCHES')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Planches')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Carte')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'CARTE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PREFACE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Preface')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PREFAZIONE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Prefazione')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Figures')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'FIGURES')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'GLOSSARY')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Glossary')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'LIST')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'MAPS')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Maps')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'NOTE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Plates')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PLATE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PHOTONACHWEIS')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Photonachweis')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'PUTE I')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDICE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Index')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INDEX')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Inscription')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'INSCRIPTION')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TAFEL')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Tafel')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TAVOL')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TAV.')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Tav.')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TABLE')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'Table')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TABEL')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'TEXTSTELLEN')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'STUDIES')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'SVPPLEMENTVM')
-                                            or contains(//book-part[@book-part-type='chapter']/book-part-meta/title-group/title,'REFERENCES')
+                                        <xsl:when test="contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'Chapter')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'CHAPTER')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'MITRAIC')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'DIVINITÉS')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'IDÉE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'SYMBOLS')">
+                                            <xsl:attribute name="source">chapter</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
+                                            <xsl:text>chapter</xsl:text>
+                                        </xsl:when>
+                                        <xsl:when test="contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Preliminary')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'INDEX')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ABRÉVIATIONS')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'AUTEURS MODERNES')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Abbreviations')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ANNEXE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'BIBLIO')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Biblio')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Commentary')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'COMMENTARY')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ADDEND')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Errata')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ACKNOWLEDGEMENTS')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ABBILDUNGEN')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Abbildungen')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'REGISTER')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'NACHTRÄGE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ÉTUDES PRÉLIMINAIRES')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'RELIGIONS IN THE GRAECO')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'CORRIGENDA')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'CONCORDANCE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'LITERATURVERZEICHNIS')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PLANCHES')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Planches')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Carte')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'CARTE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PREFACE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Preface')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PREFAZIONE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Prefazione')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Figures')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'FIGURES')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'GLOSSA')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Glossa')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'LIST')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'MAPS')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Maps')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'NOTE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Plates')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PLATE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PHOTONACHWEIS')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Photonachweis')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PUTE I')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'INDICE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Index')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'INDEX')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TAFEL')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Tafel')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TAVOL')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TAV.')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Tav.')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TABLE')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Table')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TABEL')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TEXTSTELLEN')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'SVPPLEMENTVM')
+                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'REFERENCES')
                                             ">
                                             <xsl:attribute name="source">other</xsl:attribute>
                                             <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
@@ -669,10 +667,10 @@
                                         </textClass>
                                     </xsl:if>
                                     <!-- brill-ebooks -->
-                                    <xsl:if test="//book-part[@book-part-type='chapter']/book-part-meta/kwd-group">
+                                    <xsl:if test="//book-part[not(body/book-part)]/book-part-meta/kwd-group">
                                         <textClass ana="keyword">
                                             <keywords>
-                                                <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/kwd-group/kwd"/>
+                                                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/kwd-group/kwd"/>
                                             </keywords>
                                         </textClass>
                                     </xsl:if>
@@ -887,8 +885,8 @@
                         <body>
                             <xsl:choose>
                                 <!-- brill-ebooks -->
-                                <xsl:when test="//book-part[@book-part-type='chapter']/body">
-                                    <xsl:apply-templates select="//book-part[@book-part-type='chapter']/body"/>
+                                <xsl:when test="//book-part[not(body/book-part)]/body">
+                                    <xsl:apply-templates select="//book-part[not(body/book-part)]/body"/>
                                 </xsl:when>
                                 <!-- sauf degruyter ebooks -->
                                 <xsl:when test="//book/body/book-part/body and not(contains(/book/book-meta/book-id[@pub-id-type='doi'],'10.1515/'))">
@@ -950,9 +948,9 @@
                         <xsl:value-of select="$arkistex"/>
                     </idno>
                 </xsl:if>
-                <xsl:if test="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'] | //book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi']">
+                <xsl:if test="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'] | //book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi']">
                     <idno type="DOI">
-                        <xsl:value-of select="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'] | //book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi']"/>
+                        <xsl:value-of select="//body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'] | //book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi']"/>
                     </idno>
                 </xsl:if>
                 <xsl:if test="//book-part-meta/alternate-form">
@@ -1103,8 +1101,8 @@
                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//book-part[@book-part-type='chapter']/book-part-meta/title-group/title[string-length()&gt; 0]">
-                        <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/title-group/title"/>
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
+                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
                     </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
@@ -1117,8 +1115,8 @@
                 
                 <!-- All authors are included here -->
                 <xsl:choose>
-                    <xsl:when test="//book-part[@book-part-type='chapter']/book-part-meta/contrib-group/contrib[@contrib-type='author'][string-length()&gt; 0]">
-                        <xsl:apply-templates select="//book-part[@book-part-type='chapter']/book-part-meta/contrib-group/contrib[@contrib-type='author']"/>
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[@contrib-type='author'][string-length()&gt; 0]">
+                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[@contrib-type='author']"/>
                     </xsl:when>
                     <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='editor']">
                         <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor']" mode="analytic"/>
@@ -1159,9 +1157,9 @@
                     </idno>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="//book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi']">
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi']">
                         <idno type="DOI">
-                            <xsl:value-of select="normalize-space(//book-part[@book-part-type='chapter']/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
+                            <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
                         </idno>
                     </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi']">
@@ -1354,12 +1352,12 @@
                         </xsl:when>
                     </xsl:choose>
                     <!-- ******************* pagination ******************************-->
-                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[@book-part-type='chapter']/book-part-meta/fpage[string-length() &gt; 0]">
-                        <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[@book-part-type='chapter']/book-part-meta/fpage}">
-                            <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[@book-part-type='chapter']/book-part-meta/fpage"/>
+                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[not(body/book-part)]/book-part-meta/fpage[string-length() &gt; 0]">
+                        <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage}">
+                            <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage"/>
                         </biblScope>
-                        <biblScope unit="page" to="{//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[@book-part-type='chapter']/book-part-meta/lpage}">
-                            <xsl:value-of select="//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[@book-part-type='chapter']/book-part-meta/lpage"/>
+                        <biblScope unit="page" to="{//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[not(body/book-part)]/book-part-meta/lpage}">
+                            <xsl:value-of select="//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[not(body/book-part)]/book-part-meta/lpage"/>
                         </biblScope>
                     </xsl:if>
                     <xsl:apply-templates select="book-meta/counts/book-page-count"/>
