@@ -79,239 +79,253 @@
         </xsl:choose>
     </xsl:variable>
     
+    <xsl:variable name="codeLangEN">
+        10.1163/9789004295704_046;
+        10.1163/9789004295704_012;
+        10.1163/9789004295704_015;
+        10.1163/9789004295704_026;
+        10.1163/9789004295704_029;
+        10.1163/9789004295704_036;
+        10.1163/9789004295704_044;
+        10.1163/9789004295704_046;
+    </xsl:variable>
+    <xsl:variable name="codeLangFR">
+        9789004296138;
+        9789004296145;
+        9789004296152;
+        9789004294769;
+        9789004294790;
+        9789004296213;
+        9789004294806;
+        9789004294813;
+        9789004294820;
+        9789004296237;
+        9789004296244;
+        9789004294899;
+        9789004294912;
+        9789004294929;
+        9789004294950;
+        9789004296275;
+        9789004296329;
+        9789004296282;
+        9789004296305;
+        9789004294981;
+        9789004295032;
+        9789004295124;
+        9789004295131;
+        9789004295148;
+        9789004295186;
+        9789004295247;
+        9789004295278;
+        9789004295285;
+        9789004301672;
+        9789004295308;
+        9789004295315;
+        9789004295322;
+        9789004296404;
+        9789004295339;
+        9789004295421;
+        9789004295438;
+        9789004295452;
+        9789004295469;
+        9789004295483;
+        9789004295490;
+        9789004295551;
+        9789004295544;
+        9789004295636;
+        9789004295650;
+        9789004296459;
+        9789004296466;
+        9789004295728;
+        9789004296480;
+        9789004301412;
+        9789004295933;
+        9789004301504;
+        9789004295988;
+        9789047412328;
+        9789047415855;
+        9789047408277;
+        9789047410331;
+        9789004210912;
+        9789004263246;
+        10.1163/ej.9789004188822.i-364.63;
+        10.1163/ej.9789004188822.i-364.9;
+        10.1163/ej.9789004188822.i-364.13;
+        10.1163/ej.9789004188822.i-364.39;
+        10.1163/ej.9789004188822.i-364.52;
+        10.1163/ej.9789004188822.i-364.53;
+        10.1163/ej.9789004188822.i-364.57;
+        10.1163/ej.9789004188822.i-364.69;
+        10.1163/9789004295605_026;
+        10.1163/9789004295605_043;
+        10.1163/9789004295605_047;
+        10.1163/9789004295605_051;
+        10.1163/9789004295698_010;
+        10.1163/9789004295698_014;
+        10.1163/9789004295698_015;
+        10.1163/9789004295698_017;
+        10.1163/9789004295698_024;
+        10.1163/9789004295698_025;
+        10.1163/9789004256903_003;
+        10.1163/9789004256903_004;
+        10.1163/9789004256903_007;
+        10.1163/9789004256903_008;
+        10.1163/9789004256903_010;
+        10.1163/9789004256903_014;
+        10.1163/9789004256903_015;
+        10.1163/9789004278271_005;
+        10.1163/9789004278271_006;
+        10.1163/9789004278271_007;
+        10.1163/9789004278271_008;
+        10.1163/9789004278271_009;
+        10.1163/9789004278271_010;
+        10.1163/9789004278271_012;
+        10.1163/9789004278271_013;
+        10.1163/9789004278271_014;
+        10.1163/9789004299047_003;
+        10.1163/9789004299047_004;
+        10.1163/9789004299047_012;
+        10.1163/9789004381346_004;
+        10.1163/9789004381346_007;
+        10.1163/9789004381346_011;
+        10.1163/9789004381346_012;
+        10.1163/9789004381346_013;
+        10.1163/9789004381346_015;
+        10.1163/9789004381346_016;
+        10.1163/9789004381346_018;
+        10.1163/9789004381346_020;
+        10.1163/9789004381346_022;
+        10.1163/9789004381346_024;
+        10.1163/9789004381346_025;
+        10.1163/9789004381346_028;
+        10.1163/9789004381346_029;
+        10.1163/9789004381346_030;
+        10.1163/9789004295704_017;
+        10.1163/9789004295704_003;
+        10.1163/9789004295704_013;
+        10.1163/9789004295704_014;
+        10.1163/9789004295704_016;
+        10.1163/9789004295704_017;
+        10.1163/9789004295704_018;
+        10.1163/9789004295704_019;
+        10.1163/9789004295704_020;
+        10.1163/9789004295704_023;
+        10.1163/9789004295704_025;
+        10.1163/9789004295704_027;
+        10.1163/9789004295704_039;
+        10.1163/9789004295704_040;
+        10.1163/9789004295704_041;
+        10.1163/9789004295704_042;
+        10.1163/9789004295704_043;
+    </xsl:variable>
+    <xsl:variable name="codeLangDE">
+        9789004296077;
+        9789004296091;
+        9789004294738;
+        9789004294776;
+        9789004294974;
+        9789004294998;
+        9789004295001;
+        9789004301344;
+        9789004295087;
+        9789004295292;
+        9789004301689;
+        9789004295377;
+        9789004295407;
+        9789004295506;
+        9789004295513;
+        9789004295537;
+        9789004296435;
+        9789004296442;
+        9789004295711;
+        9789004301375;
+        9789004295742;
+        9789004295858;
+        9789004295896;
+        10.1163/ej.9789004188822.i-364.56;
+        10.1163/9789004295575_005;
+        10.1163/9789004295575_008;
+        10.1163/9789004295605_044;
+        10.1163/9789004295605_049;
+        10.1163/9789004295605_050;
+        10.1163/9789004295698_006;
+        10.1163/9789004295698_008;
+        10.1163/9789004295704_045;
+    </xsl:variable>
+    <xsl:variable name="codeLangIT">
+        9789004294967;
+        9789004295261;
+        9789004295476;
+        9789004295568;
+        9789004295643;
+        9789004295667;
+        9789004296497;
+        9789004296565;
+        9789004296541;
+        9789004296640;
+        9789004295780;
+        9789004295797;
+        9789004296107;
+        10.1163/9789004295605_004;
+        10.1163/9789004295605_005;
+        10.1163/9789004295605_006;
+        10.1163/9789004295605_007;
+        10.1163/9789004295605_008;
+        10.1163/9789004295605_009;
+        10.1163/9789004295605_010;
+        10.1163/9789004295605_011;
+        10.1163/9789004295605_012;
+        10.1163/9789004295605_013;
+        10.1163/9789004295605_014;
+        10.1163/9789004295605_015;
+        10.1163/9789004295605_016;
+        10.1163/9789004295605_017;
+        10.1163/9789004295605_018;
+        10.1163/9789004295605_019;
+        10.1163/9789004295605_020;
+        10.1163/9789004295605_022;
+        10.1163/9789004295605_023;
+        10.1163/9789004295605_024;
+        10.1163/9789004295605_025;
+        10.1163/9789004295605_027;
+        10.1163/9789004295605_029;
+        10.1163/9789004295605_032;
+        10.1163/9789004295605_038;
+        10.1163/9789004295605_039;
+        10.1163/9789004295605_040;
+        10.1163/9789004295605_045;
+        10.1163/9789004295605_052;
+        10.1163/9789004295605_053;
+        10.1163/9789004295605_054;
+        10.1163/9789004295605_055;
+        10.1163/9789004295605_056;
+        10.1163/9789004295605_058;
+        10.1163/9789004295605_061;
+        10.1163/9789004295605_062;
+        10.1163/9789004295698_022;
+        9789004295704;
+    </xsl:variable>
+    <xsl:variable name="DOI">
+        <xsl:value-of select="//book-part-id[@book-part-id-type='doi']"/>
+    </xsl:variable>
+    <xsl:variable name="isbn">
+        <xsl:value-of select="//isbn[@publication-format='online']"/>
+    </xsl:variable>
     <xsl:variable name="langBrill">
         <xsl:choose>
-            <xsl:when test="//book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_046'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_012'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_015'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_026'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_029'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_036'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_044'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_046'">
-                <xsl:text>en</xsl:text>
-            </xsl:when>
-            <xsl:when test="//isbn[@publication-format='online']='9789004296138'
-                or //isbn[@publication-format='online']='9789004296145'
-                or //isbn[@publication-format='online']='9789004296152'
-                or //isbn[@publication-format='online']='9789004294769'
-                or //isbn[@publication-format='online']='9789004294790'
-                or //isbn[@publication-format='online']='9789004296213'
-                or //isbn[@publication-format='online']='9789004294806'
-                or //isbn[@publication-format='online']='9789004294813'
-                or //isbn[@publication-format='online']='9789004294820'
-                or //isbn[@publication-format='online']='9789004296237'
-                or //isbn[@publication-format='online']='9789004296244'
-                or //isbn[@publication-format='online']='9789004294899'
-                or //isbn[@publication-format='online']='9789004294912'
-                or //isbn[@publication-format='online']='9789004294929'
-                or //isbn[@publication-format='online']='9789004294950'
-                or //isbn[@publication-format='online']='9789004296275'
-                or //isbn[@publication-format='online']='9789004296329'
-                or //isbn[@publication-format='online']='9789004296282'
-                or //isbn[@publication-format='online']='9789004296305'
-                or //isbn[@publication-format='online']='9789004294981'
-                or //isbn[@publication-format='online']='9789004295032'
-                or //isbn[@publication-format='online']='9789004295124'
-                or //isbn[@publication-format='online']='9789004295131'
-                or //isbn[@publication-format='online']='9789004295148'
-                or //isbn[@publication-format='online']='9789004295186'
-                or //isbn[@publication-format='online']='9789004295247'
-                or //isbn[@publication-format='online']='9789004295278'
-                or //isbn[@publication-format='online']='9789004295285'
-                or //isbn[@publication-format='online']='9789004301672'
-                or //isbn[@publication-format='online']='9789004295308'
-                or //isbn[@publication-format='online']='9789004295315'
-                or //isbn[@publication-format='online']='9789004295322'
-                or //isbn[@publication-format='online']='9789004296404'
-                or //isbn[@publication-format='online']='9789004295339'
-                or //isbn[@publication-format='online']='9789004295421'
-                or //isbn[@publication-format='online']='9789004295438'
-                or //isbn[@publication-format='online']='9789004295452'
-                or //isbn[@publication-format='online']='9789004295469'
-                or //isbn[@publication-format='online']='9789004295483'
-                or //isbn[@publication-format='online']='9789004295490'
-                or //isbn[@publication-format='online']='9789004295551'
-                or //isbn[@publication-format='online']='9789004295544'
-                or //isbn[@publication-format='online']='9789004295636'
-                or //isbn[@publication-format='online']='9789004295650'
-                or //isbn[@publication-format='online']='9789004296459'
-                or //isbn[@publication-format='online']='9789004296466'
-                or //isbn[@publication-format='online']='9789004295728'
-                or //isbn[@publication-format='online']='9789004296480'
-                or //isbn[@publication-format='online']='9789004301412'
-                or //isbn[@publication-format='online']='9789004295933'
-                or //isbn[@publication-format='online']='9789004301504'
-                or //isbn[@publication-format='online']='9789004295988'
-                or //isbn[@publication-format='online']='9789047412328'
-                or //isbn[@publication-format='online']='9789047415855'
-                or //isbn[@publication-format='online']='9789047408277'
-                or //isbn[@publication-format='online']='9789047410331'
-                or //isbn[@publication-format='online']='9789004210912'
-                or //isbn[@publication-format='online']='9789004263246'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.63'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.9'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.13'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.39'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.52'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.53'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.57'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.69'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_026'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_043'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_047'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_051'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_010'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_014'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_015'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_017'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_024'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_025'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_003'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_004'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_007'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_008'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_010'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_014'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004256903_015'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_005'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_006'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_007'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_008'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_009'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_010'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_012'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_013'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004278271_014'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004299047_003'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004299047_004'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004299047_012'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_004'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_007'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_011'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_012'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_013'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_015'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_016'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_018'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_020'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_022'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_024'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_025'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_028'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_029'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004381346_030'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_017'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_003'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_013'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_014'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_016'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_017'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_018'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_019'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_020'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_023'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_025'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_027'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_039'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_040'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_041'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_042'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_043'">
-                <xsl:text>fr</xsl:text>
-            </xsl:when>
-            <xsl:when test="//isbn[@publication-format='online']='9789004296077'
-                or //isbn[@publication-format='online']='9789004296091'
-                or //isbn[@publication-format='online']='9789004294738'
-                or //isbn[@publication-format='online']='9789004294776'
-                or //isbn[@publication-format='online']='9789004294974'
-                or //isbn[@publication-format='online']='9789004294998'
-                or //isbn[@publication-format='online']='9789004295001'
-                or //isbn[@publication-format='online']='9789004301344'
-                or //isbn[@publication-format='online']='9789004295087'
-                or //isbn[@publication-format='online']='9789004295292'
-                or //isbn[@publication-format='online']='9789004301689'
-                or //isbn[@publication-format='online']='9789004295377'
-                or //isbn[@publication-format='online']='9789004295407'
-                or //isbn[@publication-format='online']='9789004295506'
-                or //isbn[@publication-format='online']='9789004295513'
-                or //isbn[@publication-format='online']='9789004295537'
-                or //isbn[@publication-format='online']='9789004296435'
-                or //isbn[@publication-format='online']='9789004296442'
-                or //isbn[@publication-format='online']='9789004295711'
-                or //isbn[@publication-format='online']='9789004301375'
-                or //isbn[@publication-format='online']='9789004295742'
-                or //isbn[@publication-format='online']='9789004295858'
-                or //isbn[@publication-format='online']='9789004295896'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/ej.9789004188822.i-364.56'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295575_005'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295575_008'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_044'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_049'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_050'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_006'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_008'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295704_045'">
-                <xsl:text>de</xsl:text>
-            </xsl:when>
-            <xsl:when test="//isbn[@publication-format='online']='9789004294967'
-                or //isbn[@publication-format='online']='9789004295261'
-                or //isbn[@publication-format='online']='9789004295476'
-                or //isbn[@publication-format='online']='9789004295568'
-                or //isbn[@publication-format='online']='9789004295643'
-                or //isbn[@publication-format='online']='9789004295667'
-                or //isbn[@publication-format='online']='9789004296497'
-                or //isbn[@publication-format='online']='9789004296565'
-                or //isbn[@publication-format='online']='9789004296541'
-                or //isbn[@publication-format='online']='9789004296640'
-                or //isbn[@publication-format='online']='9789004295780'
-                or //isbn[@publication-format='online']='9789004295797'
-                or //isbn[@publication-format='online']='9789004296107'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_004'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_005'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_006'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_007'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_008'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_009'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_010'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_011'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_012'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_013'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_014'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_015'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_016'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_017'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_018'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_019'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_020'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_022'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_023'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_024'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_025'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_027'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_029'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_032'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_038'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_039'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_040'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_045'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_052'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_053'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_054'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_055'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_056'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_058'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_061'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295605_062'
-                or //book-part-id[@book-part-id-type='doi']='10.1163/9789004295698_022'
-                or //isbn[@publication-format='online']='9789004295704'">
-                <xsl:text>it</xsl:text>
-            </xsl:when>
+            <xsl:when test="contains($codeLangEN,$DOI)">en</xsl:when>
+            <xsl:when test="contains($codeLangFR,$DOI)">fr</xsl:when>
+            <xsl:when test="contains($codeLangDE,$DOI)">de</xsl:when>
+            <xsl:when test="contains($codeLangIT,$DOI)">it</xsl:when>
+            <xsl:when test="contains($codeLangFR,$isbn)">fr</xsl:when>
+            <xsl:when test="contains($codeLangDE,$isbn)">de</xsl:when>
+            <xsl:when test="contains($codeLangIT,$isbn)">it</xsl:when>
             <xsl:otherwise>
                 <xsl:text>en</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    
     <xsl:template match="book">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">

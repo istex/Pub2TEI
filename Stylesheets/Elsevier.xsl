@@ -123,23 +123,11 @@
         <xsl:choose>
             <xsl:when test="$codeGenre1Elsevier='abs'">abstract</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='add'">article</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='adv'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='ann'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='brv'">book-reviews</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='cal'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='chp'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='cnf'">conference</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='con'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='cor'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='dis'">article</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='dup'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='edb'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='edi'">editorial</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='err'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='exm'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='fla'">research-article</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='ind'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='lit'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='mis'">
                     <xsl:choose>
                         <xsl:when test="//els1:head/ce:abstract | //els2:head/ce:abstract | //head/ce:abstract[string-length() &gt; 0]">article</xsl:when>
@@ -147,14 +135,6 @@
                     </xsl:choose>
             </xsl:when>
             <xsl:when test="$codeGenre1Elsevier='nws'">article</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='ocn'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='pnt'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='prp'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='prv'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='pub'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='rem'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='req'">other</xsl:when>
-            <xsl:when test="$codeGenre1Elsevier='ret'">other</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='rev'">review-article</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='sco'">brief-communication</xsl:when>
             <xsl:when test="$codeGenre1Elsevier='ssu'">article</xsl:when>
