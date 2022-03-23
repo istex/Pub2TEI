@@ -79,6 +79,10 @@
         </xsl:choose>
     </xsl:variable>
     
+    <xsl:variable name="titleToDeduceGenre">
+        <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/title-group/title)"/>
+    </xsl:variable>
+    <!-- CODE LANGUE BRILL-EBOOKS-->
     <xsl:variable name="codeLangEN">
         10.1163/9789004295704_046;
         10.1163/9789004295704_012;
@@ -88,66 +92,105 @@
         10.1163/9789004295704_036;
         10.1163/9789004295704_044;
         10.1163/9789004295704_046;
+        10.1163/9789004295605_035;
+        10.1163/9789004295698_009;
+        10.1163/9789004295698_011;
+        10.1163/9789004295698_013;
+        10.1163/9789004295698_018;
+        10.1163/9789004295605_001;
+        10.1163/9789004295605_002;
+        10.1163/9789004295605_003;
+        10.1163/9789004381346_005;
+        10.1163/9789004381346_017;
+        10.1163/9789004295438_017;
+        10.1163/9789004295698_003;
+        10.1163/9789004295698_028;
+        10.1163/9789004299047_006;
+        10.1163/9789004299047_011;
+        10.1163/9789004381346_008;
+        10.1163/9789004381346_010;
+        10.1163/9789004381346_023;
+        10.1163/9789004381346_027;
+        10.1163/9789004295421_004;
+        10.1163/9789004295605_028;
+        10.1163/9789004295421_021;
+        10.1163/9789004295704_030;
+        10.1163/9789004295704_038;
+        10.1163/9789004295933_005;
+        10.1163/9789004299047_002;
+        10.1163/9789004381346_006;
+        10.1163/9789004381346_019;
+        10.1163/9789004381346_026;
+        10.1163/9789004299047_010;
+        10.1163/9789004278271_011;
+        10.1163/9789004295438_021;
+        10.1163/9789004295605_031;
+        10.1163/9789004295605_041;
+        10.1163/9789004295698_007;
+        10.1163/9789004295698_021;
+        10.1163/9789004295698_030;
+        10.1163/9789004299047_007;
+        10.1163/9789047412328_017;
+        10.1163/9789004381346_003;
+        10.1163/9789004381346_009;
+        10.1163/9789004295605_036;
+        10.1163/9789004295421_007;
+        10.1163/9789004256903_005;
+        10.1163/9789004256903_006;
+        10.1163/9789004256903_009;
+        10.1163/9789004295421_010;
+        10.1163/9789004295421_009;
+        10.1163/9789004295605_033;
+        10.1163/9789004295698_029;
+        10.1163/9789004295698_020;
+        10.1163/9789004295698_019;
+        10.1163/9789004295698_005;
+        10.1163/9789004381346_014;
+        10.1163/9789004381346_002;
+        10.1163/9789004299047_005;
+        10.1163/9789004295452_027;
+        10.1163/9789004299047_008;
+        10.1163/9789004295698_027;
+        10.1163/9789004295452_025;
+        10.1163/9789004299047_009;
+        10.1163/9789004295698_026;
+        10.1163/9789004295698_004;
+        10.1163/9789004295698_012;
+        10.1163/9789004295438_016;
+        10.1163/9789004295698_016;
+        10.1163/9789004295698_002;
+        10.1163/9789004295605_048;
+        10.1163/9789004295605_046;
+        10.1163/9789004295605_021;
+        10.1163/9789004295988_021;
+        10.1163/9789047408277_013;
+        10.1163/9789047412328_021;
+        10.1163/9789004295933_013;
+        10.1163/9789004301504_024;
+        10.1163/9789004295438_020;
+        10.1163/9789004295421_031;
+        10.1163/9789004295452_016;
+        10.1163/9789004295698_031;
+        10.1163/9789004295605_034;
+        10.1163/9789004295438_026;
+        10.1163/9789004295377_017;
+        10.1163/9789004295575_014;
+        10.1163/9789004295575_003;
+        10.1163/9789004295575_006;
+        10.1163/9789004295575_009;
+        10.1163/9789004295575_013;
+        10.1163/9789004295575_012;
+        10.1163/9789004295575_007;
+        10.1163/9789004295575_010;
+        10.1163/9789004295711_008;
+        10.1163/9789004295575_002;
+        10.1163/9789004295377_018;
+        10.1163/9789004295377_003;
+        10.1163/9789004295407_006;
+        10.1163/9789004295377_019;
+        10.1163/9789004295575_004;
     </xsl:variable>
     <xsl:variable name="codeLangFR">
-        9789004296138;
-        9789004296145;
-        9789004296152;
-        9789004294769;
-        9789004294790;
-        9789004296213;
-        9789004294806;
-        9789004294813;
-        9789004294820;
-        9789004296237;
-        9789004296244;
-        9789004294899;
-        9789004294912;
-        9789004294929;
-        9789004294950;
-        9789004296275;
-        9789004296329;
-        9789004296282;
-        9789004296305;
-        9789004294981;
-        9789004295032;
-        9789004295124;
-        9789004295131;
-        9789004295148;
-        9789004295186;
-        9789004295247;
-        9789004295278;
-        9789004295285;
-        9789004301672;
-        9789004295308;
-        9789004295315;
-        9789004295322;
-        9789004296404;
-        9789004295339;
-        9789004295421;
-        9789004295438;
-        9789004295452;
-        9789004295469;
-        9789004295483;
-        9789004295490;
-        9789004295551;
-        9789004295544;
-        9789004295636;
-        9789004295650;
-        9789004296459;
-        9789004296466;
-        9789004295728;
-        9789004296480;
-        9789004301412;
-        9789004295933;
-        9789004301504;
-        9789004295988;
-        9789047412328;
-        9789047415855;
-        9789047408277;
-        9789047410331;
-        9789004210912;
-        9789004263246;
         10.1163/ej.9789004188822.i-364.63;
         10.1163/ej.9789004188822.i-364.9;
         10.1163/ej.9789004188822.i-364.13;
@@ -156,6 +199,17 @@
         10.1163/ej.9789004188822.i-364.53;
         10.1163/ej.9789004188822.i-364.57;
         10.1163/ej.9789004188822.i-364.69;
+        10.1163/ej.9789004154209.i-562.24;
+        10.1163/ej.9789004154209.i-562.65;
+        10.1163/ej.9789004154209.i-562.98;
+        10.1163/ej.9789004154209.i-562.101;
+        10.1163/ej.9789004154209.i-562.25;
+        10.1163/ej.9789004154209.i-562.74;
+        10.1163/ej.9789004170452.i-292.13;
+        10.1163/9789004296671_007;
+        10.1163/9789004296671_011;
+        10.1163/9789004296510_020;
+        10.1163/9789004295681_015;
         10.1163/9789004295605_026;
         10.1163/9789004295605_043;
         10.1163/9789004295605_047;
@@ -217,8 +271,109 @@
         10.1163/9789004295704_041;
         10.1163/9789004295704_042;
         10.1163/9789004295704_043;
+        10.1163/9789004295407_007;
+        10.1163/9789004295711_025;
+        10.1163/9789004298064_003;
+        9789004296138;
+        9789004296145;
+        9789004296152;
+        9789004294769;
+        9789004294790;
+        9789004296213;
+        9789004294806;
+        9789004294813;
+        9789004294820;
+        9789004296237;
+        9789004296244;
+        9789004294899;
+        9789004294912;
+        9789004294929;
+        9789004294950;
+        9789004296275;
+        9789004296329;
+        9789004296282;
+        9789004296305;
+        9789004294981;
+        9789004295032;
+        9789004295124;
+        9789004295131;
+        9789004295148;
+        9789004295186;
+        9789004295247;
+        9789004295278;
+        9789004295285;
+        9789004301672;
+        9789004295308;
+        9789004295315;
+        9789004295322;
+        9789004296404;
+        9789004295339;
+        9789004295421;
+        9789004295438;
+        9789004295452;
+        9789004295469;
+        9789004295483;
+        9789004295490;
+        9789004295551;
+        9789004295544;
+        9789004295636;
+        9789004295650;
+        9789004296459;
+        9789004296466;
+        9789004295728;
+        9789004296480;
+        9789004301412;
+        9789004295933;
+        9789004301504;
+        9789004295988;
+        9789047412328;
+        9789047415855;
+        9789047408277;
+        9789047410331;
+        9789004210912;
+        9789004263246;
     </xsl:variable>
     <xsl:variable name="codeLangDE">
+        10.1163/ej.9789004188822.i-364.56;
+        10.1163/9789004295575_005;
+        10.1163/9789004295575_008;
+        10.1163/9789004295605_044;
+        10.1163/9789004295605_049;
+        10.1163/9789004295605_050;
+        10.1163/9789004295698_006;
+        10.1163/9789004295698_008;
+        10.1163/9789004295704_045;
+        10.1163/9789004295452_012;
+        10.1163/9789004295421_029;
+        10.1163/9789004295438_007;
+        10.1163/9789004295438_023;
+        10.1163/9789004295438_002;
+        10.1163/9789004295452_018;
+        10.1163/9789047412328_005;
+        10.1163/9789047412328_016;
+        10.1163/9789004295421_026;
+        10.1163/9789004295452_024;
+        10.1163/9789004295452_026;
+        10.1163/9789004295452_022;
+        10.1163/9789004295452_006;
+        10.1163/9789004295421_032;
+        10.1163/9789004295452_023;
+        10.1163/9789004295421_033;
+        10.1163/9789004295452_008;
+        10.1163/9789004295452_013;
+        10.1163/9789004295421_033;
+        10.1163/9789004295421_025;
+        10.1163/9789004295452_008;
+        10.1163/9789004295438_027;
+        10.1163/9789004295421_020;
+        10.1163/9789004295438_012;
+        10.1163/9789004295421_023;
+        10.1163/ej.9789004131415.I-381.10;
+        10.1163/ej.9789004131415.I-381.31;
+        10.1163/ej.9789004131415.I-381.52;
+        10.1163/9789004295889_009;
+        10.1163/9789004295940_009;
+        10.1163/9789004295940_004;
         9789004296077;
         9789004296091;
         9789004294738;
@@ -242,30 +397,8 @@
         9789004295742;
         9789004295858;
         9789004295896;
-        10.1163/ej.9789004188822.i-364.56;
-        10.1163/9789004295575_005;
-        10.1163/9789004295575_008;
-        10.1163/9789004295605_044;
-        10.1163/9789004295605_049;
-        10.1163/9789004295605_050;
-        10.1163/9789004295698_006;
-        10.1163/9789004295698_008;
-        10.1163/9789004295704_045;
     </xsl:variable>
     <xsl:variable name="codeLangIT">
-        9789004294967;
-        9789004295261;
-        9789004295476;
-        9789004295568;
-        9789004295643;
-        9789004295667;
-        9789004296497;
-        9789004296565;
-        9789004296541;
-        9789004296640;
-        9789004295780;
-        9789004295797;
-        9789004296107;
         10.1163/9789004295605_004;
         10.1163/9789004295605_005;
         10.1163/9789004295605_006;
@@ -303,7 +436,56 @@
         10.1163/9789004295605_061;
         10.1163/9789004295605_062;
         10.1163/9789004295698_022;
+        10.1163/9789004295704_022;
+        10.1163/9789004295704_024;
+        10.1163/9789004295452_014;
+        10.1163/9789004295452_009;
+        10.1163/9789004295421_016;
+        10.1163/9789047412328_008;
+        10.1163/9789004295421_014;
+        10.1163/9789004295704_047;
+        10.1163/9789004295704_034
+        10.1163/9789004295704_051;
+        10.1163/9789004295704_005;
+        10.1163/9789004295704_006;
+        10.1163/9789004295704_021;
+        10.1163/9789004295452_017;
+        10.1163/9789004295704_035;
+        10.1163/9789047412328_015;
+        10.1163/9789004295704_028;
+        10.1163/9789004295704_033;
+        10.1163/9789004295704_031;
+        10.1163/9789004295704_004;
+        10.1163/9789004295704_002;
+        10.1163/9789004295452_007;
+        10.1163/9789004295704_049;
+        10.1163/9789004295704_009;
+        10.1163/9789004295704_032;
+        10.1163/9789004295605_057;
+        10.1163/9789004295704_007;
+        10.1163/9789004295704_011;
+        10.1163/9789004295704_008;
+        10.1163/9789004295704_010;
+        10.1163/9789004295452_005;
+        10.1163/9789004295704_048;
+        10.1163/9789004295421_019;
+        10.1163/9789004296497_032;
+        10.1163/9789004296541_006;
+        10.1163/9789004295889_004;
         9789004295704;
+        9789004294967;
+        9789004295261;
+        9789004295476;
+        9789004295568;
+        9789004295643;
+        9789004295667;
+        9789004296497;
+        9789004296565;
+        9789004296541;
+        9789004296640;
+        9789004295780;
+        9789004295797;
+        9789004296107;
     </xsl:variable>
     <xsl:variable name="DOI">
         <xsl:value-of select="//book-part-id[@book-part-id-type='doi']"/>
@@ -325,6 +507,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <!-- FIN CODE LANGUE BRILL-EBOOKS-->
     
     <xsl:template match="book">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
@@ -374,7 +557,7 @@
                                     </xsl:when>
                                     <!-- brill-ebooks -->
                                     <xsl:when test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                                        <xsl:apply-templates select="$titleToDeduceGenre"/>
                                     </xsl:when>
                                     <xsl:when test="//body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="//body/book-part/book-part-meta/title-group/title"/>
@@ -515,71 +698,83 @@
                                         <!-- Brill-ebooks -->
                                         <xsl:when test="contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'Chapter')
                                             or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'CHAPTER')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'MITRAIC')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'DIVINITÉS')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'IDÉE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'SYMBOLS')">
+                                            or contains($titleToDeduceGenre,'Chapter')
+                                            or contains($titleToDeduceGenre,'CHAPTER')
+                                            or contains($titleToDeduceGenre,'MITRAIC')
+                                            or contains($titleToDeduceGenre,'DIVINITÉS')
+                                            or contains($titleToDeduceGenre,'IDÉE')
+                                            or contains($titleToDeduceGenre,'SYMBOLS')
+                                            or contains($titleToDeduceGenre,'PERSPECTIVES')
+                                            or contains($titleToDeduceGenre,'Survey')">">
                                             <xsl:attribute name="source">chapter</xsl:attribute>
                                             <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
                                             <xsl:text>chapter</xsl:text>
                                         </xsl:when>
-                                        <xsl:when test="contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Preliminary')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'INDEX')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ABRÉVIATIONS')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'AUTEURS MODERNES')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Abbreviations')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ANNEXE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'BIBLIO')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Biblio')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Commentary')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'COMMENTARY')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ADDEND')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Errata')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ACKNOWLEDGEMENTS')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ABBILDUNGEN')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Abbildungen')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'REGISTER')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'NACHTRÄGE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'ÉTUDES PRÉLIMINAIRES')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'RELIGIONS IN THE GRAECO')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'CORRIGENDA')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'CONCORDANCE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'LITERATURVERZEICHNIS')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PLANCHES')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Planches')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Carte')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'CARTE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PREFACE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Preface')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PREFAZIONE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Prefazione')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Figures')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'FIGURES')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'GLOSSA')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Glossa')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'LIST')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'MAPS')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Maps')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'NOTE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Plates')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PLATE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PHOTONACHWEIS')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Photonachweis')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'PUTE I')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'INDICE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Index')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'INDEX')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TAFEL')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Tafel')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TAVOL')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TAV.')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Tav.')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TABLE')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'Table')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TABEL')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'TEXTSTELLEN')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'SVPPLEMENTVM')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/title,'REFERENCES')
+                                        <xsl:when test="contains($titleToDeduceGenre,'Preliminary')
+                                            or contains($titleToDeduceGenre,'INDEX')
+                                            or contains($titleToDeduceGenre,'ABRÉVIATIONS')
+                                            or contains($titleToDeduceGenre,'AUTEURS MODERNES')
+                                            or contains($titleToDeduceGenre,'Abbreviations')
+                                            or contains($titleToDeduceGenre,'ANNEXE')
+                                            or contains($titleToDeduceGenre,'BIBLIO')
+                                            or contains($titleToDeduceGenre,'Biblio')
+                                            or contains($titleToDeduceGenre,'BAS-RELIEFS')
+                                            or contains($titleToDeduceGenre,'BRVTTIVM')
+                                            or contains($titleToDeduceGenre,'CONCORDANC')
+                                            or contains($titleToDeduceGenre,'Concordanc')
+                                            or contains($titleToDeduceGenre,'PICENVM')
+                                            or contains($titleToDeduceGenre,'ADDEND')
+                                            or contains($titleToDeduceGenre,'Errata')
+                                            or contains($titleToDeduceGenre,'ACKNOWLEDGEMENTS')
+                                            or contains($titleToDeduceGenre,'ABBILDUNGEN')
+                                            or contains($titleToDeduceGenre,'Abbildungen')
+                                            or contains($titleToDeduceGenre,'REGISTER')
+                                            or contains($titleToDeduceGenre,'NACHTRÄGE')
+                                            or contains($titleToDeduceGenre,'ÉTUDES PRÉLIMINAIRES')
+                                            or contains($titleToDeduceGenre,'RELIGIONS IN THE GRAECO')
+                                            or contains($titleToDeduceGenre,'CORRIGENDA')
+                                            or contains($titleToDeduceGenre,'CONCORDANCE')
+                                            or contains($titleToDeduceGenre,'LITERATURVERZEICHNIS')
+                                            or contains($titleToDeduceGenre,'PLANCHES')
+                                            or contains($titleToDeduceGenre,'Planches')
+                                            or contains($titleToDeduceGenre,'Carte')
+                                            or contains($titleToDeduceGenre,'CARTE')
+                                            or contains($titleToDeduceGenre,'PREFACE')
+                                            or contains($titleToDeduceGenre,'Preface')
+                                            or contains($titleToDeduceGenre,'PREFAZIONE')
+                                            or contains($titleToDeduceGenre,'Prefazione')
+                                            or contains($titleToDeduceGenre,'Matière Preliminaire')
+                                            or contains($titleToDeduceGenre,'Bibliographie Thématique')
+                                            or contains($titleToDeduceGenre,'Preliminary material')
+                                            or contains($titleToDeduceGenre,'Figures')
+                                            or contains($titleToDeduceGenre,'FIGURES')
+                                            or contains($titleToDeduceGenre,'GLOSSA')
+                                            or contains($titleToDeduceGenre,'Glossa')
+                                            or contains($titleToDeduceGenre,'LIST')
+                                            or contains($titleToDeduceGenre,'MAP')
+                                            or contains($titleToDeduceGenre,'Map')
+                                            or contains($titleToDeduceGenre,'NOTE')
+                                            or contains($titleToDeduceGenre,'Plates')
+                                            or contains($titleToDeduceGenre,'PLATE')
+                                            or contains($titleToDeduceGenre,'PHOTONACHWEIS')
+                                            or contains($titleToDeduceGenre,'Photonachweis')
+                                            or contains($titleToDeduceGenre,'PUTE I')
+                                            or contains($titleToDeduceGenre,'INDICE')
+                                            or contains($titleToDeduceGenre,'Index')
+                                            or contains($titleToDeduceGenre,'INDEX')
+                                            or contains($titleToDeduceGenre,'CIMRM')
+                                            or contains($titleToDeduceGenre,'REALIA')
+                                            or contains($titleToDeduceGenre,'TAFEL')
+                                            or contains($titleToDeduceGenre,'Tafel')
+                                            or contains($titleToDeduceGenre,'TAVOL')
+                                            or contains($titleToDeduceGenre,'TAV.')
+                                            or contains($titleToDeduceGenre,'Tav.')
+                                            or contains($titleToDeduceGenre,'TABLE')
+                                            or contains($titleToDeduceGenre,'Table')
+                                            or contains($titleToDeduceGenre,'TABEL')
+                                            or contains($titleToDeduceGenre,'TEXTSTELLEN')
+                                            or contains($titleToDeduceGenre,'SVPPLEMENTVM')
+                                            or contains($titleToDeduceGenre,'REFERENCES')
                                             ">
                                             <xsl:attribute name="source">other</xsl:attribute>
                                             <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
@@ -1592,7 +1787,15 @@
                     </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="/book/book-meta/isbn[@publication-format='online']='9789004301351' or /book/book-meta/isbn[@publication-format='online']='9789004295100'">
+                    <xsl:text>Herodotus, Book II : </xsl:text>
+                    <xsl:value-of select="/book/book-meta/book-title-group/book-title"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </title>
     </xsl:template>
     
