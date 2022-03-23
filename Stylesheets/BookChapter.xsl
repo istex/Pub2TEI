@@ -732,6 +732,7 @@
                                             or contains($titleToDeduceGenre,'NACHTRÄGE')
                                             or contains($titleToDeduceGenre,'ÉTUDES PRÉLIMINAIRES')
                                             or contains($titleToDeduceGenre,'RELIGIONS IN THE GRAECO')
+                                            or contains($titleToDeduceGenre,'RELIGIOUS GRADES AND FUNCTIONS')
                                             or contains($titleToDeduceGenre,'CORRIGENDA')
                                             or contains($titleToDeduceGenre,'CONCORDANCE')
                                             or contains($titleToDeduceGenre,'LITERATURVERZEICHNIS')
