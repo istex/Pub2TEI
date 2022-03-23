@@ -705,7 +705,7 @@
                                             or contains($titleToDeduceGenre,'IDÉE')
                                             or contains($titleToDeduceGenre,'SYMBOLS')
                                             or contains($titleToDeduceGenre,'PERSPECTIVES')
-                                            or contains($titleToDeduceGenre,'Survey')">">
+                                            or contains($titleToDeduceGenre,'Survey')">
                                             <xsl:attribute name="source">chapter</xsl:attribute>
                                             <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
                                             <xsl:text>chapter</xsl:text>
