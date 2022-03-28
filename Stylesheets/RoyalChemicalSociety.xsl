@@ -7,6 +7,111 @@
     <!-- TEI document structure, creation of main header components, front (abstract), body, and back -->
     <!-- Le format de la RCS utilise essentiellement des composant NLM en ayant pris le soin (!) de définir ses propres constructions ici el là. -->
     <!-- On sent le travail visionaire du grouillot... -->
+    <xsl:variable name="articleType" select="normalize-space(//articletype/@pubmedForm |//rsc:articletype/@pubmedForm)"/>
+    <xsl:variable name="codeGenreRSCSource">
+        <xsl:choose>
+            <xsl:when test="//article/@type | //rsc:article/@type='ART'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='REV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='EDI'">editorial</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='EDG'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='FEA'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='TRV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='CRV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='CVR'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='CRV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='BKR'">book-reviews</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='ASU'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='COM'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='ESS'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='NTP'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='RES'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='KEY'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='PER'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='LET'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='TRV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='TEC'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='HIG'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='INV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='FOC'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='DIS'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='HOT'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='OTH'">other</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='SAB'">abstract</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='EMA'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='CMT'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='OPN'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='APP'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='FRO'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='AFO'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='CRP'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='EDU'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='MET'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='IRE'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='VPT'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='FOR'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='ILN'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='MES'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='AMS'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='ESS'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='WAT'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='NTP'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='RES'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='KEY'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='ANL'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='TWA'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='MRV'">review-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='FAB'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='CAR'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='NWS'">article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='TIN'">research-article</xsl:when>
+            <xsl:when test="//article/@type | //rsc:article/@type='PRO'">other</xsl:when>
+            <!-- pubmed mis en second plan car non fiable!-->
+            <xsl:when test="$articleType='abstract'">abstract</xsl:when>
+            <xsl:when test="$articleType='addendum'">other</xsl:when>
+            <xsl:when test="$articleType='announcement'">other</xsl:when>
+            <xsl:when test="$articleType='article-commentary'">review-article</xsl:when>
+            <xsl:when test="$articleType='book-review'">book-reviews</xsl:when>
+            <xsl:when test="$articleType='books-received'">other</xsl:when>
+            <xsl:when test="$articleType='other'">other</xsl:when>
+            <xsl:when test="$articleType='brief-report'">brief-communication</xsl:when>
+            <xsl:when test="$articleType='calendar'">other</xsl:when>
+            <xsl:when test="$articleType='case-report'">case-report</xsl:when>
+            <xsl:when test="$articleType='collection'">other</xsl:when>
+            <xsl:when test="$articleType='correction'">article</xsl:when>
+            <xsl:when test="$articleType='dissertation'">other</xsl:when>
+            <xsl:when test="$articleType='discussion'">other</xsl:when>
+            <xsl:when test="$articleType='editorial'">editorial</xsl:when>
+            <xsl:when test="$articleType='in-brief'">other</xsl:when>
+            <xsl:when test="$articleType='introduction'">other</xsl:when>
+            <xsl:when test="$articleType='letter'">article</xsl:when>
+            <xsl:when test="$articleType='meeting-report'">conference</xsl:when>
+            <xsl:when test="$articleType='news'">article</xsl:when>
+            <xsl:when test="$articleType='obituary'">other</xsl:when>
+            <xsl:when test="$articleType='oration'">other</xsl:when>
+            <xsl:when test="$articleType='other'">
+                <xsl:choose>
+                    <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and contains(//article-meta/fpage |//rsc:article-meta/rsc:fpage,'s') or contains(//article-meta/fpage | //rsc:article-meta/rsc:fpage,'S')">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="$articleType='partial-retraction'">other</xsl:when>
+            <xsl:when test="$articleType='poster'">conference</xsl:when>
+            <xsl:when test="$articleType='product-review'">other</xsl:when>
+            <xsl:when test="$articleType='rapid-communication'">brief-communication</xsl:when>
+            <xsl:when test="$articleType='reply'">article</xsl:when>
+            <xsl:when test="$articleType='reprint'">other</xsl:when>
+            <xsl:when test="$articleType='research-article'">research-article</xsl:when>
+            <xsl:when test="$articleType='retraction'">other</xsl:when>
+            <xsl:when test="$articleType='review-article'">review-article</xsl:when>
+            <xsl:when test="$articleType='translation'">other</xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:template match="article[art-admin] | rsc:article[rsc:art-admin]">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
@@ -84,127 +189,6 @@
                     </publicationStmt>
                     <notesStmt>
                         <note type="content-type">
-                            <xsl:variable name="articleType" select="normalize-space(//articletype/@pubmedForm |//rsc:articletype/@pubmedForm)"/>
-                            <xsl:variable name="codeGenreRSCSource">
-                                <xsl:choose>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='ART'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='REV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='EDI'">editorial</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='EDG'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='FEA'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='TRV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='CRV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='CVR'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='CRV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='BKR'">book-reviews</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='ASU'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='COM'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='ESS'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='NTP'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='RES'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='KEY'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='PER'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='LET'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='TRV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='TEC'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='HIG'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='INV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='FOC'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='DIS'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='HOT'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='OTH'">other</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='SAB'">abstract</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='EMA'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='CMT'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='OPN'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='APP'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='FRO'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='AFO'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='CRP'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='EDU'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='MET'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='IRE'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='VPT'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='FOR'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='ILN'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='MES'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='AMS'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='ESS'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='WAT'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='NTP'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='RES'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='KEY'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='ANL'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='TWA'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='MRV'">review-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='FAB'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='CAR'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='NWS'">article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='TIN'">research-article</xsl:when>
-                                    <xsl:when test="//article/@type | //rsc:article/@type='PRO'">other</xsl:when>
-                                    <!-- pubmed mis en second plan car non fiable!-->
-                                    <xsl:when test="$articleType='abstract'">abstract</xsl:when>
-                                    <xsl:when test="$articleType='addendum'">other</xsl:when>
-                                    <xsl:when test="$articleType='announcement'">other</xsl:when>
-                                    <xsl:when test="$articleType='article-commentary'">review-article</xsl:when>
-                                    <xsl:when test="$articleType='book-review'">book-reviews</xsl:when>
-                                    <xsl:when test="$articleType='books-received'">other</xsl:when>
-                                    <xsl:when test="$articleType='other'">other</xsl:when>
-                                    <xsl:when test="$articleType='brief-report'">brief-communication</xsl:when>
-                                    <xsl:when test="$articleType='calendar'">other</xsl:when>
-                                    <xsl:when test="$articleType='case-report'">case-report</xsl:when>
-                                    <xsl:when test="$articleType='collection'">other</xsl:when>
-                                    <xsl:when test="$articleType='correction'">article</xsl:when>
-                                    <xsl:when test="$articleType='dissertation'">other</xsl:when>
-                                    <xsl:when test="$articleType='discussion'">other</xsl:when>
-                                    <xsl:when test="$articleType='editorial'">editorial</xsl:when>
-                                    <xsl:when test="$articleType='in-brief'">other</xsl:when>
-                                    <xsl:when test="$articleType='introduction'">other</xsl:when>
-                                    <xsl:when test="$articleType='letter'">article</xsl:when>
-                                    <xsl:when test="$articleType='meeting-report'">conference</xsl:when>
-                                    <xsl:when test="$articleType='news'">article</xsl:when>
-                                    <xsl:when test="$articleType='obituary'">other</xsl:when>
-                                    <xsl:when test="$articleType='oration'">other</xsl:when>
-                                    <xsl:when test="$articleType='other'">
-                                        <xsl:choose>
-                                            <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and contains(//article-meta/fpage |//rsc:article-meta/rsc:fpage,'s') or contains(//article-meta/fpage | //rsc:article-meta/rsc:fpage,'S')">article</xsl:when>
-                                            <xsl:otherwise>other</xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:when>
-                                    <xsl:when test="$articleType='partial-retraction'">other</xsl:when>
-                                    <xsl:when test="$articleType='poster'">conference</xsl:when>
-                                    <xsl:when test="$articleType='product-review'">other</xsl:when>
-                                    <xsl:when test="$articleType='rapid-communication'">brief-communication</xsl:when>
-                                    <xsl:when test="$articleType='reply'">article</xsl:when>
-                                    <xsl:when test="$articleType='reprint'">other</xsl:when>
-                                    <xsl:when test="$articleType='research-article'">research-article</xsl:when>
-                                    <xsl:when test="$articleType='retraction'">other</xsl:when>
-                                    <xsl:when test="$articleType='review-article'">review-article</xsl:when>
-                                    <xsl:when test="$articleType='translation'">other</xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:choose>
-                                            <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0]">article</xsl:when>
-                                            <xsl:otherwise>other</xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:variable>
-                            <xsl:variable name="codeGenreRSCArk">
-                                <xsl:choose>
-                                    <xsl:when test="$codeGenreRSCSource='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-                                    <xsl:when test="$codeGenreRSCSource='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
-                                </xsl:choose>
-                            </xsl:variable>
                             <!-- niveau article / chapter -->
                             <xsl:attribute name="source">
                                 <xsl:choose>
@@ -218,7 +202,7 @@
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="scheme">
-                                <xsl:value-of select="$codeGenreRSCArk"/>
+                                <xsl:value-of select="$codeGenreArk"/>
                             </xsl:attribute>
                             <xsl:value-of select="$codeGenreRSCSource"/>
                         </note>

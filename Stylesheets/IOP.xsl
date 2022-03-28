@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:m="http://www.w3.org/1998/Math/MathML" 
+    xmlns:ce="http://www.elsevier.com/xml/common/dtd"
+    xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
+    xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
+    xmlns:s1="http://www.elsevier.com/xml/si/dtd"
+    xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
+    xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" version="2.0" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
     
@@ -7,7 +14,7 @@
         <xd:desc>
             <xd:p>created by romain dot loth at inist.fr</xd:p>
             <xd:p>ISTEX-CNRS 2014-12</xd:p>
-            <xd:p>updated by Stéphanie Gregorio from inist.fr</xd:p>
+            <xd:p>updated by gregorio dot stephanie at inist.fr</xd:p>
             <xd:p>ISTEX-CNRS 2020-03</xd:p>
         </xd:desc>
     </xd:doc>
@@ -41,19 +48,80 @@
         /TEI/teiHeader/fileDesc/respStmt
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
+    
+    <xsl:variable name="codeGenreIOP1">
+        <xsl:value-of select="//article-data/article-type/@type"/>
+    </xsl:variable>
+    <xsl:variable name="codeGenreIOP">
+        <xsl:choose>
+            <xsl:when test="normalize-space($codeGenreIOP1)='paper'">research-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='lett'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='letter'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='rev'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='review'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='edit'">editorial</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='error'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='note'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='prod'">book-reviews</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='abs'">abstract</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='abstract'">abstract</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='addendum'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='announcement'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='article-commentary'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='book-review'">book-reviews</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='books-received'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='brief-report'">brief-communication</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='calendar'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='case-report'">case-report</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='collection'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='correction'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='dissertation'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='discussion'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='editorial'">editorial</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='in-brief'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='introduction'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='meeting-report'">conference</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='news'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='obituary'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='oration'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='other'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='partial-retraction'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='poster'">conference</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='product-review'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='rapid-communication'">brief-communication</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='reply'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='reprint'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='research-article'">research-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='retraction'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='review-article'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenreIOP1)='translation'">other</xsl:when>
+            <xsl:otherwise>
+                <xsl:text>other</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:template match="article | header">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
+            <xsl:attribute name="xml:lang">
+                <xsl:choose>
+                    <xsl:when test="//article-data/doi='10.1088/1751-8113/42/8/085201'">en</xsl:when>
+                    <xsl:when test="//header/title-group/title/@lang[string-length() &gt; 0]">
+                        <xsl:value-of select="//header/title-group/title/@lang"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- ******************* Language / eng par défaut ******************************-->
+                        <xsl:text>en</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
                         <!-- Ici simplement reprise du titre principal (le détail est dans sourceDesc) -->
-                        <xsl:apply-templates select="header/title-group/title | title/title_full"></xsl:apply-templates>
-                        
-                        
-                        
+                        <xsl:apply-templates select="header/title-group/title | title/title_full"/>
                     </titleStmt>
 
                     <!-- proposition d'un "stamp" Pub2TEI -->
@@ -67,19 +135,50 @@
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <!-- Publisher jnl -->
-                        <xsl:apply-templates
-                            select="article-metadata/jnl-data/jnl-imprint"/>
+                        <xsl:apply-templates select="article-metadata/jnl-data/jnl-imprint"/>
                         
                         <!-- "printed in" ~ pubPlace -->
-                        <xsl:apply-templates
-                            select="article-metadata/article-data/printed"/>
+                        <xsl:if test="article-metadata/article-data/printed [string-length() &gt; 0]">
+                        <xsl:apply-templates select="article-metadata/article-data/printed"/>
+                        </xsl:if>
                        <availability>
                            <licence>
                                <xsl:value-of select="//article-metadata/jnl-data/jnl-imprint"/>
                            </licence>
                        </availability>
+                        <xsl:apply-templates select="//volume-data/year-publication"/>
                     </publicationStmt>
-
+                    <!-- genre ISTEX du document niveau article-->
+                    <notesStmt>
+                        <note type="content-type">
+                            <xsl:choose>
+                                <xsl:when test="$codeGenreIOP">
+                                    <xsl:attribute name="subtype">
+                                        <xsl:value-of select="$codeGenreIOP"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="source">
+                                        <xsl:value-of select="$codeGenreIOP1"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="scheme">
+                                        <xsl:value-of select="$codeGenreArk"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$codeGenreIOP"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:if test="not(//article-data/article-type/@type)">
+                                        <xsl:attribute name="subtype">N/A</xsl:attribute>
+                                        <xsl:attribute name="source">ISTEX</xsl:attribute>
+                                        <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                        <xsl:text>other</xsl:text>
+                                    </xsl:if>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </note>
+                        <note type="publication-type" subtype="journal">
+                            <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0GLKJH51-B</xsl:attribute>
+                            <xsl:text>journal</xsl:text>
+                        </note>
+                    </notesStmt>
                     <!-- métadonnées décrivant l'original -->
                     <sourceDesc>
                         <biblStruct>
@@ -88,7 +187,8 @@
                                 <xsl:apply-templates select="header/title-group"/>
 
                                 <!-- Auteurs article -->
-                                <xsl:apply-templates select="header/author-group" mode ="IOP"/>
+                                <!-- <short-author-list> non repris -->
+                                <xsl:apply-templates select="header/author-group/* except(//short-author-list)" mode ="IOP"/>
                                 
                                 
                                 <xsl:apply-templates select="header/collaboration" mode ="IOP"/>
@@ -96,11 +196,10 @@
                                 <xsl:apply-templates select="header/editor-group | header/author-group/collaboration | header/authors/collaboration | header/editors/collaboration"/>
 
                                 <!-- Identifiants article (DOI, PII et 3 IDS internes à IOP ...) -->
-                                <xsl:apply-templates select="article-metadata/article-data/doi"/>
-                                <xsl:apply-templates select="article-metadata/article-data/pii"/>
-                                <xsl:apply-templates select="article-metadata/article-data/ccc"/>
-                                <xsl:apply-templates
-                                    select="article-metadata/article-data/article-number"/>
+                                <xsl:apply-templates select="article-metadata/article-data/doi[string-length() &gt; 0]"/>
+                                <xsl:apply-templates select="article-metadata/article-data/pii[string-length() &gt; 0]"/>
+                                <xsl:apply-templates select="article-metadata/article-data/ccc[string-length() &gt; 0]"/>
+                                <xsl:apply-templates select="article-metadata/article-data/article-number[string-length() &gt; 0]"/>
                                 <!-- ajout identifiants ISTEX et ARK -->
                                 <xsl:if test="string-length($idistex) &gt; 0 ">
                                     <idno type="istex">
@@ -112,7 +211,7 @@
                                         <xsl:value-of select="$arkistex"/>
                                     </idno>
                                 </xsl:if>
-                                <idno type="iop-artid">
+                                <idno type="articleId">
                                     <xsl:value-of select="@artid"/>
                                 </idno>
                             </analytic>
@@ -128,26 +227,31 @@
                                 <!-- Identifiants journal (ISSN et CODEN) -->
                                 <xsl:apply-templates select="article-metadata/jnl-data/jnl-issn"/>
                                 <xsl:apply-templates select="article-metadata/jnl-data/jnl-coden"/>
+                                <xsl:apply-templates select="article-metadata/jnl-data/jnl-web-address"/>
 
                                 <imprint>
                                     <!-- VOLUMAISON -->
                                     <xsl:apply-templates
-                                        select="article-metadata/issue-data/coverdate"/>
-                                    <xsl:apply-templates
                                         select="article-metadata/volume-data/year-publication"/>
+                                    <xsl:apply-templates
+                                        select="article-metadata/issue-data/coverdate"/>
                                     <xsl:apply-templates
                                         select="article-metadata/volume-data/volume-number"/>
                                                                                          
                                     <xsl:apply-templates
                                         select="article-metadata/issue-data/issue-number"/>
-                                    
-
 
                                     <!-- Pagination de l'article dans la monographie ou le fascicule -->
-                                    <biblScope unit="pp">
+                                    <biblScope unit="page">
                                         <xsl:attribute name="from" select="article-metadata/article-data/first-page"/>
-                                        <xsl:attribute name="to" select="article-metadata/article-data/last-page"/>
+                                        <xsl:value-of select="article-metadata/article-data/first-page"/>
                                     </biblScope>
+                                    <xsl:if test="article-metadata/article-data/last-page[string-length() &gt; 0]">
+                                        <biblScope unit="page">
+                                            <xsl:attribute name="to" select="article-metadata/article-data/last-page"/>
+                                            <xsl:value-of select="article-metadata/article-data/last-page"/>
+                                        </biblScope>
+                                    </xsl:if>
 
                                     <xsl:apply-templates
                                         select="article-metadata/article-data/length"/>
@@ -160,7 +264,23 @@
                 <xsl:call-template name="insertVersion"/>
                 <!-- métadonnées de profil (thématique et historique du doc) -->
                 <profileDesc>
-					
+                    <!--language english | french | german dtd iopv1_8-->
+                    <langUsage>
+                        <xsl:choose>
+                            <xsl:when test="//article-data/doi='10.1088/1751-8113/42/8/085201'">
+                                <language ident="en">en</language>
+                            </xsl:when>
+                            <xsl:when test="//header/title-group/title/@lang[string-length() &gt; 0]">
+                                <language ident="{//header/title-group/title/@lang}">
+                                    <xsl:value-of select="//header/title-group/title/@lang"/>
+                                </language>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <!-- ******************* Language / eng par défaut ******************************-->
+                                <language ident="en">en</language>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </langUsage>
                     <!-- Le résumé: abstract -->
                     <xsl:apply-templates select="header/abstract-group"/>
 					
@@ -179,7 +299,6 @@
                 <revisionDesc>
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
-
             </teiHeader>
                 <text>
                     <xsl:choose>
@@ -276,7 +395,7 @@
 
     <!-- numéro d'article IOP -->
     <xsl:template match="article-data/article-number">
-        <idno type="iop-no">
+        <idno type="articleNumber">
             <xsl:value-of select="."/>
         </idno>
     </xsl:template>
@@ -325,24 +444,24 @@
     <!-- full j title 
          ex: "Journal of Physics D: Applied Physics" -->
     <xsl:template match="jnl-data/jnl-fullname">
-        <title level="j" type="full">
-            <xsl:value-of select="."/>
+        <title level="j" type="main">
+            <xsl:apply-templates/>
         </title>
     </xsl:template>
 
     <!-- abbrev j title 
         ex: "J. Phys. D: Appl. Phys." -->
     <xsl:template match="jnl-data/jnl-abbreviation">
-        <title level="j" type="abbrev">
-            <xsl:value-of select="."/>
+        <title level="j" type="alt">
+            <xsl:apply-templates/>
         </title>
     </xsl:template>
 
     <!-- short j title 
         ex: "JPhysD" -->
     <xsl:template match="jnl-data/jnl-shortname">
-        <title level="j" type="full">
-            <xsl:value-of select="."/>
+        <title level="j" type="short">
+            <xsl:apply-templates/>
         </title>
     </xsl:template>
 
@@ -350,7 +469,7 @@
         ex: "0022-3727" -->
     <xsl:template match="jnl-data/jnl-issn">
         <idno type="pISSN">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </idno>
     </xsl:template>
 
@@ -358,23 +477,23 @@
         ex: "JPAPBE" -->
     <xsl:template match="jnl-data/jnl-coden">
         <idno type="CODEN">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </idno>
     </xsl:template>
 
     <!-- web address
         ex: "stacks.iop.org/JPhysD" -->
     <xsl:template match="jnl-data/jnl-web-address">
-        <ref type="url">
-            <xsl:value-of select="."/>
-        </ref>
+        <idno type="URL">
+            <xsl:apply-templates/>
+        </idno>
     </xsl:template>
 
     <!-- imprint (~publisher)
         ex: "IOP Publishing" -->
     <xsl:template match="jnl-data/jnl-imprint">
         <publisher>
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </publisher>
     </xsl:template>
 
@@ -461,7 +580,7 @@
     <!-- year-publication => année seule => date sans when
         ex: "2007" -->
     <xsl:template match="volume-data/year-publication">
-        <date type="Published">
+        <date type="published" when="{.}">
             <xsl:value-of select="."/>
         </date>
     </xsl:template>
@@ -492,13 +611,13 @@
 
     <xsl:template match="title-group/short-title">
         <title level="a" type="short">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </title>
     </xsl:template>
 
     <xsl:template match="title-group/ej-title">
         <title level="a" type="alt" subtype="ej">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </title>
     </xsl:template>
     <!-- FIN TITRES DE L'ARTICLE*********************** -->
@@ -550,8 +669,7 @@
         
         Cas "auteur normal"
     -->
-    <xsl:template match="author-group
-        | collaboration">
+    <xsl:template match="author-group | collaboration">
         <xsl:apply-templates select="author" mode="IOP"/>
     </xsl:template>
     <xsl:template match="authors">
@@ -593,7 +711,12 @@
             <xsl:choose>
                 <xsl:when test="//address-group/address[@id=current()/@address]">
                     <affiliation>
-                        <xsl:apply-templates select="//address-group/address[@id=current()/@address]"/>
+                        <xsl:call-template name="parseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:value-of select="//address-group/address[@id=current()/@address]"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                        <!-- <xsl:apply-templates select="//address-group/address[@id=current()/@address]"/> -->
                     </affiliation>
                 </xsl:when>
                 <xsl:otherwise>
@@ -618,183 +741,7 @@
             </xsl:choose>
         </author>
     </xsl:template>
-   <!-- deja utilisé <xsl:template match="address">
-       
-        <xsl:if test="email">
-            <xsl:apply-templates select="email"/>
-        </xsl:if>
-        <xsl:choose>
-            <xsl:when test="./org">
-                <affiliation>
-                    <xsl:apply-templates select="org"/>
-                    <address>
-                        <xsl:apply-templates select="street"/>
-                        <xsl:apply-templates select="st"/>
-                        <xsl:apply-templates select="zip"/>
-                        <xsl:apply-templates select="cty"/>
-                        <xsl:apply-templates select="cny"/>
-                    </address>
-                </affiliation>
-            </xsl:when>
-            <xsl:when test="addr-line">
-                <xsl:choose>
-                    <xsl:when test="addr-line/institution">
-                        <affiliation>
-                            <xsl:apply-templates select="addr-line/institution"/>
-                            <address>
-                                <xsl:apply-templates select="addr-line/named-content"/>
-                                <xsl:apply-templates select="addr-line/country"/>
-                            </address>
-                        </affiliation>
-                    </xsl:when>
-                    <xsl:when test="addr-line and institution">
-                        <affiliation>
-                            <xsl:apply-templates select="institution"/>
-                            <address>
-                                <xsl:apply-templates select="addr-line"/>
-                                <xsl:apply-templates select="country"/>
-                            </address>
-                        </affiliation>
-                    </xsl:when>
-                    <xsl:when test="../aff">
-                        <affiliation>
-                            <xsl:call-template name="NLMParseAffiliation">
-                                <xsl:with-param name="theAffil">
-                                    <xsl:variable name="nettoie">
-                                        <xsl:apply-templates/>
-                                    </xsl:variable>
-                                    <xsl:value-of select="translate($nettoie,';/','')"/>
-                                </xsl:with-param>
-                            </xsl:call-template>
-                        </affiliation>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <affiliation>
-                            <xsl:call-template name="NLMParseAffiliation">
-                                <xsl:with-param name="theAffil">
-                                    <xsl:variable name="nettoie">
-                                        <xsl:apply-templates/>
-                                    </xsl:variable>
-                                    <xsl:value-of select="translate($nettoie,';/','')"/>
-                                </xsl:with-param>
-                            </xsl:call-template>
-                        </affiliation>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="institution and institution/addr-line">
-                <affiliation>
-                    <xsl:apply-templates select="institution" mode="NLM"/>
-                    <xsl:if test="addr-line | country">
-                        <address>
-                            <xsl:apply-templates select="addr-line"/>
-                            <xsl:apply-templates select="country"/>
-                        </address>
-                    </xsl:if>
-                </affiliation>
-            </xsl:when>
-            <xsl:when test="institution and named-content">
-                <affiliation>
-                    <xsl:apply-templates select="institution" mode="NLM"/>
-                    <address>
-                        <xsl:apply-templates select="named-content"/>
-                        <xsl:apply-templates select="country"/>
-                    </address>
-                </affiliation>
-            </xsl:when>
-            <xsl:when test="italic or bold">
-                <affiliation>
-                    <xsl:call-template name="NLMParseAffiliation">
-                        <xsl:with-param name="theAffil">
-                            <xsl:variable name="nettoie">
-                                <xsl:apply-templates/>
-                            </xsl:variable>
-                            <xsl:value-of select="translate($nettoie,';/','')"/>
-                        </xsl:with-param>
-                    </xsl:call-template>
-                </affiliation>
-            </xsl:when>
-            <xsl:when test="country and not(institution)">
-                <affiliation>
-                    <xsl:if test="country and not(addr-line)">
-                        <xsl:choose>
-                            <xsl:when test="contains(country,',')">
-                                <address>
-                                    <addrLine>
-                                        <xsl:value-of select="normalize-space(country)"/>
-                                    </addrLine>
-                                </address>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <address>
-                                    <addrLine>
-                                        <xsl:apply-templates/>
-                                    </addrLine>
-                                    <country>
-                                        <xsl:value-of select="normalize-space(country)"/>
-                                    </country>
-                                </address>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:if>
-                </affiliation>
-            </xsl:when>
-            <xsl:when test="not(contains(.,','))">
-                <affiliation>
-                    <xsl:variable name="normalize">
-                        <xsl:apply-templates/> 
-                    </xsl:variable>
-                    <xsl:choose>
-                        <xsl:when test="contains(.,'Foundation')
-                            or contains(.,'Institut')
-                            or contains(.,'Universit')">
-                            <orgName type="institution">
-                                <xsl:value-of select="normalize-space($normalize)"/>
-                            </orgName>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="normalize-space($normalize)"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </affiliation>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:if test="not(contains(.,'equally')) or not(//fm/aug/cross-ref)">
-                    <affiliation>
-                        <xsl:call-template name="NLMParseAffiliation">
-                            <xsl:with-param name="theAffil">
-                                <xsl:variable name="nettoie">
-                                    <xsl:apply-templates/>
-                                </xsl:variable>
-                                <xsl:value-of select="translate($nettoie,';/','')"/>
-                            </xsl:with-param>
-                        </xsl:call-template>
-                        <xsl:if test="email">
-                            <email>
-                                <xsl:value-of select="email"/>
-                            </email>
-                        </xsl:if>
-                    </affiliation>
-                </xsl:if>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    <xsl:template match="org">
-        <xsl:call-template name="NLMParseOrg">
-            <xsl:with-param name="theOrg">
-                <xsl:value-of select="translate(.,'.;','')"/>
-            </xsl:with-param>
-        </xsl:call-template>
-    </xsl:template>
-    <xsl:template match="institution" mode="NLM">
-        <xsl:if test=". !=''">
-            <xsl:call-template name="NLMParseOrg">
-                <xsl:with-param name="theOrg">
-                    <xsl:value-of select="translate(.,'.;','')"/>
-                </xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
-    </xsl:template>-->
+    
     <!-- idem si père = editors -->
     <xsl:template match="editors/author
                        | editors/au">
@@ -960,8 +907,8 @@
                   Ecole Royale Militaire—Koninklijke Militaire School"
     -->
     <xsl:template match="/article/header/address-group/address/orgname">
-        <orgName>
-            <xsl:value-of select="."/>
+        <orgName type="institution">
+            <xsl:apply-templates/>
         </orgName>
     </xsl:template>
 
@@ -3500,6 +3447,9 @@
     <!-- crossref/cr_doi -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/crossref/cr_doi">
         <idno type="DOI">
+            <xsl:value-of select="substring-after(.,'http://dx.doi.org/')"/>
+        </idno>
+        <idno type="URL">
             <xsl:value-of select="."/>
         </idno>
     </xsl:template>
@@ -3590,10 +3540,15 @@
             <xsl:attribute name="type">
                 <xsl:choose>
                     <xsl:when test="@type='electronic'">eISSN</xsl:when>
-                    <xsl:otherwise>ISSN</xsl:otherwise>
+                    <xsl:otherwise>pISSN</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
-            <xsl:value-of select="."/>
+            <xsl:variable name="issnReconstruct">
+                <xsl:value-of select="."/>
+            </xsl:variable>
+            <xsl:value-of select="substring($issnReconstruct,-3,string-length($issnReconstruct))"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="substring($issnReconstruct,5,string-length($issnReconstruct))"/>
         </idno>
     </xsl:template>
     
@@ -3613,7 +3568,7 @@
          TODO: attribut ISO @when
     -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/year">
-        <date type="year">
+        <date when="{.}">
             <xsl:value-of select="."/>
         </date>
     </xsl:template>
@@ -3649,7 +3604,7 @@
     
     <!-- pages  -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/pages">
-        <biblScope unit="pp">
+        <biblScope unit="pages">
             <xsl:value-of select="."/>
         </biblScope>
     </xsl:template>
@@ -3798,8 +3753,6 @@
             <xsl:apply-templates select='footnote'/>
         </div>
     </xsl:template>
-
-    
     
     <!-- FIN FOOTNOTES *********************** -->
    

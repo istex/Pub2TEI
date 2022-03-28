@@ -9,7 +9,6 @@
     exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
-
     <!-- Macrostructure -->
     
     <xsl:template match="body">

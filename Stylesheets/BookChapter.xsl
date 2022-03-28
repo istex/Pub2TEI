@@ -61,23 +61,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <!-- lien vers data.istex.fr -->
-    <xsl:variable name="codeGenreArkBrepolsBook">
-        <xsl:choose>
-            <xsl:when test="$codeGenreBrepols='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="$codeGenreBrepols='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="$codeGenreBrepols='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="$codeGenreBrepols='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="$codeGenreBrepols='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="$codeGenreBrepols='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="$codeGenreBrepols='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="$codeGenreBrepols='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="$codeGenreBrepols='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="$codeGenreBrepols='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="$codeGenreBrepols='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="$codeGenreBrepols='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
     
     <xsl:variable name="titleToDeduceGenre">
         <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/title-group/title)"/>
@@ -691,7 +674,7 @@
                                                 <xsl:value-of select="$codeGenreBrepolsBook"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="scheme">
-                                                <xsl:value-of select="$codeGenreArkBrepolsBook"/>
+                                                <xsl:value-of select="$codeGenreArk"/>
                                             </xsl:attribute>
                                             <xsl:value-of select="$codeGenreBrepols"/>
                                         </xsl:when>

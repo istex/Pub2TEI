@@ -82,6 +82,22 @@
                     <xsl:apply-templates/>
                 </table>
             </xsl:when>
+            <!-- IOP -->
+            <xsl:when test="child::caption[@type='table']">
+                <table>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@position">
+                        <xsl:attribute name="rend">
+                            <xsl:value-of select="@position"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates select="* except(label/xref | graphic | rsc:graphic |rsc:label/rsc:xref)"/>
+                </table>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
                     <xsl:when test="not(oasis:table | table | rsc:table| ancestor::div1)">

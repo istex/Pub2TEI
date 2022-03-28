@@ -49,23 +49,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <!-- lien vers data.istex.fr -->
-    <xsl:variable name="codeGenreArkA">
-        <xsl:choose>
-            <xsl:when test="$codeGenreA='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="$codeGenreA='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="$codeGenreA='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="$codeGenreA='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="$codeGenreA='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="$codeGenreA='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="$codeGenreA='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="$codeGenreA='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="$codeGenreA='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="$codeGenreA='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="$codeGenreA='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="$codeGenreA='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
     <!-- codeLangue -->
     <xsl:variable name="codeLangue">
         <xsl:choose>
@@ -356,7 +339,7 @@
                                 <xsl:value-of select="$codeGenre1"/>
                             </xsl:attribute>
                             <xsl:attribute name="scheme">
-                                <xsl:value-of select="$codeGenreArkA"/>
+                                <xsl:value-of select="$codeGenreArk"/>
                             </xsl:attribute>
                             <xsl:value-of select="$codeGenreA"/>
                         </note>

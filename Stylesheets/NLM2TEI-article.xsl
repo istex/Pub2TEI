@@ -3468,12 +3468,19 @@
                 </figure>
             </xsl:when>
             <xsl:otherwise>
-                <graphic>
-                    <xsl:attribute name="url">
-                        <xsl:value-of select="@xlink:href|@src"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </graphic>
+                <xsl:choose>
+                    <xsl:when test="child::graphic-file">
+                        <xsl:apply-templates/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <graphic>
+                            <xsl:attribute name="url">
+                                <xsl:value-of select="@xlink:href|@src"/>
+                            </xsl:attribute>
+                            <xsl:apply-templates/>
+                        </graphic>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

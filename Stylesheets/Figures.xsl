@@ -75,7 +75,7 @@
             <xsl:when test="fn">
                 <xsl:apply-templates/>
             </xsl:when>
-            <xsl:when test="ancestor::table-wrap">
+            <xsl:when test="ancestor::table-wrap |ancestor::table">
                 <head>
                     <xsl:if test="@xml:lang!=''">
                         <xsl:copy-of select="@xml:lang"/>
@@ -104,14 +104,19 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="graphic-file">
-        <desc>
+        <graphic>
+            <xsl:if test="@format">
+                <xsl:attribute name="style">
+                    <xsl:value-of select="@format"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="@version">
-                <xsl:attribute name="type">
+                <xsl:attribute name="source">
                     <xsl:value-of select="@version"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="@filename">
-                <xsl:attribute name="source">
+                <xsl:attribute name="url">
                     <xsl:value-of select="@filename"/>
                 </xsl:attribute>
             </xsl:if>
@@ -126,7 +131,7 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
-        </desc>
+        </graphic>
     </xsl:template>
     <!-- Wiley -->
     <xsl:template match="wiley:figure">
@@ -334,6 +339,18 @@
         <m:mover>
             <xsl:apply-templates/>
         </m:mover>
+    </xsl:template>
+    <!--IOP-->
+    <xsl:template match="inline-eqn">
+        <formula notation="none">
+            <xsl:apply-templates/>
+        </formula>
+    </xsl:template>
+    <xsl:template match="math-text">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="upright">
+        <xsl:apply-templates/>
     </xsl:template>
 	
 </xsl:stylesheet>
