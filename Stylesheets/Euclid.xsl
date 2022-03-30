@@ -2,48 +2,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
-    <xsl:variable name="codeGenreDuke">
-        <xsl:value-of select="normalize-space(//record/@type)"/>
-    </xsl:variable>
-    <xsl:variable name="codeGenreDuke2">
-        <xsl:choose>
-            <xsl:when test="$codeGenreDuke='article'">article</xsl:when>
-            <xsl:when test="$codeGenreDuke='frontmatter'">other</xsl:when>
-            <xsl:when test="$codeGenreDuke='backmatter'">other</xsl:when>
-            <xsl:when test="$codeGenreDuke='review'">review-article</xsl:when>
-            <xsl:when test="$codeGenreDuke='index'">other</xsl:when>
-            <xsl:when test="$codeGenreDuke='books-received'">other</xsl:when>
-            <xsl:when test="$codeGenreDuke='correction'">article</xsl:when>
-            <xsl:when test="$codeGenreDuke='laws'">case-report</xsl:when>
-            <xsl:when test="$codeGenreDuke='lists'">article</xsl:when>
-            <xsl:when test="$codeGenreDuke='news'">article</xsl:when>
-            <xsl:when test="$codeGenreDuke='correction'">article</xsl:when>
-            <xsl:when test="$codeGenreDuke='notes'">other</xsl:when>
-            <xsl:when test="$codeGenreDuke='problems'">other</xsl:when>
-            <xsl:when test="$codeGenreDuke='publications'">article</xsl:when>
-            <xsl:when test="$codeGenreDuke='retracted'">other</xsl:when>
-            <xsl:otherwise>
-                <xsl:text>other</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    <!-- lien vers data.istex.fr -->
-    <xsl:variable name="codeGenreArkDuke">
-        <xsl:choose>
-            <xsl:when test="$codeGenreDuke2='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="$codeGenreDuke2='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="$codeGenreDuke2='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="$codeGenreDuke2='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="$codeGenreDuke2='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="$codeGenreDuke2='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="$codeGenreDuke2='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="$codeGenreDuke2='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="$codeGenreDuke2='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="$codeGenreDuke2='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="$codeGenreDuke2='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="$codeGenreDuke2='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
     <!-- codeLangue -->
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
@@ -122,15 +80,15 @@
                         <!-- niveau article / chapter -->
                         <note type="content-type">
                             <xsl:attribute name="subtype">
-                                <xsl:value-of select="$codeGenreDuke2"/>
+                                <xsl:value-of select="$codeGenreIstex"/>
                             </xsl:attribute>
                             <xsl:attribute name="source">
-                                <xsl:value-of select="$codeGenreDuke"/>
+                                <xsl:value-of select="normalize-space($codeGenreAll)"/>
                             </xsl:attribute>
                             <xsl:attribute name="scheme">
-                                <xsl:value-of select="$codeGenreArkDuke"/>
+                                <xsl:value-of select="$codeGenreArk"/>
                             </xsl:attribute>
-                            <xsl:value-of select="$codeGenreDuke2"/>
+                            <xsl:value-of select="$codeGenreIstex"/>
                         </note>
                         <!-- niveau revue -->
                         <note type="publication-type" subtype="journal">

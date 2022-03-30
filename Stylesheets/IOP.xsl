@@ -49,57 +49,6 @@
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
     
-    <xsl:variable name="codeGenreIOP1">
-        <xsl:value-of select="//article-data/article-type/@type"/>
-    </xsl:variable>
-    <xsl:variable name="codeGenreIOP">
-        <xsl:choose>
-            <xsl:when test="normalize-space($codeGenreIOP1)='paper'">research-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='lett'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='letter'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='rev'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='review'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='edit'">editorial</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='error'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='note'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='prod'">book-reviews</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='abs'">abstract</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='abstract'">abstract</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='addendum'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='announcement'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='article-commentary'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='book-review'">book-reviews</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='books-received'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='brief-report'">brief-communication</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='calendar'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='case-report'">case-report</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='collection'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='correction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='dissertation'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='discussion'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='editorial'">editorial</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='in-brief'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='introduction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='meeting-report'">conference</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='news'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='obituary'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='oration'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='other'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='partial-retraction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='poster'">conference</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='product-review'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='rapid-communication'">brief-communication</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='reply'">article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='reprint'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='research-article'">research-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='retraction'">other</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='review-article'">review-article</xsl:when>
-            <xsl:when test="normalize-space($codeGenreIOP1)='translation'">other</xsl:when>
-            <xsl:otherwise>
-                <xsl:text>other</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
     <xsl:template match="article | header">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
@@ -152,25 +101,23 @@
                     <notesStmt>
                         <note type="content-type">
                             <xsl:choose>
-                                <xsl:when test="$codeGenreIOP">
+                                <xsl:when test="$codeGenreAll">
                                     <xsl:attribute name="subtype">
-                                        <xsl:value-of select="$codeGenreIOP"/>
+                                        <xsl:value-of select="$codeGenreIstex"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:value-of select="$codeGenreIOP1"/>
+                                        <xsl:value-of select="$codeGenreAll"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
                                         <xsl:value-of select="$codeGenreArk"/>
                                     </xsl:attribute>
-                                    <xsl:value-of select="$codeGenreIOP"/>
+                                    <xsl:value-of select="$codeGenreIstex"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:if test="not(//article-data/article-type/@type)">
-                                        <xsl:attribute name="subtype">N/A</xsl:attribute>
-                                        <xsl:attribute name="source">ISTEX</xsl:attribute>
-                                        <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
-                                        <xsl:text>other</xsl:text>
-                                    </xsl:if>
+                                    <xsl:attribute name="subtype">N/A</xsl:attribute>
+                                    <xsl:attribute name="source">ISTEX</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                    <xsl:text>other</xsl:text>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </note>

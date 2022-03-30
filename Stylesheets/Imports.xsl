@@ -11,6 +11,7 @@
     <xsl:include href="ISOifiers.xsl"/>
     <xsl:include href="Organisations.xsl"/>
     <xsl:include href="subjectCodes.xsl"/>
+    <xsl:include href="genreCodes.xsl"/>
     <xsl:include href="Bibliography.xsl"/>
     <xsl:include href="Tables.xsl"/>
 	<xsl:include href="Figures.xsl"/>

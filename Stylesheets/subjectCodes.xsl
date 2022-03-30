@@ -8,36 +8,7 @@
             <xd:p>Parsing of Degruyter ebooks subject codes and 'code genre' classification ISTEX</xd:p>
         </xd:desc>
     </xd:doc>
-    
-    <!--code genre-->
-    
-    
-    <xsl:variable name="codeGenreAll" select="$codeGenreSB|
-        $codeGenre2Elsevier|
-        $codeGenreDuke2|
-        $codeGenre|
-        $codeGenreSJ|
-        $codeGenreRSCSource|
-        $codeGenreBrepols|
-        $codeGenreA|
-        $codeGenreSage|
-        $codeGenreIOP"/>
-    <xsl:variable name="codeGenreArk">
-        <xsl:choose>
-            <xsl:when test="$codeGenreAll='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="$codeGenreAll='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="$codeGenreAll='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="$codeGenreAll='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="$codeGenreAll='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="$codeGenreAll='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="$codeGenreAll='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="$codeGenreAll='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="$codeGenreAll='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="$codeGenreAll='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="$codeGenreAll='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="$codeGenreAll='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
+   
     <xsl:template name="identifySubjectCode">
         <xsl:param name="theCode"/>
         <xsl:choose>

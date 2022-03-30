@@ -12,310 +12,6 @@
     </xd:doc>
 
     <xsl:output encoding="UTF-8" method="xml"/>
-    <!-- code genre -->
-    <xsl:variable name="codeGenre2">
-        <xsl:choose>
-            <xsl:when test="//article/@article-type[string-length() &gt; 0]">
-                <xsl:value-of select="normalize-space(//article/@article-type)"/>
-            </xsl:when>
-            <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
-            <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
-            <!-- RSC ebooks -->
-            <xsl:when test="contains(/article/front/journal-meta/publisher/publisher-name,'The Royal Society of Chemistry')">
-                <xsl:choose>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Appendix')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CD-ROM information')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conclusion')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contents')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conversion factor')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Epilogue')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front Cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Glossary')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Introduction')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Learning outcomes')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Subject index')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summarised contents')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summary of')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Tutorial chemistry texts')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of tables')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abbreviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Acknowledgements')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abberviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The future')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Authors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Editors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Answers to exercises')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Author index')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Bibliography')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Biographical Notes')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Boxes')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Concluding remarks')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CONTENTS')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contributors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial announcement')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Errata')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Erratum')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Foreword')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Forword')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Further reading')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Symbols and abbreviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Table of Contents')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The molecular world course team')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The target: β-Aminoalcohols')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Volume preface')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Recommended reading')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Questions: Answers and comments')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'books and reviews')">book-reviews</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original'],'Case reports')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original']"/>
-            </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject,'Chapter')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject"/>
-            </xsl:when>
-            <xsl:when test="//pubfm/categ/@id[string-length() &gt; 0]">
-                <xsl:value-of select="$codeGenreNature"/>
-            </xsl:when>
-            <xsl:when test="//article/front/article-meta/title-group/subtitle[1] [string-length() &gt; 0]">
-                <!-- traitement spécial RSC-ebooks -->
-                <xsl:choose>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Preface')">editorial</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Forward')">editorial</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1]| /article/front/article-meta/title-group/title,'Introduction')">editorial</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Introduction and general aspects')">editorial</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Back Cover')">other</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Front cover')">other</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Subject Index')">other</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Author Index')">other</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Contents')">other</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Front matter')">other</xsl:when>
-                    <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Abbreviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title[1],'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <!-- si non présence d'article-type dans la notice d'origine -->
-            <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="//article/front/article-meta/article-categories/subj-group/subject='ORIGINAL RESEARCH PAPERS'">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0] or contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
-                    <xsl:when test="//article/front/article-meta/abstract[string-length()&gt; 0]">article</xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>other</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    
-    <xsl:variable name="codeGenre">
-        <xsl:choose>
-            <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
-            <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
-            <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
-            <xsl:when test="/article/front/journal-meta/publisher/publisher-name='The Royal Society of Chemistry' and not(//article/@article-type)">
-                <xsl:choose>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Chapter') or contains(//article/front/article-meta/title-group/article-title,'CHAPTER')">chapter</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Appendix')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CD-ROM information')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conclusion')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contents')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Conversion factor')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Epilogue')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front Cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Glossary')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Introduction')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Learning outcomes')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Subject index')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summarised contents')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Summary of')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Tutorial chemistry texts')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'List of tables')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abbreviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Acknowledgements')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Front matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Abberviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The future')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Authors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'About the Editors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Answers to exercises')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Author index')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back matter')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Back Cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Bibliography')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Biographical Notes')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Boxes')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Concluding remarks')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'CONTENTS')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Contributors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editorial announcement')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Cover')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Errata')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Erratum')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Foreword')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Forword')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Further reading')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Symbols and abbreviations')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Table of Contents')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The molecular world course team')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'The target: β-Aminoalcohols')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Volume preface')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Recommended reading')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Questions: Answers and comments')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'Editors')">other</xsl:when>
-                    <xsl:when test="contains(//article/front/article-meta/title-group/article-title,'books and reviews')">book-reviews</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='astronomical-observation'">research-article</xsl:when>
-            <xsl:when test="$codeGenre2='magnetical-observation'">research-article</xsl:when>
-            <xsl:when test="$codeGenre2='meteorological-observation'">research-article</xsl:when>
-            <xsl:when test="$codeGenre2='abstract'">abstract</xsl:when>
-            <xsl:when test="$codeGenre2='Abstract'">abstract</xsl:when>
-            <xsl:when test="$codeGenre2='addendum'">other</xsl:when>
-            <xsl:when test="$codeGenre2='announcement'">other</xsl:when>
-            <xsl:when test="$codeGenre2='article-commentary'">review-article</xsl:when>
-            <xsl:when test="$codeGenre2='article'">article</xsl:when>
-            <xsl:when test="$codeGenre2='Article'">article</xsl:when>
-            <xsl:when test="$codeGenre2='book-review'">book-reviews</xsl:when>
-            <xsl:when test="$codeGenre2='books-received'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='brief-report'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenre2='calendar'">other</xsl:when>
-            <xsl:when test="$codeGenre2='case-report'">case-report</xsl:when>
-            <xsl:when test="$codeGenre2='Case reports'">case-report</xsl:when>
-            <xsl:when test="$codeGenre2='collection'">other</xsl:when>
-            <xsl:when test="$codeGenre2='correction'">article</xsl:when>
-            <xsl:when test="$codeGenre2='errata'">article</xsl:when>
-            <xsl:when test="$codeGenre2='dissertation'">other</xsl:when>
-            <!-- pour ACS -->
-            <xsl:when test="$codeGenre2='discussion'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='editorial'">editorial</xsl:when>
-            <xsl:when test="$codeGenre2='experiment'">article</xsl:when>
-            <xsl:when test="$codeGenre2='in-brief'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">brief-communication</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='introduction'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='letter'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='lecture'">article</xsl:when>
-            <xsl:when test="$codeGenre2='magazine'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='meeting-report'">conference</xsl:when>
-            <xsl:when test="$codeGenre2='news'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='paper-read'">article</xsl:when>
-            <xsl:when test="$codeGenre2='obituary'">other</xsl:when>
-            <xsl:when test="$codeGenre2='oration'">other</xsl:when>
-            <xsl:when test="$codeGenre2='other'">
-                <xsl:choose>
-                    <xsl:when test="//article/front/article-meta/article-categories/subj-group/subject='ORIGINAL RESEARCH PAPERS'">research-article</xsl:when>
-                    <xsl:when test="//article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:when test="//article/front/article-meta/abstract[string-length() &gt; 0] or contains(//article/front/article-meta/fpage,'s') or contains(//article/front/article-meta/fpage,'S')">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre2='partial-retraction'">other</xsl:when>
-            <xsl:when test="$codeGenre2='pdf-issue'">article</xsl:when>
-            <xsl:when test="$codeGenre2='poster'">conference</xsl:when>
-            <xsl:when test="$codeGenre2='product-review'">review-article</xsl:when>
-            <xsl:when test="$codeGenre2='rapid-communication'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenre2='reply'">article</xsl:when>
-            <xsl:when test="$codeGenre2='reprint'">article</xsl:when>
-            <xsl:when test="$codeGenre2='research-article'">research-article</xsl:when>
-            <xsl:when test="$codeGenre2='retraction'">other</xsl:when>
-            <xsl:when test="$codeGenre2='review-article'">review-article</xsl:when>
-            <xsl:when test="$codeGenre2='translation'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject,'Chapter')">chapter</xsl:when>
-            <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    <!-- lien vers data.istex.fr -->
-    <xsl:variable name="codeGenreArk2">
-        <xsl:choose>
-            <xsl:when test="$codeGenre='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
-            <xsl:when test="$codeGenre='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
-            <xsl:when test="$codeGenre='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-            <xsl:when test="$codeGenre='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
-            <xsl:when test="$codeGenre='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
-            <xsl:when test="$codeGenre='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
-            <xsl:when test="$codeGenre='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
-            <xsl:when test="$codeGenre='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="$codeGenre='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
-            <xsl:when test="$codeGenre='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
-            <xsl:when test="$codeGenre='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="$codeGenre='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
     
     <!-- SG ajout corrections des titres vides -->
     <xsl:variable name="repriseTitreVide">
@@ -707,6 +403,20 @@
                     <notesStmt>
                         <!-- niveau article / chapter -->
                         <xsl:choose>
+                            <xsl:when test="//pubfm/categ/@id[string-length() &gt; 0]">
+                                <note type="content-type">
+                                    <xsl:attribute name="subtype">
+                                        <xsl:value-of select="$codeGenreIstex"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="source">
+                                        <xsl:value-of select="normalize-space($codeGenreNature)"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="scheme">
+                                        <xsl:value-of select="$codeGenreArk"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$codeGenreIstex"/>
+                                </note>
+                            </xsl:when>
                             <xsl:when test="/article/@article-type='other' or /article/@article-type='other'">
                                 <note type="content-type"
                                     source="other"
@@ -739,13 +449,16 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <note type="content-type">
+                                    <xsl:attribute name="subtype">
+                                        <xsl:value-of select="$codeGenreIstex"/>
+                                    </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:value-of select="$codeGenre2"/>
+                                        <xsl:value-of select="normalize-space($codeGenreAll)"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
-                                        <xsl:value-of select="$codeGenreArk2"/>
+                                        <xsl:value-of select="$codeGenreArk"/>
                                     </xsl:attribute>
-                                    <xsl:value-of select="$codeGenre"/>
+                                    <xsl:value-of select="$codeGenreIstex"/>
                                 </note>
                             </xsl:otherwise>
                         </xsl:choose>

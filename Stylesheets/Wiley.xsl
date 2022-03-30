@@ -6,49 +6,7 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xpath-default-namespace="http://www.wiley.com/namespaces/wiley"
 	exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
-    <!-- date de creation -->
-    <!-- code genre -->
-    <xsl:variable name="codeGenre1">
-        <xsl:value-of select="normalize-space(//component/header/publicationMeta[@level='unit']/@type)"/>
-    </xsl:variable>
-    <xsl:variable name="codeGenreA">
-        <xsl:choose>
-            <xsl:when test="$codeGenre1='chapter'">
-                <xsl:choose>
-                    <xsl:when test="contains(//header/publicationMeta[@level='unit']/titleGroup/title[@type='tocHeading1'],'Brief communications')">brief-communication</xsl:when>
-                    <xsl:when test="contains(//header/publicationMeta[@level='unit']/titleGroup/title[@type='tocHeading1'],'Review Paper')">review-article</xsl:when>
-                    <xsl:otherwise>
-                        <xsl:choose>
-                            <xsl:when test="//abstract[string-length()&gt; 0]">article</xsl:when>
-                            <xsl:otherwise>other</xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenre1='technicalNote'">article</xsl:when>
-            <xsl:when test="$codeGenre1='article'">article</xsl:when>
-            <xsl:when test="$codeGenre1='reviewArticle'">review-article</xsl:when>
-            <xsl:when test="$codeGenre1='editorial'">editorial</xsl:when>
-            <xsl:when test="$codeGenre1='bookReview'">book-reviews</xsl:when>
-            <xsl:when test="$codeGenre1='shortCommunication'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenre1='shortArticle'">article</xsl:when>
-            <xsl:when test="$codeGenre1='rapidCommunication'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenre1='caseStudy'">case-report</xsl:when>
-            <xsl:when test="$codeGenre1='abstract'">abstract</xsl:when>
-            <xsl:when test="$codeGenre1='letter'">review-article</xsl:when>
-            <xsl:when test="$codeGenre1='news'">article</xsl:when>
-            <xsl:when test="$codeGenre1='commentary'">article</xsl:when>
-            <xsl:when test="$codeGenre1='meetingReport'">conference</xsl:when>
-            <xsl:when test="$codeGenre1='rapidPublication'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenre1='serialArticle'">article</xsl:when>
-            <xsl:when test="$codeGenre1='erratum'">article</xsl:when>
-            <xsl:when test="$codeGenre1='miscellaneous'">other</xsl:when>
-            <xsl:when test="$codeGenre1='historicalPerspective'">research-article</xsl:when>
-            <xsl:otherwise>
-                <xsl:text>other</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
+    
     <!-- codeLangue -->
     <xsl:variable name="codeLangue">
         <xsl:choose>
@@ -332,16 +290,26 @@
                     <notesStmt>
                         <!-- niveau article / chapter -->
                         <note type="content-type">
-                            <xsl:attribute name="subtype">
-                                <xsl:value-of select="$codeGenreA"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="source">
-                                <xsl:value-of select="$codeGenre1"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="scheme">
-                                <xsl:value-of select="$codeGenreArk"/>
-                            </xsl:attribute>
-                            <xsl:value-of select="$codeGenreA"/>
+                            <xsl:choose>
+                                <xsl:when test="$codeGenreAll">
+                                    <xsl:attribute name="subtype">
+                                        <xsl:value-of select="$codeGenreIstex"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="source">
+                                        <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="scheme">
+                                        <xsl:value-of select="$codeGenreArk"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$codeGenreIstex"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="subtype">N/A</xsl:attribute>
+                                    <xsl:attribute name="source">ISTEX</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                    <xsl:text>other</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </note>
                         <!-- niveau revue / book -->
                         <xsl:choose>
@@ -569,7 +537,7 @@
             <!-- Genre     -->
             <xsl:if test="publicationMeta[@level='unit']/@type[string-length()&gt; 0]">
                 <xsl:attribute name="type">
-                    <xsl:value-of select="normalize-space($codeGenreA)"/>
+                    <xsl:value-of select="$codeGenreIstex"/>
                 </xsl:attribute>
             </xsl:if>
             <analytic>

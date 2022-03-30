@@ -5,35 +5,8 @@
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:m="http://www.w3.org/1998/Math/MathML" exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
-    <xsl:variable name="codeGenreSpringerJournal">
-        <xsl:value-of select="normalize-space(//ArticleInfo/@ArticleType | //BookInfo/@BookProductType)"/>
-    </xsl:variable>
-    <xsl:variable name="codeGenreSJ">
-        <xsl:choose>
-            <xsl:when test="$codeGenreSpringerJournal='Graduate/advanced undergraduate textbook'">chapter</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='OriginalPaper'">
-                <xsl:choose>
-                    <xsl:when test="//Abstract and //Keyword">research-article</xsl:when>
-                    <xsl:when test="//Abstract">article</xsl:when>
-                    <xsl:otherwise>article</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='Article'">article</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='Report'">case-report</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='Letter'">article</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='Legacy'">article</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='News'">article</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='ContinuingEducation'">article</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='ReviewPaper'">review-article</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='BriefCommunication'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='EditorialNotes'">editorial</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='BookReview'">book-reviews</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='Abstract'">abstract</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='CaseReport'">case-report</xsl:when>
-            <xsl:when test="$codeGenreSpringerJournal='Announcement' and //Abstract[string-length()&gt; 0]">article</xsl:when>
-            <xsl:otherwise>other</xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
+    
+    
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="/Publisher[not(Series/Book/descendant::Chapter)]">
         <xsl:variable name="countArticle">
@@ -90,16 +63,26 @@
                     <notesStmt>
                         <!-- niveau book -->
                         <note type="content-type">
-                            <xsl:attribute name="subtype">
-                                <xsl:value-of select="$codeGenreSJ"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="source">
-                                <xsl:value-of select="$codeGenreSpringerJournal"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="scheme">
-                                <xsl:value-of select="$codeGenreArk"/>
-                            </xsl:attribute>
-                            <xsl:value-of select="$codeGenreSJ"/>
+                            <xsl:choose>
+                                <xsl:when test="$codeGenreAll">
+                                    <xsl:attribute name="subtype">
+                                        <xsl:value-of select="$codeGenreIstex"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="source">
+                                        <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="scheme">
+                                        <xsl:value-of select="$codeGenreArk"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$codeGenreIstex"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="subtype">N/A</xsl:attribute>
+                                    <xsl:attribute name="source">ISTEX</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                    <xsl:text>other</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </note>
                         <!-- niveau revue / book -->
                         <xsl:choose>

@@ -12,55 +12,8 @@
     todo : publisher depuis $docIssue
     todo : type de publication / type de contenu-->
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <!-- ******************* Genre ******************************-->
-    <xsl:variable name="codeGenreBrepolsBook">
-        <xsl:value-of select="//body/book-part/@book-part-type"/>
-    </xsl:variable>
-    <xsl:variable name="codeGenreBrepols">
-        <xsl:choose>
-            <xsl:when test="$codeGenreBrepolsBook='abstract'">abstract</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='addendum'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='announcement'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='article-commentary'">review-article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='book-review'">book-reviews</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='books-received'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='brief-report'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='calendar'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='case-report'">case-report</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='chapter'">chapter</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='collection'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='correction'">article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='dissertation'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='discussion'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='editorial'">editorial</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='in-brief'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='introduction'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='letter'">article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='meeting-report'">conference</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='news'">article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='obituary'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='oration'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='other'">
-                <xsl:choose>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0] and contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='partial-retraction'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='poster'">conference</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='product-review'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='rapid-communication'">brief-communication</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='reply'">article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='reprint'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='research-article'">research-article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='retraction'">other</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='review-article'">review-article</xsl:when>
-            <xsl:when test="$codeGenreBrepolsBook='translation'">other</xsl:when>
-            <xsl:otherwise>
-                <xsl:text>other</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
+    
+    <!-- brill-rgrwo -->
     
     <xsl:variable name="titleToDeduceGenre">
         <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/title-group/title)"/>
@@ -670,99 +623,106 @@
                                     <xsl:choose>
                                         <!-- brepols -->
                                         <xsl:when test="starts-with(//book-id[@pub-id-type='doi'],'10.1484/')">
+                                            <xsl:attribute name="subtype">
+                                                <xsl:value-of select="$codeGenreIstex"/>
+                                            </xsl:attribute>
                                             <xsl:attribute name="source">
-                                                <xsl:value-of select="$codeGenreBrepolsBook"/>
+                                                <xsl:value-of select="normalize-space($codeGenreAll)"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="scheme">
                                                 <xsl:value-of select="$codeGenreArk"/>
                                             </xsl:attribute>
-                                            <xsl:value-of select="$codeGenreBrepols"/>
+                                            <xsl:value-of select="$codeGenreIstex"/>
                                         </xsl:when>
-                                        <!-- Brill-ebooks -->
-                                        <xsl:when test="contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'Chapter')
-                                            or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'CHAPTER')
-                                            or contains($titleToDeduceGenre,'Chapter')
-                                            or contains($titleToDeduceGenre,'CHAPTER')
-                                            or contains($titleToDeduceGenre,'MITRAIC')
-                                            or contains($titleToDeduceGenre,'DIVINITÉS')
-                                            or contains($titleToDeduceGenre,'IDÉE')
-                                            or contains($titleToDeduceGenre,'SYMBOLS')
-                                            or contains($titleToDeduceGenre,'PERSPECTIVES')
-                                            or contains($titleToDeduceGenre,'Survey')">
-                                            <xsl:attribute name="source">chapter</xsl:attribute>
-                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
-                                            <xsl:text>chapter</xsl:text>
-                                        </xsl:when>
-                                        <xsl:when test="contains($titleToDeduceGenre,'Preliminary')
-                                            or contains($titleToDeduceGenre,'INDEX')
-                                            or contains($titleToDeduceGenre,'ABRÉVIATIONS')
-                                            or contains($titleToDeduceGenre,'AUTEURS MODERNES')
-                                            or contains($titleToDeduceGenre,'Abbreviations')
-                                            or contains($titleToDeduceGenre,'ANNEXE')
-                                            or contains($titleToDeduceGenre,'BIBLIO')
-                                            or contains($titleToDeduceGenre,'Biblio')
-                                            or contains($titleToDeduceGenre,'BAS-RELIEFS')
-                                            or contains($titleToDeduceGenre,'BRVTTIVM')
-                                            or contains($titleToDeduceGenre,'CONCORDANC')
-                                            or contains($titleToDeduceGenre,'Concordanc')
-                                            or contains($titleToDeduceGenre,'PICENVM')
-                                            or contains($titleToDeduceGenre,'ADDEND')
-                                            or contains($titleToDeduceGenre,'Errata')
-                                            or contains($titleToDeduceGenre,'ACKNOWLEDGEMENTS')
-                                            or contains($titleToDeduceGenre,'ABBILDUNGEN')
-                                            or contains($titleToDeduceGenre,'Abbildungen')
-                                            or contains($titleToDeduceGenre,'REGISTER')
-                                            or contains($titleToDeduceGenre,'NACHTRÄGE')
-                                            or contains($titleToDeduceGenre,'ÉTUDES PRÉLIMINAIRES')
-                                            or contains($titleToDeduceGenre,'RELIGIONS IN THE GRAECO')
-                                            or contains($titleToDeduceGenre,'RELIGIOUS GRADES AND FUNCTIONS')
-                                            or contains($titleToDeduceGenre,'CORRIGENDA')
-                                            or contains($titleToDeduceGenre,'CONCORDANCE')
-                                            or contains($titleToDeduceGenre,'LITERATURVERZEICHNIS')
-                                            or contains($titleToDeduceGenre,'PLANCHES')
-                                            or contains($titleToDeduceGenre,'Planches')
-                                            or contains($titleToDeduceGenre,'Carte')
-                                            or contains($titleToDeduceGenre,'CARTE')
-                                            or contains($titleToDeduceGenre,'PREFACE')
-                                            or contains($titleToDeduceGenre,'Preface')
-                                            or contains($titleToDeduceGenre,'PREFAZIONE')
-                                            or contains($titleToDeduceGenre,'Prefazione')
-                                            or contains($titleToDeduceGenre,'Matière Preliminaire')
-                                            or contains($titleToDeduceGenre,'Bibliographie Thématique')
-                                            or contains($titleToDeduceGenre,'Preliminary material')
-                                            or contains($titleToDeduceGenre,'Figures')
-                                            or contains($titleToDeduceGenre,'FIGURES')
-                                            or contains($titleToDeduceGenre,'GLOSSA')
-                                            or contains($titleToDeduceGenre,'Glossa')
-                                            or contains($titleToDeduceGenre,'LIST')
-                                            or contains($titleToDeduceGenre,'MAP')
-                                            or contains($titleToDeduceGenre,'Map')
-                                            or contains($titleToDeduceGenre,'NOTE')
-                                            or contains($titleToDeduceGenre,'Plates')
-                                            or contains($titleToDeduceGenre,'PLATE')
-                                            or contains($titleToDeduceGenre,'PHOTONACHWEIS')
-                                            or contains($titleToDeduceGenre,'Photonachweis')
-                                            or contains($titleToDeduceGenre,'PUTE I')
-                                            or contains($titleToDeduceGenre,'INDICE')
-                                            or contains($titleToDeduceGenre,'Index')
-                                            or contains($titleToDeduceGenre,'INDEX')
-                                            or contains($titleToDeduceGenre,'CIMRM')
-                                            or contains($titleToDeduceGenre,'REALIA')
-                                            or contains($titleToDeduceGenre,'TAFEL')
-                                            or contains($titleToDeduceGenre,'Tafel')
-                                            or contains($titleToDeduceGenre,'TAVOL')
-                                            or contains($titleToDeduceGenre,'TAV.')
-                                            or contains($titleToDeduceGenre,'Tav.')
-                                            or contains($titleToDeduceGenre,'TABLE')
-                                            or contains($titleToDeduceGenre,'Table')
-                                            or contains($titleToDeduceGenre,'TABEL')
-                                            or contains($titleToDeduceGenre,'TEXTSTELLEN')
-                                            or contains($titleToDeduceGenre,'SVPPLEMENTVM')
-                                            or contains($titleToDeduceGenre,'REFERENCES')
-                                            ">
-                                            <xsl:attribute name="source">other</xsl:attribute>
-                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
-                                            <xsl:text>other</xsl:text>
+                                        <!-- Brill-rgrwo -->
+                                        <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title">
+                                            <xsl:choose>
+                                                <xsl:when test="contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'Chapter')
+                                                    or contains(//book-part[not(body/book-part)]/book-part-meta/title-group/label,'CHAPTER')
+                                                    or contains($titleToDeduceGenre,'Chapter')
+                                                    or contains($titleToDeduceGenre,'CHAPTER')
+                                                    or contains($titleToDeduceGenre,'MITRAIC')
+                                                    or contains($titleToDeduceGenre,'DIVINITÉS')
+                                                    or contains($titleToDeduceGenre,'IDÉE')
+                                                    or contains($titleToDeduceGenre,'SYMBOLS')
+                                                    or contains($titleToDeduceGenre,'PERSPECTIVES')
+                                                    or contains($titleToDeduceGenre,'Survey')">
+                                                    <xsl:attribute name="source">chapter</xsl:attribute>
+                                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
+                                                    <xsl:text>chapter</xsl:text>
+                                                </xsl:when>
+                                                <xsl:when test="contains($titleToDeduceGenre,'Preliminary')
+                                                    or contains($titleToDeduceGenre,'INDEX')
+                                                    or contains($titleToDeduceGenre,'ABRÉVIATIONS')
+                                                    or contains($titleToDeduceGenre,'AUTEURS MODERNES')
+                                                    or contains($titleToDeduceGenre,'Abbreviations')
+                                                    or contains($titleToDeduceGenre,'ANNEXE')
+                                                    or contains($titleToDeduceGenre,'BIBLIO')
+                                                    or contains($titleToDeduceGenre,'Biblio')
+                                                    or contains($titleToDeduceGenre,'BAS-RELIEFS')
+                                                    or contains($titleToDeduceGenre,'BRVTTIVM')
+                                                    or contains($titleToDeduceGenre,'CONCORDANC')
+                                                    or contains($titleToDeduceGenre,'Concordanc')
+                                                    or contains($titleToDeduceGenre,'PICENVM')
+                                                    or contains($titleToDeduceGenre,'ADDEND')
+                                                    or contains($titleToDeduceGenre,'Errata')
+                                                    or contains($titleToDeduceGenre,'ACKNOWLEDGEMENTS')
+                                                    or contains($titleToDeduceGenre,'ABBILDUNGEN')
+                                                    or contains($titleToDeduceGenre,'Abbildungen')
+                                                    or contains($titleToDeduceGenre,'REGISTER')
+                                                    or contains($titleToDeduceGenre,'NACHTRÄGE')
+                                                    or contains($titleToDeduceGenre,'ÉTUDES PRÉLIMINAIRES')
+                                                    or contains($titleToDeduceGenre,'RELIGIONS IN THE GRAECO')
+                                                    or contains($titleToDeduceGenre,'RELIGIOUS GRADES AND FUNCTIONS')
+                                                    or contains($titleToDeduceGenre,'CORRIGENDA')
+                                                    or contains($titleToDeduceGenre,'CONCORDANCE')
+                                                    or contains($titleToDeduceGenre,'LITERATURVERZEICHNIS')
+                                                    or contains($titleToDeduceGenre,'PLANCHES')
+                                                    or contains($titleToDeduceGenre,'Planches')
+                                                    or contains($titleToDeduceGenre,'Carte')
+                                                    or contains($titleToDeduceGenre,'CARTE')
+                                                    or contains($titleToDeduceGenre,'PREFACE')
+                                                    or contains($titleToDeduceGenre,'Preface')
+                                                    or contains($titleToDeduceGenre,'PREFAZIONE')
+                                                    or contains($titleToDeduceGenre,'Prefazione')
+                                                    or contains($titleToDeduceGenre,'Matière Preliminaire')
+                                                    or contains($titleToDeduceGenre,'Bibliographie Thématique')
+                                                    or contains($titleToDeduceGenre,'Preliminary material')
+                                                    or contains($titleToDeduceGenre,'Figures')
+                                                    or contains($titleToDeduceGenre,'FIGURES')
+                                                    or contains($titleToDeduceGenre,'GLOSSA')
+                                                    or contains($titleToDeduceGenre,'Glossa')
+                                                    or contains($titleToDeduceGenre,'LIST')
+                                                    or contains($titleToDeduceGenre,'MAP')
+                                                    or contains($titleToDeduceGenre,'Map')
+                                                    or contains($titleToDeduceGenre,'NOTE')
+                                                    or contains($titleToDeduceGenre,'Plates')
+                                                    or contains($titleToDeduceGenre,'PLATE')
+                                                    or contains($titleToDeduceGenre,'PHOTONACHWEIS')
+                                                    or contains($titleToDeduceGenre,'Photonachweis')
+                                                    or contains($titleToDeduceGenre,'PUTE I')
+                                                    or contains($titleToDeduceGenre,'INDICE')
+                                                    or contains($titleToDeduceGenre,'Index')
+                                                    or contains($titleToDeduceGenre,'INDEX')
+                                                    or contains($titleToDeduceGenre,'CIMRM')
+                                                    or contains($titleToDeduceGenre,'REALIA')
+                                                    or contains($titleToDeduceGenre,'TAFEL')
+                                                    or contains($titleToDeduceGenre,'Tafel')
+                                                    or contains($titleToDeduceGenre,'TAVOL')
+                                                    or contains($titleToDeduceGenre,'TAV.')
+                                                    or contains($titleToDeduceGenre,'Tav.')
+                                                    or contains($titleToDeduceGenre,'TABLE')
+                                                    or contains($titleToDeduceGenre,'Table')
+                                                    or contains($titleToDeduceGenre,'TABEL')
+                                                    or contains($titleToDeduceGenre,'TEXTSTELLEN')
+                                                    or contains($titleToDeduceGenre,'SVPPLEMENTVM')
+                                                    or contains($titleToDeduceGenre,'REFERENCES')
+                                                    ">
+                                                    <xsl:attribute name="source">other</xsl:attribute>
+                                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                                    <xsl:text>other</xsl:text>
+                                                </xsl:when>
+                                            </xsl:choose>
                                         </xsl:when>
                                         <!-- Numérique premium -->
                                         <xsl:when test="collection-meta[@collection-type='book collection']">

@@ -14,27 +14,6 @@
     <!-- Feuille de style concernant les données:
     - Open Edition ebooks
     -->
-    <xsl:variable name="codeGenreOE">
-        <xsl:value-of select="normalize-space(//mets:xmlData[dcterms:type!='book']/dcterms:type)"/>
-    </xsl:variable>
-    <xsl:variable name="codeGenreOE2">
-        <xsl:choose>
-            <xsl:when test="$codeGenreOE='chapter'">chapter</xsl:when>
-            <xsl:when test="$codeGenreOE='preface'">editorial</xsl:when>
-            <xsl:when test="$codeGenreOE='editorial'">editorial</xsl:when>
-            <xsl:otherwise>
-                <xsl:text>other</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    <!-- lien vers data.istex.fr -->
-    <xsl:variable name="codeGenreArkOE">
-        <xsl:choose>
-            <xsl:when test="$codeGenreOE2='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
-            <xsl:when test="$codeGenreOE2='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
-            <xsl:when test="$codeGenreOE2='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
-        </xsl:choose>
-    </xsl:variable>
     
     <xsl:template match="mets:mets">
         <TEI  xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
@@ -79,16 +58,28 @@
                         <date type="published" when="{//mets:xmlData[dcterms:type!='book']/dcterms:issued}"/>
                     </publicationStmt>
                     <notesStmt>
-                        <note type="content-type">
-                            <xsl:attribute name="subtype">
-                                <xsl:value-of select="$codeGenreOE2"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="source">
-                                <xsl:value-of select="$codeGenreOE"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="scheme"><xsl:value-of select="$codeGenreArkOE"/></xsl:attribute>
-                            <xsl:value-of select="$codeGenreOE2"/>
-                        </note>
+                            <note type="content-type">
+                                <xsl:choose>
+                                    <xsl:when test="$codeGenreAll">
+                                        <xsl:attribute name="subtype">
+                                            <xsl:value-of select="$codeGenreIstex"/>
+                                        </xsl:attribute>
+                                        <xsl:attribute name="source">
+                                            <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                        </xsl:attribute>
+                                        <xsl:attribute name="scheme">
+                                            <xsl:value-of select="$codeGenreArk"/>
+                                        </xsl:attribute>
+                                        <xsl:value-of select="$codeGenreIstex"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:attribute name="subtype">other</xsl:attribute>
+                                        <xsl:attribute name="source">N/A</xsl:attribute>
+                                        <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                        <xsl:text>other</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </note>
                         <note type="publication-type" source="book" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
                     </notesStmt>
                     <sourceDesc>
