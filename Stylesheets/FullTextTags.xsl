@@ -702,7 +702,8 @@
                     <xsl:when test=".='E'">E</xsl:when>
                     <xsl:when test=".='A'">A</xsl:when>
                     <xsl:when test=".='e'">e</xsl:when>
-                    <xsl:when test=".='a'">a</xsl:when>
+                    <xsl:when test=".='a'">à</xsl:when>
+                    <xsl:when test=".='c'">ç</xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="normalize-space(.)"/>
                     </xsl:otherwise>
