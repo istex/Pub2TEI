@@ -644,16 +644,23 @@
 
     <!-- 2017-04-03: Vérifier le traitement des éléments de XMLLatex -->
     <xsl:template match="els1:math |els2:math | math">
-        <formula notation="MathML" xmlns:m="http://www.w3.org/1998/Math/MathML">
-            <xsl:if test="../ce:label[string-length() &gt; 0]">
-                <xsl:attribute name="n">
-                    <xsl:value-of select="../ce:label"/>
-                </xsl:attribute>
-            </xsl:if>
-            <m:math>
-            <xsl:apply-templates/>
-            </m:math>
-        </formula>
+        <xsl:choose>
+            <xsl:when test="els1:rm/els1:a |els2:rm/els1:a |rm/a">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <formula notation="MathML" xmlns:m="http://www.w3.org/1998/Math/MathML">
+                    <xsl:if test="../ce:label[string-length() &gt; 0]">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="../ce:label"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <m:math>
+                        <xsl:apply-templates/>
+                    </m:math>
+                </formula> 
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="r">
         <xsl:apply-templates/>
@@ -682,6 +689,27 @@
     </xsl:template>
     <xsl:template match="els1:rm |els2:rm |rm">
             <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="els1:a | els2:a| a">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="els1:ac | els2:ac| ac">
+        <xsl:choose>
+            <xsl:when test=".!=' '">
+                <!-- exemple noice elsevier polluée 10.1016/S0750-7658(00)90220-X -->
+                <xsl:choose>
+                    <xsl:when test=".=' '"/>
+                    <xsl:when test=".='E'">E</xsl:when>
+                    <xsl:when test=".='A'">A</xsl:when>
+                    <xsl:when test=".='e'">e</xsl:when>
+                    <xsl:when test=".='a'">a</xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="normalize-space(.)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="els1:ovl |els2:ovl |ovl">
         <xsl:apply-templates/>

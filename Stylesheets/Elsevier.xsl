@@ -3392,7 +3392,10 @@
         <publisher>
             <xsl:choose>
                 <xsl:when test="text()">
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:variable name="text">
+                        <xsl:apply-templates/>
+                    </xsl:variable>
+                    <xsl:value-of select="normalize-space($text)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G</xsl:attribute>
@@ -3428,7 +3431,10 @@
             	    </xsl:if>
             	    <xsl:choose>
             	        <xsl:when test="text()">
-            	            <xsl:value-of select="normalize-space(.)"/>
+            	            <xsl:variable name="text">
+            	                <xsl:apply-templates/>
+            	            </xsl:variable>
+            	            <xsl:value-of select="normalize-space($text)"/>
             	        </xsl:when>
             	        <xsl:otherwise>Elsevier.</xsl:otherwise>
             	    </xsl:choose>
@@ -3739,7 +3745,7 @@
                         <affiliation>
                             <xsl:call-template name="parseAffiliation">
                                 <xsl:with-param name="theAffil">
-                                    <xsl:value-of select="ce:textfn"/>
+                                    <xsl:apply-templates select="ce:textfn"/>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </affiliation>
@@ -3910,7 +3916,7 @@
                             <affiliation>
                                 <xsl:call-template name="parseAffiliation">
                                     <xsl:with-param name="theAffil">
-                                        <xsl:value-of select="//ce:affiliation[@id=$localId]/ce:textfn"/>
+                                        <xsl:apply-templates select="//ce:affiliation[@id=$localId]/ce:textfn"/>
                                     </xsl:with-param>
                                 </xsl:call-template>
                             </affiliation>
@@ -4109,5 +4115,7 @@
         <xsl:apply-templates/>
         </ref>
     </xsl:template>
-
+    <xsl:template match="ce:textfn">
+        <xsl:apply-templates/>
+    </xsl:template>
 </xsl:stylesheet>

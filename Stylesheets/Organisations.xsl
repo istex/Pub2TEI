@@ -113,7 +113,7 @@
                 starts-with($theOrg,'CSIC') or
                 starts-with($theOrg,'Supreme Court') or
                 starts-with($theOrg,'Ministr') or
-                contains($theOrg,'faculté') or
+                contains($theOrg,'facult') or
                 contains($theOrg,'School') or
                 contains($theOrg,'Ecole') or
                 contains($theOrg,'Scuola') or
@@ -170,6 +170,7 @@
             </xsl:when>
             <xsl:when test="contains($theOrg,'Branch') or
                 contains($theOrg,'Centre') or
+                contains($theOrg,'centre') or
                 contains($theOrg,'centrum') or
                 contains($theOrg,'zentrum') or
                 contains($theOrg,'Zentrum') or

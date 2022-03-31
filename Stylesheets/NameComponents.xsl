@@ -231,7 +231,7 @@
         <xsl:param name="theAffil"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:for-each select="$theAffil">
-            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+            <xsl:message>Un bout: <xsl:value-of select="normalize-space(.)"/></xsl:message>
         </xsl:for-each>
         <xsl:variable name="avantVirgule">
             <xsl:choose>
