@@ -152,6 +152,7 @@
                 <!--codeGenreNLM-->
                 <!--codeGenreEuclid-->
                 <!--codeGenreMets-->
+                <!--codeGenreIOPHeader-->
                 <xsl:value-of select="normalize-space(
                     //article/article-metadata/article-data/article-type/@type
                     |//SAGEmeta/@type
@@ -163,7 +164,8 @@
                     |//article/@article-type
                     |//@docsubtype
                     |//record/@type
-                    |//mets:xmlData[dcterms:type!='book']/dcterms:type)"/>
+                    |//mets:xmlData[dcterms:type!='book']/dcterms:type
+                    |//header/ident/attributes/@art_type)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>

@@ -1469,7 +1469,13 @@
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:if>
-                                <xsl:apply-templates/>
+                                <xsl:choose>
+                                    <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/cbdv.200490137'">Prediction of Aqueous Solubility Based on Large Datasets Using Several QSPR Models Utilizing Topological Structure Representation</xsl:when>
+                                    <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1046/j.1365-2605.1997.00042.x'">Letter to the Editor</xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </title>
                         </xsl:otherwise>
                     </xsl:choose>

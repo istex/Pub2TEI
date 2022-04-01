@@ -956,6 +956,7 @@
             <xsl:when test="//ArticleDOI='10.1007/s00253-005-0291-4'">Acknowledgement to reviewers 2005</xsl:when>
             <xsl:when test="//ArticleDOI='10.1023/A:1018417623867'">Reactive chemicals and cancer</xsl:when>
             <xsl:when test="//ArticleDOI='10.1007/BF02756632'">On superfields</xsl:when>
+            <xsl:when test="//ArticleDOI='10.1023/A:1018542115208'">Meeting Announcements</xsl:when>
             <xsl:when test="(//ArticleDOI='10.1007/BF01204102') or
                 (//ArticleDOI='10.1007/BF01660811') or 
                 (//ArticleDOI='10.1007/BF00421833') or

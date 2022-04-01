@@ -14,11 +14,12 @@
     <xsl:output encoding="UTF-8" method="xml"/>
     <xsl:variable name="journalList" select="document('JournalList.xml')"/>
     
+    
     <xsl:template
         match="fm/atl |article-title/title | article-title | atl | ce:title | art_title | rsc:art_title  | article_title | nihms-submit/title |chapter-title |wiley:chapterTitle | titlegrp/title| rsc:titlegrp/rsc:title | wiley:articleTitle | wiley:otherTitle | chaptl">
         <xsl:choose>
             <xsl:when test="ancestor::news-article/art-front/titlegrp |ancestor::rsc:news-article/rsc:art-front/rsc:titlegrp">
-                    <xsl:apply-templates/>
+                <xsl:apply-templates/>
             </xsl:when>
             <xsl:when test="//ce:doi='10.1016/S0140-7007(01)00037-8'">
                 <title level="a" type="main">A Word from the Director / Le mot du Directeur</title>
@@ -58,48 +59,53 @@
             </xsl:when>
             <xsl:when test="//ce:doi='10.1016/S0009-2509(99)00312-7'">
                 <title level="a" type="main">Erratum to 'Conversion-temperature trajectories for well mixed adsorptive
-reactorsa'</title>
+                    reactorsa'</title>
+            </xsl:when>
+            <xsl:when test="/article/front/article-meta/title-group/article-title ='' and /article/front/journal-meta/publisher/publisher-name='Cambridge University Press'">
+                <title level="a" type="main">Book reviews</title>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test=". !=''">
-                    <title level="a" type="main">
-                        <xsl:if test="@Language !='--'">
-                            <xsl:attribute name="xml:lang">
-                                <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:apply-templates/>
-                        <xsl:if test="//article/front/article-meta/title-group/subtitle [string-length() &gt; 0]">
-                           <xsl:text> : </xsl:text>
-                            <xsl:value-of select="//article/front/article-meta/title-group/subtitle"/>
-                        </xsl:if>
-                        <xsl:if test="//article/front/article-meta/title-group/article-title ='REVIEWS' and //product/source">
-                            <xsl:variable name="countProduct">
-                                <xsl:value-of select="count(//product)"/>
-                            </xsl:variable>
-                            <xsl:choose>
-                                <xsl:when test="$countProduct = 1">
-                                    <xsl:text> : </xsl:text>
-                                    <xsl:value-of select="//product/source"/></xsl:when>
-                            </xsl:choose>
-                        </xsl:if>
-                    </title>
-                    <xsl:if test="//ce:dochead/ce:textfn">
-                        <title level="a" type="note">
-                            <xsl:if test="@fn-type">
-                                <xsl:attribute name="type">
-                                    <xsl:value-of select="@fn-type"/>
+                <title level="a" type="main">
+                    <xsl:choose>
+                        <xsl:when test=". !=''">
+                            <xsl:if test="@Language !='--'">
+                                <xsl:attribute name="xml:lang">
+                                    <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="@id">
-                                <xsl:attribute name="xml:id">
-                                    <xsl:value-of select="@id"/>
-                                </xsl:attribute>
+                            <xsl:apply-templates/>
+                            <xsl:if test="//article/front/article-meta/title-group/subtitle [string-length() &gt; 0]">
+                                <xsl:text> : </xsl:text>
+                                <xsl:value-of select="//article/front/article-meta/title-group/subtitle"/>
                             </xsl:if>
-                            <xsl:value-of select="//ce:dochead/ce:textfn"/>
-                        </title>
-                    </xsl:if>
-                </xsl:if>
+                            <xsl:if test="//article/front/article-meta/title-group/article-title ='REVIEWS' and //product/source">
+                                <xsl:variable name="countProduct">
+                                    <xsl:value-of select="count(//product)"/>
+                                </xsl:variable>
+                                <xsl:choose>
+                                    <xsl:when test="$countProduct = 1">
+                                        <xsl:text> : </xsl:text>
+                                        <xsl:value-of select="//product/source"/></xsl:when>
+                                </xsl:choose>
+                            </xsl:if>
+                            <xsl:if test="//ce:dochead/ce:textfn">
+                                <title level="a" type="note">
+                                    <xsl:if test="@fn-type">
+                                        <xsl:attribute name="type">
+                                            <xsl:value-of select="@fn-type"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:if test="@id">
+                                        <xsl:attribute name="xml:id">
+                                            <xsl:value-of select="@id"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:value-of select="//ce:dochead/ce:textfn"/>
+                                </title>
+                            </xsl:if>
+                        </xsl:when>
+                    </xsl:choose>
+                </title>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -745,6 +751,22 @@ reactorsa'</title>
                         <xsl:apply-templates/>
                     </xsl:otherwise>
                 </xsl:choose>
+            </idno>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template
+        match="ecs">
+        <xsl:if test=". !=''">
+            <idno type="ecs">
+                <xsl:value-of select="normalize-space(.)"/>
+            </idno>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template
+        match="serial">
+        <xsl:if test=". !=''">
+            <idno type="serial">
+                <xsl:value-of select="normalize-space(.)"/>
             </idno>
         </xsl:if>
     </xsl:template>

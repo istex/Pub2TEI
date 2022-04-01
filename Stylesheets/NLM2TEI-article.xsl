@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" 
+    xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -14,6 +15,10 @@
     <xsl:output encoding="UTF-8" method="xml"/>
     
     <!-- SG ajout corrections des titres vides -->
+    
+    <xsl:variable name="ttl">
+        <xsl:apply-templates select="//article/front/article-meta/title-group/article-title"/>
+    </xsl:variable>
     <xsl:variable name="repriseTitreVide">
         <xsl:choose>
             <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='pii']='S0883769400055172'"><title level="a" type="main">Semiconductor Materials and Process Technology Handbook</title></xsl:when>
@@ -198,6 +203,36 @@
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781847558329-00188'">Epilogue</xsl:when>
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781849735490-FP001'">Publication Details</xsl:when>
             <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1039/9781847550125-00117'">Spectral coincidence profiles</xsl:when>
+        <!-- brill-journal -->
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156854266X00070'">MODERNISM AND THE HINTERLAND: THE CANADIAN EXAMPLE</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/187633101X00019'">INTRODUCTION</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00454'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00418'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00427'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00580'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156853367X00510'">Short Notes</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/157181958X00456'">Lettre</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/157005863X00357'">Bulletin critique</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/157005863X00465'">Bulletin critique</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/187633196X00213'">Clothes Make the Comrade: A history of the Russian Fashion Industry </xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/157181958X00447'">Communication</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156853471X00127'">Book received</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/187633196X00169'">The Search for the Socialist City</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852583X00016'">Communication</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/187501788X00339'">Editorial</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/187122099X00065'">Editorial</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/002820368X00010'">Editorial</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/157006088X00014'">Fritz Steppat</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/157006495X00012'">Appendix</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156854092X00659'">Pictures</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/187633196X00268'">Figures and Pictures</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156854265X00017'">Obituary MEYER F. NIMKOFF</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156853238X00018'">PICTURE</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156854267X00015'">Obituary GEORGE A.LUNDBERG</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00481'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00788'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X01084'">BOOK-REVIEWS</xsl:when>
+            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1163/156852172X00580'">BOOK-REVIEWS</xsl:when>
         </xsl:choose>
     </xsl:variable>
    
@@ -233,6 +268,9 @@
                                 <title level="a" type="main">
                                     <xsl:value-of select="$repriseTitreVide"/>
                                 </title>
+                            </xsl:when>
+                            <xsl:when test="$ttl='[no title]' or $ttl='[No title]' or $ttl='[No Title]' or $ttl='No Title' or $ttl='No title' or $ttl='no title'">
+                                <title level="a" type="main">Communications</title>
                             </xsl:when>
                             <xsl:when test="//article/front/article-meta/title-group/article-title[string-length() &gt; 0] |//fm/atl[string-length() &gt; 0]">
                                 <xsl:apply-templates select="//article/front/article-meta/title-group/article-title | //fm/atl "/>
@@ -278,6 +316,9 @@
                                                 <title level="a" type="main">
                                                     <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject"/>
                                                 </title>
+                                            </xsl:when>
+                                            <xsl:when test="/article/front/article-meta/title-group/article-title ='' and /article/front/journal-meta/publisher/publisher-name='Cambridge University Press'">
+                                                <title level="a" type="main">Book reviews</title>
                                             </xsl:when>
                                             <xsl:otherwise><title/></xsl:otherwise>
                                         </xsl:choose>
@@ -1215,6 +1256,12 @@
                         <title level="a" type="main">
                             <xsl:value-of select="$repriseTitreVide"/>
                         </title>
+                    </xsl:when>
+                    <xsl:when test="$ttl='[no title]' or $ttl='[No title]' or $ttl='[No Title]' or $ttl='No Title' or $ttl='No title' or $ttl='no title'">
+                        <title level="a" type="main">Communications</title>
+                    </xsl:when>
+                    <xsl:when test="//article/front/article-meta/title-group/article-title[string-length() &gt; 0]">
+                        <xsl:apply-templates select="//article/front/article-meta/title-group/article-title"/>
                     </xsl:when>
                     <xsl:when test="//fm/atl">
                         <xsl:apply-templates select="//fm/atl"/>
@@ -3575,6 +3622,11 @@
                 <head>
                     <xsl:apply-templates/>
                 </head>
+            </xsl:when>
+            <xsl:when test="ancestor::header/title-group">
+                <title level="a" type="main">
+                    <xsl:apply-templates/>
+                </title>
             </xsl:when>
             <xsl:when test="ancestor::notes"/>
             <xsl:otherwise>

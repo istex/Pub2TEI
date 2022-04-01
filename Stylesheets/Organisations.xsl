@@ -17,7 +17,7 @@
                 contains($theOrg,'CNRS') or
                 contains($theOrg,'College of') or
                 contains($theOrg,'College') or
-                contains($theOrg,'Universidad') or
+                contains($theOrg,'Univ') or
                 contains($theOrg,'Hospi') or
                 contains($theOrg,'Krankenhaus') or
                 contains($theOrg,'szpital') or
@@ -123,7 +123,8 @@
                 contains($theOrg,'Facul') or
                 contains($theOrg,'Fakult') or
                 contains($theOrg,'Inflammatory') or
-                contains($theOrg,'High Education')">
+                contains($theOrg,'High Education') or
+                contains($theOrg,'MIND-IN2UB')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Research') or
@@ -165,6 +166,7 @@
                 contains($theOrg,'wissenschaft') or
                 contains($theOrg,'CEN Saclay') or
                 contains($theOrg,'EMBL ') or
+                contains($theOrg,'Naka Joint Work Site') or
                 contains($theOrg,'Ricerche')">
                 <xsl:text>laboratory</xsl:text>
             </xsl:when>
@@ -239,7 +241,8 @@
                 or contains($theOrg,'Team')
                 or contains($theOrg,'Private')
                 or contains($theOrg,' Co.')
-                or contains($theOrg,'Gaters')
+                or contains($theOrg,' Co.')
+                or contains($theOrg,'EURATOM')
                 ">
                 <xsl:text>group</xsl:text>
             </xsl:when>
@@ -254,6 +257,7 @@
                 contains($theOrg,'Taiyo Kaihatu-Kensetu Co') or
                 contains($theOrg,'B.I.S.R.A') or
                 contains($theOrg,'ACRIA') or
+                contains($theOrg,'ITER EDA') or
                 contains($theOrg,'Ingenieurbüro')
                 ">
                 <xsl:text>organization</xsl:text>

@@ -48,6 +48,217 @@
         /TEI/teiHeader/fileDesc/respStmt
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
+    <!-- table de correspondance des titres car non fournit dans donnée-->
+    <xsl:variable name="codeTitleIOP1">
+        <xsl:value-of select="//header/ident/issn"/>
+    </xsl:variable>
+    <xsl:variable name="codeTitleIOP">
+        <xsl:choose>
+            <xsl:when test="$codeTitleIOP1='0004-6256'">The Astronomical Journal</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0004-637X'">The Astrophysical Journal</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0021-4922'">Japanese Journal of Applied Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0022-3689'">Journal of Physics A: General Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0022-3700'">Journal of Physics B: Atomic and Molecular Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0022-3719'">Journal of Physics C: Solid State Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0022-3727'">Journal of Physics D: Applied Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0022-3735'">Journal of Physics E: Scientific Instruments</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0025-5726'">Mathematics of the USSR-Izvestiya</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0025-5734'">Mathematics of the USSR-Sbornik</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0026-1394'">Metrologia</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0029-4780'">Nouvelle Revue d'Optique AppliquÃ©e</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0029-5515'">Nuclear Fusion</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0031-8949'">Physica Scripta</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0031-9120'">Physics Education</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0031-9155'">Physics in Medicine and Biology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0032-1028'">Plasma Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0034-4885'">Reports on Progress in Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0034-6683'">Review of Physics in Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0036-021X'">Russian Chemical Reviews</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0036-0279'">Russian Mathematical Surveys</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0038-5670'">Soviet Physics Uspekhi</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0049-1748'">Soviet Journal of Quantum Electronics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0067-0049'">The Astrophysical Journal Supplement Series</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0143-0807'">European Journal of Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0143-0815'">Clinical Physics and Physiological Measurement</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0150-536X'">Journal of Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0169-5983'">Fluid Dynamics Research</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0253-6102'">Communications in Theoretical Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0256-307X'">Chinese Physics Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0260-2814'">Journal of the Society for Radiological Protection</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0264-9381'">Classical and Quantum Gravity</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0266-5611'">Inverse Problems</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0268-1242'">Semiconductor Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0295-5075'">EPL (Europhysics Letters)</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0301-0015'">Journal of Physics A: Mathematical, Nuclear and General</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0305-4470'">Journal of Physics A: Mathematical and General</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0305-4608'">Journal of Physics F: Metal Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0305-4616'">Journal of Physics G: Nuclear Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0305-4624'">Physics in Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0335-7368'">Nouvelle Revue d'Optique</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0368-3281'">Journal of Nuclear Energy. Part C, Plasma Physics, Accelerators, Thermonuclear Research</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0370-1298'">Proceedings of the Physical Society. Section A</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0370-1301'">Proceedings of the Physical Society. Section B</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0370-1328'">Proceedings of the Physical Society</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0508-3443'">British Journal of Applied Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0741-3335'">Plasma Physics and Controlled Fusion</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0950-7671'">Journal of Scientific Instruments</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0951-7715'">Nonlinearity</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0952-4746'">Journal of Radiological Protection</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0953-2048'">Superconductor Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0953-4075'">Journal of Physics B: Atomic, Molecular and Optical Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0953-8984'">Journal of Physics: Condensed Matter</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0954-3899'">Journal of Physics G: Nuclear and Particle Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0954-8998'">Quantum Optics: Journal of the European Optical Society Part B</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0957-0233'">Measurement Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0957-4484'">Nanotechnology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0959-5309'">Proceedings of the Physical Society</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0960-1317'">Journal of Micromechanics and Microengineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0963-0252'">Plasma Sources Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0963-9659'">Pure and Applied Optics: Journal of the European Optical Society Part A</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0964-1726'">Smart Materials and Structures</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0965-0393'">Modelling and Simulation in Materials Science and Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0967-1846'">Distributed Systems Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='0967-3334'">Physiological Measurement</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1003-7713'">Chinese Journal of Chemical Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1004-423X'">Acta Physica Sinica (Overseas Edition)</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1005-0841'">Science Foundation in China</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1009-0630'">Plasma Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1009-1963'">Chinese Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1009-9271'">Chinese Journal of Astronomy and Astrophysics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1029-8479'">Journal of High Energy Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1054-660X'">Laser Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1063-7818'">Quantum Electronics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1063-7869'">Physics-Uspekhi</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1064-5616'">Sbornik: Mathematics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1064-5632'">Izvestiya: Mathematics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1126-6708'">Journal of High Energy Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1286-4854'">EPL (Europhysics Letters)</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1347-4065'">Japanese Journal of Applied Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1355-5111'">Quantum and Semiclassical Optics: Journal of the European Optical Society Part B</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6382'">Classical and Quantum Gravity</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6390'">Distributed Systems Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6404'">European Journal of Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6420'">Inverse Problems</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6439'">Journal of Micromechanics and Microengineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6447'">Journal of Physics A: Mathematical and General</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6455'">Journal of Physics B: Atomic, Molecular and Optical Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6463'">Journal of Physics D: Applied Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6471'">Journal of Physics G: Nuclear and Particle Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-648X'">Journal of Physics: Condensed Matter</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6498'">Journal of Radiological Protection</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6501'">Measurement Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-651X'">Modelling and Simulation in Materials Science and Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6528'">Nanotechnology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6544'">Nonlinearity</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6552'">Physics Education</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6560'">Physics in Medicine and Biology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6579'">Physiological Measurement</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6587'">Plasma Physics and Controlled Fusion</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6595'">Plasma Sources Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6617'">Pure and Applied Optics: Journal of the European Optical Society Part A</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6625'">Quantum and Semiclassical Optics: Journal of the European Optical Society Part B</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6633'">Reports on Progress in Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6641'">Semiconductor Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-665X'">Smart Materials and Structures</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1361-6668'">Superconductor Science and Technology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1367-2630'">New Journal of Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1402-4896'">Physica Scripta</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1464-4258'">Journal of Optics A: Pure and Applied Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1464-4266'">Journal of Optics B: Quantum and Semiclassical Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-4780'">Physics-Uspekhi</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-4799'">Quantum Electronics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-4802'">Russian Academy of Sciences. Sbornik Mathematics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-4810'">Russian Academy of Sciences. Izvestiya Mathematics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-4829'">Russian Mathematical Surveys</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-4837'">Russian Chemical Reviews</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1468-6996'">Science and Technology of Advanced Materials</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1475-4878'">Transactions of the Optical Society</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1475-7516'">Journal of Cosmology and Astroparticle Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1478-3967'">Physical Biology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1478-3975'">Physical Biology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1478-7814'">Proceedings of the Physical Society of London</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1538-3881'">The Astronomical Journal</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1538-4357'">The Astrophysical Journal Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1538-4365'">The Astrophysical Journal Supplement Series</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1555-6611'">Laser Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1612-2011'">Laser Physics Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1612-202X'">Laser Physics Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1674-0068'">Chinese Journal of Chemical Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1674-1056'">Chinese Physics B</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1674-1137'">Chinese Physics C</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1674-4527'">Research in Astronomy and Astrophysics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1674-4926'">Journal of Semiconductors</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1681-7575'">Metrologia</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-2552'">Journal of Neural Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-2560'">Journal of Neural Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-3540'">Chinese Physics Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-3567'">Journal of Optics A: Pure and Applied Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-3575'">Journal of Optics B: Quantum and Semiclassical Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-4199'">Chinese Physics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1741-4326'">Nuclear Fusion</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1742-2132'">Journal of Geophysics and Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1742-2140'">Journal of Geophysics and Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1742-5468'">Journal of Statistical Mechanics: Theory and Experiment</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1742-6588'">Journal of Physics: Conference Series</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1742-6596'">Journal of Physics: Conference Series</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1748-0221'">Journal of Instrumentation</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1748-3182'">Bioinspiration &amp; Biomimetics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1748-3190'">Bioinspiration &amp; Biomimetics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1748-6041'">Biomedical Materials</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1748-605X'">Biomedical Materials</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1748-9326'">Environmental Research Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1749-4680'">Computational Science &amp; Discovery</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1749-4699'">Computational Science &amp; Discovery</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1751-8113'">Journal of Physics A: Mathematical and Theoretical</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1751-8121'">Journal of Physics A: Mathematical and Theoretical</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1752-7155'">Journal of Breath Research</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1752-7163'">Journal of Breath Research</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1755-1307'">IOP Conference Series: Earth and Environmental Science</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1755-1315'">IOP Conference Series: Earth and Environmental Science</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1757-8981'">IOP Conference Series: Materials Science and Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1757-899X'">IOP Conference Series: Materials Science and Engineering</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1758-5082'">Biofabrication</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1758-5090'">Biofabrication</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1873-7005'">Fluid Dynamics Research</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1878-5514'">Science and Technology of Advanced Materials</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1882-0778'">Applied Physics Express</xsl:when>
+            <xsl:when test="$codeTitleIOP1='1882-0786'">Applied Physics Express</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2040-8978'">Journal of Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2040-8986'">Journal of Optics</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2041-8205'">The Astrophysical Journal Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2041-8213'">The Astrophysical Journal Letters</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2043-6262'">Advances in Natural Sciences: Nanoscience and Nanotechnology</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2050-6120'">Methods and Applications in Fluorescence</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2051-672X'">Surface Topography: Metrology and Properties</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2053-1583'">2D Materials</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2053-1591'">Materials Research Express</xsl:when>
+            <xsl:when test="$codeTitleIOP1='2053-1613'">Translational Materials Research</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    <!-- traitement des titres fre/eng concaténés dans une même balise -->
+    <xsl:variable name="codeTitre">
+        <xsl:value-of select="//header/ident/doi"/>
+    </xsl:variable>
+    <xsl:variable name="codeTitreFre">
+        <xsl:choose>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/012'">Analyse des fondements de la conduction électronique dans les états localisés, en fonction de la fréquence: II. Analyse des hypothèses fondamentales des théories existantes</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0951-7715/21/6/013'">Expériences sur certaines transformations birationnelles quadratiques</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0954-3899/27/10/301'">Expériences de détection directe de la matière sombre non baryonique</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/011'">Analyse des fondements de la conduction électronique dans les états localisés, en fonction de la fréquence: I. Analyse des méthodes de calcul dans les théories existantes</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0026-1394/7/3/001'">Variation de la masse volumique de l'eau en fonction de sa composition isotopique</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0031-9155/41/5/003'">Caractérisation de la réponse des collimateurs à trous parallèles hexagonaux des caméras à scintillation</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="codeTitreEng">
+        <xsl:choose>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/012'">Analysis of the foundations of the frequency-dependent electronic conductivity in localized states: II. Analysis of the fundamental hypotheses of the existing theories</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0951-7715/21/6/013'">Experiments on some birational quadratic transformations</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0954-3899/27/10/301'">Direct searches for non-baryonic dark matter</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/011'">Analysis of the foundations of the frequency-dependent electronic conductivity in localized states: I. Analysis of the methods of calculation in the available theories</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0026-1394/7/3/001'">Variation of the Water Density as a Function of its Isotopic Composition</xsl:when>
+            <xsl:when test="normalize-space($codeTitre)='10.1088/0031-9155/41/5/003'">Characterization of the response of hexagonal parallel-hole collimators of scintillation cameras</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
     
     <xsl:template match="article | header">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
@@ -70,17 +281,17 @@
                 <fileDesc>
                     <titleStmt>
                         <!-- Ici simplement reprise du titre principal (le détail est dans sourceDesc) -->
-                        <xsl:apply-templates select="header/title-group/title | title/title_full"/>
+                        <xsl:apply-templates select="header/title-group/title"/>
+                        <xsl:choose>
+                            <xsl:when test="title/title_full!=''">
+                                <xsl:apply-templates select="title/title_full"/>
+                            </xsl:when>
+                            <xsl:when test="title/title_toc !=''">
+                                <xsl:apply-templates select="title/title_toc"/>
+                            </xsl:when>
+                        </xsl:choose>
                     </titleStmt>
-
-                    <!-- proposition d'un "stamp" Pub2TEI -->
-                  <!-- <editionStmt>
-                        <edition>TEI version</edition>
-                        <respStmt>
-                            <resp>Conversion from IOP XML to TEI-conformant markup</resp>
-                            <name>Pub2TEI XSLT</name>
-                        </respStmt>
-                    </editionStmt>-->
+                    
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <!-- Publisher jnl -->
@@ -89,13 +300,19 @@
                         <!-- "printed in" ~ pubPlace -->
                         <xsl:if test="article-metadata/article-data/printed [string-length() &gt; 0]">
                         <xsl:apply-templates select="article-metadata/article-data/printed"/>
+                        <xsl:apply-templates select="dates/date_cover"/>
                         </xsl:if>
                        <availability>
                            <licence>
-                               <xsl:value-of select="//article-metadata/jnl-data/jnl-imprint"/>
+                               <xsl:choose>
+                                   <xsl:when test="//article-metadata/jnl-data/jnl-imprint">
+                                       <xsl:value-of select="//article-metadata/jnl-data/jnl-imprint"/>
+                                   </xsl:when>
+                                   <xsl:otherwise>IOP Publishing</xsl:otherwise>
+                               </xsl:choose>
                            </licence>
                        </availability>
-                        <xsl:apply-templates select="//volume-data/year-publication"/>
+                        <xsl:apply-templates select="//volume-data/year-publication | dates/date_cover"/>
                     </publicationStmt>
                     <!-- genre ISTEX du document niveau article-->
                     <notesStmt>
@@ -130,23 +347,32 @@
                     <sourceDesc>
                         <biblStruct>
                             <analytic>
+                                <xsl:choose>
+                                    <xsl:when test="$codeTitreFre !=''">
+                                        <title level="a" xml:id="fr">
+                                            <xsl:value-of select="$codeTitreFre"/>
+                                        </title>
+                                        <title level="a" xml:id="en">
+                                            <xsl:value-of select="$codeTitreEng"/>
+                                        </title>
+                                    </xsl:when>
+                                </xsl:choose>
                                 <!-- Titre(s) article -->
-                                <xsl:apply-templates select="header/title-group"/>
-
+                                <xsl:apply-templates select="header/title-group/title | title/title_full |title/surtitle"/>
                                 <!-- Auteurs article -->
                                 <!-- <short-author-list> non repris -->
                                 <xsl:apply-templates select="header/author-group/* except(//short-author-list)" mode ="IOP"/>
-                                
-                                
+                                <xsl:apply-templates select="authors/* except(//authors_toc)" mode="IOP"/>
+                               
                                 <xsl:apply-templates select="header/collaboration" mode ="IOP"/>
                                 <!-- Adresse(s) d'affiliation -->
                                 <xsl:apply-templates select="header/editor-group | header/author-group/collaboration | header/authors/collaboration | header/editors/collaboration"/>
 
                                 <!-- Identifiants article (DOI, PII et 3 IDS internes à IOP ...) -->
-                                <xsl:apply-templates select="article-metadata/article-data/doi[string-length() &gt; 0]"/>
+                                <xsl:apply-templates select="article-metadata/article-data/doi[string-length() &gt; 0] | ident/doi[string-length() &gt; 0]"/>
                                 <xsl:apply-templates select="article-metadata/article-data/pii[string-length() &gt; 0]"/>
                                 <xsl:apply-templates select="article-metadata/article-data/ccc[string-length() &gt; 0]"/>
-                                <xsl:apply-templates select="article-metadata/article-data/article-number[string-length() &gt; 0]"/>
+                                <xsl:apply-templates select="article-metadata/article-data/article-number[string-length() &gt; 0]| ident/artnum[string-length() &gt; 0]"/>
                                 <!-- ajout identifiants ISTEX et ARK -->
                                 <xsl:if test="string-length($idistex) &gt; 0 ">
                                     <idno type="istex">
@@ -158,24 +384,46 @@
                                         <xsl:value-of select="$arkistex"/>
                                     </idno>
                                 </xsl:if>
-                                <idno type="articleId">
-                                    <xsl:value-of select="@artid"/>
-                                </idno>
+                                <xsl:if test="ident/pii[string-length() &gt; 0 ]">
+                                    <idno type="PII">
+                                        <xsl:value-of select="ident/pii"/>
+                                    </idno>
+                                </xsl:if>
+                                <xsl:if test="@artid|ident/artnum">
+                                    <idno type="articleId">
+                                        <xsl:value-of select="@artid|ident/artnum"/>
+                                    </idno>
+                                </xsl:if>
+                                <xsl:if test="text/fulltext/@pdf[string-length() &gt; 0 ]">
+                                    <idno type="pdf">
+                                        <xsl:value-of select="text/fulltext/@pdf"/>
+                                    </idno>
+                                </xsl:if>
                             </analytic>
 
                             <monogr>
-                                <!-- Titres du périodique       NB: suppose un <jnl-data> ! -->
-                                <xsl:apply-templates select="article-metadata/jnl-data/jnl-fullname"/>
-                                <xsl:apply-templates
-                                    select="article-metadata/jnl-data/jnl-abbreviation"/>
-                                <xsl:apply-templates
-                                    select="article-metadata/jnl-data/jnl-shortname"/>
-
+                                <xsl:choose>
+                                    <xsl:when test="ident/issn">
+                                        <title level="j" type="main">
+                                            <xsl:value-of select="$codeTitleIOP"/>
+                                        </title>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <!-- Titres du périodique NB: suppose un <jnl-data> ! -->
+                                        <xsl:apply-templates select="article-metadata/jnl-data/jnl-fullname"/>
+                                        <xsl:apply-templates
+                                            select="article-metadata/jnl-data/jnl-abbreviation"/>
+                                        <xsl:apply-templates
+                                            select="article-metadata/jnl-data/jnl-shortname"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                
                                 <!-- Identifiants journal (ISSN et CODEN) -->
-                                <xsl:apply-templates select="article-metadata/jnl-data/jnl-issn"/>
+                                <xsl:apply-templates select="article-metadata/jnl-data/jnl-issn | ident/issn"/>
                                 <xsl:apply-templates select="article-metadata/jnl-data/jnl-coden"/>
                                 <xsl:apply-templates select="article-metadata/jnl-data/jnl-web-address"/>
-
+                                <xsl:apply-templates select="ident/ecs"/>
+                                <xsl:apply-templates select="ident/serial"/>
                                 <imprint>
                                     <!-- VOLUMAISON -->
                                     <xsl:apply-templates
@@ -183,20 +431,27 @@
                                     <xsl:apply-templates
                                         select="article-metadata/issue-data/coverdate"/>
                                     <xsl:apply-templates
-                                        select="article-metadata/volume-data/volume-number"/>
+                                        select="/header/dates/date_cover"/>
+                                    <xsl:apply-templates
+                                        select="article-metadata/volume-data/volume-number |ident/volume"/>
                                                                                          
                                     <xsl:apply-templates
-                                        select="article-metadata/issue-data/issue-number"/>
+                                        select="article-metadata/issue-data/issue-number | ident/issue"/>
 
                                     <!-- Pagination de l'article dans la monographie ou le fascicule -->
+                                    <xsl:if test="ident/pages/@range[string-length() &gt; 0]">
+                                        <biblScope unit="page-range">
+                                            <xsl:value-of select="ident/pages/@range"/>
+                                        </biblScope> 
+                                    </xsl:if>
                                     <biblScope unit="page">
-                                        <xsl:attribute name="from" select="article-metadata/article-data/first-page"/>
-                                        <xsl:value-of select="article-metadata/article-data/first-page"/>
+                                        <xsl:attribute name="from" select="article-metadata/article-data/first-page | ident/pages/@start"/>
+                                        <xsl:value-of select="article-metadata/article-data/first-page | ident/pages/@start"/>
                                     </biblScope>
-                                    <xsl:if test="article-metadata/article-data/last-page[string-length() &gt; 0]">
+                                    <xsl:if test="article-metadata/article-data/last-page[string-length() &gt; 0] | ident/pages/@end[string-length() &gt; 0]">
                                         <biblScope unit="page">
-                                            <xsl:attribute name="to" select="article-metadata/article-data/last-page"/>
-                                            <xsl:value-of select="article-metadata/article-data/last-page"/>
+                                            <xsl:attribute name="to" select="article-metadata/article-data/last-page | ident/pages/@end"/>
+                                            <xsl:value-of select="article-metadata/article-data/last-page | ident/pages/@end"/>
                                         </biblScope>
                                     </xsl:if>
 
@@ -306,15 +561,25 @@
         
     -->
 <!-- title -->
-<xsl:template match="header/title-group/title | title/title_full">
-    <title level="a" type="main">
-        <xsl:if test="@lang">
-            <xsl:attribute name="xml:lang">
-                <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-        </xsl:if>
-        <xsl:apply-templates/>
-    </title>
+<xsl:template match="title/title_full">
+    <xsl:choose>
+        <xsl:when test="//ident/doi='10.1088/0264-9381/21/1/E01'">
+            <title level="a" type="main">
+                <xsl:attribute name="lang">en</xsl:attribute>
+                <xsl:value-of select="normalize-space(//title/surtitle)"/>
+            </title>
+        </xsl:when>
+        <xsl:otherwise>
+            <title level="a" type="main">
+                <xsl:if test="@lang">
+                    <xsl:attribute name="xml:lang">
+                        <xsl:value-of select="@lang"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:apply-templates/>
+            </title>
+        </xsl:otherwise>
+    </xsl:choose>
 </xsl:template>
     
    
@@ -457,6 +722,12 @@
         >> biblScope
         >> date
     -->
+    
+    <xsl:template match="date_cover">
+        <date when="{.}">
+            <xsl:value-of select="substring-before(.,'-')"/>
+        </date>
+    </xsl:template>
 
     <!-- issue number => biblScope unit issue 
         ex: "4" -->
@@ -617,12 +888,17 @@
         Cas "auteur normal"
     -->
     <xsl:template match="author-group | collaboration">
-        <xsl:apply-templates select="author" mode="IOP"/>
+        <xsl:apply-templates select="author|author_granular" mode="IOP"/>
     </xsl:template>
     <xsl:template match="authors">
         <xsl:apply-templates select="au" mode="IOP"/>
     </xsl:template>
-    <xsl:template match="author" mode="IOP">
+    <xsl:template match="author|author_granular" mode="IOP">
+        <!-- On tokenize sur les espaces -->
+        <xsl:param name="items" 
+            select="tokenize(.,' ')"/>
+        <xsl:param name="nbItems" 
+            select="count($items)"/>
         <author>
             <xsl:variable name="i" select="position() -1"/>
             <xsl:attribute name="xml:id">
@@ -649,10 +925,41 @@
                         <xsl:apply-templates/>
                     </persName>
                 </xsl:when>
-                <xsl:otherwise>
-                    <name>
+                <xsl:when test="given">
+                    <persName>
+                        <!-- ne préjuge pas de l'ordre -->
                         <xsl:apply-templates/>
-                    </name>
+                    </persName>
+                </xsl:when>
+                <xsl:otherwise>
+                        <!-- exemple  <author>S C Tisley</author> -->
+                    <xsl:choose>
+                        <xsl:when test="$nbItems = 3">
+                            <persName>
+                                <forename type="first">
+                                    <xsl:value-of select="concat($items[1],'.',$items[2],'.')"/>
+                                </forename>
+                                <surname>
+                                    <xsl:value-of select="$items[3]"/>
+                                </surname>
+                            </persName>
+                        </xsl:when>
+                        <xsl:when test="$nbItems = 2">
+                            <persName>
+                                <forename type="first">
+                                    <xsl:value-of select="$items[1]"/>
+                                </forename>
+                                <surname>
+                                    <xsl:value-of select="$items[2]"/>
+                                </surname>
+                            </persName>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <name>
+                                <xsl:value-of select="."/>
+                            </name>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:choose>
@@ -663,11 +970,26 @@
                                 <xsl:value-of select="//address-group/address[@id=current()/@address]"/>
                             </xsl:with-param>
                         </xsl:call-template>
-                        <!-- <xsl:apply-templates select="//address-group/address[@id=current()/@address]"/> -->
                     </affiliation>
                 </xsl:when>
-                <xsl:otherwise>
-                </xsl:otherwise>
+                <xsl:when test="//affil[@id=current()/@affil]">
+                    <affiliation>
+                        <xsl:call-template name="parseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:value-of select="//affil[@id=current()/@affil]"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </affiliation>
+                </xsl:when>
+                <xsl:when test="//affil">
+                    <affiliation>
+                        <xsl:call-template name="parseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:value-of select="//affil"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </affiliation>
+                </xsl:when>
             </xsl:choose>
         </author>
     </xsl:template>
@@ -3551,7 +3873,7 @@
     
     <!-- pages  -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/pages">
-        <biblScope unit="pages">
+        <biblScope unit="page">
             <xsl:value-of select="."/>
         </biblScope>
     </xsl:template>
