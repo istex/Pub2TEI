@@ -153,10 +153,12 @@
                 <!--codeGenreEuclid-->
                 <!--codeGenreMets-->
                 <!--codeGenreIOPHeader-->
+                <!--codeGenreCUPebooks-->
                 <xsl:value-of select="normalize-space(
                     //article/article-metadata/article-data/article-type/@type
                     |//SAGEmeta/@type
                     |//component/header/publicationMeta[@level='unit']/@type
+                    |//book-part[not(body/book-part)]/@book-part-type
                     |//body/book-part/@book-part-type
                     |//article/@type | //rsc:article/@type |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm
                     |//ArticleInfo/@ArticleType | //BookInfo/@BookProductType

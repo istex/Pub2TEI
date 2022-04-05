@@ -613,6 +613,7 @@
                                             <xsl:value-of select="$docIssue//pub-date[1]/year[string-length()&gt; 0]"/>
                                         </date>
                                     </xsl:when>
+                                    <xsl:when test="/book/book-meta/pub-history/event/date[@publication-format='print']/year"><xsl:apply-templates select="/book/book-meta/pub-history/event/date[@publication-format='print']/year"/></xsl:when>
                                 </xsl:choose>
                             </publicationStmt>
                             
@@ -623,6 +624,18 @@
                                     <xsl:choose>
                                         <!-- brepols -->
                                         <xsl:when test="starts-with(//book-id[@pub-id-type='doi'],'10.1484/')">
+                                            <xsl:attribute name="subtype">
+                                                <xsl:value-of select="$codeGenreIstex"/>
+                                            </xsl:attribute>
+                                            <xsl:attribute name="source">
+                                                <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                            </xsl:attribute>
+                                            <xsl:attribute name="scheme">
+                                                <xsl:value-of select="$codeGenreArk"/>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="$codeGenreIstex"/>
+                                        </xsl:when>
+                                        <xsl:when test="//book-part[not(body/book-part)]/@book-part-type">
                                             <xsl:attribute name="subtype">
                                                 <xsl:value-of select="$codeGenreIstex"/>
                                             </xsl:attribute>
@@ -861,10 +874,17 @@
                             <xsl:when test="book-meta/abstract[string-length() &gt; 0] |$docIssue//book-meta/pub-date">
                                 <profileDesc>
                                     <creation>
-                                        <xsl:apply-templates select="$docIssue//book-meta/pub-date | //book-meta/pub-date"/>
+                                        <xsl:choose>
+                                            <xsl:when test="$docIssue//book-meta/pub-date"><xsl:apply-templates select="$docIssue//book-meta/pub-date"></xsl:apply-templates></xsl:when>
+                                            <xsl:when test="//book-meta/pub-date"><xsl:apply-templates select="//book-meta/pub-date"/></xsl:when>
+                                            <xsl:when test="/book/book-meta/pub-history/event/date[@publication-format='print']/year"><xsl:apply-templates select="/book/book-meta/pub-history/event/date[@publication-format='print']/year"/></xsl:when>
+                                        </xsl:choose>
                                     </creation>
                                     <!-- PL: abstract is moved from <front> to here -->
                                     <xsl:choose>
+                                        <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/abstract">
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/abstract"/>
+                                        </xsl:when>
                                         <!-- ne pas reprendre les abstracts du livre si on traite les chapitres-->
                                         <xsl:when test="/book/book-meta/abstract and /book/body/book-part/book-part-meta/title-group/title"/>
                                         <xsl:otherwise>
@@ -1386,8 +1406,13 @@
                 <xsl:if test="book-meta/isbn[string-length() &gt; 0]">
                     <xsl:for-each select="book-meta/isbn">
                         <xsl:choose>
-                            <xsl:when test="@publication-format='online'">
+                            <xsl:when test="@publication-format='online' or @publication-format='electronic'">
                                 <idno type='eISBN'>
+                                    <xsl:value-of select="normalize-space(.)"/>
+                                </idno>
+                            </xsl:when>
+                            <xsl:when test="@publication-format='hardback'">
+                                <idno type='hISBN'>
                                     <xsl:value-of select="normalize-space(.)"/>
                                 </idno>
                             </xsl:when>
@@ -1463,6 +1488,8 @@
                                 <xsl:value-of select="//metadata/pubDate"/>
                             </date>
                         </xsl:when>
+                        <xsl:when test="/book/book-meta/pub-history/event/date[@publication-format='print']/year"><xsl:apply-templates select="/book/book-meta/pub-history/event/date[@publication-format='print']/year"/></xsl:when>
+                        <xsl:when test="/book/book-meta/pub-history/event/date[@publication-format='print']/year"><xsl:apply-templates select="/book/book-meta/pub-history/event/date[@publication-format='online']/year"/></xsl:when>
                         <xsl:otherwise>
                             <xsl:if test="//metadata/date[@type='course'][string-length() &gt; 0] != 'na'">
                                 <date type="published">
