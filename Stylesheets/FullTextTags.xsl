@@ -1483,12 +1483,12 @@
         </l>
     </xsl:template>
     <xsl:template match="definition-list">
-        <list type="index">
+        <list type="index" xml:id="{@id}">
             <xsl:apply-templates/>
         </list>
     </xsl:template>
     <xsl:template match="def-list-item">
-        <item>
+        <item xml:id="{@id}">
             <xsl:apply-templates/>
         </item>
     </xsl:template>
@@ -1497,4 +1497,19 @@
             <xsl:value-of select="p"/>
         </desc>
     </xsl:template>
+    <xsl:template match="display-eqn">
+        <figure type="latexEquation" >
+            <figDesc>
+                <xsl:variable name="TeX">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($TeX)"/>
+            </figDesc>
+            <graphic url="{eqn-graphic/@filename}"/>
+        </figure>
+    </xsl:template>
+    <xsl:template match="processing-instruction('TeX')">
+        <xsl:value-of select="."/>
+    </xsl:template>
+    
 </xsl:stylesheet>

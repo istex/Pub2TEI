@@ -525,6 +525,8 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <back>
+                        <!-- remerciements -->
+                        <xsl:apply-templates select="/article/body/acknowledgment"/>
                         <!-- Lancement des refbibs -->
                         <xsl:apply-templates select="/article/back/references"/>
                         <!-- <listBibl> (<biblStruct/> +) </listBibl> -->
@@ -3585,7 +3587,7 @@
     <xsl:template match="sec-level1">
         <div>
             <!-- id -->
-            <xsl:attribute name="n" select="@id"/>
+            <xsl:attribute name="xml:id" select="@id"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -3876,7 +3878,7 @@
     
     <!-- pages  -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/pages">
-        <biblScope unit="page">
+        <biblScope unit="pages">
             <xsl:value-of select="."/>
         </biblScope>
     </xsl:template>
@@ -4023,6 +4025,13 @@
     <xsl:template match="article/back/footnotes">
         <div type="footnotes">
             <xsl:apply-templates select='footnote'/>
+        </div>
+    </xsl:template>
+    
+    <!-- acknowledgment -->
+    <xsl:template match="acknowledgment">
+        <div type="acknowledgment">
+            <xsl:apply-templates/>
         </div>
     </xsl:template>
     

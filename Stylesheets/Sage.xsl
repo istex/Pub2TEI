@@ -2093,7 +2093,7 @@
     <xsl:template match="aut|au">
         <author>
             <persName>
-                <xsl:apply-templates select="au"/>
+                <xsl:apply-templates/>
             </persName>
         </author>
     </xsl:template>
