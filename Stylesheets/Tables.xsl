@@ -30,22 +30,6 @@
                     <xsl:apply-templates/>
                 </table>
             </xsl:when>
-            <xsl:when test="ancestor::p  and not(../row)">
-                <figure>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="label">
-                        <head type="label">
-                            <xsl:value-of select="label"/>
-                        </head>
-                    </xsl:if>
-                    <!--<xsl:apply-templates select="* except tgroup"/>-->
-                    <xsl:apply-templates/>
-                </figure>
-            </xsl:when>
             <xsl:when test="ancestor::p | ancestor::rsc:p">
                 <table>
                     <xsl:if test="@id">
@@ -81,6 +65,22 @@
                     <!-- <xsl:apply-templates select="* except tgroup"/>-->
                     <xsl:apply-templates/>
                 </table>
+            </xsl:when>
+            <xsl:when test="ancestor::p  and not(../row)">
+                <figure>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="label">
+                        <head type="label">
+                            <xsl:value-of select="label"/>
+                        </head>
+                    </xsl:if>
+                    <!--<xsl:apply-templates select="* except tgroup"/>-->
+                    <xsl:apply-templates/>
+                </figure>
             </xsl:when>
             <!-- IOP -->
             <xsl:when test="child::caption[@type='table']">

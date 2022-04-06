@@ -342,9 +342,16 @@
     </xsl:template>
     <!--IOP-->
     <xsl:template match="inline-eqn">
-        <formula notation="none">
-            <xsl:apply-templates/>
-        </formula>
+        <xsl:choose>
+            <xsl:when test="parent::term">
+                <xsl:value-of select="inline-graphic/@filename"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <formula notation="none">
+                    <xsl:apply-templates/>
+                </formula>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="math-text">
         <xsl:apply-templates/>

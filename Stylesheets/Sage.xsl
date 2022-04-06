@@ -2090,16 +2090,12 @@
         </author>
     </xsl:template>
     
-    <xsl:template match="aut">
+    <xsl:template match="aut|au">
         <author>
             <persName>
                 <xsl:apply-templates select="au"/>
             </persName>
         </author>
-    </xsl:template>
-    
-    <xsl:template match="au">
-       <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="dte">

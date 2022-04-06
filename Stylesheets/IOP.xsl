@@ -359,6 +359,8 @@
                                 </xsl:choose>
                                 <!-- Titre(s) article -->
                                 <xsl:apply-templates select="header/title-group/title | title/title_full |title/surtitle"/>
+                                <xsl:apply-templates select="header/title-group/short-title"/>
+                                <xsl:apply-templates select="header/title-group/ej-title"/>
                                 <!-- Auteurs article -->
                                 <!-- <short-author-list> non repris -->
                                 <xsl:apply-templates select="header/author-group/* except(//short-author-list)" mode ="IOP"/>
@@ -2242,6 +2244,7 @@
                             <xsl:when test="contains($codePacs,'47.80.-v')">Instrumentation and measurement methods in fluid dynamics</xsl:when>
                             <xsl:when test="contains($codePacs,'47.80.Cb')">Velocity measurements</xsl:when>
                             <xsl:when test="contains($codePacs,'47.80.Fg')">Pressure and temperature measurements</xsl:when>
+                            <xsl:when test="contains($codePacs,'47.80.Jk')">Flow visualization</xsl:when>
                             <xsl:when test="contains($codePacs,'47.85.Dh')">Hydrodynamics, hydraulics, hydrostatics</xsl:when>
                             <xsl:when test="contains($codePacs,'47.85.Gj')">Aerodynamics</xsl:when>
                             <xsl:when test="contains($codePacs,'51.00.00')">Physics of gases</xsl:when>

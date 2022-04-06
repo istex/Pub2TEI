@@ -1482,4 +1482,19 @@
         <xsl:apply-templates/>
         </l>
     </xsl:template>
+    <xsl:template match="definition-list">
+        <list type="index">
+            <xsl:apply-templates/>
+        </list>
+    </xsl:template>
+    <xsl:template match="def-list-item">
+        <item>
+            <xsl:apply-templates/>
+        </item>
+    </xsl:template>
+    <xsl:template match="list-text">
+        <desc>
+            <xsl:value-of select="p"/>
+        </desc>
+    </xsl:template>
 </xsl:stylesheet>
