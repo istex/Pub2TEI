@@ -57,9 +57,14 @@
                             <xsl:value-of select="@position"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="label | rsc:label">
+                    <xsl:if test="caption/@label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="caption/@label"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="label | rsc:label | @label">
                         <head type="label">
-                            <xsl:value-of select="label| rsc:label"/>
+                            <xsl:value-of select="label | rsc:label | @label"/>
                         </head>
                     </xsl:if>
                     <!-- <xsl:apply-templates select="* except tgroup"/>-->

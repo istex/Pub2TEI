@@ -2090,7 +2090,7 @@
         </author>
     </xsl:template>
     
-    <xsl:template match="aut|au">
+    <xsl:template match="aut">
         <author>
             <persName>
                 <xsl:apply-templates/>

@@ -1573,7 +1573,8 @@
 
             <!-- partie analytique (article) -->
             <analytic>
-                <xsl:for-each select="authors/au">
+                <xsl:apply-templates select="authors/au"/>
+                <!--<xsl:for-each select="authors/au">
                     <author>
                         <persName>
                             <surname>
@@ -1584,7 +1585,7 @@
                             </forename>
                         </persName>
                     </author>
-                </xsl:for-each>
+                </xsl:for-each>-->
                 <xsl:for-each select="authors/others">
                     <author>
                         <xsl:value-of select="italic"/>
@@ -1953,11 +1954,8 @@
                 <!-- comme pour book-ref -->
                 <xsl:when test="art-title | authors/au">
                     <analytic>
-                        <xsl:apply-templates
-                            select="
-                                authors/au
-                                | art-title"
-                        />
+                        <xsl:apply-templates select="art-title"/>
+                        <xsl:apply-templates select="authors"/>
                     </analytic>
                     <monogr>
                         <xsl:apply-templates

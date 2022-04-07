@@ -95,6 +95,11 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <figDesc>
+                                <xsl:if test="../@id">
+                                    <xsl:attribute name="xml:id">
+                                        <xsl:value-of select="../@id"/>
+                                    </xsl:attribute>
+                                </xsl:if>
                                 <xsl:apply-templates/>
                             </figDesc>
                         </xsl:otherwise>
@@ -106,7 +111,7 @@
     <xsl:template match="graphic-file">
         <graphic>
             <xsl:if test="@format">
-                <xsl:attribute name="style">
+                <xsl:attribute name="mimeType">
                     <xsl:value-of select="@format"/>
                 </xsl:attribute>
             </xsl:if>

@@ -1062,7 +1062,13 @@
         <ref type="figure">
             <xsl:attribute name="target">
                 <xsl:variable name="concat">
-                    <xsl:value-of select="concat('#',@idrefs)"/>
+                    <xsl:choose>
+                        <xsl:when test="@idrefs[string-length() &gt; 0]">
+                            <xsl:value-of select="concat('#',@idrefs)"/></xsl:when>
+                        <xsl:when test="@linkend[string-length() &gt; 0]">
+                            <xsl:value-of select="concat('#',@linkend)"/>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:variable>
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
@@ -1498,18 +1504,31 @@
         </desc>
     </xsl:template>
     <xsl:template match="display-eqn">
-        <figure type="latexEquation" >
-            <figDesc>
-                <xsl:variable name="TeX">
-                    <xsl:apply-templates/>
-                </xsl:variable>
-                <xsl:value-of select="normalize-space($TeX)"/>
-            </figDesc>
-            <graphic url="{eqn-graphic/@filename}"/>
-        </figure>
+        <formula style="latexEquation" >
+            <xsl:variable name="TeX">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:if test="@id[string-length() &gt; 0]">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="normalize-space($TeX)"/>
+        </formula>
+        <graphic mimeType="{eqn-graphic/@format}" url="{eqn-graphic/@filename}"/>
     </xsl:template>
     <xsl:template match="processing-instruction('TeX')">
         <xsl:value-of select="."/>
+    </xsl:template>
+    <xsl:template match="eqnref |tabref">
+        <ref>
+            <xsl:if test="@linkend[string-length() &gt; 0]">
+                <xsl:attribute name="target">
+                    <xsl:value-of select="@linkend"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="."/>
+        </ref>
     </xsl:template>
     
 </xsl:stylesheet>

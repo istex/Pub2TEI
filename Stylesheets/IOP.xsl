@@ -1244,7 +1244,11 @@
          contenus possibles de <classifications>) -->
     <xsl:template match="classifications">
         <textClass ana="classification">
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="subject-areas"/>
+            <xsl:apply-templates select="class-codes"/>
+        </textClass>
+        <textClass ana="keywords">
+            <xsl:apply-templates select="keywords"/>
         </textClass>
     </xsl:template>
 
@@ -3588,6 +3592,7 @@
         <div>
             <!-- id -->
             <xsl:attribute name="xml:id" select="@id"/>
+            <xsl:attribute name="n" select="@label"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -3595,6 +3600,7 @@
         <div>
             <!-- id -->
             <xsl:attribute name="xml:id" select="@id"/>
+            <xsl:attribute name="n" select="@label"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
