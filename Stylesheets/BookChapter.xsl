@@ -623,7 +623,7 @@
                                 <note type="content-type">
                                     <xsl:choose>
                                         <!-- brepols -->
-                                        <xsl:when test="starts-with(//book-id[@pub-id-type='doi'],'10.1484/')">
+                                        <xsl:when test="starts-with(/book/book-meta/book-id[@pub-id-type='doi'][1],'10.1484/')">
                                             <xsl:attribute name="subtype">
                                                 <xsl:value-of select="$codeGenreIstex"/>
                                             </xsl:attribute>
@@ -1340,6 +1340,16 @@
                             <xsl:value-of select="normalize-space(/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
                         </idno>
                     </xsl:when>
+                    <xsl:when test="/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi']|book/body/book-part/book-part-meta/book-part-id[@pub-id-type='doi']">
+                        <idno type="DOI">
+                            <xsl:value-of select="normalize-space(/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi']|book/body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'])"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="/book/body/book-part/book-part-meta/book-part-id[@pub-id-type='doi']">
+                        <idno type="DOI">
+                            <xsl:value-of select="normalize-space(/book/body/book-part/book-part-meta/book-part-id[@pub-id-type='doi'])"/>
+                        </idno>
+                    </xsl:when>
                     <xsl:when test="book-meta/book-id[string-length() &gt; 0]">
                         <xsl:for-each select="book-meta/book-id">
                             <idno type="{translate(@book-id-type,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')}">
@@ -1396,8 +1406,18 @@
                 </xsl:if>
             </analytic>
             <monogr>
-                <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
-                <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
+                <xsl:choose>
+                    <xsl:when test="book-meta/book-title-group">
+                        <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
+                        <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- pas de titres chez degruyter 2017 -->
+                        <title level="m" type="main">
+                            <xsl:value-of select="$titleDG"/>
+                        </title>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
                 

@@ -358,6 +358,7 @@
                     <xsl:text>corresp</xsl:text>
                 </xsl:attribute>
             </xsl:if>
+            <persName>
             <xsl:apply-templates select="contrib-id"/>
             <xsl:apply-templates select="collab"/>
             <xsl:apply-templates select="name"/>
@@ -476,6 +477,7 @@
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
                 </xsl:when>
             </xsl:choose>
+            </persName>
         </author>
         </xsl:if>
     </xsl:template>
