@@ -2,7 +2,8 @@
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
-    xmlns="http://www.tei-c.org/ns/1.0" 
+    xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:m="http://www.w3.org/1998/Math/MathML" 
     xmlns:ce="http://www.elsevier.com/xml/common/dtd"
@@ -13,11 +14,17 @@
     xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd"
     exclude-result-prefixes="xsi m els1 els2 s1 sb ce xlink">
     <xsl:output encoding="UTF-8" method="xml"/>
-    
     <xsl:include href="ElsevierFormula.xsl"/>
     <xsl:param name="partOfSetXmlPath" />
     <xsl:variable name="docIssueEls" select="document($partOfSetXmlPath)"/>
     <xsl:variable name="currentPii" select="//ce:pii"/>
+    
+    <xsl:variable name="titleCodes" select="document('TitleCodes.xml')"/>
+    <xsl:variable name="value_to_jid" select="//jid|//els1:jid | //els2:jid"/>
+    <xsl:variable name="resultCodeTitle">
+        <xsl:value-of select="$titleCodes/descendant::tei:row[tei:cell/text() = $value_to_jid]/tei:cell[@role = 'name']"/>
+    </xsl:variable>
+
     <xsl:variable name="substringOfDate">
         <xsl:choose>
             <xsl:when test="string-length($date)=8">
@@ -344,7 +351,7 @@
                                                 <xsl:otherwise>j</xsl:otherwise>
                                             </xsl:choose>
                                         </xsl:attribute>
-                                        <xsl:value-of select="$codeTitleElsevier"/>
+                                        <xsl:value-of select="$resultCodeTitle"/>
                                     </title>
                                     <title type="abbrev">
                                         <xsl:attribute name="level">
@@ -353,7 +360,7 @@
                                                 <xsl:otherwise>j</xsl:otherwise>
                                             </xsl:choose>
                                         </xsl:attribute>
-                                        <xsl:value-of select="//els1:item-info/els1:jid |//els2:item-info/els2:jid | //item-info/jid"/>
+                                        <xsl:value-of select="$value_to_jid"/>
                                     </title>
                                 </xsl:if>
                                 <!-- titre supplémentaire -->

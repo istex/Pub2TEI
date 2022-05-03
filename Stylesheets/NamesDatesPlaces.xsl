@@ -129,7 +129,7 @@
     </xsl:template>
 
     <xsl:template match="Year | year| rsc:year | yy">
-        <date type="published" when="{translate(.,'abcdefghijklmnopqrstuvwyyz ','')}">
+        <date type="published" when="{translate(.,'abcdefghijklmnopqrstuvwyyz[] ','')}">
             <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwyyz ','')"/>
         </date>
     </xsl:template>

@@ -1085,7 +1085,7 @@
             </xsl:when>
             <xsl:when test="surname | given-names">
                 <xsl:choose>
-                    <xsl:when test="ancestor::ref">
+                    <xsl:when test="ancestor::ref or ancestor::mixed-citation">
                         <author>
                             <persName>
                                 <xsl:apply-templates select="surname"/>
@@ -2035,14 +2035,26 @@
                 </bibl>
             </xsl:when>
             <xsl:when test="not(source)">
-                <xsl:if test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
-                <bibl>
-                    <xsl:attribute name="type">
-                        <xsl:text>in-line</xsl:text>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </bibl>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
+                        <bibl>
+                            <xsl:attribute name="type">
+                                <xsl:text>in-line</xsl:text>
+                            </xsl:attribute>
+                            <xsl:apply-templates/>
+                        </bibl>
+                    </xsl:when>
+                    <xsl:when test="string-name">
+                        <bibl>
+                            <xsl:if test="ancestor::ref/@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="ancestor::ref/@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:apply-templates/>
+                        </bibl>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="contains(., ':') and $count and //publisher-name='S. Karger AG'">
                 <biblStruct>

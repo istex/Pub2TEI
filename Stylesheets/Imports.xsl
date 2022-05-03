@@ -15,5 +15,4 @@
     <xsl:include href="Bibliography.xsl"/>
     <xsl:include href="Tables.xsl"/>
 	<xsl:include href="Figures.xsl"/>
-    <xsl:include href="MissingTitles.xsl"/>
 </xsl:stylesheet>

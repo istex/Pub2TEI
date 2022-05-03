@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:rsc="http://www.rsc.org/schema/rscart38" 
     xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
 
@@ -14,6 +14,16 @@
 
     <xsl:output encoding="UTF-8" method="xml"/>
     
+    <xsl:variable name="value_to_id" select="article/front/journal-meta/journal-id[@journal-id-type='publisher-id']"/>
+    <xsl:variable name="resultCodeTitleNLM">
+        <xsl:value-of select="$titleCodes/descendant::tei:row[tei:cell/text() = $value_to_id]/tei:cell[@role = 'name']"/>
+    </xsl:variable>
+    <xsl:variable name="result_ISSN_NLM">
+        <xsl:value-of select="$titleCodes/descendant::tei:row[tei:cell/text() = $value_to_id]/tei:cell[@role = 'issn']"/>
+    </xsl:variable>
+    <xsl:variable name="result_eISSN_NLM">
+        <xsl:value-of select="$titleCodes/descendant::tei:row[tei:cell/text() = $value_to_id]/tei:cell[@role = 'eissn']"/>
+    </xsl:variable>
     <!-- SG ajout corrections des titres vides -->
     
     <xsl:variable name="ttl">
@@ -1405,7 +1415,13 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <title level="j" type="main">
-                                    <xsl:value-of select="$SageJournalTitle"/>
+                                    <xsl:choose>
+                                        <xsl:when test="//journal-id[@journal-id-type='isbn']='978-0-85404-169-5'"><title>Nanotechnologies in Food</title></xsl:when>
+                                        <xsl:when test="//journal-id[@journal-id-type='isbn']='978-1-84755-916-6'"><title>Handbook of Culture Media for Food and Water Microbiology (3rd Edition)</title></xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="$resultCodeTitle"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </title>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -2642,8 +2658,13 @@
             <xsl:apply-templates/>
         </ref>
     </xsl:template>
-
+<!-- cambridge ebooks -->
     <xsl:template match="aff/label"/>
+    <xsl:template match="body/label">
+        <head>
+            <xsl:apply-templates/>
+        </head>
+    </xsl:template>
 
     <!-- redirected affiliation by means of basic index (BMJ - 3.0 example) -->
     <xsl:template match="xref[@ref-type = 'aff']">
@@ -2941,6 +2962,10 @@
     </xsl:template>
     <xsl:template match="sec[not(parent::boxed-text)]/title">
             <head>
+                <xsl:if test="../label[string-length()&gt; 0]">
+                    <xsl:value-of select="../label"/>
+                    <xsl:text> - </xsl:text>
+                </xsl:if>
                 <xsl:apply-templates/>
             </head>
     </xsl:template>
@@ -2969,7 +2994,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template match="statement">
         <floatingText type="statement">
             <xsl:if test="@id">
@@ -2988,6 +3013,7 @@
             <xsl:when test="email">
                 <xsl:apply-templates/>
             </xsl:when>
+            <xsl:when test="parent::label"/>
             <xsl:otherwise>
                 <name>
                     <xsl:if test="@content-type">
@@ -3232,6 +3258,26 @@
                     <xsl:when test="child::graphic-file">
                         <xsl:apply-templates/>
                     </xsl:when>
+                    <xsl:when test="parent::alternatives">
+                        <figure>
+                            <graphic>
+                                <xsl:attribute name="url">
+                                    <xsl:value-of select="@xlink:href|@src"/>
+                                </xsl:attribute>
+                                <xsl:apply-templates/>
+                            </graphic>
+                        </figure>
+                    </xsl:when>
+                    <xsl:when test="parent::named-book-part-body">
+                        <figure>
+                            <graphic>
+                                <xsl:attribute name="url">
+                                    <xsl:value-of select="@xlink:href|@src"/>
+                                </xsl:attribute>
+                                <xsl:apply-templates/>
+                            </graphic>
+                        </figure>
+                    </xsl:when>
                     <xsl:otherwise>
                         <graphic>
                             <xsl:attribute name="url">
@@ -3251,6 +3297,11 @@
                 <item>
                     <xsl:apply-templates/>
                 </item>
+            </xsl:when>
+            <xsl:when test="parent::table-wrap">
+                <note>
+                    <xsl:apply-templates/>
+                </note>
             </xsl:when>
             <xsl:otherwise>
                 <desc>
@@ -3313,7 +3364,7 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
+                <xsl:attribute name="n">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
@@ -3590,7 +3641,7 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
-            <xsl:when test="parent::table-wrap-foot">
+            <xsl:when test="parent::table-wrap-foot | parent::toc-entry">
                 <title>
                     <xsl:apply-templates/>
                 </title>

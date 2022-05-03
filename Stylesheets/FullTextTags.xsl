@@ -116,7 +116,7 @@
                     </xsl:when>
                     <xsl:when test="parent::fn |parent::list-item ">
                         <p>
-                            <xsl:value-of select="normalize-space(.)"/>
+                            <xsl:apply-templates/>
                         </p>
                     </xsl:when>
                     <xsl:when test="ancestor::boxed-text/sec and not(parent::list-item)">
@@ -180,6 +180,11 @@
                             <xsl:if test="@xml:lang">
                                 <xsl:attribute name="xml:lang">
                                     <xsl:value-of select="@xml:lang"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@content-type">
+                                <xsl:attribute name="style">
+                                    <xsl:value-of select="@content-type"/>
                                 </xsl:attribute>
                             </xsl:if>
                             <xsl:apply-templates/>
@@ -1156,7 +1161,7 @@
                     <title><xsl:apply-templates/></title>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="not(ancestor::reftxt or ancestor::list-item)">
+                    <xsl:if test="not(ancestor::reftxt or parent::list-item)">
                         <hi rend="italic">
                             <xsl:apply-templates/>
                         </hi>
@@ -1470,8 +1475,17 @@
         </div>
     </xsl:template>
     <!-- taylor et francis -->
-    <xsl:template match="index-entry">
-        <xsl:apply-templates/>
+    <xsl:template match="index-entry | toc-entry">
+        <xsl:choose>
+            <xsl:when test="parent::index-div | parent::toc">
+                <item>
+                    <xsl:apply-templates/> 
+                </item>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="index-term">
         <term>

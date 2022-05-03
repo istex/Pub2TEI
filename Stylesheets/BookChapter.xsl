@@ -534,7 +534,7 @@
                                         </xsl:choose>
                                     </xsl:when>
                                 </xsl:choose>
-                                <xsl:if test="book-meta/pub-date/year[string-length() &gt; 0] |$docIssue//pub-date/year[string-length() &gt; 0] | /book/metadata/pubDate[string-length() &gt; 0]">
+                                <xsl:if test="book-meta/pub-date/year[string-length() &gt; 0] |$docIssue//pub-date/year[string-length() &gt; 0] | /book/metadata/pubDate[string-length() &gt; 0] | //permissions">
                                     <availability>
                                         <xsl:if test="/book/body/book-part/book-part-meta/permissions/license[@license-type='free'] |//license[@license-type='open-access']">
                                             <xsl:attribute name="status">free</xsl:attribute>
@@ -1068,6 +1068,14 @@
                                 <xsl:when test="//book/book-body/book-part/body">
                                     <xsl:apply-templates select="//book/book-body/book-part/body"/>
                                 </xsl:when>
+                                <!-- cup-ebooks -->
+                                <xsl:when test="//front-matter/ack | //front-matter//named-book-part-body |//front-matter/toc|//front-matter/glossary ">
+                                    <xsl:apply-templates select="//front-matter/*  "/>
+                                </xsl:when>
+                                <xsl:when test="//book-back/index |//book-back/app">
+                                    <xsl:apply-templates select="//book-back/*"/>
+                                </xsl:when>
+                                <!-- fin cup-ebooks -->
                                 <xsl:otherwise>
                                     <div>
                                         <xsl:choose>
@@ -1082,8 +1090,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </body>
-                           
-                        <xsl:choose>
+                        <xsl:choose> 
                             <xsl:when test="//book/body/book-part/back">
                                 <back>
                                     <xsl:apply-templates select="//book/body/book-part/back/*"/>
@@ -1091,10 +1098,11 @@
                             </xsl:when>
                             <xsl:when test="//back">
                                 <back>
-                                    <!-- brill-ebooks -->
+                                    <!-- brill-ebooks-->
                                     <xsl:apply-templates select="//back/*"/>
                                 </back>
                             </xsl:when>
+                           
                         </xsl:choose>
                     </text>
                 </xsl:otherwise>
@@ -1411,12 +1419,6 @@
                         <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
                         <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
                     </xsl:when>
-                    <xsl:otherwise>
-                        <!-- pas de titres chez degruyter 2017 -->
-                        <title level="m" type="main">
-                            <xsl:value-of select="$titleDG"/>
-                        </title>
-                    </xsl:otherwise>
                 </xsl:choose>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
@@ -1481,7 +1483,14 @@
                         <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
                     </xsl:if>
                     <xsl:if test="book-meta/publisher[1]/publisher-loc | metadata/pubPlace">
-                        <pubPlace><xsl:value-of select="book-meta/publisher[1]/publisher-loc | metadata/pubPlace"/></pubPlace>
+                        <pubPlace>
+                            <xsl:choose>
+                                <xsl:when test="book-meta/publisher[1]/publisher-loc='Cambridge'">UK</xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="book-meta/publisher[1]/publisher-loc | metadata/pubPlace"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </pubPlace>
                     </xsl:if>
                     <xsl:choose>
                         <xsl:when test="book-meta/pub-date[@publication-format='print']/year[string-length() &gt; 0]">
@@ -1909,6 +1918,94 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <!-- index -->
+    <xsl:template match="index">
+        <div type="index">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="index-div">
+        <list>
+            <xsl:apply-templates/>
+        </list>
+    </xsl:template>
+    <xsl:template match="nav-pointer-group">
+        <source>
+            <xsl:apply-templates/>
+        </source>
+    </xsl:template>
+    <xsl:template match="nav-pointer">
+        <ptr type="page">
+            <xsl:if test="@nav-pointer-type">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@nav-pointer-type"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:attribute name="target">
+                <xsl:apply-templates/>
+            </xsl:attribute>
+        </ptr>
+    </xsl:template>
+    <xsl:template match="front-matter-part">
+        <div type="contributors">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="preface">
+        <div type="preface">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="dedication">
+        <div type="dedication">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="foreword">
+        <div type="foreword">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="named-book-part-body">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="toc">
+        <div type="contents">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <list>
+                <xsl:apply-templates/>
+            </list>
         </div>
     </xsl:template>
 </xsl:stylesheet>

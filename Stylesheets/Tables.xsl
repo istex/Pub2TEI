@@ -30,6 +30,11 @@
                     <xsl:apply-templates/>
                 </table>
             </xsl:when>
+            <xsl:when test="parent::alternatives">
+                <table>
+                    <xsl:apply-templates/>
+                </table>
+            </xsl:when>
             <xsl:when test="ancestor::p | ancestor::rsc:p">
                 <table>
                     <xsl:if test="@id">
@@ -105,6 +110,53 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
+                    <xsl:when test="parent::body | parent::app">
+                        <table>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="graphic/@xlink:href |rsc:graphic/@xlink:href">
+                                <xsl:attribute name="n">
+                                    <xsl:value-of select="graphic/@xlink:href|rsc:graphic/@xlink:href"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="oasis:table/@rowsep">
+                                <xsl:attribute name="rows">
+                                    <xsl:value-of select="oasis:table/@rowsep"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="oasis:table/@colsep">
+                                <xsl:attribute name="cols">
+                                    <xsl:value-of select="oasis:table/@colsep"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="@position">
+                                <xsl:attribute name="rend">
+                                    <xsl:value-of select="@position"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="label| rsc:label">
+                                <head type="label">
+                                    <xsl:if test="label/xref/@id | rsc:label/rsc:xref/@id">
+                                        <xsl:attribute name="corresp">
+                                            <xsl:text>#</xsl:text>
+                                            <xsl:value-of select="label/xref/@id| rsc:label/rsc:xref/@id"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:value-of select="label| rsc:label"/>
+                                </head>
+                            </xsl:if>
+                            <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                            <xsl:apply-templates select="* except(label/xref | graphic | rsc:graphic |rsc:label/rsc:xref)"/>
+                        </table>
+                    </xsl:when>
                     <xsl:when test="not(oasis:table | table | rsc:table| ancestor::div1)">
                         <figure>
                             <xsl:if test="@id">
@@ -200,14 +252,16 @@
                         </table>
                     </xsl:otherwise>
                 </xsl:choose>
-                
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+    <!-- Cambridge ebooks -->
+    <xsl:template match="alternatives">
+        <xsl:apply-templates select="*"/>
+    </xsl:template>
     <!-- American chemical Society: oasis:table; oasis:table-wrap -->
     <xsl:template match="oasis:table">
-        <xsl:apply-templates select="*"/>
+        <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="label | rsc:label">
