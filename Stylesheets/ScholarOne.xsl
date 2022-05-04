@@ -481,6 +481,137 @@
         </author>
         </xsl:if>
     </xsl:template>
+    <xsl:template match="contrib[@contrib-type='author' or not(@contrib-type)]" mode="monogr">
+        <xsl:if test=".!=''">
+            <author>
+                <xsl:if test="@corresp = 'yes'">
+                    <xsl:attribute name="role">
+                        <xsl:text>corresp</xsl:text>
+                    </xsl:attribute>
+                </xsl:if>
+                <persName>
+                    <xsl:apply-templates select="contrib-id"/>
+                    <xsl:apply-templates select="collab"/>
+                    <xsl:apply-templates select="name"/>
+                    <xsl:apply-templates select="string-name"/>
+                    <xsl:apply-templates select="name-alternatives"/>
+                    <xsl:apply-templates select="email"/>
+                    <!-- affiliation -->
+                    <xsl:variable name="count">
+                        <xsl:value-of select="count(name)"/>
+                    </xsl:variable>
+                    <xsl:variable name="countRef">
+                        <xsl:value-of select="count(xref)"/>
+                    </xsl:variable>
+                    <xsl:choose>
+                        <!-- cas particulier Karger doi 10.1159/000493063  -->
+                        <xsl:when test="//article-meta/aff/@id='aff_ '">
+                            <xsl:apply-templates select="//article-meta/aff"/>
+                        </xsl:when>
+                        <xsl:when test="$count &gt;1">
+                            <xsl:apply-templates select="//aff"/>
+                        </xsl:when>
+                        <!-- cas Karger -->
+                        <xsl:when test="contains(/article/front/journal-meta/publisher/publisher-name,'S. Karger AG')">
+                            <xsl:call-template name="supAffil"/>
+                        </xsl:when>
+                        <xsl:when test="$countRef &gt;1">
+                            <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
+                                <email>
+                                    <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
+                                </email>
+                            </xsl:if>
+                            <xsl:for-each select="xref">
+                                <xsl:choose>
+                                    <xsl:when test="contains(@rid,' ')">
+                                        <xsl:call-template name="createNLMAffiliations">
+                                            <xsl:with-param name="restAff" select="@rid"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/@rid] except(/article/front/article-meta/contrib-group/aff[@id=current()/@rid]/label)"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="/article/front/article-meta/aff[@id=current()/xref/@rid] |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] ">
+                            <!-- email -->
+                            <xsl:if test="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email">
+                                <email>
+                                    <xsl:value-of select="/article/front/article-meta/aff[@id=current()/xref/@rid]/email |/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/email"/>
+                                </email>
+                            </xsl:if>
+                            <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid] |
+                                /article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid] 
+                                except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/label)"/>
+                        </xsl:when>
+                        <xsl:when test="aff">
+                            <xsl:apply-templates select="aff"/>
+                        </xsl:when>
+                        <xsl:when test="parent::contrib-group/aff and not(//collab) and not(author-notes/fn='†')">
+                            <xsl:apply-templates select="parent::contrib-group/aff"/>
+                        </xsl:when>
+                        <!-- ajout 20/08/2021 sgreg pour données rsc-ebooks -->
+                        <xsl:when test="contains(xref/@rid,' ')">
+                            <xsl:for-each select="xref">
+                                <xsl:choose>
+                                    <xsl:when test="contains(@rid,' ')">
+                                        <xsl:call-template name="createNLMAffiliations">
+                                            <xsl:with-param name="restAff" select="@rid"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                </xsl:choose>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="//article-meta/aff and not(//collab)">
+                            <xsl:apply-templates select="//article-meta/aff"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:for-each select="xref">
+                                <xsl:choose>
+                                    <xsl:when test="contains(@rid,' ')">
+                                        <xsl:call-template name="createNLMAffiliations">
+                                            <xsl:with-param name="restAff" select="@rid"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                </xsl:choose>
+                            </xsl:for-each>
+                        </xsl:otherwise>
+                        <!-- <xsl:when test="ancestor::article-meta and //aff and not(//collab)">
+                    <xsl:apply-templates select="//aff"/>
+                </xsl:when>-->
+                    </xsl:choose>
+                    <!-- appelle les affiliations complementaires -->
+                    <!-- pour ACS -->
+                    <xsl:if test="//article/front/journal-meta/publisher/publisher-name='American Chemical Society'">
+                        <xsl:choose>
+                            <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
+                                <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="acs"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:if>
+                    <!-- Pour le reste de la production -->
+                    <xsl:choose>
+                        <!-- ne pas faire sortir les author-footnotes dans les données ACS car elles sont repris 
+                dans les affiliations principales-->
+                        <xsl:when test="/article/front/journal-meta/publisher/publisher-name='American Chemical Society'"/>
+                        <xsl:when test="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]">
+                            <xsl:apply-templates select="//contrib-group/aff"/>
+                            <xsl:apply-templates select="/article/front/article-meta/author-notes/fn[@id=current()/xref/@rid]" mode="author"/>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="/article/front/article-meta/author-notes/corresp[@id=current()/xref/@rid]">
+                            <xsl:apply-templates select="/article/front/article-meta/author-notes"/>
+                        </xsl:when>
+                        <xsl:when test="/article/front/article-meta/author-notes/corresp and not(/article/front/article-meta/author-notes/corresp/@id)">
+                            <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </persName>
+            </author>
+        </xsl:if>
+    </xsl:template>
     
 
     <xsl:template match="comments">

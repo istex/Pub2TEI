@@ -1422,8 +1422,7 @@
                 </xsl:choose>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
-                
-
+                <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
                 <!-- ********************************** Identifier *******************************-->
                 <xsl:if test="book-meta/isbn[string-length() &gt; 0]">
                     <xsl:for-each select="book-meta/isbn">
