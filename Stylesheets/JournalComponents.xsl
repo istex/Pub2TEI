@@ -657,7 +657,7 @@
                     <xsl:value-of select="normalize-space(.)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="$repriseISSNCode"/>
+                    <xsl:value-of select="$result_ISSN_NLM"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
