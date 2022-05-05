@@ -480,31 +480,26 @@
                     <teiHeader>
                         <fileDesc>
                             <titleStmt>
+                                <!-- Title information related to the paper goes here -->
                                 <xsl:choose>
-                                    <!-- brill-hacco -->
                                     <xsl:when test="//book/entryGroup/entry/headGroup/head[string-length()&gt; 0]">
                                         <title level="a" type="main">
                                             <xsl:if test="//book/entryGroup/entry/headGroup/label[string-length()&gt; 0]">
-                                            <xsl:value-of select="/book/entryGroup/entry/headGroup/label"/>
+                                                <xsl:value-of select="/book/entryGroup/entry/headGroup/label"/>
                                                 <xsl:text> - </xsl:text>
                                             </xsl:if>
                                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                                         </title>
                                     </xsl:when>
-                                    <!-- brill-ebooks -->
-                                    <xsl:when test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                        <xsl:apply-templates select="$titleToDeduceGenre"/>
-                                    </xsl:when>
-                                    <xsl:when test="//body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                        <xsl:apply-templates select="//body/book-part/book-part-meta/title-group/title"/>
+                                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
                                     </xsl:when>
                                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
                                     </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:apply-templates select="//book-title-group/book-title" mode="article"></xsl:apply-templates>
-                                        <xsl:apply-templates select="//book-title-group/subtitle"></xsl:apply-templates>
-                                    </xsl:otherwise>
+                                    <xsl:when test="book-meta/book-title-group/book-title">
+                                        <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="analytic"/>
+                                    </xsl:when>
                                 </xsl:choose>
                             </titleStmt>
                             <publicationStmt>
@@ -871,7 +866,7 @@
                                     
                                 </profileDesc>
                             </xsl:when>
-                            <xsl:when test="book-meta/abstract[string-length() &gt; 0] |$docIssue//book-meta/pub-date">
+                            <xsl:when test="//abstract[string-length() &gt; 0] |$docIssue//book-meta/pub-date | //kwd-group">
                                 <profileDesc>
                                     <creation>
                                         <xsl:choose>
@@ -882,7 +877,7 @@
                                     </creation>
                                     <!-- PL: abstract is moved from <front> to here -->
                                     <xsl:choose>
-                                        <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/abstract">
+                                        <xsl:when test="//book-part[not(body/book-part)]/book-part-meta">
                                             <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/abstract"/>
                                         </xsl:when>
                                         <!-- ne pas reprendre les abstracts du livre si on traite les chapitres-->
@@ -965,9 +960,16 @@
                                             </xsl:for-each>
                                         </textClass>
                                     </xsl:if>
-                                    <xsl:if test="book-meta/kwd-group[string-length() &gt; 0]">
-                                        <xsl:apply-templates select="book-meta/kwd-group"/>
-                                    </xsl:if>
+                                    <xsl:choose>
+                                        <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/kwd-group">
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/kwd-group"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:if test="book-meta/kwd-group[string-length() &gt; 0]">
+                                                <xsl:apply-templates select="book-meta/kwd-group"/>
+                                            </xsl:if>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                     
                                     <!-- language -->
                                     <xsl:choose>
@@ -1422,7 +1424,7 @@
                 </xsl:choose>
                 <xsl:apply-templates select="metadata/title"/>
                 <xsl:apply-templates select="metadata/subtitle"/>
-                <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
+
                 <!-- ********************************** Identifier *******************************-->
                 <xsl:if test="book-meta/isbn[string-length() &gt; 0]">
                     <xsl:for-each select="book-meta/isbn">
@@ -1476,7 +1478,7 @@
                 </xsl:if>
                 <!-- All authors are included here -->
                 <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']" mode="editor"/>       
-                
+                <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
                 <imprint>
                     <xsl:if test="book-meta/publisher[1]/publisher-name | metadata/publisher">
                         <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
