@@ -31,9 +31,7 @@
                 </table>
             </xsl:when>
             <xsl:when test="parent::alternatives">
-                <table>
                     <xsl:apply-templates/>
-                </table>
             </xsl:when>
             <xsl:when test="ancestor::p | ancestor::rsc:p">
                 <table>

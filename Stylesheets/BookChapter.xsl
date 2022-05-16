@@ -491,8 +491,18 @@
                                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                                         </title>
                                     </xsl:when>
-                                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[string-length()&gt; 0]">
+                                        <xsl:choose>
+                                            <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                                            </xsl:when>
+                                            <xsl:otherwise> 
+                                                <!-- cambridge titre vide prendre type de contenu -->
+                                                <title level="a" type="main">
+                                                    <xsl:value-of select="translate(//book-part[not(body/book-part)]/@book-part-type,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/> 
+                                                </title>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:when>
                                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
@@ -1284,8 +1294,18 @@
                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
-                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[string-length()&gt; 0]">
+                        <xsl:choose>
+                            <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                            </xsl:when>
+                            <xsl:otherwise> 
+                                <!-- cambridge titre vide prendre type de contenu -->
+                                <title level="a" type="main">
+                                    <xsl:value-of select="translate(//book-part[not(body/book-part)]/@book-part-type,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/> 
+                                </title>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
@@ -1340,10 +1360,15 @@
                     </idno>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi']">
-                        <idno type="DOI">
-                            <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
-                        </idno>
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta">
+                        <xsl:choose>
+                            <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi']">
+                                <idno type="DOI">
+                                    <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/book-part-id[@book-part-id-type='doi'])"/>
+                                </idno>
+                            </xsl:when>
+                            <xsl:otherwise/>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/book-part-id[@book-part-id-type='doi']">
                         <idno type="DOI">
@@ -1383,9 +1408,14 @@
                         </xsl:for-each>
                     </xsl:when>
                 </xsl:choose>
-                
-                <xsl:if test="book-meta/self-uri">
-                    <xsl:for-each select="book-meta/self-uri">
+                <xsl:choose>
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/self-uri">
+                        <idno type="URI">
+                            <xsl:value-of select="//book-part[not(body/book-part)]/book-part-meta/self-uri"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="book-meta/self-uri">
+                        <xsl:for-each select="book-meta/self-uri">
                             <idno>
                                 <xsl:if test="@content-type">
                                     <xsl:attribute name="type">
@@ -1404,8 +1434,9 @@
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </idno>
-                    </xsl:for-each>
-                </xsl:if>
+                        </xsl:for-each>
+                    </xsl:when>
+                </xsl:choose>
                 <xsl:if test="//toc/item/@id[string-length() &gt; 0]">
                     <xsl:for-each select="//toc/item/@id">
                         <idno>
@@ -1475,6 +1506,28 @@
                     <idno type="DOI">
                         <xsl:value-of select="normalize-space(/book/book-meta/book-id[@book-id-type='doi'])"/>
                     </idno>
+                </xsl:if>
+                <xsl:if test="book-meta/self-uri">
+                    <xsl:for-each select="book-meta/self-uri">
+                        <idno>
+                            <xsl:if test="@content-type">
+                                <xsl:attribute name="type">
+                                    <xsl:value-of select="normalize-space(@content-type)"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="contains(.,'http://dx.doi.org/')">
+                                <xsl:attribute name="type">URI-DOI</xsl:attribute>
+                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="@xlink:href">
+                                    <xsl:value-of select="normalize-space(@xlink:href)"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="."/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </idno>
+                    </xsl:for-each>
                 </xsl:if>
                 <!-- All authors are included here -->
                 <xsl:choose>
