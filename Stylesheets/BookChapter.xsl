@@ -635,7 +635,7 @@
                                                 <xsl:value-of select="$codeGenreIstex"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="source">
-                                                <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                                <xsl:value-of select="$codeGenreAll"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="scheme">
                                                 <xsl:value-of select="$codeGenreArk"/>
@@ -1477,8 +1477,16 @@
                     </idno>
                 </xsl:if>
                 <!-- All authors are included here -->
-                <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']" mode="editor"/>       
-                <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
+                <xsl:choose>
+                    <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']">
+                        <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']" mode="editor"/>       
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+
+
                 <imprint>
                     <xsl:if test="book-meta/publisher[1]/publisher-name | metadata/publisher">
                         <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
