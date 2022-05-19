@@ -1000,6 +1000,14 @@
                                                     </xsl:attribute>
                                                 </language>
                                             </langUsage></xsl:when>
+                                        <xsl:when test="//publisher-name='Cambridge University Press'">
+                                            <!-- Cambridge-polit-sci langue par défaut "en"-->
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">en</xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:when>
                                     </xsl:choose>
                                 </profileDesc>
                             </xsl:when>

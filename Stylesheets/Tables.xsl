@@ -23,7 +23,12 @@
                     </xsl:if>
                     <xsl:if test="label">
                         <head type="label">
-                            <xsl:value-of select="label"/>
+                            <xsl:if test="label/target[@id]">
+                               <xsl:attribute name="xml:id">
+                                   <xsl:value-of select="label/target/@id"/>
+                               </xsl:attribute>
+                            </xsl:if>
+                            <xsl:apply-templates select="label/text()"/>
                         </head>
                     </xsl:if>
                     <!--<xsl:apply-templates select="* except tgroup"/>-->
@@ -155,7 +160,7 @@
                             <xsl:apply-templates select="* except(label/xref | graphic | rsc:graphic |rsc:label/rsc:xref)"/>
                         </table>
                     </xsl:when>
-                    <xsl:when test="not(oasis:table | table | rsc:table| ancestor::div1)">
+                    <xsl:when test="not(oasis:table | table | ../table-wrap | rsc:table| ancestor::div1)">
                         <figure>
                             <xsl:if test="@id">
                                 <xsl:attribute name="xml:id">
@@ -263,7 +268,7 @@
     </xsl:template>
     
     <xsl:template match="label | rsc:label">
-                <xsl:apply-templates select="*"/>
+        <xsl:apply-templates select="* except(named-content|target)"/>
     </xsl:template>
     <!--elsevier-->
     <xsl:template match="ce:table">

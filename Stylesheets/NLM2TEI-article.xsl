@@ -1606,6 +1606,9 @@
                         <publisher>The Royal Society of London</publisher>
                         <pubPlace>London, UK</pubPlace>
                         <xsl:choose>
+                            <xsl:when test="/article/front/article-meta/pub-date">
+                                <xsl:apply-templates select="/article/front/article-meta/pub-date"/>
+                            </xsl:when>
                             <xsl:when test="//art/coverdate/@yr |//rsc:art/rsc:coverdate/@yr">
                                 <date type="published" when="{//art/coverdate/@yr|//rsc:art/rsc:coverdate/@yr}"/>
                             </xsl:when>
@@ -1614,6 +1617,7 @@
                             </xsl:when>
                         </xsl:choose>
                     </xsl:if>
+                    <xsl:apply-templates select="/article/front/article-meta/pub-date"/>
                     <!-- suppfm/parent/cpg/cpn |pubfm/cpg/cpn -->
                     <!-- pubfm/cpg/cpy -->
                     <!-- suppfm/cpg/cpy -->
@@ -1687,7 +1691,6 @@
                                 <xsl:value-of select="normalize-space(//word-count/@count)"/>
                             </biblScope>
                         </xsl:if>
-                    
                     <xsl:apply-templates select="copyright-year | cpg/cpy"/>
 				</imprint>
             </monogr>
@@ -3745,7 +3748,7 @@
             <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1991.0079' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0095' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0102' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0106' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0109' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0111' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0114' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0117' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0126' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0088' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0089' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0105' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0107' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0108' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0112' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0115' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0120' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0123' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0127' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0076' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0080' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0086' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0087' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0090' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0091' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0093' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0096' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0103' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0118' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0122' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0129' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0137' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0073' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0081' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0085' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0094' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0098' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0113' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0116' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0125' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0130' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0132' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0077' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0078' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0082' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0092' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0097' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0104' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0110' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0119' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0121' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0124' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0128' or //article-id[@pub-id-type='doi']='10.1098/rsta.1991.0131'"><date type="published">1991</date></xsl:when>  
             <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rstb.1992.0010' or //article-id[@pub-id-type='doi']='10.1098/rsta.1992.0014'"><date type="published">1992</date></xsl:when>
             <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1993.0038' or //article-id[@pub-id-type='doi']='10.1098/rsta.1993.0046'"><date type="published">1993</date></xsl:when>
-            <xsl:when test="//article-id[@pub-id-type='doi']=' 10.1098/rsta.1994.0124' or //article-id[@pub-id-type='doi']='10.1098/rsta.1994.0111' or //article-id[@pub-id-type='doi']='10.1098/rsta.1994.0125'"><date type="published">1994</date></xsl:when>
+            <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rsta.1994.0124' or //article-id[@pub-id-type='doi']='10.1098/rsta.1994.0111' or //article-id[@pub-id-type='doi']='10.1098/rsta.1994.0125'"><date type="published">1994</date></xsl:when>
             <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rstb.1995.0129'"><date type="published">1995</date></xsl:when>
             
             <!-- RSL rattrapage années erronées -->
