@@ -27,6 +27,7 @@
 
     <xsl:variable name="substringOfDate">
         <xsl:choose>
+            <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
             <xsl:when test="string-length($date)=8">
                 <xsl:value-of select="substring($date,-3,string-length($date))"/>
             </xsl:when>
@@ -97,7 +98,12 @@
         <xsl:value-of select="$docIssueEls//iss-first | $docIssueEls//s1:iss-first"/>
     </xsl:variable>
     <xsl:variable name="date">
-        <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+        <xsl:choose>
+            <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:variable>
     
     <xsl:variable name="rattrapageVolElsevier">
@@ -190,6 +196,7 @@
                             <xsl:attribute name="when">
                                 <xsl:value-of select="$substringOfDate"/>
                             </xsl:attribute>
+                            <xsl:value-of select="$substringOfDate"/>
                         </date>
                         <xsl:apply-templates
                             select="els1:item-info/ce:copyright |els2:item-info/ce:copyright | item-info/ce:copyright"/>
@@ -466,6 +473,7 @@
                                                 <xsl:attribute name="when">
                                                     <xsl:value-of select="$substringOfDate"/>
                                                 </xsl:attribute>
+                                                <xsl:value-of select="$substringOfDate"/>
                                             </date>
                                         </xsl:when>
                                         <xsl:when test="$docIssueEls//issue-data/cover-date/date-range/start-date[string-length() &gt; 0] |$docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date[string-length() &gt; 0]">

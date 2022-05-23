@@ -3835,13 +3835,13 @@
                 <xsl:if test="position() = last()">
                     <date>
                         <xsl:choose>
-                            <xsl:when test="@pub-type = 'ppub'">
+                            <xsl:when test="@pub-type='ppub'">
                                 <xsl:attribute name="type">published</xsl:attribute>
                             </xsl:when>
-                            <xsl:when test="@pub-type = 'epub'">
+                            <xsl:when test="@pub-type='epub'">
                                 <xsl:attribute name="type">e-published</xsl:attribute>
                             </xsl:when>
-                            <xsl:when test="@pub-type = 'subscription-year'">
+                            <xsl:when test="@pub-type='subscription-year'">
                                 <xsl:attribute name="type">subscription-year</xsl:attribute>
                             </xsl:when>
                             <xsl:when test="@publication-format='print'">
