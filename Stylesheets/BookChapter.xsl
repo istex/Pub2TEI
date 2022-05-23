@@ -987,11 +987,29 @@
                                     
                                     <!-- language -->
                                     <xsl:choose>
+                                        <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[1]/@xml:lang">
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">
+                                                        <xsl:value-of select="translate(//book-part[not(body/book-part)]/book-part-meta/title-group/title[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                    </xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:when>
                                         <xsl:when test="book-meta/volume[1]/@xml:lang">
                                             <langUsage>
                                                 <language>
                                                     <xsl:attribute name="ident">
                                                         <xsl:value-of select="translate(book-meta/volume[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                    </xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:when>
+                                        <xsl:when test="$docIssue/book-meta/volume[1]/@xml:lang">
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">
+                                                        <xsl:value-of select="translate($docIssue/book-meta/volume[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                     </xsl:attribute>
                                                 </language>
                                             </langUsage>
@@ -1607,15 +1625,24 @@
 
 
                 <imprint>
-                    <xsl:if test="book-meta/publisher[1]/publisher-name | metadata/publisher">
-                        <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
-                    </xsl:if>
-                    <xsl:if test="book-meta/publisher[1]/publisher-loc | metadata/pubPlace">
+                    <xsl:choose>
+                        <xsl:when test="book-meta/publisher[1]/publisher-name | metadata/publisher">
+                            <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
+                        </xsl:when>
+                        <xsl:when test="$docIssue/book-meta/publisher[1]/publisher-name">
+                            <publisher><xsl:value-of select="$docIssue/book-meta/publisher[1]/publisher-name"/></publisher>
+                        </xsl:when>
+                    </xsl:choose>
+                    
+                    <xsl:if test="$docIssue/book-meta/publisher[1]/publisher-loc | book-meta/publisher[1]/publisher-loc | metadata/pubPlace">
                         <pubPlace>
                             <xsl:choose>
                                 <xsl:when test="book-meta/publisher[1]/publisher-loc='Cambridge'">UK</xsl:when>
-                                <xsl:otherwise>
+                                <xsl:when test="book-meta/publisher[1]/publisher-loc | metadata/pubPlace">
                                     <xsl:value-of select="book-meta/publisher[1]/publisher-loc | metadata/pubPlace"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$docIssue/book-meta/publisher[1]/publisher-loc"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </pubPlace>
@@ -1635,6 +1662,14 @@
                                     <xsl:value-of select="normalize-space(book-meta/pub-date[1]/year)"/>
                                 </xsl:attribute>
                                 <xsl:value-of select="normalize-space(book-meta/pub-date[1]/year)"/>
+                            </date>
+                        </xsl:when>
+                        <xsl:when test="$docIssue/book-meta/pub-date/year">
+                            <date type="published">
+                                <xsl:attribute name="when">
+                                    <xsl:value-of select="normalize-space($docIssue/book-meta/pub-date[1]/year)"/>
+                                </xsl:attribute>
+                                <xsl:value-of select="normalize-space($docIssue/book-meta/pub-date[1]/year)"/>
                             </date>
                         </xsl:when>
                         <xsl:when test="//metadata/pubDate[string-length() &gt; 0] != 'na'">

@@ -3665,12 +3665,18 @@
                 </title>
             </xsl:when>
             <xsl:when test="ancestor::book-part-meta">
-            <title level="a" type="main">
-                <xsl:if test="/book/book-meta/publisher/publisher-name = 'Brill'">
-                    <xsl:apply-templates select="parent::title-group/label" mode="brill-ebooks"/>
-                </xsl:if>
-                <xsl:apply-templates/>
-            </title>
+                <title level="a" type="main">
+                    <xsl:if test="@xml:lang">
+                        <xsl:attribute name="xml:lang">
+                            <xsl:value-of select="@xml:lang"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="/book/book-meta/publisher/publisher-name = 'Brill'">
+                        <xsl:apply-templates select="parent::title-group/label" mode="brill-ebooks"/>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </title>
+                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/subtitle"/>
             </xsl:when>
             <xsl:when test="ancestor::ref-list">
                 <head>
