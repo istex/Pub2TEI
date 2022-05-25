@@ -27,6 +27,8 @@
 
     <xsl:variable name="substringOfDate">
         <xsl:choose>
+            <xsl:when test="$codeISSN='0047-2670' and $codeVol='22'">1983</xsl:when>
+            <xsl:when test="$codeISSN='0044-328X' and $codeVol='107'">1982</xsl:when>
             <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
             <xsl:when test="string-length($date)=8">
                 <xsl:value-of select="substring($date,-3,string-length($date))"/>

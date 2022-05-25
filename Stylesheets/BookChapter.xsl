@@ -2091,50 +2091,56 @@
         </series>
     </xsl:template>
     <xsl:template match="book-series-meta">
-        <series>
-            <xsl:choose>
-                <xsl:when test="series[string-length() &gt; 0] and //book-series-meta/issn">
-                    <title level="s" type="main">
-                        <xsl:value-of select="$currentTitle"/>
-                    </title>
-                    <idno type="ISSN">
-                        <xsl:value-of select="issn"/>
-                    </idno>
-                    <xsl:if test="$currentDoi">
-                        <idno type="DOI">
-                            <xsl:value-of select="$currentDoi"/>
-                        </idno>
-                    </xsl:if>
-                    <xsl:if test="contrib-group[string-length() &gt; 0]">
-                        <xsl:apply-templates select="contrib-group" mode="editorSeries"/>
-                    </xsl:if>
-                </xsl:when>
-                <xsl:when test="series[string-length() &gt; 0]">
-                    <title level="s" type="main">
-                        <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'name']"/>
-                    </title>
-                    <idno type="ISSN">
-                        <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'issn']"/>
-                    </idno>
-                    <idno type="DOI">
-                        <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'doi']"/>
-                    </idno>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:if test="book-id[@pub-id-type='doi'][string-length() &gt; 0]">
-                        <title level="s" type="main">
-                            <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='doi'] = $currentDoi]/tei:cell[@role = 'name']"/>
-                        </title>
-                        <idno type="ISSN">
-                            <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='doi'] = $currentDoi]/tei:cell[@role = 'issn']"/>
-                        </idno>
-                        <idno type="DOI">
-                            <xsl:value-of select="$currentDoi"/>
-                        </idno>
-                    </xsl:if>
-                </xsl:otherwise>
-            </xsl:choose>
-        </series>
+        <xsl:choose>
+            <xsl:when test="$currentDoi='10.1515/monographs'"/>
+            <xsl:when test="$currentDoi='10.1515/lecorfranz'"/>
+            <xsl:otherwise>
+                <series>
+                    <xsl:choose>
+                        <xsl:when test="series[string-length() &gt; 0] and //book-series-meta/issn">
+                            <title level="s" type="main">
+                                <xsl:value-of select="$currentTitle"/>
+                            </title>
+                            <idno type="ISSN">
+                                <xsl:value-of select="issn"/>
+                            </idno>
+                            <xsl:if test="$currentDoi">
+                                <idno type="DOI">
+                                    <xsl:value-of select="$currentDoi"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="contrib-group[string-length() &gt; 0]">
+                                <xsl:apply-templates select="contrib-group" mode="editorSeries"/>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:when test="series[string-length() &gt; 0]">
+                            <title level="s" type="main">
+                                <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'name']"/>
+                            </title>
+                            <idno type="ISSN">
+                                <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'issn']"/>
+                            </idno>
+                            <idno type="DOI">
+                                <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'doi']"/>
+                            </idno>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="book-id[@pub-id-type='doi'][string-length() &gt; 0]">
+                                <title level="s" type="main">
+                                    <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='doi'] = $currentDoi]/tei:cell[@role = 'name']"/>
+                                </title>
+                                <idno type="ISSN">
+                                    <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='doi'] = $currentDoi]/tei:cell[@role = 'issn']"/>
+                                </idno>
+                                <idno type="DOI">
+                                    <xsl:value-of select="$currentDoi"/>
+                                </idno>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </series>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- appendix -->
     <xsl:template match="app">

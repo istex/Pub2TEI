@@ -21,6 +21,10 @@
             <div>
                 <table>
                     <row>
+                        <cell role="doi">10.11129/detail.indetailfr</cell>
+                        <cell role="name">in DETAIL</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/as</cell>
                         <cell role="issn">2199-4161</cell>
                         <cell role="name">Ars et Scientia : Schriften zur Kunstwissenschaft</cell>
