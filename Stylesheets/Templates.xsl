@@ -22,6 +22,14 @@
                     <rendition xml:id="style04" scheme="css">font-weight:bold;</rendition>
                 </tagsDecl>
             </xsl:if>
+            <!-- ECCO -->
+            <xsl:if test="//bookInfo">
+            <classDecl>
+                <taxonomy xml:id="LCSH">
+                    <bibl>Library of Congress Subject Headings</bibl>
+                </taxonomy>
+            </classDecl>
+            </xsl:if>
         </encodingDesc>
     </xsl:template>
 

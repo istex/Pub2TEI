@@ -427,12 +427,6 @@
         9789004295797;
         9789004296107;
     </xsl:variable>
-    <xsl:variable name="DOI">
-        <xsl:value-of select="//book-part-id[@book-part-id-type='doi']"/>
-    </xsl:variable>
-    <xsl:variable name="isbn">
-        <xsl:value-of select="//isbn[@publication-format='online']"/>
-    </xsl:variable>
     <xsl:variable name="langBrill">
         <xsl:choose>
             <xsl:when test="contains($codeLangEN,$DOI)">en</xsl:when>
@@ -448,6 +442,236 @@
         </xsl:choose>
     </xsl:variable>
     <!-- FIN CODE LANGUE BRILL-EBOOKS-->
+    <!-- code langue ECCO -->
+    <xsl:variable name="codeLangEcco">
+        <xsl:value-of select="//bookInfo/language"/>
+    </xsl:variable>
+    <xsl:variable name="langEcco">
+        <xsl:choose>
+            <xsl:when test="$codeLangEcco='Afar'">aa</xsl:when>
+            <xsl:when test="$codeLangEcco='Abkhaz'">ab</xsl:when>
+            <xsl:when test="$codeLangEcco='Afrikaans'">af</xsl:when>
+            <xsl:when test="$codeLangEcco='Akan'">ak</xsl:when>
+            <xsl:when test="$codeLangEcco='Albanian'">sq</xsl:when>
+            <xsl:when test="$codeLangEcco='Amharic'">am</xsl:when>
+            <xsl:when test="$codeLangEcco='Arabic'">ar</xsl:when>
+            <xsl:when test="$codeLangEcco='Aragonese'">an</xsl:when>
+            <xsl:when test="$codeLangEcco='Armenian'">hy</xsl:when>
+            <xsl:when test="$codeLangEcco='Armenian'">hy</xsl:when>
+            <xsl:when test="$codeLangEcco='Assamese'">as</xsl:when>
+            <xsl:when test="$codeLangEcco='Avaric'">av</xsl:when>
+            <xsl:when test="$codeLangEcco='Avestan'">ae</xsl:when>
+            <xsl:when test="$codeLangEcco='Aymara'">ay</xsl:when>
+            <xsl:when test="$codeLangEcco='Azerbaijani'">az</xsl:when>
+            <xsl:when test="$codeLangEcco='Bashkir'">ba</xsl:when>
+            <xsl:when test="$codeLangEcco='Bambara'">bm</xsl:when>
+            <xsl:when test="$codeLangEcco='Basque'">eu</xsl:when>
+            <xsl:when test="$codeLangEcco='Belarusian'">be</xsl:when>
+            <xsl:when test="$codeLangEcco='Bengali'">bn</xsl:when>
+            <xsl:when test="$codeLangEcco='Bihari (languages)'">bh</xsl:when>
+            <xsl:when test="$codeLangEcco='Bislama'">bi</xsl:when>
+            <xsl:when test="$codeLangEcco='Bosnian'">bs</xsl:when>
+            <xsl:when test="$codeLangEcco='Breton'">br</xsl:when>
+            <xsl:when test="$codeLangEcco='Bulgarian'">bg</xsl:when>
+            <xsl:when test="$codeLangEcco='Burmese'">my</xsl:when>
+            <xsl:when test="$codeLangEcco='Catalan'">ca</xsl:when>
+            <xsl:when test="$codeLangEcco='Chamorro'">ch</xsl:when>
+            <xsl:when test="$codeLangEcco='Chechen'">ce</xsl:when>
+            <xsl:when test="$codeLangEcco='Chinese'">zh</xsl:when>
+            <xsl:when test="$codeLangEcco='Church Slavic'">cu</xsl:when>
+            <xsl:when test="$codeLangEcco='Old Slavonic'">cu</xsl:when>
+            <xsl:when test="$codeLangEcco='Church Slavonic'">cu</xsl:when>
+            <xsl:when test="$codeLangEcco='Old Church Slavonic'">cu</xsl:when>
+            <xsl:when test="$codeLangEcco='Old Bulgarian'">cu</xsl:when>
+            <xsl:when test="$codeLangEcco='Chuvash'">cv</xsl:when>
+            <xsl:when test="$codeLangEcco='Cornish'">kw</xsl:when>
+            <xsl:when test="$codeLangEcco='Corsican'">co</xsl:when>
+            <xsl:when test="$codeLangEcco='Cree'">cr</xsl:when>
+            <xsl:when test="$codeLangEcco='Czech'">cs</xsl:when>
+            <xsl:when test="$codeLangEcco='Danish'">da</xsl:when>
+            <xsl:when test="$codeLangEcco='Divehi'">dv</xsl:when>
+            <xsl:when test="$codeLangEcco='Dhivehi'">dv</xsl:when>
+            <xsl:when test="$codeLangEcco='Maldivian'">dv</xsl:when>
+            <xsl:when test="$codeLangEcco='Dutch'">nl</xsl:when>
+            <xsl:when test="$codeLangEcco='Flemish'">nl</xsl:when>
+            <xsl:when test="$codeLangEcco='Dzongkha'">dz</xsl:when>
+            <xsl:when test="$codeLangEcco='English'">en</xsl:when>
+            <xsl:when test="$codeLangEcco='Esperanto'">eo</xsl:when>
+            <xsl:when test="$codeLangEcco='Estonian'">et</xsl:when>
+            <xsl:when test="$codeLangEcco='Ewe'">ee</xsl:when>
+            <xsl:when test="$codeLangEcco='Faroese'">fo</xsl:when>
+            <xsl:when test="$codeLangEcco='Fijian'">fj</xsl:when>
+            <xsl:when test="$codeLangEcco='Finnish'">fi</xsl:when>
+            <xsl:when test="$codeLangEcco='French'">fr</xsl:when>
+            <xsl:when test="$codeLangEcco='Western Frisian'">fy</xsl:when>
+            <xsl:when test="$codeLangEcco='Fulah'">ff</xsl:when>
+            <xsl:when test="$codeLangEcco='Georgian'">ka</xsl:when>
+            <xsl:when test="$codeLangEcco='German'">de</xsl:when>
+            <xsl:when test="$codeLangEcco='Gaelic'">gd</xsl:when>
+            <xsl:when test="$codeLangEcco='Scottish Gaelic'">gd</xsl:when>
+            <xsl:when test="$codeLangEcco='Irish'">ga</xsl:when>
+            <xsl:when test="$codeLangEcco='Galician'">gl</xsl:when>
+            <xsl:when test="$codeLangEcco='Manx'">gv</xsl:when>
+            <xsl:when test="$codeLangEcco='Modern Greek (since 1453–)'">el</xsl:when>
+            <xsl:when test="$codeLangEcco='Guarani'">gn</xsl:when>
+            <xsl:when test="$codeLangEcco='Gujarati'">gu</xsl:when>
+            <xsl:when test="$codeLangEcco='Haitian Creole'">ht</xsl:when>
+            <xsl:when test="$codeLangEcco='Haitian'">ht</xsl:when>
+            <xsl:when test="$codeLangEcco='Hausa'">ha</xsl:when>
+            <xsl:when test="$codeLangEcco='Hebrew'">he</xsl:when>
+            <xsl:when test="$codeLangEcco='Herero'">hz</xsl:when>
+            <xsl:when test="$codeLangEcco='Hindi'">hi</xsl:when>
+            <xsl:when test="$codeLangEcco='Hiri Motu'">ho</xsl:when>
+            <xsl:when test="$codeLangEcco='Croatian'">hr</xsl:when>
+            <xsl:when test="$codeLangEcco='Hungarian'">hu</xsl:when>
+            <xsl:when test="$codeLangEcco='Igbo'">ig</xsl:when>
+            <xsl:when test="$codeLangEcco='Icelandic'">is</xsl:when>
+            <xsl:when test="$codeLangEcco='Ido'">io</xsl:when>
+            <xsl:when test="$codeLangEcco='Nuosu'">ii</xsl:when>
+            <xsl:when test="$codeLangEcco='Sichuan Yi'">ii</xsl:when>
+            <xsl:when test="$codeLangEcco='Inuktitut'">iu</xsl:when>
+            <xsl:when test="$codeLangEcco='Interlingue'">ie</xsl:when>
+            <xsl:when test="$codeLangEcco='Occidental'">ie</xsl:when>
+            <xsl:when test="$codeLangEcco='Interlingua (International Auxiliary Language Association)'">ia</xsl:when>
+            <xsl:when test="$codeLangEcco='Indonesian'">id</xsl:when>
+            <xsl:when test="$codeLangEcco='Inupiaq'">ik</xsl:when>
+            <xsl:when test="$codeLangEcco='Italian'">it</xsl:when>
+            <xsl:when test="$codeLangEcco='Javanese'">jv</xsl:when>
+            <xsl:when test="$codeLangEcco='Japanese'">ja</xsl:when>
+            <xsl:when test="$codeLangEcco='Greenlandic'">kl</xsl:when>
+            <xsl:when test="$codeLangEcco='Kalaallisut'">kl</xsl:when>
+            <xsl:when test="$codeLangEcco='Kannada'">kn</xsl:when>
+            <xsl:when test="$codeLangEcco='Kashmiri'">ks</xsl:when>
+            <xsl:when test="$codeLangEcco='Kanuri'">kr</xsl:when>
+            <xsl:when test="$codeLangEcco='Kazakh'">kk</xsl:when>
+            <xsl:when test="$codeLangEcco='Central Khmer'">km</xsl:when>
+            <xsl:when test="$codeLangEcco='Kikuyu'">ki</xsl:when>
+            <xsl:when test="$codeLangEcco='Gikuyu'">ki</xsl:when>
+            <xsl:when test="$codeLangEcco='Kinyarwanda'">rw</xsl:when>
+            <xsl:when test="$codeLangEcco='Kirghiz'">ky</xsl:when>
+            <xsl:when test="$codeLangEcco='Komi'">kv</xsl:when>
+            <xsl:when test="$codeLangEcco='Kongo'">kg</xsl:when>
+            <xsl:when test="$codeLangEcco='Korean'">ko</xsl:when>
+            <xsl:when test="$codeLangEcco='Kuanyama'">kj</xsl:when>
+            <xsl:when test="$codeLangEcco='Kwanyama'">kj</xsl:when>
+            <xsl:when test="$codeLangEcco='Kurdish'">ku</xsl:when>
+            <xsl:when test="$codeLangEcco='Lao'">lo</xsl:when>
+            <xsl:when test="$codeLangEcco='Latin'">la</xsl:when>
+            <xsl:when test="$codeLangEcco='Latvian'">lv</xsl:when>
+            <xsl:when test="$codeLangEcco='Limburgish'">li</xsl:when>
+            <xsl:when test="$codeLangEcco='Limburgan'">li</xsl:when>
+            <xsl:when test="$codeLangEcco='Limburgish'">li</xsl:when>
+            <xsl:when test="$codeLangEcco='Lingala'">ln</xsl:when>
+            <xsl:when test="$codeLangEcco='Lithuanian'">lt</xsl:when>
+            <xsl:when test="$codeLangEcco='Letzeburgesch'">lb</xsl:when>
+            <xsl:when test="$codeLangEcco='Luxembourgish'">lb</xsl:when>
+            <xsl:when test="$codeLangEcco='Luba-Katanga'">lu</xsl:when>
+            <xsl:when test="$codeLangEcco='Ganda'">lg</xsl:when>
+            <xsl:when test="$codeLangEcco='Macedonian'">mk</xsl:when>
+            <xsl:when test="$codeLangEcco='Marshallese'">mh</xsl:when>
+            <xsl:when test="$codeLangEcco='Malayalam'">ml</xsl:when>
+            <xsl:when test="$codeLangEcco='Māori'">mi</xsl:when>
+            <xsl:when test="$codeLangEcco='Marathi'">mr</xsl:when>
+            <xsl:when test="$codeLangEcco='Malay'">ms</xsl:when>
+            <xsl:when test="$codeLangEcco='Malagasy'">mg</xsl:when>
+            <xsl:when test="$codeLangEcco='Maltese'">mt</xsl:when>
+            <xsl:when test="$codeLangEcco='Mongolian'">mn</xsl:when>
+            <xsl:when test="$codeLangEcco='Nauruan'">na</xsl:when>
+            <xsl:when test="$codeLangEcco='Navajo'">nv</xsl:when>
+            <xsl:when test="$codeLangEcco='Navaho'">nv</xsl:when>
+            <xsl:when test="$codeLangEcco='South Ndebele'">nr</xsl:when>
+            <xsl:when test="$codeLangEcco='North Ndebele'">nd</xsl:when>
+            <xsl:when test="$codeLangEcco='Ndonga'">ng</xsl:when>
+            <xsl:when test="$codeLangEcco='Nepali'">ne</xsl:when>
+            <xsl:when test="$codeLangEcco='Norwegian Nynorsk'">nn</xsl:when>
+            <xsl:when test="$codeLangEcco='Norwegian Bokmål'">nb</xsl:when>
+            <xsl:when test="$codeLangEcco='Norwegian'">no</xsl:when>
+            <xsl:when test="$codeLangEcco='Chichewa'">ny</xsl:when>
+            <xsl:when test="$codeLangEcco='Chewa'">ny</xsl:when>
+            <xsl:when test="$codeLangEcco='Nyanja'">ny</xsl:when>
+            <xsl:when test="$codeLangEcco='Occitan (post 1500)'">oc</xsl:when>
+            <xsl:when test="$codeLangEcco='Provençal'">oc</xsl:when>
+            <xsl:when test="$codeLangEcco='Ojibwa'">oj</xsl:when>
+            <xsl:when test="$codeLangEcco='Oriya'">or</xsl:when>
+            <xsl:when test="$codeLangEcco='Oromo'">om</xsl:when>
+            <xsl:when test="$codeLangEcco='Ossetian'">os</xsl:when>
+            <xsl:when test="$codeLangEcco='Ossetic'">os</xsl:when>
+            <xsl:when test="$codeLangEcco='Punjabi'">pa</xsl:when>
+            <xsl:when test="$codeLangEcco='Panjabi'">pa</xsl:when>
+            <xsl:when test="$codeLangEcco='Persian'">fa</xsl:when>
+            <xsl:when test="$codeLangEcco='Pali'">pi</xsl:when>
+            <xsl:when test="$codeLangEcco='Polish'">pl</xsl:when>
+            <xsl:when test="$codeLangEcco='Portuguese'">pt</xsl:when>
+            <xsl:when test="$codeLangEcco='Pushto'">ps</xsl:when>
+            <xsl:when test="$codeLangEcco='Pashto'">ps</xsl:when>
+            <xsl:when test="$codeLangEcco='Quechua'">qu</xsl:when>
+            <xsl:when test="$codeLangEcco='Romansh'">rm</xsl:when>
+            <xsl:when test="$codeLangEcco='Romanian'">ro</xsl:when>
+            <xsl:when test="$codeLangEcco='Moldavian'">ro</xsl:when>
+            <xsl:when test="$codeLangEcco='Moldovan'">ro</xsl:when>
+            <xsl:when test="$codeLangEcco='Rundi'">rn</xsl:when>
+            <xsl:when test="$codeLangEcco='Russian'">ru</xsl:when>
+            <xsl:when test="$codeLangEcco='Sango'">sg</xsl:when>
+            <xsl:when test="$codeLangEcco='Sanskrit'">sa</xsl:when>
+            <xsl:when test="$codeLangEcco='Sinhala'">si</xsl:when>
+            <xsl:when test="$codeLangEcco='Sinhalese'">si</xsl:when>
+            <xsl:when test="$codeLangEcco='Slovak'">sk</xsl:when>
+            <xsl:when test="$codeLangEcco='Slovenian'">sl</xsl:when>
+            <xsl:when test="$codeLangEcco='Northern Sami'">se</xsl:when>
+            <xsl:when test="$codeLangEcco='Samoan'">sm</xsl:when>
+            <xsl:when test="$codeLangEcco='Shona'">sn</xsl:when>
+            <xsl:when test="$codeLangEcco='Sindhi'">sd</xsl:when>
+            <xsl:when test="$codeLangEcco='Somali'">so</xsl:when>
+            <xsl:when test="$codeLangEcco='Southern Sotho'">st</xsl:when>
+            <xsl:when test="$codeLangEcco='Spanish'">es</xsl:when>
+            <xsl:when test="$codeLangEcco='Castilian'">es</xsl:when>
+            <xsl:when test="$codeLangEcco='Sardinian'">sc</xsl:when>
+            <xsl:when test="$codeLangEcco='Serbian'">sr</xsl:when>
+            <xsl:when test="$codeLangEcco='Swati'">ss</xsl:when>
+            <xsl:when test="$codeLangEcco='Sundanese'">su</xsl:when>
+            <xsl:when test="$codeLangEcco='Swahili'">sw</xsl:when>
+            <xsl:when test="$codeLangEcco='Swedish'">sv</xsl:when>
+            <xsl:when test="$codeLangEcco='Tahitian'">ty</xsl:when>
+            <xsl:when test="$codeLangEcco='Tamil'">ta</xsl:when>
+            <xsl:when test="$codeLangEcco='Tatar'">tt</xsl:when>
+            <xsl:when test="$codeLangEcco='Telugu'">te</xsl:when>
+            <xsl:when test="$codeLangEcco='Tajik'">tg</xsl:when>
+            <xsl:when test="$codeLangEcco='Tagalog'">tl</xsl:when>
+            <xsl:when test="$codeLangEcco='Thai'">th</xsl:when>
+            <xsl:when test="$codeLangEcco='Tibetan'">bo</xsl:when>
+            <xsl:when test="$codeLangEcco='Tigrinya'">ti</xsl:when>
+            <xsl:when test="$codeLangEcco='Tongan'">to</xsl:when>
+            <xsl:when test="$codeLangEcco='Tswana'">tn</xsl:when>
+            <xsl:when test="$codeLangEcco='Tsonga'">ts</xsl:when>
+            <xsl:when test="$codeLangEcco='Turkmen'">tk</xsl:when>
+            <xsl:when test="$codeLangEcco='Turkish'">tr</xsl:when>
+            <xsl:when test="$codeLangEcco='Twi'">tw</xsl:when>
+            <xsl:when test="$codeLangEcco='Uighur'">ug</xsl:when>
+            <xsl:when test="$codeLangEcco='Uyghur'">ug</xsl:when>
+            <xsl:when test="$codeLangEcco='Ukrainian'">uk</xsl:when>
+            <xsl:when test="$codeLangEcco='Urdu'">ur</xsl:when>
+            <xsl:when test="$codeLangEcco='Uzbek'">uz</xsl:when>
+            <xsl:when test="$codeLangEcco='Venda'">ve</xsl:when>
+            <xsl:when test="$codeLangEcco='Vietnamese'">vi</xsl:when>
+            <xsl:when test="$codeLangEcco='Volapük'">vo</xsl:when>
+            <xsl:when test="$codeLangEcco='Welsh'">cy</xsl:when>
+            <xsl:when test="$codeLangEcco='Walloon'">wa</xsl:when>
+            <xsl:when test="$codeLangEcco='Wolof'">wo</xsl:when>
+            <xsl:when test="$codeLangEcco='Xhosa'">xh</xsl:when>
+            <xsl:when test="$codeLangEcco='Yiddish'">yi</xsl:when>
+            <xsl:when test="$codeLangEcco='Yoruba'">yo</xsl:when>
+            <xsl:when test="$codeLangEcco='Zhuang'">za</xsl:when>
+            <xsl:when test="$codeLangEcco='Chuang'">za</xsl:when>
+            <xsl:when test="$codeLangEcco='Zulu'">zu</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+  
+    <xsl:variable name="DOI">
+        <xsl:value-of select="//book-part-id[@book-part-id-type='doi']"/>
+    </xsl:variable>
+    <xsl:variable name="isbn">
+        <xsl:value-of select="//isbn[@publication-format='online']"/>
+    </xsl:variable>
     
     <xsl:template match="book">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
@@ -495,6 +719,23 @@
                                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                                         </title>
                                     </xsl:when>
+                                    <!-- ecco -->
+                                    <xsl:when test="citation/titleGroup/fullTitle[string-length()&gt; 0]">
+                                        <title level="a" type="main" xml:lang="{$langEcco}">
+                                            <xsl:value-of select="citation/titleGroup/fullTitle"/>
+                                        </title>
+                                    </xsl:when>
+                                    <xsl:when test="citation/titleGroup/displayTitle[string-length()&gt; 0]">
+                                        <title level="a" type="main" xml:lang="{$langEcco}">
+                                            <xsl:value-of select="citation/titleGroup/displayTitle"/>
+                                        </title>
+                                    </xsl:when>
+                                    <xsl:when test="citation/titleGroup/uniformTitle[string-length()&gt; 0]">
+                                        <title level="a" type="main" xml:lang="{$langEcco}">
+                                            <xsl:value-of select="citation/titleGroup/uniformTitle"/>
+                                        </title>
+                                    </xsl:when>
+                                    <!-- fin ecco -->
                                     <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[string-length()&gt; 0]">
                                         <xsl:choose>
                                             <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
@@ -516,12 +757,26 @@
                                     </xsl:when>
                                 </xsl:choose>
                             </titleStmt>
+                            <!-- ecco -->
+                            <xsl:if test="//citation/edition | //citation/collation">
+                                <editionStmt>
+                                    <xsl:if test="//citation/edition[string-length()&gt; 0]">
+                                        <edition><xsl:value-of select="//citation/edition"/></edition></xsl:if>
+                                    <!--<xsl:if test="//citation/imprint/imprintYear[string-length()&gt; 0]">
+                                        <date><xsl:value-of select="//citation/imprint/imprintYear"/></date></xsl:if>-->
+                                    <xsl:if test="//citation/collation[string-length()&gt; 0]">
+                                        <p><xsl:value-of select="//citation/collation"/></p></xsl:if>
+                                </editionStmt>
+                            </xsl:if>
                             <publicationStmt>
                                 <authority>ISTEX</authority>
                                 <xsl:choose>
                                     <xsl:when test="book-meta/publisher/publisher-name='De Gruyter'">
                                         <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-1JLL5NJT-J">
                                             <xsl:value-of select="book-meta/publisher/publisher-name"/></publisher>
+                                    </xsl:when>
+                                    <xsl:when test="bookInfo/sourceBibCitation='ESTC Short Title Catalogue'">
+                                        <publisher ref="http://scientific-publisher.data.istex.fr/ark:/67375/H02-P08W2FQ2-9">Gale Cengage</publisher>
                                     </xsl:when>
                                     <xsl:when test="book-meta/publisher/publisher-name[string-length() &gt; 0]">
                                         <xsl:choose>
@@ -543,13 +798,18 @@
                                         </xsl:choose>
                                     </xsl:when>
                                 </xsl:choose>
+                                <xsl:if test="//bookInfo">
+                                    <availability>
+                                        <licence><xsl:text>&#169; Gale-Eighteenth Century Collections Online. All rights reserved.</xsl:text></licence>
+                                    </availability>
+                                </xsl:if>
                                 <xsl:if test="book-meta/pub-date/year[string-length() &gt; 0] |$docIssue//pub-date/year[string-length() &gt; 0] | /book/metadata/pubDate[string-length() &gt; 0] | //permissions">
                                     <availability>
                                         <xsl:if test="/book/body/book-part/book-part-meta/permissions/license[@license-type='free'] |//license[@license-type='open-access']">
                                             <xsl:attribute name="status">free</xsl:attribute>
                                         </xsl:if>
                                         <licence>
-                                           
+                                            
                                             <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/@license-type='free'">
                                                 <xsl:if test="/book/body/book-part/book-part-meta/permissions/license/license-p[string-length() &gt; 0]">
                                                 <p>
@@ -585,6 +845,15 @@
                                     </availability>
                                 </xsl:if>
                                 <xsl:choose>
+                                    <!-- ecco -->
+                                    <xsl:when test="//bookInfo/pubDate">
+                                        <date type="published">
+                                            <xsl:attribute name="when">
+                                                <xsl:call-template name="dateEcco"/>
+                                            </xsl:attribute>
+                                            <xsl:call-template name="dateEcco"/>
+                                        </date>
+                                    </xsl:when>
                                     <xsl:when test="book-meta/pub-date[@publication-format='print']/year[string-length() &gt; 0]">
                                         <date type="published">
                                             <xsl:attribute name="when">
@@ -746,8 +1015,8 @@
                                                 </xsl:when>
                                             </xsl:choose>
                                         </xsl:when>
-                                        <!-- Numérique premium -->
-                                        <xsl:when test="collection-meta[@collection-type='book collection']">
+                                        <!-- Numérique premium --><!-- ECCO -->
+                                        <xsl:when test="collection-meta[@collection-type='book collection'] |bookInfo">
                                             <xsl:attribute name="source">book</xsl:attribute>
                                             <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:attribute>
                                             <xsl:text>book</xsl:text>
@@ -787,6 +1056,13 @@
                                             <xsl:text>reference-works</xsl:text>
                                         </note>
                                     </xsl:when>
+                                    <!-- Ecco -->
+                                    <xsl:when test="//book/bookInfo">
+                                        <note type="publication-type">
+                                            <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-NTSGR1R0-Z</xsl:attribute>
+                                            <xsl:text>database</xsl:text>
+                                        </note>
+                                    </xsl:when>
                                     <xsl:otherwise>
                                         <!-- niveau revue -->
                                         <note type="publication-type">
@@ -798,6 +1074,16 @@
                                 </xsl:choose>
                                 <xsl:if test="front/article-meta/volume-id">
                                     <xsl:apply-templates select="front/article-meta/volume-id"/>
+                                </xsl:if>
+                                <xsl:if test="//bookInfo/notes[string-length()&gt; 0]">
+                                    <note type="documentaryNotes">
+                                        <xsl:value-of select="//bookInfo/notes"/>
+                                    </note>
+                                </xsl:if>
+                                <xsl:if test="//bookInfo/comments[string-length()&gt; 0]">
+                                    <note type="comments">
+                                        <xsl:value-of select="//bookInfo/comments"/>
+                                    </note>
                                 </xsl:if>
                             </notesStmt>
                             <sourceDesc>
@@ -880,13 +1166,14 @@
                                     
                                 </profileDesc>
                             </xsl:when>
-                            <xsl:when test="//abstract[string-length() &gt; 0] |$docIssue//book-meta/pub-date | //kwd-group">
+                            <xsl:when test="//abstract[string-length() &gt; 0] |$docIssue//book-meta/pub-date | //kwd-group | //module">
                                 <profileDesc>
                                     <creation>
                                         <xsl:choose>
                                             <xsl:when test="$docIssue//book-meta/pub-date"><xsl:apply-templates select="$docIssue//book-meta/pub-date"></xsl:apply-templates></xsl:when>
                                             <xsl:when test="//book-meta/pub-date"><xsl:apply-templates select="//book-meta/pub-date"/></xsl:when>
                                             <xsl:when test="/book/book-meta/pub-history/event/date[@publication-format='print']/year"><xsl:apply-templates select="/book/book-meta/pub-history/event/date[@publication-format='print']/year"/></xsl:when>
+                                            <xsl:when test="//bookInfo/pubDate"><xsl:call-template name="dateEcco"/></xsl:when>
                                         </xsl:choose>
                                     </creation>
                                     <!-- PL: abstract is moved from <front> to here -->
@@ -983,8 +1270,77 @@
                                         <xsl:when test="book-meta/kwd-group[string-length() &gt; 0]">
                                             <xsl:apply-templates select="book-meta/kwd-group"/>
                                         </xsl:when>
+                                        <!-- ecco -->
+                                        <xsl:when test="//module[string-length()&gt; 0]|//locSubjectHead[string-length() &gt; 0]">
+                                            <textClass>
+                                                <xsl:if test="//module[string-length()&gt; 0]">
+                                                    <keywords ana="discipline">
+                                                        <xsl:for-each select="//module">
+                                                            <term>
+                                                                <xsl:value-of select="normalize-space(.)"/>
+                                                            </term>
+                                                        </xsl:for-each>
+                                                    </keywords>
+                                                </xsl:if>
+                                                <xsl:if test="//locSubjectHead[string-length()&gt; 0]">
+                                                    <xsl:for-each select="//locSubjectHead">
+                                                        <keywords ana="subject">
+                                                            <xsl:choose>
+                                                                <xsl:when test="@type='geographicalLocation'">
+                                                                    <xsl:attribute name="source">
+                                                                        <xsl:value-of select="@type"/>
+                                                                    </xsl:attribute>
+                                                                    <xsl:if test="locSubject[@subField='y']">
+                                                                        <term>
+                                                                            <geogName>
+                                                                                <xsl:value-of select="locSubject[@subField='y']"/>
+                                                                            </geogName>
+                                                                        </term>
+                                                                    </xsl:if>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:attribute name="source">
+                                                                        <xsl:value-of select="@type"/>
+                                                                    </xsl:attribute>
+                                                                    <xsl:attribute name="scheme">#LCSH</xsl:attribute>
+                                                                    <term>
+                                                                        <xsl:value-of select="normalize-space(locSubject[@subField='a'])"/>
+                                                                    </term>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose> 
+                                                        </keywords>
+                                                    </xsl:for-each>
+                                                </xsl:if>
+                                            </textClass>
+                                            <xsl:if test="$langEcco">
+                                                <xsl:choose>
+                                                    <xsl:when test="//language='French|English'">
+                                                        <langUsage>
+                                                            <language>
+                                                                <xsl:attribute name="ident">
+                                                                    <xsl:text>fr</xsl:text>
+                                                                </xsl:attribute>
+                                                            </language>
+                                                            <language>
+                                                                <xsl:attribute name="ident">
+                                                                    <xsl:text>en</xsl:text>
+                                                                </xsl:attribute>
+                                                            </language>
+                                                        </langUsage>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <langUsage>
+                                                            <language>
+                                                                <xsl:attribute name="ident">
+                                                                    <xsl:value-of select="$langEcco"/>
+                                                                </xsl:attribute>
+                                                            </language>
+                                                        </langUsage>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:if>
+                                        </xsl:when>
                                     </xsl:choose>
-                                    
                                     <!-- language -->
                                     <xsl:choose>
                                         <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[1]/@xml:lang">
@@ -1342,6 +1698,12 @@
                     <xsl:when test="book-meta/book-title-group/book-title">
                         <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="analytic"/>
                     </xsl:when>
+                    <!-- ecco -->
+                    <xsl:when test="citation/titleGroup/fullTitle[string-length()&gt; 0]">
+                        <title level="a" type="main" xml:lang="{$langEcco}">
+                            <xsl:value-of select="citation/titleGroup/fullTitle"/>
+                        </title>
+                    </xsl:when>
                 </xsl:choose>
                 
                 
@@ -1356,8 +1718,11 @@
                     <xsl:when test="//metadata/author[string-length()&gt; 0]">
                         <xsl:apply-templates select="//metadata/author"/>
                     </xsl:when>
-                    <xsl:when test="//metadata/editor[string-length()&gt; 0]">
-                        <xsl:apply-templates select="//metadata/editor"/>
+                    <xsl:when test="//metadata/author[string-length()&gt; 0]">
+                        <xsl:apply-templates select="//metadata/author"/>
+                    </xsl:when>
+                    <xsl:when test="/book/citation/authorGroup/author[string-length()&gt; 0]">
+                        <xsl:apply-templates select="/book/citation/authorGroup/author"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:apply-templates select="book-meta/contrib-group"/>
@@ -1374,6 +1739,28 @@
                 <xsl:if test="string-length($arkistex) &gt; 0 ">
                     <idno type="ark">
                         <xsl:value-of select="$arkistex"/>
+                    </idno>
+                </xsl:if>
+                <!-- ecco -->
+                <xsl:if
+                    test="//ESTCID[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">ESTCID</xsl:attribute>
+                        <xsl:value-of select="//ESTCID"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if
+                    test="//bookInfo/documentID[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">documentID</xsl:attribute>
+                        <xsl:value-of select="//bookInfo/documentID"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if
+                    test="//bookInfo/unit[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">local</xsl:attribute>
+                        <xsl:value-of select="//bookInfo/unit"/>
                     </idno>
                 </xsl:if>
                 <xsl:if test="/book/entryGroup/entry/identifier[string-length() &gt; 0]">
@@ -1494,6 +1881,12 @@
                         <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="monogr"/>
                         <xsl:apply-templates select="book-meta/book-title-group/subtitle"/>
                     </xsl:when>
+                    <!-- ecco -->
+                    <xsl:when test="citation/titleGroup/fullTitle[string-length()&gt; 0]">
+                        <title level="a" type="main">
+                            <xsl:value-of select="citation/titleGroup/fullTitle"/>
+                        </title>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:if test="$docIssue/book-meta/book-title-group">
                             <xsl:apply-templates select="$docIssue/book-meta/book-title-group/book-title" mode="monogr"/>
@@ -1505,6 +1898,46 @@
                 <xsl:apply-templates select="metadata/subtitle"/>
 
                 <!-- ********************************** Identifier *******************************-->
+                
+                <!--reel ID number-->
+                <xsl:if test="//bookInfo/reel[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">reel_ID_number</xsl:attribute>
+                        <xsl:value-of select="//bookInfo/reel"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if test="//SeriesElectronicISSN[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">eISSN</xsl:attribute>
+                        <xsl:value-of select="//SeriesElectronicISSN"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if test="//bookInfo/mcode[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">mcode</xsl:attribute>
+                        <xsl:value-of select="//bookInfo/mcode"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if test="//bookInfo/unit[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">local</xsl:attribute>
+                        <xsl:value-of select="//bookInfo/unit"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if
+                    test="//ESTCID[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">ESTCID</xsl:attribute>
+                        <xsl:value-of select="//ESTCID"/>
+                    </idno>
+                </xsl:if>
+                <xsl:if
+                    test="//bookInfo/documentID[string-length() &gt; 0 ]">
+                    <idno>
+                        <xsl:attribute name="type">documentID</xsl:attribute>
+                        <xsl:value-of select="//bookInfo/documentID"/>
+                    </idno>
+                </xsl:if>
                 <xsl:choose>
                     <xsl:when test="book-meta/isbn[string-length() &gt; 0]">
                         <xsl:for-each select="book-meta/isbn">
@@ -1626,28 +2059,38 @@
 
                 <imprint>
                     <xsl:choose>
-                        <xsl:when test="book-meta/publisher[1]/publisher-name | metadata/publisher">
-                            <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher"/></publisher>
+                        <xsl:when test="book-meta/publisher[1]/publisher-name | metadata/publisher|//imprintPublisher">
+                            <publisher><xsl:value-of select="book-meta/publisher[1]/publisher-name |metadata/publisher|//imprintPublisher"/></publisher>
                         </xsl:when>
                         <xsl:when test="$docIssue/book-meta/publisher[1]/publisher-name">
                             <publisher><xsl:value-of select="$docIssue/book-meta/publisher[1]/publisher-name"/></publisher>
                         </xsl:when>
                     </xsl:choose>
-                    
-                    <xsl:if test="$docIssue/book-meta/publisher[1]/publisher-loc | book-meta/publisher[1]/publisher-loc | metadata/pubPlace">
-                        <pubPlace>
-                            <xsl:choose>
-                                <xsl:when test="book-meta/publisher[1]/publisher-loc='Cambridge'">UK</xsl:when>
-                                <xsl:when test="book-meta/publisher[1]/publisher-loc | metadata/pubPlace">
-                                    <xsl:value-of select="book-meta/publisher[1]/publisher-loc | metadata/pubPlace"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="$docIssue/book-meta/publisher[1]/publisher-loc"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </pubPlace>
-                    </xsl:if>
                     <xsl:choose>
+                        <xsl:when test="$docIssue/book-meta/publisher[1]/publisher-loc | book-meta/publisher[1]/publisher-loc | metadata/pubPlace |//publicationPlace[string-length()&gt; 0]">
+                            <pubPlace>
+                                <xsl:choose>
+                                    <xsl:when test="book-meta/publisher[1]/publisher-loc='Cambridge'">UK</xsl:when>
+                                    <xsl:when test="book-meta/publisher[1]/publisher-loc | metadata/pubPlace|//publicationPlace[string-length()&gt; 0]">
+                                        <xsl:value-of select="book-meta/publisher[1]/publisher-loc | metadata/pubPlace|//publicationPlace"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$docIssue/book-meta/publisher[1]/publisher-loc"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </pubPlace>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <!-- ecco -->
+                        <xsl:when test="//bookInfo/pubDate">
+                            <date type="published">
+                                <xsl:attribute name="when">
+                                    <xsl:call-template name="dateEcco"/>
+                                </xsl:attribute>
+                                <xsl:call-template name="dateEcco"/>
+                            </date>
+                        </xsl:when>
                         <xsl:when test="book-meta/pub-date[@publication-format='print']/year[string-length() &gt; 0]">
                             <date type="published">
                                 <xsl:attribute name="when">
@@ -1710,6 +2153,15 @@
                                 <xsl:value-of select="substring-after($docIssue/book/book-meta/volume[1],' ')"/>
                             </biblScope>
                         </xsl:when>
+                        <xsl:when test="//citation/volumeGroup/currentVolume[string-length() &gt; 0 ] !='0'">
+                            <biblScope unit="vol">
+                                <xsl:if test="//citation/volumeGroup/volumeSet/filmedVolume[string-length() &gt; 0 ]">
+                                    <xsl:value-of select="normalize-space(translate(//citation/volumeGroup/volumeSet/filmedVolume,'Volume',''))"/>
+                                    <xsl:text>-</xsl:text>
+                                </xsl:if>
+                                <xsl:value-of select="normalize-space(translate(//citation/volumeGroup/currentVolume,'Volume',''))"/>
+                            </biblScope>
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="/book/collection-meta/volume-in-collection/volume-number"/>
                         </xsl:otherwise>
@@ -1746,6 +2198,12 @@
                     <xsl:apply-templates select="book-meta/counts/book-page-count"/>
                     <xsl:apply-templates select="book-body/book-part/book-part-meta/counts/book-page-count"/>
                     <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/counts/page-count"/>
+                    
+                    <xsl:if test="//citation/totalPages[string-length() &gt; 0 ]">
+                        <biblScope unit="total-book-pages">
+                            <xsl:value-of select="//citation/totalPages"/>
+                        </biblScope>
+                    </xsl:if>
                 </imprint>
             </monogr>
                 
@@ -2240,5 +2698,83 @@
                 <xsl:apply-templates/>
             </list>
         </div>
+    </xsl:template>
+    <!-- date ECCO -->
+    <xsl:template name="dateEcco">
+        <xsl:choose>
+            <xsl:when test="//bookInfo/documentID='1685402300'">1757</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1310502800'">1792</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1661300900'">1716</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1289500301'">1700</xsl:when>
+            <xsl:when test="//bookInfo/documentID='0060801400'">1772</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1299603100'">1794</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1685402600'">1777</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1544600201'">1798</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1657600300'">1793</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1679400300'">1720</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1661300600'">1718</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1661300800'">1718</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1685301900'">1738</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1661301000'">1719</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1633400500'">1755</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1434400200'">1793</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1701802300'">1784</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1444900100'">1771</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1654700700'">1771</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1309201101'">1740</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1712200500'">1776</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1661301100'">1742</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1719800900'">1700</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1289500501'">1744</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1572601000'">1737</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1429100400'">1764</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1346300900'">1784</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1493300106'">1776</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1493300108'">1776</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1493400110'">1776</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1493300104'">1776</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1493400111'">1776</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1289903503'">1793</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1290000106'">1793</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1290000105'">1793</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1290000104'">1793</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1710200600'">1728</xsl:when>
+            <xsl:when test="//bookInfo/documentID='419801500'">1726</xsl:when>
+            <xsl:when test="//bookInfo/documentID='154603700'">1792</xsl:when>
+            <xsl:when test="//bookInfo/documentID='72900400'">1720</xsl:when>
+            <xsl:when test="//bookInfo/documentID='531600300'">1733</xsl:when>
+            <xsl:when test="//bookInfo/documentID='277000600'">1756</xsl:when>
+            <xsl:when test="//bookInfo/documentID='0872200600'">1782</xsl:when>
+            <xsl:when test="//bookInfo/documentID='0872200700'">1786</xsl:when>
+            <xsl:when test="//bookInfo/documentID='0531600300'">1733</xsl:when>
+            <xsl:when test="//bookInfo/documentID='0277000600'">1719</xsl:when>
+            <xsl:when test="//bookInfo/documentID='0154603700'">1792</xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="date">
+                    <xsl:value-of select="//pubDate"/>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="contains(//imprintYear,' [')">
+                        <xsl:variable name="nettoie">
+                            <xsl:value-of select="normalize-space(//imprintYear)"/> 
+                        </xsl:variable>
+                        <xsl:variable name="nettoie2">
+                            <xsl:value-of select="substring-after($nettoie,' [')"/> 
+                        </xsl:variable>
+                        <xsl:variable name="nettoieFinal">
+                            <xsl:value-of select="translate($nettoie2,'?]','')"/> 
+                        </xsl:variable>
+                        <xsl:value-of select="normalize-space($nettoieFinal)"/> 
+                    </xsl:when>
+                    <!-- ex: <pubDate>[?1789.]</pubDate> -->
+                    <xsl:when test="contains(//pubDate,'[')">
+                        <xsl:value-of select="normalize-space(translate(//pubDate,'[?]MDCLXIV.',''))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="substring($date,1,4)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>

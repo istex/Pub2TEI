@@ -453,26 +453,36 @@
     <xsl:template match="author">
         <author>
             <xsl:if test="not(//euclid_issue/issue/div)">
-            <xsl:attribute name="xml:id">
-                <xsl:variable name="i" select="position()-1"/>
-                <xsl:choose>
-                    <xsl:when test="$i &lt; 10">
-                        <xsl:value-of select="concat('author-000', $i)"/>
-                    </xsl:when>
-                    <xsl:when test="$i &lt; 100">
-                        <xsl:value-of select="concat('author-00', $i)"/>
-                    </xsl:when>
-                    <xsl:when test="$i &lt; 1000">
-                        <xsl:value-of select="concat('author-0', $i)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="concat('author-', $i)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
+                <xsl:attribute name="xml:id">
+                    <xsl:variable name="i" select="position()-1"/>
+                    <xsl:choose>
+                        <xsl:when test="$i &lt; 10">
+                            <xsl:value-of select="concat('author-000', $i)"/>
+                        </xsl:when>
+                        <xsl:when test="$i &lt; 100">
+                            <xsl:value-of select="concat('author-00', $i)"/>
+                        </xsl:when>
+                        <xsl:when test="$i &lt; 1000">
+                            <xsl:value-of select="concat('author-0', $i)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('author-', $i)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
             </xsl:if>
             <!-- affiliation mis en exception pour ne pas interferer avec feuille scholarOne -->
-            <xsl:apply-templates select="* except(affiliation)"/>
+            <xsl:choose>
+                <xsl:when test="marcName">
+                    <persName>
+                        <xsl:apply-templates select="marcName"/>
+                        <xsl:apply-templates select="marcDate"/>
+                    </persName>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="* except(affiliation)"/>  
+                </xsl:otherwise>
+            </xsl:choose>
             <!-- reprise de l'affiliation -->
             <xsl:if test="affiliation">
                 <xsl:apply-templates select="affiliation" mode="Duke"/>
@@ -659,7 +669,55 @@
         <xsl:apply-templates/>
         </idno>
     </xsl:template>
-   
+    <xsl:template match="marcName">
+        <xsl:variable name="prenomFST">
+            <xsl:value-of select="substring-after(.,', ')"/>
+        </xsl:variable>
+        <xsl:variable name="prenom2FST">
+            <xsl:value-of select="substring-after($prenomFST,',')"/>
+        </xsl:variable>
+        <xsl:variable name="prenom3FST">
+            <xsl:value-of select="substring-before($prenomFST,',')"/>
+        </xsl:variable>
+        <xsl:variable name="nom">
+            <xsl:value-of select="substring-before(.,',')"/>
+        </xsl:variable>
+            <!--<xsl:choose>
+                <xsl:when test="contains(.,',')">
+                    <forename type="first"><xsl:value-of select="normalize-space(substring-after(.,','))"/></forename>
+                    <surname><xsl:value-of select="substring-before(.,',')"/></surname>
+                </xsl:when>
+                <xsl:otherwise>
+                    <surname><xsl:apply-templates/></surname>
+                </xsl:otherwise>
+            </xsl:choose>-->
+       
+        <xsl:choose>
+            <xsl:when test="contains($prenomFST,',')">
+                <forename type="first">
+                <xsl:value-of select="$prenom3FST"/>
+                </forename>
+            </xsl:when>
+            <xsl:otherwise>
+                <forename type="first">
+                <xsl:value-of select="$prenomFST"/>
+                </forename>
+            </xsl:otherwise>
+        </xsl:choose>
+        <surname>
+        <xsl:value-of select="$nom"/>
+        </surname>
+        <xsl:if test="contains($prenomFST,',')">
+            <state type="biography">
+                <desc>
+                <xsl:value-of select="$prenom2FST"/>
+                </desc>
+            </state>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="marcDate">
+        <date><xsl:apply-templates/></date>
+    </xsl:template>
     <xsl:template match="identifier">
         <xsl:choose>
             <xsl:when test="@type='doi'">
