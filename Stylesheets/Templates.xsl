@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:tei="http://www.tei-c.org/ns/1.0"
 	exclude-result-prefixes="#all" version="2.0"
 	xmlns="http://www.tei-c.org/ns/1.0">
 
@@ -23,12 +23,39 @@
                 </tagsDecl>
             </xsl:if>
             <!-- ECCO -->
-            <xsl:if test="//bookInfo">
-            <classDecl>
-                <taxonomy xml:id="LCSH">
-                    <bibl>Library of Congress Subject Headings</bibl>
-                </taxonomy>
-            </classDecl>
+            <xsl:if test="//bookInfo | //marc:datafield[@tag='650']">
+                <classDecl>
+                    <xsl:if test="//bookInfo | //marc:datafield[@ind2='0'][@tag='650']">
+                        <taxonomy xml:id="LCSH">
+                            <bibl>Library of Congress Subject Headings</bibl>
+                        </taxonomy>
+                    </xsl:if>
+                    <xsl:if test="//marc:datafield[@ind2='1'][@tag='650']">
+                        <taxonomy xml:id="LCSHA">
+                            <bibl>Library of Congress Subject Headings</bibl>
+                        </taxonomy>
+                    </xsl:if>
+                    <xsl:if test="//marc:datafield[@ind2='2'][@tag='650']">
+                        <taxonomy xml:id="MESH">
+                            <bibl>Medical Subject Headings of the National Library of Medicine.</bibl>
+                        </taxonomy>
+                    </xsl:if>
+                    <xsl:if test="//marc:datafield[@ind2='3'][@tag='650']">
+                        <taxonomy xml:id="NAL">
+                            <bibl>US National Library of Agriculture</bibl>
+                        </taxonomy>
+                    </xsl:if>
+                    <xsl:if test="//marc:datafield[@ind2='5'][@tag='650']">
+                        <taxonomy xml:id="CSH">
+                            <bibl>Canadian Subject Headings</bibl>
+                        </taxonomy>
+                    </xsl:if>
+                    <xsl:if test="//marc:datafield[@ind2='6'][@tag='650']">
+                        <taxonomy xml:id="RVM">
+                            <bibl>Répertoire de vedettes-matière, Bibliothèque de l'Université Laval, Canada</bibl>
+                        </taxonomy>
+                    </xsl:if>
+                </classDecl>
             </xsl:if>
         </encodingDesc>
     </xsl:template>

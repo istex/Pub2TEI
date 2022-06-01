@@ -3668,7 +3668,7 @@
                 <title level="a" type="main">
                     <xsl:if test="@xml:lang">
                         <xsl:attribute name="xml:lang">
-                            <xsl:value-of select="@xml:lang"/>
+                            <xsl:value-of select="$codeLang"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:if test="/book/book-meta/publisher/publisher-name = 'Brill'">

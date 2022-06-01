@@ -441,6 +441,223 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="codeLangTitle">
+        <xsl:value-of select="translate(//book-part[not(body/book-part)]/book-part-meta/title-group/title[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+    </xsl:variable>
+    <xsl:variable name="codeLang">
+        <xsl:choose>
+            <xsl:when test="normalize-space($codeLangTitle)='aar'">aa</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='abk'">ab</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='afr'">af</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='aka'">ak</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='alb'">sq</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='amh'">am</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ara'">ar</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='arg'">an</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hye'">hy</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='arm'">hy</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='asm'">as</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ava'">av</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ave'">ae</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='aym'">ay</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='aze'">az</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bak'">ba</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bam'">bm</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='eus'">eu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='baq'">eu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bel'">be</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ben'">bn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bih'">bh</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bis'">bi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bod'">bo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bos'">bs</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bre'">br</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bul'">bg</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='bur'">my</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mya'">my</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cat'">ca</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ces'">cs</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cha'">ch</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='che'">ce</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='chi'">zh</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='chu'">cu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='chv'">cv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cor'">kw</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cos'">co</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cre'">cr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cym'">cy</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='cze'">cs</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='dan'">da</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='deu'">de</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='div'">dv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='dut'">nl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nld'">nl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='dzo'">dz</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='eng'">en</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='epo'">eo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='est'">et</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ewe'">ee</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fao'">fo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fij'">fj</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fin'">fi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fre'">fr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fra'">fr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fry'">fy</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ful'">ff</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='geo'">ka</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kat'">ka</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ger'">de</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='gla'">gd</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='gle'">ga</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='glg'">gl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='glv'">gv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='gre'">el</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ell'">el</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='grn'">gn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='guj'">gu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hat'">ht</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hau'">ha</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='heb'">he</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='her'">hz</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hin'">hi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hmo'">ho</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hrv'">hr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='scr'">hr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='hun'">hu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ibo'">ig</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ice'">is</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='isl'">is</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ido'">io</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='iii'">ii</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='iku'">iu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ile'">ie</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ina'">ia</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ind'">id</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ipk'">ik</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ita'">it</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='jav'">jv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='jpn'">ja</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kal'">kl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kan'">kn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kas'">ks</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kau'">kr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kaz'">kk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='khm'">km</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kik'">ki</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kin'">rw</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kir'">ky</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kom'">kv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kon'">kg</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kor'">ko</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kua'">kj</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='kur'">ku</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lao'">lo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lat'">la</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lav'">lv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lim'">li</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lin'">ln</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lit'">lt</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ltz'">lb</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lub'">lu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='lug'">lg</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mac'">mk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mkd'">mk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mah'">mh</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mal'">ml</xsl:when>
+            <!-- etude degruyter code "mis" = allemand -->
+            <xsl:when test="normalize-space($codeLangTitle)='mis'">de</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mri'">mi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mao'">mi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mar'">mr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='may'">ms</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='msa'">ms</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mlg'">mg</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mlt'">mt</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='mon'">mn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nau'">na</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nav'">nv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nbl'">nr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nde'">nd</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ndo'">ng</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nep'">ne</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nno'">nn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nob'">nb</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nor'">no</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='nya'">ny</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='oci'">oc</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='oji'">oj</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ori'">or</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='orm'">om</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='oss'">os</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='pan'">pa</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='fas'">fa</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='per'">fa</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='pli'">pi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='pol'">pl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='por'">pt</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='pus'">ps</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='que'">qu</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='roh'">rm</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ron'">ro</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='rum'">ro</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='run'">rn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='rus'">ru</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sag'">sg</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='san'">sa</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='scc'">sr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sin'">si</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='slo'">sk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='slk'">sk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='slv'">sl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sme'">se</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='smo'">sm</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sna'">sn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='snd'">sd</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='som'">so</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sot'">st</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='spa'">es</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sqi'">sq</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='srd'">sc</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='srp'">sr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ssw'">ss</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='sun'">su</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='swa'">sw</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='swe'">sv</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tah'">ty</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tam'">ta</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tat'">tt</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tel'">te</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tgk'">tg</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tgl'">tl</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tha'">th</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tib'">bo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tir'">ti</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ton'">to</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tsn'">tn</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tso'">ts</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tuk'">tk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='tur'">tr</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='twi'">tw</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='uig'">ug</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ukr'">uk</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='urd'">ur</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='uzb'">uz</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='ven'">ve</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='vie'">vi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='vol'">vo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='wel'">cy</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='wln'">wa</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='wol'">wo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='xho'">xh</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='yid'">yi</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='yor'">yo</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='zha'">za</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='zho'">zh</xsl:when>
+            <xsl:when test="normalize-space($codeLangTitle)='zul'">zu</xsl:when>
+            <xsl:otherwise>en</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+        
     <!-- FIN CODE LANGUE BRILL-EBOOKS-->
     <!-- code langue ECCO -->
     <xsl:variable name="codeLangEcco">
@@ -1036,7 +1253,7 @@
                                 </note>
                                 <!-- niveau revue / book -->
                                 <xsl:choose>
-                                    <xsl:when test="$docIssue//book/book-series-meta">
+                                    <xsl:when test="$docIssue/book/book-series-meta">
                                         <note type="publication-type">
                                             <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
                                             <xsl:text>book-series</xsl:text>
@@ -1347,7 +1564,7 @@
                                             <langUsage>
                                                 <language>
                                                     <xsl:attribute name="ident">
-                                                        <xsl:value-of select="translate(//book-part[not(body/book-part)]/book-part-meta/title-group/title[1]/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                        <xsl:value-of select="$codeLang"/>
                                                     </xsl:attribute>
                                                 </language>
                                             </langUsage>
@@ -1627,6 +1844,7 @@
                             <xsl:choose>
                                 <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/ba'">Byzantinisches Archiv</xsl:when>
                                 <xsl:when test="/book/book-series-meta/book-id[@pub-id-type='doi']='10.1515/icon'">Image &amp; Context</xsl:when>
+                                <xsl:when test="/book/book-meta/book-id[@pub-id-type='doi']='10.1515/9783110942330' or /book/book-meta/book-id[@pub-id-type='doi']='10.1515/9783110634211'">Berliner Griechische Urkunden</xsl:when>
                             </xsl:choose>
                         </xsl:variable>
                         <xsl:variable name="issnSerieDG">
@@ -1644,12 +1862,16 @@
                             <title level="s" type="main">
                                 <xsl:value-of select="$titreSerieDG"/>
                             </title>
+                            <xsl:if test="$issnSerieDG !=''">
                             <idno type="ISSN">
                                 <xsl:value-of select="$issnSerieDG"/>
                             </idno>
+                            </xsl:if>
+                            <xsl:if test="$eissnSerieDG !=''">
                             <idno type="eISSN">
                                 <xsl:value-of select="$eissnSerieDG"/>
                             </idno>
+                            </xsl:if>
                        </xsl:if>
                         <xsl:apply-templates select="//book/book-series-meta/book-id[@pub-id-type='doi']"/>
                     </series>
@@ -2208,7 +2430,14 @@
             </monogr>
                 
             <xsl:apply-templates select="collection-meta"/>
-            <xsl:apply-templates select="book-series-meta"/>
+            <xsl:choose>
+                <xsl:when test="book-series-meta">
+                    <xsl:apply-templates select="book-series-meta"/>
+                </xsl:when>
+                <xsl:when test="$docIssue/book-series-meta">
+                    <xsl:apply-templates select="$docIssue/book-series-meta"/>
+                </xsl:when>
+            </xsl:choose>
             
             <xsl:if test="//metadata/series[string-length() &gt; 0]">
                 <series>
@@ -2555,7 +2784,7 @@
             <xsl:otherwise>
                 <series>
                     <xsl:choose>
-                        <xsl:when test="series[string-length() &gt; 0] and //book-series-meta/issn">
+                        <xsl:when test="series[string-length() &gt; 0] and issn">
                             <title level="s" type="main">
                                 <xsl:value-of select="$currentTitle"/>
                             </title>
