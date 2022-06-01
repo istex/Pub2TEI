@@ -10,8 +10,8 @@
     <!-- ajout déclaration schema ODD-ISTEX -->
     
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
-    <xsl:param name="xslversion">2.1.0</xsl:param>
-    <xsl:param name="releasedate">2022-05-30</xsl:param>
+    <xsl:param name="xslversion">3.0.0</xsl:param>
+    <xsl:param name="releasedate">2022-06-01</xsl:param>
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
@@ -50,6 +50,8 @@
     <xsl:include href="Mets.xsl"/>
     <!-- SG: ajout du format ASP - proquest theologiens-->
     <xsl:include href="Asp.xsl"/>
+    <!-- SG: ajout du format Marc21XML-->
+    <xsl:include href="MARC21.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
