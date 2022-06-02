@@ -1986,7 +1986,10 @@
 				<xsl:call-template name="createSubGeoFrom255"/>
 			</xsl:for-each>
 			
-			<!-- tags 600 - 610 -611 -630 delete -->
+			<!-- tags 610 -611 -630 delete -->
+			<xsl:for-each select="marc:datafield[@tag=600]">
+				<xsl:call-template name="createSubNameFrom600"/>
+			</xsl:for-each>
 			
 			<xsl:for-each select="marc:datafield[@tag=648]">
 				<xsl:call-template name="createSubChronFrom648"/>
@@ -2097,25 +2100,21 @@
 		</xsl:for-each>
 	</xsl:template>
 	<xsl:template name="subjectGeographicZ">
-		<textClass>
-			<keywords ana="geographical">
-				<term>
-					<xsl:call-template name="chopPunctuation">
-						<xsl:with-param name="chopString" select="."/>
-					</xsl:call-template>
-				</term>
-			</keywords>
-		</textClass>
-	</xsl:template>
-	<xsl:template name="subjectTemporalY">
-		<temporal>
+		<term ana="geographic">
 			<xsl:call-template name="chopPunctuation">
 				<xsl:with-param name="chopString" select="."/>
 			</xsl:call-template>
-		</temporal>
+		</term>
+	</xsl:template>
+	<xsl:template name="subjectTemporalY">
+		<term ana="temporal">
+			<xsl:call-template name="chopPunctuation">
+				<xsl:with-param name="chopString" select="."/>
+			</xsl:call-template>
+		</term>
 	</xsl:template>
 	<xsl:template name="subjectTopic">
-		<term>
+		<term ana="head">
 			<xsl:call-template name="chopPunctuation">
 				<xsl:with-param name="chopString" select="."/>
 			</xsl:call-template>
@@ -2123,7 +2122,7 @@
 	</xsl:template>
 	<!-- 3.2 change tmee 6xx $v genre -->
 	<xsl:template name="subjectGenre">
-		<term>
+		<term ana="genre">
 			<xsl:call-template name="chopPunctuation">
 				<xsl:with-param name="chopString" select="."/>
 			</xsl:call-template>
@@ -2985,7 +2984,10 @@
 			<xsl:when test="$sf06a='255'">
 				<xsl:call-template name="createSubGeoFrom255"/>
 			</xsl:when>
-			<!-- tags 600 - 610 -611 -630 delete -->
+			<!-- tags 610 -611 -630 delete -->
+			<xsl:when test="$sf06a='600'">
+				<xsl:call-template name="createSubNameFrom600"/>
+			</xsl:when>
 			<xsl:when test="$sf06a='648'">
 				<xsl:call-template name="createSubChronFrom648"/>
 			</xsl:when>
@@ -3711,8 +3713,30 @@
 		</textClass>
 	</xsl:template>
 
-	<!-- tags 600 - 610 -611 -630 delete -->
-
+	<!-- tags 610 -611 -630 delete -->
+	<xsl:template name="createSubNameFrom600">
+		<textClass>
+			<keywords>
+				<xsl:call-template name="subjectAuthority"/>
+				<xsl:call-template name="termsOfAddress"/>
+				<term type="name">
+					<xsl:call-template name="chopPunctuation">
+						<xsl:with-param name="chopString">
+							<xsl:call-template name="subfieldSelect">
+								<xsl:with-param name="codes">aq</xsl:with-param>
+							</xsl:call-template>
+						</xsl:with-param>
+					</xsl:call-template>
+				</term>
+				<xsl:if test="marc:subfield[@code='d']">
+					<term ana="date">
+						<xsl:call-template name="nameDate"/>
+					</term>
+				</xsl:if>
+				<xsl:call-template name="subjectAnyOrder"/>
+			</keywords>
+		</textClass>
+	</xsl:template>
 	<xsl:template name="createSubChronFrom648">
 		<textClass>
 			<keywords ana="temporal">
@@ -3758,12 +3782,13 @@
 		<textClass>
 			<keywords ana="geographic">
 			<xsl:for-each select="marc:subfield[@code='a']">
-				<term>
+				<term ana="geographic">
 					<xsl:call-template name="chopPunctuation">
 						<xsl:with-param name="chopString" select="."/>
 					</xsl:call-template>
 				</term>
 			</xsl:for-each>
+				<xsl:call-template name="subjectAnyOrder"/>
 			</keywords>
 		</textClass>
 	</xsl:template>
@@ -4083,6 +4108,19 @@
 					<xsl:with-param name="str" select="substring($str,2)"/>
 				</xsl:call-template>
 			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+	<xsl:template name="termsOfAddress">
+		<xsl:if test="marc:subfield[@code='b' or @code='c']">
+			<term type="termsOfAddress">
+				<xsl:call-template name="chopPunctuation">
+					<xsl:with-param name="chopString">
+						<xsl:call-template name="subfieldSelect">
+							<xsl:with-param name="codes">bc</xsl:with-param>
+						</xsl:call-template>
+					</xsl:with-param>
+				</xsl:call-template>
+			</term>
 		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>
