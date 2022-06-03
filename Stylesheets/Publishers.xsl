@@ -105,7 +105,7 @@
                 <xsl:message>Converting a Wiley article</xsl:message>
             </xsl:when>
             <xsl:when test="book/book-meta">
-                <xsl:message>Converting a Brepols book chapter</xsl:message>
+                <xsl:message>Converting a bits.book.dtd chapter</xsl:message>
             </xsl:when>
             <xsl:when test="euclid_issue">
                 <xsl:message>Converting a Duke article</xsl:message>
