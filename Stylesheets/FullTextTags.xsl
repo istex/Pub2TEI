@@ -1544,5 +1544,9 @@
             <xsl:value-of select="."/>
         </ref>
     </xsl:template>
-    
+    <!-- ecco ajout d'un espace entre les balises pour reconstruction du texte-->
+    <xsl:template match="wd">
+        <xsl:apply-templates/>
+        <xsl:text> </xsl:text>
+    </xsl:template>
 </xsl:stylesheet>

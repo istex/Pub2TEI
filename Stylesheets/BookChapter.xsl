@@ -1507,11 +1507,19 @@
                                                                     <xsl:attribute name="source">
                                                                         <xsl:value-of select="@type"/>
                                                                     </xsl:attribute>
-                                                                    <xsl:if test="locSubject[@subField='y']">
+                                                                    <xsl:if test="locSubject[@subField='y'] | locSubject[@subField='a']">
+                                                                        <term type="geographical">
+                                                                                <xsl:value-of select="locSubject[@subField='y'] | locSubject[@subField='a']"/>
+                                                                        </term>
+                                                                    </xsl:if>
+                                                                    <xsl:if test="locSubject[@subField='x']">
                                                                         <term>
-                                                                            <geogName>
-                                                                                <xsl:value-of select="locSubject[@subField='y']"/>
-                                                                            </geogName>
+                                                                            <xsl:value-of select="locSubject[@subField='x']"/>
+                                                                        </term>
+                                                                    </xsl:if>
+                                                                    <xsl:if test="locSubject[@subField='v']">
+                                                                        <term type="genre">
+                                                                            <xsl:value-of select="locSubject[@subField='v']"/>
                                                                         </term>
                                                                     </xsl:if>
                                                                 </xsl:when>
@@ -1693,6 +1701,10 @@
                                 <xsl:otherwise>
                                     <div>
                                         <xsl:choose>
+                                            <!-- ecco -->
+                                            <xsl:when test="/book/text/page/pageContent/p[string-length()&gt; 0]">
+                                                <xsl:apply-templates select="/book/text/page/pageContent/p"/>
+                                            </xsl:when>
                                             <xsl:when test="string-length($rawfulltextpath) &gt; 0">
                                                 <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
                                             </xsl:when>
