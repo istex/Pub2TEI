@@ -107,11 +107,14 @@
             <xsl:when test="book/book-meta">
                 <xsl:message>Converting a bits.book.dtd chapter</xsl:message>
             </xsl:when>
+            <xsl:when test="book/bookInfo">
+                <xsl:message>Converting a proquest book.dtd ebook</xsl:message>
+            </xsl:when>
             <xsl:when test="euclid_issue">
                 <xsl:message>Converting a Duke article</xsl:message>
             </xsl:when>
             <xsl:when test="asp">
-                <xsl:message>Converting a proquest TCRT article</xsl:message>
+                <xsl:message>Converting a proquest TCRT chapter</xsl:message>
             </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(

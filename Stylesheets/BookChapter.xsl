@@ -654,7 +654,14 @@
             <xsl:when test="normalize-space($codeLangTitle)='zha'">za</xsl:when>
             <xsl:when test="normalize-space($codeLangTitle)='zho'">zh</xsl:when>
             <xsl:when test="normalize-space($codeLangTitle)='zul'">zu</xsl:when>
-            <xsl:otherwise>en</xsl:otherwise>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="string-length($codeLangTitle)=2">
+                        <xsl:value-of select="$codeLangTitle"/>
+                    </xsl:when>
+                    <xsl:otherwise>en</xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
         
@@ -1638,6 +1645,13 @@
                                             <xsl:when test="//book-meta/book-id[@pub-id-type='doi']='10.1484/M.IPM-EB.4.2017034'">
                                                 <language>
                                                     <xsl:attribute name="ident">la</xsl:attribute>
+                                                </language>
+                                            </xsl:when>
+                                            <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[1]/@xml:lang !=''">
+                                                <language>
+                                                    <xsl:attribute name="ident">
+                                                        <xsl:value-of select="$codeLangTitle"/>
+                                                    </xsl:attribute>
                                                 </language>
                                             </xsl:when>
                                             <xsl:when test="$langBrill">
