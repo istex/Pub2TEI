@@ -363,10 +363,11 @@
                                 <xsl:apply-templates select="header/title-group/ej-title"/>
                                 <!-- Auteurs article -->
                                 <!-- <short-author-list> non repris -->
-                                <xsl:apply-templates select="header/author-group/* except(//short-author-list)" mode ="IOP"/>
-                                <xsl:apply-templates select="authors/* except(//authors_toc)" mode="IOP"/>
+                                <xsl:apply-templates select="authors/* except(//short-author-list|//authors_toc| //affil)" mode ="IOP"/>
+                                <xsl:apply-templates select="header/author-group/* except(//short-author-list|//authors_toc| //affil)" mode ="IOP"/>
+                                <xsl:apply-templates select="header/collaboration except(//short-author-list|//authors_toc| //affil)" mode ="IOP"/>
                                
-                                <xsl:apply-templates select="header/collaboration" mode ="IOP"/>
+
                                 <!-- Adresse(s) d'affiliation -->
                                 <xsl:apply-templates select="header/editor-group | header/author-group/collaboration | header/authors/collaboration | header/editors/collaboration"/>
 
@@ -892,7 +893,7 @@
         Cas "auteur normal"
     -->
     <xsl:template match="author-group | collaboration">
-        <xsl:apply-templates select="author|author_granular" mode="IOP"/>
+        <xsl:apply-templates select="*" mode="IOP"/>
     </xsl:template>
     <xsl:template match="authors">
         <xsl:apply-templates select="au" mode="IOP"/>

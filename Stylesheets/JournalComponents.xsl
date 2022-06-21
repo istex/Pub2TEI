@@ -576,7 +576,7 @@
     <!-- Rem.: @pub-typr not considered -->
 
     <xsl:template
-        match="Issn[string-length() &gt; 0] | ISSN[string-length() &gt; 0] | issn[string-length() &gt; 0] | ce:issn[string-length() &gt; 0]">
+        match="Issn[string-length() &gt; 0] | ISSN[string-length() &gt; 0] | ce:issn[string-length() &gt; 0]">
         <xsl:choose>
             <xsl:when test="@publication-format = 'print'">
                 <idno type="pISSN">
@@ -645,7 +645,7 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template
-        match="JournalPrintISSN | issn[@issn_type = 'print'][string-length() &gt; 0] | issn[@pub-type = 'ppub'][string-length() &gt; 0] | PrintISSN | issn-paper | SeriesPrintISSN | SubSeriesPrintISSN | issn[@type = 'print'] | wiley:issn[@type = 'print']">
+        match="JournalPrintISSN | issn[@issn_type = 'print'][string-length() &gt; 0] | issn[@pub-type = 'ppub'][string-length() &gt; 0] | PrintISSN | issn-paper | SeriesPrintISSN | SubSeriesPrintISSN | issn[@type = 'print'] | wiley:issn[@type = 'print'] |issn">
         <xsl:variable name="ISSNCode">
             <xsl:choose>
                 <!-- BMJ -->
@@ -700,7 +700,7 @@
 
     <xsl:template
         match="JournalElectronicISSN | ElectronicISSN | issn[@issn_type = 'digital'] | issn[@pub-type = 'epub'] | issn-elec | SeriesElectronicISSN | SubSeriesElectronicISSN | issn[@type = 'electronic'] | wiley:issn[@type = 'electronic'] | E-ISSN">
-        <xsl:variable name="ISSNCode">
+        <xsl:variable name="eISSNCode">
             <xsl:if test=". != ''">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:if>
@@ -719,7 +719,7 @@
             <xsl:otherwise>
                 <xsl:if test=". != ''">
                     <idno type="eISSN">
-                        <xsl:value-of select="$ISSNCode"/>
+                        <xsl:value-of select="$eISSNCode"/>
                     </idno>
                 </xsl:if>
             </xsl:otherwise>

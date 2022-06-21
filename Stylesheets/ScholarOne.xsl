@@ -365,6 +365,10 @@
             <xsl:apply-templates select="string-name"/>
             <xsl:apply-templates select="name-alternatives"/>
             <xsl:apply-templates select="email"/>
+                <!-- à tester et enlever si ça pose des soucis -->
+                <xsl:if test="xref[@ref-type='corresp'] and not(xref[@ref-type='aff'])">
+                    <xsl:apply-templates select="../aff"/>
+                </xsl:if>
             <!-- affiliation -->
             <xsl:variable name="count">
                 <xsl:value-of select="count(name)"/>

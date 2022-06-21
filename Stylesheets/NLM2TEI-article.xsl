@@ -4720,7 +4720,6 @@
                                                     <xsl:otherwise>
                                                         <xsl:choose>
                                                             <xsl:when test="$countSup">
-                                                                <address>
                                                                     <xsl:choose>
                                                                         <xsl:when test="contains($avantVirgule,'.')">
                                                                             <region>
@@ -4754,7 +4753,7 @@
                                                                             </xsl:choose>
                                                                         </xsl:otherwise>
                                                                     </xsl:choose>
-                                                                </address>
+                                                                
                                                             </xsl:when>
                                                             <xsl:otherwise>
                                                                 <addrLine>

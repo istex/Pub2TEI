@@ -367,6 +367,10 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:choose>
+                    <xsl:when test="/header/ident/doi='10.1088/0305-4470/5/11/009'">
+                        <region>Massachusetts</region>
+                        <country key="US" xml:lang="en">UNITED STATES</country>
+                    </xsl:when>
                     <xsl:when test="$testCountry != ''">
                         <country>
                             <xsl:choose>
