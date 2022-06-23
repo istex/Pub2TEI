@@ -194,9 +194,9 @@
                     <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Sommaire')">other</xsl:when>
                     <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOMMAIRE DU TOME PREMIER')">other</xsl:when>
                     <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOURCES')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOURCES')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Source')">other</xsl:when>
                     <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'TABLE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'TABLE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Table')">other</xsl:when>
                     <xsl:otherwise>chapter</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>

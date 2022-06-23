@@ -30,6 +30,11 @@
                         <cell role="name">Ars et Scientia : Schriften zur Kunstwissenschaft</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/AS</cell>
+                        <cell role="issn">2199-4161</cell>
+                        <cell role="name">Ars et Scientia : Schriften zur Kunstwissenschaft</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/BZAW</cell>
                         <cell role="issn">0934-2575</cell>
                         <cell role="name">Beihefte zur Zeitschrift für die alttestamentliche
@@ -69,6 +74,11 @@
                         <cell role="name">Beiträge zur Dialogforschung</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/df</cell>
+                        <cell role="issn">0940-5992</cell>
+                        <cell role="name">Beiträge zur Dialogforschung</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/CANROM</cell>
                         <cell role="issn">0933-2421</cell>
                         <cell role="name">Canadiana Romanica</cell>
@@ -94,7 +104,17 @@
                         <cell role="name">Civilisations et Sociétés</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/ciso-b</cell>
+                        <cell role="issn">0069-4290</cell>
+                        <cell role="name">Civilisations et Sociétés</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/CAGB</cell>
+                        <cell role="issn">1864-4805</cell>
+                        <cell role="name">Commentaria in Aristotelem Graeca et Byzantina</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/cagb</cell>
                         <cell role="issn">1864-4805</cell>
                         <cell role="name">Commentaria in Aristotelem Graeca et Byzantina</cell>
                     </row>
@@ -104,7 +124,17 @@
                         <cell role="name">Commentaria in Aristotelem Graeca et Byzantina</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/cagb-b</cell>
+                        <cell role="issn">1864-4805</cell>
+                        <cell role="name">Commentaria in Aristotelem Graeca et Byzantina</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/com</cell>
+                        <cell role="issn">0941-1704</cell>
+                        <cell role="name">Communicatio : Kultur – Text – Medium</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/COM</cell>
                         <cell role="issn">0941-1704</cell>
                         <cell role="name">Communicatio : Kultur – Text – Medium</cell>
                     </row>
@@ -113,15 +143,11 @@
                         <cell role="name">Chromatiques whiteheadiennes</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/CHWH</cell>
+                        <cell role="name">Chromatiques whiteheadiennes</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/CONSTANT</cell>
-                        <cell role="name">Benjamin Constant: Œuvres complètes</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1515/CONSTANT-S1</cell>
-                        <cell role="name">Benjamin Constant: Œuvres complètes</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1515/CONSTANT-S2</cell>
                         <cell role="name">Benjamin Constant: Œuvres complètes</cell>
                     </row>
                     <row>
@@ -129,9 +155,35 @@
                         <cell role="name">Benjamin Constant: Œuvres complètes</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/CONSTANT-S1</cell>
+                        <cell role="name">Benjamin Constant: Œuvres complètes</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/constant-s1</cell>
+                        <cell role="name">Benjamin Constant: Œuvres complètes</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/CONSTANT-S2</cell>
+                        <cell role="name">Benjamin Constant: Œuvres complètes</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/constant-s2</cell>
+                        <cell role="name">Benjamin Constant: Œuvres complètes</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/COWB</cell>
+                        <cell role="name">Constitutions of the World from the late 18th Century to
+                            the Middle of the 19th Century</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/cowb</cell>
                         <cell role="name">Constitutions of the World from the late 18th Century to
                             the Middle of the 19th Century</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/DAG</cell>
+                        <cell role="name">Dictionnaire onomasiologique de l’ancien gascon
+                            (DAG)</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/dag</cell>
@@ -139,9 +191,19 @@
                             (DAG)</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/DEAF</cell>
+                        <cell role="name">Dictionnaire étymologique de l’ancien français
+                            (DEAF)</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/deaf</cell>
                         <cell role="name">Dictionnaire étymologique de l’ancien français
                             (DEAF)</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/DHAR</cell>
+                        <cell role="name">Dictionnaire historique de l’anthroponymie romane
+                            (Patronymica Romanica)</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/dhar</cell>
@@ -154,8 +216,21 @@
                             (Patronymica Romanica)</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/dhar-b</cell>
+                        <cell role="name">Dictionnaire historique de l’anthroponymie romane
+                            (Patronymica Romanica)</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/DWP</cell>
+                        <cell role="name">The Dynamics of Wordplay</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/dwp</cell>
                         <cell role="name">The Dynamics of Wordplay</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/EAA</cell>
+                        <cell role="name">Encyclopédie linguistique d’Al-Andalus</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/eaa</cell>
@@ -166,7 +241,16 @@
                         <cell role="name">Encyclopédie linguistique d’Al-Andalus</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/eaa-b</cell>
+                        <cell role="name">Encyclopédie linguistique d’Al-Andalus</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/ELF-B</cell>
+                        <cell role="issn">2365-2071</cell>
+                        <cell role="name">Études de linguistique française</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/elf-b</cell>
                         <cell role="issn">2365-2071</cell>
                         <cell role="name">Études de linguistique française</cell>
                     </row>
@@ -176,10 +260,28 @@
                             Grenoble. Série Histoire Institutionelle</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/hi-b</cell>
+                        <cell role="name">Publications de l’Université des Sciences Sociales de
+                            Grenoble. Série Histoire Institutionelle</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/LEXSM</cell>
+                        <cell role="issn">0175-9264</cell>
+                        <cell role="name">Lexicographica. Series Maior : Supplementbände zum
+                            Internationalen Jahrbuch für Lexikographie</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/lexsm</cell>
                         <cell role="issn">0175-9264</cell>
                         <cell role="name">Lexicographica. Series Maior : Supplementbände zum
                             Internationalen Jahrbuch für Lexikographie</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/MST</cell>
+                        <cell role="issn">1862-1139</cell>
+                        <cell role="name">Millennium-Studien / Millennium Studies : Studien zu
+                            Kultur und Geschichte des ersten Jahrtausends n. Chr. / Studies in the
+                            Culture and History of the First Millennium C.E.</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/mst</cell>
@@ -194,14 +296,33 @@
                         <cell role="name">Mimesis</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/mime-b</cell>
+                        <cell role="issn">0178-7489</cell>
+                        <cell role="name">Mimesis</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/MOMD-B</cell>
                         <cell role="name">Le Monde d'Outre-Mer passé et Présent, Série
                             Documents</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/momd-b</cell>
+                        <cell role="name">Le Monde d'Outre-Mer passé et Présent, Série
+                            Documents</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/MOME</cell>
+                        <cell role="name">Le Monde d’Outre-Mer Passé et Présent / Série
+                            Études</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/mome</cell>
                         <cell role="name">Le Monde d’Outre-Mer Passé et Présent / Série
                             Études</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/MRL</cell>
+                        <cell role="name">Manuals of Romance Linguistics</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/mrl</cell>
@@ -212,7 +333,16 @@
                         <cell role="name">Mathématiques et Sciences de l'Homme</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/msh-b</cell>
+                        <cell role="name">Mathématiques et Sciences de l'Homme</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/MTNF</cell>
+                        <cell role="issn">1862-1260</cell>
+                        <cell role="name">Monographien und Texte zur Nietzsche-Forschung</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/mtnf</cell>
                         <cell role="issn">1862-1260</cell>
                         <cell role="name">Monographien und Texte zur Nietzsche-Forschung</cell>
                     </row>
@@ -220,6 +350,15 @@
                         <cell role="doi">10.1515/PHS-B</cell>
                         <cell role="issn">0479-5997</cell>
                         <cell role="name">Pariser Historische Studien</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/phs-b</cell>
+                        <cell role="issn">0479-5997</cell>
+                        <cell role="name">Pariser Historische Studien</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/RU</cell>
+                        <cell role="name">La recherche urbaine</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/ru</cell>
@@ -230,7 +369,15 @@
                         <cell role="name">La recherche urbaine</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/ru-b</cell>
+                        <cell role="name">La recherche urbaine</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/SED-B</cell>
+                        <cell role="name">Séries Économie du Développement</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/sed-b</cell>
                         <cell role="name">Séries Économie du Développement</cell>
                     </row>
                     <row>
@@ -249,7 +396,18 @@
                         <cell role="name">Scientia Graeco-Arabica</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/sga-b</cell>
+                        <cell role="issn">1868-7172</cell>
+                        <cell role="name">Scientia Graeco-Arabica</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/SF</cell>
+                        <cell role="issn">1422-4445</cell>
+                        <cell role="name">Scrinium Friburgense : Veröffentlichungen des
+                            Mediävistischen Instituts der Universität Freiburg</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/sf</cell>
                         <cell role="issn">1422-4445</cell>
                         <cell role="name">Scrinium Friburgense : Veröffentlichungen des
                             Mediävistischen Instituts der Universität Freiburg</cell>
@@ -260,7 +418,17 @@
                         <cell role="name">Studia Praesocratica</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/SP</cell>
+                        <cell role="issn">1869-7143</cell>
+                        <cell role="name">Studia Praesocratica</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/SBS-B</cell>
+                        <cell role="issn">1097-4806</cell>
+                        <cell role="name">Studies in Byzantine Sigillography</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/sbs-b</cell>
                         <cell role="issn">1097-4806</cell>
                         <cell role="name">Studies in Byzantine Sigillography</cell>
                     </row>
@@ -269,7 +437,15 @@
                         <cell role="name">Le Savoir Historique</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/sh-b</cell>
+                        <cell role="name">Le Savoir Historique</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/SHS-B</cell>
+                        <cell role="name">Serie Histoire Sociale</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/shs-b</cell>
                         <cell role="name">Serie Histoire Sociale</cell>
                     </row>
                     <row>
@@ -279,8 +455,23 @@
                             East</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/SME</cell>
+                        <cell role="issn">2198-0853</cell>
+                        <cell role="name">Studies in the History and Culture of the Middle
+                            East</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/SP</cell>
+                        <cell role="name">Studia Praesocratica</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/sp</cell>
                         <cell role="name">Studia Praesocratica</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/TILLR</cell>
+                        <cell role="name">Tillich Research : Tillich-Forschungen / Recherches sur
+                            Tillich</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/tillr</cell>
@@ -292,14 +483,32 @@
                         <cell role="name">Textes de Sciences Sociales</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/tss</cell>
+                        <cell role="name">Textes de Sciences Sociales</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/TU</cell>
                         <cell role="issn">0082-3589" name ="Texte und Untersuchungen zur Geschichte
                             der altchristlichen Literatur</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/tu</cell>
+                        <cell role="issn">0082-3589" name ="Texte und Untersuchungen zur Geschichte
+                            der altchristlichen Literatur</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/UALG</cell>
+                        <cell role="issn">1862-1112</cell>
+                        <cell role="name">Untersuchungen zur antiken Literatur und Geschichte</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/ualg</cell>
                         <cell role="issn">1862-1112</cell>
                         <cell role="name">Untersuchungen zur antiken Literatur und Geschichte</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/ANMO</cell>
+                        <cell role="name">Antike in der Moderne</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/anmo</cell>
@@ -319,6 +528,12 @@
                     </row>
                     <row>
                         <cell role="doi">10.1515/APF-BEIH-B</cell>
+                        <cell role="issn">1868-9337</cell>
+                        <cell role="name">Archiv für Papyrusforschung und verwandte Gebiete -
+                            Beihefte</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/apf-beih-b</cell>
                         <cell role="issn">1868-9337</cell>
                         <cell role="name">Archiv für Papyrusforschung und verwandte Gebiete -
                             Beihefte</cell>
@@ -346,6 +561,11 @@
                         <cell role="issn">1864-9785</cell>
                         <cell role="name">Byzantinisches Archiv : als Ergänzung zur Byzantinischen
                             Zeitschrift</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/BKT</cell>
+                        <cell role="issn">2365-8649</cell>
+                        <cell role="name">Berliner Klassikertexte</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/bkt</cell>
@@ -379,15 +599,18 @@
                         <cell role="name">Commentaria in Aristotelem Graeca</cell>
                     </row>
                     <row>
-                        <cell role="doi">10.1515/cagb</cell>
+                        <cell role="doi">10.1515/cag</cell>
+                        <cell role="name">Commentaria in Aristotelem Graeca</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/CAGB</cell>
                         <cell role="issn">1864-4805</cell>
                         <cell role="name">Commentaria in Aristotelem Graeca et Byzantina</cell>
                     </row>
                     <row>
-                        <cell role="doi">10.1515/cfhb</cell>
-                        <cell role="issn">0589-8048</cell>
-                        <cell role="name">Corpus Fontium Historiae Byzantinae - Series
-                            Berolinensis</cell>
+                        <cell role="doi">10.1515/cagb</cell>
+                        <cell role="issn">1864-4805</cell>
+                        <cell role="name">Commentaria in Aristotelem Graeca et Byzantina</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/CFHB</cell>
@@ -396,7 +619,19 @@
                             Berolinensis</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/cfhb</cell>
+                        <cell role="issn">0589-8048</cell>
+                        <cell role="name">Corpus Fontium Historiae Byzantinae - Series
+                            Berolinensis</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/CFHB-B</cell>
+                        <cell role="issn">0589-8048</cell>
+                        <cell role="name">Corpus Fontium Historiae Byzantinae - Series
+                            Berolinensis</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/cfhb-b</cell>
                         <cell role="issn">0589-8048</cell>
                         <cell role="name">Corpus Fontium Historiae Byzantinae - Series
                             Berolinensis</cell>
@@ -412,6 +647,11 @@
                             (CLGP)</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/CMG</cell>
+                        <cell role="issn">0070-0347</cell>
+                        <cell role="name">Corpus Medicorum Graecorum</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/cmg</cell>
                         <cell role="issn">0070-0347</cell>
                         <cell role="name">Corpus Medicorum Graecorum</cell>
@@ -422,12 +662,28 @@
                         <cell role="name">Corpus Medicorum Latinorum</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/CML</cell>
+                        <cell role="issn">0070-0355</cell>
+                        <cell role="name">Corpus Medicorum Latinorum</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/CR</cell>
+                        <cell role="issn">1616-1157</cell>
+                        <cell role="name">Colloquia Raurica</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/cr</cell>
                         <cell role="issn">1616-1157</cell>
                         <cell role="name">Colloquia Raurica</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/FN</cell>
+                        <cell role="issn">0934-5531</cell>
+                        <cell role="name">Frühe Neuzeit : Studien und Dokumente zur deutschen
+                            Literatur und Kultur im europäischen Kontext</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/fn</cell>
                         <cell role="issn">0934-5531</cell>
                         <cell role="name">Frühe Neuzeit : Studien und Dokumente zur deutschen
                             Literatur und Kultur im europäischen Kontext</cell>
@@ -447,7 +703,25 @@
                             N.F.</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/gfa</cell>
+                        <cell role="issn">1866-7651</cell>
+                        <cell role="name">Göttinger Forum für Altertumswissenschaft. Beihefte
+                            N.F.</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/GFAB-NF-B</cell>
+                        <cell role="issn">1866-7651</cell>
+                        <cell role="name">Göttinger Forum für Altertumswissenschaft. Beihefte
+                            N.F.</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/gfab-nf-b</cell>
+                        <cell role="issn">1866-7651</cell>
+                        <cell role="name">Göttinger Forum für Altertumswissenschaft. Beihefte
+                            N.F.</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/GFAB-NF</cell>
                         <cell role="issn">1866-7651</cell>
                         <cell role="name">Göttinger Forum für Altertumswissenschaft. Beihefte
                             N.F.</cell>
@@ -459,9 +733,19 @@
                             N.F.</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/GM</cell>
+                        <cell role="issn">2749-7089</cell>
+                        <cell role="name">Griechisches Münzwerk</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/gm</cell>
                         <cell role="issn">2749-7089</cell>
                         <cell role="name">Griechisches Münzwerk</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/HLV</cell>
+                        <cell role="issn">1861-6011</cell>
+                        <cell role="name">Hans-Lietzmann-Vorlesungen</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/hlv</cell>
@@ -474,6 +758,16 @@
                         <cell role="name">Sammlung wissenschaftlicher Commentare (SWC)</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/homer</cell>
+                        <cell role="issn">1864-3426</cell>
+                        <cell role="name">Sammlung wissenschaftlicher Commentare (SWC)</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/ICON</cell>
+                        <cell role="issn">1868-4777</cell>
+                        <cell role="name">Image &amp; Context</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/icon</cell>
                         <cell role="issn">1868-4777</cell>
                         <cell role="name">Image &amp; Context</cell>
@@ -484,9 +778,24 @@
                         <cell role="name">Image &amp; Context</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/icon-b</cell>
+                        <cell role="issn">1868-4777</cell>
+                        <cell role="name">Image &amp; Context</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/kadmos-s</cell>
                         <cell role="issn">0453-0586</cell>
                         <cell role="name">Kadmos/Supplemente</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/KADMOS-S</cell>
+                        <cell role="issn">0453-0586</cell>
+                        <cell role="name">Kadmos/Supplemente</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/KLIO-BH</cell>
+                        <cell role="issn">1438-7689</cell>
+                        <cell role="name">KLIO / Beihefte. Neue Folge</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/klio-bh</cell>
@@ -502,6 +811,11 @@
                         <cell role="name">Lectio Teubnerianae</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/MEP</cell>
+                        <cell role="issn">1868-5080</cell>
+                        <cell role="name">MythosEikonPoiesis</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/mep</cell>
                         <cell role="issn">1868-5080</cell>
                         <cell role="name">MythosEikonPoiesis</cell>
@@ -512,12 +826,36 @@
                         <cell role="name">MythosEikonPoiesis</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/mep-b</cell>
+                        <cell role="issn">1868-5080</cell>
+                        <cell role="name">MythosEikonPoiesis</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/mgs</cell>
                         <cell role="issn">2192-1296</cell>
                         <cell role="name">Militärgeschichtliche Studien</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/MGS</cell>
+                        <cell role="issn">2192-1296</cell>
+                        <cell role="name">Militärgeschichtliche Studien</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/MST</cell>
+                        <cell role="issn">1862-1139</cell>
+                        <cell role="name">Millennium-Studien / Millennium Studies : Studien zu
+                            Kultur und Geschichte des ersten Jahrtausends n. Chr. / Studies in the
+                            Culture and History of the First Millennium C.E.</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/mst</cell>
+                        <cell role="issn">1862-1139</cell>
+                        <cell role="name">Millennium-Studien / Millennium Studies : Studien zu
+                            Kultur und Geschichte des ersten Jahrtausends n. Chr. / Studies in the
+                            Culture and History of the First Millennium C.E.</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/mst-b</cell>
                         <cell role="issn">1862-1139</cell>
                         <cell role="name">Millennium-Studien / Millennium Studies : Studien zu
                             Kultur und Geschichte des ersten Jahrtausends n. Chr. / Studies in the
@@ -536,6 +874,11 @@
                         <cell role="name">Oldenbourg Grundriss der Geschichte</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/OGG</cell>
+                        <cell role="issn">2190-2976</cell>
+                        <cell role="name">Oldenbourg Grundriss der Geschichte</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/peripato</cell>
                         <cell role="issn">1862-1465</cell>
                         <cell role="name">Peripatoi</cell>
@@ -547,6 +890,12 @@
                     </row>
                     <row>
                         <cell role="doi">10.1515/phsup</cell>
+                        <cell role="issn">2199-0255</cell>
+                        <cell role="name">Philologus. Supplemente / Philologus. Supplementary
+                            Volumes</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/PHSUP</cell>
                         <cell role="issn">2199-0255</cell>
                         <cell role="name">Philologus. Supplemente / Philologus. Supplementary
                             Volumes</cell>
@@ -570,7 +919,18 @@
                             Altertumskunde</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/RGA-ERG</cell>
+                        <cell role="issn">1866-7678</cell>
+                        <cell role="name">Ergänzungsbände zum Reallexikon der Germanischen
+                            Altertumskunde</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/rgvv</cell>
+                        <cell role="issn">0939-2580</cell>
+                        <cell role="name">Religionsgeschichtliche Versuche und Vorarbeiten</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/RGVV</cell>
                         <cell role="issn">0939-2580</cell>
                         <cell role="name">Religionsgeschichtliche Versuche und Vorarbeiten</cell>
                     </row>
@@ -580,11 +940,30 @@
                         <cell role="name">Rhetorik-Forschungen</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/rhet-f</cell>
+                        <cell role="issn">0939-6462</cell>
+                        <cell role="name">Rhetorik-Forschungen</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/sagoesch</cell>
                         <cell role="name">Sammlung Göschen</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/SAGOESCH</cell>
+                        <cell role="name">Sammlung Göschen</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/saner</cell>
+                        <cell role="issn">2161-4415</cell>
+                        <cell role="name">Studies in Ancient Near Eastern Records (SANER)</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/SANER</cell>
+                        <cell role="issn">2161-4415</cell>
+                        <cell role="name">Studies in Ancient Near Eastern Records (SANER)</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/saner-b</cell>
                         <cell role="issn">2161-4415</cell>
                         <cell role="name">Studies in Ancient Near Eastern Records (SANER)</cell>
                     </row>
@@ -595,6 +974,12 @@
                     </row>
                     <row>
                         <cell role="doi">10.1515/sf</cell>
+                        <cell role="issn">1422-4445</cell>
+                        <cell role="name">Scrinium Friburgense : Veröffentlichungen des
+                            Mediävistischen Instituts der Universität Freiburg</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/SF</cell>
                         <cell role="issn">1422-4445</cell>
                         <cell role="name">Scrinium Friburgense : Veröffentlichungen des
                             Mediävistischen Instituts der Universität Freiburg</cell>
@@ -615,6 +1000,11 @@
                         <cell role="name">Sammlung griechischer und lateinischer Grammatiker</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/sglg-b</cell>
+                        <cell role="issn">1862-2372</cell>
+                        <cell role="name">Sammlung griechischer und lateinischer Grammatiker</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/SOZOMENA</cell>
                         <cell role="issn">1869-6368</cell>
                         <cell role="name">Sozomena : studies in the recovery of ancient texts</cell>
@@ -630,7 +1020,18 @@
                         <cell role="name">Supplementa Byzantina: Texte und Untersuchungen</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/SPPLYZ</cell>
+                        <cell role="issn">0933-5080</cell>
+                        <cell role="name">Supplementa Byzantina: Texte und Untersuchungen</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/stio</cell>
+                        <cell role="issn">1862-1295</cell>
+                        <cell role="name">Studien zur Geschichte und Kultur des islamischen
+                            Orients</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/STIO</cell>
                         <cell role="issn">1862-1295</cell>
                         <cell role="name">Studien zur Geschichte und Kultur des islamischen
                             Orients</cell>
@@ -642,13 +1043,30 @@
                             Judentums</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/STJ</cell>
+                        <cell role="issn">0585-5306</cell>
+                        <cell role="name">Studia Judaica : Forschungen zur Wissenschaft des
+                            Judentums</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/stmac</cell>
                         <cell role="issn">2194-976X</cell>
                         <cell role="name">Science, Technology, and Medicine in Ancient
                             Cultures</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/STMAC</cell>
+                        <cell role="issn">2194-976X</cell>
+                        <cell role="name">Science, Technology, and Medicine in Ancient
+                            Cultures</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/suf</cell>
+                        <cell role="issn">0138-3361</cell>
+                        <cell role="name">Schriften zur Ur- und Frühgeschichte</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/SUF</cell>
                         <cell role="issn">0138-3361</cell>
                         <cell role="name">Schriften zur Ur- und Frühgeschichte</cell>
                     </row>
@@ -668,6 +1086,11 @@
                         <cell role="name">Sammlung wissenschaftlicher Commentare (SWC)</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/swc-b</cell>
+                        <cell role="issn">1864-3426</cell>
+                        <cell role="name">Sammlung wissenschaftlicher Commentare (SWC)</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/TA</cell>
                         <cell role="issn">1864-5208</cell>
                         <cell role="name">Transformationen der Antike</cell>
@@ -679,6 +1102,11 @@
                     </row>
                     <row>
                         <cell role="doi">10.1515/TA-B</cell>
+                        <cell role="issn">1864-5208</cell>
+                        <cell role="name">Transformationen der Antike</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/ta-b</cell>
                         <cell role="issn">1864-5208</cell>
                         <cell role="name">Transformationen der Antike</cell>
                     </row>
@@ -698,10 +1126,27 @@
                         <cell role="name">Trends in Classics - Supplementary Volumes</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/tcsv-b</cell>
+                        <cell role="issn">1868-4785</cell>
+                        <cell role="name">Trends in Classics - Supplementary Volumes</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/TOPOI</cell>
+                        <cell role="issn">2191-5806</cell>
+                        <cell role="name">Topoi - Berlin Studies of the Ancient World/Topoi -
+                            Berliner Studien der Alten Welt</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/topoi</cell>
                         <cell role="issn">2191-5806</cell>
                         <cell role="name">Topoi - Berlin Studies of the Ancient World/Topoi -
                             Berliner Studien der Alten Welt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/TU</cell>
+                        <cell role="issn">0082-3589</cell>
+                        <cell role="name">Texte und Untersuchungen zur Geschichte der
+                            altchristlichen Literatur</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/tu</cell>
@@ -726,7 +1171,16 @@
                         <cell role="name">Sammlung Tusculum</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/TUSCULUM</cell>
+                        <cell role="name">Sammlung Tusculum</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/UALG</cell>
+                        <cell role="issn">1862-1112</cell>
+                        <cell role="name">Untersuchungen zur antiken Literatur und Geschichte</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/ualg</cell>
                         <cell role="issn">1862-1112</cell>
                         <cell role="name">Untersuchungen zur antiken Literatur und Geschichte</cell>
                     </row>
@@ -743,9 +1197,19 @@
                             Archäologie</cell>
                     </row>
                     <row>
+                        <cell role="doi">10.1515/URBS</cell>
+                        <cell role="issn">2194-4857</cell>
+                        <cell role="name">Urban Spaces</cell>
+                    </row>
+                    <row>
                         <cell role="doi">10.1515/urbs</cell>
                         <cell role="issn">2194-4857</cell>
                         <cell role="name">Urban Spaces</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1515/VF</cell>
+                        <cell role="issn">0176-6570</cell>
+                        <cell role="name">Vorgeschichtliche Forschungen</cell>
                     </row>
                     <row>
                         <cell role="doi">10.1515/vf</cell>
