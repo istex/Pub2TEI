@@ -1625,6 +1625,11 @@
                                 <profileDesc>
                                     <langUsage>
                                         <xsl:choose>
+                                            <xsl:when test="book/body/book-part/book-part-meta/book-part-id[@pub-id-type='doi']='10.1515/9783484970465.1.9'">
+                                                <language>
+                                                    <xsl:attribute name="ident">en</xsl:attribute>
+                                                </language>
+                                            </xsl:when>
                                             <xsl:when test="/book/metadata/title/@lang">
                                                 <language>
                                                     <xsl:attribute name="ident">
