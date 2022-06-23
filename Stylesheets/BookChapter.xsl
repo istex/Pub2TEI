@@ -1267,7 +1267,7 @@
                                         </note>
                                     </xsl:when>
                                     <!-- Brill-ebooks-->
-                                    <xsl:when test="//book/collection-meta">
+                                    <xsl:when test="//book/collection-meta | /book/book-series-meta">
                                         <note type="publication-type">
                                             <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
                                             <xsl:text>book-series</xsl:text>
@@ -1629,6 +1629,13 @@
                                                 <language>
                                                     <xsl:attribute name="ident">
                                                         <xsl:value-of select="translate(/book/metadata/title/@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                                    </xsl:attribute>
+                                                </language>
+                                            </xsl:when>
+                                            <xsl:when test="/book/@xml:lang">
+                                                <language>
+                                                    <xsl:attribute name="ident">
+                                                        <xsl:value-of select="translate(/book/@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                                                     </xsl:attribute>
                                                 </language>
                                             </xsl:when>
@@ -2393,7 +2400,14 @@
                         <!-- degruyter -->
                         <xsl:when test="/book/book-meta/volume[1]">
                             <biblScope unit="vol">
-                                <xsl:value-of select="substring-after(/book/book-meta/volume[1],' ')"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains(/book/book-meta/volume[1],' ')">
+                                        <xsl:value-of select="substring-after(/book/book-meta/volume[1],' ')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="/book/book-meta/volume[1]"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </biblScope>
                         </xsl:when>
                         <xsl:when test="$docIssue/book/book-meta/volume[1]">

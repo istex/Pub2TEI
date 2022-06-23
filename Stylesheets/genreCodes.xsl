@@ -141,6 +141,65 @@
                     <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
+            <xsl:when test="//body/book-part/book-part-meta/title-group/title [string-length() &gt; 0]">
+                <!-- traitement spécial Degruyter-ebooks -->
+                <xsl:choose>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Preface')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Préface')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PREFACE')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PREFACE')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PRÉFACE')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PRÉFACE LA DOMUS À MONTAILLOU ET EN HAUTE-ARIÈGE')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Introduction Générale')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Introduction')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Avant-Propos')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'AVANT-PROPOS')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'INTRODUCTION')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'INTRODUCTION ET PROGRAMME')">editorial</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Backmatter')">other</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'A. Tableaux statistiques')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Abréviations')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'ABRÉVIATIONS')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'ANNEXE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'ARCHIVES')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Avertissement')">other</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Β. Cartes')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Bibliographie')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'BIBLIOGRAPHIE')">other</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Choix et utilisation des sources')">other</xsl:when>
+                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'C. Graphiques')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Carte')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Exercices et compléments')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'GLOSSAIRE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Glossaire')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'GRAPHIQUE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'IMPRIMÉS')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Index')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'INDEX')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Liste')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Liste')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Noms des auteurs')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'NOTE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'NOTE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Plan de')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'PIÈCES JUSTIFICATIVES')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'PRINCIPAUX OUVRAGES UTILISES')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'PROGRAMME')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Quelques thèmes')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'REMERCIEMENTS')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'RÈGLES DE TRADUCTION')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Remerciements')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Repères bibliographiques')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SIGLES UTILISÉS')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Sommaire')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOMMAIRE DU TOME PREMIER')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOURCES')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOURCES')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'TABLE')">other</xsl:when>
+                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'TABLE')">other</xsl:when>
+                    <xsl:otherwise>chapter</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:otherwise>
                 <!--codeGenreIOP-->
                 <!--codeGenreSage-->
