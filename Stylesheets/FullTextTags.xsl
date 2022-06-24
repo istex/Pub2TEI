@@ -1441,6 +1441,11 @@
                     <xsl:value-of select="@location"/>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:if test="normalize-space(@filename)">
+                <xsl:attribute name="url">
+                    <xsl:value-of select="@filename"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="normalize-space(@xlink:href)">
                 <xsl:attribute name="url">
                     <xsl:value-of select="@xlink:href"/>

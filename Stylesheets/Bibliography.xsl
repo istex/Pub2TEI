@@ -1938,7 +1938,7 @@
                     <xsl:when test="patent-number">patent</xsl:when>
                     <!-- heuristiques -->
                     <xsl:when test="misc-title and contains('Report', misc-title)">report</xsl:when>
-                    <xsl:when test="misc-text and starts-with('PAT', misc-text)">patent</xsl:when>
+                    <xsl:when test="misc-text[1] and starts-with('PAT', misc-text[1])">patent</xsl:when>
                     <xsl:otherwise>misc</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
