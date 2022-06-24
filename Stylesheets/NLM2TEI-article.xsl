@@ -3666,7 +3666,7 @@
             </xsl:when>
             <xsl:when test="ancestor::book-part-meta">
                 <title level="a" type="main">
-                    <xsl:if test="@xml:lang">
+                    <xsl:if test="$codeLang">
                         <xsl:attribute name="xml:lang">
                             <xsl:value-of select="$codeLang"/>
                         </xsl:attribute>

@@ -1988,14 +1988,24 @@
                                 | misc-textr
                                 | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
                         <imprint>
-                            <xsl:apply-templates
-                                select="
+                            <xsl:choose>
+                                <xsl:when test="
                                     year
                                     | pages
                                     | publication/place
                                     | publication/publisher
-                                    | source"
-                            />
+                                    | source">
+                                    <xsl:apply-templates
+                                        select="
+                                        year
+                                        | pages
+                                        | publication/place
+                                        | publication/publisher
+                                        | source"
+                                    />
+                                </xsl:when>
+                                <xsl:otherwise><date/></xsl:otherwise>
+                            </xsl:choose>
                         </imprint>
                     </monogr>
                 </xsl:otherwise>

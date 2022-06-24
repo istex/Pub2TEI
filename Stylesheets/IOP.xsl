@@ -3933,7 +3933,7 @@
     <xsl:template match="*[ends-with(local-name(),'-ref')]/series">
         <series>
             <title type="main" level="s">
-                <xsl:value-of select="normalize-space(text())"/>
+                <xsl:value-of select="text()"/>
             </title>
             <xsl:if test="volume">
                 <biblScope unit="vol">
