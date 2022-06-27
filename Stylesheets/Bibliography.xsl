@@ -1931,14 +1931,14 @@
         <biblStruct>
 
             <!-- attribut type (pas aussi univoque que pour les autres ref) -->
-            <xsl:attribute name="type">
+         <xsl:attribute name="type">
                 <xsl:choose>
                     <!-- ne pas hésiter à ajouter d'autres tests -->
                     <xsl:when test="thesis">thesis</xsl:when>
                     <xsl:when test="patent-number">patent</xsl:when>
                     <!-- heuristiques -->
-                    <xsl:when test="misc-title and contains('Report', misc-title)">report</xsl:when>
-                    <xsl:when test="misc-text[1] and starts-with('PAT', misc-text[1])">patent</xsl:when>
+                    <xsl:when test="misc-title[2] and contains(misc-title[2],'Report')">report</xsl:when>
+                    <xsl:when test="misc-text[1] and starts-with(misc-text[1],'PAT')">patent</xsl:when>
                     <xsl:otherwise>misc</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
