@@ -1772,7 +1772,7 @@
                 
                 <!-- All authors are included here -->
                 <xsl:choose>
-                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[@contrib-type='author'][string-length()&gt; 0]">
+                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[@contrib-type='author']/name[string-length()&gt; 0]">
                         <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[@contrib-type='author']"/>
                     </xsl:when>
                     <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='editor']">
@@ -1788,7 +1788,14 @@
                         <xsl:apply-templates select="/book/citation/authorGroup/author"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:apply-templates select="book-meta/contrib-group"/>
+                        <xsl:choose>
+                            <xsl:when test="$docIssue/book/book-meta/contrib-group/contrib[@contrib-type = 'author']/name [string-length() &gt; 0]">
+                                <xsl:apply-templates select="$docIssue//book/book-meta/contrib-group/contrib[@contrib-type = 'author']"/>
+                            </xsl:when>
+                       <xsl:otherwise>
+                           <xsl:apply-templates select="book-meta/contrib-group"/>
+                       </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
                 
