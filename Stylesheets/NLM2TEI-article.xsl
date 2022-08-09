@@ -1849,22 +1849,6 @@
                 </xsl:when>
             </xsl:choose>
             <xsl:choose>
-                <!-- SG - cas quand les liens auteurs/affiliations sont définis dans <super> ex: nature_headerx_315773a0.xml -->
-                <xsl:when test="super">
-                    <xsl:for-each select="super">
-                        <!-- SG: nettoyage de la balise <super> polluant l'affiliation, ne prendre que le texte -->
-                        <xsl:variable name="super">
-                            <xsl:value-of select="normalize-space(//aff[super = current()/.]/text())"/>
-                        </xsl:variable>
-                        <xsl:choose>
-                            <xsl:when test="$super">
-                                <affiliation>
-                                    <xsl:value-of select="$super"/>
-                                </affiliation>
-                            </xsl:when>
-                        </xsl:choose>
-                    </xsl:for-each>
-                </xsl:when>
                 <!-- SG - cas quand les affiliations n'ont pas de liens auteurs/affiliations définis explicitement ex: nature_headerx_315736a0.xml -->
                 <xsl:when test="//aff/org and not(//aff/oid)">
                     <xsl:apply-templates select="aff"/>
@@ -1873,9 +1857,7 @@
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
                 <xsl:when test="../aff and not(../aff/oid)">
-                    <affiliation>
-                        <xsl:apply-templates select="following-sibling::aff"/>
-                    </affiliation>
+                    <xsl:apply-templates select="following-sibling::aff"/>
                 </xsl:when>
                <xsl:when test="../aff and not(../aff/oid)">
                     <affiliation>
@@ -1896,7 +1878,24 @@
                <xsl:when test="../aff">
                     <xsl:apply-templates select="aff"/>
                 </xsl:when>
+                <!-- SG - cas quand les liens auteurs/affiliations sont définis dans <super> ex: nature_headerx_315773a0.xml -->
+                <xsl:when test="super">
+                    <xsl:for-each select="super">
+                        <!-- SG: nettoyage de la balise <super> polluant l'affiliation, ne prendre que le texte -->
+                        <xsl:variable name="super">
+                            <xsl:value-of select="//aff[super = current()/.]/text()"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="$super">
+                                <affiliation>
+                                    <xsl:value-of select="$super"/>
+                                </affiliation>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:for-each>
+                </xsl:when>
             </xsl:choose>
+                
             <xsl:if test="aufnr/@rid">
                 <affiliation>
                     <xsl:value-of select="//aufn[@id = current()/aufnr/@rid]"/>
