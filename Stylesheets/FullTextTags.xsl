@@ -168,6 +168,7 @@
                         </div>  
                     </xsl:when>
                     <xsl:otherwise>
+                        <!--ecco-->
                         <p>
                             <xsl:if test="@id">
                                 <xsl:attribute name="xml:id">

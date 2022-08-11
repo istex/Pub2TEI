@@ -1528,20 +1528,22 @@
                                 </xsl:when>
                                 <!-- fin cup-ebooks -->
                                 <xsl:otherwise>
-                                    <div>
-                                        <xsl:choose>
-                                            <!-- ecco -->
-                                            <xsl:when test="/book/text/page/pageContent/p[string-length()&gt; 0]">
-                                                <xsl:apply-templates select="/book/text/page/pageContent/p"/>
-                                            </xsl:when>
-                                            <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                                    <xsl:choose>
+                                        <!-- ecco -->
+                                        <xsl:when test="/book/text/page/pageContent/p[string-length()&gt; 0]">
+                                            <xsl:apply-templates select="/book/text/page/pageContent/p"/>
+                                        </xsl:when>
+                                        <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                                            <div>
                                                 <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-                                            </xsl:when>
-                                            <xsl:otherwise>
+                                            </div>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <div>
                                                 <p></p>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </div>
+                                            </div>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </body>
