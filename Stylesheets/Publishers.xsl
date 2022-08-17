@@ -4,6 +4,7 @@
     xmlns:m="http://www.w3.org/1998/Math/MathML"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
+    xmlns:onix="http://ns.editeur.org/onix/3.0/reference"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
     xmlns:wiley="http://www.wiley.com/namespaces/wiley/wiley"
     xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
@@ -52,6 +53,8 @@
     <xsl:include href="Asp.xsl"/>
     <!-- SG: ajout du format Marc21XML-->
     <xsl:include href="MARC21.xsl"/>
+    <!-- SG: ajout du format Onix-->
+    <xsl:include href="Onix.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
@@ -115,6 +118,10 @@
             </xsl:when>
             <xsl:when test="asp">
                 <xsl:message>Converting a proquest TCRT chapter</xsl:message>
+            </xsl:when>
+            <!-- SG casalini -->
+            <xsl:when test="onix:ONIXMessage">
+                <xsl:message>Converting a onix chapter</xsl:message>
             </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(

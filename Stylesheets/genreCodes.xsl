@@ -9,7 +9,8 @@
     xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd"
     xmlns:tei="http://www.tei-c.org/ns/1.0" 
     xmlns:dcterms="http://purl.org/dc/terms/" 
-    xmlns:mets="http://www.loc.gov/METS/" exclude-result-prefixes="#all">
+    xmlns:mets="http://www.loc.gov/METS/"
+    xmlns:onix="http://ns.editeur.org/onix/3.0/reference" exclude-result-prefixes="#all">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> March 14, 2022</xd:p>
@@ -43,6 +44,9 @@
     <!-- genre dans titre -->
     <xsl:variable name="deduceGenreFromTitle">
         <xsl:value-of select="//article/front/article-meta/title-group/article-title |//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+    </xsl:variable>
+    <xsl:variable name="titleToDeduceGenreOnix">
+        <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:ContentDetail/onix:ContentItem/onix:TitleDetail/onix:TitleElement/onix:TitleText"/>
     </xsl:variable>
     <!-- code genre Elsevier-->
     <xsl:variable name="codeGenre1Elsevier">
@@ -114,6 +118,43 @@
                     <xsl:when test="contains($deduceGenreFromTitle,'Questions: Answers and comments')">other</xsl:when>
                     <xsl:when test="contains($deduceGenreFromTitle,'Editors')">other</xsl:when>
                     <xsl:when test="contains($deduceGenreFromTitle,'books and reviews')">book-reviews</xsl:when>
+                    <xsl:otherwise>chapter</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <!-- traitement spécial Casalini-torrossa-eeo -->
+            <xsl:when test="//onix:ONIXMessage">
+                <xsl:choose>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Introduc')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Presentació')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Preámbulo')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'A modo de ')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Reproducción facsimilar')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Bibliograf')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Índice')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Indice')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Autor')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Abrevia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Agradecimientos')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Advertencia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Agraïments')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Anexo')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Annex')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Biograf')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cronologia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cuadros')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Glosario')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Glossari')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Illustracions')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Índex')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Index')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Lista')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Palabras liminares')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Resum')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Salud')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Salud')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Saluta')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Sigl')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Abstract')">abstract</xsl:when>
                     <xsl:otherwise>chapter</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
