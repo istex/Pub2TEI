@@ -124,78 +124,78 @@
             <!-- traitement spécial Casalini-torrossa-eeo -->
             <xsl:when test="//onix:ONIXMessage">
                 <xsl:choose>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Introduc')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Presentació')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Preámbul')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Prólogo')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Pròleg')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Prefac')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'A modo de ')"><xsl:attribute name="type">editorial</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:attribute><xsl:text>editorial</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Reproducción facsimilar')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Bibliograf')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Índice')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Indice')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Autor')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Abrevia')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Agradecimientos')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Advertencia')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Agraïments')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Anexo')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Annex')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Biograf')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cronologia')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cuadros')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Glosario')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Glossari')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Illustracions')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Índex')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Index')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Lista')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Palabras liminares')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Resum')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Salud')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Saluta')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Sigl')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Dicionario')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Figuras')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Ilustraciones')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Los autores')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Apèndix fotogràfic')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Mapas')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Fuentes documentales')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Algunas siglas y abreviaturas')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Fuentes')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Sobre los autores')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Láminas')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Topònims i antropònims')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'In memóriam')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cálculos')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Concordancias')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Nota sobre transcripciones y abreviaturas')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Documentos y fotografías')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Nota')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Expósita')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Objectius')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Apéndices')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Palabras')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Álbum fotográfico')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cronología')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Relación de ilustraciones')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Criterios de edición de textos')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Arxius')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Nuestra edición')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Breve presentación')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Imágenes')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'La presente edición')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'A modo de epílogo')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Ficha')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Briefing in english')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Programa')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Fonts i bibliografia')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Tipología y decoración')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Presagios')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Referencias')"><xsl:attribute name="type">other</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
-                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Abstract')"><xsl:attribute name="type">abstract</xsl:attribute><xsl:attribute name="valueURI">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:attribute><xsl:text>other</xsl:text></xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Introduc')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Presentació')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Preámbul')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Prólogo')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Pròleg')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Prefac')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'A modo de ')">editorial</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Reproducción facsimilar')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Bibliograf')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Índice')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Indice')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Autor')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Abrevia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Agradecimientos')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Advertencia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Agraïments')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Anexo')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Annex')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Biograf')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cronologia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cuadros')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Glosario')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Glossari')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Illustracions')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Índex')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Index')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Lista')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Palabras liminares')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Resum')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Salud')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Saluta')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Sigl')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Dicionario')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Figuras')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Ilustraciones')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Los autores')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Apèndix fotogràfic')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Mapas')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Fuentes documentales')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Algunas siglas y abreviaturas')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Fuentes')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Sobre los autores')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Láminas')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Topònims i antropònims')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'In memóriam')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cálculos')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Concordancias')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Nota sobre transcripciones y abreviaturas')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Documentos y fotografías')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Nota')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Expósita')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Objectius')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Apéndices')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Palabras')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Álbum fotográfico')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Cronología')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Relación de ilustraciones')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Criterios de edición de textos')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Arxius')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Nuestra edición')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Breve presentación')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Imágenes')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'La presente edición')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'A modo de epílogo')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Ficha')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Briefing in english')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Programa')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Fonts i bibliografia')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Tipología y decoración')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Presagios')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Referencias')">other</xsl:when>
+                    <xsl:when test="starts-with($titleToDeduceGenreOnix,'Abstract')">abstract</xsl:when>
                     <xsl:otherwise>chapter</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
