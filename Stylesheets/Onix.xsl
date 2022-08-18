@@ -226,6 +226,7 @@
                 </fileDesc>
                 <xsl:call-template name="insertVersion"/>
                 <profileDesc>
+                    <xsl:apply-templates select="/onix:ONIXMessage/onix:Product/onix:CollateralDetail/onix:TextContent[onix:TextType='03']/onix:Text"/>
                     <xsl:if test="//onix:Product/onix:DescriptiveDetail/onix:Subject">
                         <xsl:for-each select="//onix:Product/onix:DescriptiveDetail/onix:Subject">
                             <xsl:choose>
@@ -371,6 +372,18 @@
         <pubPlace>
             <xsl:apply-templates/>
         </pubPlace>
+    </xsl:template>
+    
+    <!-- book abstract -->
+    <xsl:template match="onix:Text">
+        <abstract ana="book-abstract">
+            <xsl:attribute name="xml:lang">
+                <xsl:value-of select="$codeLang2Onix"/>
+            </xsl:attribute>
+            <p>
+                <xsl:apply-templates/>
+            </p>
+        </abstract>
     </xsl:template>
     
     <!-- book-subject -->
