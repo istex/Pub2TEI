@@ -351,6 +351,7 @@
                                 <xsl:apply-templates select="els1:item-info/ce:document-thread |els2:item-info/ce:document-thread | item-info/ce:document-thread"/>
                             </analytic>
                             <monogr>
+                                
                                 <!-- verbalisation titre série / journal -->
                                 <xsl:if test="//els1:item-info/els1:jid |//els2:item-info/els2:jid | //item-info/jid">
                                     <title type="main">
@@ -360,7 +361,13 @@
                                                 <xsl:otherwise>j</xsl:otherwise>
                                             </xsl:choose>
                                         </xsl:attribute>
-                                        <xsl:value-of select="$resultCodeTitle"/>
+                                        <xsl:choose>
+                                            <xsl:when test="$codeISSN='1095-6433'">Comparative Biochemistry and Physiology Part A: Molecular &amp; Integrative Physiology</xsl:when>
+                                            <xsl:when test="$codeISSN='0742-8413'">Comparative biochemistry and physiology. C. Comparative pharmacology and toxicology</xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="$resultCodeTitle"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </title>
                                     <title type="abbrev">
                                         <xsl:attribute name="level">
