@@ -149,17 +149,22 @@
                                             <!-- concaténation préfix + titre pour reconstitution -->
                                             <xsl:text> </xsl:text>
                                             <xsl:value-of select="normalize-space(/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:TitleWithoutPrefix)"/>
+                                            <!-- concaténation titre + sous-titre pour reconstitution -->
+                                            <xsl:if test="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:Subtitle">
+                                                <xsl:text> : </xsl:text>
+                                                <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:Subtitle"/>
+                                            </xsl:if>
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="normalize-space(/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:TitleText)"/>
+                                            <!-- concaténation titre + sous-titre pour reconstitution -->
+                                            <xsl:if test="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:Subtitle">
+                                                <xsl:text> : </xsl:text>
+                                                    <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:Subtitle"/>
+                                            </xsl:if>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </title>
-                                <xsl:if test="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:Subtitle">
-                                    <title level="m" type="sub">
-                                        <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:TitleDetail/onix:TitleElement/onix:Subtitle"/>
-                                    </title>
-                                </xsl:if>
 
                                 <!-- identifiant niveau book -->
                                 <idno>
