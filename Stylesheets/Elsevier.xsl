@@ -451,9 +451,9 @@
                                     <meeting>
                                         <xsl:if test="$docIssueEls//issue-data/title-editors-group/ce:title[string-length() &gt; 0] |$docIssueEls//s1:issue-data/s1:title-editors-group/ce:title[string-length() &gt; 0]">
                                             <xsl:for-each select="$docIssueEls//issue-data/title-editors-group/ce:title|$docIssueEls//s1:issue-data/s1:title-editors-group/ce:title">
-                                                <addName>
+                                                <title>
                                                     <xsl:value-of select="."/>
-                                                </addName>
+                                                </title>
                                             </xsl:for-each>
                                         </xsl:if>
                                         <xsl:if test="$docIssueEls//issue-data/title-editors-group/conference-info/venue[string-length() &gt; 0] | $docIssueEls//s1:issue-data/s1:title-editors-group/s1:conference-info/s1:venue[string-length() &gt; 0]">

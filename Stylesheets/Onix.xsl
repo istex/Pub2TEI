@@ -182,6 +182,8 @@
                                 </idno>
                                 <!-- auteurs -->
                                 <xsl:apply-templates select="//onix:Product/onix:DescriptiveDetail/onix:Contributor"/>
+                                <!-- conference -->
+                                <xsl:apply-templates select="//onix:Product/onix:DescriptiveDetail/onix:Conference"/>
                                 <imprint>
                                     <!-- publisher -->
                                     <xsl:apply-templates select="/onix:ONIXMessage/onix:Product/onix:PublishingDetail/onix:Publisher/onix:PublisherName"/>
@@ -253,6 +255,9 @@
                             </xsl:choose>
                         </xsl:for-each>
                     </xsl:if>
+                    <!-- keywords sous forme de nom -->
+                    <xsl:apply-templates select="//onix:Product/onix:DescriptiveDetail/onix:NameAsSubject"/>
+                    
                     <!-- language -->
                     <langUsage>
                         <language>
@@ -316,52 +321,119 @@
    
     <!-- table des auteurs -->
     <xsl:template match="onix:Contributor">
-        <author>
-            <xsl:choose>
-                <xsl:when test="parent::onix:ContentItem">
-                    <xsl:variable name="i" select="position()-1"/>
-                    <xsl:variable name="authorNumber">
+        <xsl:choose>
+            <xsl:when test="onix:ContributorRole='B01'">
+                <editor>
+                    <xsl:choose>
+                        <xsl:when test="parent::onix:DescriptiveDetail">
+                            <xsl:variable name="i" select="position()-1"/>
+                            <xsl:variable name="authorNumber">
+                                <xsl:choose>
+                                    <xsl:when test="$i &lt; 10">
+                                        <xsl:value-of select="concat('editor-000', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 100">
+                                        <xsl:value-of select="concat('editor-00', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 1000">
+                                        <xsl:value-of select="concat('editor-0', $i)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('editor-', $i)"/>
+                                    </xsl:otherwise>
+                                </xsl:choose> 
+                            </xsl:variable>
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="$authorNumber"/>
+                            </xsl:attribute> 
+                        </xsl:when>
+                    </xsl:choose>
+                    <persName>
                         <xsl:choose>
-                            <xsl:when test="$i &lt; 10">
-                                <xsl:value-of select="concat('author-000', $i)"/>
-                            </xsl:when>
-                            <xsl:when test="$i &lt; 100">
-                                <xsl:value-of select="concat('author-00', $i)"/>
-                            </xsl:when>
-                            <xsl:when test="$i &lt; 1000">
-                                <xsl:value-of select="concat('author-0', $i)"/>
+                            <xsl:when test="contains(onix:PersonNameInverted,',')">
+                                <forename type="first">
+                                    <xsl:value-of select="substring-after(onix:PersonNameInverted,', ')"/>
+                                </forename>
+                                <surname>
+                                    <xsl:value-of select="substring-before(onix:PersonNameInverted,',')"/>
+                                </surname>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="concat('author-', $i)"/>
+                                <surname>
+                                    <xsl:value-of select="onix:PersonNameInverted"/>
+                                </surname>
                             </xsl:otherwise>
-                        </xsl:choose> 
-                    </xsl:variable>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="$authorNumber"/>
-                    </xsl:attribute> 
-                </xsl:when>
-            </xsl:choose>
-            <persName>
-            <xsl:choose>
-                <xsl:when test="contains(onix:PersonNameInverted,',')">
-                    <forename type="first">
-                        <xsl:value-of select="substring-after(onix:PersonNameInverted,', ')"/>
-                    </forename>
-                    <surname>
-                        <xsl:value-of select="substring-before(onix:PersonNameInverted,',')"/>
-                    </surname>
-                </xsl:when>
-                <xsl:otherwise>
-                    <surname>
-                        <xsl:value-of select="onix:PersonNameInverted"/>
-                    </surname>
-                </xsl:otherwise>
-            </xsl:choose>
-            </persName>
-            <roleName>author</roleName>
+                        </xsl:choose>
+                    </persName>
+                    <xsl:if test="onix:ContributorRole='B01' or onix:ContributorRole='A01'">
+                        <roleName>
+                            <xsl:choose>
+                                <xsl:when test="onix:ContributorRole='B01'">editor</xsl:when>
+                                <xsl:when test="onix:ContributorRole='A01'">author</xsl:when>
+                                <xsl:otherwise>author</xsl:otherwise>                
+                            </xsl:choose>
+                        </roleName>
+                    </xsl:if>
+                </editor>
+            </xsl:when>
+            <xsl:when test="onix:ContributorRole='A01'">
+                <author>
+                    <xsl:choose>
+                        <xsl:when test="parent::onix:ContentItem">
+                            <xsl:variable name="i" select="position()-1"/>
+                            <xsl:variable name="authorNumber">
+                                <xsl:choose>
+                                    <xsl:when test="$i &lt; 10">
+                                        <xsl:value-of select="concat('author-000', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 100">
+                                        <xsl:value-of select="concat('author-00', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 1000">
+                                        <xsl:value-of select="concat('author-0', $i)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('author-', $i)"/>
+                                    </xsl:otherwise>
+                                </xsl:choose> 
+                            </xsl:variable>
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="$authorNumber"/>
+                            </xsl:attribute> 
+                        </xsl:when>
+                    </xsl:choose>
+                    <persName>
+                        <xsl:choose>
+                            <xsl:when test="contains(onix:PersonNameInverted,',')">
+                                <forename type="first">
+                                    <xsl:value-of select="substring-after(onix:PersonNameInverted,', ')"/>
+                                </forename>
+                                <surname>
+                                    <xsl:value-of select="substring-before(onix:PersonNameInverted,',')"/>
+                                </surname>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <surname>
+                                    <xsl:value-of select="onix:PersonNameInverted"/>
+                                </surname>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </persName>
+                    <roleName>author</roleName>
+                </author>
+            </xsl:when>
+            <xsl:when test="onix:ContributorRole='A02'">
+                <xsl:apply-templates select="onix:CorporateName"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="onix:CorporateName">
+        <author>
+            <name type="corporate">
+                <xsl:apply-templates/>
+            </name>
         </author>
     </xsl:template>
-    
     <!-- publisher -->
     <xsl:template match="onix:PublisherName">
         <publisher>
@@ -412,5 +484,62 @@
         <biblScope unit="vol" >
             <xsl:apply-templates/>
         </biblScope>
+    </xsl:template>
+    
+    <!-- conférence -->
+    <xsl:template match="onix:Conference">
+        <meeting>
+            <xsl:apply-templates select="onix:ConferenceName"/>
+            <xsl:apply-templates select="onix:ConferenceNumber"/>
+            <xsl:apply-templates select="onix:ConferenceDate"/>
+            <xsl:apply-templates select="onix:ConferencePlace"/>
+        </meeting>
+    </xsl:template>
+    
+    <xsl:template match="onix:ConferenceName">
+        <title>
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
+    <xsl:template match="onix:ConferenceNumber">
+        <num>
+            <xsl:apply-templates/>
+        </num>
+    </xsl:template>
+    <xsl:template match="onix:ConferenceDate">
+        <date>
+            <xsl:apply-templates/>
+        </date>
+    </xsl:template>
+    <xsl:template match="onix:ConferencePlace">
+        <placeName>
+            <xsl:variable name="nettoie">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="translate($nettoie,')','')"/>
+        </placeName>
+    </xsl:template>
+    <!-- NameAsSubject -->
+    <xsl:template match="onix:NameAsSubject">
+        <xsl:apply-templates select="onix:CorporateName"/>
+        <xsl:apply-templates select="onix:PersonName"/>
+    </xsl:template>
+    <xsl:template match="onix:PersonName">
+        <textClass ana="name-subject">
+            <keywords>
+                <term>
+                    <xsl:apply-templates/>
+                </term>
+            </keywords>
+        </textClass>
+    </xsl:template>
+    <xsl:template match="onix:CorporateName">
+        <textClass ana="corporate-subject">
+            <keywords>
+                <term>
+                <xsl:apply-templates/>
+                </term>
+            </keywords>
+        </textClass>
     </xsl:template>
 </xsl:stylesheet>
