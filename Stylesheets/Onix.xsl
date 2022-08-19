@@ -311,17 +311,22 @@
                     <!-- concaténation préfix + titre pour reconstitution -->
                     <xsl:text> </xsl:text>
                     <xsl:value-of select="normalize-space(onix:TitleWithoutPrefix)"/>
+                    <!-- concaténation titre + sous-titre pour reconstitution -->
+                    <xsl:if test="onix:Subtitle">
+                        <xsl:text> : </xsl:text>
+                        <xsl:value-of select="onix:Subtitle"/>
+                    </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="normalize-space(onix:TitleText)"/>
+                    <!-- concaténation titre + sous-titre pour reconstitution -->
+                    <xsl:if test="onix:Subtitle">
+                        <xsl:text> : </xsl:text>
+                        <xsl:value-of select="onix:Subtitle"/>
+                    </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
         </title>
-        <xsl:if test="onix:Subtitle">
-            <title level="a" type="sub">
-                <xsl:value-of select="onix:Subtitle"/>
-            </title>
-        </xsl:if>
     </xsl:template>
    
     <!-- table des auteurs -->
@@ -428,7 +433,7 @@
                 </author>
             </xsl:when>
             <xsl:when test="onix:ContributorRole='A02'">
-                <xsl:apply-templates select="onix:CorporateName"/>
+                <xsl:apply-templates select="onix:CorporateName" mode="normal"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -526,7 +531,7 @@
     </xsl:template>
     <!-- NameAsSubject -->
     <xsl:template match="onix:NameAsSubject">
-        <xsl:apply-templates select="onix:CorporateName"/>
+        <xsl:apply-templates select="onix:CorporateName" mode="subject"/>
         <xsl:apply-templates select="onix:PersonName"/>
     </xsl:template>
     <xsl:template match="onix:PersonName">
@@ -538,11 +543,18 @@
             </keywords>
         </textClass>
     </xsl:template>
-    <xsl:template match="onix:CorporateName">
+    <xsl:template match="onix:CorporateName" mode="normal">
+        <author>
+            <orgName>
+                <xsl:apply-templates/>
+            </orgName>
+        </author>
+    </xsl:template>
+    <xsl:template match="onix:CorporateName" mode="subject">
         <textClass ana="corporate-subject">
             <keywords>
                 <term>
-                <xsl:apply-templates/>
+                    <xsl:apply-templates/>
                 </term>
             </keywords>
         </textClass>
