@@ -102,13 +102,8 @@
                             </xsl:otherwise>
                         </xsl:choose>
                         <!-- note editorial - physical descriptions -->
-                        <xsl:if test="/onix:ONIXMessage/onix:Product/onix:CollateralDetail/onix:TextContent/onix:Text">
-                            <xsl:for-each select="/onix:ONIXMessage/onix:Product/onix:CollateralDetail/onix:TextContent/onix:Text">
-                                <note type="physical-description">
-                                    <xsl:value-of select="."/>
-                                </note>
-                            </xsl:for-each>
-                        </xsl:if>
+                        <xsl:apply-templates select="/onix:ONIXMessage/onix:Product/onix:CollateralDetail/onix:TextContent[onix:TextType!='03']/onix:Text"/>
+                        
                     </notesStmt>
                     <sourceDesc>
                         <biblStruct type="article">
@@ -168,10 +163,6 @@
 
                                 <!-- identifiant niveau book -->
                                 <idno>
-                                    <xsl:attribute name="type">ISBN</xsl:attribute>
-                                    <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:ProductIdentifier[onix:ProductIDType='15']/onix:IDValue"/>
-                                </idno>
-                                <idno>
                                     <xsl:attribute name="type">eISBN</xsl:attribute>
                                     <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:ProductIdentifier[onix:ProductIDType='15']/onix:IDValue"/>
                                 </idno>
@@ -214,7 +205,7 @@
                                         </biblScope>
                                     </xsl:if>
                                     <biblScope unit="total-page-book">
-                                        <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:Extent/onix:ExtentValue"/>
+                                        <xsl:value-of select="/onix:ONIXMessage/onix:Product/onix:DescriptiveDetail/onix:Extent[onix:ExtentType='10']/onix:ExtentValue"/>
                                     </biblScope>
                                 </imprint>
                             </monogr>
@@ -456,16 +447,25 @@
         </pubPlace>
     </xsl:template>
     
-    <!-- book abstract -->
+    <!-- book abstract / physical description-->
     <xsl:template match="onix:Text">
-        <abstract ana="book-abstract">
-            <xsl:attribute name="xml:lang">
-                <xsl:value-of select="$codeLang2Onix"/>
-            </xsl:attribute>
-            <p>
-                <xsl:apply-templates/>
-            </p>
-        </abstract>
+       <xsl:choose>
+           <xsl:when test="parent::onix:TextContent[onix:TextType='03']">
+               <abstract ana="book-abstract">
+                   <xsl:attribute name="xml:lang">
+                       <xsl:value-of select="$codeLang2Onix"/>
+                   </xsl:attribute>
+                   <p>
+                       <xsl:apply-templates/>
+                   </p>
+               </abstract>
+           </xsl:when>
+           <xsl:otherwise>
+               <note type="physical-description">
+                   <xsl:apply-templates/>
+               </note>
+           </xsl:otherwise>
+       </xsl:choose>
     </xsl:template>
     
     <!-- book-subject -->
