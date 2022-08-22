@@ -94,7 +94,7 @@
                             </note>
                         <!-- genre niveau host-->
                         <xsl:choose>
-                            <xsl:when test="//onix:Collection and //onix:Collection/onix:TitleDetail/onix:TitleElement[onix:TitleElementLevel='02']/onix:TitleText!='Monografies'">
+                            <xsl:when test="//onix:Collection">
                                 <note type="publication-type" source="book-series" subtype="book-series" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z">book</note>
                             </xsl:when>
                             <xsl:otherwise>
@@ -219,7 +219,7 @@
                                 </imprint>
                             </monogr>
                             <!-- niveau collection -->
-                            <xsl:if test="//onix:Collection and //onix:Collection/onix:TitleDetail/onix:TitleElement[onix:TitleElementLevel='02']/onix:TitleText!='Monografies'">
+                            <xsl:if test="//onix:Collection">
                                 <series>
                                     <title level="s" type="main">
                                         <xsl:value-of select="//onix:Collection/onix:TitleDetail/onix:TitleElement[onix:TitleElementLevel='02']/onix:TitleText"/>
