@@ -3261,14 +3261,12 @@
                         <xsl:apply-templates/>
                     </xsl:when>
                     <xsl:when test="parent::alternatives">
-                        <figure>
-                            <graphic>
-                                <xsl:attribute name="url">
-                                    <xsl:value-of select="@xlink:href|@src"/>
-                                </xsl:attribute>
-                                <xsl:apply-templates/>
-                            </graphic>
-                        </figure>
+                        <graphic>
+                            <xsl:attribute name="url">
+                                <xsl:value-of select="@xlink:href|@src"/>
+                            </xsl:attribute>
+                            <xsl:apply-templates/>
+                        </graphic>
                     </xsl:when>
                     <xsl:when test="parent::named-book-part-body">
                         <figure>
