@@ -2234,11 +2234,7 @@
                         </xsl:when>
                         <xsl:when test="//citation/volumeGroup/currentVolume[string-length() &gt; 0 ] !='0'">
                             <biblScope unit="vol">
-                                <xsl:if test="//citation/volumeGroup/volumeSet/filmedVolume[string-length() &gt; 0 ]">
-                                    <xsl:value-of select="normalize-space(translate(//citation/volumeGroup/volumeSet/filmedVolume,'Volume',''))"/>
-                                    <xsl:text>-</xsl:text>
-                                </xsl:if>
-                                <xsl:value-of select="normalize-space(translate(//citation/volumeGroup/currentVolume,'Volume',''))"/>
+                                <xsl:value-of select="normalize-space(translate(//citation/volumeGroup/currentVolume[1],'Volume',''))"/>
                             </biblScope>
                         </xsl:when>
                         <xsl:otherwise>
