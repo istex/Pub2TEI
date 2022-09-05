@@ -370,12 +370,10 @@
 							<body>
 								<xsl:choose>
 									<xsl:when test="string-length($rawfulltextpath) &gt; 0">
-										<div>
-											<p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-										</div>
+										<p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
 									</xsl:when>
 									<xsl:otherwise>
-										<div><p></p></div>
+										<p></p>
 									</xsl:otherwise>
 								</xsl:choose>
 							</body>

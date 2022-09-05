@@ -328,7 +328,7 @@
                     <xsl:choose>
                         <xsl:when test="parent::onix:DescriptiveDetail">
                             <xsl:variable name="i" select="position()-1"/>
-                            <xsl:variable name="authorNumber">
+                            <xsl:variable name="editorNumber">
                                 <xsl:choose>
                                     <xsl:when test="$i &lt; 10">
                                         <xsl:value-of select="concat('editor-000', $i)"/>
@@ -345,7 +345,7 @@
                                 </xsl:choose> 
                             </xsl:variable>
                             <xsl:attribute name="xml:id">
-                                <xsl:value-of select="$authorNumber"/>
+                                <xsl:value-of select="$editorNumber"/>
                             </xsl:attribute> 
                         </xsl:when>
                     </xsl:choose>

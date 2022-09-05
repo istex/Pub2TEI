@@ -55,6 +55,8 @@
     <xsl:include href="MARC21.xsl"/>
     <!-- SG: ajout du format Onix-->
     <xsl:include href="Onix.xsl"/>
+    <!-- SG: ajout du format EEB2-->
+    <xsl:include href="EEB2.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
@@ -122,6 +124,9 @@
             <!-- SG casalini -->
             <xsl:when test="onix:ONIXMessage">
                 <xsl:message>Converting a onix chapter</xsl:message>
+            </xsl:when>
+            <xsl:when test="Record">
+                <xsl:message>Converting a EEB2_ISTEX.dtd ebooks</xsl:message>
             </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(
