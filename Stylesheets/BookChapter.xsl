@@ -1330,7 +1330,9 @@
                                                                     </xsl:attribute>
                                                                     <xsl:attribute name="scheme">#LCSH</xsl:attribute>
                                                                     <term>
-                                                                        <xsl:value-of select="normalize-space(locSubject[@subField='a'])"/>
+                                                                        <xsl:for-each select="locSubject[@subField='a']">
+                                                                            <xsl:value-of select="normalize-space(.)"/>
+                                                                        </xsl:for-each>
                                                                     </term>
                                                                 </xsl:otherwise>
                                                             </xsl:choose> 

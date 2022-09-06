@@ -37,7 +37,10 @@
     <xsl:variable name="dateEEB2">
         <xsl:choose>
             <xsl:when test="Record/AlphaPubDate='Jan 1, 1'">
-                <xsl:text>1600</xsl:text>
+                <xsl:text>1500</xsl:text>
+            </xsl:when>
+            <xsl:when test="contains(Record/AlphaPubDate,'?')">
+                <xsl:text>1500</xsl:text>
             </xsl:when>
             <xsl:when test="Record/AlphaPubDate[string-length()&gt; 0]">
                 <xsl:value-of select="Record/AlphaPubDate"/>
@@ -72,9 +75,7 @@
                         <availability>
                             <xsl:attribute name="status">restricted</xsl:attribute>
                             <licence>Proquest</licence>
-                            <p> <xsl:text>EEB2 &#169;</xsl:text>
-                                <xsl:value-of select="$dateEEB2"/>
-                                <xsl:text>, all rights reserved.</xsl:text></p>
+                            <p> <xsl:text>EEB2 &#169;, all rights reserved.</xsl:text></p>
                             <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/8Q1-XW617H8X-P">eeb2-ebooks</p>
                         </availability>
                         <date type="published" when="{$dateEEB2}"/>
