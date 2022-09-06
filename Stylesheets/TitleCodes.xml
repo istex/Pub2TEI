@@ -5275,6 +5275,11 @@
                         <cell role="code" style="elsevier">JRC</cell>
                         <cell role="name">Journal of Reproduction and Contraception</cell>
                     </row>
+                    <!-- JRANDC code supplémentaire trouvé dans années 2009-2012 -->
+                    <row>
+                        <cell role="code" style="elsevier">JRANDC</cell>
+                        <cell role="name">Journal of Reproduction and Contraception</cell>
+                    </row>
                     <row>
                         <cell role="code" style="elsevier">JRE</cell>
                         <cell role="name">Journal of Rare Earths</cell>
@@ -6742,6 +6747,10 @@
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PEDSPH</cell>
+                        <cell role="name">Pedosphere</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PEDOS</cell>
                         <cell role="name">Pedosphere</cell>
                     </row>
                     <row>
@@ -11209,8 +11218,12 @@
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CLINRE</cell>
-                        <cell role="name">Clinics and Research in Hepatology and
-                            Gastroenterology</cell>
+                        <cell role="name">Clinics and Research in Hepatology and Gastroenterology</cell>
+                    </row>
+                    <!-- GCB code supplémentaire trouvé dans années 2009-2012 -->
+                    <row>
+                        <cell role="code" style="elsevier">GCB</cell>
+                        <cell role="name">Clinics and Research in Hepatology and Gastroenterology</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">COMPTC</cell>
