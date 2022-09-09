@@ -255,7 +255,8 @@
                     <persName>
                         <xsl:apply-templates select="FirstName"/>
                         <xsl:apply-templates select="MiddleName"/>
-                        <xsl:apply-templates select="LastName"/> 
+                        <xsl:apply-templates select="LastName"/>
+                        <xsl:apply-templates select="PersonTitle"/>
                         <xsl:apply-templates select="OriginalForm" mode="lastName"/>
                         <xsl:apply-templates select="ContribRole"/>
                     </persName>
@@ -303,10 +304,12 @@
                                 <xsl:apply-templates select="FirstName"/>
                                 <xsl:apply-templates select="MiddleName"/>
                                 <xsl:apply-templates select="LastName"/>
+                                <xsl:apply-templates select="PersonTitle"/>
                                 <xsl:apply-templates select="ContribRole"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:apply-templates select="PersonName"/>
+                                <xsl:apply-templates select="PersonTitle"/>
                                 <xsl:apply-templates select="ContribRole"/>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -342,6 +345,7 @@
                         <xsl:apply-templates select="FirstName"/>
                         <xsl:apply-templates select="MiddleName"/>
                         <xsl:apply-templates select="LastName"/> 
+                        <xsl:apply-templates select="PersonTitle"/>
                         <xsl:apply-templates select="OriginalForm" mode="lastName"/>
                         <xsl:apply-templates select="ContribRole"/>
                     </persName>
@@ -377,10 +381,12 @@
                                 <xsl:apply-templates select="FirstName"/>
                                 <xsl:apply-templates select="MiddleName"/>
                                 <xsl:apply-templates select="LastName"/>
+                                <xsl:apply-templates select="PersonTitle"/>
                                 <xsl:apply-templates select="ContribRole"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:apply-templates select="PersonName"/>
+                                <xsl:apply-templates select="PersonTitle"/>
                                 <xsl:apply-templates select="ContribRole"/>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -406,6 +412,11 @@
         <surname>
             <xsl:apply-templates/>
         </surname>
+    </xsl:template>
+    <xsl:template match="PersonTitle">
+        <state type="biography">
+            <desc><xsl:apply-templates/></desc>
+        </state>
     </xsl:template>
     <xsl:template match="OriginalForm" mode="lastName">
         <xsl:if test="contains(.,'1')">
