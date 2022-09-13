@@ -114,7 +114,7 @@
                                 <!-- ident interne du book-->
                                 <xsl:if test="RecordID[string-length()&gt; 0]">
                                     <idno>
-                                        <xsl:attribute name="type">recordID</xsl:attribute>
+                                        <xsl:attribute name="type">BookID</xsl:attribute>
                                         <xsl:value-of select="RecordID"/>
                                     </idno>
                                 </xsl:if>
@@ -402,11 +402,6 @@
                 <xsl:apply-templates/>
             </name>
         </author>
-    </xsl:template>
-    <xsl:template match="MiddleName">
-        <forename type="middle">
-            <xsl:apply-templates/>
-        </forename>
     </xsl:template>
     <xsl:template match="PersonName">
         <surname>
