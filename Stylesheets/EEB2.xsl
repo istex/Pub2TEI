@@ -247,6 +247,28 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="contains(LastName,'Anonymous')"/>
+            <xsl:when test="contains(.,'Tubini, Antonio &amp; Ghirlandi, Andrea')">
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Antonio</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Tubini</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Andrea</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Ghirlandi</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+            </xsl:when>
             <xsl:when test="LastName[string-length()&gt; 0]">
                 <author>
                     <xsl:attribute name="xml:id">
@@ -426,14 +448,6 @@
     </xsl:template>
     <xsl:template match="OriginalForm" mode="lastNameNull">
         <xsl:choose>
-            <xsl:when test="contains(.,'Tubini, Antonio &amp; Ghirlandi, Andrea')">
-                <orgName>
-                    <xsl:text>Antonio Tubini &amp; Andrea Ghirlandi</xsl:text>
-                </orgName>
-                <note>
-                    <xsl:apply-templates/>
-                </note>
-            </xsl:when>
             <xsl:when test="contains(.,'Albertus, Magnus, Saint, 1193-1280')">
                 <surname>Saint Albertus Magnus</surname>
                 <date>
