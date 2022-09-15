@@ -5,10 +5,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:m="http://www.w3.org/1998/Math/MathML" 
-    xmlns:tei="http://www.tei-c.org/ns/1.0" 
-    xmlns:dcterms="http://purl.org/dc/terms/" 
-    xmlns:mets="http://www.loc.gov/METS/"
-    xmlns:onix="http://ns.editeur.org/onix/3.0/reference"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"  
     exclude-result-prefixes="#all">
     
     <xsl:output encoding="UTF-8" method="xml"/>
@@ -28,9 +25,13 @@
     <xsl:variable name="codeLangEEB2Translate">
         <xsl:choose>
             <xsl:when test="normalize-space($codeLangEEB2)='dan'">da</xsl:when>
-            <xsl:when test="normalize-space($codeLangEEB2)='grc'"/>
+            <xsl:when test="normalize-space($codeLangEEB2)='grc'">el</xsl:when>
+            <xsl:when test="normalize-space($codeLangEEB2)='gre'">el</xsl:when>
             <xsl:when test="normalize-space($codeLangEEB2)='lat'">la</xsl:when>
             <xsl:when test="normalize-space($codeLangEEB2)='ita'">it</xsl:when>
+            <xsl:when test="normalize-space($codeLangEEB2)='ger'">de</xsl:when>
+            <xsl:when test="normalize-space($codeLangEEB2)='fre'">fr</xsl:when>
+            <xsl:when test="normalize-space($codeLangEEB2)='heb'">he</xsl:when>
         </xsl:choose>
     </xsl:variable>
     
@@ -41,6 +42,9 @@
             </xsl:when>
             <xsl:when test="contains(Record/AlphaPubDate,'?')">
                 <xsl:text>1500</xsl:text>
+            </xsl:when>
+            <xsl:when test="contains(Record/AlphaPubDate,'[s.d.]')">
+                <xsl:value-of select="Record/NumericPubDate"/>
             </xsl:when>
             <xsl:when test="Record/AlphaPubDate[string-length()&gt; 0]">
                 <xsl:value-of select="Record/AlphaPubDate"/>
@@ -65,6 +69,11 @@
                     <titleStmt>
                         <xsl:apply-templates select="RecordTitle" mode="primaire"/>
                     </titleStmt>
+                    <editionStmt>
+                        <edition>
+                            <xsl:value-of select="Publication/Title"/>
+                        </edition>
+                    </editionStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <!-- publisher -->
@@ -84,9 +93,11 @@
                         <note type="content-type" source="book" subtype="book" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T">book</note>
                         <!-- genre niveau host-->
                         <note type="publication-type" source="book" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
-                        <!-- note editorial - physical descriptions -->
-                        <xsl:apply-templates select="/onix:ONIXMessage/onix:Product/onix:CollateralDetail/onix:TextContent[onix:TextType!='03']/onix:Text"/>
-                        
+                        <xsl:if test="Pagination[string-length() &gt; 0 ]">
+                            <note type="pagination">
+                                <xsl:value-of select="Pagination"/>
+                            </note>
+                        </xsl:if>
                     </notesStmt>
                     <sourceDesc>
                         <biblStruct type="article">
@@ -138,7 +149,7 @@
                                 </xsl:if>
                                 <xsl:if test="URLDocView[string-length()&gt; 0]">
                                     <idno>
-                                        <xsl:attribute name="type">recordID</xsl:attribute>
+                                        <xsl:attribute name="type">URL</xsl:attribute>
                                         <xsl:value-of select="URLDocView"/>
                                     </idno>
                                 </xsl:if>
@@ -150,12 +161,6 @@
                                     </publisher>
                                     <!-- date de publication -->
                                     <date type="published" when="{$dateEEB2}"/>
-                                    <!-- pagination -->
-                                    <xsl:if test="Pagination[string-length() &gt; 0 ]">
-                                        <biblScope unit="total-page-book">
-                                            <xsl:value-of select="Pagination"/>
-                                        </biblScope>
-                                    </xsl:if>
                                 </imprint>
                             </monogr>
                         </biblStruct>
@@ -247,7 +252,9 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="contains(LastName,'Anonymous')"/>
-            <xsl:when test="contains(.,'Tubini, Antonio &amp; Ghirlandi, Andrea')">
+            <xsl:when test="contains(OriginalForm,'Anon..')"/>
+            <xsl:when test="contains(.,'Tubini, Antonio &amp; Ghirlandi, Andrea')
+                or contains(OriginalForm,'Tubini, Antonio * Ghirlandi, Andrea')">
                 <author>
                     <persName>
                         <forename type="first">
@@ -265,6 +272,65 @@
                         </forename>
                         <surname>
                             <xsl:text>Ghirlandi</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+            </xsl:when>
+            <xsl:when test="contains(OriginalForm,'Canacci, Antonio &amp; Viotti, Erasmo')">
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Antonio</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Canacci</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Erasmo</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Viotti</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+            </xsl:when>
+            <xsl:when test="contains(OriginalForm,'Torresano, Girolamo &amp; fratelli')">
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Girolamo</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Torresano</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+                <author>
+                    <orgName>fratelli Torresano</orgName>
+                </author>
+            </xsl:when>
+            <xsl:when test="contains(OriginalForm,'Bonardo, Bartolomeo &amp; Grossi, Marcantonio')">
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Bartolomeo</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Bonardo</xsl:text>
+                        </surname>
+                    </persName>
+                </author>
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:text>Marcantonio</xsl:text>
+                        </forename>
+                        <surname>
+                            <xsl:text>Grossi</xsl:text>
                         </surname>
                     </persName>
                 </author>
@@ -297,9 +363,16 @@
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="$authorNumber"/>
                     </xsl:attribute>
-                    <persName>
-                        <xsl:apply-templates select="OriginalForm" mode="lastNameNull"/>
-                    </persName>
+                    <xsl:choose>
+                        <xsl:when test="contains(OriginalForm,',')">
+                            <persName>
+                                <xsl:apply-templates select="OriginalForm" mode="lastNameNull"/>
+                            </persName>
+                        </xsl:when>
+                        <xsl:otherwise>
+                                <xsl:apply-templates select="OriginalForm" mode="lastNameNull"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </author>
             </xsl:when>
             <xsl:when test="OriginalForm">
@@ -361,6 +434,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="contains(LastName,'Anonymous')"/>
+            <xsl:when test="contains(OriginalForm,'Anon..')"/>
             <xsl:when test="LastName[string-length()&gt; 0]">
                 <author>
                     <persName>
@@ -419,11 +493,23 @@
     </xsl:template>
      
     <xsl:template match="OrganizationName">
-        <author>
-            <name type="corporate">
-                <xsl:apply-templates/>
-            </name>
-        </author>
+        <xsl:choose>
+            <xsl:when test="contains(.,'Plutarch')">
+                <persName>
+                    <surname>
+                        <xsl:apply-templates/>
+                    </surname>
+                    <note>
+                        <xsl:apply-templates/>
+                    </note>
+                </persName>
+            </xsl:when>
+            <xsl:otherwise>
+                <name type="corporate">
+                    <xsl:apply-templates/>
+                </name>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="PersonName">
         <surname>
@@ -611,11 +697,687 @@
                     <xsl:text>frate Cherubino da Siena</xsl:text>
                 </surname>
                 <date>
-                    <xsl:text>1484</xsl:text>
+                    <xsl:text>-1484</xsl:text>
                 </date>
                 <note>
                     <xsl:apply-templates/>
                 </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Immanuel ben Solomon, approximately 1265-1330')">
+                <forename type="first">
+                    <xsl:text>Immanuel</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>ben Solomon</xsl:text>
+                </surname>
+                <date>
+                    <xsl:text>1265-1330</xsl:text>
+                </date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Phocylides, active 544 B.C.-541 B.C.')">
+                <surname>
+                    <xsl:text>Phocylides</xsl:text>
+                </surname>
+                <date>544 B.C.-541 B.C.</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Hervaeus Natalis, -1323')">
+                <forename type="first">
+                    <xsl:text>Hervaeus</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Natalis</xsl:text>
+                </surname>
+                <date>1323</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Petrus Mantuanus, -1400')">
+                <forename type="first">
+                    <xsl:text>Petrus</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Mantuanus</xsl:text>
+                </surname>
+                <date>1400</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'-1428 Hermann de Petra')">
+                <forename type="first">
+                    <xsl:text>Hermann</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Mantuanus</xsl:text>
+                </surname>
+                <date>1428</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Giovanni Bernardo, -1503 or 1504')">
+                <forename type="first">
+                    <xsl:text>Giovanni</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Bernardo</xsl:text>
+                </surname>
+                <date>1503</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Council of Trent, 1545-1563 (Trento, Italy)')">
+                <surname>
+                    <xsl:text>Council of Trent</xsl:text>
+                </surname>
+                <date>1545-1563</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Lucian, of Samosata')">
+                <surname>
+                    <xsl:text>Lucian of Samosata</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Callistratus, active 3rd century-4th century')">
+                <surname>
+                    <xsl:text>Callistratus</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Eusebius, of Caesarea, Bishop of Caesarea, approximately 260-approximately 340')">
+                <surname>
+                    <xsl:text>Eusebius of Caesarea</xsl:text>
+                </surname>
+                <date>260-340</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Boethius, -524')">
+                <surname>
+                    <xsl:text>Boethius</xsl:text>
+                </surname>
+                <date>-524</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Abū Maʿshar, -886')">
+                <surname>
+                    <xsl:text>Abū Maʿshar</xsl:text>
+                </surname>
+                <date>-886</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Usuard, -876 or 877')">
+                <surname>
+                    <xsl:text>Usuard</xsl:text>
+                </surname>
+                <date>-876</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Burchiello, 1404-1449')">
+                <surname>
+                    <xsl:text>Burchiello</xsl:text>
+                </surname>
+                <date>1404-1449</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'ʻAbd al-ʻAzīz Ibn ʻUthmān, -967')">
+                <surname>
+                    <xsl:text>ʻAbd al-ʻAzīz Ibn ʻUthmān</xsl:text>
+                </surname>
+                <date>-967</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Diogenes, -approximately 323 B.C')">
+                <surname>
+                    <xsl:text>Diogenes</xsl:text>
+                </surname>
+                <date>323 B.C</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Council of Constance, 1414-1418 (Konstanz, Germany)')">
+                <surname>
+                    <xsl:text>Council of Constance</xsl:text>
+                </surname>
+                <date>1414-1418</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Platina, 1421-1481')">
+                <surname>
+                    <xsl:text>Platina</xsl:text>
+                </surname>
+                <date>1421-1481</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Sabellico, 1436?-1506')">
+                <surname>
+                    <xsl:text>Sabellico</xsl:text>
+                </surname>
+                <date>1436-1506</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Senarega Matteo, 1534-1606')">
+                <forename type="first">
+                    <xsl:text>Matteo</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Senarega</xsl:text>
+                </surname>
+                <date>1534-1606</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+
+            <xsl:when test="contains(.,'Johannes Carthusiensis, active 1480')">
+                <forename type="first">
+                    <xsl:text>Johannes</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Carthusiensis</xsl:text>
+                </surname>
+                <date>1480</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Bartolommeo da li Sonetti, active 1485')">
+                <forename type="first">
+                    <xsl:text>Bartolommeo</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>da li Sonetti</xsl:text>
+                </surname>
+                <date>1485</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Prudentius, 348-')">
+                <surname>
+                    <xsl:text>Prudentius</xsl:text>
+                </surname>
+                <date>348</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Lucan, 39-65')">
+                <surname>
+                    <xsl:text>Lucan</xsl:text>
+                </surname>
+                <date>39-65</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Ovid, 43 B.C.-17 A.D. or 18 A.D.')">
+                <surname>
+                    <xsl:text>Ovid</xsl:text>
+                </surname>
+                <date>43-18 A.D.</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Sallust, 86 B.C.-34 B.C.')">
+                <surname>
+                    <xsl:text>Sallust</xsl:text>
+                </surname>
+                <date>86-34 B.C</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Athenagoras, active 2nd century')">
+                <surname>
+                    <xsl:text>Athenagoras</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Oppian, active 2nd century')">
+                <surname>
+                    <xsl:text>Oppian</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Ptolemy, active 2nd century')">
+                <surname>
+                    <xsl:text>Ptolemy</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Pomponius Porphyrio, active 3rd century')">
+                <surname>
+                    <xsl:text>Pomponius Porphyrio</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Diomedes (Grammarian), active 4th century')">
+                <surname>
+                    <xsl:text>Diomedes</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Proba, active 4th century')">
+                <surname>
+                    <xsl:text>Proba</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Servius, active 4th century')">
+                <surname>
+                    <xsl:text>Servius</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Maximianus, active 6th century')">
+                <surname>
+                    <xsl:text>Maximianus</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Priscian, active approximately 500-530')">
+                <surname>
+                    <xsl:text>Priscian</xsl:text>
+                </surname>
+                <date>500-530</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Ambrosius Catharinus, Archbishop of Conza, 1484-1553')">
+                <forename type="first">
+                    <xsl:text>Ambrosius</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Catharinus</xsl:text>
+                </surname>
+                <date>1484-1553</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Velleius Paterculus, approximately 19 B.C.-approximately 30 A.D.')">
+                <forename type="first">
+                    <xsl:text>Velleius</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:attribute name="type">family</xsl:attribute>
+                    <xsl:text>Paterculus</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Suetonius, approximately 69-122')">
+                <surname>
+                    <xsl:text>Suetonius</xsl:text>
+                </surname>
+                <date>69-122</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Lactantius, approximately 240-320')">
+                <surname>
+                    <xsl:text>Lactantius</xsl:text>
+                </surname>
+                <date>240-320</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Catholic Church. Archdiocese of Milan (Italy)')">
+                <surname>
+                    <xsl:text>Catholic Church. Archdiocese of Milan</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Confessionale [in italiano]')">
+                <surname>
+                    <xsl:text>Confessionale</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Danimarca (regno di)')">
+                <surname>
+                    <xsl:text>Danimarca</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Catholic Church. Patriarchate of Venice (Italy)')">
+                <surname>
+                    <xsl:text>Catholic Church. Patriarchate of Venice</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Catholic Church. Congregatio indicis')">
+                <surname>
+                    <xsl:text>Catholic Church. Congregatio indicis</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            
+            <xsl:when test="contains(.,'Francis, of Assisi, Saint, 1182-1226')">
+                <surname>
+                    <xsl:text>Saint Francis of Assisi</xsl:text>
+                </surname>
+                <date>1182-1226</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Alfonso X, King of Castile and Leon, 1221-1284')">
+                <surname>
+                    <xsl:text>Alfonso X</xsl:text>
+                </surname>
+                <date>1221-1284</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Appianus, of Alexandria')">
+                <surname>
+                    <xsl:text>Appianus of Alexandria</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Dioscorides Pedanius, of Anazarbos')">
+                <surname>
+                    <xsl:text>Dioscorides Pedanius of Anazarbos</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Alexander, of Aphrodisias')">
+                <surname>
+                    <xsl:text>Alexander of Aphrodisias</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Catherine, of Bologna, Saint, 1413-1463')">
+                <surname>
+                    <xsl:text>Saint Catherine of Bologna</xsl:text>
+                </surname>
+                <date>1413-1463</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Bernard, of Clairvaux, Saint, 1090 or 1091-1153')">
+                <surname>
+                    <xsl:text>Saint Bernard of Clairvaux</xsl:text>
+                </surname>
+                <date>1091-1153</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Nicomachus, of Gerasa')">
+                <surname>
+                    <xsl:text>Nicomachus of Gerasa</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Gorgias of Leontini')">
+                <surname>
+                    <xsl:text></xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Gregory, of Nyssa, Saint, approximately 335-394')">
+                <surname>
+                    <xsl:text>Saint Gregory of Nyssa</xsl:text>
+                </surname>
+                <date>335-394</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Gregory, of Nazianzus, Saint')">
+                <surname>
+                    <xsl:text>Saint Gregory of Nazianzus</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Bartholomew, of San Concordio, 1262-1347')">
+                <surname>
+                    <xsl:text>Bartholomew of San Concordio</xsl:text>
+                </surname>
+                <date>1262-1347</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Catherine, of Siena, Saint, 1347-1380')">
+                <surname>
+                    <xsl:text>Saint Catherine of Siena</xsl:text>
+                </surname>
+                <date>1347-1380</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Maurice, of Sully, Bishop of Paris, approximately 1120-1196')">
+                <surname>
+                    <xsl:text>Maurice of Sully</xsl:text>
+                </surname>
+                <date>1120-1196</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Cebes, of Thebes')">
+                <surname>
+                    <xsl:text>Cebes of Thebes</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Antoninus, Saint, Archbishop of Florence, 1389-1459')">
+                <surname>
+                    <xsl:text>Saint Antoninus</xsl:text>
+                </surname>
+                <date>1389-1459</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="starts-with(.,'Rincontro a Sant')">
+                <surname>
+                    <xsl:text>Sant'Apollinare</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Phalaris, Tyrant of Agrigentum, active 6th century B.C.')">
+                <surname>
+                    <xsl:text>Phalaris</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Pliny, the Younger')">
+                <surname>
+                    <xsl:text>Pliny the Younger</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Cosmas, the Melodian, Saint, approximately 706-761')">
+                <surname>
+                    <xsl:text>Saint Cosmas</xsl:text>
+                </surname>
+                <date>706-761</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Pliny, the Elder')">
+                <surname>
+                    <xsl:text>Pliny the Elder</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Alcidamas, 4th century B.C.')">
+                <surname>
+                    <xsl:text>Alcidamas</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Libanius, 314-393')">
+                <surname>
+                    <xsl:text>Libanius</xsl:text>
+                </surname>
+                <date>314-393</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Erasmus, Desiderius, -1536')">
+                <forename type="first">
+                    <xsl:text>Desiderius</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Erasmus</xsl:text>
+                </surname>
+                <date>-1536</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Paul, the Deacon, approximately 720-799?')">
+                <surname>
+                    <xsl:text>Paul the Deacon</xsl:text>
+                </surname>
+                <date>720-799</date>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Eutropius, active 4th century')">
+                <surname>
+                    <xsl:text>Eutropius</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Sedulius, active 5th century')">
+                <surname>
+                    <xsl:text>Sedulius</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Juvencus, Gaius Vettius Aquilinus')">
+                <surname>
+                    <xsl:text>Juvencus</xsl:text>
+                </surname>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <xsl:when test="contains(.,'Benessius, Damianus -1540')">
+                <forename type="first">
+                    <xsl:text>Benessius</xsl:text>
+                </forename>
+                <surname>
+                    <xsl:text>Damianus</xsl:text>
+                </surname>
+                <date>-1540</date>
+                <description xmlns="http://www.loc.gov/mods/v3">
+                    <xsl:apply-templates/>
+                </description>
+            </xsl:when>
+            <xsl:when test="contains(.,'Prosper, of Aquitaine, Saint, approximately 390-463')">
+                <surname>
+                    <xsl:text>Saint Prosper of Aquitaine</xsl:text>
+                </surname>
+                <date>390-463</date>
+                <description xmlns="http://www.loc.gov/mods/v3">
+                    <xsl:apply-templates/>
+                </description>
             </xsl:when>
             <xsl:when test="contains(.,',')">
                 <xsl:variable name="ParseOriginalForm">
@@ -672,9 +1434,9 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <note>
+                <orgName>
                     <xsl:apply-templates/>
-                </note>
+                </orgName>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:apply-templates select="ContribRole"/>
