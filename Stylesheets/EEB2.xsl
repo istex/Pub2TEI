@@ -90,9 +90,9 @@
                         <date type="published" when="{$dateEEB2}"/>
                     </publicationStmt>
                     <notesStmt>
-                        <note type="content-type" source="book" subtype="book" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T">book</note>
+                        <note type="content-type" source="other" subtype="other" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
                         <!-- genre niveau host-->
-                        <note type="publication-type" source="book" subtype="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
+                        <note type="publication-type" source="database" subtype="database" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-NTSGR1R0-Z">database</note>
                         <xsl:if test="Pagination[string-length() &gt; 0 ]">
                             <note type="pagination">
                                 <xsl:value-of select="Pagination"/>
