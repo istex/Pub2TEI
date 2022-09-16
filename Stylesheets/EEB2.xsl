@@ -494,23 +494,26 @@
      
     <xsl:template match="OrganizationName">
         <xsl:choose>
-            <xsl:when test="contains(.,'Plutarch')">
+            <xsl:when test="starts-with(.,'Accademia della Crusca')
+                or starts-with(.,'Biblioteca')
+                or starts-with(.,'Catholic Church')
+                or starts-with(.,'Compagnia')
+                or starts-with(.,'Loggia')
+                or starts-with(.,'Museo')
+                or starts-with(.,'Presso')
+                or contains(.,'Purgatorium')
+                or contains(.,'Stamperia')
+                or contains(.,'Firenze Servi')">
+                <orgName>
+                    <xsl:apply-templates/>
+                </orgName>                
+            </xsl:when>
+            <xsl:otherwise>
                 <persName>
                     <surname>
                         <xsl:apply-templates/>
                     </surname>
-                    <note>
-                        <xsl:apply-templates/>
-                    </note>
                 </persName>
-            </xsl:when>
-            <xsl:otherwise>
-                <name type="corporate">
-                    <xsl:apply-templates/>
-                </name>
-                <note>
-                    <xsl:apply-templates/>
-                </note>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1178,9 +1181,29 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <orgName>
-                    <xsl:apply-templates/>
-                </orgName>
+                <xsl:choose>
+                    <xsl:when test="starts-with(.,'Accademia della Crusca')
+                        or starts-with(.,'Biblioteca')
+                        or starts-with(.,'Catholic Church')
+                        or starts-with(.,'Compagnia')
+                        or starts-with(.,'Loggia')
+                        or starts-with(.,'Museo')
+                        or starts-with(.,'Presso')
+                        or contains(.,'Purgatorium')
+                        or contains(.,'Stamperia')
+                        or contains(.,'Firenze Servi')">
+                        <orgName>
+                            <xsl:apply-templates/>
+                        </orgName>                
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <persName>
+                            <surname>
+                                <xsl:apply-templates/>
+                            </surname>
+                        </persName>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
         <note>
