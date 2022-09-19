@@ -80,11 +80,11 @@
                         <publisher>
                             <xsl:text>Proquest</xsl:text>
                         </publisher>
-                        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-20TNKDTW-C">Proquest</publisher>
+                        <publisher ref="https://scientific-publisher.data.istex.fr/ark:/67375/H02-RJ5JRQVP-5">Proquest</publisher>
                         <availability>
                             <xsl:attribute name="status">restricted</xsl:attribute>
                             <licence>Proquest</licence>
-                            <p> <xsl:text>EEB2 &#169;, all rights reserved.</xsl:text></p>
+                            <p> <xsl:text>Proquest &#169;, all rights reserved.</xsl:text></p>
                             <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/8Q1-XW617H8X-P">eeb2</p>
                         </availability>
                         <date type="published" when="{$dateEEB2}"/>
