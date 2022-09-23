@@ -19,7 +19,7 @@
         </xd:desc>
     </xd:doc>
 
-    <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
+    <xsl:output encoding="UTF-8" method="xml"/>
 
     <!-- 
         =========================

@@ -1,6 +1,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
 	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:marc="http://www.loc.gov/MARC21/slim"  xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
-	<xsl:output encoding="UTF-8" indent="yes" method="xml"/>
+	<xsl:output encoding="UTF-8" method="xml"/>
 	<xsl:strip-space elements="*"/>
 
 	<!-- Réadaptation Stéphanie Gregorio - INIST/CNRS - FRANCE
@@ -715,7 +715,7 @@
 			</publicationStmt>
 			<!-- notesStmt -->
 			<notesStmt>
-				<note type="content-type" source="other" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6">chapter</note>
+				<note type="content-type" source="other" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
 				<note type="publication-type" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-NTSGR1R0-Z">database</note>
 				<xsl:if test="substring($controlField008,26,1)='d'">
 					<note type="globe" source="globe" scheme="#marcgt">globe</note>
@@ -1733,7 +1733,11 @@
 								<xsl:value-of select="normalize-space(substring-after(marc:subfield[@code='a'], '(OCoLC)'))"/>
 							</idno>
 						</xsl:for-each>
-						
+						<xsl:if test="marc:datafield[@tag='856'][1]/marc:subfield[@code='u']">
+							<idno type="BookID">
+							<xsl:value-of select="substring-after(marc:datafield[@tag='856'][1]/marc:subfield[@code='u'],'https://search.proquest.com/docview/')"/>
+							</idno>
+						</xsl:if>
 						
 						<!-- 3.5 1.95 20140421 -->
 						<xsl:for-each select="marc:datafield[@tag='035'][marc:subfield[@code='a'][contains(text(), '(WlCaITV)')]]">
@@ -1921,47 +1925,7 @@
 							</title>
 						</series>
 					</xsl:for-each>
-					<xsl:for-each select="marc:datafield[@tag='830']">
-						<series>
-							<title level="s" type="main">
-								<xsl:call-template name="chopPunctuation">
-									<xsl:with-param name="chopString">
-										<xsl:call-template name="subfieldSelect">
-											<xsl:with-param name="codes">adfgklmorsv</xsl:with-param>
-										</xsl:call-template>
-									</xsl:with-param>
-								</xsl:call-template>
-							</title>
-						</series>
-					</xsl:for-each>
-					<xsl:for-each select="marc:datafield[@tag=800]">
-						<series>
-							<title type="main" level="s">
-								<xsl:call-template name="chopPunctuation">
-									<xsl:with-param name="chopString">
-										<xsl:call-template name="specialSubfieldSelect">
-											<xsl:with-param name="anyCodes">tfklmorsv</xsl:with-param>
-											<xsl:with-param name="axis">t</xsl:with-param>
-											<xsl:with-param name="afterCodes">g</xsl:with-param>
-										</xsl:call-template>
-									</xsl:with-param>
-								</xsl:call-template>
-							</title>
-							<editor>
-								<persName>
-									<xsl:call-template name="chopPunctuation">
-										<xsl:with-param name="chopString">
-											<xsl:call-template name="specialSubfieldSelect">
-												<xsl:with-param name="anyCodes">aq</xsl:with-param>
-												<xsl:with-param name="axis">t</xsl:with-param>
-												<xsl:with-param name="beforeCodes">g</xsl:with-param>
-											</xsl:call-template>
-										</xsl:with-param>
-									</xsl:call-template>
-								</persName>
-							</editor>
-						</series>
-					</xsl:for-each>
+					
 					
 					<xsl:for-each select="marc:datafield[@tag=810]">
 						<series>
@@ -1990,6 +1954,19 @@
 									</xsl:for-each>
 								</persName>
 							</editor>
+						</series>
+					</xsl:for-each>
+					<xsl:for-each select="marc:datafield[@tag=317][1]">
+						<series>
+							<title type="main" level="s">
+								<xsl:call-template name="chopPunctuation">
+									<xsl:with-param name="chopString">
+										<xsl:call-template name="specialSubfieldSelect">
+											<xsl:with-param name="anyCodes">a</xsl:with-param>
+										</xsl:call-template>
+									</xsl:with-param>
+								</xsl:call-template>
+							</title>
 						</series>
 					</xsl:for-each>
 				</biblStruct>
@@ -2073,6 +2050,30 @@
 			</xsl:for-each>
 			<xsl:for-each select="marc:datafield[@tag='086']">
 				<xsl:call-template name="createClassificationFrom086"/>
+			</xsl:for-each>
+			<xsl:for-each select="marc:datafield[@tag=606]">
+				<textClass>
+					<classCode scheme="#rameau">
+						<xsl:value-of select="marc:subfield[@code='3']"/>
+					</classCode>
+					<keywords scheme="#rameau">
+						<term>
+							<xsl:value-of select="marc:subfield[@code='a']"/>
+						</term>
+					</keywords>
+				</textClass>
+			</xsl:for-each>
+			<xsl:for-each select="marc:datafield[@tag=608]">
+				<textClass>
+					<classCode scheme="#rameau">
+						<xsl:value-of select="marc:subfield[@code='3']"/>
+					</classCode>
+					<keywords scheme="#rameau">
+						<term>
+							<xsl:value-of select="marc:subfield[@code='a']"/>
+						</term>
+					</keywords>
+				</textClass>
 			</xsl:for-each>
 			
 			<!-- language -->
@@ -3955,7 +3956,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	<!-- classification 050 060 080 082 084 086 -->
+	<!-- classification 050 060 080 082 084 086 606-->
 
 	<xsl:template name="createClassificationFrom050">
 		<xsl:for-each select="marc:subfield[@code='b']">
