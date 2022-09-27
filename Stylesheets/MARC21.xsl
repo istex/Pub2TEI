@@ -2224,7 +2224,7 @@
 					</forename>
 				</xsl:if>
 				<surname>
-					<xsl:value-of select="normalize-space(concat(marc:subfield[@code='c'],' ',$splitName))"/>
+					<xsl:value-of select="normalize-space(concat(marc:subfield[@code='c'][1],' ',$splitName))"/>
 				</surname>
 			</xsl:otherwise>
 		</xsl:choose>
