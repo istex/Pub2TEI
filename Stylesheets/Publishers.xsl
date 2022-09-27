@@ -11,8 +11,8 @@
     <!-- ajout déclaration schema ODD-ISTEX -->
     
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
-    <xsl:param name="xslversion">3.2.5</xsl:param>
-    <xsl:param name="releasedate">2022-09-23</xsl:param>
+    <xsl:param name="xslversion">3.2.6</xsl:param>
+    <xsl:param name="releasedate">2022-09-27</xsl:param>
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
