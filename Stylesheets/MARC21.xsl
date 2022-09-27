@@ -464,6 +464,13 @@
 				<xsl:when test="//marc:controlfield[@tag=001]='ocm99888822e '">
 					<xsl:text>1690</xsl:text>
 				</xsl:when>
+				<xsl:when test="normalize-space(/marc:collection/marc:record/marc:datafield[@tag='455']/marc:subfield[@code='d'][string-length()&gt; 0])">
+					<xsl:value-of select="normalize-space(/marc:collection/marc:record/marc:datafield[@tag='455']/marc:subfield[@code='d'])"/>
+				</xsl:when>
+				<xsl:when test="contains(normalize-space(/marc:collection/marc:record/marc:datafield[@tag='325']/marc:subfield[@code='a']),'[s.d.]') or contains(normalize-space(/marc:collection/marc:record/marc:datafield[@tag='325']/marc:subfield[@code='a']),'[Date inconnue]')">1500</xsl:when>
+				<xsl:when test="normalize-space(/marc:collection/marc:record/marc:datafield[@tag='325']/marc:subfield[@code='a'])[string-length()&gt; 0]">
+					<xsl:value-of select="substring-after(normalize-space(/marc:collection/marc:record/marc:datafield[@tag='325']/marc:subfield[@code='a']),'. ')"/>
+				</xsl:when>
 				<xsl:otherwise>
 					<!-- tmee 1.35 1.36 dateIssued/nonMSS vs dateCreated/MSS -->
 					<xsl:choose>
@@ -2197,6 +2204,11 @@
 			</xsl:call-template>
 		</xsl:variable>
 		<xsl:choose>
+			<xsl:when test="marc:subfield[@code='d']">
+				<surname>
+					<xsl:value-of select="concat(marc:subfield[@code='c'],' ',marc:subfield[@code='a'],' ',marc:subfield[@code='d']) "/>
+				</surname>
+			</xsl:when>
 			<xsl:when test="contains($splitName,',')">
 				<forename type="first">
 					<xsl:value-of select="substring-after($splitName,', ')"/>
@@ -2212,7 +2224,7 @@
 					</forename>
 				</xsl:if>
 				<surname>
-					<xsl:value-of select="$splitName"/>
+					<xsl:value-of select="normalize-space(concat(marc:subfield[@code='c'],' ',$splitName))"/>
 				</surname>
 			</xsl:otherwise>
 		</xsl:choose>
