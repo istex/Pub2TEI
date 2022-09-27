@@ -1859,7 +1859,7 @@
 								</pubPlace>
 							</xsl:for-each>
 							<pubPlace>
-								<xsl:value-of select="concat(marc:datafield[@tag=620]/marc:subfield[@code='d'],', ',marc:datafield[@tag=620]/marc:subfield[@code='a'])"/>
+								<xsl:value-of select="concat(marc:datafield[@tag=620][1]/marc:subfield[@code='d'],', ',marc:datafield[@tag=620]/marc:subfield[@code='a'])"/>
 							</pubPlace>
 							<xsl:for-each select="marc:datafield[@tag=260]/marc:subfield[@code='a']">
 								<pubPlace>
@@ -2099,19 +2099,7 @@
 			</affiliation>
 		</xsl:for-each>
 	</xsl:template>
-	<!-- role -->
-	<xsl:template name="role">
-		<xsl:for-each select="marc:subfield[@code='e']">
-			<roleName type="text">
-				<xsl:value-of select="."/>
-			</roleName>
-		</xsl:for-each>
-		<xsl:for-each select="marc:subfield[@code='4']">
-			<roleName type="text">
-				<xsl:value-of select="."/>
-			</roleName>
-		</xsl:for-each>
-	</xsl:template>
+	
 	<xsl:template name="relatedSubject">
 		<xsl:for-each select="marc:subfield[@code='j']">
 			<textClass>
@@ -3296,7 +3284,7 @@
 			<author>
 				<persName>
 					<xsl:call-template name="nameABCDQ"/>
-					<xsl:call-template name="role"/>
+					<roleName type="text">author</roleName>
 				</persName>
 				<xsl:call-template name="affiliation"/>
 			</author>
@@ -3306,7 +3294,7 @@
 			<author>
 				<persName>
 					<xsl:call-template name="nameABCDQ"/>
-					<xsl:call-template name="role"/>
+					<roleName type="text">author</roleName>
 				</persName>
 				<xsl:call-template name="affiliation"/>
 			</author>
@@ -3325,7 +3313,7 @@
 	<xsl:template name="createNameFrom111">
 		<name type="conference">
 			<xsl:call-template name="nameACDENQ"/>
-			<xsl:call-template name="role"/>
+			<roleName type="text">author</roleName>
 		</name>
 	</xsl:template>
 
@@ -3338,7 +3326,7 @@
 			<author>
 				<persName>
 					<xsl:call-template name="nameABCDQ"/>
-					<xsl:call-template name="role"/>
+					<roleName type="text">author</roleName>
 				</persName>
 				<xsl:if test="marc:subfield[@code='f'] !=''">
 					<date><xsl:value-of select="marc:subfield[@code='f']"/></date>
@@ -3350,7 +3338,7 @@
 			<author>
 				<persName>
 					<xsl:call-template name="nameABCDQ"/>
-					<xsl:call-template name="role"/>
+					<roleName type="text">author</roleName>
 				</persName>
 				<xsl:call-template name="affiliation"/>
 			</author>
@@ -3360,7 +3348,7 @@
 	<xsl:template name="createNameFrom710">
 		<name type="org">
 			<xsl:call-template name="nameABCDN"/>
-			<xsl:call-template name="role"/>
+			<roleName type="text">author</roleName>
 		</name>
 	</xsl:template>
 
@@ -3368,7 +3356,7 @@
 	<xsl:template name="createNameFrom711">
 		<name type="conference">
 			<xsl:call-template name="nameACDENQ"/>
-			<xsl:call-template name="role"/>
+			<roleName type="text">author</roleName>
 		</name>
 	</xsl:template>
 	
@@ -3381,7 +3369,7 @@
 				<persName>
 					<xsl:value-of select="marc:subfield[@code='a']"/>
 				</persName>
-				<xsl:call-template name="role"/>
+				<roleName type="text">author</roleName>
 			</author>
 		</xsl:if>
 	</xsl:template>
