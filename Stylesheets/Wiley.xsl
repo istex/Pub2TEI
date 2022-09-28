@@ -291,6 +291,12 @@
                         <!-- niveau article / chapter -->
                         <note type="content-type">
                             <xsl:choose>
+                                <xsl:when test="header/publicationMeta/issn[@type='print']='0931-7597'">
+                                    <xsl:attribute name="subtype">abstract</xsl:attribute>
+                                    <xsl:attribute name="source">abstract</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:attribute>
+                                    <xsl:text>abstract</xsl:text>
+                                </xsl:when>
                                 <xsl:when test="$codeGenreAll">
                                     <xsl:attribute name="subtype">
                                         <xsl:value-of select="$codeGenreIstex"/>
