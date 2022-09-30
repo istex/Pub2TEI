@@ -1572,6 +1572,10 @@
 		<xsl:for-each select="marc:datafield[@tag='700']">
 			<xsl:call-template name="createNameFrom700"/>
 		</xsl:for-each>
+						
+		<xsl:for-each select="marc:datafield[@tag='702']">
+			<xsl:call-template name="createNameFrom700"/>
+		</xsl:for-each>				
 
 		<xsl:for-each select="marc:datafield[@tag='710']">
 			<xsl:call-template name="createNameFrom710"/>
@@ -1989,6 +1993,14 @@
 							<xsl:call-template name="createNameFrom700"/>
 						</xsl:for-each>
 						
+						<xsl:for-each select="marc:datafield[@tag='701']">
+							<xsl:call-template name="createNameFrom701"/>
+						</xsl:for-each>
+						
+						<xsl:for-each select="marc:datafield[@tag='702']">
+							<xsl:call-template name="createNameFrom702"/>
+						</xsl:for-each>
+						
 						<xsl:for-each select="marc:datafield[@tag='710']">
 							<xsl:call-template name="createNameFrom710"/>
 						</xsl:for-each>
@@ -2395,7 +2407,7 @@
 					</forename>
 				</xsl:if>
 				<surname>
-					<xsl:value-of select="normalize-space(concat(marc:subfield[@code='c'][1],' ',$splitName))"/>
+					<xsl:value-of select="normalize-space($splitName)"/>
 				</surname>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -3502,10 +3514,18 @@
 
 
 
-	<!-- name 700 710 711 720 -->
+	<!-- name 700 702 710 711 720 -->
 
 	<xsl:template name="createNameFrom700">
-		<xsl:if test="@ind1='1' or @ind2='1'">
+		<xsl:choose>
+			<xsl:when test="marc:subfield[@code='a']='Catholic Church. Congregatio indicis' or marc:subfield[@code='a']='Purgatorium divi Patricii' or marc:subfield[@code='a']='Confessionale [in italiano]'">
+				<author>
+					<orgName>
+						<xsl:value-of select="marc:subfield[@code='a']"/>
+					</orgName>
+				</author>
+			</xsl:when>
+		<xsl:otherwise>
 			<author>
 				<persName>
 					<xsl:call-template name="nameABCDQ"/>
@@ -3516,16 +3536,34 @@
 				</xsl:if>
 				<xsl:call-template name="affiliation"/>
 			</author>
-		</xsl:if>
-		<xsl:if test="@ind1='3'">
-			<author>
-				<persName>
-					<xsl:call-template name="nameABCDQ"/>
-					<roleName type="text">author</roleName>
-				</persName>
-				<xsl:call-template name="affiliation"/>
-			</author>
-		</xsl:if>
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template name="createNameFrom701">
+		<author>
+			<persName>
+				<xsl:call-template name="nameABCDQ"/>
+				<roleName type="text">author</roleName>
+			</persName>
+			<xsl:if test="marc:subfield[@code='f'] !=''">
+				<date><xsl:value-of select="marc:subfield[@code='f']"/></date>
+			</xsl:if>
+			<xsl:call-template name="affiliation"/>
+		</author>
+	</xsl:template>
+	
+	<xsl:template name="createNameFrom702">
+		<author>
+			<persName>
+				<xsl:call-template name="nameABCDQ"/>
+				<roleName type="text">author</roleName>
+			</persName>
+			<xsl:if test="marc:subfield[@code='f'] !=''">
+				<date><xsl:value-of select="marc:subfield[@code='f']"/></date>
+			</xsl:if>
+			<xsl:call-template name="affiliation"/>
+		</author>
 	</xsl:template>
 	
 	<xsl:template name="createNameFrom710">
