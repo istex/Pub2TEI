@@ -469,7 +469,9 @@
     <!-- Springer: Abstract, Heading, Para -->
 	<!-- PL: this could be moved to KeywordsAbstract.xsl when generalised to all publishers -->
     <xsl:template match="abstract |rsc:abstract |trans-abstract | Abstract | els1:head/ce:abstract | els2:head/ce:abstract | head/ce:abstract | fp | abs | execsumm | websumm">
-			<abstract>
+        <!-- 09/2022 non reprise des abstracts type graphical car ce ne sont pas des résumés -->
+        <xsl:if test="not(contains(@class,'graphical'))">
+        <abstract>
 			    <!-- Karger ebooks tous les abstracts sont en anglais-->
 			    <xsl:if test="//publisher-name='S. Karger AG'">
 			        <xsl:attribute name="xml:lang">en</xsl:attribute>
@@ -542,6 +544,7 @@
 	                </xsl:otherwise>
 	            </xsl:choose>
 			</abstract>
+			</xsl:if>
     </xsl:template>
 
 
