@@ -3834,8 +3834,8 @@
             <xsl:when test="//issn[@pub-type='ppub']='0962-8436' and //article/front/article-meta/volume='347'"><date type="published">1995</date></xsl:when>
             <xsl:otherwise>
         <xsl:choose>
-            <xsl:when test="year[string-length()&gt; 0]">
-                <xsl:if test="position() = last()">
+            <xsl:when test="year!='0'">
+                <xsl:if test="not(@pub-type='epreprint')">
                     <date>
                         <xsl:choose>
                             <xsl:when test="@pub-type='ppub'">
@@ -3870,6 +3870,7 @@
             <!-- reprise pour certaines données ou year n'existe pas -->
             <xsl:when test="day[string-length()&gt; 0]">
                 <xsl:if test="position() = last()">
+                    <xsl:if test="not(@pub-type='epreprint')">
                     <date>
                         <xsl:choose>
                             <xsl:when test="@pub-type = 'epub'">
@@ -3893,6 +3894,7 @@
                         </xsl:choose>
                         <xsl:value-of select="normalize-space(day)"/>
                     </date>
+                </xsl:if>
                 </xsl:if>
             </xsl:when>
             <!-- date par défaut erreur de l'éditeur pas de date de publication -->
