@@ -125,6 +125,7 @@
 					<xsl:when test="//marc:controlfield[@tag=001]='ocm22441450e'"></xsl:when>
 					<xsl:when test="//marc:controlfield[@tag=001]='ocm22605292e'"></xsl:when>
 					<xsl:when test="//marc:controlfield[@tag=001]='ocm24146175e'"></xsl:when>
+					<xsl:when test="//marc:controlfield[@tag=001]='ocm99891770e'">en</xsl:when>
 					<xsl:when test="$controlField008-35-37='g d'">en</xsl:when>
 					<xsl:when test="$controlField008-35-37='d'">en</xsl:when>
 					<xsl:when test="$controlField008-35-37='ng'">en</xsl:when>
@@ -2065,9 +2066,9 @@
 							<!-- date -->
 							<date type="published" when="{$date}">
 								<xsl:attribute name="when">
-									<xsl:value-of select="normalize-space(translate($date,'[]',''))"/>
+									<xsl:value-of select="normalize-space(translate($date,'MDXCIVLabcdefghijklmnopqrstuvwxyz []',''))"/>
 								</xsl:attribute>
-								<xsl:value-of select="normalize-space(translate($date,'[]',''))"/>
+								<xsl:value-of select="normalize-space(translate($date,'MDXCIVLabcdefghijklmnopqrstuvwxyz []',''))"/>
 							</date>
 							<xsl:for-each select="marc:datafield[@tag=300]">
 								<biblScope unit="edition">
@@ -2170,7 +2171,7 @@
 			<xsl:if test="($controlField008-6='e' or $controlField008-6='p' or $controlField008-6='r' or $controlField008-6='s' or $controlField008-6='t') and not($leader6='d' or $leader6='f' or $leader6='p' or $leader6='t')">
 				<creation>
 					<date>
-						<xsl:value-of select="normalize-space($date)"/>
+						<xsl:value-of select="normalize-space(translate($date,'MDXCIVLabcdefghijklmnopqrstuvwxyz []',''))"/>
 					</date>
 				</creation>
 			</xsl:if>
@@ -2269,9 +2270,14 @@
 			<!-- language -->
 			<langUsage>
 				<language>
-				<xsl:attribute name="ident">
-					<xsl:value-of select="normalize-space($codeLangMarc)"/>
-				</xsl:attribute>
+					<xsl:attribute name="ident">
+						<xsl:choose>
+							<xsl:when test="$codeLangMarc='g d'">en</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$codeLangMarc"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
 				</language>
 			</langUsage>
 		</profileDesc>
@@ -3325,7 +3331,15 @@
 					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:variable>
-		<title level="a" type="main" xml:lang="{$codeLangMarc}">
+		<title level="a" type="main" xml:lang="{}">
+			<xsl:attribute name="xml:lang">
+				<xsl:choose>
+					<xsl:when test="$codeLangMarc='g d'">en</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$codeLangMarc"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
 			<xsl:value-of select="translate($titleChop,'(,),[,],/,&#34;','')"/>
 			<xsl:if test="marc:subfield[@code='b']">
 				<xsl:text> : </xsl:text>
@@ -4062,7 +4076,7 @@
 					<xsl:call-template name="chopPunctuation">
 						<xsl:with-param name="chopString">
 							<xsl:call-template name="subfieldSelect">
-								<xsl:with-param name="codes">x</xsl:with-param>
+								<xsl:with-param name="codes">xv</xsl:with-param>
 							</xsl:call-template>
 						</xsl:with-param>
 					</xsl:call-template>
