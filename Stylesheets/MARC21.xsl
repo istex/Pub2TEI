@@ -884,9 +884,9 @@
 				</availability>
 				<date type="published" when="{$date}">
 					<xsl:attribute name="when">
-						<xsl:value-of select="normalize-space($date)"/>
+						<xsl:value-of select="normalize-space(translate($date,'MDXCIVLabcdefghijklmnopqrstuvwxyz []',''))"/>
 					</xsl:attribute>
-					<xsl:value-of select="normalize-space($date)"/>
+					<xsl:value-of select="normalize-space(translate($date,'MDXCIVLabcdefghijklmnopqrstuvwxyz []',''))"/>
 				</date>
 			</publicationStmt>
 			<!-- notesStmt -->
@@ -2065,9 +2065,9 @@
 							<!-- date -->
 							<date type="published" when="{$date}">
 								<xsl:attribute name="when">
-									<xsl:value-of select="normalize-space($date)"/>
+									<xsl:value-of select="normalize-space(translate($date,'[]',''))"/>
 								</xsl:attribute>
-								<xsl:value-of select="normalize-space($date)"/>
+								<xsl:value-of select="normalize-space(translate($date,'[]',''))"/>
 							</date>
 							<xsl:for-each select="marc:datafield[@tag=300]">
 								<biblScope unit="edition">
@@ -3421,11 +3421,6 @@
 		</xsl:if>
 	</xsl:template>
 	<xsl:template name="createTitleInfoFrom246">
-			<xsl:for-each select="marc:subfield[@code='i']">
-				<xsl:attribute name="source">
-					<xsl:value-of select="text()"/>
-				</xsl:attribute>
-			</xsl:for-each>
 		<title level="a" type="alt">
 			<xsl:call-template name="chopPunctuation">
 				<xsl:with-param name="chopString">
