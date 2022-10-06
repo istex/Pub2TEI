@@ -2273,6 +2273,7 @@
 					<xsl:attribute name="ident">
 						<xsl:choose>
 							<xsl:when test="$codeLangMarc='g d'">en</xsl:when>
+							<xsl:when test="$codeLangMarc='ng '">en</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="$codeLangMarc"/>
 							</xsl:otherwise>
@@ -3331,10 +3332,11 @@
 					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:variable>
-		<title level="a" type="main" xml:lang="{}">
+		<title level="a" type="main">
 			<xsl:attribute name="xml:lang">
 				<xsl:choose>
 					<xsl:when test="$codeLangMarc='g d'">en</xsl:when>
+					<xsl:when test="$codeLangMarc='ng '">en</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="$codeLangMarc"/>
 					</xsl:otherwise>
@@ -4076,7 +4078,7 @@
 					<xsl:call-template name="chopPunctuation">
 						<xsl:with-param name="chopString">
 							<xsl:call-template name="subfieldSelect">
-								<xsl:with-param name="codes">xv</xsl:with-param>
+								<xsl:with-param name="codes">xvy</xsl:with-param>
 							</xsl:call-template>
 						</xsl:with-param>
 					</xsl:call-template>
