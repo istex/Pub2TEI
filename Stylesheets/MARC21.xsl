@@ -361,60 +361,32 @@
 			</xsl:variable>
 <!-- debut des templates -->
 	<xsl:template match="//marc:collection">
-		<xsl:choose>
-			<xsl:when test="//marc:collection">
-				<xsl:for-each select="//marc:collection/marc:record">
-					<TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
-						<xsl:attribute name="xsi:noNamespaceSchemaLocation">
-							<xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
-						</xsl:attribute>
-						<teiHeader>
-								<xsl:call-template name="marcRecord"/>
-						</teiHeader>
-						<text>
-							<body>
-								<xsl:choose>
-									<xsl:when test="string-length($rawfulltextpath) &gt; 0">
-										<p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-									</xsl:when>
-									<xsl:otherwise>
-										<p></p>
-									</xsl:otherwise>
-								</xsl:choose>
-							</body>
-						</text>
-					</TEI>
-				</xsl:for-each>
-			</xsl:when>
-			<xsl:otherwise>
-				<TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
-					<xsl:attribute name="xsi:noNamespaceSchemaLocation">
-						<xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
-					</xsl:attribute>
-					<teiHeader>
-						<fileDesc>
-							<xsl:for-each select="//marc:record">
-								<xsl:call-template name="marcRecord"/>
-							</xsl:for-each>
-						</fileDesc>
-					</teiHeader>
-					<text>
-						<body>
-							<xsl:choose>
-								<xsl:when test="string-length($rawfulltextpath) &gt; 0">
-									<div>
-										<p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-									</div>
-								</xsl:when>
-								<xsl:otherwise>
-									<div><p></p></div>
-								</xsl:otherwise>
-							</xsl:choose>
-						</body>
-					</text>
-				</TEI>
-			</xsl:otherwise>
-		</xsl:choose>
+		<TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+			<xsl:attribute name="xsi:noNamespaceSchemaLocation">
+				<xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
+			</xsl:attribute>
+			<teiHeader>
+				<fileDesc>
+					<xsl:for-each select="//marc:record">
+						<xsl:call-template name="marcRecord"/>
+					</xsl:for-each>
+				</fileDesc>
+			</teiHeader>
+			<text>
+				<body>
+					<xsl:choose>
+						<xsl:when test="string-length($rawfulltextpath) &gt; 0">
+							<div>
+								<p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
+							</div>
+						</xsl:when>
+						<xsl:otherwise>
+							<div><p></p></div>
+						</xsl:otherwise>
+					</xsl:choose>
+				</body>
+			</text>
+		</TEI>
 	</xsl:template>
 	<xsl:template name="marcRecord">
 		<xsl:variable name="leader" select="marc:leader"/>
@@ -724,7 +696,7 @@
 			
 			<xsl:variable name="dataField260c">
 				<xsl:call-template name="chopPunctuation">
-					<xsl:with-param name="chopString" select="marc:datafield[@tag=260]/marc:subfield[@code='c']"/>
+					<xsl:with-param name="chopString" select="marc:datafield[@tag=260]/marc:subfield[@code='c'][1]"/>
 				</xsl:call-template>
 			</xsl:variable>
 			
@@ -1914,7 +1886,8 @@
 								<xsl:value-of select="normalize-space(substring-after(marc:subfield[@code='a'], '(OCoLC)'))"/>
 							</idno>
 						</xsl:for-each>
-						<xsl:if test="marc:datafield[@tag='856'][1]/marc:subfield[@code='u']">
+						
+						<xsl:if test="contains(marc:datafield[@tag='856'][1]/marc:subfield[@code='u'],'https://search.proquest.com/docview/')">
 							<idno type="BookID">
 							<xsl:value-of select="substring-after(marc:datafield[@tag='856'][1]/marc:subfield[@code='u'],'https://search.proquest.com/docview/')"/>
 							</idno>
@@ -2274,6 +2247,9 @@
 						<xsl:choose>
 							<xsl:when test="$codeLangMarc='g d'">en</xsl:when>
 							<xsl:when test="$codeLangMarc='ng '">en</xsl:when>
+							<xsl:when test="$codeLangMarc='e d'">en</xsl:when>
+							<xsl:when test="$codeLangMarc='0 0'">en</xsl:when>
+							<xsl:when test="$codeLangMarc='s  '">en</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="$codeLangMarc"/>
 							</xsl:otherwise>
@@ -2396,7 +2372,7 @@
 		<xsl:choose>
 			<xsl:when test="marc:subfield[@code='d']">
 				<surname>
-					<xsl:value-of select="concat(marc:subfield[@code='c'],' ',marc:subfield[@code='a'],' ',marc:subfield[@code='d']) "/>
+					<xsl:value-of select="concat(marc:subfield[1][@code='c'],' ',marc:subfield[@code='a']) "/>
 				</surname>
 			</xsl:when>
 			<xsl:when test="contains($splitName,',')">
@@ -2440,7 +2416,7 @@
 	
 	
 	<xsl:template name="constituentOrRelatedType">
-		<xsl:if test="@ind2=2">
+		<xsl:if test="@ind2='2'">
 			<xsl:attribute name="type">constituent</xsl:attribute>
 		</xsl:if>
 	</xsl:template>
@@ -2522,28 +2498,22 @@
 		</xsl:for-each>
 	</xsl:template>
 	<xsl:template name="subjectAuthority">
-		<xsl:if test="@ind2!=4">
-			<xsl:if test="@ind2!=' '">
-				<xsl:if test="@ind2!=8">
-					<xsl:if test="@ind2!=9">
-						<xsl:attribute name="scheme">
-							<xsl:choose>
-								<xsl:when test="@ind2=0">#LCSH</xsl:when>
-								<xsl:when test="@ind2=1">#LCSHA</xsl:when>
-								<xsl:when test="@ind2=2">#MESH</xsl:when>
-								<!-- 1/04 fix -->
-								<xsl:when test="@ind2=3">#NAL</xsl:when>
-								<xsl:when test="@ind2=5">#CSH</xsl:when>
-								<xsl:when test="@ind2=6">#RVM</xsl:when>
-								<xsl:when test="@ind2=7">
-									<xsl:text>#</xsl:text>
-									<xsl:value-of select="marc:subfield[@code='2']"/>
-								</xsl:when>
-							</xsl:choose>
-						</xsl:attribute>
-					</xsl:if>
-				</xsl:if>
-			</xsl:if>
+		<xsl:if test="@ind2!='4' or @ind2!=' ' or @ind2!='8' or @ind2!=9">
+			<xsl:attribute name="scheme">
+				<xsl:choose>
+					<xsl:when test="@ind2='0'">#LCSH</xsl:when>
+					<xsl:when test="@ind2='1'">#LCSHA</xsl:when>
+					<xsl:when test="@ind2='2'">#MESH</xsl:when>
+					<!-- 1/04 fix -->
+					<xsl:when test="@ind2='3'">#NAL</xsl:when>
+					<xsl:when test="@ind2='5'">#CSH</xsl:when>
+					<xsl:when test="@ind2='6'">#RVM</xsl:when>
+					<xsl:when test="@ind2='7'">
+						<xsl:text>#</xsl:text>
+						<xsl:value-of select="marc:subfield[@code='2']"/>
+					</xsl:when>
+				</xsl:choose>
+			</xsl:attribute>
 		</xsl:if>
 	</xsl:template>
 	<xsl:template name="subjectAnyOrder">
@@ -3337,6 +3307,9 @@
 				<xsl:choose>
 					<xsl:when test="$codeLangMarc='g d'">en</xsl:when>
 					<xsl:when test="$codeLangMarc='ng '">en</xsl:when>
+					<xsl:when test="$codeLangMarc='e d'">en</xsl:when>
+					<xsl:when test="$codeLangMarc='0 0'">en</xsl:when>
+					<xsl:when test="$codeLangMarc='s  '">en</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="$codeLangMarc"/>
 					</xsl:otherwise>
@@ -3442,7 +3415,7 @@
 				<xsl:with-param name="chopString">
 					<xsl:call-template name="subfieldSelect">
 						<!-- 1/04 removed $h, $b -->
-						<xsl:with-param name="codes">af</xsl:with-param>
+						<xsl:with-param name="codes">afi</xsl:with-param>
 					</xsl:call-template>
 				</xsl:with-param>
 			</xsl:call-template>
@@ -3714,7 +3687,7 @@
 
 	<xsl:template name="createNoteFrom500">
 		<note>
-			<xsl:value-of select="normalize-space(marc:subfield[@code='a'])"/>
+			<xsl:value-of select="normalize-space(marc:subfield[1][@code='a'])"/>
 		</note>
 	</xsl:template>
 
@@ -4123,7 +4096,7 @@
 			</textClass>
 		</xsl:if>
 <!-- tmee 1.93 20140130 delete-->
-		<xsl:if test="@ind2=4">
+		<xsl:if test="@ind2='4'">
 			<textClass>
 				<keywords ana="temporal">
 					<term>
@@ -4132,7 +4105,7 @@
 				</keywords>
 			</textClass>
 		</xsl:if>
-		<xsl:if test="@ind2=5">
+		<xsl:if test="@ind2='5'">
 			<textClass>
 				<keywords ana="geographic">
 					<term>
