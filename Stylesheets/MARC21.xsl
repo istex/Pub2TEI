@@ -2372,7 +2372,7 @@
 		<xsl:choose>
 			<xsl:when test="marc:subfield[@code='d']">
 				<surname>
-					<xsl:value-of select="concat(marc:subfield[1][@code='c'],' ',marc:subfield[@code='a']) "/>
+					<xsl:value-of select="concat(marc:subfield[1][@code='c'],' ',marc:subfield[1][@code='a']) "/>
 				</surname>
 			</xsl:when>
 			<xsl:when test="contains($splitName,',')">
