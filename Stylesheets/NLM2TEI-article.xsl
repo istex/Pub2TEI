@@ -468,6 +468,11 @@
                                     <xsl:value-of select="$codeGenreIstex"/>
                                 </note>
                             </xsl:when>
+                            <xsl:when test="/article/@article-type='biography'">
+                                <note type="content-type"
+                                    source="other"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
+                            </xsl:when>
                             <xsl:when test="/article/@article-type='other' or /article/@article-type='other'">
                                 <note type="content-type"
                                     source="other"
@@ -1004,16 +1009,18 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <!-- pour sage le contenu du body non structurée est contenu dans ce champ
-                            <xsl:when test="not(body) and //custom-meta[meta-name='search-text']/meta-value [string-length() &gt; 0]">
+                            <xsl:when test="//abstract/title='TABLE DES MATIÈRES'">
                                 <body>
                                     <div>
-                                        <p>
-                                            <xsl:value-of select="//custom-meta[meta-name='search-text']/meta-value"/>
-                                        </p>
+                                        <head>
+                                            <xsl:value-of select="//abstract/title"/>
+                                        </head>
+                                        <xsl:for-each select="//abstract/p">
+                                            <p><xsl:value-of select="."/></p>
+                                        </xsl:for-each>
                                     </div>
                                 </body>
-                            </xsl:when> -->
+                            </xsl:when>
                             <xsl:when test="not(//sub-article)">
                                 <body>
                                     <div>

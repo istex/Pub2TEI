@@ -424,7 +424,12 @@
                         <langUsage>
                             <language>
                                 <xsl:attribute name="ident">
-                                    <xsl:value-of select="$codeLangue"/>
+                                    <xsl:choose>
+                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/ejic.200400619'">en</xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="$codeLangue"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:attribute>
                             </language>
                         </langUsage>
@@ -1424,6 +1429,9 @@
                             <title level= "a" type="main">
                                 <xsl:if test="@xml:lang">
                                     <xsl:choose>
+                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/ejic.200400619'">
+                                            <xsl:attribute name="xml:lang">en</xsl:attribute>
+                                        </xsl:when>
                                         <xsl:when test="//component/header/publicationMeta/issn[@type='print']='0378-5599'">
                                             <xsl:attribute name="xml:lang">fr</xsl:attribute>
                                         </xsl:when>

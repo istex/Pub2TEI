@@ -19,28 +19,6 @@
         </xd:desc>
     </xd:doc>
     
-    <!-- <note type="content-type">
-        <xsl:choose>
-             <xsl:when test="$codeGenreAll">
-                <xsl:attribute name="subtype">
-                    <xsl:value-of select="$codeGenreIstex"/>
-                 </xsl:attribute>
-                 <xsl:attribute name="source">
-                     <xsl:value-of select="normalize-space($codeGenreAll)"/>
-                 </xsl:attribute>
-                  <xsl:attribute name="scheme">
-                       <xsl:value-of select="$codeGenreArk"/>
-                   </xsl:attribute>
-                   <xsl:value-of select="$codeGenreIstex"/>
-               </xsl:when>
-               <xsl:otherwise>
-                    <xsl:attribute name="subtype">other</xsl:attribute>
-                    <xsl:attribute name="source">N/A</xsl:attribute>
-                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
-                    <xsl:text>other</xsl:text>
-               </xsl:otherwise>
-          </xsl:choose>
-    </note> -->
     <!-- genre dans titre -->
     <xsl:variable name="deduceGenreFromTitle">
         <xsl:value-of select="//article/front/article-meta/title-group/article-title |//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
@@ -55,9 +33,17 @@
     <!-- REGROUPEMENT -->
     <xsl:variable name="codeGenreAll">
         <xsl:choose>
+            <xsl:when test="//ArticleDOI='10.1007/s10528-006-9009-2'">article</xsl:when>
             <xsl:when test="//pubfm/categ/@id[string-length() &gt; 0]">
                 <xsl:value-of select="normalize-space(//pubfm/categ/@id)"/>
             </xsl:when>
+            <!-- wiley -->
+            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1002/germ.201090011'">other</xsl:when>
+            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1002/pssc.201570068'">other</xsl:when>
+            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1111/j.1095-8339.1893.tb02274a.x'">other</xsl:when>
+            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1002/jbio.200910057'">article</xsl:when>
+            <xsl:when test="//a1:component/a1:header/a1:publicationMeta/a1:issn[@type='print']='0931-7597'">abstract</xsl:when>
+            
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
             <!-- RSC ebooks -->
@@ -301,7 +287,7 @@
                     |//component/header/publicationMeta[@level='unit']/@type
                     |//book-part[not(body/book-part)]/@book-part-type
                     |//body/book-part/@book-part-type
-                    |//article/@type | //rsc:article/@type |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm
+                    |//article/@type  |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm
                     |//ArticleInfo/@ArticleType | //BookInfo/@BookProductType
                     |//Series/Book/Chapter/ChapterInfo/@ChapterType | //Series/Book/Part/Chapter/ChapterInfo/@ChapterType | //Publisher/Book/Chapter/ChapterInfo/@ChapterType | //Publisher/Book/Part/Chapter/ChapterInfo/@ChapterType
                     |//article/@article-type
@@ -316,6 +302,8 @@
     <!-- ISTEX -->
     <xsl:variable name="codeGenreIstex">
         <xsl:choose>
+            <xsl:when test="(//els1:item-info/ce:doi |//els2:item-info/ce:doi | //item-info/ce:doi)='10.1016/0168-1656(96)01385-5'">research-article</xsl:when>
+            <xsl:when test="(//els1:item-info/ce:doi |//els2:item-info/ce:doi | //item-info/ce:doi)='10.1002/adma.201570063'">other</xsl:when>
         <xsl:when test="$codeGenreAll='Announcement'">
                 <xsl:choose>
                     <xsl:when test="$codeGenreAll='Announcement' and //Abstract[string-length()&gt; 0]">article</xsl:when>

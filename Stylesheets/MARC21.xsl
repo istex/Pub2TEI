@@ -441,6 +441,9 @@
 				<xsl:when test="//marc:controlfield[@tag=001]='ocm99888822e '">
 					<xsl:text>1690</xsl:text>
 				</xsl:when>
+				<xsl:when test="//marc:controlfield[@tag=001]='ocm27954405e '">
+					<xsl:text>1676</xsl:text>
+				</xsl:when>
 				<!-- date eeb2-->
 				<xsl:when test="$zone826='2126543607' or $zone826='2126543503' or $zone826='2126543599' or $zone826='2126543775' or $zone826='2126543336' or $zone826='2126543293' or $zone826='2126543593' or $zone826='2126543656' or $zone826='2126543621' or $zone826='2126543502' or $zone826='2126543657' or $zone826='2126543723' or $zone826='2126543566' or $zone826='2126543592' or $zone826='2090363417' or $zone826='2126543493' or $zone826='2126543652' or $zone826='2126543542' or $zone826='2126543553' or $zone826='2126543488' or $zone826='2126543510' or $zone826='2126543565' or $zone826='2126543484' or $zone826='2126543726' or $zone826='2126543533' or $zone826='2126543637' or $zone826='2126543714' or $zone826='2090358698' or $zone826='2126543660' or $zone826='2126543568' or $zone826='2126543668' or $zone826='2126543481' or $zone826='2090342402' or $zone826='2090361660' or $zone826='2090362932' or $zone826='2090364680'">1455</xsl:when>
 				<xsl:when test="$zone826='2090342724' or $zone826='2090326260'">1466</xsl:when>
