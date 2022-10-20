@@ -3845,6 +3845,9 @@
                 <xsl:if test="not(@pub-type='epreprint')">
                     <date>
                         <xsl:choose>
+                            <xsl:when test="@date-type='issue-pub'">
+                                <xsl:attribute name="type">published</xsl:attribute>
+                            </xsl:when>
                             <xsl:when test="@pub-type='ppub'">
                                 <xsl:attribute name="type">published</xsl:attribute>
                             </xsl:when>

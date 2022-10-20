@@ -10,6 +10,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" 
     xmlns:dcterms="http://purl.org/dc/terms/" 
     xmlns:mets="http://www.loc.gov/METS/"
+    xmlns:wiley="http://www.wiley.com/namespaces/wiley/wiley"
     xmlns:onix="http://ns.editeur.org/onix/3.0/reference" exclude-result-prefixes="#all">
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -38,11 +39,11 @@
                 <xsl:value-of select="normalize-space(//pubfm/categ/@id)"/>
             </xsl:when>
             <!-- wiley -->
-            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1002/germ.201090011'">other</xsl:when>
-            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1002/pssc.201570068'">other</xsl:when>
-            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1111/j.1095-8339.1893.tb02274a.x'">other</xsl:when>
-            <xsl:when test="//a1:component/a1:header/a1:publicationMeta[@level='unit']/a1:doi='10.1002/jbio.200910057'">article</xsl:when>
-            <xsl:when test="//a1:component/a1:header/a1:publicationMeta/a1:issn[@type='print']='0931-7597'">abstract</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1002/germ.201090011'">other</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1002/pssc.201570068'">other</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1111/j.1095-8339.1893.tb02274a.x'">other</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1002/jbio.200910057'">article</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0931-7597'">abstract</xsl:when>
             
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
