@@ -1,412 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
-    
+    xmlns:rsc="http://www.rsc.org/schema/rscart38" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Jun. 2021</xd:p>
+            <xd:p><xd:b>Created on:</xd:b> Oct. 2022</xd:p>
             <xd:p><xd:b>Author:</xd:b> Stéphanie Gregorio</xd:p>
         </xd:desc>
     </xd:doc>
-    
-    <xsl:output encoding="UTF-8" method="xml"/>
-    <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <xsl:variable name="language">
+    <xsl:output encoding="UTF-8" method="xml" omit-xml-declaration="no"/>
+   
+   
+
+    <!-- Feuille de style ISTEX Editeur Proquest / TCRT journals
+         DTD "asp_istex.dtd" 
+        =======================================================================================
+        Auteur:  Stéphanie GREGORIO - INIST/CNRS
+        =======================================================================================
+        Version 0.1 du 13/06/2022
+     -->
+    <!-- ******************* TRAITEMENT PRINCIPAL ******************************-->
+    <xsl:variable name="bibliographicalInformationsTable" select="document('aspBibliographicalInformations.xml')"/>
+    <xsl:variable name="currentDorpID">
+        <xsl:value-of select="substring-before(//a/@href,'.pdf')"/>
+    </xsl:variable>
+    <xsl:variable name="currentTitleAsp" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='title']"/>
+    <xsl:variable name="currentProductId" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='productID']"/>
+    <xsl:variable name="currentPageCount" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='pageCount']"/>
+    <xsl:variable name="currentLanguage" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='language']"/>
+    <xsl:variable name="currentCopyright" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='copyright']"/>
+    <xsl:variable name="currentAuthor" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='author']"/>
+    <xsl:variable name="currentDate" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='date']"/>
+    <xsl:variable name="currentPublicationType" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='publicationType']"/>
+    <xsl:variable name="currentReligionGenre" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='religionGenre']"/>
+    <xsl:variable name="currentSocialSubject" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='socialSubject']"/>
+    <xsl:variable name="currentReligionDiscussed" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='religionDiscussed']"/>
+    <xsl:variable name="currentTheologicalDiscussed" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='TheologicalDiscussed']"/>
+    <xsl:variable name="currentHostTitle" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='hostTitle']"/>
+    <xsl:variable name="currentAbstract" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='abstract']"/>
+    <xsl:variable name="currentContentType" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='contentType']"/>
+    <xsl:variable name="currentPageRange" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='pageRange']"/>
+    <xsl:variable name="currentCollection" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='collection']"/>
+    <xsl:variable name="currentIdeologicalSubject" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='ideologicalSubject']"/>
+    <xsl:variable name="currentIsbn" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='isbn']"/>
+    <xsl:variable name="currentPublisher" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='publisher']"/>
+    <!-- langue du document-->
+    <xsl:variable name="langue">
+        <xsl:value-of select="asp/original_language |asp/text/original_language |$currentLanguage"/>
+    </xsl:variable>
+    <xsl:variable name="langue2">
         <xsl:choose>
-            <xsl:when test="//language_of_edition='English'">en</xsl:when>
-            <xsl:when test="//language_of_edition='German'">de</xsl:when>
-            <xsl:when test="//language_of_edition='French'">fr</xsl:when>
+            <xsl:when test="$langue='English'">en</xsl:when>
+            <xsl:when test="$langue='German'">de</xsl:when>
+            <xsl:when test="$langue='French'">fr</xsl:when>
+            <xsl:when test="$langue='Portuguese'">pt</xsl:when>
+            <xsl:when test="$langue='Spanish'">es</xsl:when>
+            <xsl:when test="$langue='Greek'">el</xsl:when>
+            <xsl:when test="$langue='Italian'">it</xsl:when>
+            <xsl:when test="$langue='Latin'">la</xsl:when>
+            <xsl:when test="$langue='Russian'">ru</xsl:when>
+            <xsl:otherwise>en</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:template match="asp">
-        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
-            <xsl:attribute name="xsi:noNamespaceSchemaLocation">
-                <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
+    <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+        <xsl:attribute name="xsi:noNamespaceSchemaLocation">
+            <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
+        </xsl:attribute>
+        <xsl:if test="language_of_edition | text/language_of_edition">
+            <xsl:attribute name="xml:lang">
+                <xsl:value-of select="$langue2"/>
             </xsl:attribute>
-            <xsl:if test="language_of_edition | text/language_of_edition">
-                <xsl:attribute name="xml:lang">
-                    <xsl:value-of select="$language"/>
-                </xsl:attribute>
-            </xsl:if>
-            <teiHeader>
-                <fileDesc>
-                    <titleStmt>
-                        <title type="main" level="a">
-                            <xsl:choose>
-                                <xsl:when test="text/div1[1]/p[@align][1][string-length() &gt; 0]">
-                                    <xsl:value-of select="normalize-space(text/div1[1]/p[@align][1])"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="real_title | text/real_title"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </title>
-                    </titleStmt>
-                    <publicationStmt>
-                        <authority>ISTEX</authority>
-                        <date type="published">
-                            <xsl:attribute name="when">
-                                <xsl:choose>
-                                    <xsl:when test="div1/publication_year[string-length() &gt; 0]| text/div1/publication_year[string-length() &gt; 0]">
-                                        <xsl:value-of select="substring-before(div1/publication_year| text/div1/publication_year,'-')"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>1900</xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:choose>
-                                <xsl:when test="div1/publication_year[string-length() &gt; 0]| text/div1/publication_year[string-length() &gt; 0]">
-                                    <xsl:value-of select="substring-before(div1/publication_year| text/div1/publication_year,'-')"/>
-                                </xsl:when>
-                                <xsl:otherwise>1900</xsl:otherwise>
-                            </xsl:choose>
-                        </date>
-                        <publisher ref="https://scientific-publisher.data.istex.fr">
-                            <xsl:choose>
-                                <xsl:when test="publisher[string-length() &gt; 0]| text/publisher[string-length() &gt; 0]">
-                                    <xsl:value-of select="publisher| text/publisher"/>
-                                </xsl:when>
-                                <xsl:otherwise>Alexander Street Press</xsl:otherwise>
-                            </xsl:choose>
-                        </publisher>
-                        <xsl:if test="publisher_place[string-length() &gt; 0]| text/publisher_place[string-length() &gt; 0]">
-                            <pubPlace>
-                                <xsl:value-of select="publisher_place| text/publisher_place"/>
-                            </pubPlace>
-                        </xsl:if>
-                            <availability status="restricted">
-                                <licence>
-                                    <p>
-                                        <xsl:choose>
-                                            <xsl:when test="copyright_message[string-length() &gt; 0]| text/copyright_message[string-length() &gt; 0]">
-                                                <xsl:value-of select="normalize-space(copyright_message| text/copyright_message)"/>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:text>Copyright © </xsl:text><xsl:value-of select="substring-before(div1/publication_year| text/div1/publication_year,'-')"/><xsl:text> Journal of the Evangelical Theological Society</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                        </p>
-                                    <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-"/>
-                                </licence>
-                            </availability>
-                    </publicationStmt>
-                    <notesStmt>
-                        <xsl:choose>
-                            <xsl:when test="not(publication_type| text/publication_type)">
-                                <note type="content-type" subtype="book" source="book" scheme="http://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T">book</note> 
-                                <note type="publication-type" subtype="book" scheme="http://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
-                            </xsl:when>
-                            <xsl:when test="(publication_type| text/publication_type)='Manuscript'">
-                                <note type="content-type" subtype="other" source="{publication_type| text/publication_type}" scheme="http://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note> 
-                                <note type="publication-type" subtype="database" scheme="http://publication-type.data.istex.fr/ark:/67375/JMC-NTSGR1R0-Z">database</note>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <note type="content-type" subtype="article" source="{publication_type| text/publication_type}" scheme="http://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D">article</note> 
-                                <note type="publication-type" subtype="journal" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-0GLKJH51-B">journal</note>
-                            </xsl:otherwise>
-                        </xsl:choose>
-
-                        
-                    </notesStmt>
-                    <sourceDesc>
-                        <biblStruct>
-                            <analytic>
-                                <!-- Title information related to the paper goes here -->
-                                <title type="main" level="a">
-                                    <xsl:choose>
-                                        <xsl:when test="text/div1[1]/p[@align][1][string-length() &gt; 0]">
-                                            <xsl:value-of select="normalize-space(text/div1[1]/p[@align][1])"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:value-of select="real_title | text/real_title"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </title>
-                                <!-- All authors are included here -->
-                                <author>
-                                    <persName>
-                                        <xsl:choose>
-                                            <xsl:when test="contains(author| text/author,'.')">
-                                                <forename type="first">
-                                                    <xsl:value-of select="substring-before(author| text/author,'. ')"/><xsl:text>.</xsl:text>
-                                                </forename>
-                                                <xsl:choose>
-                                                    <xsl:when test="contains(author| text/author,'(')">
-                                                        <surname>
-                                                            <xsl:value-of select="substring-before(substring-after(author| text/author,'. '),' (')"/>
-                                                        </surname>
-                                                        <date>
-                                                            <xsl:value-of select="substring-before(substring-after(author| text/author,'('),')')"/>
-                                                        </date>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <surname>
-                                                            <xsl:value-of select="substring-after(author| text/author,'. ')"/>
-                                                        </surname>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:when>
-                                            <xsl:when test="@author[string-length() &gt; 0]">
-                                                <forename type="first">
-                                                    <xsl:value-of select="substring-after(@author,', ')"/>
-                                                </forename>
-                                                <surname>
-                                                    <xsl:value-of select="substring-before(@author,', ')"/>
-                                                </surname>
-                                            </xsl:when>
-                                            <xsl:when test="not(contains(author| text/author,'.')) and contains(author| text/author,' ')">
-                                                <forename type="first">
-                                                    <xsl:value-of select="substring-before(author| text/author,' ')"/>
-                                                </forename>
-                                                <xsl:choose>
-                                                    <xsl:when test="contains(author| text/author,'(')">
-                                                        <surname>
-                                                            <xsl:value-of select="substring-after(substring-before(author| text/author,' ('),' ')"/>
-                                                        </surname>
-                                                        <date>
-                                                            <xsl:value-of select="substring-before(substring-after(author| text/author,'('),')')"/>
-                                                        </date>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <surname>
-                                                            <xsl:value-of select="substring-after(author| text/author,' ')"/>
-                                                        </surname>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <surname>
-                                                    <xsl:value-of select="author| text/author"/>
-                                                </surname>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                        <xsl:if test="/asp/div1/note/p[string-length() &gt; 0]| text/asp/div1/note/p[string-length() &gt; 0]">
-                                            <roleName>
-                                                <xsl:value-of select="normalize-space(/asp/div1/note/p| text//asp/div1/note/p)"/>
-                                            </roleName>
-                                        </xsl:if>
-                                    </persName>
-                                </author>
-                                <xsl:apply-templates select="div1/dorpid| text/div1/dorpid"/>
-                                <xsl:apply-templates select="div1/entity_id| text/div1/entity_id"/>
-                            </analytic>
-                            <monogr>
-                                <title type="main">
-                                    <xsl:choose>
-                                        <xsl:when test="source_title[string-length() &gt; 0]| text/source_title[string-length() &gt; 0]">
-                                            <xsl:attribute name="level">j</xsl:attribute>
-                                            <xsl:value-of select="substring-before(source_title| text/source_title,',')"/>
-                                        </xsl:when>
-                                        <xsl:when test="text/div1[1]/p[@align][1][string-length() &gt; 0]">
-                                            <xsl:attribute name="level">m</xsl:attribute>
-                                            <xsl:value-of select="normalize-space(text/div1[1]/p[@align][1])"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:attribute name="level">m</xsl:attribute>
-                                            <xsl:value-of select="real_title| text/real_title"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </title>
-                                <xsl:apply-templates select="dorpid| text/dorpid"/>
-                                <xsl:apply-templates select="entity_id| text/entity_id"/>
-                                <xsl:apply-templates select="page_count| text/page_count"/>
-                                <xsl:if test="@isbn[string-length() &gt; 0]">
-                                    <idno type="isbn">
-                                        <xsl:value-of select="@isbn"/>
-                                    </idno>
-                                </xsl:if>
-                                <xsl:if test="@lccn[string-length() &gt; 0]">
-                                    <idno type="lccn">
-                                        <xsl:value-of select="@lccn"/>
-                                    </idno>
-                                </xsl:if>
-                                <imprint>
-                                    <publisher>
-                                        <xsl:choose>
-                                            <xsl:when test="publisher[string-length() &gt; 0]| text/publisher[string-length() &gt; 0]">
-                                                <xsl:value-of select="publisher| text/publisher"/>
-                                            </xsl:when>
-                                            <xsl:otherwise>Alexander Street Press</xsl:otherwise>
-                                        </xsl:choose>
-                                    </publisher>
-                                    <xsl:if test="publisher_place[string-length() &gt; 0]| text/publisher_place[string-length() &gt; 0]">
-                                        <pubPlace>
-                                            <xsl:value-of select="publisher_place| text/publisher_place"/>
-                                        </pubPlace>
-                                    </xsl:if>
-                                        <date>
-                                            <xsl:attribute name="when">
-                                                <xsl:choose>
-                                                    <xsl:when test="div1/publication_year[string-length() &gt; 0]| text/div1/publication_year[string-length() &gt; 0]">
-                                                        <xsl:value-of select="substring-before(div1/publication_year| text/div1/publication_year,'-')"/>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>1900</xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:attribute>
-                                            <xsl:choose>
-                                                <xsl:when test="div1/publication_year[string-length() &gt; 0]| text/div1/publication_year[string-length() &gt; 0]">
-                                                    <xsl:value-of select="substring-before(div1/publication_year| text/div1/publication_year,'-')"/>
-                                                </xsl:when>
-                                                <xsl:otherwise>1900</xsl:otherwise>
-                                            </xsl:choose>
-                                        </date>
-                                    
-                                    <xsl:if test="contains(source_title| text/source_title,'Vol.')">
-                                        <biblScope unit="vol">
-                                            <xsl:value-of select="normalize-space(substring-before(substring-after(source_title| text/source_title,'Vol.'),','))"/>
-                                        </biblScope>
-                                    </xsl:if>
-                                    <xsl:if test="contains(source_title| text/source_title,'No.')">
-                                        <biblScope unit="issue">
-                                            <xsl:value-of select="normalize-space(substring-before(substring-after(source_title| text/source_title,'No.'),','))"/>
-                                        </biblScope>
-                                    </xsl:if>
-                                    <xsl:if test="contains(source_title| text/source_title,'pp.')">
-                                        <xsl:variable name="decoupPage">
-                                            <xsl:value-of select="normalize-space(substring-after(source_title| text/source_title,'pp.'))"/> 
-                                        </xsl:variable>
-                                        <xsl:choose>
-                                            <xsl:when test="contains($decoupPage,'-')">
-                                                <biblScope unit="page" from="{normalize-space(substring-before($decoupPage,'-'))}">
-                                                    <xsl:value-of select="normalize-space(substring-before($decoupPage,'-'))"/> 
-                                                </biblScope>
-                                                <biblScope unit="page" to="{normalize-space(substring-after($decoupPage,'-'))}">
-                                                    <xsl:value-of select="normalize-space(substring-after($decoupPage,'-'))"/> 
-                                                </biblScope>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <biblScope unit="page">
-                                                    <xsl:value-of select="$decoupPage"/> 
-                                                </biblScope>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:if>
-                                </imprint>
-                            </monogr>
-                            <xsl:if test="hub_collection[string-length() &gt; 0] |text/hub_collection[string-length() &gt; 0]">
-                                <series>
-                                    <title type="main" level="s">
-                                        <xsl:value-of select="hub_collection|text/hub_collection"/>
-                                    </title>
-                                </series>
-                            </xsl:if>
-                        </biblStruct>
-                    </sourceDesc>
-                </fileDesc>
-                <!-- versionning -->
-                <xsl:call-template name="insertVersion"/>
-                
-                <!-- profileDesc -->
-                    <profileDesc>
-                        <creation>
-                            <date>
-                                <xsl:choose>
-                                    <xsl:when test="div1/publication_year[string-length() &gt; 0]| text/div1/publication_year[string-length() &gt; 0]">
-                                        <xsl:value-of select="substring-before(div1/publication_year| text/div1/publication_year,'-')"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>1900</xsl:otherwise>
-                                </xsl:choose>
-                            </date>
-                        </creation>
-                        <xsl:if test="language_of_edition| text/language_of_edition">
-                            <langUsage>
-                                <language>
-                                    <xsl:attribute name="ident">
-                                <xsl:value-of select="$language"/>
-                            </xsl:attribute>
-                                </language>
-                            </langUsage>
-                        </xsl:if>
-                        <xsl:if test="keyword[string-length() &gt; 0]| text/keyword[string-length() &gt; 0]">
-                            <textClass>
-                                <keywords scheme="keyword">
-                                    <xsl:apply-templates select="keyword| text/keyword"/>
-                                </keywords>
-                            </textClass>
-                        </xsl:if>
-                        <xsl:if test="aspgroup| text/aspgroup">
-                            <xsl:apply-templates select="aspgroup| text/aspgroup"/>
-                        </xsl:if>
-                        <xsl:if test="religion_social_subject_discussed[string-length() &gt; 0]| text/religion_social_subject_discussed[string-length() &gt; 0]">
-                            <textClass>
-                                <xsl:call-template name="decoup"/>
-                            </textClass>
-                        </xsl:if>
-                    </profileDesc>
-                
-                <!-- traceability -->
-                <revisionDesc>
-                    <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
-                </revisionDesc>
-            </teiHeader>
-            <text>
-                <body>
-                    <xsl:choose>
-                        <xsl:when test="div1/p| text/div1/p">
-                            <xsl:apply-templates select="div1| text/div1"/>
-                        </xsl:when>
-                        <xsl:when test="string-length($rawfulltextpath) &gt; 0">
-                            <div>
-                                <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
-                            </div>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <div><p></p></div>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </body>
-            </text>
-        </TEI>
-    </xsl:template>
-    <xsl:template match="div1">
-        <div>
-            <xsl:apply-templates select="pb |p |table"/>
-        </div>
-    </xsl:template>
-    <xsl:template match="entity_id">
-        <idno type="entity_id">
-            <xsl:apply-templates/>
-        </idno>
-    </xsl:template>
-    <xsl:template match="dorpid">
-        <idno type="dorpid">
-            <xsl:apply-templates/>
-        </idno>
-    </xsl:template>
-    <xsl:template match="page_count">
-        <idno type="page_count">
-            <xsl:apply-templates/>
-        </idno>
-    </xsl:template>
-    <xsl:template match="aspgroup">
-        <textClass>
-            <keywords scheme="journal-subject">
-                <term>
-                    <xsl:apply-templates/>
-                </term>
-            </keywords>
-        </textClass>
-    </xsl:template>
-    <xsl:template  name="decoup">
-        <keywords scheme="journal-subject">
-            <xsl:call-template name="tokenizekw"/>
-        </keywords>
-    </xsl:template>
-    <xsl:template match="//div1/religion_social_subject_discussed" name="tokenizekw">
-        <xsl:param name="text" select="//div1/religion_social_subject_discussed"/>
-        <xsl:param name="separator" select="';'"/>
+        </xsl:if>
+        <xsl:variable name="title">
             <xsl:choose>
-                <xsl:when test="not(contains($text, $separator))">
-                    <term>
-                        <xsl:value-of select="normalize-space($text)"/>
-                    </term>
+                <xsl:when test="real_title">
+                    <xsl:apply-templates select="real_title"/>
+                </xsl:when>
+                <xsl:when test="text/real_title">
+                    <xsl:apply-templates select="text/real_title"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <term>
-                        <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
-                    </term>
-                    <xsl:call-template name="tokenizekw">
-                        <xsl:with-param name="text" select="substring-after($text, $separator)"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="$currentTitleAsp"/>
                 </xsl:otherwise>
             </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="date">
+            <xsl:choose>
+                <xsl:when test="$currentDate">
+                    <xsl:value-of select="$currentDate"/>
+                </xsl:when>
+                <xsl:when test="string-length(publication_year | text/publication_year)&gt; 0">
+                    <xsl:apply-templates select="publication_year | text/publication_year"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- ajout d'une date par défaut -->
+                    <xsl:text>1950</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <teiHeader>
+            <fileDesc>
+                <titleStmt>
+                    <title type="main" level="a">
+                        <xsl:value-of select="normalize-space($title)"/>
+                    </title>
+                </titleStmt>
+                <publicationStmt>
+                    <authority>ISTEX</authority>
+                    <date type="published">
+                        <xsl:attribute name="when">
+                            <xsl:value-of select="$date"/>
+                        </xsl:attribute>
+                        <xsl:value-of select="$date"/>
+                    </date>
+                    <xsl:choose>
+                        <xsl:when test="publisher|text/publisher[string-length()&gt; 0]">
+                            <xsl:apply-templates select="publisher|text/publisher"/>
+                            <xsl:apply-templates select="publisher_place|text/publisher_place"/>
+                        </xsl:when>
+                        <xsl:when test="string-length($currentPublisher) &gt; 0">
+                            <publisher ref="https://scientific-publisher.data.istex.fr">
+                                <xsl:value-of select="$currentPublisher"/>
+                            </publisher>
+                        </xsl:when>
+                        <xsl:when test="string-length($currentCopyright) &gt; 0">
+                            <publisher ref="https://scientific-publisher.data.istex.fr">Alexander Street Press</publisher>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <publisher ref="https://scientific-publisher.data.istex.fr">Alexander Street Press</publisher>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <availability status="restricted">
+                        <licence>
+                            <p>
+                                <xsl:choose>
+                                    <xsl:when test="$currentCopyright">
+                                        <xsl:value-of select="$currentCopyright"/>
+                                    </xsl:when>
+                                    <xsl:when test="copyright_message|text/copyright_message">
+                                        <xsl:value-of select="copyright_message|text/copyright_message"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:text>Copyright © Alexander Street Press is not aware of any existing copyright in this
+                work. Alexander Street Press would like to hear from any copyright holder that is
+                not cited in this database.</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </p>
+                        </licence>
+                    </availability>
+                </publicationStmt>
+                <!-- genre -->
+                <notesStmt>
+                    <xsl:choose>
+                        <xsl:when test="string-length(document_type) &gt; 0">
+                            <note>
+                                <xsl:attribute name="type">content-type</xsl:attribute>
+                                <xsl:attribute name="subtype">article</xsl:attribute>
+                                <xsl:attribute name="source">
+                                    <xsl:value-of select="document_type"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
+                                <xsl:text>article</xsl:text>
+                            </note>
+                        </xsl:when>
+                        <xsl:when test="string-length(text/document_type) &gt; 0">
+                            <note>
+                                <xsl:attribute name="type">content-type</xsl:attribute>
+                                <xsl:attribute name="subtype">other</xsl:attribute>
+                                <xsl:attribute name="source">
+                                    <xsl:value-of select="text/document_type"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
+                                <xsl:text>article</xsl:text>
+                            </note>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <note>
+                                <xsl:attribute name="type">content-type</xsl:attribute>
+                                <xsl:attribute name="subtype">
+                                    <xsl:choose>
+                                        <xsl:when test="$currentContentType='Monograph'">book</xsl:when>
+                                        <xsl:when test="//publication_type[1]='Monograph'">book</xsl:when>
+                                        <xsl:otherwise>other</xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                                <xsl:attribute name="source">
+                                    <xsl:value-of select="$currentContentType"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="scheme"> 
+                                    <xsl:choose>
+                                        <xsl:when test="$currentContentType='Monograph'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+                                        <xsl:when test="//publication_type[1]='Monograph'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+                                        <xsl:otherwise>https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                                <xsl:choose>
+                                    <xsl:when test="$currentContentType='Monograph'">book</xsl:when>
+                                    <xsl:otherwise>other</xsl:otherwise>
+                                </xsl:choose>
+                            </note> 
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <note type="publication-type" subtype="database" scheme="http://publication-type.data.istex.fr/ark:/67375/JMC-NTSGR1R0-Z">database</note>
+                </notesStmt>
+                <sourceDesc>
+                    <biblStruct>
+                        <analytic>
+                            <title type="main" level="a">
+                                <xsl:value-of select="normalize-space($title)"/>
+                            </title>
+                            <!-- auteurs -->
+                            <author>
+                                <persName>   
+                                    <xsl:choose>
+                                        <xsl:when test="string-length(@author) &gt; 0">
+                                            <xsl:apply-templates select="@author"/>
+                                        </xsl:when>
+                                        <xsl:when test="string-length(author|text/author) &gt; 0">
+                                            <xsl:apply-templates select="author|text/author"/>
+                                        </xsl:when>
+                                        <xsl:when test="string-length($currentAuthor) &gt; 0">
+                                            <forename type="first">
+                                                    <xsl:value-of select="substring-before($currentAuthor,',')"/>
+                                            </forename>
+                                            <surname>
+                                                    <xsl:value-of select="substring-after($currentAuthor,',')"/>
+                                            </surname>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </persName>
+                            </author>
+                            <!-- ******************* identifiant systéme (n'apparaît pas dans le résultat ******************************-->
+                            <xsl:if test="string-length($idistex) &gt; 0 ">
+                                <idno>
+                                    <xsl:attribute name="type">istex</xsl:attribute>
+                                    <xsl:value-of select="normalize-space($idistex)"/>
+                                </idno>
+                            </xsl:if>
+                            <!-- mars 2017 - ajout identifiant ark utilisé par API web -->
+                            <xsl:if test="string-length($arkistex) &gt; 0 ">
+                                <idno>
+                                    <xsl:attribute name="type">ark</xsl:attribute>
+                                    <xsl:value-of select="$arkistex"/>
+                                </idno>
+                            </xsl:if>
+                            
+                            <!-- identifiants niveau article -->
+                            <xsl:apply-templates select="dorpid|text/dorpid"/>
+                            <xsl:apply-templates select="entity_id|text/entity_id"/>
+                            <xsl:apply-templates select="a|text/a" mode="asp"/>
+                            <xsl:if test="$currentDorpID">
+                                <idno type="BookID">
+                                    <xsl:value-of select="$currentDorpID"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="$currentProductId">
+                                <idno type="ProductID">
+                                    <xsl:value-of select="$currentProductId"/>
+                                </idno>
+                            </xsl:if>
+                        </analytic>
+                        <monogr>
+                            <xsl:variable name="titleHost">
+                                <xsl:choose>
+                                    <xsl:when test="real_title">
+                                        <xsl:apply-templates select="real_title"/>
+                                    </xsl:when>
+                                    <xsl:when test="text/real_title">
+                                        <xsl:apply-templates select="text/real_title"/>
+                                    </xsl:when>
+                                    <xsl:when test="source_title | text/source_title">
+                                        <xsl:apply-templates select="source_title | text/source_title" mode="title"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$currentTitleAsp"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <title type="main" level="m">
+                                <xsl:value-of select="$titleHost"/>
+                            </title>
+                            <xsl:choose>
+                                <xsl:when test="@isbn[string-length()&gt; 0]">
+                                    <idno type="ISBN">
+                                        <xsl:value-of select="@isbn"/>
+                                    </idno>
+                                </xsl:when>
+                                <xsl:when test="$currentIsbn[string-length()&gt; 0]">
+                                    <idno type="ISBN">
+                                        <xsl:value-of select="translate($currentIsbn,'-','')"/>
+                                    </idno>
+                                </xsl:when>
+                            </xsl:choose>
+                            <xsl:if test="$currentDorpID">
+                                <idno type="BookID">
+                                    <xsl:value-of select="$currentDorpID"/>
+                                </idno>
+                            </xsl:if>
+                            <imprint>
+                                <xsl:choose>
+                                    <xsl:when test="publisher|text/publisher[string-length()&gt; 0]">
+                                        <xsl:apply-templates select="publisher|text/publisher"/>
+                                        <xsl:apply-templates select="publisher_place|text/publisher_place"/>
+                                    </xsl:when>
+                                    <xsl:when test="string-length($currentPublisher) &gt; 0">
+                                        <publisher ref="https://scientific-publisher.data.istex.fr">
+                                            <xsl:value-of select="$currentPublisher"/>
+                                        </publisher>
+                                    </xsl:when>
+                                    <xsl:when test="string-length($currentCopyright) &gt; 0">
+                                        <publisher ref="https://scientific-publisher.data.istex.fr">Alexander Street Press</publisher>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <publisher ref="https://scientific-publisher.data.istex.fr">Alexander Street Press</publisher>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                <date type="published">
+                                    <xsl:attribute name="when">
+                                        <xsl:value-of select="$date"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$date"/>
+                                </date>
+                                
+                                <xsl:apply-templates select="source_title" mode="volumeIssue"/>
+                                
+                                <xsl:if test="contains(source_title,'pp')">
+                                    <biblScope>
+                                        <xsl:attribute name="unit">page</xsl:attribute> 
+                                        <xsl:apply-templates select="source_title" mode="pages"/>
+                                        <xsl:apply-templates select="page_count"/>
+                                    </biblScope>
+                                </xsl:if>
+                                <xsl:if test="page_count">
+                                    <biblScope>
+                                        <xsl:attribute name="unit">totalPages</xsl:attribute>
+                                        <xsl:apply-templates select="page_count"/>
+                                    </biblScope>
+                                </xsl:if>
+                                
+                                <xsl:choose>
+                                    <xsl:when test="$currentPageCount">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">totalPages</xsl:attribute>
+                                                <xsl:value-of select="$currentPageCount"/>
+                                        </biblScope>
+                                    </xsl:when>
+                                    <xsl:when test="page_count|text/page_count">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">totalPages</xsl:attribute>
+                                            <xsl:value-of select="page_count|text/page_count"/>
+                                        </biblScope>
+                                    </xsl:when>
+                                </xsl:choose>
+                            </imprint>
+                        </monogr>
+                        <!-- serie/collection -->
+                        <xsl:if test="$currentCollection | //archive_collection[1]">
+                            <series>
+                                <title type="main" level="s">Twentieth Century Religious Thought: Volume I, Christianity</title>
+                                <title type="sub" level="s">
+                                    <xsl:value-of select="$currentCollection| //archive_collection[1]"/>
+                                </title>
+                            </series>
+                        </xsl:if>
+                    </biblStruct>
+                </sourceDesc>
+            </fileDesc>
+            <!-- versionning -->
+            <xsl:call-template name="insertVersion"/>   
+            <profileDesc>
+                <creation>
+                    <date>
+                        <xsl:value-of select="$date"/>
+                    </date>
+                </creation>
+                
+                <xsl:if test="string-length($currentAbstract) &gt; 0">
+                    <abstract xmlns="http://www.loc.gov/mods/v3">
+                        <xsl:value-of select="$currentAbstract"/>
+                    </abstract>
+                </xsl:if>
+                <!-- mots clés auteurs-->
+                <xsl:if test="string-length(keyword) &gt; 0">
+                    <textClass ana="keyword">
+                        <keywords scheme="keyword">
+                            <xsl:apply-templates select="keyword | text/keyword"/>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <!-- subject -->
+                <xsl:choose>
+                    <xsl:when test="string-length(religion_genre|text/religion_genre)&gt; 0">
+                        <textClass ana="religion_genre">
+                            <keywords scheme="subject">
+                                <xsl:apply-templates select="religion_genre|text/religion_genre"/>
+                            </keywords>
+                        </textClass>
+                    </xsl:when>
+                    <xsl:when test="$currentReligionGenre">
+                        <textClass ana="religion_genre">
+                            <keywords scheme="subject">
+                                <xsl:call-template name="tokenizeReligionGenre"/>
+                            </keywords>
+                        </textClass>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:if test="$currentReligionDiscussed">
+                    <textClass ana="religion_discussed">
+                        <keywords scheme="subject">
+                            <xsl:call-template name="tokenizeReligionDiscussed"/>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentIdeologicalSubject">
+                    <textClass ana="ideological">
+                        <keywords scheme="subject">
+                            <xsl:call-template name="tokenizeIdeological"/>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="$currentTheologicalDiscussed">
+                        <textClass ana="theological_discussed">
+                            <keywords scheme="subject">
+                                <xsl:call-template name="tokenizeTheological"/>
+                            </keywords>
+                        </textClass>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="theological_subject_discussed|text/theological_subject_discussed[string-length()&gt; 0]">
+                            <xsl:apply-templates select="theological_subject_discussed|text/theological_subject_discussed"/>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="$currentSocialSubject">
+                    <textClass ana="social">
+                        <keywords scheme="subject">
+                            <xsl:call-template name="tokenizeSocial"/>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="religion_social_subject_discussed|text/religion_social_subject_discussed[string-length()&gt; 0]">
+                    <textClass ana="religion_social_subject_discussed">
+                        <keywords scheme="subject">
+                            <xsl:apply-templates select="religion_social_subject_discussed|text/religion_social_subject_discussed"/>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <langUsage>
+                    <language ident="{$langue2}"/>
+                </langUsage>
+            </profileDesc>
+            <revisionDesc>
+                <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
+            </revisionDesc>
+        </teiHeader>
+        <xsl:choose>
+            <xsl:when test="div1/p[string-length()&gt; 0] | text[div1][string-length()&gt; 0]">
+                <text>
+                    <body>
+                        <div>
+                            <xsl:apply-templates select="div1/*|text[div1]/*"/>
+                        </div>
+                    </body>
+                </text>
+            </xsl:when>
+            <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                <text>
+                    <body>
+                        <div>
+                            <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
+                        </div>
+                    </body>
+                </text>
+            </xsl:when>
+            <xsl:otherwise>
+                <text>
+                    <body>
+                        <div><p></p></div>
+                    </body>
+                </text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </TEI>
+    </xsl:template>
+    
+    
+    <!-- ***********************Début des templates d'appel *************************-->
+    <xsl:template match="div1|div2|div3|div4|div5">
+        <div>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <!-- titre-->
+    <xsl:template match="real_title">
+        <xsl:value-of select="normalize-space(.)"/>
+    </xsl:template>
+    <!-- accessCondition-->
+    <xsl:template match="copyright_message">
+            <xsl:apply-templates/>
+    </xsl:template>
+    
+    <!-- table des auteurs -->
+    <xsl:template match="@author">
+        <persName>
+            <forename type="first">
+                <xsl:variable name="given">
+                    <xsl:value-of select="substring-after(.,', ')"/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($given)"/>
+            </forename>
+            <surname>
+                <xsl:variable name="nomFamille">
+                    <xsl:value-of select="substring-before(.,', ')"/>
+                </xsl:variable>
+                <!-- traduit des caractéres dans le résultat -->
+                <xsl:value-of select="$nomFamille"/>
+            </surname>
+        </persName>
+    </xsl:template>
+    <xsl:template match="author">
+        <persName>
+            <name>
+                <xsl:value-of select="normalize-space(substring-before(.,' ('))"/>
+            </name>
+        </persName>
+    </xsl:template>
+    
+    <!-- publisher -->
+    <xsl:template match="publisher">
+        <publisher xmlns="http://www.loc.gov/mods/v3">
+            <xsl:apply-templates/>
+        </publisher>
+    </xsl:template>
+    <xsl:template match="publisher_place">
+        <pubPlace xmlns="http://www.loc.gov/mods/v3">
+            <xsl:apply-templates/>
+        </pubPlace>
+    </xsl:template>
+    <xsl:template match="publication_year">
+        <date type="published">
+            <xsl:apply-templates/>
+        </date>
+    </xsl:template>
+    <xsl:template match="page_count">
+        <biblScope unit="totalPages">
+            <xsl:apply-templates/>
+        </biblScope>
+    </xsl:template>
+    
+    <!-- Mots clés -->
+    <xsl:template match="keyword">
+        <term>  
+            <xsl:apply-templates/>
+        </term>
+    </xsl:template>
+    
+    <!-- titre du journal -->
+    <xsl:template match="source_title" mode="title">
+        <title level="a" type="main">
+                <xsl:value-of select="substring-before(.,',')"/>
+            </title>
+    </xsl:template>
+    <!-- volume -->
+    <xsl:template match="source_title" mode="volumeIssue">
+        <xsl:variable name="line">
+            <xsl:value-of select="substring-after(.,',')"/>
+        </xsl:variable>
+        <biblScope unit="vol">
+                <xsl:value-of select="translate(substring-before(substring-after(.,'Vol'),','),'. ','')"/>
+                <xsl:value-of select="translate(substring-before(substring-after(.,'vol'),','),'. ','')"/>
+        </biblScope>
+        <biblScope unit="issue">
+                <xsl:value-of select="translate(substring-before(substring-after(.,'No'),','),'. ','')"/>
+                <xsl:value-of select="translate(substring-before(substring-after(.,'no'),','),'. ','')"/>
+        </biblScope>
+    </xsl:template>
+    <!-- pages -->
+    <xsl:template match="source_title" mode="pages">
+        <xsl:variable name="line">
+            <xsl:value-of select="substring-after(.,'pp.')"/>
+        </xsl:variable>
+        <biblScope unit="page" from="{substring-before($line,'-')}">
+            <xsl:value-of select="normalize-space(substring-before($line,'-'))"/>
+        </biblScope>
+        <biblScope unit="page" to="{substring-after($line,'-')}">
+            <xsl:value-of select="normalize-space(substring-after($line,'-'))"/>
+        </biblScope> 
+    </xsl:template>
+    <!-- identifier -->
+    <xsl:template match="dorpid">
+            <idno type="articleID">
+                <xsl:apply-templates/>
+            </idno>
+    </xsl:template>
+    <xsl:template match="entity_id">
+        <idno type="productID">
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="a" mode="asp">
+        <idno type="PdfID">
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="theological_subject_discussed">
+            <xsl:call-template name="tokenizeAsp"/>
+    </xsl:template>
+    
+    <xsl:template match="religion_genre">
+            <xsl:call-template name="tokenizeAsp"/>
+    </xsl:template>
+    
+    <xsl:template match="religion_social_subject_discussed">
+            <xsl:call-template name="tokenizeAsp"/>
+    </xsl:template>
+    <xsl:template name="tokenizeAsp">
+        <xsl:param name="text" select="."/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <term>
+                        <xsl:value-of select="normalize-space($text)"/>
+                    </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <term>
+                    <xsl:value-of select="normalize-space($item)"/>
+                </term>
+                <xsl:call-template name="tokenizeAsp">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="tokenizeIdeological">
+        <xsl:param name="text" select="$currentIdeologicalSubject"/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <term>
+                    <xsl:value-of select="normalize-space($text)"/>
+                </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <term>
+                    <xsl:value-of select="normalize-space($item)"/>
+                </term>
+                <xsl:call-template name="tokenizeIdeological">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="tokenizeSocial">
+        <xsl:param name="text" select="$currentSocialSubject"/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <term>
+                    <xsl:value-of select="normalize-space($text)"/>
+                </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <term>
+                    <xsl:value-of select="normalize-space($item)"/>
+                </term>
+                <xsl:call-template name="tokenizeSocial">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="tokenizeTheological">
+        <xsl:param name="text" select="$currentTheologicalDiscussed"/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <term>
+                    <xsl:value-of select="normalize-space($text)"/>
+                </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <term>
+                    <xsl:value-of select="normalize-space($item)"/>
+                </term>
+                <xsl:call-template name="tokenizeTheological">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="tokenizeReligionDiscussed">
+        <xsl:param name="text" select="$currentReligionDiscussed"/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <term>
+                    <xsl:value-of select="normalize-space($text)"/>
+                </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <term>
+                    <xsl:value-of select="normalize-space($item)"/>
+                </term>
+                <xsl:call-template name="tokenizeReligionDiscussed">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="tokenizeReligionGenre">
+        <xsl:param name="text" select="$currentReligionGenre"/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <term>
+                    <xsl:value-of select="normalize-space($text)"/>
+                </term>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <term>
+                    <xsl:value-of select="normalize-space($item)"/>
+                </term>
+                <xsl:call-template name="tokenizeReligionGenre">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="u">
+        <hi rend="bold">
+            <xsl:apply-templates/>
+        </hi>
+    </xsl:template>
+    <xsl:template match="lacuna"/>
+    <xsl:template match="bl">
+        <!--<hi rend="bold">
+            <xsl:apply-templates/>
+        </hi>-->
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="br">
+        <lb/>
+    </xsl:template>
+    <xsl:template match="div1/head|div2/head|div3/head|div4/head|div5/head">
+        <p rend="head">
+            <xsl:apply-templates/>
+        </p>
     </xsl:template>
 </xsl:stylesheet>

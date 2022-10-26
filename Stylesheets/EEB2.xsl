@@ -10,7 +10,8 @@
     
     <xsl:output encoding="UTF-8" method="xml"/>
     <!-- Feuille de style concernant les données:
-    - Casalini Torrossa EEO
+    - EEB2
+    - TCRT
     -->
     <xsl:variable name="codeLangEEB2">
         <xsl:choose>
@@ -85,7 +86,7 @@
                             <xsl:attribute name="status">restricted</xsl:attribute>
                             <licence>Proquest</licence>
                             <p> <xsl:text>Proquest &#169;, all rights reserved.</xsl:text></p>
-                            <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/8Q1-XW617H8X-P">eeb2</p>
+                            <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-XW617H8X-P">eeb2</p>
                         </availability>
                         <date type="published" when="{$dateEEB2}"/>
                     </publicationStmt>

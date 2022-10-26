@@ -1624,7 +1624,7 @@
                             </xsl:when>
                         </xsl:choose>
                     </xsl:if>
-                    <xsl:apply-templates select="/article/front/article-meta/pub-date"/>
+                   
                     <!-- suppfm/parent/cpg/cpn |pubfm/cpg/cpn -->
                     <!-- pubfm/cpg/cpy -->
                     <!-- suppfm/cpg/cpy -->
@@ -1641,13 +1641,15 @@
                         <xsl:apply-templates select="//suppfm/idt"/>
                     </xsl:if>
                     
-                    <xsl:for-each select="article-meta/pub-date">
+                    <!-- date de publication -->
+                    <!--<xsl:for-each select="article-meta/pub-date">
                         <xsl:message>Current: <xsl:value-of select="@pub-type"/></xsl:message>
                         <xsl:if test="year != '' and year != '0000'">
                             <xsl:message>Pubdate year: <xsl:value-of select="year"/></xsl:message>
                             <xsl:apply-templates select="."/>
                         </xsl:if>
-                    </xsl:for-each>
+                    </xsl:for-each>-->
+                    <xsl:apply-templates select="/article/front/article-meta/pub-date"/>
                     <xsl:choose>
                         <!-- RSL rattrapage dates de publication erronées-->
                         <xsl:when test="//article-id[@pub-id-type='doi']='10.1098/rspa.1991.0136'"><date type="published" when="1991">1991</date></xsl:when>

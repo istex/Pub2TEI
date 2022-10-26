@@ -840,7 +840,7 @@
     
     <xsl:template match="pb">
         <xsl:choose>
-            <xsl:when test="parent::div1">
+            <xsl:when test="parent::div1|parent::div2|parent::div3|parent::div4|parent::div5">
                 <ab>
                     <ptr>
                         <xsl:if test="@id[string-length() &gt; 0]">

@@ -119,7 +119,7 @@
                 <xsl:message>Converting a Duke article</xsl:message>
             </xsl:when>
             <xsl:when test="asp">
-                <xsl:message>Converting a proquest TCRT chapter</xsl:message>
+                <xsl:message>Converting a proquest TCRT book</xsl:message>
             </xsl:when>
             <!-- SG casalini -->
             <xsl:when test="onix:ONIXMessage">
