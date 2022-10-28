@@ -114,9 +114,9 @@
                         <xsl:value-of select="$date"/>
                     </date>
                     <xsl:choose>
-                        <xsl:when test="publisher|text/publisher[string-length()&gt; 0]">
-                            <xsl:apply-templates select="publisher|text/publisher"/>
-                            <xsl:apply-templates select="publisher_place|text/publisher_place"/>
+                        <xsl:when test="publisher[string-length()&gt; 0]|text/publisher[string-length()&gt; 0]">
+                            <xsl:apply-templates select="publisher[string-length()&gt; 0]|text/publisher" mode="asp"/>
+                            <xsl:apply-templates select="publisher_place[string-length()&gt; 0]|text/publisher_place"/>
                         </xsl:when>
                         <xsl:when test="string-length($currentPublisher) &gt; 0">
                             <publisher ref="https://scientific-publisher.data.istex.fr">
@@ -218,7 +218,7 @@
                                             <xsl:apply-templates select="@author"/>
                                         </xsl:when>
                                         <xsl:when test="string-length(author|text/author) &gt; 0">
-                                            <xsl:apply-templates select="author|text/author"/>
+                                            <xsl:apply-templates select="author|text/author" mode="asp"/>
                                         </xsl:when>
                                         <xsl:when test="string-length($currentAuthor) &gt; 0">
                                             <forename type="first">
@@ -264,14 +264,14 @@
                         <monogr>
                             <xsl:variable name="titleHost">
                                 <xsl:choose>
+                                    <xsl:when test="source_title | text/source_title">
+                                        <xsl:apply-templates select="source_title | text/source_title" mode="title"/>
+                                    </xsl:when>
                                     <xsl:when test="real_title">
                                         <xsl:apply-templates select="real_title"/>
                                     </xsl:when>
                                     <xsl:when test="text/real_title">
                                         <xsl:apply-templates select="text/real_title"/>
-                                    </xsl:when>
-                                    <xsl:when test="source_title | text/source_title">
-                                        <xsl:apply-templates select="source_title | text/source_title" mode="title"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="$currentTitleAsp"/>
@@ -300,8 +300,8 @@
                             </xsl:if>
                             <imprint>
                                 <xsl:choose>
-                                    <xsl:when test="publisher|text/publisher[string-length()&gt; 0]">
-                                        <xsl:apply-templates select="publisher|text/publisher"/>
+                                    <xsl:when test="publisher[string-length()&gt; 0]|text/publisher[string-length()&gt; 0]">
+                                        <xsl:apply-templates select="publisher|text/publisher" mode="asp"/>
                                         <xsl:apply-templates select="publisher_place|text/publisher_place"/>
                                     </xsl:when>
                                     <xsl:when test="string-length($currentPublisher) &gt; 0">
@@ -326,33 +326,16 @@
                                 <xsl:apply-templates select="source_title" mode="volumeIssue"/>
                                 
                                 <xsl:if test="contains(source_title,'pp')">
-                                    <biblScope>
-                                        <xsl:attribute name="unit">page</xsl:attribute> 
-                                        <xsl:apply-templates select="source_title" mode="pages"/>
-                                        <xsl:apply-templates select="page_count"/>
-                                    </biblScope>
+                                    <xsl:apply-templates select="source_title" mode="pages"/>
                                 </xsl:if>
-                                <xsl:if test="page_count">
+                                <xsl:apply-templates select="page_count"/>
+                                <xsl:if test="$currentPageCount">
                                     <biblScope>
                                         <xsl:attribute name="unit">totalPages</xsl:attribute>
-                                        <xsl:apply-templates select="page_count"/>
+                                        <xsl:value-of select="$currentPageCount"/>
                                     </biblScope>
                                 </xsl:if>
                                 
-                                <xsl:choose>
-                                    <xsl:when test="$currentPageCount">
-                                        <biblScope>
-                                            <xsl:attribute name="unit">totalPages</xsl:attribute>
-                                                <xsl:value-of select="$currentPageCount"/>
-                                        </biblScope>
-                                    </xsl:when>
-                                    <xsl:when test="page_count|text/page_count">
-                                        <biblScope>
-                                            <xsl:attribute name="unit">totalPages</xsl:attribute>
-                                            <xsl:value-of select="page_count|text/page_count"/>
-                                        </biblScope>
-                                    </xsl:when>
-                                </xsl:choose>
                             </imprint>
                         </monogr>
                         <!-- serie/collection -->
@@ -377,7 +360,7 @@
                 </creation>
                 
                 <xsl:if test="string-length($currentAbstract) &gt; 0">
-                    <abstract xmlns="http://www.loc.gov/mods/v3">
+                    <abstract>
                         <xsl:value-of select="$currentAbstract"/>
                     </abstract>
                 </xsl:if>
@@ -429,8 +412,12 @@
                         </textClass>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:if test="theological_subject_discussed|text/theological_subject_discussed[string-length()&gt; 0]">
-                            <xsl:apply-templates select="theological_subject_discussed|text/theological_subject_discussed"/>
+                        <xsl:if test="theological_subject_discussed[string-length()&gt; 0]|text/theological_subject_discussed[string-length()&gt; 0]">
+                            <textClass ana="theological_subject_discussed">
+                                <keywords scheme="subject">
+                                    <xsl:apply-templates select="theological_subject_discussed|text/theological_subject_discussed"/>
+                                </keywords>
+                            </textClass>
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -441,7 +428,7 @@
                         </keywords>
                     </textClass>
                 </xsl:if>
-                <xsl:if test="religion_social_subject_discussed|text/religion_social_subject_discussed[string-length()&gt; 0]">
+                <xsl:if test="religion_social_subject_discussed[string-length()&gt; 0]|text/religion_social_subject_discussed[string-length()&gt; 0]">
                     <textClass ana="religion_social_subject_discussed">
                         <keywords scheme="subject">
                             <xsl:apply-templates select="religion_social_subject_discussed|text/religion_social_subject_discussed"/>
@@ -461,7 +448,7 @@
                 <text>
                     <body>
                         <div>
-                            <xsl:apply-templates select="div1/*|text[div1]/*"/>
+                            <xsl:apply-templates select="(div1/*|text[div1]/*) except(//entity_id|//dorpid|//real_title|//page_count|//page_range|//original_language|//publisher|//copyright_message|//author|//document_type|//author_statement|//language_of_edition|//material_type|//original_publication_type|//publication_year|//year_written|//keyword|//hub_collection|//place_discussed|//archive_collection|//aspgroup|//aspcommunity|//unitaccess|//asptertiarycommunity|//publication_type|//publisher_place|//religion_discussed|//asp_release_date|//theological_subject_discussed|//ideological_subject_discussed|//religion_genre|//religion_social_subject_discussed|//archive_box|//archive_document_number|//archive_box_title)"/>
                         </div>
                     </body>
                 </text>
@@ -520,7 +507,7 @@
             </surname>
         </persName>
     </xsl:template>
-    <xsl:template match="author">
+    <xsl:template match="author" mode="asp">
         <persName>
             <name>
                 <xsl:value-of select="normalize-space(substring-before(.,' ('))"/>
@@ -529,13 +516,13 @@
     </xsl:template>
     
     <!-- publisher -->
-    <xsl:template match="publisher">
-        <publisher xmlns="http://www.loc.gov/mods/v3">
+    <xsl:template match="publisher" mode="asp">
+        <publisher>
             <xsl:apply-templates/>
         </publisher>
     </xsl:template>
     <xsl:template match="publisher_place">
-        <pubPlace xmlns="http://www.loc.gov/mods/v3">
+        <pubPlace>
             <xsl:apply-templates/>
         </pubPlace>
     </xsl:template>
@@ -548,13 +535,6 @@
         <biblScope unit="totalPages">
             <xsl:apply-templates/>
         </biblScope>
-    </xsl:template>
-    
-    <!-- Mots clés -->
-    <xsl:template match="keyword">
-        <term>  
-            <xsl:apply-templates/>
-        </term>
     </xsl:template>
     
     <!-- titre du journal -->
@@ -771,4 +751,27 @@
             <xsl:apply-templates/>
         </p>
     </xsl:template>
+    <xsl:template match="asp_release_date"/>
+    <xsl:template match="archive_box"/>
+    <xsl:template match="page_range"/>
+    <xsl:template match="document_type"/>
+    <xsl:template match="author_statement"/>
+    <xsl:template match="language_of_edition"/>
+    <xsl:template match="material_type"/>
+    <xsl:template match="original_publication_type"/>
+    <xsl:template match="original_language"/>
+    <xsl:template match="year_written"/>
+    <xsl:template match="hub_collection"/>
+    <xsl:template match="archive_collection"/>
+    <xsl:template match="aspgroup"/>
+    <xsl:template match="aspcommunity"/>
+    <xsl:template match="unitaccess"/>
+    <xsl:template match="asptertiarycommunity"/>
+    <xsl:template match="archive_box_title"/>
+    <xsl:template match="archive_document_number"/>
+    <xsl:template match="place_discussed"/>
+    <xsl:template match="source_title"/>
+    <xsl:template match="publication_type"/>
+    <xsl:template match="religion_discussed"/>
+    <xsl:template match="ideological_subject_discussed"/>
 </xsl:stylesheet>

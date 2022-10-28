@@ -8,7 +8,7 @@
     <xsl:output encoding="UTF-8" method="xml"/>
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <xsl:template match="/Publisher[count(Series/Book/descendant::Chapter)=1]">
+    <xsl:template match="/Publisher[count(Series/Book/descendant::Chapter)=1]|book-part-wrapper">
         <TEI  xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
@@ -16,12 +16,13 @@
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
-                        <xsl:apply-templates
-                            select="Series/Book/descendant::Chapter/ChapterInfo/ChapterTitle"/>
+                        <xsl:apply-templates select="Series/Book/descendant::Chapter/ChapterInfo/ChapterTitle"/>
+                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title" mode="springer"/>
+                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/alt-title"/>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
-                        <xsl:apply-templates select="PublisherInfo/PublisherName"/>
+                        <xsl:apply-templates select="PublisherInfo/PublisherName |book-meta/publisher"/>
                         <xsl:apply-templates
                             select="Series/Book/descendant::Chapter/ChapterInfo/ChapterCopyright"/>
                         <xsl:if test="//ArticleGrants/BodyPDFGrant[string(@Grant)='OpenAccess']">
@@ -29,6 +30,8 @@
                                 <p>Open Access</p>
                             </availability>
                         </xsl:if>
+                        <xsl:apply-templates select="book-meta/permissions/copyright-statement"/>
+                        <xsl:apply-templates select="book-meta/permissions/copyright-year"/>
                         <xsl:apply-templates select="//ChapterCopyright/CopyrightYear"/>
                     </publicationStmt>
                     <notesStmt>
@@ -58,43 +61,25 @@
                                 <xsl:text>conference</xsl:text>
                                 </note>
                             </xsl:when>
+                            <xsl:when test="//book-part[not(body/book-part)]/@book-part-type='chapter'">
+                                <note type="content-type">
+                                    <xsl:attribute name="subtype">
+                                        <xsl:text>chapter</xsl:text>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="source">
+                                        <xsl:value-of select="//book-part[not(body/book-part)]/@book-part-type"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:attribute>
+                                    <xsl:text>chapter</xsl:text>
+                                </note>
+                            </xsl:when>
                             <xsl:otherwise>
-                                <xsl:choose>
-                                    <xsl:when test="$codeGenreAll">
-                                        <xsl:attribute name="subtype">
-                                            <xsl:value-of select="$codeGenreIstex"/>
-                                        </xsl:attribute>
-                                        <xsl:attribute name="source">
-                                            <xsl:value-of select="normalize-space($codeGenreAll)"/>
-                                        </xsl:attribute>
-                                        <xsl:attribute name="scheme">
-                                            <xsl:value-of select="$codeGenreArk"/>
-                                        </xsl:attribute>
-                                        <xsl:value-of select="$codeGenreIstex"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:choose>
-                                            <xsl:when test="//KeywordGroup[string-length() &gt; 0]">
-                                                <xsl:attribute name="subtype">N/A</xsl:attribute>
-                                                <xsl:attribute name="source">research-article</xsl:attribute>
-                                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:attribute>
-                                                <xsl:text>research-article</xsl:text>
-                                                </xsl:when>
-                                            <xsl:when test="//Abstract[string-length() &gt; 0]">
-                                                <xsl:attribute name="subtype">N/A</xsl:attribute>
-                                                <xsl:attribute name="source">article</xsl:attribute>
-                                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
-                                                <xsl:text>article</xsl:text>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:attribute name="subtype">N/A</xsl:attribute>
-                                                <xsl:attribute name="source">ISTEX</xsl:attribute>
-                                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
-                                                <xsl:text>other</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                <note type="content-type">
+                                    <xsl:attribute name="subtype">other</xsl:attribute>
+                                    <xsl:attribute name="source">book-frontmatter</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                    <xsl:text>other</xsl:text>
+                                </note>
                             </xsl:otherwise>
                         </xsl:choose>
                         <!-- niveau revue / book -->
@@ -111,11 +96,79 @@
                                     <xsl:text>book</xsl:text>
                                 </note>
                             </xsl:when>
+                            <xsl:when test="collection-meta[string-length() &gt; 0]">
+                                <note type="publication-type" subtype="book-series">
+                                    <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
+                                    <xsl:text>book-series</xsl:text>
+                                </note>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <note type="publication-type" subtype="book">
+                                    <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F</xsl:attribute>
+                                    <xsl:text>book</xsl:text>
+                                </note>
+                            </xsl:otherwise>
                         </xsl:choose>
+                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/notes"/>
                     </notesStmt>
-                    <sourceDesc>
-                        <xsl:apply-templates select="Series" mode="sourceDesc"/>
-                    </sourceDesc>
+                    <xsl:choose>
+                        <xsl:when test="Series">
+                            <sourceDesc>
+                                <xsl:apply-templates select="Series" mode="sourceDesc"/>
+                            </sourceDesc>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <sourceDesc>
+                                <biblStruct>
+                                    <analytic>
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title" mode="springer"/>
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/alt-title"/>
+                                        <xsl:if test="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[string-length() &gt; 0]">
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/contrib-group" mode="springer"/>
+                                        </xsl:if>
+                                        <!-- ajout identifiants ISTEX et ARK -->
+                                        <xsl:if test="string-length($idistex) &gt; 0 ">
+                                            <idno type="istex">
+                                                <xsl:value-of select="$idistex"/>
+                                            </idno>
+                                        </xsl:if>
+                                        <xsl:if test="string-length($arkistex) &gt; 0 ">
+                                            <idno type="ark">
+                                                <xsl:value-of select="$arkistex"/>
+                                            </idno>
+                                        </xsl:if>
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/@id" mode="springer"/>
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/book-part-id"/>
+                                        <!-- lien vers les chapitres corrigés -->
+                                        <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/related-article"/>
+                                    </analytic>
+                                    <monogr>
+                                        <xsl:if test="book-meta/book-title-group/book-title[string-length() &gt; 0]">
+                                            <title level="m" type="main">
+                                                <xsl:value-of select="normalize-space(book-meta/book-title-group/book-title)"/>
+                                            </title>
+                                            <title level="m" type="sub">
+                                                <xsl:value-of select="normalize-space(book-meta/book-title-group/subtitle)"/>
+                                            </title>
+                                        </xsl:if>
+                                        <xsl:apply-templates select="book-meta/book-id"/>
+                                        <xsl:apply-templates select="book-meta/isbn"/>
+                                        <xsl:if test="book-meta/contrib-group[string-length() &gt; 0]">
+                                            <xsl:apply-templates select="book-meta/contrib-group" mode="springer"/>
+                                        </xsl:if>
+                                        <imprint>
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/pub-date[@publication-format='print']/year"/>
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/pub-date[@publication-format='electronic']/year"/>
+                                            <xsl:apply-templates select="//book-part[body/book-part]/book-part-meta/title-group/title" mode="issue"/>
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/fpage"/>
+                                            <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/lpage"/>
+                                        </imprint>
+                                    </monogr>
+                                    <xsl:apply-templates select="collection-meta"/>
+                                </biblStruct>
+                            </sourceDesc>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion"/>
@@ -123,18 +176,32 @@
                     <xsl:apply-templates select="//Book/descendant::Chapter/ChapterHeader/Abstract"/>
                     <xsl:apply-templates select="//Book/descendant::Chapter/ChapterHeader/AbbreviationGroup"/>
                     <xsl:apply-templates select="//Book/descendant::Chapter/ChapterHeader/KeywordGroup"/>
-                    <textClass ana="subject">
-                        <xsl:apply-templates select="//Book/descendant::SubjectCollection"/></textClass>
-                    <textClass ana="subject"><xsl:apply-templates select="//Book/descendant::BookSubjectGroup"/></textClass>
-                <xsl:if test="//Chapter/@Language">
-                    <langUsage>
-                        <language>
-                            <xsl:attribute name="ident">
-                                <xsl:value-of select="translate(//Chapter/@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                            </xsl:attribute>
-                        </language>
-                    </langUsage>
-                </xsl:if>
+                    <!-- ******************* Abstract ******************************-->
+                    <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/abstract"/>
+                    <!-- *************************************** Mots clés niveau book ******************************-->
+                    <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/kwd-group"/>
+                    <xsl:if test="book-meta/custom-meta-group/custom-meta">
+                        <textClass>
+                            <keywords ana="book-subject">
+                                <xsl:apply-templates select="book-meta/custom-meta-group/custom-meta"/>
+                            </keywords>
+                        </textClass>
+                    </xsl:if>
+                    <xsl:if test="//Book/descendant::SubjectCollection or //Book/descendant::BookSubjectGroup">
+                        <textClass ana="subject">
+                            <xsl:apply-templates select="//Book/descendant::SubjectCollection"/></textClass>
+                        <textClass ana="subject"><xsl:apply-templates select="//Book/descendant::BookSubjectGroup"/></textClass>
+                    </xsl:if>
+                    <!-- ******************* Language ******************************-->
+                    <xsl:if test="//Chapter/@Language|@xml:lang">
+                        <langUsage>
+                            <language>
+                                <xsl:attribute name="ident">
+                                    <xsl:value-of select="translate(//Chapter/@Language|@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                </xsl:attribute>
+                            </language>
+                        </langUsage>
+                    </xsl:if>
                 </profileDesc>
                 <!-- traceability -->
                 <revisionDesc>
@@ -143,19 +210,38 @@
             </teiHeader>
             <text>
                 <body>
-                    <div>
-                        <xsl:choose>
-                            <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                    <xsl:choose>
+                        <xsl:when test="//book-part[not(body/book-part)]/body">
+                            <xsl:apply-templates select="//book-part[not(body/book-part)]/body/*"/>
+                        </xsl:when>
+                        <xsl:when test="string-length($rawfulltextpath) &gt; 0">
+                            <div>
                                 <p>
                                     <xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/>
                                 </p>
-                            </xsl:when>
-                            <xsl:otherwise>
+                            </div>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <div>
                                 <p/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </div>
+                            </div>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </body>
+                <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref|fn-group">
+                    <back>
+                        <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref">
+                            <div type="references">
+                                <listBibl>
+                                    <xsl:apply-templates select="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref"/>
+                                </listBibl>
+                            </div>
+                        </xsl:if>
+                        <xsl:if test="//fn-group">
+                            <xsl:apply-templates select="//fn-group"/>
+                        </xsl:if>
+                    </back>
+                </xsl:if>
             </text>
         </TEI>
     </xsl:template>
@@ -233,5 +319,181 @@
             <xsl:apply-templates select="SubSeriesInfo/SubSeriesElectronicISSN"/>
             <xsl:apply-templates select="SubSeriesInfo/SubSeriesID"/>
         </series>
+    </xsl:template>
+    <xsl:template match="title" mode="springer">
+        <title level="a" type="main">
+            <xsl:if test="../label[string-length() &gt; 0]">
+                <xsl:value-of select="normalize-space(../label)"/>
+                <xsl:text> - </xsl:text>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </title>
+        <xsl:if test="../subtitle[string-length() &gt; 0]">
+            <xsl:value-of select="normalize-space(../subtitle)"/>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="custom-meta">
+        <xsl:apply-templates select="meta-value"/>
+    </xsl:template>
+    
+    <xsl:template match="meta-value">
+        <xsl:choose>
+            <xsl:when test="../meta-name=('book-subject-primary')">
+                <term>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </term>
+            </xsl:when>
+            <xsl:when test="../meta-name=('book-subject-secondary')">
+                <term>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </term>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="contrib-group" mode="springer">
+        <xsl:apply-templates select="contrib" mode="springer"/>
+    </xsl:template>
+    
+    <xsl:template match="contrib" mode="springer">
+            <xsl:choose>
+                <xsl:when test="@contrib-type='author'">
+                    <author>
+                        <persName>
+                            <xsl:apply-templates select="name"/>
+                            <xsl:choose>
+                                <xsl:when test="../aff[@id=current()/xref/@rid]">
+                                    <xsl:apply-templates select="../aff[@id=current()/xref/@rid]" mode="springer"/>
+                                </xsl:when>
+                                <xsl:when test="ancestor::book-part-meta and //aff">
+                                    <xsl:apply-templates select="//aff" mode="springer"/>
+                                </xsl:when>
+                                <xsl:when test="/book-part-meta/aff">
+                                    <xsl:apply-templates select="//aff" mode="springer"/>
+                                </xsl:when>
+                            </xsl:choose>
+                        </persName>
+                    </author>
+                </xsl:when>
+                <xsl:when test="@contrib-type='editor' or @contrib-type='Series Editor'">
+                    <editor>
+                        <persName>
+                            <xsl:apply-templates select="name"/>
+                            <xsl:choose>
+                                <xsl:when test="../aff[@id=current()/xref/@rid]">
+                                    <xsl:apply-templates select="../aff[@id=current()/xref/@rid]" mode="springer"/>
+                                </xsl:when>
+                                <xsl:when test="ancestor::book-part-meta and //aff">
+                                    <xsl:apply-templates select="//aff" mode="springer"/>
+                                </xsl:when>
+                                <xsl:when test="/book-part-meta/aff">
+                                    <xsl:apply-templates select="//aff" mode="springer"/>
+                                </xsl:when>
+                            </xsl:choose>
+                        </persName>
+                    </editor>
+                </xsl:when>
+            </xsl:choose>
+    </xsl:template>
+    <xsl:template match="aff" mode="springer">
+        <affiliation>
+            <xsl:apply-templates select="institution-wrap" mode="springer"/>
+            <xsl:if test="addr-line">
+                <address>
+                    <xsl:apply-templates select="addr-line" mode="springer"/>
+                    <xsl:apply-templates select="country"/>
+                </address>
+            </xsl:if>
+        </affiliation>
+    </xsl:template>
+    <xsl:template match="institution-wrap" mode="springer">
+        <xsl:apply-templates select="institution-id" mode="springer"/>
+        <xsl:apply-templates select="institution" mode="springer"/>
+    </xsl:template>
+    <xsl:template match="institution" mode="springer">
+        <xsl:choose>
+            <xsl:when test="@content-type='org-name'">
+                <orgName type="institution">
+                    <xsl:apply-templates/>
+                </orgName>
+            </xsl:when>
+            <xsl:when test="@content-type='org-division'">
+                <orgName type="division">
+                    <xsl:apply-templates/>
+                </orgName>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="institution-id" mode="springer">
+        <idno type="{@institution-id-type}">
+        <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="addr-line" mode="springer">
+        <xsl:choose>
+            <xsl:when test="@content-type='street'">
+                <street>
+                    <xsl:apply-templates/>
+                </street>
+            </xsl:when>
+            <xsl:when test="@content-type='postcode'">
+                <postCode>
+                    <xsl:apply-templates/>
+                </postCode>
+            </xsl:when>
+            <xsl:when test="@content-type='city'">
+                <settlement>
+                    <xsl:apply-templates/>
+                </settlement>
+            </xsl:when>
+            <xsl:when test="@content-type='state'">
+                <region>
+                    <xsl:apply-templates/>
+                </region>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="@id" mode="springer">
+        <idno>
+            <xsl:attribute name="type">chapterID</xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </idno>
+    </xsl:template>
+    
+    <!-- Title Issue-->
+    <xsl:template match="title" mode="issue">
+        <biblScope>
+            <xsl:attribute name="unit">titlePart</xsl:attribute>
+            <xsl:if test="../label">
+                <xsl:value-of select="../label"/>
+                <xsl:text> - </xsl:text>
+            </xsl:if>
+            <xsl:value-of select="."/>
+        </biblScope>
+    </xsl:template>
+    
+    <xsl:template match="related-article"> 
+        <ref type="{@related-article-type}">
+            <idno>
+                <xsl:attribute name="type">
+                    <xsl:choose>
+                        <xsl:when test="@ext-link-type='doi'">DOI</xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@ext-link-type"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="@elocation-id"><xsl:apply-templates select="@elocation-id"/></xsl:when>
+                    <xsl:when test="@xlink:href"><xsl:apply-templates select="@xlink:href"/></xsl:when>
+                </xsl:choose>
+            </idno>
+            <xsl:if test="@id">
+                <idno>
+                    <xsl:attribute name="type">related-article-id</xsl:attribute>
+                    <xsl:apply-templates select="@id"/> 
+                </idno>
+            </xsl:if>
+        </ref>
     </xsl:template>
 </xsl:stylesheet>

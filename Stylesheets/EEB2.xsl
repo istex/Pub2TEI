@@ -1114,7 +1114,7 @@
                     <xsl:text>Damianus</xsl:text>
                 </surname>
                 <date>-1540</date>
-                <description xmlns="http://www.loc.gov/mods/v3">
+                <description>
                     <xsl:apply-templates/>
                 </description>
             </xsl:when>
@@ -1123,7 +1123,7 @@
                     <xsl:text>Saint Prosper of Aquitaine</xsl:text>
                 </surname>
                 <date>390-463</date>
-                <description xmlns="http://www.loc.gov/mods/v3">
+                <description>
                     <xsl:apply-templates/>
                 </description>
             </xsl:when>

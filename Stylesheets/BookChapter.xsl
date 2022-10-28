@@ -2626,6 +2626,14 @@
             </xsl:choose>
             <xsl:apply-templates select="title-group/title"/>
             <xsl:apply-templates select="title-group/subtitle"/>
+            <xsl:choose>
+                <xsl:when test="//institution-wrap">
+                    <xsl:apply-templates select="contrib-group/contrib" mode="springer"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="contrib-group/contrib" mode="editorSeries"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates select="contrib-group/contrib" mode="editorSeries"/>
             <xsl:apply-templates select="issn"/>
             <xsl:apply-templates select="collection-id"/>

@@ -128,6 +128,9 @@
             <xsl:when test="Record">
                 <xsl:message>Converting a EEB2_ISTEX.dtd ebooks</xsl:message>
             </xsl:when>
+            <xsl:when test="book-part-wrapper">
+                <xsl:message>Converting a Springer-bits-book-2 ebooks</xsl:message>
+            </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(
                 contains(/article/article-metadata/article-data/copyright, 'IOP')

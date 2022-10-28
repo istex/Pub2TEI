@@ -30,8 +30,8 @@
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
-    <xsl:template match="book-id">
-        <idno type="{@pub-id-type}" >
+    <xsl:template match="book-id|book-part-id">
+        <idno type="{@pub-id-type|@book-id-type|@book-part-id-type}" >
             <xsl:apply-templates/>
         </idno>
     </xsl:template>

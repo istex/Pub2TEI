@@ -2537,12 +2537,6 @@
         </respStmt>
     </xsl:template>-->
 
-    <xsl:template match="contrib/address">
-        <address>
-            <xsl:apply-templates/>
-        </address>
-    </xsl:template>
-
     <xsl:template match="dateStruct">
         <date>
             <xsl:value-of select="."/>
@@ -2551,62 +2545,33 @@
 
     <xsl:template match="title-group/fn-group"/>
 
-    <!-- Inline affiliation (embedded in <contrib>) -->
+    <!-- Inline affiliation (embedded in <contrib>)-->
     <xsl:template match="contrib/address">
-        <xsl:if test="not(/article/pubfm | /headerx/pubfm | /article/suppfm)">
-            <!-- this only apply to NPG articles not containing a pubfm style component -->
-            <affiliation>
-                <xsl:apply-templates select="*[name(.) != 'addr-line' and name(.) != 'country' and name(.) != 'sup']"/>
-                <xsl:choose>
-                    <xsl:when test="addr-line | country">
-                        <address>
-                            <xsl:apply-templates select="addr-line | country"/>
-                        </address>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="text()"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </affiliation>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="not(/article/pubfm | /headerx/pubfm | /article/suppfm)">
+                <!-- this only apply to NPG articles not containing a pubfm style component -->
+                <affiliation>
+                    <xsl:apply-templates select="*[name(.) != 'addr-line' and name(.) != 'country' and name(.) != 'sup']"/>
+                    <xsl:choose>
+                        <xsl:when test="addr-line | country">
+                            <address>
+                                <xsl:apply-templates select="addr-line | country"/>
+                            </address>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="text()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </affiliation>
+            </xsl:when>
+            <xsl:otherwise>
+                <address>
+                    <xsl:apply-templates/>
+                </address>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-   <!--<xsl:template match="contrib/aff">
-
-          <affiliation>
-                <xsl:apply-templates/>
-                <xsl:choose>
-                    <xsl:when test="addr-line | country">
-                        <address>
-                            <xsl:apply-templates select="addr-line | country"/>
-                        </address>
-                    </xsl:when>
-                    <xsl:otherwise>
-
-                         <xsl:call-template name="NLMaffiliation"/>
-
-                    </xsl:otherwise>
-                </xsl:choose>
-            </affiliation>
-    </xsl:template>-->
-   <!--<xsl:template match="author-notes/corresp">
-       <xsl:if test="*[name(.) != 'addr-line' and name(.) != 'country'] except(email)">
-        <affiliation role="corresp">
-            <xsl:apply-templates/>
-                <xsl:choose>
-                    <xsl:when test="addr-line | country">
-                        <address>
-                            <xsl:if test="addr-line">
-                                <xsl:apply-templates select="addr-line"/>
-                            </xsl:if>
-                            <xsl:if test="country">
-                                <xsl:apply-templates select="country"/>
-                            </xsl:if>
-                        </address>
-                    </xsl:when>
-                </xsl:choose>
-            </affiliation>
-       </xsl:if>
-    </xsl:template>-->
+    
     <xsl:template match="caff" mode="sourceDesc">
         <xsl:choose>
             <xsl:when test="email">
@@ -2855,6 +2820,41 @@
             redondance des informations-->
             <xsl:when test="ref-list"/>
             <xsl:when test="fn-group"/>
+            <xsl:when test="parent::notes">
+                <xsl:if test="@sec-type[string-length()&gt; 0]">
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="@sec-type"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="parent::boxed-text">
+                    <xsl:attribute name="rend">
+                        <xsl:text>boxed-text</xsl:text>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="@id[string-length()&gt; 0]">
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="@id"/>
+                    </xsl:attribute>
+                </xsl:if>
+                
+                <xsl:if test="label[string-length()&gt; 0]">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="label"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="not(descendant::sec) and descendant::boxed-text">
+                        <xsl:comment>Boxed-text</xsl:comment>
+                        <xsl:apply-templates select="title"/>
+                        <xsl:apply-templates select="*except(title)"/>
+                        <xsl:apply-templates select="descendant::boxed-text/sec" mode="boxed-text"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="title"/>
+                        <xsl:apply-templates select="*except(title)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:otherwise>
                 <div>
                     <xsl:if test="@sec-type[string-length()&gt; 0]">
@@ -3611,13 +3611,16 @@
             <!-- SG: ajout licence -->
         <xsl:choose>
             <xsl:when test=".=''"/>
-            <xsl:otherwise>
-                <licence>
-                    <xsl:apply-templates/>
-                </licence>
+            <xsl:otherwise> 
+                <availability>
+                    <licence>
+                        <p>
+                            <xsl:apply-templates/>
+                        </p>
+                    </licence>
+                </availability>
             </xsl:otherwise>
         </xsl:choose>
-        
     </xsl:template>
     <xsl:template match="cpn">
         <!-- SG: ajout publisher -->

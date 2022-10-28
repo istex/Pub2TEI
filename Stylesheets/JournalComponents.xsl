@@ -588,6 +588,11 @@
                     <xsl:apply-templates/>
                 </idno>
             </xsl:when>
+            <xsl:when test="@publication-format = 'electronic'">
+                <idno type="eISSN">
+                    <xsl:apply-templates/>
+                </idno>
+            </xsl:when>
             <xsl:when test="normalize-space(.)">
                 <xsl:variable name="ISSNCode">
                     <xsl:value-of select="normalize-space(.)"/>
@@ -677,9 +682,23 @@
                 <idno type="pISSN">0151-9107</idno>
             </xsl:when>
             <xsl:otherwise>
-                <idno type="pISSN">
-                    <xsl:value-of select="$ISSNCode"/>
-                </idno>
+                <xsl:choose>
+                    <xsl:when test="@publication-format='electronic'">
+                        <idno type="eISSN">
+                            <xsl:value-of select="$ISSNCode"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="@publication-format='print'">
+                        <idno type="pISSN">
+                            <xsl:value-of select="$ISSNCode"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <idno type="pISSN">
+                            <xsl:value-of select="$ISSNCode"/>
+                        </idno> 
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
