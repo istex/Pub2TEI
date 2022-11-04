@@ -2634,7 +2634,6 @@
                     <xsl:apply-templates select="contrib-group/contrib" mode="editorSeries"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:apply-templates select="contrib-group/contrib" mode="editorSeries"/>
             <xsl:apply-templates select="issn"/>
             <xsl:apply-templates select="collection-id"/>
             <xsl:apply-templates select="volume-in-collection/volume-number"/>

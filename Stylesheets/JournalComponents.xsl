@@ -709,7 +709,8 @@
                 <xsl:attribute name="type">
                     <xsl:choose>
                         <xsl:when test="@content-type = 'e-isbn'">eISBN</xsl:when>
-                        <xsl:otherwise>ISBN</xsl:otherwise>
+                        <xsl:when test="@content-type = 'epub'">eISBN</xsl:when>
+                        <xsl:otherwise>pISBN</xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
                 <xsl:apply-templates/>

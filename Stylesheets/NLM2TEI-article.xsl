@@ -2996,6 +2996,11 @@
                     </listBibl>
                 </div>
             </xsl:when>
+            <xsl:when test="parent::ref-list">
+                <listBibl>
+                    <xsl:apply-templates/>
+                </listBibl>
+            </xsl:when>
             <xsl:otherwise>
                 <div type="references">
                     <listBibl>
@@ -3232,7 +3237,16 @@
     </xsl:template>
 
     <xsl:template match="caption">
-        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="ancestor::asp">
+                <figDesc>
+                    <xsl:apply-templates/>
+                </figDesc>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="caption/title">

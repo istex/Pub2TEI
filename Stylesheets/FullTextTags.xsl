@@ -1495,6 +1495,11 @@
     </xsl:template>
     <xsl:template match="index-term">
         <term>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </term>
     </xsl:template>

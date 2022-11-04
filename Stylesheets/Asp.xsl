@@ -92,6 +92,11 @@
                 <xsl:when test="string-length(publication_year | text/publication_year)&gt; 0">
                     <xsl:apply-templates select="publication_year | text/publication_year"/>
                 </xsl:when>
+                <xsl:when test="source_title[string-length()&gt; 0]|text/source_title[string-length()&gt; 0]">
+                    <date>
+                        <xsl:apply-templates select="source_title|text/source_title" mode="date"/>
+                    </date>
+                </xsl:when>
                 <xsl:otherwise>
                     <!-- ajout d'une date par défaut -->
                     <xsl:text>1950</xsl:text>
@@ -116,7 +121,9 @@
                     <xsl:choose>
                         <xsl:when test="publisher[string-length()&gt; 0]|text/publisher[string-length()&gt; 0]">
                             <xsl:apply-templates select="publisher[string-length()&gt; 0]|text/publisher" mode="asp"/>
-                            <xsl:apply-templates select="publisher_place[string-length()&gt; 0]|text/publisher_place"/>
+                            <xsl:if test="publisher_place[string-length()&gt; 0]|text/publisher_place[string-length()&gt; 0]">
+                                <xsl:apply-templates select="publisher_place|text/publisher_place"/>
+                            </xsl:if>
                         </xsl:when>
                         <xsl:when test="string-length($currentPublisher) &gt; 0">
                             <publisher ref="https://scientific-publisher.data.istex.fr">
@@ -302,7 +309,9 @@
                                 <xsl:choose>
                                     <xsl:when test="publisher[string-length()&gt; 0]|text/publisher[string-length()&gt; 0]">
                                         <xsl:apply-templates select="publisher|text/publisher" mode="asp"/>
-                                        <xsl:apply-templates select="publisher_place|text/publisher_place"/>
+                                        <xsl:if test="publisher_place[string-length()&gt; 0]|text/publisher_place[string-length()&gt; 0]">
+                                            <xsl:apply-templates select="publisher_place|text/publisher_place"/>
+                                        </xsl:if>
                                     </xsl:when>
                                     <xsl:when test="string-length($currentPublisher) &gt; 0">
                                         <publisher ref="https://scientific-publisher.data.istex.fr">
@@ -323,10 +332,10 @@
                                     <xsl:value-of select="$date"/>
                                 </date>
                                 
-                                <xsl:apply-templates select="source_title" mode="volumeIssue"/>
+                                <xsl:apply-templates select="source_title|text/source_title" mode="volumeIssue"/>
                                 
-                                <xsl:if test="contains(source_title,'pp')">
-                                    <xsl:apply-templates select="source_title" mode="pages"/>
+                                <xsl:if test="contains(source_title,'pp') or contains(text/source_title,'pp')">
+                                    <xsl:apply-templates select="source_title|text/source_title" mode="pages"/>
                                 </xsl:if>
                                 <xsl:apply-templates select="page_count"/>
                                 <xsl:if test="$currentPageCount">
@@ -339,14 +348,14 @@
                             </imprint>
                         </monogr>
                         <!-- serie/collection -->
-                        <xsl:if test="$currentCollection | //archive_collection[1]">
-                            <series>
-                                <title type="main" level="s">Twentieth Century Religious Thought: Volume I, Christianity</title>
+                        <series>
+                            <title type="main" level="s">Twentieth Century Religious Thought: Volume I, Christianity</title>
+                            <xsl:if test="$currentCollection[string-length()&gt; 0] | //archive_collection[1][string-length()&gt; 0]">
                                 <title type="sub" level="s">
                                     <xsl:value-of select="$currentCollection| //archive_collection[1]"/>
                                 </title>
-                            </series>
-                        </xsl:if>
+                            </xsl:if>
+                        </series>
                     </biblStruct>
                 </sourceDesc>
             </fileDesc>
@@ -358,12 +367,24 @@
                         <xsl:value-of select="$date"/>
                     </date>
                 </creation>
-                
-                <xsl:if test="string-length($currentAbstract) &gt; 0">
-                    <abstract>
-                        <xsl:value-of select="$currentAbstract"/>
-                    </abstract>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="contains(source_title,'pp') and not(div1/p[1]/@align)">
+                        <abstract>
+                            <p>
+                                <xsl:apply-templates select="div1/p[1]" mode="abstractAsp"/>
+                            </p>
+                        </abstract>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="string-length($currentAbstract) &gt; 0">
+                            <abstract>
+                                <p>
+                                    <xsl:value-of select="normalize-space($currentAbstract)"/>
+                                </p>
+                            </abstract>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <!-- mots clés auteurs-->
                 <xsl:if test="string-length(keyword) &gt; 0">
                     <textClass ana="keyword">
@@ -444,12 +465,10 @@
             </revisionDesc>
         </teiHeader>
         <xsl:choose>
-            <xsl:when test="div1/p[string-length()&gt; 0] | text[div1][string-length()&gt; 0]">
+            <xsl:when test="div1/p[string-length()&gt; 0] | text[div1]/p[string-length()&gt; 0] | div1/div2/p[string-length()&gt; 0] | text[div1/div2]/p[string-length()&gt; 0]">
                 <text>
                     <body>
-                        <div>
-                            <xsl:apply-templates select="(div1/*|text[div1]/*) except(//entity_id|//dorpid|//real_title|//page_count|//page_range|//original_language|//publisher|//copyright_message|//author|//document_type|//author_statement|//language_of_edition|//material_type|//original_publication_type|//publication_year|//year_written|//keyword|//hub_collection|//place_discussed|//archive_collection|//aspgroup|//aspcommunity|//unitaccess|//asptertiarycommunity|//publication_type|//publisher_place|//religion_discussed|//asp_release_date|//theological_subject_discussed|//ideological_subject_discussed|//religion_genre|//religion_social_subject_discussed|//archive_box|//archive_document_number|//archive_box_title)"/>
-                        </div>
+                        <xsl:apply-templates select="(div1|text[div1])"/>
                     </body>
                 </text>
             </xsl:when>
@@ -475,8 +494,28 @@
     
     
     <!-- ***********************Début des templates d'appel *************************-->
-    <xsl:template match="div1|div2|div3|div4|div5">
-        <div>
+    <xsl:template match="div1">
+        <div type="1" subtype="{translate(@name,' ','_')}" n="{@idpaging}" ana="{translate(@type,' ','')}" xml:lang="{@lang}">
+            <xsl:apply-templates select="* except(//entity_id|//dorpid|//real_title|//page_count|//page_range|//original_language|//publisher|//copyright_message|//author|//document_type|//author_statement|//language_of_edition|//material_type|//original_publication_type|//publication_year|//year_written|//keyword|//hub_collection|//place_discussed|//archive_collection|//aspgroup|//aspcommunity|//unitaccess|//asptertiarycommunity|//publication_type|//publisher_place|//religion_discussed|//asp_release_date|//theological_subject_discussed|//ideological_subject_discussed|//religion_genre|//religion_social_subject_discussed|//archive_box|//archive_document_number|//archive_box_title)"/>
+        </div>
+    </xsl:template>
+    <xsl:template match="div2">
+        <div type="2" subtype="{translate(@name,' ','_')}" n="{@idpaging}" ana="{translate(@type,' ','')}" xml:lang="{@lang}">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="div3">
+        <div type="3" subtype="{translate(@name,' ','_')}" n="{@idpaging}" ana="{translate(@type,' ','')}" xml:lang="{@lang}">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="div4">
+        <div type="4" subtype="{translate(@name,' ','_')}" n="{@idpaging}" ana="{translate(@type,' ','')}" xml:lang="{@lang}">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="div5">
+        <div type="5" subtype="{translate(@name,' ','_')}" n="{@idpaging}" ana="{translate(@type,' ','')}" xml:lang="{@lang}">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -523,7 +562,14 @@
     </xsl:template>
     <xsl:template match="publisher_place">
         <pubPlace>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="contains(.,':')">
+                    <xsl:value-of select="substring-after(.,':')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/> 
+                </xsl:otherwise>
+            </xsl:choose>
         </pubPlace>
     </xsl:template>
     <xsl:template match="publication_year">
@@ -543,14 +589,26 @@
                 <xsl:value-of select="substring-before(.,',')"/>
             </title>
     </xsl:template>
+    <!-- date -->
+    <xsl:template match="source_title" mode="date">
+        <xsl:variable name="line">
+            <xsl:text>19</xsl:text>
+            <xsl:value-of select="substring-before(substring-after(.,'19'),', pp')"/>
+        </xsl:variable>
+        <xsl:value-of select="$line"/>
+    </xsl:template>
     <!-- volume -->
     <xsl:template match="source_title" mode="volumeIssue">
-        <xsl:variable name="line">
-            <xsl:value-of select="substring-after(.,',')"/>
-        </xsl:variable>
         <biblScope unit="vol">
-                <xsl:value-of select="translate(substring-before(substring-after(.,'Vol'),','),'. ','')"/>
-                <xsl:value-of select="translate(substring-before(substring-after(.,'vol'),','),'. ','')"/>
+            <xsl:choose>
+                <xsl:when test="contains(substring-before(substring-after(.,'Vol'),','),'no')">
+                    <xsl:value-of select="translate(substring-before(substring-before(substring-after(.,'Vol'),','),'no'),'. ','')"/>  
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="translate(substring-before(substring-after(.,'Vol'),','),'. ','')"/>
+                    <xsl:value-of select="translate(substring-before(substring-after(.,'vol'),','),'. ','')"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </biblScope>
         <biblScope unit="issue">
                 <xsl:value-of select="translate(substring-before(substring-after(.,'No'),','),'. ','')"/>
@@ -562,7 +620,7 @@
         <xsl:variable name="line">
             <xsl:value-of select="substring-after(.,'pp.')"/>
         </xsl:variable>
-        <biblScope unit="page" from="{substring-before($line,'-')}">
+        <biblScope unit="page" from="{normalize-space(substring-before($line,'-'))}">
             <xsl:value-of select="normalize-space(substring-before($line,'-'))"/>
         </biblScope>
         <biblScope unit="page" to="{substring-after($line,'-')}">
@@ -744,13 +802,34 @@
         </p>
     </xsl:template>
     <xsl:template match="br">
-        <lb/>
+        <xsl:choose>
+            <xsl:when test="parent::caption"/>
+            <xsl:otherwise>
+                <lb/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="div1/head|div2/head|div3/head|div4/head|div5/head">
         <p rend="head">
             <xsl:apply-templates/>
         </p>
     </xsl:template>
+    <xsl:template match="altpage">
+        <p rend="head">
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="sp">
+        <sp>
+            <xsl:apply-templates/>
+        </sp>
+    </xsl:template>
+    <xsl:template match="speaker">
+        <speaker>
+            <xsl:apply-templates/>
+        </speaker>
+    </xsl:template>
+    
     <xsl:template match="asp_release_date"/>
     <xsl:template match="archive_box"/>
     <xsl:template match="page_range"/>
@@ -774,4 +853,5 @@
     <xsl:template match="publication_type"/>
     <xsl:template match="religion_discussed"/>
     <xsl:template match="ideological_subject_discussed"/>
+    <xsl:template match="ill"/>
 </xsl:stylesheet>

@@ -837,6 +837,17 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template match="note" mode="abstractAsp">
+        <note>
+            <xsl:if test="@id[string-length() &gt; 0]">
+                <xsl:attribute name="xml:id">
+                    <xsl:text>b</xsl:text>
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </note>
+    </xsl:template>
     
     <xsl:template match="pb">
         <xsl:choose>
@@ -2032,6 +2043,17 @@
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>footnote</xsl:text>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
+            <xsl:when test="@publication-type='other'">
+                <bibl>
+                    <xsl:attribute name="type">
+                        <xsl:text>in-line</xsl:text>
+                    </xsl:attribute>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="../@id"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </bibl>

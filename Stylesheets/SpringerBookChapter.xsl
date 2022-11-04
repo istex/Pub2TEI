@@ -231,14 +231,13 @@
                 <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref|fn-group">
                     <back>
                         <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref">
-                            <div type="references">
-                                <listBibl>
-                                    <xsl:apply-templates select="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref"/>
-                                </listBibl>
-                            </div>
+                            <xsl:apply-templates select="//book-part[not(body/book-part)]/back/ref-list"/>
                         </xsl:if>
                         <xsl:if test="//fn-group">
                             <xsl:apply-templates select="//fn-group"/>
+                        </xsl:if>
+                        <xsl:if test="//app-group">
+                            <xsl:apply-templates select="//app-group"/>
                         </xsl:if>
                     </back>
                 </xsl:if>
