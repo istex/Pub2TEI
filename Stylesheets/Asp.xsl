@@ -256,7 +256,17 @@
                             <!-- identifiants niveau article -->
                             <xsl:apply-templates select="dorpid|text/dorpid"/>
                             <xsl:apply-templates select="entity_id|text/entity_id"/>
-                            <xsl:apply-templates select="a|text/a" mode="asp"/>
+                            <xsl:apply-templates select="a[1]|text/a[1]" mode="asp"/>
+                            <xsl:choose>
+                                <xsl:when test="div1[1]/@dorpid|text/div1[1]/@dorpid">
+                                    <idno type="dorpid">
+                                        <xsl:value-of select="div1[1]/@dorpid|text/div1[1]/@dorpid"/>
+                                    </idno>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="div1[1]/dorpid| text/div1[1]/dorpid"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                             <xsl:if test="$currentDorpID">
                                 <idno type="BookID">
                                     <xsl:value-of select="$currentDorpID"/>
@@ -288,6 +298,14 @@
                             <title type="main" level="m">
                                 <xsl:value-of select="$titleHost"/>
                             </title>
+                            <xsl:if test="a[1][@href][string-length() &gt; 0] |text/a[1][@href][string-length() &gt; 0]">
+                                <idno type="bookID">
+                                    <xsl:value-of select="substring-before(a[1]|text/a[1],'.pdf')"/>
+                                </idno>
+                                <idno type="pdfID">
+                                    <xsl:value-of select="a[1]|text/a[1]"/>
+                                </idno>
+                            </xsl:if>
                             <xsl:choose>
                                 <xsl:when test="@isbn[string-length()&gt; 0]">
                                     <idno type="ISBN">
@@ -303,6 +321,11 @@
                             <xsl:if test="$currentDorpID">
                                 <idno type="BookID">
                                     <xsl:value-of select="$currentDorpID"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="@lccn[string-length() &gt; 0]">
+                                <idno type="lccn">
+                                    <xsl:value-of select="@lccn"/>
                                 </idno>
                             </xsl:if>
                             <imprint>
@@ -464,31 +487,23 @@
                 <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
             </revisionDesc>
         </teiHeader>
-        <xsl:choose>
-            <xsl:when test="div1/p[string-length()&gt; 0] | text[div1]/p[string-length()&gt; 0] | div1/div2/p[string-length()&gt; 0] | text[div1/div2]/p[string-length()&gt; 0]">
-                <text>
-                    <body>
-                        <xsl:apply-templates select="(div1|text[div1])"/>
-                    </body>
-                </text>
-            </xsl:when>
-            <xsl:when test="string-length($rawfulltextpath) &gt; 0">
-                <text>
-                    <body>
+        <text>
+            <body>
+                <xsl:choose>
+                    <xsl:when test="div1/p[string-length()&gt; 0] | text/div1/p[string-length()&gt; 0] | div1/div2/p[string-length()&gt; 0] | text[div1/div2]/p[string-length()&gt; 0]">
+                        <xsl:apply-templates select="div1| text/div1"/>
+                    </xsl:when>
+                    <xsl:when test="string-length($rawfulltextpath) &gt; 0">
                         <div>
                             <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
                         </div>
-                    </body>
-                </text>
-            </xsl:when>
-            <xsl:otherwise>
-                <text>
-                    <body>
+                    </xsl:when>
+                    <xsl:otherwise>
                         <div><p></p></div>
-                    </body>
-                </text>
-            </xsl:otherwise>
-        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </body>
+        </text>
     </TEI>
     </xsl:template>
     

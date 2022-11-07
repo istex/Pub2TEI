@@ -50741,6 +50741,12 @@
                         <cell role="religionDiscussed">Church Tradition; Nature of Humanity</cell>
                         <cell role="TheologicalDiscussed">Social &amp; Political Writings</cell>
                         <cell role="socialSubject">Social Views</cell>
+                        <cell role="rameau" corresp="028075668">Relations interethniques: Aspect religieux</cell>
+                        <cell role="rameau" corresp="027229955">Christianisme</cell>
+                        <cell role="rameau" corresp="032558279">Black power</cell>
+                        <cell role="rameau" corresp="027660540">Aspect religieux</cell>
+                        <cell role="rameau" corresp="027229955">Christianisme</cell>
+                        <cell role="rameau" corresp="027488454">Théologie noire</cell>
                     </row>
                     <row>
                         <cell role="productID">1868124</cell>
@@ -51819,6 +51825,8 @@
                             Governing/Disciplinary</cell>
                         <cell role="TheologicalDiscussed">Social &amp; Political Writings</cell>
                         <cell role="socialSubject">Women, Social &amp; Religious Role of</cell>
+                        <cell role="rameau" corresp="030273471">Théologie féministe</cell>
+                        <cell role="rameau" corresp="029839521">Femmes et Église catholique</cell>
                     </row>
                     <row>
                         <cell role="productID">1870196</cell>
@@ -52261,6 +52269,7 @@
                         <cell role="religionDiscussed">Jesus Christ, Works &amp; Offices of;
                             Revelation; Incarnation</cell>
                         <cell role="TheologicalDiscussed">Systems of Theology</cell>
+                        <cell role="rameau" corresp="027317870">Parole de Dieu</cell>
                     </row>
                     <row>
                         <cell role="productID">1880554</cell>
@@ -52280,6 +52289,7 @@
                         <cell role="religionGenre">Roman Catholic</cell>
                         <cell role="religionDiscussed">Trinity; Nature of/Marks</cell>
                         <cell role="TheologicalDiscussed">Systems of Theology</cell>
+                        <cell role="rameau" corresp="027790258">Église</cell>
                     </row>
                     <row>
                         <cell role="productID">1880581</cell>
@@ -52561,6 +52571,11 @@
                         <cell role="religionGenre">Christian; Roman Catholic</cell>
                         <cell role="religionDiscussed">Resurrection &amp; Ascension</cell>
                         <cell role="TheologicalDiscussed">Systems of Theology</cell>
+                        <cell role="rameau" corresp="027469514">Jésus-Christ: Passion</cell>
+                        <cell role="rameau" corresp="027399575">Jésus-Christ: Crucifixion</cell>
+                        <cell role="rameau" corresp="02783428X">Jésus-Christ: Descente aux enfers</cell>
+                        <cell role="rameau" corresp="027429873">Jésus-Christ: Résurrection</cell>
+                        <cell role="rameau" corresp="027655520">Mystère pascal</cell>
                     </row>
                     <row>
                         <cell role="productID">1905644</cell>
@@ -53448,6 +53463,18 @@
                         <cell role="TheologicalDiscussed">Treatises;Tracts on Theological
                             Themes;Doctrines</cell>
                         <cell role="socialSubject">Social Views; Political Views</cell>
+                        <cell role="rameau" corresp="032791437">Stabilité sociale</cell>
+                        <cell role="rameau" corresp="027532666">Religion et civilisation</cell>
+                        <cell role="rameau" corresp="027223280">Civilisation: Philosophie</cell>
+                        <cell role="rameau" corresp="027402592">Religion et culture</cell>
+                        <cell role="rameau" corresp="027224651">Europe</cell>
+                        <cell role="rameau" corresp="027488225">Sécularisation (théologie)</cell>
+                        <cell role="rameau" corresp="027300668">Relativisme moral</cell>
+                        <cell role="rameau" corresp="02753233X">Islam: Relations Christianisme</cell>
+                        <cell role="rameau" corresp="027404722">Christianisme: Relations Islam</cell>
+                        <cell role="rameau" corresp="030026989">Libéralisme: Aspect religieux Église catholique</cell>
+                        <cell role="rameau" corresp="027600858">Christianisme et civilisation</cell>
+                        <cell role="rameau" corresp="029251133">Identité collective</cell>
                     </row>
                     <row>
                         <cell role="productID">2290313</cell>
@@ -53651,6 +53678,7 @@
                         <cell role="religionDiscussed">Humanity; Faith; Theology</cell>
                         <cell role="TheologicalDiscussed">Treatises;Tracts on Theological
                             Themes;Doctrines</cell>
+                        <cell role="rameau" corresp="055758355">Stanley Hauerwas (1940-)</cell>
                     </row>
                     <row>
                         <cell role="productID">2290777</cell>
@@ -53816,6 +53844,8 @@
                             Attributes &amp; Nature of</cell>
                         <cell role="TheologicalDiscussed">Treatises;Tracts on Theological
                             Themes;Doctrines</cell>
+                        <cell role="rameau" corresp="026996871">Henri de Lubac (1896-1991)</cell>
+                        <cell role="rameau" corresp="027881776">Surnaturel (théologie chrétienne)</cell>
                     </row>
                     <row>
                         <cell role="productID">2292029</cell>
@@ -53940,7 +53970,10 @@
                             Faith</cell>
                         <cell role="TheologicalDiscussed">Treatises;Tracts on Theological
                             Themes;Doctrines</cell>
-                        <cell role="socialSubject">Social Welfare/Poverty/Vagrancy</cell>
+                        <cell role="socialSubject">Social Welfare;Poverty;Vagrancy</cell>
+                        <cell role="rameau" corresp="027266605">Église catholique</cell>
+                        <cell role="rameau" corresp="02721897X">Amérique latine</cell>
+                        <cell role="rameau" corresp="027253090">Théologie de la libération</cell>
                     </row>
                     <row>
                         <cell role="productID">2292552</cell>
@@ -54481,6 +54514,8 @@
                         <cell role="TheologicalDiscussed">Treatises;Tracts on Theological
                             Themes;Doctrines</cell>
                         <cell role="socialSubject">Women, Social &amp; Religious Role of</cell>
+                        <cell role="rameau" corresp="028198654">Bible</cell>
+                        <cell role="rameau" corresp="027791114">Critique et exégèse</cell>
                     </row>
                     <row>
                         <cell role="productID">2293226</cell>
