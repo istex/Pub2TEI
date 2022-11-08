@@ -1891,7 +1891,7 @@
 						</xsl:for-each>
 						
 						<xsl:if test="contains(marc:datafield[@tag='856'][1]/marc:subfield[@code='u'],'https://search.proquest.com/docview/')">
-							<idno type="BookID">
+							<idno type="bookID">
 							<xsl:value-of select="substring-after(marc:datafield[@tag='856'][1]/marc:subfield[@code='u'],'https://search.proquest.com/docview/')"/>
 							</idno>
 						</xsl:if>

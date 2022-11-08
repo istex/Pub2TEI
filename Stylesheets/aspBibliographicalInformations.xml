@@ -1000,7 +1000,7 @@
                         <cell role="title">Bulletin no. 2, to the Members of the Seminary
                             Board</cell>
                         <cell role="pageCount">3</cell>
-                        <cell role="language">German; English</cell>
+                        <cell role="language">English</cell>
                         <cell role="copyright">Alexander Street Press is not aware of any existing
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
@@ -17818,7 +17818,6 @@
                         <cell role="copyright">Alexander Street Press is not aware of any existing
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
-                        <cell role="author">Anonymous German Christian Businessman</cell>
                         <cell role="contentType">Letter</cell>
                         <cell role="date">1940</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
@@ -21967,7 +21966,7 @@
                         <cell role="dorpID">1004785943</cell>
                         <cell role="title">What About Good Men Without Religion</cell>
                         <cell role="pageCount">2</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="copyright">Alexander Street Press is not aware of any existing
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
@@ -48449,7 +48448,7 @@
                         <cell role="dorpID">1004880505</cell>
                         <cell role="title">Untitled Sermon, Reformation Day, 1915 or 1916(?)</cell>
                         <cell role="pageCount">13</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="copyright">Alexander Street Press is not aware of any existing
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
@@ -48775,7 +48774,7 @@
                         <cell role="hostTitle">The Christian Century, Vol. 96, May 30, 1979, p.
                             NA</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
-                        <cell role="publicationType">Manuscript Component Part</cell>
+                        <cell role="publicationType">Manuscript</cell>
                         <cell role="religionDiscussed">Jewish; Episcopalian</cell>
                         <cell role="TheologicalDiscussed">Religious Holidays</cell>
                         <cell role="religionGenre">Miscellaneous Writings</cell>
@@ -49894,7 +49893,7 @@
                         <cell role="author">Donald G.,Bloesch </cell>
                         <cell role="contentType">General reference</cell>
                         <cell role="date">2000</cell>
-                        <cell role="collection">Monograph</cell>
+                        <cell role="publicationType">Monograph</cell>
                         <cell role="religionDiscussed">Christian</cell>
                         <cell role="TheologicalDiscussed">Holy Spirit; Faith; Bible, Interpretation
                             of</cell>
@@ -49930,8 +49929,8 @@
                             chronology of the coming church struggle and its prehistory, which is
                             often accurate to the day.</cell>
                         <cell role="hostTitle">Vorträge und kleinere Arbeiten 1930–1933</cell>
-                        <cell role="collection">Karl Barth Complete EditionEvangelicalism;
-                            Theological LiberalismMonograph</cell>
+                        <cell role="collection">Karl Barth Complete Edition</cell>
+                        <cell role="publicationType">Monograph</cell>
                         <cell role="religionDiscussed">Christian</cell>
                         <cell role="TheologicalDiscussed">Christianity; Theology</cell>
                         <cell role="religionGenre">Sermons, Lectures &amp; Orations</cell>
@@ -49963,8 +49962,8 @@
                             «Dialectical Theology» and decisively shaped the theology of the 20th
                             century.</cell>
                         <cell role="hostTitle">Vorträge und kleinere Arbeiten 1914–1921</cell>
-                        <cell role="collection">Karl Barth Complete EditionTheological
-                            LiberalismMonograph</cell>
+                        <cell role="collection">Karl Barth Complete Edition</cell>
+                        <cell role="publicationType">Monograph</cell>
                         <cell role="religionDiscussed">Christian</cell>
                         <cell role="TheologicalDiscussed">Christianity; Theology</cell>
                         <cell role="religionGenre">Sermons, Lectures &amp; Orations</cell>
@@ -49990,7 +49989,8 @@
                             of Dialectical Theology.</cell>
                         <cell role="hostTitle">Der Römerbrief (Zweite Fassung) II. Akademische Werke
                             1922</cell>
-                        <cell role="collection">GesamtausgabeTheological LiberalismMonograph</cell>
+                        <cell role="collection">Gesamtausgabe</cell>
+                        <cell role="publicationType">Monograph</cell>
                         <cell role="religionDiscussed">Protestant</cell>
                         <cell role="TheologicalDiscussed">Christianity; Theology; God's Grace;
                             Bible, Interpretation of</cell>
@@ -50030,8 +50030,8 @@
                             Dogmatics'.</cell>
                         <cell role="hostTitle">Erklärungen des Epheser- und des Jakobusbriefes.
                             1919–1929</cell>
-                        <cell role="collection">Karl Barth Complete EditionTheological
-                            LiberalismMonograph</cell>
+                        <cell role="collection">Karl Barth Complete Edition</cell>
+                        <cell role="publicationType">Monograph</cell>
                         <cell role="religionDiscussed">Christian</cell>
                         <cell role="TheologicalDiscussed">Bible, Interpretation of; Christianity;
                             Theology</cell>
@@ -50066,7 +50066,8 @@
                             of working.</cell>
                         <cell role="hostTitle">Unveröffentlichte Texte Zur Kirchlichen Dogmatik II.
                             Akademische Werke</cell>
-                        <cell role="collection">Kirchliche DogmatikMonograph</cell>
+                        <cell role="collection">Kirchliche Dogmatik</cell>
+                        <cell role="publicationType">Monograph</cell>
                         <cell role="TheologicalDiscussed">Christianity; Theology</cell>
                         <cell role="religionGenre">Miscellaneous Writings</cell>
                     </row>
@@ -50078,7 +50079,7 @@
                             Religions</cell>
                         <cell role="isbn">978-0-664-23016-6</cell>
                         <cell role="pageCount">176</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Westminster John Knox Press</cell>
                         <cell role="copyright">Copyright © 1971 by Westminster John Knox
                             Press</cell>
@@ -50097,7 +50098,7 @@
                         <cell role="title">The Gospel of John: A Commentary</cell>
                         <cell role="isbn">0-664-20893-2</cell>
                         <cell role="pageCount">760</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Westminister Press</cell>
                         <cell role="copyright">Copyright © 1971 by Westminster Press</cell>
                         <cell role="author">Rudolf Karl,Bultmann</cell>
@@ -50196,7 +50197,7 @@
                             Society</cell>
                         <cell role="isbn">978-1-60608-007-8</cell>
                         <cell role="pageCount">190</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Cascade Books</cell>
                         <cell role="copyright">Copyright © 2009 by Wipf &amp; Stock
                             Publishers</cell>
@@ -50215,7 +50216,7 @@
                         <cell role="dorpID">1004531411</cell>
                         <cell role="title">Sources of the Apostolic Canons</cell>
                         <cell role="pageCount">237</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">F. Norgate and Company</cell>
                         <cell role="copyright">Copyright © 1895 by F. Norgate and Company</cell>
                         <cell role="author">Adolf,von Harnack</cell>
@@ -50234,7 +50235,7 @@
                             Protestantism for the Rise of the Modern World</cell>
                         <cell role="isbn">0-8006-3200-1</cell>
                         <cell role="pageCount">114</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 1986 by Wipf &amp; Stock
                             Publishers</cell>
@@ -50254,7 +50255,7 @@
                         <cell role="title">Christian Thought: Its History and Application</cell>
                         <cell role="isbn">1-57910-287-5</cell>
                         <cell role="pageCount">212</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Baron Friedrich von Hügel </cell>
                         <cell role="publisher">Wipf &amp; Stock</cell>
                         <cell role="copyright">Copyright © 2000 by Wipf &amp; Stock
@@ -50429,7 +50430,7 @@
                             Salvation</cell>
                         <cell role="isbn">0-88344-4771</cell>
                         <cell role="pageCount">337</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Sister Caridad Inda; John Eagleson</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1973 by Orbis Press</cell>
@@ -50470,7 +50471,7 @@
                         <cell role="title">The Density of the Present</cell>
                         <cell role="isbn">1-57075-246-X</cell>
                         <cell role="pageCount">226</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1999 by Orbis Press</cell>
                         <cell role="author">Gustavo,Gutiérrez</cell>
@@ -50489,7 +50490,7 @@
                         <cell role="title">The God of Life</cell>
                         <cell role="isbn">0-88344-760-6</cell>
                         <cell role="pageCount">234</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1991 by Orbis Press</cell>
                         <cell role="author">Gustavo,Gutiérrez</cell>
@@ -50510,7 +50511,7 @@
                         <cell role="title">Mysterium Liberationis: Fundamental Concepts of
                             Liberation Theology</cell>
                         <cell role="pageCount">769</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Ignacio Ellacuría </cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2004 by Orbis Press</cell>
@@ -50529,7 +50530,7 @@
                         <cell role="title">On Job: God-Talk and the Suffering of the Innocent</cell>
                         <cell role="isbn">0-88344-577-8</cell>
                         <cell role="pageCount">161</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">William E. Jerman</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1987 by Orbis Press</cell>
@@ -50552,7 +50553,7 @@
                         <cell role="title">The Truth Shall Make You Free</cell>
                         <cell role="isbn">0-88344-679-0</cell>
                         <cell role="pageCount">218</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1990 by Orbis Press</cell>
                         <cell role="author">Gustavo,Gutiérrez</cell>
@@ -50573,7 +50574,7 @@
                             People</cell>
                         <cell role="isbn">1-57075-496-9</cell>
                         <cell role="pageCount">208</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2003 by Orbis Press</cell>
                         <cell role="author">Gustavo,Gutiérrez</cell>
@@ -50594,7 +50595,7 @@
                         <cell role="title">Passion of Christ, Passion of the World</cell>
                         <cell role="isbn">978-1-57075-909-3</cell>
                         <cell role="pageCount">162</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2011 by Orbis Press</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -50613,7 +50614,7 @@
                         <cell role="title">Cry of the Earth, Cry of the Poor</cell>
                         <cell role="isbn">1-57075-136-6</cell>
                         <cell role="pageCount">257</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1997 by Orbis Press</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -50634,7 +50635,7 @@
                         <cell role="title">Ecclesiogenesis</cell>
                         <cell role="isbn">0-88344-214-0</cell>
                         <cell role="pageCount">130</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1986 by Orbis Press</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -50653,7 +50654,7 @@
                         <cell role="title">Francis of Assisi: A Model for Human Liberation</cell>
                         <cell role="isbn">978-1-57075-680-1</cell>
                         <cell role="pageCount">177</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2006 by Orbis Press</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -50672,7 +50673,7 @@
                         <cell role="title">Holy Trinity, Perfect Community</cell>
                         <cell role="isbn">1-57075-332-6</cell>
                         <cell role="pageCount">146</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2000 by Orbis Press</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -50691,7 +50692,7 @@
                         <cell role="title">Jesus Christ Liberator</cell>
                         <cell role="isbn">0-88344-236-1</cell>
                         <cell role="pageCount">337</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1978 by Orbis Press</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -50742,11 +50743,10 @@
                         <cell role="TheologicalDiscussed">Social &amp; Political Writings</cell>
                         <cell role="socialSubject">Social Views</cell>
                         <cell role="rameau" corresp="028075668">Relations interethniques: Aspect religieux</cell>
-                        <cell role="rameau" corresp="027229955">Christianisme</cell>
-                        <cell role="rameau" corresp="032558279">Black power</cell>
-                        <cell role="rameau" corresp="027660540">Aspect religieux</cell>
-                        <cell role="rameau" corresp="027229955">Christianisme</cell>
-                        <cell role="rameau" corresp="027488454">Théologie noire</cell>
+                        <cell role="rameau2" corresp="027229955">Christianisme</cell>
+                        <cell role="rameau3" corresp="032558279">Black power</cell>
+                        <cell role="rameau4" corresp="027660540">Aspect religieux</cell>
+                        <cell role="rameau5" corresp="027488454">Théologie noire</cell>
                     </row>
                     <row>
                         <cell role="productID">1868124</cell>
@@ -50791,7 +50791,7 @@
                         <cell role="title">A Broad Place: An Autobiography</cell>
                         <cell role="isbn">978-0-8006-6214-1</cell>
                         <cell role="pageCount">450</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -50812,7 +50812,7 @@
                         <cell role="title">Against the Wind: Memoir of a Radical Christian</cell>
                         <cell role="isbn">0-8006-3079-3</cell>
                         <cell role="pageCount">185</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -50853,7 +50853,7 @@
                         <cell role="title">Christian Faith</cell>
                         <cell role="isbn">0-8006-3209-5</cell>
                         <cell role="pageCount">354</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Gertrud von Le Fort </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -50875,7 +50875,7 @@
                             Messianic Ecclesiology</cell>
                         <cell role="isbn">0-8006-2821-7</cell>
                         <cell role="pageCount">431</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -50896,7 +50896,7 @@
                         <cell role="title">Coming of God: Christian Eschatology</cell>
                         <cell role="isbn">0-8006-3666-X</cell>
                         <cell role="pageCount">414</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -50917,7 +50917,7 @@
                             &amp; Criticism of Christian Theology</cell>
                         <cell role="isbn">0-8006-2822-5</cell>
                         <cell role="pageCount">364</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -50937,7 +50937,7 @@
                         <cell role="title">Sanctorum Communio: A Theological Study of the Sociology
                             of the Church</cell>
                         <cell role="pageCount">389</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Clifford J. Green</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -50977,7 +50977,7 @@
                         <cell role="dorpID">1004531532</cell>
                         <cell role="title">Act and Being</cell>
                         <cell role="pageCount">253</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Wayne Whitson Floyd, Jr.</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -50999,7 +50999,7 @@
                             1-3</cell>
                         <cell role="isbn">0-8006-8303</cell>
                         <cell role="pageCount">221</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">John W. De Gruchy </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51022,7 +51022,7 @@
                         <cell role="title">Discipleship</cell>
                         <cell role="isbn">0-8006-8304-8</cell>
                         <cell role="pageCount">385</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">John D. Godsey; Geffrey B. Kelly; Martin Kuske</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51043,7 +51043,7 @@
                         <cell role="title">Ethics</cell>
                         <cell role="isbn">978-0-8006-8326-9</cell>
                         <cell role="pageCount">607</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Clifford J. Green</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51064,7 +51064,7 @@
                         <cell role="title">Fiction from Tegel Prison</cell>
                         <cell role="isbn">978-0-8006-9766-2</cell>
                         <cell role="pageCount">301</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Clifford J. Green</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51085,7 +51085,7 @@
                         <cell role="title">Letters and Papers from Prison</cell>
                         <cell role="isbn">978-0-8006-9703-7</cell>
                         <cell role="pageCount">776</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">John W. De Gruchy </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51106,7 +51106,7 @@
                         <cell role="title">Barcelona, Berlin, New York: 1928-1931</cell>
                         <cell role="isbn">978-0-8006-8330-6</cell>
                         <cell role="pageCount">792</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Clifford J. Green</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51126,7 +51126,7 @@
                         <cell role="title">Ecumenical, Academic, and Pastoral Work: 1931-1932</cell>
                         <cell role="isbn">978-0-8006-9838-6</cell>
                         <cell role="pageCount">636</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Mark S. Brocker; Michael B. Lukens; Victoria J. Barnett </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51146,7 +51146,7 @@
                         <cell role="title">London, 1933-1935</cell>
                         <cell role="isbn">978-0-8006-8313-9</cell>
                         <cell role="pageCount">550</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Keith Clements</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51166,7 +51166,7 @@
                         <cell role="title">Theological Education at Finkenwalde, 1935-1937</cell>
                         <cell role="isbn">978-1602583948</cell>
                         <cell role="pageCount">1257</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">H. Gaylon Barker; Mark S. Brocker</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2013 by Fortress Press</cell>
@@ -51186,7 +51186,7 @@
                         <cell role="title">Theological Education Underground, 1937-1940</cell>
                         <cell role="isbn">978-0-8006-9815-7</cell>
                         <cell role="pageCount">751</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Victoria J. Barnett </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51206,7 +51206,7 @@
                         <cell role="title">Conspiracy and Imprisonment 1940-1945</cell>
                         <cell role="isbn">978-0-8006-8316-0</cell>
                         <cell role="pageCount">902</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Mark S. Brocker</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51247,7 +51247,7 @@
                         <cell role="title">Ethics of Hope</cell>
                         <cell role="isbn">978-0-8006-9858-4</cell>
                         <cell role="pageCount">289</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51267,7 +51267,7 @@
                             Theology</cell>
                         <cell role="isbn">0-8006-3267-2</cell>
                         <cell role="pageCount">418</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51285,7 +51285,7 @@
                         <cell role="title">Experiences of God</cell>
                         <cell role="isbn">978-0-8006-1406-5</cell>
                         <cell role="pageCount">93</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51304,7 +51304,7 @@
                         <cell role="title">Future of Creation: Collected Essays</cell>
                         <cell role="isbn">0-8006-0627-2</cell>
                         <cell role="pageCount">208</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51325,7 +51325,7 @@
                             Theology</cell>
                         <cell role="isbn">0-8006-3184-6</cell>
                         <cell role="pageCount">306</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51346,7 +51346,7 @@
                             Spirit of God</cell>
                         <cell role="isbn">0-8006-2823-3</cell>
                         <cell role="pageCount">385</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51365,7 +51365,7 @@
                         <cell role="title">In the End -- The Beginning: The Life of Hope</cell>
                         <cell role="isbn">8006-3656-2</cell>
                         <cell role="pageCount">194</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51404,7 +51404,7 @@
                         <cell role="dorpID">1004531576</cell>
                         <cell role="title">Jesus Christ for Today's World</cell>
                         <cell role="pageCount">162</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51425,7 +51425,7 @@
                         <cell role="title">The Mystery of Death</cell>
                         <cell role="isbn">978-0-8006-3891-7</cell>
                         <cell role="pageCount">162</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51445,7 +51445,7 @@
                             Writings</cell>
                         <cell role="isbn">0-8006-0727-9</cell>
                         <cell role="pageCount">178</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Schubert M. Ogden </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51467,7 +51467,7 @@
                             Present</cell>
                         <cell role="isbn">978-0-8006-1066-1</cell>
                         <cell role="pageCount">142</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51505,7 +51505,7 @@
                         <cell role="title">Passion for Life: A Messianic Lifestyle</cell>
                         <cell role="isbn">978-0-8006-6249-3</cell>
                         <cell role="pageCount">130</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51590,7 +51590,7 @@
                         <cell role="title">Religion in History</cell>
                         <cell role="isbn">978-0-8006-3208-3</cell>
                         <cell role="pageCount">398</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51630,7 +51630,7 @@
                         <cell role="title">Science and Wisdom</cell>
                         <cell role="isbn">0-8006-3587-6</cell>
                         <cell role="pageCount">235</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51651,7 +51651,7 @@
                         <cell role="title">Silent Cry: Mysticism and Resistance</cell>
                         <cell role="isbn">0-8006-3266-4</cell>
                         <cell role="pageCount">337</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51671,7 +51671,7 @@
                             Life</cell>
                         <cell role="isbn">0-8006-3099-8</cell>
                         <cell role="pageCount">160</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51690,7 +51690,7 @@
                         <cell role="title">Spirit of Life: A Universal Affirmation</cell>
                         <cell role="isbn">0-8006-3424-1</cell>
                         <cell role="pageCount">380</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51710,7 +51710,7 @@
                         <cell role="title">Spiritual Care</cell>
                         <cell role="isbn">0-8006-1874-2</cell>
                         <cell role="pageCount">95</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51729,7 +51729,7 @@
                         <cell role="title">Suffering</cell>
                         <cell role="isbn">0-8006-1813-0</cell>
                         <cell role="pageCount">188</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51750,7 +51750,7 @@
                             and the Earth</cell>
                         <cell role="isbn">978-0-8006-9658-0</cell>
                         <cell role="pageCount">266</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51770,7 +51770,7 @@
                         <cell role="title">Theology for Skeptics</cell>
                         <cell role="isbn">0-8006-2788-1</cell>
                         <cell role="pageCount">128</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51790,7 +51790,7 @@
                         <cell role="title">Theology of Hope</cell>
                         <cell role="isbn">0-8006-2824-1</cell>
                         <cell role="pageCount">344</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51826,7 +51826,7 @@
                         <cell role="TheologicalDiscussed">Social &amp; Political Writings</cell>
                         <cell role="socialSubject">Women, Social &amp; Religious Role of</cell>
                         <cell role="rameau" corresp="030273471">Théologie féministe</cell>
-                        <cell role="rameau" corresp="029839521">Femmes et Église catholique</cell>
+                        <cell role="rameau2" corresp="029839521">Femmes et Église catholique</cell>
                     </row>
                     <row>
                         <cell role="productID">1870196</cell>
@@ -51834,7 +51834,7 @@
                         <cell role="title">Trinity and the Kingdom</cell>
                         <cell role="isbn">0-8006-2825-X</cell>
                         <cell role="pageCount">274</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51855,7 +51855,7 @@
                             Dimensions</cell>
                         <cell role="isbn">0-8006-2826-8</cell>
                         <cell role="pageCount">410</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51876,7 +51876,7 @@
                         <cell role="title">What Is Christianity?</cell>
                         <cell role="isbn">0-8006-3201-X</cell>
                         <cell role="pageCount">321</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
                             Press.</cell>
@@ -51895,7 +51895,7 @@
                         <cell role="title">What is Theology?</cell>
                         <cell role="isbn">0-8006-3008-2</cell>
                         <cell role="pageCount">258</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Eberhard Jüngel; Klaus W. Müller</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51915,7 +51915,7 @@
                         <cell role="title">Who is Christ for Us?</cell>
                         <cell role="isbn">0-8006-3480-2</cell>
                         <cell role="pageCount">96</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Renate Wind; Craig L. Nessan</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress
@@ -51957,7 +51957,7 @@
                         <cell role="title">A Brief Catechesis on Nature and Grace</cell>
                         <cell role="isbn">978-0-87890-035-0</cell>
                         <cell role="pageCount">309</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1984 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -51995,7 +51995,7 @@
                         <cell role="title">A Theology of History</cell>
                         <cell role="isbn">978-0-89870-460-0</cell>
                         <cell role="pageCount">155</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1959, 1963 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52014,7 +52014,7 @@
                             Interpretation</cell>
                         <cell role="isbn">978-0-89870-398-6</cell>
                         <cell role="pageCount">452</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1992 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52035,7 +52035,7 @@
                             the Circumstances That Occasioned His Writings</cell>
                         <cell role="isbn">978-0-89870-414-3</cell>
                         <cell role="pageCount">413</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1993 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52053,7 +52053,7 @@
                         <cell role="title">Called to Communion</cell>
                         <cell role="isbn">0-89870-578-9</cell>
                         <cell role="pageCount">165</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1996 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -52071,7 +52071,7 @@
                         <cell role="title">Catholicism: Christ and the Common Destiny of Man</cell>
                         <cell role="isbn">0-89870-203-3</cell>
                         <cell role="pageCount">445</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1988 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52090,7 +52090,7 @@
                         <cell role="title">Christian Meditation</cell>
                         <cell role="isbn">978-0-89870-235-6-4</cell>
                         <cell role="pageCount">97</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1989 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52109,7 +52109,7 @@
                             Ecclesiology</cell>
                         <cell role="isbn">978-1-58617-217-6</cell>
                         <cell role="pageCount">258</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2008 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -52129,7 +52129,7 @@
                         <cell role="title">Convergences: To the Source of Christian Mystery</cell>
                         <cell role="isbn">0-89870-032-9</cell>
                         <cell role="pageCount">154</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1983 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52147,7 +52147,7 @@
                             Confessor</cell>
                         <cell role="isbn">978-89870-758-8</cell>
                         <cell role="pageCount">409</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2004 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52166,7 +52166,7 @@
                         <cell role="title">Credo: Meditations on the Apostle's Creed</cell>
                         <cell role="isbn">978-0-89870-803-5</cell>
                         <cell role="pageCount">105</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1989, 1990 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52184,7 +52184,7 @@
                         <cell role="title">Dare We Hope: With a Short Discourse on Hell</cell>
                         <cell role="isbn">0-89087-207-0</cell>
                         <cell role="pageCount">254</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1988 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52203,7 +52203,7 @@
                         <cell role="title">Does Jesus Know Us? Do We Know Him?</cell>
                         <cell role="isbn">978-0-89870-023-7</cell>
                         <cell role="pageCount">99</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1983 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52240,7 +52240,7 @@
                         <cell role="title">Elucidations</cell>
                         <cell role="isbn">89870-621-1</cell>
                         <cell role="pageCount">321</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1971, 1975 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52333,7 +52333,7 @@
                         <cell role="title">Fundamental Speeches from Five Decades</cell>
                         <cell role="isbn">978-1-58617-301-2</cell>
                         <cell role="pageCount">261</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Florian Schuller</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2012 by Ignatius Press.</cell>
@@ -52353,7 +52353,7 @@
                         <cell role="title">Heart of the World</cell>
                         <cell role="isbn">978-0-89870-001-5</cell>
                         <cell role="pageCount">221</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1979 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52372,7 +52372,7 @@
                             According to Origen</cell>
                         <cell role="isbn">978-0-89870-880-6</cell>
                         <cell role="pageCount">509</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2007 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52393,7 +52393,7 @@
                             Distinctively Catholic</cell>
                         <cell role="isbn">0-89870-166-X</cell>
                         <cell role="pageCount">131</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1988 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52411,7 +52411,7 @@
                         <cell role="title">Introduction to Christianity, 2nd edition</cell>
                         <cell role="isbn">1-58617-029-5</cell>
                         <cell role="pageCount">380</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2004 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -52429,7 +52429,7 @@
                         <cell role="title">Life Out of Death</cell>
                         <cell role="isbn">978-1-58617-144-5</cell>
                         <cell role="pageCount">90</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2012 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52448,7 +52448,7 @@
                         <cell role="title">Love Alone is Credible</cell>
                         <cell role="isbn">978-0-89870-881-3</cell>
                         <cell role="pageCount">155</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2004 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52468,7 +52468,7 @@
                         <cell role="title">Mary for Today</cell>
                         <cell role="isbn">978-0-89870-190-6</cell>
                         <cell role="pageCount">76</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1987 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52487,7 +52487,7 @@
                         <cell role="title">Mary: The Church at the Source</cell>
                         <cell role="isbn">978-1-58617-0189</cell>
                         <cell role="pageCount">178</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2005 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52506,7 +52506,7 @@
                         <cell role="title">More Paradoxes</cell>
                         <cell role="isbn">0-89870-864-8</cell>
                         <cell role="pageCount">127</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2002 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52525,7 +52525,7 @@
                         <cell role="title">Motherhood of the Church</cell>
                         <cell role="isbn">0-89870-014-0</cell>
                         <cell role="pageCount">364</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1982 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52543,7 +52543,7 @@
                         <cell role="title">My Work in Retrospect</cell>
                         <cell role="isbn">978-0-89870-435-8</cell>
                         <cell role="pageCount">125</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1993 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52561,7 +52561,7 @@
                         <cell role="title">Mysterium Paschale: The Mystery of Easter</cell>
                         <cell role="isbn">978-0-89870-804-2</cell>
                         <cell role="pageCount">311</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1990 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52572,10 +52572,10 @@
                         <cell role="religionDiscussed">Resurrection &amp; Ascension</cell>
                         <cell role="TheologicalDiscussed">Systems of Theology</cell>
                         <cell role="rameau" corresp="027469514">Jésus-Christ: Passion</cell>
-                        <cell role="rameau" corresp="027399575">Jésus-Christ: Crucifixion</cell>
-                        <cell role="rameau" corresp="02783428X">Jésus-Christ: Descente aux enfers</cell>
-                        <cell role="rameau" corresp="027429873">Jésus-Christ: Résurrection</cell>
-                        <cell role="rameau" corresp="027655520">Mystère pascal</cell>
+                        <cell role="rameau2" corresp="027399575">Jésus-Christ: Crucifixion</cell>
+                        <cell role="rameau3" corresp="02783428X">Jésus-Christ: Descente aux enfers</cell>
+                        <cell role="rameau4" corresp="027429873">Jésus-Christ: Résurrection</cell>
+                        <cell role="rameau5" corresp="027655520">Mystère pascal</cell>
                     </row>
                     <row>
                         <cell role="productID">1905644</cell>
@@ -52583,7 +52583,7 @@
                         <cell role="title">New Elucidations</cell>
                         <cell role="isbn">0-89870-041-8</cell>
                         <cell role="pageCount">304</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1986 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52601,7 +52601,7 @@
                         <cell role="title">Our Task</cell>
                         <cell role="isbn">0-89870-515-0</cell>
                         <cell role="pageCount">232</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1994 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52622,7 +52622,7 @@
                         <cell role="title">Paradoxes of Faith</cell>
                         <cell role="isbn">978-0-89870-132-6</cell>
                         <cell role="pageCount">237</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1987 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52642,7 +52642,7 @@
                             Message of the Letters to the Corinthians</cell>
                         <cell role="isbn">978-0-89870-386-3</cell>
                         <cell role="pageCount">91</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1992 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52661,7 +52661,7 @@
                         <cell role="title">Prayer</cell>
                         <cell role="isbn">978-0-89870-074-09</cell>
                         <cell role="pageCount">311</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright ©1986 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52680,7 +52680,7 @@
                             Philosophy of Gregory of Nyssa</cell>
                         <cell role="isbn">978-89870-521-8</cell>
                         <cell role="pageCount">195</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1995 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52700,7 +52700,7 @@
                             Fundamental Theology</cell>
                         <cell role="isbn">0-89870-133-3</cell>
                         <cell role="pageCount">398</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1987 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -52719,7 +52719,7 @@
                         <cell role="title">Principles of Christian Morality</cell>
                         <cell role="isbn">978-0-89870-086-2</cell>
                         <cell role="pageCount">104</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1986 by Ignatius Press.</cell>
                         <cell role="author">Heinz,Schürmann</cell>
@@ -52737,7 +52737,7 @@
                         <cell role="title">Razing the Bastions: On the Church in this Age</cell>
                         <cell role="isbn">0-89870-428-6</cell>
                         <cell role="pageCount">104</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1993 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52756,7 +52756,7 @@
                         <cell role="title">Short Primer for Unsettled Laymen</cell>
                         <cell role="isbn">0-89870-037-X</cell>
                         <cell role="pageCount">135</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1985 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52775,7 +52775,7 @@
                         <cell role="title">Test Everything: Hold Fast to What Is Good</cell>
                         <cell role="isbn">978-0-89870-196-8</cell>
                         <cell role="pageCount">94</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1989 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52792,7 +52792,7 @@
                         <cell role="title">The Christian and Anxiety</cell>
                         <cell role="isbn">0-89870-587-8</cell>
                         <cell role="pageCount">156</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2000 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52813,7 +52813,7 @@
                             Apostles' Creed</cell>
                         <cell role="isbn">0-89870-053-1</cell>
                         <cell role="pageCount">354</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1986 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52832,7 +52832,7 @@
                         <cell role="title">The Christian State of Life</cell>
                         <cell role="isbn">0-89870-044-2</cell>
                         <cell role="pageCount">213</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Hans Urs von Balthasar </cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1983 by Ignatius Press.</cell>
@@ -52851,7 +52851,7 @@
                         <cell role="title">The Drama of Atheist Humanism</cell>
                         <cell role="isbn">978-0-89870-443-2</cell>
                         <cell role="pageCount">540</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1995 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -52870,7 +52870,7 @@
                             Liturgy</cell>
                         <cell role="isbn">978-0-89870-056-5</cell>
                         <cell role="pageCount">153</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1986 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -52889,7 +52889,7 @@
                         <cell role="title">Seeing the Form</cell>
                         <cell role="isbn">978-7-58617-321-0</cell>
                         <cell role="pageCount">675</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1961, 1967, 1982 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52908,7 +52908,7 @@
                         <cell role="title">Clerical Styles</cell>
                         <cell role="isbn">0-89870-048-5</cell>
                         <cell role="pageCount">368</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1962, 1969, 1984 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52929,7 +52929,7 @@
                         <cell role="title">Lay Styles</cell>
                         <cell role="isbn">978-0-89870-038-1</cell>
                         <cell role="pageCount">526</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1962, 1969, 1986 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52948,7 +52948,7 @@
                         <cell role="title">Realm of Metaphysics in Antiquity</cell>
                         <cell role="isbn">978-0-89870-246-0</cell>
                         <cell role="pageCount">421</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1967, 1989 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52968,7 +52968,7 @@
                         <cell role="title">Realm of Metaphysics in the Modern Age</cell>
                         <cell role="isbn">978-0-89870-247-7</cell>
                         <cell role="pageCount">668</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1965, 1991 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -52985,7 +52985,7 @@
                         <cell role="dorpID">1004589881</cell>
                         <cell role="title">Theology: The Old Covenant</cell>
                         <cell role="pageCount">432</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">John Riches</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1967, 1991 by Ignatius Press</cell>
@@ -53006,7 +53006,7 @@
                         <cell role="title">Theology: The New Covenant</cell>
                         <cell role="isbn">0-89870-249-6</cell>
                         <cell role="pageCount">573</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">John K. Riches</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1969, 1989 by Ignatius Press</cell>
@@ -53029,7 +53029,7 @@
                             Mission in the World</cell>
                         <cell role="isbn">0-89870-572-X</cell>
                         <cell role="pageCount">306</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2003 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53047,7 +53047,7 @@
                         <cell role="title">The Moment of Christian Witness</cell>
                         <cell role="isbn">0-89870-516-9</cell>
                         <cell role="pageCount">156</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1966, 1969, 1987 by Ignatius Press</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53067,7 +53067,7 @@
                             Theology in Today's Debates</cell>
                         <cell role="isbn">978-0-89870-538-6</cell>
                         <cell role="pageCount">130</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1995 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -53086,7 +53086,7 @@
                             Edition</cell>
                         <cell role="isbn">978-1-58617-228-2</cell>
                         <cell role="pageCount">460</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2007 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53106,7 +53106,7 @@
                         <cell role="title">The Splendor of the Church</cell>
                         <cell role="isbn">987-0-89870-742-7</cell>
                         <cell role="pageCount">383</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1999 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -53126,7 +53126,7 @@
                             Prayer</cell>
                         <cell role="isbn">978-0-89870-015-2</cell>
                         <cell role="pageCount">148</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1985 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53145,7 +53145,7 @@
                         <cell role="title">Prolegomena</cell>
                         <cell role="isbn">978-0-89870-185-2</cell>
                         <cell role="pageCount">665</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1988 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53165,7 +53165,7 @@
                         <cell role="title">Dramatis Personae: Man in God</cell>
                         <cell role="isbn">0-89870-287-9</cell>
                         <cell role="pageCount">439</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1990 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53185,7 +53185,7 @@
                         <cell role="title">Persons in Christ</cell>
                         <cell role="isbn">978-0-89870-295-8</cell>
                         <cell role="pageCount">548</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1992 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53206,7 +53206,7 @@
                         <cell role="title">The Action</cell>
                         <cell role="isbn">0-89870-471-5</cell>
                         <cell role="pageCount">513</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1994 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53227,7 +53227,7 @@
                         <cell role="title">The Last Act</cell>
                         <cell role="isbn">0-89870-689-0</cell>
                         <cell role="pageCount">531</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1998 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53247,7 +53247,7 @@
                         <cell role="title">The Truth of the Word</cell>
                         <cell role="isbn">0-89870-718-8</cell>
                         <cell role="pageCount">274</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2000 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53267,7 +53267,7 @@
                         <cell role="title">Truth of God</cell>
                         <cell role="isbn">0-89870-719-6</cell>
                         <cell role="pageCount">373</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2004 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53287,7 +53287,7 @@
                         <cell role="title">The Spirit of the Truth</cell>
                         <cell role="isbn">0-89870-720</cell>
                         <cell role="pageCount">459</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2005 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53307,7 +53307,7 @@
                         <cell role="title">Theology in History</cell>
                         <cell role="isbn">0-89870-472-3</cell>
                         <cell role="pageCount">626</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1996 by Ignatius Press.</cell>
                         <cell role="author">Henri,de Lubac</cell>
@@ -53326,7 +53326,7 @@
                         <cell role="title">Theology of Henri De Lubac</cell>
                         <cell role="isbn">978-0-89870-350-4</cell>
                         <cell role="pageCount">128</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1991 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53347,7 +53347,7 @@
                             Religions</cell>
                         <cell role="isbn">978-1-58617-035-6</cell>
                         <cell role="pageCount">284</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 2004 by Ignatius Press.</cell>
                         <cell role="author">Pope Benedict XVI</cell>
@@ -53367,7 +53367,7 @@
                         <cell role="title">Truth Is Symphonic: Aspects of Christian Pluralism</cell>
                         <cell role="isbn">0-89870-141-4</cell>
                         <cell role="pageCount">193</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1987 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53387,7 +53387,7 @@
                             Elizabeth of the Trinity</cell>
                         <cell role="isbn">978-0-89870-148-7</cell>
                         <cell role="pageCount">501</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1992 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53408,7 +53408,7 @@
                         <cell role="title">Unless You Become Like This Child</cell>
                         <cell role="isbn">978-0-89870-379-5</cell>
                         <cell role="pageCount">76</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Ignatius Press</cell>
                         <cell role="copyright">Copyright © 1991 by Ignatius Press.</cell>
                         <cell role="author">Hans Urs,von Balthasar</cell>
@@ -53449,7 +53449,7 @@
                             Islam</cell>
                         <cell role="isbn">0-465-00634-5</cell>
                         <cell role="pageCount">178</cell>
-                        <cell role="language">Italian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Perseus Books Group</cell>
                         <cell role="copyright">Copyright © 2006 by Arnoldo Mondadori Editore
                             S.p.A</cell>
@@ -53464,17 +53464,17 @@
                             Themes;Doctrines</cell>
                         <cell role="socialSubject">Social Views; Political Views</cell>
                         <cell role="rameau" corresp="032791437">Stabilité sociale</cell>
-                        <cell role="rameau" corresp="027532666">Religion et civilisation</cell>
-                        <cell role="rameau" corresp="027223280">Civilisation: Philosophie</cell>
-                        <cell role="rameau" corresp="027402592">Religion et culture</cell>
-                        <cell role="rameau" corresp="027224651">Europe</cell>
-                        <cell role="rameau" corresp="027488225">Sécularisation (théologie)</cell>
-                        <cell role="rameau" corresp="027300668">Relativisme moral</cell>
-                        <cell role="rameau" corresp="02753233X">Islam: Relations Christianisme</cell>
-                        <cell role="rameau" corresp="027404722">Christianisme: Relations Islam</cell>
-                        <cell role="rameau" corresp="030026989">Libéralisme: Aspect religieux Église catholique</cell>
-                        <cell role="rameau" corresp="027600858">Christianisme et civilisation</cell>
-                        <cell role="rameau" corresp="029251133">Identité collective</cell>
+                        <cell role="rameau2" corresp="027532666">Religion et civilisation</cell>
+                        <cell role="rameau3" corresp="027223280">Civilisation: Philosophie</cell>
+                        <cell role="rameau4" corresp="027402592">Religion et culture</cell>
+                        <cell role="rameau5" corresp="027224651">Europe</cell>
+                        <cell role="rameau6" corresp="027488225">Sécularisation (théologie)</cell>
+                        <cell role="rameau7" corresp="027300668">Relativisme moral</cell>
+                        <cell role="rameau8" corresp="02753233X">Islam: Relations Christianisme</cell>
+                        <cell role="rameau9" corresp="027404722">Christianisme: Relations Islam</cell>
+                        <cell role="rameau10" corresp="030026989">Libéralisme: Aspect religieux Église catholique</cell>
+                        <cell role="rameau11" corresp="027600858">Christianisme et civilisation</cell>
+                        <cell role="rameau12" corresp="029251133">Identité collective</cell>
                     </row>
                     <row>
                         <cell role="productID">2290313</cell>
@@ -53547,7 +53547,7 @@
                         <cell role="title">Unfading Light</cell>
                         <cell role="isbn">978-0-8028-6711-7</cell>
                         <cell role="pageCount">554</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Thomas Allan Smith</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2012 Thomas Allan Smith</cell>
@@ -53567,7 +53567,7 @@
                         <cell role="title">Icons and the Name of God</cell>
                         <cell role="isbn">978-0-8028-6664-6</cell>
                         <cell role="pageCount">192</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © by Boris Jakim 2012</cell>
                         <cell role="author">Sergei,Bulgakov</cell>
@@ -53586,7 +53586,7 @@
                         <cell role="title">Relics and Miracles: Two Theological Essays</cell>
                         <cell role="isbn">978-0-8028-6531-1</cell>
                         <cell role="pageCount">128</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2011 by Boris Jakim</cell>
                         <cell role="author">Sergei,Bulgakov</cell>
@@ -53605,7 +53605,7 @@
                         <cell role="title">Jacob's Ladder: On Angels</cell>
                         <cell role="isbn">978-0-8028-6516-8</cell>
                         <cell role="pageCount">183</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2010 Wm. B. Eerdmans Publishing
                             Company</cell>
@@ -53625,7 +53625,7 @@
                         <cell role="title">Systematic Theology: Volume I</cell>
                         <cell role="isbn">978-0-8028-6503-8</cell>
                         <cell role="pageCount">487</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 1991 by Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53646,7 +53646,7 @@
                         <cell role="title">Systematic Theology: Volume III</cell>
                         <cell role="isbn">978-0-8028-6456-7</cell>
                         <cell role="pageCount">729</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 1997 by Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53687,7 +53687,7 @@
                             of the Forerunner</cell>
                         <cell role="isbn">0-8028-4979-2</cell>
                         <cell role="pageCount">202</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2003 Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53708,7 +53708,7 @@
                         <cell role="title">Churchly Joy</cell>
                         <cell role="isbn">978-0-8028-4834-5</cell>
                         <cell role="pageCount">163</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2008 William B. Eerdmans Publishing
                             Company</cell>
@@ -53809,7 +53809,7 @@
                         <cell role="title">The Bride of the Lamb</cell>
                         <cell role="isbn">0-8028-3915-0</cell>
                         <cell role="pageCount">549</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2002 Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53845,7 +53845,7 @@
                         <cell role="TheologicalDiscussed">Treatises;Tracts on Theological
                             Themes;Doctrines</cell>
                         <cell role="rameau" corresp="026996871">Henri de Lubac (1896-1991)</cell>
-                        <cell role="rameau" corresp="027881776">Surnaturel (théologie chrétienne)</cell>
+                        <cell role="rameau2" corresp="027881776">Surnaturel (théologie chrétienne)</cell>
                     </row>
                     <row>
                         <cell role="productID">2292029</cell>
@@ -53853,7 +53853,7 @@
                         <cell role="title">The Lamb of God</cell>
                         <cell role="isbn">978-0-8028-2779-1</cell>
                         <cell role="pageCount">472</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2008 Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53873,7 +53873,7 @@
                         <cell role="title">The Comforter</cell>
                         <cell role="isbn">978-0-8028-2112-6</cell>
                         <cell role="pageCount">414</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 2004 Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53915,7 +53915,7 @@
                         <cell role="title">Systematic Theology: Volume II</cell>
                         <cell role="isbn">0-8028-3707-7</cell>
                         <cell role="pageCount">516</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">William B. Eerdmans Publishing Company</cell>
                         <cell role="copyright">Copyright © 1994 Wm. B. Eerdmans Publishing
                             Co.</cell>
@@ -53936,7 +53936,7 @@
                         <cell role="title">Las Casas</cell>
                         <cell role="isbn">0-88344-838-6</cell>
                         <cell role="pageCount">705</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1993 by Orbis Books</cell>
                         <cell role="author">Gustavo,Gutiérrez</cell>
@@ -53957,7 +53957,7 @@
                         <cell role="title">The Power of the Poor in History</cell>
                         <cell role="isbn">0-88344-388-0</cell>
                         <cell role="pageCount">257</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1992 by Orbis Books</cell>
                         <cell role="author">Gustavo,Gutiérrez</cell>
@@ -53972,8 +53972,8 @@
                             Themes;Doctrines</cell>
                         <cell role="socialSubject">Social Welfare;Poverty;Vagrancy</cell>
                         <cell role="rameau" corresp="027266605">Église catholique</cell>
-                        <cell role="rameau" corresp="02721897X">Amérique latine</cell>
-                        <cell role="rameau" corresp="027253090">Théologie de la libération</cell>
+                        <cell role="rameau2" corresp="02721897X">Amérique latine</cell>
+                        <cell role="rameau3" corresp="027253090">Théologie de la libération</cell>
                     </row>
                     <row>
                         <cell role="productID">2292552</cell>
@@ -54003,7 +54003,7 @@
                         <cell role="title">Trinity and Society</cell>
                         <cell role="isbn">0-88344-622-7</cell>
                         <cell role="pageCount">289</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1988 by Orbis Books</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -54023,7 +54023,7 @@
                         <cell role="title">Liberating Grace</cell>
                         <cell role="isbn">0-88344-282-5</cell>
                         <cell role="pageCount">257</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1979 by Orbis Books</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -54042,7 +54042,7 @@
                         <cell role="title">New Evangelization: Good News to the Poor</cell>
                         <cell role="isbn">0-88344-778-9</cell>
                         <cell role="pageCount">145</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1991 by Orbis Books</cell>
                         <cell role="author">Leonardo,Boff</cell>
@@ -54085,7 +54085,7 @@
                         <cell role="title">Sanctorum Communio: Eine dogmatische Untersuchung zur
                             Soziologie der Kirche</cell>
                         <cell role="pageCount">368</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Joachim von Soosten</cell>
                         <cell role="publisher">Christian Kaiser Verlag</cell>
                         <cell role="copyright">Copyright © 1986 by Christian Kaiser Verlag</cell>
@@ -54266,7 +54266,7 @@
                         <cell role="dorpID">1004919535</cell>
                         <cell role="title">Barcelona, Berlin, Amerika 1928-1931</cell>
                         <cell role="pageCount">784</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Matthias Wünsche; Holger Roggelin; Hans Christoph von
                             Hase; Reinhart Staats</cell>
                         <cell role="publisher">Gütersloher Verlagshause</cell>
@@ -54326,7 +54326,7 @@
                         <cell role="dorpID">1004919538</cell>
                         <cell role="title">London 1933-1935</cell>
                         <cell role="pageCount">610</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Hans-Walter Schleicher; Martin Heimbucher; Hans
                             Goedeking</cell>
                         <cell role="publisher">Christian Kaiser Verlag</cell>
@@ -54418,7 +54418,7 @@
                         <cell role="dorpID">1004932646</cell>
                         <cell role="title">The Death of the Gods</cell>
                         <cell role="pageCount">424</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">G. P. Putnam's Sons</cell>
                         <cell role="author">Dmitrii Sergeyeyevich,Merezhkovskii</cell>
                         <cell role="contentType">General reference</cell>
@@ -54515,7 +54515,7 @@
                             Themes;Doctrines</cell>
                         <cell role="socialSubject">Women, Social &amp; Religious Role of</cell>
                         <cell role="rameau" corresp="028198654">Bible</cell>
-                        <cell role="rameau" corresp="027791114">Critique et exégèse</cell>
+                        <cell role="rameau2" corresp="027791114">Critique et exégèse</cell>
                     </row>
                     <row>
                         <cell role="productID">2293226</cell>
@@ -54567,7 +54567,7 @@
                             Holiness</cell>
                         <cell role="isbn">0-88344-616-2</cell>
                         <cell role="pageCount">200</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1985 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54588,7 +54588,7 @@
                             the Cross</cell>
                         <cell role="isbn">0-88344-986-2</cell>
                         <cell role="pageCount">208</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1994 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54607,7 +54607,7 @@
                         <cell role="title">Jesus the Liberator: A Historical-Theological View</cell>
                         <cell role="isbn">0-88344-930-7</cell>
                         <cell role="pageCount">319</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1993 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54669,7 +54669,7 @@
                         <cell role="title">Christology at the Crossroads</cell>
                         <cell role="isbn">0-88344-076-8</cell>
                         <cell role="pageCount">459</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1978 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54690,7 +54690,7 @@
                             Essays</cell>
                         <cell role="isbn">978-1-57075-752-5</cell>
                         <cell role="pageCount">160</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2008 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54712,7 +54712,7 @@
                             Other Statements</cell>
                         <cell role="isbn">0-88344-525-5</cell>
                         <cell role="pageCount">209</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">William E. Jerman</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1985 by Orbis Books</cell>
@@ -54815,7 +54815,7 @@
                         <cell role="title">The True Church and the Poor</cell>
                         <cell role="isbn">0-88344-513-1</cell>
                         <cell role="pageCount">385</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1984 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54834,7 +54834,7 @@
                         <cell role="title">Hoping Against All Hope</cell>
                         <cell role="isbn">0-88344-192-6</cell>
                         <cell role="pageCount">95</cell>
-                        <cell role="language">German; French</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">William E. Jerman</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1984 by Orbis Books</cell>
@@ -54854,7 +54854,7 @@
                         <cell role="title">Mary Mother of God, Mother of the Poor</cell>
                         <cell role="isbn">0-88344-638-3</cell>
                         <cell role="pageCount">209</cell>
-                        <cell role="language">Portuguese</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1987 by Orbis Books</cell>
                         <cell role="author">Maria Clara,Lucchetti Bingemer</cell>
@@ -54875,7 +54875,7 @@
                             the Crucified Peoples</cell>
                         <cell role="isbn">1-57075-468-3</cell>
                         <cell role="pageCount">239</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2003 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54896,7 +54896,7 @@
                             Hope</cell>
                         <cell role="isbn">1-57075-566-3</cell>
                         <cell role="pageCount">193</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2004 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54916,7 +54916,7 @@
                         <cell role="title">Jesus in Latin America</cell>
                         <cell role="isbn">0-88344-412-7</cell>
                         <cell role="pageCount">209</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 1987 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -54958,7 +54958,7 @@
                         <cell role="title">Ontological and Psychological Constitution of
                             Christ</cell>
                         <cell role="pageCount">314</cell>
-                        <cell role="language">Latin</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">University of Toronto Press</cell>
                         <cell role="copyright">Copyright © 2002 by University of Toronto
                             Press</cell>
@@ -55067,7 +55067,7 @@
                         <cell role="title">Triune God - Doctrines</cell>
                         <cell role="isbn">978-0-8020-9667-8</cell>
                         <cell role="pageCount">801</cell>
-                        <cell role="language">Latin</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Robert M. Doran; H. Daniel Monsour</cell>
                         <cell role="publisher">University of Toronto Press</cell>
                         <cell role="copyright">Copyright © 2009 by University of Toronto
@@ -55089,7 +55089,7 @@
                         <cell role="title">Christ the Liberator</cell>
                         <cell role="isbn">1-57075-372-5</cell>
                         <cell role="pageCount">385</cell>
-                        <cell role="language">Spanish</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Orbis Books</cell>
                         <cell role="copyright">Copyright © 2001 by Orbis Books</cell>
                         <cell role="author">Jon,Sobrino</cell>
@@ -55129,7 +55129,7 @@
                         <cell role="title">True and False Reform in the Church</cell>
                         <cell role="isbn">978-0-8146-5693-8</cell>
                         <cell role="pageCount">394</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Liturgical Press</cell>
                         <cell role="copyright">Copyright © 2011 by Liturgical Press</cell>
                         <cell role="author">Yves Marie-Joseph,Congar</cell>
@@ -55329,7 +55329,7 @@
                         <cell role="title">God of the Living</cell>
                         <cell role="isbn">978-1-60258-394-8</cell>
                         <cell role="pageCount">623</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Baylor University Press</cell>
                         <cell role="copyright">Copyright © 2011 by Baylor University Press</cell>
                         <cell role="author">Hermann,Spieckermann</cell>
@@ -55407,7 +55407,7 @@
                         <cell role="dorpID">1006857537</cell>
                         <cell role="title">Indexes and Supplementary Materials</cell>
                         <cell role="pageCount">630</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Mark S. Brocker; Barbara Wojhoski </cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2014 by Fortress Press</cell>
@@ -55760,7 +55760,7 @@
                         <cell role="title">Choosing Life</cell>
                         <cell role="isbn">978-1-59244-191-4</cell>
                         <cell role="pageCount">128</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Wipf &amp; Stock</cell>
                         <cell role="copyright">Copyright © 1981 Wipf &amp; Stock Publishers</cell>
                         <cell role="author">Colin,O'Brien Winter</cell>
@@ -55869,7 +55869,7 @@
                         <cell role="title">The Apostles Creed in Light of Today's Questions</cell>
                         <cell role="isbn">9781579104405</cell>
                         <cell role="pageCount">186</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">Wipf &amp; Stock</cell>
                         <cell role="copyright">Copyright © 1972 Wipf &amp; Stock Publishers</cell>
                         <cell role="author">Wolfhart,Pannenberg</cell>
@@ -57103,7 +57103,7 @@
                             With Chronological Arrangement Of The Sacred Books, And Improved
                             Divisions Of Chapters And Verses. By Leicester Ambrose Sawyer</cell>
                         <cell role="pageCount">422</cell>
-                        <cell role="language">Greek</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">John P. Jewett and Company</cell>
                         <cell role="author">Leicester Ambrose,Sawyer</cell>
                         <cell role="contentType">General reference</cell>
@@ -57126,7 +57126,7 @@
                             Modern English Made From The Original Greek (Westcott &amp; Hort's
                             Text)</cell>
                         <cell role="pageCount">555</cell>
-                        <cell role="language">Greek</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Fenton John Anthony Hort </cell>
                         <cell role="publisher">Horace Marshall and Son</cell>
                         <cell role="contentType">General reference</cell>
@@ -57170,7 +57170,7 @@
                         <cell role="title">The Church of the Holy Spirit</cell>
                         <cell role="isbn">978-0-268-02030-9</cell>
                         <cell role="pageCount">351</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Michael Plekon </cell>
                         <cell role="publisher">University of Notre Dame Press</cell>
                         <cell role="copyright">Copyright © 2007 by the University of Notre
@@ -57587,7 +57587,7 @@
                             Letter on Independence, Revised Edition</cell>
                         <cell role="isbn">978-0-268-01177-2</cell>
                         <cell role="pageCount">365</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Frederick Crosson </cell>
                         <cell role="publisher">University of Notre Dame Press</cell>
                         <cell role="copyright">Copyright © 1996 by the University of Notre
@@ -57629,7 +57629,7 @@
                         <cell role="title">Human Existence and Transcendence</cell>
                         <cell role="isbn">978-0-268-10106-0</cell>
                         <cell role="pageCount">213</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Jeffrey Hanson; William C. Hackett; Kevin Hart </cell>
                         <cell role="publisher">University of Notre Dame Press</cell>
                         <cell role="copyright">Copyright © 2016 by the University of Notre
@@ -57793,7 +57793,7 @@
                         <cell role="title">Bergsonian Philosophy and Thomism</cell>
                         <cell role="isbn">978-0-26802-152-8</cell>
                         <cell role="pageCount">385</cell>
-                        <cell role="language">French</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">University of Notre Dame Press</cell>
                         <cell role="copyright">Copyright © 2007 by the University of Notre
                             Dame</cell>
@@ -58243,7 +58243,7 @@
                         <cell role="title">Sophia: The Wisdom of God</cell>
                         <cell role="isbn">978-0-940262-60-7</cell>
                         <cell role="pageCount">155</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">SteinberBooks</cell>
                         <cell role="copyright">Copyright © 1993 SteinberBooks</cell>
                         <cell role="author">Sergei,Bulgakov</cell>
@@ -58277,7 +58277,7 @@
                         <cell role="title">The Holy Grail and the Eucharist</cell>
                         <cell role="isbn">978-0-940262-81-2</cell>
                         <cell role="pageCount">160</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Boris Jakim</cell>
                         <cell role="publisher">SteinberBooks</cell>
                         <cell role="copyright">Copyright © 1997 SteinberBooks</cell>
@@ -58318,7 +58318,7 @@
                         <cell role="title">The Meaning of Love</cell>
                         <cell role="isbn">978-0-940262-18-8</cell>
                         <cell role="pageCount">128</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Thomas R. Beyer, Jr.</cell>
                         <cell role="publisher">SteinberBooks</cell>
                         <cell role="copyright">Copyright © 1985 SteinberBooks</cell>
@@ -58359,7 +58359,7 @@
                             Conversations, Including a Short Story of the Anti-Christ</cell>
                         <cell role="isbn">978-0-940262-35-5</cell>
                         <cell role="pageCount">192</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">SteinberBooks</cell>
                         <cell role="copyright">Copyright © 1990 SteinberBooks</cell>
                         <cell role="author">Vladimir,Solovyov</cell>
@@ -58385,7 +58385,7 @@
                             Positivists</cell>
                         <cell role="isbn">978-1621511151</cell>
                         <cell role="pageCount">144</cell>
-                        <cell role="language">Russian</cell>
+                        <cell role="language">English</cell>
                         <cell role="publisher">SteinberBooks</cell>
                         <cell role="copyright">Copyright © 1996 SteinberBooks</cell>
                         <cell role="author">Vladimir,Solovyov</cell>
@@ -58507,7 +58507,7 @@
                         <cell role="title">Life Together and Prayerbook of the Bible</cell>
                         <cell role="isbn">0-8006-5305-6</cell>
                         <cell role="pageCount">234</cell>
-                        <cell role="language">German</cell>
+                        <cell role="language">English</cell>
                         <cell role="editor">Geffrey B. Kelly</cell>
                         <cell role="publisher">Fortress Press</cell>
                         <cell role="copyright">Copyright © 2012. Used by permission of Fortress

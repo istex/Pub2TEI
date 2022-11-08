@@ -21,7 +21,7 @@
     <!-- ******************* TRAITEMENT PRINCIPAL ******************************-->
     <xsl:variable name="bibliographicalInformationsTable" select="document('aspBibliographicalInformations.xml')"/>
     <xsl:variable name="currentDorpID">
-        <xsl:value-of select="substring-before(//a/@href,'.pdf')"/>
+        <xsl:value-of select="substring-before(asp/a[1]|asp/text/a[1],'.pdf')"/>
     </xsl:variable>
     <xsl:variable name="currentTitleAsp" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='title']"/>
     <xsl:variable name="currentProductId" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='productID']"/>
@@ -43,6 +43,30 @@
     <xsl:variable name="currentIdeologicalSubject" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='ideologicalSubject']"/>
     <xsl:variable name="currentIsbn" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='isbn']"/>
     <xsl:variable name="currentPublisher" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='publisher']"/>
+    <xsl:variable name="currentRameau" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau']"/>
+    <xsl:variable name="currentRameauID" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau']/@corresp"/>
+    <xsl:variable name="currentRameau2" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau2']"/>
+    <xsl:variable name="currentRameauID2" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau2']/@corresp"/>
+    <xsl:variable name="currentRameau3" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau3']"/>
+    <xsl:variable name="currentRameauID3" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau3']/@corresp"/>
+    <xsl:variable name="currentRameau4" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau4']"/>
+    <xsl:variable name="currentRameauID4" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau4']/@corresp"/>
+    <xsl:variable name="currentRameau5" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau5']"/>
+    <xsl:variable name="currentRameauID5" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau5']/@corresp"/>
+    <xsl:variable name="currentRameau6" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau6']"/>
+    <xsl:variable name="currentRameauID6" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau6']/@corresp"/>
+    <xsl:variable name="currentRameau7" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau7']"/>
+    <xsl:variable name="currentRameauID7" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau7']/@corresp"/>
+    <xsl:variable name="currentRameau8" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau8']"/>
+    <xsl:variable name="currentRameauID8" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau9']/@corresp"/>
+    <xsl:variable name="currentRameau9" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau9']"/>
+    <xsl:variable name="currentRameauID9" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau9']/@corresp"/>
+    <xsl:variable name="currentRameau10" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau10']"/>
+    <xsl:variable name="currentRameauID10" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau10']/@corresp"/>
+    <xsl:variable name="currentRameau11" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau11']"/>
+    <xsl:variable name="currentRameauID11" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau11']/@corresp"/>
+    <xsl:variable name="currentRameau12" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau12']"/>
+    <xsl:variable name="currentRameauID12" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='rameau12']/@corresp"/>
     <!-- langue du document-->
     <xsl:variable name="langue">
         <xsl:value-of select="asp/original_language |asp/text/original_language |$currentLanguage"/>
@@ -160,23 +184,12 @@
                 <!-- genre -->
                 <notesStmt>
                     <xsl:choose>
-                        <xsl:when test="string-length(document_type) &gt; 0">
+                        <xsl:when test="document_type[string-length()&gt; 0]|text/document_type[string-length()&gt; 0]">
                             <note>
                                 <xsl:attribute name="type">content-type</xsl:attribute>
                                 <xsl:attribute name="subtype">article</xsl:attribute>
                                 <xsl:attribute name="source">
-                                    <xsl:value-of select="document_type"/>
-                                </xsl:attribute>
-                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
-                                <xsl:text>article</xsl:text>
-                            </note>
-                        </xsl:when>
-                        <xsl:when test="string-length(text/document_type) &gt; 0">
-                            <note>
-                                <xsl:attribute name="type">content-type</xsl:attribute>
-                                <xsl:attribute name="subtype">other</xsl:attribute>
-                                <xsl:attribute name="source">
-                                    <xsl:value-of select="text/document_type"/>
+                                    <xsl:value-of select="document_type | text/document_type"/>
                                 </xsl:attribute>
                                 <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
                                 <xsl:text>article</xsl:text>
@@ -188,6 +201,7 @@
                                 <xsl:attribute name="subtype">
                                     <xsl:choose>
                                         <xsl:when test="$currentContentType='Monograph'">book</xsl:when>
+                                        <xsl:when test="$currentContentType='Book'">book</xsl:when>
                                         <xsl:when test="//publication_type[1]='Monograph'">book</xsl:when>
                                         <xsl:otherwise>other</xsl:otherwise>
                                     </xsl:choose>
@@ -198,12 +212,14 @@
                                 <xsl:attribute name="scheme"> 
                                     <xsl:choose>
                                         <xsl:when test="$currentContentType='Monograph'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+                                        <xsl:when test="$currentContentType='Book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
                                         <xsl:when test="//publication_type[1]='Monograph'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
                                         <xsl:otherwise>https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:attribute>
                                 <xsl:choose>
                                     <xsl:when test="$currentContentType='Monograph'">book</xsl:when>
+                                    <xsl:when test="$currentContentType='Book'">book</xsl:when>
                                     <xsl:otherwise>other</xsl:otherwise>
                                 </xsl:choose>
                             </note> 
@@ -256,7 +272,6 @@
                             <!-- identifiants niveau article -->
                             <xsl:apply-templates select="dorpid|text/dorpid"/>
                             <xsl:apply-templates select="entity_id|text/entity_id"/>
-                            <xsl:apply-templates select="a[1]|text/a[1]" mode="asp"/>
                             <xsl:choose>
                                 <xsl:when test="div1[1]/@dorpid|text/div1[1]/@dorpid">
                                     <idno type="dorpid">
@@ -268,7 +283,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                             <xsl:if test="$currentDorpID">
-                                <idno type="BookID">
+                                <idno type="bookID">
                                     <xsl:value-of select="$currentDorpID"/>
                                 </idno>
                             </xsl:if>
@@ -298,12 +313,9 @@
                             <title type="main" level="m">
                                 <xsl:value-of select="$titleHost"/>
                             </title>
-                            <xsl:if test="a[1][@href][string-length() &gt; 0] |text/a[1][@href][string-length() &gt; 0]">
+                            <xsl:if test="$currentDorpID">
                                 <idno type="bookID">
-                                    <xsl:value-of select="substring-before(a[1]|text/a[1],'.pdf')"/>
-                                </idno>
-                                <idno type="pdfID">
-                                    <xsl:value-of select="a[1]|text/a[1]"/>
+                                    <xsl:value-of select="$currentDorpID"/>
                                 </idno>
                             </xsl:if>
                             <xsl:choose>
@@ -318,11 +330,6 @@
                                     </idno>
                                 </xsl:when>
                             </xsl:choose>
-                            <xsl:if test="$currentDorpID">
-                                <idno type="BookID">
-                                    <xsl:value-of select="$currentDorpID"/>
-                                </idno>
-                            </xsl:if>
                             <xsl:if test="@lccn[string-length() &gt; 0]">
                                 <idno type="lccn">
                                     <xsl:value-of select="@lccn"/>
@@ -411,7 +418,7 @@
                 <!-- mots clés auteurs-->
                 <xsl:if test="string-length(keyword) &gt; 0">
                     <textClass ana="keyword">
-                        <keywords scheme="keyword">
+                        <keywords scheme="#keyword">
                             <xsl:apply-templates select="keyword | text/keyword"/>
                         </keywords>
                     </textClass>
@@ -420,14 +427,14 @@
                 <xsl:choose>
                     <xsl:when test="string-length(religion_genre|text/religion_genre)&gt; 0">
                         <textClass ana="religion_genre">
-                            <keywords scheme="subject">
+                            <keywords scheme="#subject">
                                 <xsl:apply-templates select="religion_genre|text/religion_genre"/>
                             </keywords>
                         </textClass>
                     </xsl:when>
                     <xsl:when test="$currentReligionGenre">
                         <textClass ana="religion_genre">
-                            <keywords scheme="subject">
+                            <keywords scheme="#subject">
                                 <xsl:call-template name="tokenizeReligionGenre"/>
                             </keywords>
                         </textClass>
@@ -435,14 +442,14 @@
                 </xsl:choose>
                 <xsl:if test="$currentReligionDiscussed">
                     <textClass ana="religion_discussed">
-                        <keywords scheme="subject">
+                        <keywords scheme="#subject">
                             <xsl:call-template name="tokenizeReligionDiscussed"/>
                         </keywords>
                     </textClass>
                 </xsl:if>
                 <xsl:if test="$currentIdeologicalSubject">
                     <textClass ana="ideological">
-                        <keywords scheme="subject">
+                        <keywords scheme="#subject">
                             <xsl:call-template name="tokenizeIdeological"/>
                         </keywords>
                     </textClass>
@@ -450,7 +457,7 @@
                 <xsl:choose>
                     <xsl:when test="$currentTheologicalDiscussed">
                         <textClass ana="theological_discussed">
-                            <keywords scheme="subject">
+                            <keywords scheme="#subject">
                                 <xsl:call-template name="tokenizeTheological"/>
                             </keywords>
                         </textClass>
@@ -458,7 +465,7 @@
                     <xsl:otherwise>
                         <xsl:if test="theological_subject_discussed[string-length()&gt; 0]|text/theological_subject_discussed[string-length()&gt; 0]">
                             <textClass ana="theological_subject_discussed">
-                                <keywords scheme="subject">
+                                <keywords scheme="#subject">
                                     <xsl:apply-templates select="theological_subject_discussed|text/theological_subject_discussed"/>
                                 </keywords>
                             </textClass>
@@ -467,14 +474,158 @@
                 </xsl:choose>
                 <xsl:if test="$currentSocialSubject">
                     <textClass ana="social">
-                        <keywords scheme="subject">
+                        <keywords scheme="#subject">
                             <xsl:call-template name="tokenizeSocial"/>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau2">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID2"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau2"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau3">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID3"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau3"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau4">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID4"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau4"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau5">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID5"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau5"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau6">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID6"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau6"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau7">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID7"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau7"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau8">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID8"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau8"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau9">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID9"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau9"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau10">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID10"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau10"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau11">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID11"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau11"/>
+                            </term>
+                        </keywords>
+                    </textClass>
+                </xsl:if>
+                <xsl:if test="$currentRameau12">
+                    <textClass ana="rameau">
+                        <classCode scheme="#rameau">
+                            <xsl:value-of select="$currentRameauID12"/>
+                        </classCode>
+                        <keywords scheme="#rameau">
+                            <term>
+                                <xsl:value-of select="$currentRameau12"/>
+                            </term>
                         </keywords>
                     </textClass>
                 </xsl:if>
                 <xsl:if test="religion_social_subject_discussed[string-length()&gt; 0]|text/religion_social_subject_discussed[string-length()&gt; 0]">
                     <textClass ana="religion_social_subject_discussed">
-                        <keywords scheme="subject">
+                        <keywords scheme="#subject">
                             <xsl:apply-templates select="religion_social_subject_discussed|text/religion_social_subject_discussed"/>
                         </keywords>
                     </textClass>
@@ -650,11 +801,6 @@
     </xsl:template>
     <xsl:template match="entity_id">
         <idno type="productID">
-            <xsl:apply-templates/>
-        </idno>
-    </xsl:template>
-    <xsl:template match="a" mode="asp">
-        <idno type="PdfID">
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
