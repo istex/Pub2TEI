@@ -29,12 +29,13 @@
     <xsl:variable name="currentLanguage" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='language']"/>
     <xsl:variable name="currentCopyright" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='copyright']"/>
     <xsl:variable name="currentAuthor" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='author']"/>
+    <xsl:variable name="currentEditor" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='editor']"/>
     <xsl:variable name="currentDate" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='date']"/>
     <xsl:variable name="currentPublicationType" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='publicationType']"/>
     <xsl:variable name="currentReligionGenre" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='religionGenre']"/>
     <xsl:variable name="currentSocialSubject" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='socialSubject']"/>
     <xsl:variable name="currentReligionDiscussed" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='religionDiscussed']"/>
-    <xsl:variable name="currentTheologicalDiscussed" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='TheologicalDiscussed']"/>
+    <xsl:variable name="currentTheologicalDiscussed" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='theologicalDiscussed']"/>
     <xsl:variable name="currentHostTitle" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='hostTitle']"/>
     <xsl:variable name="currentAbstract" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='abstract']"/>
     <xsl:variable name="currentContentType" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='contentType']"/>
@@ -334,6 +335,31 @@
                                 <idno type="lccn">
                                     <xsl:value-of select="@lccn"/>
                                 </idno>
+                            </xsl:if>
+                            <!-- auteurs -->
+                            <author>
+                                <persName>   
+                                    <xsl:choose>
+                                        <xsl:when test="string-length(@author) &gt; 0">
+                                            <xsl:apply-templates select="@author"/>
+                                        </xsl:when>
+                                        <xsl:when test="string-length(author|text/author) &gt; 0">
+                                            <xsl:apply-templates select="author|text/author" mode="asp"/>
+                                        </xsl:when>
+                                        <xsl:when test="string-length($currentAuthor) &gt; 0">
+                                            <forename type="first">
+                                                <xsl:value-of select="substring-before($currentAuthor,',')"/>
+                                            </forename>
+                                            <surname>
+                                                <xsl:value-of select="substring-after($currentAuthor,',')"/>
+                                            </surname>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </persName>
+                            </author>
+                            <!-- editor -->
+                            <xsl:if test="$currentEditor">
+                                <xsl:call-template name="tokenizeEditor"/>
                             </xsl:if>
                             <imprint>
                                 <xsl:choose>
@@ -990,7 +1016,43 @@
             <xsl:apply-templates/>
         </speaker>
     </xsl:template>
-    
+    <!-- editor -->
+    <xsl:template name="tokenizeEditor">
+        <xsl:param name="text" select="$currentEditor"/>
+        <xsl:param name="separator" select="';'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <editor>
+                    <persName>
+                        <forename type="first">
+                            <xsl:value-of select="normalize-space(substring-before($text,','))"/>
+                        </forename>
+                        <surname>
+                            <xsl:value-of select="normalize-space(substring-after($text,','))"/>
+                        </surname>
+                    </persName>
+                </editor>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <editor>
+                    <persName>
+                        <forename type="first">
+                            <xsl:value-of select="normalize-space(substring-before($item,','))"/>
+                        </forename>
+                        <surname>
+                            <xsl:value-of select="normalize-space(substring-after($item,','))"/>
+                        </surname>
+                    </persName>
+                </editor>
+                <xsl:call-template name="tokenizeEditor">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     <xsl:template match="asp_release_date"/>
     <xsl:template match="archive_box"/>
     <xsl:template match="page_range"/>
