@@ -3136,13 +3136,13 @@
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
                         <cell role="author">Reinhold,Niebuhr</cell>
-                        <cell role="contentType">General reference</cell>
+                        <cell role="contentType">Periodical article</cell>
                         <cell role="date">1944</cell>
                         <cell role="hostTitle">The University and the Modern World: An Essay in the
-                            Social Philosophy of University Education, by Arnold S. Nash. (London,
-                            England; London: S C M Press, 1945), pp. 9-10</cell>
+                            Social Philosophy of University Education</cell>
+                        <cell role="pages">9-10</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
-                        <cell role="publicationType">Monograph</cell>
+                        <cell role="publicationType">Periodical article</cell>
                         <cell role="religionDiscussed">Christian</cell>
                         <cell role="religionGenre">Social &amp; Political Writings</cell>
                         <cell role="socialSubject">Education &amp; Learning</cell>
@@ -23890,8 +23890,11 @@
                         <cell role="contentType">Periodical article</cell>
                         <cell role="abstract">Article by Reinhold Niebuhr for the periodical
                             'Current Religious Thought' from Jan-Feb 1953 issue.</cell>
-                        <cell role="hostTitle">Current Religious Thought, Vol. 13 no. 1,
-                            January-February 1953, pp. 7-11</cell>
+                        <cell role="hostTitle">Current Religious Thought</cell>
+                        <cell role="date">1953</cell>
+                        <cell role="volume">13</cell>
+                        <cell role="issue">1</cell>
+                        <cell role="pages">7-11</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
                         <cell role="publicationType">Serial Component Part</cell>
                         <cell role="religionDiscussed">Jewish; Christian</cell>
@@ -48767,12 +48770,12 @@
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
                         <cell role="author">Ursula,Niebuhr</cell>
-                        <cell role="contentType">Comment</cell>
-                        <cell role="date">1940</cell>
+                        <cell role="contentType">Periodical article</cell>
+                        <cell role="date">1979</cell>
                         <cell role="abstract">Editorial by Ursula Niebuhr appearing in the May 30,
                             1979 edition of The Christian Century.</cell>
-                        <cell role="hostTitle">The Christian Century, Vol. 96, May 30, 1979, p.
-                            NA</cell>
+                        <cell role="hostTitle">The Christian Century</cell>
+                        <cell role="volume">96</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
                         <cell role="publicationType">Manuscript</cell>
                         <cell role="religionDiscussed">Jewish; Episcopalian</cell>
@@ -49054,13 +49057,13 @@
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
                         <cell role="author">Reinhold,Niebuhr</cell>
-                        <cell role="contentType">Review</cell>
+                        <cell role="contentType">Periodical article</cell>
                         <cell role="date">1967</cell>
                         <cell role="abstract">Book reviews by Reinhold Niebuhr appearing in the
                             Sunday, Jan. 1967 edition of the New York Herald Tribune. Second page of
                             review is missing.</cell>
-                        <cell role="hostTitle">New York Herald Tribune, January 15, 1967, p.
-                            4+</cell>
+                        <cell role="hostTitle">New York Herald Tribune</cell>
+                        <cell role="pages">4</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
                         <cell role="publicationType">Manuscript</cell>
                         <cell role="religionDiscussed">Christian; Protestant</cell>
@@ -49529,12 +49532,14 @@
                             copyright in this work. Alexander Street Press would like to hear from
                             any copyright holder that is not cited in this database.</cell>
                         <cell role="author">Ursula,Niebuhr</cell>
-                        <cell role="contentType">Comment</cell>
+                        <cell role="contentType">Periodical article</cell>
                         <cell role="date">1953</cell>
                         <cell role="abstract">Editorial by Ursula Niebuhr appearing in the April
                             1953 edition of The Bulletin of the Diocese of New York.</cell>
-                        <cell role="hostTitle">Bulletin of the Diocese of New York, Vol. 29 no. 4,
-                            April 1953. pp. 7-8</cell>
+                        <cell role="hostTitle">Bulletin of the Diocese of New York</cell>
+                        <cell role="volume">29</cell>
+                        <cell role="issue">4</cell>
+                        <cell role="pages">7-8</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
                         <cell role="publicationType">Serial Component Part</cell>
                         <cell role="religionDiscussed">Christian</cell>
@@ -49555,10 +49560,12 @@
                         <cell role="date">1947</cell>
                         <cell role="abstract">Journal article by Ursula M. Niebuhr for the bi-weekly
                             journal, 'Christianity and Crisis' from March 31, 1947.</cell>
-                        <cell role="hostTitle">Christianity and Crisis, Vol. 7 no. 5, March 31,
-                            1947, pp. 1-2</cell>
+                        <cell role="hostTitle">Christianity and Crisis</cell>
+                        <cell role="volume">7</cell>
+                        <cell role="issue">5</cell>
+                        <cell role="pages">1-2</cell>
                         <cell role="collection">Reinhold Niebuhr Papers, 1907-1990</cell>
-                        <cell role="publicationType">Serial Component Part</cell>
+                        <cell role="publicationType">Periodical article</cell>
                         <cell role="religionDiscussed">Christian</cell>
                         <cell role="theologicalDiscussed">Resurrection &amp; Ascension; Faith</cell>
                         <cell role="religionGenre">Miscellaneous Writings</cell>

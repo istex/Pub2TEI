@@ -31,6 +31,9 @@
     <xsl:variable name="currentAuthor" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='author']"/>
     <xsl:variable name="currentEditor" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='editor']"/>
     <xsl:variable name="currentDate" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='date']"/>
+    <xsl:variable name="currentVolume" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='volume']"/>
+    <xsl:variable name="currentIssue" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='issue']"/>
+    <xsl:variable name="currentPages" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='pages']"/>
     <xsl:variable name="currentPublicationType" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='publicationType']"/>
     <xsl:variable name="currentReligionGenre" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='religionGenre']"/>
     <xsl:variable name="currentSocialSubject" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='socialSubject']"/>
@@ -201,6 +204,7 @@
                                 <xsl:attribute name="type">content-type</xsl:attribute>
                                 <xsl:attribute name="subtype">
                                     <xsl:choose>
+                                        <xsl:when test="$currentContentType='Periodical article'">article</xsl:when>
                                         <xsl:when test="$currentContentType='Monograph'">book</xsl:when>
                                         <xsl:when test="$currentContentType='Book'">book</xsl:when>
                                         <xsl:when test="//publication_type[1]='Monograph'">book</xsl:when>
@@ -212,6 +216,7 @@
                                 </xsl:attribute>
                                 <xsl:attribute name="scheme"> 
                                     <xsl:choose>
+                                        <xsl:when test="$currentContentType='Periodical article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
                                         <xsl:when test="$currentContentType='Monograph'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
                                         <xsl:when test="$currentContentType='Book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
                                         <xsl:when test="//publication_type[1]='Monograph'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
@@ -219,6 +224,7 @@
                                     </xsl:choose>
                                 </xsl:attribute>
                                 <xsl:choose>
+                                    <xsl:when test="$currentContentType='Periodical article'">article</xsl:when>
                                     <xsl:when test="$currentContentType='Monograph'">book</xsl:when>
                                     <xsl:when test="$currentContentType='Book'">book</xsl:when>
                                     <xsl:otherwise>other</xsl:otherwise>
@@ -312,7 +318,14 @@
                                 </xsl:choose>
                             </xsl:variable>
                             <title type="main" level="m">
-                                <xsl:value-of select="$titleHost"/>
+                                <xsl:choose>
+                                    <xsl:when test="$currentHostTitle[string-length()&gt; 0]">
+                                        <xsl:value-of select="$currentHostTitle"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$titleHost"/> 
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </title>
                             <xsl:if test="$currentDorpID">
                                 <idno type="bookID">
@@ -375,10 +388,10 @@
                                         </publisher>
                                     </xsl:when>
                                     <xsl:when test="string-length($currentCopyright) &gt; 0">
-                                        <publisher ref="https://scientific-publisher.data.istex.fr">Alexander Street Press</publisher>
+                                        <publisher>Alexander Street Press</publisher>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <publisher ref="https://scientific-publisher.data.istex.fr">Alexander Street Press</publisher>
+                                        <publisher>Alexander Street Press</publisher>
                                     </xsl:otherwise>
                                 </xsl:choose>
                                 <date type="published">
@@ -388,19 +401,44 @@
                                     <xsl:value-of select="$date"/>
                                 </date>
                                 
-                                <xsl:apply-templates select="source_title|text/source_title" mode="volumeIssue"/>
                                 
                                 <xsl:if test="contains(source_title,'pp') or contains(text/source_title,'pp')">
                                     <xsl:apply-templates select="source_title|text/source_title" mode="pages"/>
                                 </xsl:if>
-                                <xsl:apply-templates select="page_count"/>
-                                <xsl:if test="$currentPageCount">
+                                <xsl:apply-templates select="source_title|text/source_title" mode="volumeIssue"/>
+                                <xsl:if test="$currentVolume[string-length()&gt; 0]">
+                                    <biblScope unit="volume">
+                                        <xsl:value-of select="$currentVolume"/>
+                                    </biblScope>
+                                </xsl:if>
+                                <xsl:if test="$currentIssue[string-length()&gt; 0]">
+                                    <biblScope unit="issue">
+                                        <xsl:value-of select="$currentIssue"/>
+                                    </biblScope>
+                                </xsl:if>
+                                <!-- pagination -->
+                                <xsl:apply-templates select="page_count|text/page_count"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($currentPages,'-')">
+                                        <biblScope unit="page" from="{substring-before($currentPages,'-')}">
+                                            <xsl:value-of select="substring-before($currentPages,'-')"/>
+                                        </biblScope>
+                                        <biblScope unit="page" to="{substring-after($currentPages,'-')}">
+                                            <xsl:value-of select="substring-after($currentPages,'-')"/>
+                                        </biblScope>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <biblScope unit="page" from="{$currentPages}">
+                                            <xsl:value-of select="$currentPages"/>
+                                        </biblScope>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                <xsl:if test="$currentPageCount[string-length()&gt; 0]">
                                     <biblScope>
-                                        <xsl:attribute name="unit">totalPages</xsl:attribute>
+                                        <xsl:attribute name="unit">total-issue-pages</xsl:attribute>
                                         <xsl:value-of select="$currentPageCount"/>
                                     </biblScope>
                                 </xsl:if>
-                                
                             </imprint>
                         </monogr>
                         <!-- serie/collection -->
@@ -791,7 +829,7 @@
     </xsl:template>
     <!-- volume -->
     <xsl:template match="source_title" mode="volumeIssue">
-        <biblScope unit="vol">
+        <biblScope unit="volume">
             <xsl:choose>
                 <xsl:when test="contains(substring-before(substring-after(.,'Vol'),','),'no')">
                     <xsl:value-of select="translate(substring-before(substring-before(substring-after(.,'Vol'),','),'no'),'. ','')"/>  
