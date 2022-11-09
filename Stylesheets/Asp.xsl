@@ -188,7 +188,7 @@
                 <!-- genre -->
                 <notesStmt>
                     <xsl:choose>
-                        <xsl:when test="document_type[string-length()&gt; 0]|text/document_type[string-length()&gt; 0]">
+                        <xsl:when test="document_type='Periodical article' or text/document_type='Periodical article'">
                             <note>
                                 <xsl:attribute name="type">content-type</xsl:attribute>
                                 <xsl:attribute name="subtype">article</xsl:attribute>
@@ -197,6 +197,17 @@
                                 </xsl:attribute>
                                 <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
                                 <xsl:text>article</xsl:text>
+                            </note>
+                        </xsl:when>
+                        <xsl:when test="document_type[string-length()&gt; 0]|text/document_type[string-length()&gt; 0]">
+                            <note>
+                                <xsl:attribute name="type">content-type</xsl:attribute>
+                                <xsl:attribute name="subtype">other</xsl:attribute>
+                                <xsl:attribute name="source">
+                                    <xsl:value-of select="document_type | text/document_type"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                <xsl:text>other</xsl:text>
                             </note>
                         </xsl:when>
                         <xsl:otherwise>
@@ -303,14 +314,14 @@
                         <monogr>
                             <xsl:variable name="titleHost">
                                 <xsl:choose>
-                                    <xsl:when test="source_title | text/source_title">
+                                    <xsl:when test="source_title[string-length()&gt; 0] | text/source_title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="source_title | text/source_title" mode="title"/>
                                     </xsl:when>
-                                    <xsl:when test="real_title">
-                                        <xsl:apply-templates select="real_title"/>
+                                    <xsl:when test="real_title[string-length()&gt; 0] |text/real_title[string-length()&gt; 0]">
+                                        <xsl:apply-templates select="real_title|text/real_title"/>
                                     </xsl:when>
-                                    <xsl:when test="text/real_title">
-                                        <xsl:apply-templates select="text/real_title"/>
+                                    <xsl:when test="$currentHostTitle[string-length()&gt; 0]">
+                                        <xsl:value-of select="$currentHostTitle"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="$currentTitleAsp"/>
@@ -318,14 +329,7 @@
                                 </xsl:choose>
                             </xsl:variable>
                             <title type="main" level="m">
-                                <xsl:choose>
-                                    <xsl:when test="$currentHostTitle[string-length()&gt; 0]">
-                                        <xsl:value-of select="$currentHostTitle"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="$titleHost"/> 
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                <xsl:value-of select="$titleHost"/> 
                             </title>
                             <xsl:if test="$currentDorpID">
                                 <idno type="bookID">
@@ -405,7 +409,9 @@
                                 <xsl:if test="contains(source_title,'pp') or contains(text/source_title,'pp')">
                                     <xsl:apply-templates select="source_title|text/source_title" mode="pages"/>
                                 </xsl:if>
-                                <xsl:apply-templates select="source_title|text/source_title" mode="volumeIssue"/>
+                                <xsl:if test="source_title[string-length()&gt; 0]|text/source_title[string-length()&gt; 0]">
+                                    <xsl:apply-templates select="source_title|text/source_title" mode="volumeIssue"/>
+                                </xsl:if>
                                 <xsl:if test="$currentVolume[string-length()&gt; 0]">
                                     <biblScope unit="volume">
                                         <xsl:value-of select="$currentVolume"/>
@@ -418,21 +424,23 @@
                                 </xsl:if>
                                 <!-- pagination -->
                                 <xsl:apply-templates select="page_count|text/page_count"/>
-                                <xsl:choose>
-                                    <xsl:when test="contains($currentPages,'-')">
-                                        <biblScope unit="page" from="{substring-before($currentPages,'-')}">
-                                            <xsl:value-of select="substring-before($currentPages,'-')"/>
-                                        </biblScope>
-                                        <biblScope unit="page" to="{substring-after($currentPages,'-')}">
-                                            <xsl:value-of select="substring-after($currentPages,'-')"/>
-                                        </biblScope>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <biblScope unit="page" from="{$currentPages}">
-                                            <xsl:value-of select="$currentPages"/>
-                                        </biblScope>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                <xsl:if test="$currentPages[string-length()&gt; 0]">
+                                    <xsl:choose>
+                                        <xsl:when test="contains($currentPages,'-')">
+                                            <biblScope unit="page" from="{substring-before($currentPages,'-')}">
+                                                <xsl:value-of select="substring-before($currentPages,'-')"/>
+                                            </biblScope>
+                                            <biblScope unit="page" to="{substring-after($currentPages,'-')}">
+                                                <xsl:value-of select="substring-after($currentPages,'-')"/>
+                                            </biblScope>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <biblScope unit="page" from="{$currentPages}">
+                                                <xsl:value-of select="$currentPages"/>
+                                            </biblScope>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:if>
                                 <xsl:if test="$currentPageCount[string-length()&gt; 0]">
                                     <biblScope>
                                         <xsl:attribute name="unit">total-issue-pages</xsl:attribute>
@@ -777,11 +785,16 @@
         </persName>
     </xsl:template>
     <xsl:template match="author" mode="asp">
-        <persName>
             <name>
-                <xsl:value-of select="normalize-space(substring-before(.,' ('))"/>
+                <xsl:choose>
+                    <xsl:when test="contains(.,' (')">
+                        <xsl:value-of select="normalize-space(substring-before(.,' ('))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="normalize-space(.)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </name>
-        </persName>
     </xsl:template>
     
     <!-- publisher -->
