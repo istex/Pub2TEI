@@ -768,7 +768,11 @@
     
     <!-- table des auteurs -->
     <xsl:template match="@author">
-        <persName>
+        <xsl:choose>
+            <xsl:when test="contains(.,'|')">
+                <xsl:call-template name="tokenizeAuthor"/>
+            </xsl:when>
+            <xsl:otherwise>
             <forename type="first">
                 <xsl:variable name="given">
                     <xsl:value-of select="substring-after(.,', ')"/>
@@ -782,7 +786,8 @@
                 <!-- traduit des caractéres dans le résultat -->
                 <xsl:value-of select="$nomFamille"/>
             </surname>
-        </persName>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="author" mode="asp">
             <name>
@@ -1104,6 +1109,43 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template name="tokenizeAuthor">
+        <xsl:param name="text" select="."/>
+        <xsl:param name="separator" select="'|'"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:value-of select="normalize-space(substring-after($text,','))"/>
+                        </forename>
+                        <surname>
+                            <xsl:value-of select="normalize-space(substring-before($text,','))"/>
+                        </surname>
+                    </persName>
+                </author>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="item">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <author>
+                    <persName>
+                        <forename type="first">
+                            <xsl:value-of select="normalize-space(substring-after($item,','))"/>
+                        </forename>
+                        <surname>
+                            <xsl:value-of select="normalize-space(substring-before($item,','))"/>
+                        </surname>
+                    </persName>
+                </author>
+                <xsl:call-template name="tokenizeAuthor">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template match="asp_release_date"/>
     <xsl:template match="archive_box"/>
     <xsl:template match="page_range"/>
