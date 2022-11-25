@@ -5,6 +5,7 @@
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:wiley2="http://www.wiley.com/namespaces/wiley/wiley" xmlns:m="http://www.w3.org/1998/Math/MathML/"
     xmlns:oasis="http://www.niso.org/standards/z39-96/ns/oasis-exchange/table"
     xmlns:rsc="http://www.rsc.org/schema/rscart38"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
 	exclude-result-prefixes="#all" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0">
 
@@ -364,5 +365,21 @@
     <xsl:template match="upright">
         <xsl:apply-templates/>
     </xsl:template>
-	
+	<!-- Erudit -->
+    <xsl:template match="legende">
+            <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="titre">
+        <head>
+            <xsl:apply-templates/>
+        </head>
+    </xsl:template>
+    <xsl:template match="objetmedia">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="image">
+        <graphic xml:id="{@id}" rend="{@typeimage}" mimeType="{@typemime}" url="{@xlink:href}">
+            <xsl:apply-templates/>
+        </graphic>
+    </xsl:template>
 </xsl:stylesheet>

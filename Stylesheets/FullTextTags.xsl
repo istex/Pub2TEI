@@ -195,7 +195,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="Para | SimplePara">
+    <xsl:template match="Para | SimplePara| para">
         <xsl:choose>
             <xsl:when test="ancestor::DefinitionListEntry/Description">
                 <xsl:apply-templates/>
@@ -1353,7 +1353,6 @@
             <xsl:apply-templates select="sectitle | p"/>
 		</div>
     </xsl:template>
-	
     <xsl:template match="sectitle |heading">
         <head>
 			<xsl:apply-templates/>
@@ -1559,5 +1558,41 @@
     <xsl:template match="wd">
         <xsl:apply-templates/>
         <xsl:text> </xsl:text>
+    </xsl:template>
+    
+    
+    
+    <!-- erudit -->
+    <xsl:template match="section1">
+        <div>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="section2">
+        <div>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="encadre">
+        <p>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+                <xsl:value-of select="@type"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="renvoi">
+        <ref xml:id="{@id}" n="{@id}" type="{@typeref}">
+            <xsl:apply-templates/>
+        </ref>	
     </xsl:template>
 </xsl:stylesheet>

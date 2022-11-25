@@ -825,6 +825,11 @@
     <xsl:template match="note">
         <xsl:choose>
             <xsl:when test="ancestor::ref"/>
+            <xsl:when test="parent::grnote">
+            <note place="inline" xml:id="{@id}">
+                <xsl:apply-templates/>
+            </note>
+            </xsl:when>
             <xsl:otherwise>
                 <note>
                     <xsl:if test="@id[string-length() &gt; 0]">
@@ -1148,22 +1153,32 @@
 
     <!-- Journal information for <monogr> -->
     <xsl:template match="source">
-        <title>
-            <xsl:attribute name="level">
-                <xsl:choose>
-                    <xsl:when
-                        test="ancestor::citation/@citation-type = 'journal' or ancestor::mixed-citation/@publication-type = 'journal'
-                        or ancestor::*/@publication-type='journal'">j</xsl:when>
-                    <xsl:when
-                        test="ancestor::citation/@citation-type = 'book' or ancestor::nlm-citation/@citation-type = 'book' or ancestor::mixed-citation/@publication-type = 'book'">m</xsl:when>
-                    <xsl:otherwise>j</xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:if test="@xml:lang">
-                <xsl:copy-of select="@xml:lang"/>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </title>
+        <xsl:choose>
+            <!-- erudit -->
+            <xsl:when test="parent::figure">
+               <note>
+                   <xsl:apply-templates/>
+               </note>
+            </xsl:when>
+            <xsl:otherwise>
+                <title>
+                    <xsl:attribute name="level">
+                        <xsl:choose>
+                            <xsl:when
+                                test="ancestor::citation/@citation-type = 'journal' or ancestor::mixed-citation/@publication-type = 'journal'
+                                or ancestor::*/@publication-type='journal'">j</xsl:when>
+                            <xsl:when
+                                test="ancestor::citation/@citation-type = 'book' or ancestor::nlm-citation/@citation-type = 'book' or ancestor::mixed-citation/@publication-type = 'book'">m</xsl:when>
+                            <xsl:otherwise>j</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:if test="@xml:lang">
+                        <xsl:copy-of select="@xml:lang"/>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="pub-id">

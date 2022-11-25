@@ -55,8 +55,8 @@
     <xsl:include href="MARC21.xsl"/>
     <!-- SG: ajout du format Onix-->
     <xsl:include href="Onix.xsl"/>
-    <!-- SG: ajout du format EEB2-->
-    <xsl:include href="EEB2.xsl"/>
+    <!-- SG: ajout du format Erudit (cairn)-->
+    <xsl:include href="Erudit.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
