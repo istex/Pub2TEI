@@ -370,12 +370,23 @@
             <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="titre">
-        <head>
-            <xsl:apply-templates/>
-        </head>
+        <xsl:choose>
+            <xsl:when test="parent::legende">
+                <label>
+                    <xsl:apply-templates/>
+                </label>
+            </xsl:when>
+            <xsl:otherwise>
+                <head>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="objetmedia">
-        <xsl:apply-templates/>
+        <figure type="{@flot}">
+            <xsl:apply-templates/>
+        </figure>
     </xsl:template>
     <xsl:template match="image">
         <graphic xml:id="{@id}" rend="{@typeimage}" mimeType="{@typemime}" url="{@xlink:href}">

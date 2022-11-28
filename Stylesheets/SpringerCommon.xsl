@@ -850,6 +850,11 @@
                     </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:if test="@align">
+                <xsl:attribute name="rend">
+                    <xsl:value-of select="@align"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </cell>
     </xsl:template>

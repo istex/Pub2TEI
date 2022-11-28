@@ -13,6 +13,15 @@
         Auteur:  Stéphanie GREGORIO - INIST/CNRS
         =======================================================================================
         Version 0.1 du 21/11/2022
+        
+        reste à entrainer:
+/article/liminaire/grtitre/surtitre
+/article/liminaire/grtitre/trefbiblio
+/article/liminaire/noteedito
+/article/partiesann/merci
+
+        
+        
     -->
     <!-- reformatage des données Eruditarticle_Cairn_v2.1.dtd vers MODS XSD MODS.v.3.6 -->
     <!-- date -->
@@ -37,7 +46,12 @@
     </xsl:variable>
     <!-- contentType -->
     <xsl:variable name="codeGenreErudit">
-        <xsl:value-of select="/article/admin/infoarticle/section_sommaire"/>
+        <xsl:choose>
+            <xsl:when test="/article/admin/infoarticle/section_sommaire">
+                <xsl:value-of select="/article/admin/infoarticle/section_sommaire"/>
+            </xsl:when>
+            <xsl:otherwise>article</xsl:otherwise>
+        </xsl:choose>
     </xsl:variable>
     <xsl:variable name="codeGenreErudit2">
         <xsl:choose>
@@ -59,7 +73,7 @@
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="xml:lang">
-                <xsl:value-of select="$codeLangErudit"/>
+                <xsl:value-of select="$codeLangErudit1"/>
             </xsl:attribute>
             
             <teiHeader>
@@ -85,20 +99,23 @@
                             <p><xsl:value-of select="admin/droitsauteur"/></p>
                             <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-CD0RJTWG-S">cairn-journal</p>
                         </availability>
-                        <date type="published" when="{$dateErudit}"/>
+                        <date type="published" when="{$dateErudit}"><xsl:value-of select="$dateErudit"/></date>
+                        <date type="copyright" when="{$dateErudit}"><xsl:value-of select="$dateErudit"/></date>
                     </publicationStmt>
                     <notesStmt>
-                        <note type="content-type" source="{translate($codeGenreErudit,' &#160;','')}" subtype="{$codeGenreErudit2}" scheme="{$codeGenreArk}">other</note>
+                        <note type="content-type" source="{translate($codeGenreErudit,' &#xA;&#160;','')}" subtype="{$codeGenreErudit2}" scheme="{$codeGenreArk}">
+                            <xsl:value-of select="$codeGenreErudit2"/>
+                        </note>
                         <!-- genre niveau host-->
                         <xsl:choose>
-                            <xsl:when test="admin/revue/idissn[string-length()&gt; 0] and admin/numero/idisbn[string-length()&gt; 0]">
+                            <xsl:when test="admin/revue/idissn[string-length()&gt; 0] and admin/numero/idisbn[string-length()&gt; 0]!='sans'">
                                 <note type="publication-type">
                                     <xsl:attribute name="subtype">book-series</xsl:attribute>
                                     <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z</xsl:attribute>
                                     <xsl:text>book-series</xsl:text>
                                 </note>
                             </xsl:when>
-                            <xsl:when test="admin/numero/idisbn[string-length()&gt; 0]">
+                            <xsl:when test="admin/numero/idisbn[string-length()&gt; 0]!='sans'">
                                 <note type="publication-type">
                                     <xsl:attribute name="subtype">book</xsl:attribute>
                                     <xsl:attribute name="scheme">https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F</xsl:attribute>
@@ -147,26 +164,28 @@
                             </analytic>
                             <monogr>
                                 <xsl:apply-templates select="admin/revue"/>
+                                <xsl:apply-templates select="admin/numero/theme"/>
+                                <xsl:apply-templates select="admin/numero/themeparal"/>
                                 <xsl:if test="PublicationID[string-length()&gt; 0]">
                                     <idno>
                                         <xsl:attribute name="type">documentID</xsl:attribute>
                                         <xsl:value-of select="PublicationID"/>
                                     </idno>
                                 </xsl:if>
-                                <!-- ident interne du book-->
+                                <!-- ident interne du journal-->
                                 <xsl:if test="admin/revue/idissn[string-length()&gt; 0]">
                                     <idno>
                                         <xsl:attribute name="type">ISSN</xsl:attribute>
                                         <xsl:value-of select="admin/revue/idissn"/>
                                     </idno>
                                 </xsl:if>
-                                <xsl:if test="admin/revue/idissnnum[string-length()&gt; 0]">
+                                <xsl:if test="admin/revue/idissnnum[string-length()&gt; 0]!='en cours'">
                                     <idno>
                                         <xsl:attribute name="type">eISSN</xsl:attribute>
                                         <xsl:value-of select="admin/revue/idissnnum"/>
                                     </idno>
                                 </xsl:if>
-                                <xsl:if test="admin/numero/idisbn[string-length()&gt; 0]">
+                                <xsl:if test="admin/numero/idisbn[string-length()&gt; 0]!='sans'">
                                     <idno>
                                         <xsl:attribute name="type">ISBN</xsl:attribute>
                                         <xsl:value-of select="admin/numero/idisbn"/>
@@ -190,6 +209,25 @@
                                     <xsl:apply-templates select="admin/infoarticle/pagination"/>
                                 </imprint>
                             </monogr>
+                            <xsl:if test="admin/numero/theme[string-length() &gt; 0 ]">
+                                <series>
+                                    <xsl:apply-templates select="admin/revue"/>
+                                    <xsl:if test="admin/numero/theme[string-length() &gt; 0 ]">
+                                        <xsl:if test="admin/revue/idissn[string-length()&gt; 0]">
+                                            <idno>
+                                                <xsl:attribute name="type">ISSN</xsl:attribute>
+                                                <xsl:value-of select="admin/revue/idissn"/>
+                                            </idno>
+                                        </xsl:if>
+                                        <xsl:if test="admin/revue/idissnnum[string-length()&gt; 0]!='en cours'">
+                                            <idno>
+                                                <xsl:attribute name="type">eISSN</xsl:attribute>
+                                                <xsl:value-of select="admin/revue/idissnnum"/>
+                                            </idno>
+                                        </xsl:if>
+                                    </xsl:if>
+                                </series>
+                            </xsl:if>
                         </biblStruct>
                     </sourceDesc>
                 </fileDesc>
@@ -219,7 +257,7 @@
                         <body>
                             <xsl:apply-templates select="corps/*"/>
                         </body>
-                        <xsl:if test="partiesann/biblio">
+                        <xsl:if test="partiesann[string-length()&gt; 0]">
                             <back>
                                 <xsl:apply-templates select="partiesann/*"/>
                                 <xsl:apply-templates select="grnote/*"/> 
@@ -234,7 +272,7 @@
                                 <p><xsl:value-of select="unparsed-text($rawfulltextpath, 'UTF-8')"/></p>
                             </div>
                         </body>
-                        <xsl:if test="partiesann/biblio">
+                        <xsl:if test="partiesann[string-length()&gt; 0]">
                             <back>
                                 <xsl:apply-templates select="partiesann/biblio"/> 
                             </back>
@@ -246,9 +284,9 @@
                         <body>
                             <div><p></p></div>
                         </body>
-                        <xsl:if test="partiesann/biblio">
+                        <xsl:if test="partiesann[string-length()&gt; 0]">
                             <back>
-                                <xsl:apply-templates select="partiesann/biblio"/> 
+                                <xsl:apply-templates select="partiesann"/> 
                             </back>
                         </xsl:if>
                     </text>
@@ -260,54 +298,93 @@
     <!-- début des templates-->
     <!-- ********************** Titre niveau book niveau 1  ********************************-->
     <xsl:template match="grtitre">
+        <xsl:apply-templates select="titre" mode="erudit"/>
+        <xsl:apply-templates select="sstitre"/>
+        <xsl:apply-templates select="titreparal"/>
+    </xsl:template>
+    
+    <xsl:template match="titre" mode="erudit">
         <title level="a" type="main">
             <xsl:attribute name="xml:lang">
                 <xsl:value-of select="$codeLangErudit1"/>
             </xsl:attribute>
             <xsl:variable name="normalize">
-                <xsl:apply-templates select="titre"/>
+                <xsl:apply-templates/>
             </xsl:variable>
             <xsl:value-of select="normalize-space($normalize)"/>
         </title>
-        <xsl:if test="sstitre">
-            <title level="a" type="sub">
-                <xsl:variable name="normalize">
-                    <xsl:apply-templates select="sstitre"/>
-                </xsl:variable>
-                <xsl:value-of select="normalize-space($normalize)"/>
-            </title>
-        </xsl:if>
     </xsl:template>
-    <!-- ********************** Titre niveau book  ********************************-->
-    <xsl:template match="revue">
-        <title level="m" type="main">
+    <xsl:template match="sstitre">
+        <title level="a" type="sub">
             <xsl:attribute name="xml:lang">
                 <xsl:value-of select="$codeLangErudit1"/>
             </xsl:attribute>
             <xsl:variable name="normalize">
-                <xsl:apply-templates select="titrerev"/>
+                <xsl:apply-templates/>
             </xsl:variable>
             <xsl:value-of select="normalize-space($normalize)"/>
         </title>
-        <xsl:if test="soustitrerev">
-            <title level="m" type="sub">
-                <xsl:variable name="normalize">
-                    <xsl:apply-templates select="soustitrerev"/>
-                </xsl:variable>
-                <xsl:value-of select="normalize-space($normalize)"/>
-            </title>
-        </xsl:if>
-        <xsl:apply-templates select="titrerevabr"/>
     </xsl:template>
-    <xsl:template match="titrerevabr">
-        <title level="m" type="short">
-                <xsl:variable name="normalize">
-                    <xsl:apply-templates/>
-                </xsl:variable>
-                <xsl:value-of select="normalize-space($normalize)"/>
+    <xsl:template match="titreparal">
+        <title level="a" type="alt">
+            <xsl:attribute name="xml:lang">
+                <xsl:value-of select="@lang"/>
+            </xsl:attribute>
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
         </title>
     </xsl:template>
-   
+    <!-- ********************** Titre niveau book  ********************************-->
+    <xsl:template match="revue">
+        <xsl:apply-templates select="titrerev"/>
+        <xsl:apply-templates select="soustitrerev"/>
+        <xsl:apply-templates select="titrerevabr"/>
+    </xsl:template>
+    <xsl:template match="titrerev">
+        <title type="main">
+            <xsl:attribute name="level">
+                <xsl:choose>
+                    <xsl:when test="../admin/numero/theme">s</xsl:when>
+                    <xsl:otherwise>j</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>  
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
+        </title>
+    </xsl:template>
+    <xsl:template match="soustitrerev">
+        <title type="sub">
+            <xsl:attribute name="level">
+                <xsl:choose>
+                    <xsl:when test="../admin/numero/theme">s</xsl:when>
+                    <xsl:otherwise>j</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
+        </title>
+    </xsl:template>
+    <xsl:template match="titrerevabr">
+        <title type="short">
+            <xsl:attribute name="level">
+                <xsl:choose>
+                    <xsl:when test="../admin/numero/theme">s</xsl:when>
+                    <xsl:otherwise>j</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
+        </title>
+    </xsl:template>
+    
     <!-- ********************** Auteurs********************************-->
     <xsl:template match="editeur/nomorg">
         <editor>
@@ -319,31 +396,48 @@
     <xsl:template match="grauteur">
         <xsl:apply-templates/>
     </xsl:template>
-    <xsl:template match="auteur" mode="primary">
-        <xsl:variable name="i" select="position()-1"/>
-        <xsl:variable name="authorNumber">
+    <xsl:template match="auteur">
+        <author>
+            <xsl:variable name="i" select="position()-1"/>
+            <xsl:variable name="authorNumber">
+                <xsl:choose>
+                    <xsl:when test="$i &lt; 10">
+                        <xsl:value-of select="concat('author-000', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 100">
+                        <xsl:value-of select="concat('author-00', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 1000">
+                        <xsl:value-of select="concat('author-0', $i)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('author-', $i)"/>
+                    </xsl:otherwise>
+                </xsl:choose> 
+            </xsl:variable>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="$authorNumber"/>
+            </xsl:attribute>
             <xsl:choose>
-                <xsl:when test="$i &lt; 10">
-                    <xsl:value-of select="concat('author-000', $i)"/>
+                <xsl:when test="nompers">
+                    <persName>
+                        <xsl:apply-templates select="nompers"/>
+                        <xsl:apply-templates select="affiliation" mode="erudit"/>
+                        <xsl:apply-templates select="courriel"/>
+                    </persName>
                 </xsl:when>
-                <xsl:when test="$i &lt; 100">
-                    <xsl:value-of select="concat('author-00', $i)"/>
+                <xsl:when test="nomorg">
+                    <orgName>
+                        <xsl:apply-templates select="nomorg"/>
+                        <xsl:apply-templates select="affiliation" mode="erudit"/>
+                    </orgName>
                 </xsl:when>
-                <xsl:when test="$i &lt; 1000">
-                    <xsl:value-of select="concat('author-0', $i)"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="concat('author-', $i)"/>
-                </xsl:otherwise>
-            </xsl:choose> 
-        </xsl:variable>
-        <xsl:apply-templates/>
+            </xsl:choose>
+        </author>
     </xsl:template>
     <xsl:template match="nompers">
         <xsl:apply-templates select="prenom"/>
         <xsl:apply-templates select="nomfamille"/>
-        <xsl:apply-templates select="contribution"/>
-        <xsl:apply-templates select="affiliation"/>
     </xsl:template>
     <xsl:template match="prenom">
         <forename type="first">
@@ -351,31 +445,43 @@
         </forename>
     </xsl:template>
     <xsl:template match="nomfamille">
-        <surname>
-            <xsl:apply-templates/>
-        </surname>
-    </xsl:template>
-    <xsl:template match="contribution">
-        <orgName>
-            <xsl:apply-templates/>
-        </orgName>
-    </xsl:template>
-    <xsl:template match="affiliation">
-        <xsl:variable name="nomFamille">
-            <xsl:value-of select="//nomfamille"/>
-        </xsl:variable>
         <xsl:choose>
-            <xsl:when test="contains(.,$nomFamille/text())">
+            <xsl:when test="renvoi">
+                <surname>
+                    <xsl:value-of select="./text() except(renvoi)"/>
+                </surname>
                 <state type="biography">
-                    <desc><xsl:apply-templates/></desc>
+                    <desc>
+                        <xsl:if test="//note[@id=current()/renvoi/@idref]">
+                            <xsl:value-of select="normalize-space(//note[@id=current()/renvoi/@idref]/alinea)"/>
+                        </xsl:if>
+                    </desc>
                 </state>
             </xsl:when>
             <xsl:otherwise>
-                <affiliation>
-                    <xsl:apply-templates/>
-                </affiliation>
+                <surname>
+                    <xsl:apply-templates/> 
+                </surname>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="contribution"/>
+    <xsl:template match="nomorg">
+        <name>
+            <xsl:value-of select="./text() except(renvoi)"/>
+        </name>
+    </xsl:template>
+    <xsl:template match="courriel">
+        <email>
+            <xsl:apply-templates/>
+        </email>
+    </xsl:template>
+    <xsl:template match="affiliation" mode="erudit">
+        <state type="biography">
+            <desc>
+                <xsl:value-of select="normalize-space(.)"/>
+            </desc>
+        </state>
     </xsl:template>
     <!-- pagination -->
     <xsl:template match="pagination">
@@ -394,16 +500,18 @@
     </xsl:template>
     <!-- tomaison -->
     <xsl:template match="numero">
-        <xsl:apply-templates select="theme"/>
         <xsl:apply-templates select="volume" mode="erudit"/>
         <xsl:apply-templates select="nonumero"/>
     </xsl:template>
     <xsl:template match="theme">
-        <biblScope unit="title">
-            <title>
-                <xsl:apply-templates/>
-            </title>
-        </biblScope>
+        <title type="main" level="m">
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
+    <xsl:template match="themeparal">
+        <title type="alt" level="m" xml:lang="{@lang}">
+            <xsl:apply-templates/>
+        </title>
     </xsl:template>
     <xsl:template match="volume" mode="erudit">
         <biblScope unit="vol">
@@ -471,42 +579,212 @@
     <xsl:template match="biblio">
         <div type="references">
             <listBibl>
-                <xsl:apply-templates select="refbiblio"/>
+                <xsl:apply-templates/>
             </listBibl>
         </div>
     </xsl:template>
     <xsl:template match="refbiblio">
         <bibl type="reference">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </bibl>
     </xsl:template>
     <xsl:template match="alinea">
         <xsl:choose>
-            <xsl:when test="parent::resume">
+            <!--<xsl:when test="parent::resume|parent::note|parent::elemliste|parent::epigraphe|parent::encadre">
                 <p>
                     <xsl:apply-templates/>
                 </p>
+            </xsl:when>-->
+            <xsl:when test="parent::legende">
+            <figure>
+                <figDesc>
+                    <xsl:apply-templates/>
+                </figDesc>
+            </figure>
+            </xsl:when>
+            <xsl:when test="parent::texte|parent::refbiblio">
+                <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates/>
+                <p>
+                    <xsl:apply-templates/>
+                </p>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="marquage[@typemarq='italique']">
-        <hi rend="italic">
+        <xsl:choose>
+            <xsl:when test="ancestor::refbiblio">
+                <title>
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:otherwise>
+                <hi rend="italic">
+                    <xsl:apply-templates/>
+                </hi>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="marquage[@typemarq='url']">
+        <hi rend="url">
             <xsl:apply-templates/>
         </hi>
     </xsl:template>
     <xsl:template match="marquage[@typemarq='petitecap']">
-        <hi rend="smallCaps">
-            <xsl:apply-templates/>
-        </hi>
+        <xsl:choose>
+            <xsl:when test="ancestor::refbiblio">
+                <name>
+                    <xsl:apply-templates/>
+                </name>
+            </xsl:when>
+            <xsl:otherwise>
+                <hi rend="smallCaps">
+                    <xsl:apply-templates/>
+                </hi>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="marquage[@typemarq='gras']">
         <hi rend="bold">
             <xsl:apply-templates/>
         </hi>
     </xsl:template>
-
+    <xsl:template match="marquage[@typemarq='souligne']">
+        <hi rend="underline">
+            <xsl:apply-templates/>
+        </hi>
+    </xsl:template>
+    <xsl:template match="marquage[@typemarq='indice']">
+        <hi rend="subscript">
+            <xsl:apply-templates/>
+        </hi>
+    </xsl:template>
+    <xsl:template match="prodnum"/>
+    <xsl:template match="diffnum"/>
+    <xsl:template match="np"/>
+    <xsl:template match="no">
+        <xsl:choose>
+            <xsl:when test="parent::note">
+                <label>
+                    <xsl:apply-templates/>
+                </label>
+            </xsl:when>
+            <xsl:when test="parent::grfigure">
+                <label>
+                    <xsl:apply-templates/>
+                </label>
+            </xsl:when>
+            <xsl:otherwise>
+                <head><xsl:apply-templates/></head>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template> 
+    <xsl:template match="exposant">
+        <hi rend="superscript">
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
+        </hi> 
+    </xsl:template>
+    <xsl:template match="indice">
+        <hi rend="subscript">
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($normalize)"/>
+        </hi> 
+    </xsl:template>
+    
+    <xsl:template match="texte[@typetexte]">
+        <figure>
+            <figDesc>
+                <xsl:apply-templates/>
+            </figDesc>
+        </figure>
+    </xsl:template>
+    <xsl:template match="bloccitation">
+        <quote>
+            <xsl:apply-templates/>
+        </quote>
+    </xsl:template>
+    <xsl:template match="verbatim">
+        <p style="{@typeverb}"> 
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="bloc">
+        <lg>
+            <xsl:if test="@alignh">
+                <xsl:attribute name="rend">
+                    <xsl:value-of select="@alignh"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </lg>
+    </xsl:template>
+    <xsl:template match="ligne">
+        <l>
+            <xsl:apply-templates/>
+        </l>
+    </xsl:template>
+    <xsl:template match="epigraphe">
+        <epigraph>
+            <xsl:apply-templates/>
+        </epigraph>
+    </xsl:template>
+    <xsl:template match="annexe">
+        <div type="appendix">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="dedicace">
+        <div type="dedicace">
+            <p>
+                <xsl:apply-templates/>
+            </p>
+        </div>
+    </xsl:template>
+    <xsl:template match="encadre">
+        <div style="insert">
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+                <xsl:value-of select="@type"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="grfigure">
+        <div style="figure" xml:id="{@id}">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="grtableau">
+        <div style="table" xml:id="{@id}">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="spanspec"/>
+    <xsl:template match="divbiblio">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="exemple">
+        <div type="exemple">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 </xsl:stylesheet>
 

@@ -1155,6 +1155,16 @@
     <xsl:template match="source">
         <xsl:choose>
             <!-- erudit -->
+            <xsl:when test="parent::epigraphe|parent::bloccitation">
+                <bibl type="source">
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
+            <xsl:when test="parent::tableau|parent::grfigure">
+                <span type="source">
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:when>
             <xsl:when test="parent::figure">
                <note>
                    <xsl:apply-templates/>

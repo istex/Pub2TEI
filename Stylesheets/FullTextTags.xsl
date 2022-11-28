@@ -200,6 +200,11 @@
             <xsl:when test="ancestor::DefinitionListEntry/Description">
                 <xsl:apply-templates/>
             </xsl:when>
+            <xsl:when test="ancestor::article[admin]">
+                <div style="para" xml:id="{@id}">
+                    <xsl:apply-templates/>
+                </div>
+            </xsl:when>
             <xsl:otherwise>
                 <p>
                     <xsl:if test="@id">
@@ -1579,20 +1584,73 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="encadre">
-        <p>
+    <xsl:template match="section3">
+        <div>
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
             </xsl:attribute>
-            <xsl:attribute name="n">
-                <xsl:value-of select="@type"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="section4">
+        <div>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
             </xsl:attribute>
             <xsl:apply-templates/>
-        </p>
+        </div>
+    </xsl:template>
+    <xsl:template match="section5">
+        <div>
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
     <xsl:template match="renvoi">
-        <ref xml:id="{@id}" n="{@id}" type="{@typeref}">
+        <xsl:choose>
+            <xsl:when test="parent::nomfamille"/>
+            <xsl:otherwise>
+                <ref xml:id="{@id}" n="{@id}" type="{@typeref}">
+                    <xsl:apply-templates/>
+                </ref>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="liensimple">
+        <ref xml:id="{@id}" n="{@id}">
+            <xsl:if test="@typeref[string-length()&gt; 0]">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@typeref"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@xlink:href[string-length()&gt; 0]">
+                <xsl:attribute name="target">
+                    <xsl:value-of select="@xlink:href"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
-        </ref>	
+        </ref>
+    </xsl:template>
+    <xsl:template match="listenonord">
+        <list rend="{@signe}">
+            <xsl:apply-templates/>
+        </list>
+    </xsl:template>
+    <xsl:template match="listeord">
+        <list rend="{@numeration}">
+            <xsl:apply-templates/>
+        </list>
+    </xsl:template>
+    <xsl:template match="elemliste">
+        <item>
+            <xsl:apply-templates/>
+        </item>
+    </xsl:template>
+    <xsl:template match="equation">
+        <figure xml:id="{@id}">
+            <xsl:apply-templates/>
+        </figure>
     </xsl:template>
 </xsl:stylesheet>

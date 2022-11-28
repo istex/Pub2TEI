@@ -38,7 +38,7 @@
             <xsl:when test="parent::alternatives">
                     <xsl:apply-templates/>
             </xsl:when>
-            <xsl:when test="ancestor::p | ancestor::rsc:p">
+            <xsl:when test="ancestor::p | ancestor::rsc:p| parent::tableau">
                 <table>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
@@ -110,6 +110,10 @@
                     </xsl:if>
                     <xsl:apply-templates select="* except(label/xref | graphic | rsc:graphic |rsc:label/rsc:xref)"/>
                 </table>
+            </xsl:when>
+            <!-- Erudit -->
+            <xsl:when test="ancestor::article[admin]">
+                    <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
@@ -593,5 +597,12 @@
             </xsl:if>
             <xsl:apply-templates/>
         </cell>
+    </xsl:template>
+    
+    <!-- eruditCairn -->
+    <xsl:template match="tableau">
+        <div type="table" xml:id="{@id}">
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 </xsl:stylesheet>
