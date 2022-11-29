@@ -234,6 +234,66 @@
                                     <date type="published" when="{$dateErudit}"/>
                                     <xsl:apply-templates select="admin/numero"/>
                                     <xsl:apply-templates select="admin/infoarticle/pagination"/>
+                                    <xsl:if test="admin/infoarticle/nbpage[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbPages</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbpage"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbpara[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbParagraphs</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbpara"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbmot[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbWords</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbmot"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbfig[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbFigures</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbfig"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbtabl[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbTables</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbtabl"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbimage[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbImages</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbimage"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbaudio[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbAudio</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbaudio"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbvideo[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbVideo</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbvideo"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbrefbiblio[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbRefbib</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbrefbiblio"/>
+                                        </biblScope>
+                                    </xsl:if>
+                                    <xsl:if test="admin/infoarticle/nbnote[string-length() &gt; 0 ]!=0">
+                                        <biblScope>
+                                            <xsl:attribute name="unit">nbNotes</xsl:attribute>
+                                            <xsl:value-of select="admin/infoarticle/nbnote"/>
+                                        </biblScope>
+                                    </xsl:if>
                                 </imprint>
                             </monogr>
                             <xsl:if test="admin/numero/theme[string-length() &gt; 0 ]">
