@@ -47,7 +47,7 @@
     <!-- contentType -->
     <xsl:variable name="codeGenreErudit">
         <xsl:choose>
-            <xsl:when test="/article/admin/infoarticle/section_sommaire">
+            <xsl:when test="/article/admin/infoarticle/section_sommaire[string-length()&gt; 0]">
                 <xsl:value-of select="/article/admin/infoarticle/section_sommaire"/>
             </xsl:when>
             <xsl:otherwise>article</xsl:otherwise>
@@ -181,13 +181,19 @@
                                         <xsl:value-of select="admin/infoarticle/tri"/>
                                     </idno>
                                 </xsl:if>
-                                <!-- ident DOI du book-->
-                                <xsl:if test="admin/infoarticle/idpublic[@norme='doi'][string-length()&gt; 0]">
-                                    <idno>
-                                        <xsl:attribute name="type">DOI</xsl:attribute>
-                                        <xsl:value-of select="admin/infoarticle/idpublic[@norme='doi']"/>
-                                    </idno>
-                                </xsl:if>
+                                <!-- ident DOI DE L'ARTICLE-->
+                                <idno>
+                                    <xsl:attribute name="type">DOI</xsl:attribute>
+                                    <xsl:choose>
+                                        <xsl:when test="admin/infoarticle/idpublic[@norme='doi'][string-length()&gt; 0]">
+                                            <xsl:value-of select="admin/infoarticle/idpublic[@norme='doi']"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:text>10.3917/</xsl:text>
+                                            <xsl:value-of select="translate(admin/infoarticle/tri,'ABCDEFGHIJKLMNOPQRSTUVWXYZ_','abcdefghijklmnopqrstuvwxyz.')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>        
+                                </idno>
                             </analytic>
                             <monogr>
                                 <xsl:apply-templates select="admin/revue"/>

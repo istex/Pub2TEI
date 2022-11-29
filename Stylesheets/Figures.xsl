@@ -384,7 +384,24 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="objetmedia">
-        <figure type="{@flot}">
+        <figure>
+            <xsl:choose>
+                <xsl:when test="@flot[string-length()&gt; 0]">
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="@flot"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@typeimage[string-length()&gt; 0]">
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="@typeimage"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@xlink:href[string-length()&gt; 0]">
+                    <xsl:attribute name="corresp">
+                        <xsl:value-of select="@xlink:href"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates/>
         </figure>
     </xsl:template>
