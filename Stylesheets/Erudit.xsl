@@ -57,12 +57,39 @@
         <xsl:choose>
             <xsl:when test="starts-with($codeGenreErudit,'Revue')">book-reviews</xsl:when>
             <xsl:when test="$codeGenreErudit='REVUE DES LIVRES'">book-reviews</xsl:when>
-            <xsl:when test="$codeGenreErudit='Rep&#232;res bibliographiques'">other</xsl:when>
-            <xsl:when test="$codeGenreErudit='Ouverture'">editorial</xsl:when>
-            <xsl:when test="starts-with($codeGenreErudit,'Nouvelles')">other</xsl:when>
-            <xsl:when test="starts-with($codeGenreErudit,'Note')"></xsl:when>
-            <xsl:when test="$codeGenreErudit='Monnaie et prospection'"></xsl:when>
+            <xsl:when test="$codeGenreErudit='Lectures'">book-reviews</xsl:when>
             <xsl:when test="starts-with($codeGenreErudit,'Note')">book-reviews</xsl:when>
+            <xsl:when test="$codeGenreErudit=' Note critique'">book-reviews</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'Comptes')">book-reviews</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'Rep&#232;res bibliographiques')">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Ouverture'">editorial</xsl:when>
+            <xsl:when test="$codeGenreErudit='&#192; chaud'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='À chaud'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='&#201;ditorial'">editorial</xsl:when>
+            <xsl:when test="$codeGenreErudit='&#201;pilogue'">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Appel &#224; communication'">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Actualit&#233;'">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Addenda'">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Agr&#233;gation 2009/2010'">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Avant-propos'">editorial</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'Bilan')">brief-communication</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'BILAN')">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='Cahier de lectures'">book-reviews</xsl:when>
+            <xsl:when test="$codeGenreErudit='Conf&#233;rence pr&#233;sidentielle'">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='D&#201;BATS/OPINIONS'">brief-communication</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'D&#233;bat')">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='D&#233;fauts de coordination'">brief-communication</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'Débats')">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='Echanges/Contreverses'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='En t&#234;te'">brief-communication</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'Entretien')">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Faits et chiffres'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='Hommage'">other</xsl:when>
+            <xsl:when test="starts-with($codeGenreErudit,'Hors')">other</xsl:when>
+            <xsl:when test="$codeGenreErudit='Insert'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='Introduction'">editorial</xsl:when>
+            <xsl:when test="$codeGenreErudit='Magazine'">brief-communication</xsl:when>
+            <xsl:when test="$codeGenreErudit='Majeure'">brief-communication</xsl:when>
             <xsl:otherwise>article</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -97,7 +124,7 @@
                             <xsl:attribute name="status">restricted</xsl:attribute>
                             <licence>Cairn</licence>
                             <p><xsl:value-of select="admin/droitsauteur"/></p>
-                            <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-CD0RJTWG-S">cairn-journal</p>
+                            <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-CD0RJTWG-S">cairn-journals</p>
                         </availability>
                         <date type="published" when="{$dateErudit}"><xsl:value-of select="$dateErudit"/></date>
                         <date type="copyright" when="{$dateErudit}"><xsl:value-of select="$dateErudit"/></date>
@@ -584,11 +611,14 @@
         </div>
     </xsl:template>
     <xsl:template match="refbiblio">
-        <bibl type="reference">
+        <bibl>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="alinea/marquage[@typemarq='italique']">
+                <xsl:attribute name="type">journal</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </bibl>
@@ -745,10 +775,15 @@
         </div>
     </xsl:template>
     <xsl:template match="dedicace">
-        <div type="dedicace">
+        <div type="dedication">
             <p>
                 <xsl:apply-templates/>
             </p>
+        </div>
+    </xsl:template>
+    <xsl:template match="merci">
+        <div type="acknowledgement">
+            <xsl:apply-templates/>
         </div>
     </xsl:template>
     <xsl:template match="encadre">
