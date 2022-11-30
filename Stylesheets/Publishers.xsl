@@ -57,6 +57,8 @@
     <xsl:include href="Onix.xsl"/>
     <!-- SG: ajout du format Erudit (cairn)-->
     <xsl:include href="Erudit.xsl"/>
+    <!-- SG: ajout du format Result (proquest archives parlementaires)-->
+    <xsl:include href="Result.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
@@ -130,6 +132,9 @@
             </xsl:when>
             <xsl:when test="book-part-wrapper">
                 <xsl:message>Converting a Springer-bits-book-2 ebooks</xsl:message>
+            </xsl:when>
+            <xsl:when test="result">
+                <xsl:message>Converting a Proquest items</xsl:message>
             </xsl:when>
             <!-- RL: vérif encore très stricte pour le nouveau cas -->
             <xsl:when test="(

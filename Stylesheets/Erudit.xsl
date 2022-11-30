@@ -15,13 +15,9 @@
         Version 0.1 du 21/11/2022
         
         reste à entrainer:
-/article/liminaire/grtitre/surtitre
-/article/liminaire/grtitre/trefbiblio
-/article/liminaire/noteedito
-/article/partiesann/merci
-
-        
-        
+        /article/liminaire/grtitre/surtitre
+        /article/liminaire/grtitre/trefbiblio
+        /article/liminaire/noteedito
     -->
     <!-- reformatage des données Eruditarticle_Cairn_v2.1.dtd vers MODS XSD MODS.v.3.6 -->
     <!-- date -->
