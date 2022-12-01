@@ -13,11 +13,6 @@
         Auteur:  Stéphanie GREGORIO - INIST/CNRS
         =======================================================================================
         Version 0.1 du 21/11/2022
-        
-        reste à entrainer:
-        /article/liminaire/grtitre/surtitre
-        /article/liminaire/grtitre/trefbiblio
-        /article/liminaire/noteedito
     -->
     <!-- reformatage des données Eruditarticle_Cairn_v2.1.dtd vers MODS XSD MODS.v.3.6 -->
     <!-- date -->
@@ -104,6 +99,11 @@
                     <titleStmt>
                         <xsl:apply-templates select="liminaire/grtitre"/>
                     </titleStmt>
+                    <xsl:if test="liminaire/noteedito[string-length() &gt; 0 ]|liminaire/grtitre/trefbiblio[string-length() &gt; 0 ]">
+                        <editionStmt>
+                            <xsl:apply-templates select="liminaire/noteedito|liminaire/grtitre/trefbiblio"/>
+                        </editionStmt>
+                    </xsl:if>
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <!-- publisher -->
@@ -687,11 +687,6 @@
     </xsl:template>
     <xsl:template match="alinea">
         <xsl:choose>
-            <!--<xsl:when test="parent::resume|parent::note|parent::elemliste|parent::epigraphe|parent::encadre">
-                <p>
-                    <xsl:apply-templates/>
-                </p>
-            </xsl:when>-->
             <xsl:when test="parent::legende">
             <figure>
                 <figDesc>
@@ -699,7 +694,7 @@
                 </figDesc>
             </figure>
             </xsl:when>
-            <xsl:when test="parent::texte|parent::refbiblio">
+            <xsl:when test="parent::texte|parent::refbiblio|parent::noteedito">
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
@@ -870,8 +865,14 @@
         </div>
     </xsl:template>
     <xsl:template match="spanspec"/>
+    <xsl:template match="surtitre"/>
     <xsl:template match="divbiblio">
         <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="noteedito|trefbiblio">
+        <edition>
+            <xsl:apply-templates/>
+        </edition>
     </xsl:template>
     <xsl:template match="exemple">
         <div type="exemple">
