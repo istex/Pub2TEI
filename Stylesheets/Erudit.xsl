@@ -542,7 +542,7 @@
                 <state type="biography">
                     <desc>
                         <xsl:if test="//note[@id=current()/renvoi/@idref]">
-                            <xsl:value-of select="normalize-space(//note[@id=current()/renvoi/@idref]/alinea)"/>
+                            <xsl:value-of select="//note[@id=current()/renvoi/@idref]/alinea"/>
                         </xsl:if>
                     </desc>
                 </state>
