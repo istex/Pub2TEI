@@ -202,18 +202,61 @@
                                     </idno>
                                 </xsl:if>
                                 <!-- ident interne du journal-->
-                                <xsl:if test="admin/revue/idissn[string-length()&gt; 0]">
-                                    <idno>
-                                        <xsl:attribute name="type">ISSN</xsl:attribute>
-                                        <xsl:value-of select="admin/revue/idissn"/>
-                                    </idno>
-                                </xsl:if>
-                                <xsl:if test="admin/revue/idissnnum[string-length()&gt; 0]!='en cours'">
-                                    <idno>
-                                        <xsl:attribute name="type">eISSN</xsl:attribute>
-                                        <xsl:value-of select="admin/revue/idissnnum"/>
-                                    </idno>
-                                </xsl:if>
+                                    <xsl:choose>
+                                        <xsl:when test="starts-with(@idproprio,'ACO')">
+                                            <idno type="ISSN">1660-7880</idno>
+                                            <idno type="eISSN">1662-8667</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'ANNOR')">
+                                            <idno type="ISSN">0003-4134</idno>
+                                            <idno type="eISSN">2261-4427</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'ECRU')">
+                                            <idno type="ISSN">0013-0559</idno>
+                                            <idno type="eISSN">2105-2581</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'EDC')">
+                                            <idno type="ISSN">1270-6841</idno>
+                                            <idno type="eISSN">2101-0366</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'FLUX1')">
+                                            <idno type="ISSN">1154-2721</idno>
+                                            <idno type="eISSN">1958-9557</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'HSR')">
+                                            <idno type="ISSN">1254-728x</idno>
+                                            <idno type="eISSN">1950-666X</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'LSDLE')">
+                                            <idno type="ISSN">0755-9593</idno>
+                                            <idno type="eISSN">2259-3764</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'MULT')">
+                                            <idno type="ISSN">0292-0107</idno>
+                                            <idno type="eISSN">1777-5841</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'POLAF')">
+                                            <idno type="ISSN">0244-7827</idno>
+                                            <idno type="eISSN">2264-5047</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'REDP')">
+                                            <idno type="ISSN">0373-2630</idno>
+                                            <idno type="eISSN">2105-2883</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'RHU')">
+                                            <idno type="ISSN">1628-0482</idno>
+                                            <idno type="eISSN">2101-003X</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'RIEJ')">
+                                            <idno type="ISSN">0770-2310</idno>
+                                            <idno type="eISSN">2406-4742</idno>
+                                        </xsl:when>
+                                        <xsl:when test="starts-with(@idproprio,'TELE')">
+                                            <idno type="ISSN">1263-588X</idno>
+                                            <idno type="eISSN">2118-2191</idno>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                
                                 <xsl:if test="admin/numero/idisbn[string-length()&gt; 0]!='sans'">
                                     <idno>
                                         <xsl:attribute name="type">ISBN</xsl:attribute>
