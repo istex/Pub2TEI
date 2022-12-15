@@ -15,6 +15,9 @@
         Version 0.1 du 21/11/2022
     -->
     <!-- reformatage des données Eruditarticle_Cairn_v2.1.dtd vers MODS XSD MODS.v.3.6 -->
+    <xsl:variable name="doiErudit">
+        <xsl:value-of select="/article/admin/infoarticle/idpublic[@norme='doi']"/>
+    </xsl:variable>
     <!-- date -->
     <xsl:variable name="dateErudit">
         <xsl:choose>
@@ -24,6 +27,13 @@
             <xsl:when test="/article/admin/numero/pubnum/date[string-length()&gt; 0]">
                 <xsl:value-of select="/article/admin/numero/pubnum/date"/>
             </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="$doiErudit='10.3917/hsr.044.0027' or '10.3917/hsr.044.0081' or '10.3917/hsr.044.0111' or '10.3917/hsr.044.0057' or '10.3917/hsr.044.0007' or '10.3917/hsr.044.0141'">2015</xsl:when>
+                    <xsl:when test="$doiErudit='10.3917/hsr.046.0069' or '10.3917/tele.049.0165' or '10.3917/tele.049.0125' or '10.3917/tele.049.0099' or '10.3917/hsr.046.0007' or '10.3917/hsr.045.0043' or '10.3917/tele.049.0153' or '10.3917/hsr.046.0031' or '10.3917/tele.049.0065' or '10.3917/tele.049.0017' or '10.3917/hsr.046.0125' or '10.3917/hsr.046.0097' or '10.3917/tele.049.0111' or '10.3917/tele.049.0079' or '10.3917/hsr.045.0171' or '10.3917/hsr.045.0069' or '10.3917/tele.049.0139' or '10.3917/tele.049.0051' or '10.3917/hsr.045.0115' or '10.3917/tele.049.0009' or '10.3917/tele.049.0031' or '10.3917/hsr.046.0155' or '10.3917/hsr.045.0209' or '10.3917/tele.049.0179'">2016</xsl:when>
+                    <xsl:when test="$doiErudit='10.3917/hsr.047.0041' or '10.3917/hsr.047.0099' or '10.3917/tele.052.0129' or '10.3917/hsr.047.0075' or '10.3917/hsr.047.0007' or '10.3917/hsr.045.0007' or '10.3917/hsr.047.0137' or '10.3917/hsr.047.0181'">2017</xsl:when>
+                </xsl:choose>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <!-- language -->

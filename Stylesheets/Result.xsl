@@ -193,7 +193,11 @@
                 <xsl:when test="fulltext[string-length()&gt; 0]">
                     <text>
                         <body>
+                            <div>
+                                <p>
                             <xsl:value-of select="fulltext"/>
+                                </p>
+                            </div>
                         </body>
                     </text>
                 </xsl:when>
