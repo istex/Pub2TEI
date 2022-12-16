@@ -24,16 +24,12 @@
             <xsl:when test="/article/admin/numero/pub/annee[string-length()&gt; 0]">
                 <xsl:value-of select="/article/admin/numero/pub/annee"/>
             </xsl:when>
+            <xsl:when test="$doiErudit='10.3917/hsr.044.0027' or '10.3917/hsr.044.0081' or '10.3917/hsr.044.0111' or '10.3917/hsr.044.0057' or '10.3917/hsr.044.0007' or '10.3917/hsr.044.0141'">2015</xsl:when>
+            <xsl:when test="$doiErudit='10.3917/hsr.046.0069' or '10.3917/tele.049.0165' or '10.3917/tele.049.0125' or '10.3917/tele.049.0099' or '10.3917/hsr.046.0007' or '10.3917/hsr.045.0043' or '10.3917/tele.049.0153' or '10.3917/hsr.046.0031' or '10.3917/tele.049.0065' or '10.3917/tele.049.0017' or '10.3917/hsr.046.0125' or '10.3917/hsr.046.0097' or '10.3917/tele.049.0111' or '10.3917/tele.049.0079' or '10.3917/hsr.045.0171' or '10.3917/hsr.045.0069' or '10.3917/tele.049.0139' or '10.3917/tele.049.0051' or '10.3917/hsr.045.0115' or '10.3917/tele.049.0009' or '10.3917/tele.049.0031' or '10.3917/hsr.046.0155' or '10.3917/hsr.045.0209' or '10.3917/tele.049.0179'">2016</xsl:when>
+            <xsl:when test="$doiErudit='10.3917/hsr.047.0041' or '10.3917/hsr.047.0099' or '10.3917/tele.052.0129' or '10.3917/hsr.047.0075' or '10.3917/hsr.047.0007' or '10.3917/hsr.045.0007' or '10.3917/hsr.047.0137' or '10.3917/hsr.047.0181'">2017</xsl:when>
             <xsl:when test="/article/admin/numero/pubnum/date[string-length()&gt; 0]">
                 <xsl:value-of select="/article/admin/numero/pubnum/date"/>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="$doiErudit='10.3917/hsr.044.0027' or '10.3917/hsr.044.0081' or '10.3917/hsr.044.0111' or '10.3917/hsr.044.0057' or '10.3917/hsr.044.0007' or '10.3917/hsr.044.0141'">2015</xsl:when>
-                    <xsl:when test="$doiErudit='10.3917/hsr.046.0069' or '10.3917/tele.049.0165' or '10.3917/tele.049.0125' or '10.3917/tele.049.0099' or '10.3917/hsr.046.0007' or '10.3917/hsr.045.0043' or '10.3917/tele.049.0153' or '10.3917/hsr.046.0031' or '10.3917/tele.049.0065' or '10.3917/tele.049.0017' or '10.3917/hsr.046.0125' or '10.3917/hsr.046.0097' or '10.3917/tele.049.0111' or '10.3917/tele.049.0079' or '10.3917/hsr.045.0171' or '10.3917/hsr.045.0069' or '10.3917/tele.049.0139' or '10.3917/tele.049.0051' or '10.3917/hsr.045.0115' or '10.3917/tele.049.0009' or '10.3917/tele.049.0031' or '10.3917/hsr.046.0155' or '10.3917/hsr.045.0209' or '10.3917/tele.049.0179'">2016</xsl:when>
-                    <xsl:when test="$doiErudit='10.3917/hsr.047.0041' or '10.3917/hsr.047.0099' or '10.3917/tele.052.0129' or '10.3917/hsr.047.0075' or '10.3917/hsr.047.0007' or '10.3917/hsr.045.0007' or '10.3917/hsr.047.0137' or '10.3917/hsr.047.0181'">2017</xsl:when>
-                </xsl:choose>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <!-- language -->
@@ -658,6 +654,9 @@
     <xsl:template match="volume" mode="erudit">
         <biblScope unit="vol">
             <xsl:choose>
+                <xsl:when test="contains(.,'Hors')">
+                    <xsl:value-of select="."/>
+                </xsl:when>
                 <xsl:when test="contains(.,' ')">
                     <xsl:value-of select="substring-after(.,' ')"/>
                 </xsl:when>
@@ -672,15 +671,25 @@
     </xsl:template>
     <xsl:template match="nonumero">
         <biblScope unit="issue">
+            <xsl:variable name="nettoie">
+                <xsl:choose>
+                    <xsl:when test="contains(.,' ')">
+                        <xsl:value-of select="substring-after(.,' ')"/>
+                    </xsl:when>
+                    <xsl:when test="contains(.,'&#160;')">
+                        <xsl:value-of select="substring-after(.,'&#160;')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <xsl:choose>
-                <xsl:when test="contains(.,' ')">
-                    <xsl:value-of select="substring-after(.,' ')"/>
-                </xsl:when>
-                <xsl:when test="contains(.,'&#160;')">
-                    <xsl:value-of select="substring-after(.,'&#160;')"/>
+                <xsl:when test="../anonumero[string-length()&gt; 0]">
+                    <xsl:value-of select="concat(.,'-',../anonumero)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="."/>
+                    <xsl:value-of select="$nettoie"/>
                 </xsl:otherwise>
             </xsl:choose>
         </biblScope>
