@@ -192,7 +192,7 @@
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:text>10.3917/</xsl:text>
-                                            <xsl:value-of select="translate(admin/infoarticle/tri,'ABCDEFGHIJKLMNOPQRSTUVWXYZ_','abcdefghijklmnopqrstuvwxyz.')"/>
+                                            <xsl:value-of select="translate(@idproprio,'ABCDEFGHIJKLMNOPQRSTUVWXYZ_','abcdefghijklmnopqrstuvwxyz.')"/>
                                         </xsl:otherwise>
                                     </xsl:choose>        
                                 </idno>
@@ -282,7 +282,9 @@
                                         </xsl:choose>
                                     </publisher>
                                     <!-- date de publication -->
-                                    <date type="published" when="{$dateErudit}"/>
+                                    <date type="published" when="{$dateErudit}">
+                                        <xsl:value-of select="$dateErudit"/>
+                                    </date>
                                     <xsl:apply-templates select="admin/numero"/>
                                     <xsl:apply-templates select="admin/infoarticle/pagination"/>
                                     <xsl:if test="admin/infoarticle/nbpage[string-length() &gt; 0 ]!=0">
@@ -481,18 +483,22 @@
         <xsl:apply-templates select="titrerevabr"/>
     </xsl:template>
     <xsl:template match="titrerev">
-        <title type="main">
-            <xsl:attribute name="level">
-                <xsl:choose>
-                    <xsl:when test="../admin/numero/theme">s</xsl:when>
-                    <xsl:otherwise>j</xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:variable name="normalize">
-                <xsl:apply-templates/>  
-            </xsl:variable>
-            <xsl:value-of select="normalize-space($normalize)"/>
-        </title>
+        <xsl:if test=". !='Titre abbr'">
+            <xsl:if test=". !='0'">
+            <title type="main">
+                <xsl:attribute name="level">
+                    <xsl:choose>
+                        <xsl:when test="../admin/numero/theme">s</xsl:when>
+                        <xsl:otherwise>j</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:variable name="normalize">
+                    <xsl:apply-templates/>  
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($normalize)"/>
+            </title>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="soustitrerev">
         <title type="sub">
@@ -509,18 +515,20 @@
         </title>
     </xsl:template>
     <xsl:template match="titrerevabr">
-        <title type="short">
-            <xsl:attribute name="level">
-                <xsl:choose>
-                    <xsl:when test="../admin/numero/theme">s</xsl:when>
-                    <xsl:otherwise>j</xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:variable name="normalize">
-                <xsl:apply-templates/>
-            </xsl:variable>
-            <xsl:value-of select="normalize-space($normalize)"/>
-        </title>
+        <xsl:if test=". !='Titre abbr'">
+            <title type="short">
+                <xsl:attribute name="level">
+                    <xsl:choose>
+                        <xsl:when test="../admin/numero/theme">s</xsl:when>
+                        <xsl:otherwise>j</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:variable name="normalize">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($normalize)"/>
+            </title>
+        </xsl:if>
     </xsl:template>
     
     <!-- ********************** Auteurs********************************-->
@@ -642,12 +650,14 @@
         <xsl:apply-templates select="nonumero"/>
     </xsl:template>
     <xsl:template match="theme">
-        <title type="main" level="m">
-            <xsl:apply-templates/>
-        </title>
+        <xsl:if test=".!='0'">
+            <title type="main" level="j">
+                <xsl:apply-templates/>
+            </title>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="themeparal">
-        <title type="alt" level="m" xml:lang="{@lang}">
+        <title type="alt" level="j" xml:lang="{@lang}">
             <xsl:apply-templates/>
         </title>
     </xsl:template>
