@@ -4912,6 +4912,11 @@
                         <cell role="code" style="elsevier">JMAD</cell>
                         <cell role="name">Materials &amp; Design</cell>
                     </row>
+                    <!-- ajout code supplementaire PANIST 02/01/2023-->
+                    <row>
+                        <cell role="code" style="elsevier">JMADE</cell>
+                        <cell role="name">Materials &amp; Design</cell>
+                    </row>
                     <row>
                         <cell role="code" style="elsevier">JMAM</cell>
                         <cell role="name">Molecular Aspects of Medicine</cell>
