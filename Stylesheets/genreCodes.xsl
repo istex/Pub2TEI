@@ -289,7 +289,7 @@
                     |//book-part[not(body/book-part)]/@book-part-type
                     |//body/book-part/@book-part-type
                     |//article/@type  |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm
-                    |//ArticleInfo/@ArticleType | //BookInfo/@BookProductType
+                    |//ArticleInfo/@ArticleType
                     |//Series/Book/Chapter/ChapterInfo/@ChapterType | //Series/Book/Part/Chapter/ChapterInfo/@ChapterType | //Publisher/Book/Chapter/ChapterInfo/@ChapterType | //Publisher/Book/Part/Chapter/ChapterInfo/@ChapterType
                     |//article/@article-type
                     |//@docsubtype
