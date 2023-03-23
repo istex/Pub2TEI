@@ -1009,19 +1009,19 @@
             </xsl:choose>
             <xsl:copy-of select="tei:address"/>
             <xsl:choose>
-                <xsl:when test="contains(tei:availability/tei:licence,'Droz')">
+                <xsl:when test="tei:availability/tei:licence[contains(text(),'Droz')]">
                     <availability status="{tei:availability/@status}">
                         <xsl:copy-of select="tei:availability/tei:licence"/>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
-                <xsl:when test="contains(tei:publisher,'Librairie Droz')">
+                <xsl:when test="tei:publisher[contains(text(),'Librairie Droz')]">
                     <availability status="restricted">
                         <licence>Copyright <date><xsl:value-of select="tei:date/@when"/></date> Librairie Droz S.A.</licence>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
-                <xsl:when test="normalize-space(tei:availability/tei:p)[string-length()&gt; 0]">
+                <xsl:when test="tei:availability/tei:p[string-length(normalize-space(text())) &gt; 0]">
                     <xsl:copy-of select="tei:availability"/>
                     <availability>
                         <licence>© <xsl:value-of select="tei:date"/> OpenEdition</licence>
@@ -1056,22 +1056,26 @@
     <xsl:template match="tei:author">
         <author>
             <xsl:copy-of select="tei:persName"/>
-            <!-- reprise de l'adresse email -->
-            <xsl:choose>
-                <xsl:when test="tei:affiliation/tei:hi[@rend='author-email']">
-                    <email>
-                        <xsl:value-of select="normalize-space(tei:affiliation/tei:hi[@rend='author-email'])"/>
-                    </email>
-                </xsl:when>
-                <xsl:when test="contains(tei:affiliation,'Courriel')">
-                    <email>
-                        <xsl:value-of select="normalize-space(substring-after(tei:affiliation,'Courriel : '))"/>
-                    </email>
-                </xsl:when>
-            </xsl:choose>
+            <!-- reprise des adresses email -->
+            <xsl:apply-templates select="tei:affiliation" mode="mail"/>
             <!-- affiliation découpée et structurée -->
             <xsl:apply-templates select="tei:affiliation"/>
         </author>
+    </xsl:template>
+    
+    <xsl:template match="tei:affiliation" mode="mail">
+        <xsl:for-each select="tei:hi[@rend='author-email']">
+            <email>
+                <xsl:value-of select="normalize-space(.)"/>
+            </email>
+        </xsl:for-each>
+        <xsl:for-each select="text()">
+            <xsl:if test="contains(.,'Courriel')">
+                <email>
+                    <xsl:value-of select="normalize-space(substring-after(text(),'Courriel : '))"/>
+                </email>
+            </xsl:if>
+        </xsl:for-each>
     </xsl:template>
     
     <xsl:template match="tei:affiliation">
