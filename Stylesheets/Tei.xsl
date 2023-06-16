@@ -9,6 +9,8 @@
     - Open Edition Revues
     -->
    
+    <xsl:variable name="idnoUrl" select="string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'])"/>
+   
     <xsl:template match="tei:TEI">
         <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:apply-templates select="tei:teiHeader"/>
@@ -339,7 +341,9 @@
                                 <imprint>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:publisher"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:pubPlace"/>
-                                    <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                    <xsl:call-template name="fixAndCopyDate">
+                                        <xsl:with-param name="date" select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                    </xsl:call-template>
                                    <!-- ajout des tomaisons quand seulement présente dans le titre de l'ouvrage -->
                             <xsl:choose>
                                 <xsl:when test="//tei:idno[@type='EAN-13']='9782600031660'
@@ -666,7 +670,9 @@
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno"/>
                                     <imprint>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:publisher"/>
-                                        <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+                                    <xsl:call-template name="fixAndCopyDate">
+                                        <xsl:with-param name="date" select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+                                    </xsl:call-template>
                                         <!-- volume et numero -->
                                         <xsl:choose>
                                             <xsl:when test="contains(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue'],'Volume')">
@@ -741,7 +747,9 @@
                                                 <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:publisher"/>
                                             </xsl:if>
                                             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor"/>
-                                            <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                            <xsl:call-template name="fixAndCopyDate">
+                                                <xsl:with-param name="date" select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
+                                            </xsl:call-template>
                                             <xsl:if test="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'][string-length()&gt; 0]">
                                                 <xsl:variable name="pageStart">
                                                     <xsl:value-of select="substring-before(//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'],'-')"/>
@@ -803,7 +811,23 @@
             <xsl:choose>
                 <xsl:when test="//tei:front/tei:div[@type='abstract']">
                     <profileDesc>
-                        <xsl:copy-of select="//tei:langUsage"/>
+                        <!-- OpenEdition Journals nettoyage de données erronnées type langue --> 
+                        <xsl:choose>
+                            <xsl:when test=" contains($idnoUrl,'journals.openedition.org') and (
+                                ends-with($idnoUrl,'pyramides/1556')
+                                or ends-with($idnoUrl,'textyles/2104') 
+                                or ends-with($idnoUrl,'textyles/1712') 
+                                or ends-with($idnoUrl,'rsr/365')
+                                )">
+                                <langUsage>
+                                    <language ident="fr">fr</language>
+                                </langUsage>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:copy-of select="//tei:langUsage"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+
                         <xsl:if test="//tei:textClass/tei:keywords">
                             <xsl:apply-templates select="//tei:textClass"/>
                         </xsl:if>
@@ -1043,14 +1067,9 @@
         </publicationStmt>
     </xsl:template>
     <xsl:template match="tei:date">
-        <xsl:choose>
-            <xsl:when test="@when">
-                <date type="published" when="{@when}"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <date type="published" when="{.}"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:call-template name="fixAndCopyDate">
+            <xsl:with-param name="date" select="."/>
+        </xsl:call-template>
     </xsl:template>
     
     <xsl:template match="tei:author">
@@ -1229,4 +1248,30 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template name="fixAndCopyDate">
+        <xsl:param name="date"/>
+        <xsl:variable name="fixedDate">
+            <xsl:choose>
+                <xsl:when test="ends-with($idnoUrl,'mcv/8237')">2018</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'eps/5530')">2013</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'trace/972')">2013</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'amerika/7001')">2015</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'amerika/6883')">2015</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'sociologies/11660')">2019</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'sociologies/11087')">2019</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'sociologies/11110')">2019</xsl:when>
+                <xsl:when test="ends-with($idnoUrl,'resf/1215')">2018</xsl:when>
+                <xsl:otherwise><xsl:value-of select="string($date)"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <date>
+            <xsl:for-each select="$date/attribute()">
+                <xsl:if test="local-name()='when'"><xsl:attribute name="when" select="$fixedDate"/></xsl:if>
+                <xsl:if test="local-name()!='when'"><xsl:attribute name="{local-name()}" select="string()"/></xsl:if>
+            </xsl:for-each>
+            <xsl:value-of select="$fixedDate"/>
+        </date>
+    </xsl:template>
+    
 </xsl:stylesheet>
