@@ -666,7 +666,26 @@
                                 </xsl:when>
                                 <!-- autres corpus -->
                                 <xsl:when test="normalize-space(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title[1])[string-length()&gt; 0]">
-                                    <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title"/>
+                                    <xsl:variable name="eissn" select="string(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type = 'eISSN'])"/>
+                                    <xsl:for-each select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title">
+                                        <xsl:choose>
+                                            <xsl:when test="@level = 'j'">
+                                                <title level="j">
+                                                    <xsl:choose>
+                                                        <xsl:when test="$eissn = '1724-2150'">Mélanges de l’École française de Rome - Moyen Âge</xsl:when>
+                                                        <xsl:when test="$eissn = '1724-2142'">Mélanges de l’École française de Rome - Italie et Méditerranée modernes et contemporaines</xsl:when>
+                                                        <xsl:when test="$eissn = '1957-7761'">Cahiers de civilisation espagnole contemporaine (de 1808 au temps présent)</xsl:when>
+                                                        <xsl:when test="$eissn = '2263-0856'">Revue française des sciences de l’information et de la communication</xsl:when>
+                                                        <xsl:when test="$eissn = '1492-8442'">VertigO - la revue électronique en sciences de l’environnement</xsl:when>
+                                                        <xsl:otherwise><xsl:value-of select="string(.)"/></xsl:otherwise>
+                                                    </xsl:choose>
+                                                </title>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:copy-of select="."/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:for-each>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno"/>
                                     <imprint>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:publisher"/>
