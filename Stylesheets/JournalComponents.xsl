@@ -736,6 +736,10 @@
                 test="//wiley:publicationMeta/wiley:issn[@type = 'print'] = '0009-9163' and contains(//wiley:publicationMeta/wiley:coverDate/@startDate, '2003') and //wiley:publicationMeta/wiley:numberingGroup/wiley:numbering[@type = 'journalVolume'] = '43'">
                 <idno type="eISSN">1741-4520</idno>
             </xsl:when>
+            <xsl:when
+                test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1051/limn/2022010'">
+                <idno type="eISSN">2823-1465</idno>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:if test=". != ''">
                     <idno type="eISSN">
