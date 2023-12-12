@@ -2072,7 +2072,7 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="@publication-type='other'">
+            <xsl:when test="@publication-type='other' or not(article-title |source)">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
