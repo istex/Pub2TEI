@@ -1062,7 +1062,7 @@
                     <back>
                         <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                         <xsl:apply-templates select="front/article-meta/product"/>
-                        <xsl:apply-templates select="back/* |bm/ack | bm/bibl"/>
+                        <xsl:apply-templates select="back/* | bm/ack | bm/bibl"/>
                     </back>
                 </xsl:if>
             </text>
@@ -2821,39 +2821,41 @@
             <xsl:when test="ref-list"/>
             <xsl:when test="fn-group"/>
             <xsl:when test="parent::notes">
-                <xsl:if test="@sec-type[string-length()&gt; 0]">
-                    <xsl:attribute name="type">
-                        <xsl:value-of select="@sec-type"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:if test="parent::boxed-text">
-                    <xsl:attribute name="rend">
-                        <xsl:text>boxed-text</xsl:text>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:if test="@id[string-length()&gt; 0]">
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="@id"/>
-                    </xsl:attribute>
-                </xsl:if>
-                
-                <xsl:if test="label[string-length()&gt; 0]">
-                    <xsl:attribute name="n">
-                        <xsl:value-of select="label"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:choose>
-                    <xsl:when test="not(descendant::sec) and descendant::boxed-text">
-                        <xsl:comment>Boxed-text</xsl:comment>
-                        <xsl:apply-templates select="title"/>
-                        <xsl:apply-templates select="*except(title)"/>
-                        <xsl:apply-templates select="descendant::boxed-text/sec" mode="boxed-text"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="title"/>
-                        <xsl:apply-templates select="*except(title)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <div type="notes">
+                   <xsl:if test="@sec-type[string-length()&gt; 0]">
+                       <xsl:attribute name="type">
+                           <xsl:value-of select="@sec-type"/>
+                       </xsl:attribute>
+                   </xsl:if>
+                   <xsl:if test="parent::boxed-text">
+                       <xsl:attribute name="rend">
+                           <xsl:text>boxed-text</xsl:text>
+                       </xsl:attribute>
+                   </xsl:if>
+                   <xsl:if test="@id[string-length()&gt; 0]">
+                       <xsl:attribute name="xml:id">
+                           <xsl:value-of select="@id"/>
+                       </xsl:attribute>
+                   </xsl:if>
+                   
+                   <xsl:if test="label[string-length()&gt; 0]">
+                       <xsl:attribute name="n">
+                           <xsl:value-of select="label"/>
+                       </xsl:attribute>
+                   </xsl:if>
+                   <xsl:choose>
+                       <xsl:when test="not(descendant::sec) and descendant::boxed-text">
+                           <xsl:comment>Boxed-text</xsl:comment>
+                           <xsl:apply-templates select="title"/>
+                           <xsl:apply-templates select="*except(title)"/>
+                           <xsl:apply-templates select="descendant::boxed-text/sec" mode="boxed-text"/>
+                       </xsl:when>
+                       <xsl:otherwise>
+                           <xsl:apply-templates select="title"/>
+                           <xsl:apply-templates select="*except(title)"/>
+                       </xsl:otherwise>
+                   </xsl:choose>
+                </div>
             </xsl:when>
             <xsl:otherwise>
                 <div>
