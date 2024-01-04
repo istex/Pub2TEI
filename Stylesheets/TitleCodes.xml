@@ -24,6 +24,10 @@
                         <cell role="name">Acta Astronautica</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">AAC</cell>
+                        <cell role="name">Advances in Accounting</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">AADE</cell>
                         <cell role="name">Agricultural Administration and Extension</cell>
                     </row>
@@ -327,6 +331,10 @@
                     <row>
                         <cell role="code" style="elsevier">AJC</cell>
                         <cell role="name">The American Journal of Cardiology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">AJGERP</cell>
+                        <cell role="name">The American Journal of Geriatric Pharmacotherapy</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">AJGP</cell>
@@ -785,6 +793,10 @@
                         <cell role="name">Arthropod Structure and Development</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">ASSWRI</cell>
+                        <cell role="name">Assessing Writing</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">ASIECO</cell>
                         <cell role="name">Journal of Asian Economics</cell>
                     </row>
@@ -1119,6 +1131,10 @@
                         <cell role="name">Behavior Therapy</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">BIBLIP</cell>
+                        <cell role="name">Biochimica et Biophysica Acta (BBA) - Lipids and Lipid Metabolism</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">BICA</cell>
                         <cell role="name">Biologically Inspired Cognitive Architectures</cell>
                     </row>
@@ -1309,6 +1325,10 @@
                         <cell role="name">Developmental Brain Research</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">BRESG</cell>
+                        <cell role="name">Gene Expression Patterns</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">BRESM</cell>
                         <cell role="name">Molecular Brain Research</cell>
                     </row>
@@ -1423,6 +1443,10 @@
                         <cell role="name">Clinical and Applied Immunology Reviews</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">CAL</cell>
+                        <cell role="name">Calphad</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">CALI</cell>
                         <cell role="name">Revista de Calidad Asistencial</cell>
                     </row>
@@ -1473,6 +1497,10 @@
                     <row>
                         <cell role="code" style="elsevier">CARREV</cell>
                         <cell role="name">Cardiovascular Revascularization Medicine</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">CARSUR</cell>
+                        <cell role="name">Cardiovascular Surgery</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CAS</cell>
@@ -1712,6 +1740,10 @@
                     <row>
                         <cell role="code" style="elsevier">CHEMOM</cell>
                         <cell role="name">Chemometrics and Intelligent Laboratory Systems</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">CHEMP</cell>
+                        <cell role="name">Chemical Physics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CHEMPH</cell>
@@ -2200,6 +2232,10 @@
                         <cell role="name">Computers &amp; Security</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">COSIS</cell>
+                        <cell role="name">Current Opinion in Colloid &amp; Interface Science</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">COSREV</cell>
                         <cell role="name">Computer Science Review</cell>
                     </row>
@@ -2267,6 +2303,10 @@
                     <row>
                         <cell role="code" style="elsevier">CRAS2C</cell>
                         <cell role="name">Comptes Rendus Chimie</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">CRASIM</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series I - Mathematics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CRASS1</cell>
@@ -3045,6 +3085,10 @@
                         <cell role="name">Energy Conversion</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">END</cell>
+                        <cell role="name">Endeavour</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">ENDE</cell>
                         <cell role="name">Endeavour</cell>
                     </row>
@@ -3135,6 +3179,10 @@
                     <row>
                         <cell role="code" style="elsevier">ENVTOX</cell>
                         <cell role="name">Environmental Toxicology and Pharmacology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">EOB</cell>
+                        <cell role="name">European Journal of Obstetrics &amp; Gynecology and Reproductive Biology</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">EOR</cell>
@@ -3534,6 +3582,10 @@
                         <cell role="name">Fuel Cells Bulletin</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">FUEENE</cell>
+                        <cell role="name">Fuel and Energy Abstracts</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">FUNECO</cell>
                         <cell role="name">Fungal Ecology</cell>
                     </row>
@@ -3911,6 +3963,10 @@
                     <row>
                         <cell role="code" style="elsevier">IFCOM</cell>
                         <cell role="name">Interfaces in Computing</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">IHCMT</cell>
+                        <cell role="name">International Communications in Heat and Mass Transfer</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">IIIREV</cell>
@@ -4643,6 +4699,10 @@
                         <cell role="name">Journal of the Chinese Medical Association</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">JCME</cell>
+                        <cell role="name">Journal of Chiropractic Medicine</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">JCOU</cell>
                         <cell role="name">Journal of CO2 Utilization</cell>
                     </row>
@@ -4959,6 +5019,10 @@
                         <cell role="name">International Journal of Refrigeration</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">JIK</cell>
+                        <cell role="name">Journal of Chromatography A</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">JIM</cell>
                         <cell role="name">Journal of Immunological Methods</cell>
                     </row>
@@ -5214,6 +5278,10 @@
                       <cell role="name">Journal of Oral Biosciences</cell>
                    </row>
                     <row>
+                        <cell role="code" style="elsevier">JOC</cell>
+                        <cell role="name">Journal of Organometallic Chemistry</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">JOCCA</cell>
                         <cell role="name">Journal of Occupational Accidents</cell>
                     </row>
@@ -5299,6 +5367,10 @@
                         <cell role="name">Progress in Biophysics and Molecular Biology</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">JPBMB</cell>
+                        <cell role="name">Progress in Biophysics and Molecular Biology</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">JPC</cell>
                         <cell role="name">Journal of Photochemistry &amp; Photobiology, A:
                             Chemistry</cell>
@@ -5365,6 +5437,10 @@
                     <row>
                         <cell role="code" style="elsevier">JPNMRS</cell>
                         <cell role="name">Progress in Nuclear Magnetic Resonance Spectroscopy</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">JPNPBP</cell>
+                        <cell role="name">Progress in Neuro-Psychopharmacology and Biological Psychiatry</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">JPO</cell>
@@ -5574,6 +5650,10 @@
                     <row>
                         <cell role="code" style="elsevier">JULTR</cell>
                         <cell role="name">Journal of Ultrastructure Research</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">JUMSTR</cell>
+                        <cell role="name">Journal of Ultrastructure and Molecular Structure Research</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">JUOGR</cell>
@@ -5985,6 +6065,10 @@
                         <cell role="name">Journal of Membrane Science</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">MEMSI</cell>
+                        <cell role="name">Journal of Membrane Science</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">MENCOM</cell>
                         <cell role="name">Mendeleev Communications</cell>
                     </row>
@@ -6011,6 +6095,10 @@
                     <row>
                         <cell role="code" style="elsevier">METMAT</cell>
                         <cell role="name">Metamaterials</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">MF</cell>
+                        <cell role="name">International Journal of Multiphase Flow</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">MHP</cell>
@@ -6055,6 +6143,10 @@
                     <row>
                         <cell role="code" style="elsevier">MICS</cell>
                         <cell role="name">Microprocessors</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">MIDWOM</cell>
+                        <cell role="name">Journal of Midwifery &amp; Women s Health</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">MIMA</cell>
@@ -6104,6 +6196,10 @@
                     <row>
                         <cell role="code" style="elsevier">MLBLUE</cell>
                         <cell role="name">Materials Letters</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">MMT</cell>
+                        <cell role="name">Mechanism and Machine Theory</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">MOD</cell>
@@ -7209,6 +7305,10 @@
                         <cell role="name">Polyhedron</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">POLYME</cell>
+                        <cell role="name">Polymer</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">POP</cell>
                         <cell role="name">Primary Care: Clinics in Office Practice</cell>
                     </row>
@@ -7474,6 +7574,22 @@
                         <cell role="name">Annales durologie</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXAO</cell>
+                        <cell role="name">Acta Oecologica</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXAQ</cell>
+                        <cell role="name">Aquatic Living Resources</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXAR</cell>
+                        <cell role="name">Annales de Réadaptation et de Médecine Physique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXAS</cell>
+                        <cell role="name">Annales Scientifiques de l'École Normale Supérieure</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXAZ</cell>
                         <cell role="name">Annales des Sciences Naturelles Zoologie et Biologie
                             Animale</cell>
@@ -7484,8 +7600,20 @@
                             Chemistry</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXBC</cell>
+                        <cell role="name">Biochimie</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXBG</cell>
+                        <cell role="name">Pathologie Biologie</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXBF</cell>
                         <cell role="name">Biofutur</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXBM</cell>
+                        <cell role="name">Biomedicine &amp; Pharmacotherapy</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXCA</cell>
@@ -7500,6 +7628,10 @@
                         <cell role="name">Cryptogamie Mycologie</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXCE</cell>
+                        <cell role="name">Biology of the Cell</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXCF</cell>
                         <cell role="name">Revue Générale des Chemins de Fer</cell>
                     </row>
@@ -7508,16 +7640,60 @@
                         <cell role="name">Annales de chirurgie</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXCM</cell>
+                        <cell role="name">Annales de Chimie Science des Matériaux</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXCOLD</cell>
                         <cell role="name">Chirurgie</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXCP</cell>
+                        <cell role="name">Annales de Chirurgie Plastique Esthétique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXCR</cell>
+                        <cell role="name">Cancer / Radiothérapie</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXCS</cell>
+                        <cell role="name">Gynécologie Obstétrique &amp; Fertilité</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXDI</cell>
-                        <cell role="name">Annales de cardiologie et dangeiologie</cell>
+                        <cell role="name">Annales de cardiologie et d'angeiologie</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXEA</cell>
+                        <cell role="name">Neuropsychiatrie de l'Enfance et de l'Adolescence</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXEJ</cell>
+                        <cell role="name">European Journal of Medicinal Chemistry</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXEP</cell>
+                        <cell role="name">L'Évolution Psychiatrique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXEX</cell>
+                        <cell role="name">Exergy An International Journal</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXFM</cell>
+                        <cell role="name">Il Farmaco</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXGA</cell>
+                        <cell role="name">Geodinamica Acta</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXGE</cell>
                         <cell role="name">Annales de genetique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXGL</cell>
+                        <cell role="name">Geobios</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXHOLD</cell>
@@ -7525,17 +7701,81 @@
                             Physics</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXHY</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series IV - Physics-Astrophysics</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXIB</cell>
+                        <cell role="name">Immuno-analyse &amp; Biologie Spécialisée</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXIM</cell>
+                        <cell role="name">Revue Française d'Allergologie et d'Immunologie Clinique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXJA</cell>
+                        <cell role="name">European Journal of Mechanics - A/Solids</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXJB</cell>
+                        <cell role="name">European Journal of Mechanics - B/Fluids</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXJH</cell>
+                        <cell role="name">Journal of Cultural Heritage</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMA</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series I - Mathematics</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMC</cell>
+                        <cell role="name">Microbes and Infection</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMD</cell>
+                        <cell role="name">Médecine &amp; Droit</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMI</cell>
+                        <cell role="name">La Revue de Médecine Interne</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMM</cell>
+                        <cell role="name">Médecine et Maladies Infectieuses</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXMOLD</cell>
                         <cell role="name">Comptes Rendus de l'Académie des Sciences Series I
                             Mathematics</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMP</cell>
+                        <cell role="name">Journal de Mathématiques Pures et Appliquées</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXMQ</cell>
+                        <cell role="name">Mécanique &amp; Industries</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXMS</cell>
                         <cell role="name">Annales médico-psychologiques</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXNC</cell>
+                        <cell role="name">Neurophysiologie Clinique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXNS</cell>
+                        <cell role="name">Natures Sciences Sociétés</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXOB</cell>
                         <cell role="name">Option/Bio</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXOC</cell>
+                        <cell role="name">Oceanologica Acta</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXOLDC</cell>
@@ -7548,8 +7788,36 @@
                             Mechanics</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXPB</cell>
+                        <cell role="name">Annales de l'Institut Henri Poincaré Probabilités et Statistiques</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPC</cell>
+                        <cell role="name">Annales de l'Institut Henri Poincaré / Analyse Non Linéaire</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPD</cell>
+                        <cell role="name">Archives de Pédiatrie</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPH</cell>
+                        <cell role="name">Journal of Physiology-Paris</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXPL</cell>
                         <cell role="name">Plasmas &amp; Ions</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPO</cell>
+                        <cell role="name">Annales de Paléontologie</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPP</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series IIB - Mechanics-Physics-Astronomy</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPP</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series IIB - Mechanics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXPOLD</cell>
@@ -7557,12 +7825,84 @@
                             Mechanics Physics Astronomy</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXPT</cell>
+                        <cell role="name">Plant Physiology and Biochemistry</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPU</cell>
+                        <cell role="name">Journal de Pédiatrie et de Puériculture</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXPY</cell>
+                        <cell role="name">European Psychiatry</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXRF</cell>
+                        <cell role="name">Revue Française des Laboratoires</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXRG</cell>
+                        <cell role="name">International Journal of Thermal Sciences</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXRH</cell>
+                        <cell role="name">Revue du Rhumatisme</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXRM</cell>
+                        <cell role="name">Research in Microbiology</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXROLD</cell>
                         <cell role="name">Réanimation Urgences</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">PXRR</cell>
+                        <cell role="name">Joint Bone Spine</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXRU</cell>
+                        <cell role="name">Réanimation</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXRW</cell>
+                        <cell role="name">ITBM-RBM News</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXSB</cell>
+                        <cell role="name">European Journal of Soil Biology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXSC</cell>
+                        <cell role="name">Sociologie du Travail</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXSF</cell>
+                        <cell role="name">Sauvegarde de l'Enfance</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">PXSM</cell>
                         <cell role="name">Bulletin des sciences mathématiques</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXSS</cell>
+                        <cell role="name">Solid State Sciences</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXST</cell>
+                        <cell role="name">Aerospace Science and Technology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXSU</cell>
+                        <cell role="name">Chirurgie de la Main</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXTC</cell>
+                        <cell role="name">Transfusion Clinique et Biologique</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXTE</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series IIA - Earth and Planetary Science</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXTOLD</cell>
@@ -7572,6 +7912,10 @@
                     <row>
                         <cell role="code" style="elsevier">PXUR</cell>
                         <cell role="name">Médecine de Catastrophe</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">PXVI</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series III - Sciences de la Vie</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXVOLD</cell>
@@ -7851,6 +8195,10 @@
                         <cell role="name">Revue Française de Transfusion</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">RF</cell>
+                        <cell role="name">Revue Française des Laboratoires</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">RFL</cell>
                         <cell role="name">Revue Francophone des Laboratoires</cell>
                     </row>
@@ -8114,6 +8462,10 @@
                         <cell role="name">Screening</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">SCRMAT</cell>
+                        <cell role="name">Scripta Materialia</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">SCRMET</cell>
                         <cell role="name">Scripta Metallurgica</cell>
                     </row>
@@ -8128,6 +8480,10 @@
                     <row>
                         <cell role="code" style="elsevier">SE</cell>
                         <cell role="name">Solar Energy</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">SEAES</cell>
+                        <cell role="name">Journal of Asian Earth Sciences</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">SEAESO</cell>
@@ -8292,8 +8648,16 @@
                         <cell role="name">Soil Technology</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">SOLAR</cell>
+                        <cell role="name">Solar Energy</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">SOLCEL</cell>
                         <cell role="name">Solar Cells</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">SOLMAG</cell>
+                        <cell role="name">Solid State Nuclear Magnetic Resonance</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">SOLMAT</cell>
@@ -9018,6 +9382,22 @@
                         <cell role="name">Womens Studies International Quarterly</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">X45</cell>
+                        <cell role="name">Pump Industry Analyst</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X49</cell>
+                        <cell role="name">Metal Powder Report</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X67</cell>
+                        <cell role="name">Biofutur</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X82</cell>
+                        <cell role="name">Archives de Pédiatrie</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">X135</cell>
                         <cell role="name">Research in Virology</cell>
                     </row>
@@ -9078,6 +9458,34 @@
                     <row>
                         <cell role="code" style="elsevier">X85</cell>
                         <cell role="name">Urgences Medicales</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X198</cell>
+                        <cell role="name">Current Therapeutic Research</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X220</cell>
+                        <cell role="name">Médecine &amp; Droit</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X221</cell>
+                        <cell role="name">Journal de Pédiatrie et de Puériculture</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X289</cell>
+                        <cell role="name">Current Opinion in Biotechnology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X290</cell>
+                        <cell role="name">Current Opinion in Neurobiology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X294</cell>
+                        <cell role="name">Current Opinion in Cell Biology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">X300</cell>
+                        <cell role="name">L'Évolution Psychiatrique</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">XACRA</cell>
@@ -9159,6 +9567,10 @@
                             and Surgery</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YAMHJ</cell>
+                        <cell role="name">American Heart Journal</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YANAE</cell>
                         <cell role="name">Anaerobe</cell>
                     </row>
@@ -9191,6 +9603,10 @@
                         <cell role="name">Archives of Psychiatric Nursing</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YAPPE</cell>
+                        <cell role="name">Appetite</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YAPTCS</cell>
                         <cell role="name">The Asia Pacific Journal of Thoracic and Cardiovascular
                             Surgery</cell>
@@ -9204,8 +9620,16 @@
                         <cell role="name">Atmospheric Science Letters</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YASUJ</cell>
+                        <cell role="name">Aesthetic Surgery Journal</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YBARE</cell>
                         <cell role="name">The British Accounting Review</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">YBIOE</cell>
+                        <cell role="name">Biosystems Engineering</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">YBBMT</cell>
@@ -9454,6 +9878,10 @@
                     <row>
                         <cell role="code" style="elsevier">YCUOR</cell>
                         <cell role="name">Current Orthopaedics</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">YCUPE</cell>
+                        <cell role="name">Current Paediatrics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">YCVIGP</cell>
@@ -9769,6 +10197,10 @@
                             Ophthalmic Registered Nurses</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YJAAD</cell>
+                        <cell role="name">Journal of the American Academy of Dermatology</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YJAAR</cell>
                         <cell role="name">Journal of Anthropological Archaeology</cell>
                     </row>
@@ -10063,6 +10495,10 @@
                         <cell role="name">Journal of Network and Computer Applications</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YJNCD</cell>
+                        <cell role="name">Journal of Nuclear Cardiology</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YJNTH</cell>
                         <cell role="name">Journal of Number Theory</cell>
                     </row>
@@ -10103,12 +10539,24 @@
                         <cell role="name">Journal of Pediatric Nursing</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YJPED</cell>
+                        <cell role="name">The Journal of Pediatrics</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">YJPHC</cell>
+                        <cell role="name">Journal of Pediatric Health Care</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YJPHO</cell>
                         <cell role="name">Journal of Phonetics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">YJPMN</cell>
                         <cell role="name">Pain Management Nursing</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">YJPNA</cell>
+                        <cell role="name">Journal of the American Psychiatric Nurses Association</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">YJPNU</cell>
@@ -10181,6 +10629,10 @@
                         <cell role="name">Journal of Visual Languages and Computing</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YJVSU</cell>
+                        <cell role="name">Journal of Vascular Surgery</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YJXRA</cell>
                         <cell role="name">Journal of X-Ray Science and Technology</cell>
                     </row>
@@ -10231,6 +10683,10 @@
                     <row>
                         <cell role="code" style="elsevier">YMCD</cell>
                         <cell role="name">Current Problems in Cardiology</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">YMCHJ</cell>
+                        <cell role="name">Microchemical Journal</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">YMCM</cell>
@@ -10517,6 +10973,10 @@
                         <cell role="name">Optical Fiber Technology</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YOHNS</cell>
+                        <cell role="name">Otolaryngology</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YOTCT</cell>
                         <cell role="name">Operative Techniques in Thoracic and Cardiovascular
                             Surgery: A Comparative Atlas</cell>
@@ -10667,6 +11127,10 @@
                         <cell role="name">Seminars in Arthritis and Rheumatism</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YSBMR</cell>
+                        <cell role="name">Solid State Nuclear Magnetic Resonance</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YSCBI</cell>
                         <cell role="name">Seminars in Cancer Biology</cell>
                     </row>
@@ -10787,6 +11251,10 @@
                         <cell role="name">Toxicology and Applied Pharmacology</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">YTCMG</cell>
+                        <cell role="name">The Case Manager</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">YTGIE</cell>
                         <cell role="name">Techniques in Gastrointestinal Endoscopy</cell>
                     </row>
@@ -10846,6 +11314,10 @@
                     <row>
                         <cell role="code" style="elsevier">YWMRE</cell>
                         <cell role="name">Waste Management &amp; Research</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">YWOCN</cell>
+                        <cell role="name">Journal of Wound Ostomy and Continence Nursing</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">YZJLS</cell>
