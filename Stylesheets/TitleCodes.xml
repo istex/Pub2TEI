@@ -106,10 +106,6 @@
                         <cell role="code" style="elsevier">ACN</cell>
                         <cell role="name">Archives of Clinical Neuropsychology</cell>
                     </row>
-                   <row>
-                      <cell role="code" style="elsevier">ACUROE</cell>
-                      <cell role="name">Actas Urológicas Españolas (English Edition)</cell>
-                   </row>
                     <row>
                         <cell role="code" style="elsevier">ACPAIN</cell>
                         <cell role="name">Acute Pain</cell>
@@ -145,10 +141,6 @@
                     <row>
                         <cell role="code" style="elsevier">ACURO</cell>
                         <cell role="name">Actas Urologicas Españolas</cell>
-                    </row>
-                    <row>
-                        <cell role="code" style="elsevier">ACUROE</cell>
-                        <cell role="name">Actas Urológicas Españolas (English Edition)</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">ACVD</cell>
@@ -1834,10 +1826,6 @@
                         <cell role="code" style="elsevier">CIN</cell>
                         <cell role="name">Clinical Immunology Newsletter</cell>
                     </row>
-                   <row>
-                      <cell role="code" style="elsevier">CIRENG</cell>
-                      <cell role="name">Cirugía Española (English Edition)</cell>
-                   </row>
                     <row>
                         <cell role="code" style="elsevier">CIRP</cell>
                         <cell role="name">CIRP Annals - Manufacturing Technology</cell>
@@ -6032,10 +6020,6 @@
                         <cell role="code" style="elsevier">MEDIN</cell>
                         <cell role="name">Medicina intensiva</cell>
                     </row>
-                   <row>
-                      <cell role="code" style="elsevier">MEDINE</cell>
-                      <cell role="name">Medicina Intensiva (English Edition)</cell>
-                   </row>
                     <row>
                         <cell role="code" style="elsevier">MEDMAL</cell>
                         <cell role="name">Médecine et Maladies Infectieuses</cell>
@@ -6599,10 +6583,6 @@
                         <cell role="name">Neuropsychopharmacology</cell>
                     </row>
                     <row>
-                        <cell role="code" style="elsevier">NRLENG</cell>
-                        <cell role="name">Neurología (English Edition)</cell>
-                    </row>
-                    <row>
                         <cell role="code" style="elsevier">NRR</cell>
                         <cell role="name">Neural Regeneration Research</cell>
                     </row>
@@ -6756,7 +6736,7 @@
                     </row>
                     <row>
                         <cell role="code" style="elsevier">OFTALE</cell>
-                        <cell role="name">Archivos de la Sociedad Española de Oftalmología (English Ed)</cell>
+                        <cell role="name">Archivos de la Sociedad Española de Oftalmología (English Edition)</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">OG</cell>
@@ -7813,10 +7793,6 @@
                     </row>
                     <row>
                         <cell role="code" style="elsevier">PXPP</cell>
-                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series IIB - Mechanics-Physics-Astronomy</cell>
-                    </row>
-                    <row>
-                        <cell role="code" style="elsevier">PXPP</cell>
                         <cell role="name">Comptes Rendus de l'Académie des Sciences - Series IIB - Mechanics</cell>
                     </row>
                     <row>
@@ -8303,10 +8279,6 @@
                         <cell role="name">Reports of Practical Oncology &amp; Radiotherapy</cell>
                     </row>
                    <row>
-                      <cell role="code" style="elsevier">RPPNEN</cell>
-                      <cell role="name">Revista Portuguesa de Pneumologia (English Edition)</cell>
-                   </row>
-                   <row>
                       <cell role="code" style="elsevier">RPSMEN</cell>
                       <cell role="name">Revista de Psiquiatría y Salud Mental (English Edition)</cell>
                    </row>
@@ -8358,14 +8330,9 @@
                         <cell role="code" style="elsevier">RX</cell>
                         <cell role="name">Radiologia</cell>
                     </row>
-                   <row>
-                      <cell role="code" style="elsevier">RXENG</cell>
-                      <cell role="name">Radiología (English Edition)</cell>
-                   </row>
                     <row>
                         <cell role="code" style="elsevier">SAA</cell>
-                        <cell role="name">Spectrochimica Acta Part A: Molecular and Biomolecular
-                            Spectroscopy</cell>
+                        <cell role="name">Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">SAAOLD</cell>
@@ -11894,11 +11861,6 @@
                         <cell role="name">Apollo Medicine</cell>
                     </row>
                     <row>
-                        <cell role="code" style="elsevier">OFTALE</cell>
-                        <cell role="name">Archivos de la Sociedad Española de Oftalmología (English
-                            Ed)</cell>
-                    </row>
-                    <row>
                         <cell role="code" style="elsevier">AJOMS</cell>
                         <cell role="name">Asian Journal of Oral and Maxillofacial Surgery</cell>
                     </row>
@@ -12028,10 +11990,6 @@
                     <row>
                         <cell role="code" style="elsevier">ECOSER</cell>
                         <cell role="name">Ecosystem Services</cell>
-                    </row>
-                    <row>
-                        <cell role="code" style="elsevier">ENDOEN</cell>
-                        <cell role="name">Endocrinología y nutrición (English Edition)</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">ESR</cell>
@@ -12195,11 +12153,6 @@
                         <cell role="name">Journal of Optometry</cell>
                     </row>
                     <row>
-                        <cell role="code" style="elsevier">JOMSMP</cell>
-                        <cell role="name">Journal of Oral and Maxillofacial Surgery, Medicine, and
-                            Pathology</cell>
-                    </row>
-                    <row>
                         <cell role="code" style="elsevier">JOBCR</cell>
                         <cell role="name">Journal of Oral Biology and Craniofacial Research</cell>
                     </row>
@@ -12292,15 +12245,6 @@
                         <cell role="code" style="elsevier">RTBM</cell>
                         <cell role="name">Research in Transportation Business &amp;
                             Management</cell>
-                    </row>
-                    <row>
-                        <cell role="code" style="elsevier">REUMAE</cell>
-                        <cell role="name">Reumatología clínica (English Edition)</cell>
-                    </row>
-                    <row>
-                        <cell role="code" style="elsevier">RPSMEN</cell>
-                        <cell role="name">Revista de psiquiatría y salud mental (English
-                            Edition)</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">REMNGL</cell>
