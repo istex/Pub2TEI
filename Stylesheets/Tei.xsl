@@ -1052,13 +1052,13 @@
             </xsl:choose>
             <xsl:copy-of select="tei:address"/>
             <xsl:choose>
-                <xsl:when test="tei:availability/tei:licence[contains(text(),'Droz')]">
+                <xsl:when test="contains(string(tei:availability/tei:licence),'Droz')">
                     <availability status="{tei:availability/@status}">
                         <xsl:copy-of select="tei:availability/tei:licence"/>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
-                <xsl:when test="tei:publisher[contains(text(),'Librairie Droz')]">
+                <xsl:when test="contains(string(tei:publisher),'Librairie Droz')">
                     <availability status="restricted">
                         <licence>Copyright <date><xsl:value-of select="tei:date/@when"/></date> Librairie Droz S.A.</licence>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
