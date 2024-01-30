@@ -16,6 +16,7 @@
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
+    <xsl:param name="corpusname"/>
     <xsl:param name="rawfulltextpath"/>
     
     <xsl:include href="Imports.xsl"/>
