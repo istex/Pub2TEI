@@ -1039,6 +1039,9 @@
             <xsl:copy-of select="tei:edition"/>
         </editionStmt>
     </xsl:template>
+    <xsl:variable name="publishersString">
+        <xsl:for-each select="tei:publisher"><xsl:value-of select="."/> - </xsl:for-each>
+    </xsl:variable>
     <xsl:template match="tei:publicationStmt">
         <publicationStmt>
             <authority>ISTEX</authority>
@@ -1058,7 +1061,7 @@
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
-                <xsl:when test="contains(string(tei:publisher),'Librairie Droz')">
+                <xsl:when test="contains($publishersString,'Librairie Droz')">
                     <availability status="restricted">
                         <licence>Copyright <date><xsl:value-of select="tei:date/@when"/></date> Librairie Droz S.A.</licence>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
