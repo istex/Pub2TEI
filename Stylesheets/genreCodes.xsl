@@ -186,11 +186,11 @@
                     <xsl:otherwise>chapter</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original'],'Case reports')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[@content-type='original']"/>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[1][@content-type='original'],'Case reports')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[1][@content-type='original']"/>
             </xsl:when>
-            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject,'Chapter')">
-                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject"/>
+            <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[1],'Chapter')">
+                <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[1]"/>
             </xsl:when>
             <xsl:when test="//article/front/article-meta/title-group/subtitle[1] [string-length() &gt; 0]">
                 <!-- traitement spécial RSC-ebooks -->
