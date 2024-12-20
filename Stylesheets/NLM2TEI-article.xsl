@@ -3628,13 +3628,11 @@
         <xsl:choose>
             <xsl:when test=".=''"/>
             <xsl:otherwise> 
-                <availability>
                     <licence>
                         <p>
                             <xsl:apply-templates/>
                         </p>
                     </licence>
-                </availability>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -4432,7 +4430,6 @@
                             <xsl:otherwise>
                                 <xsl:choose>
                                     <xsl:when test="$countSup">
-                                        <address>
                                             <country>
                                                 <xsl:attribute name="key">
                                                     <xsl:value-of select="$testCountry"/>
@@ -4441,7 +4438,6 @@
                                                     <xsl:with-param name="country" select="$avantVirgule"/>
                                                 </xsl:call-template>
                                             </country>
-                                        </address>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <country>
