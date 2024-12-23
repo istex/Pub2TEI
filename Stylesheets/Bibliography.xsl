@@ -689,7 +689,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <title level="m" type="main">
-                                    <xsl:value-of select="normalize-space($entry/article-title)"/>
+                                    <xsl:value-of select="normalize-space($entry/article-title[1])"/>
                                 </title>
                             </xsl:otherwise>
                         </xsl:choose>
