@@ -2787,19 +2787,23 @@
         <xsl:variable name="strip-string">
             <xsl:value-of select="."/>
         </xsl:variable>
-        <xsl:apply-templates select="ancestor::article-meta/descendant::author-notes/fn[@id = $index]"/>
+        <xsl:if test="not(ancestor::*[@id = $index])">
+            <xsl:apply-templates select="ancestor::article-meta/descendant::author-notes/fn[@id = $index]"/>
+        </xsl:if>
     </xsl:template>
 
     <!-- additional information attached to corresponding authors (Cambridge example)-->
     <xsl:template match="xref[@ref-type = 'corresp']">
         <xsl:variable name="index" select="@rid"/>
-        <xsl:variable name="refCorresp" select="ancestor::article-meta/descendant::author-notes/corresp[@id = $index]"/>
-        <xsl:apply-templates select="$refCorresp/email"/>
-        <!-- Cambridge may provide country in "author-notes/corresp" instead of "aff" -->
-        <xsl:if test="$refCorresp/country">
-            <address>
-                <xsl:apply-templates select="$refCorresp/addr-line | $refCorresp/country | $refCorresp/institution"/>
-               </address>
+        <xsl:if test="not(ancestor::*[@id = $index])">
+            <xsl:variable name="refCorresp" select="ancestor::article-meta/descendant::author-notes/corresp[@id = $index]"/>
+            <xsl:apply-templates select="$refCorresp/email"/>
+            <!-- Cambridge may provide country in "author-notes/corresp" instead of "aff" -->
+            <xsl:if test="$refCorresp/country">
+                <address>
+                    <xsl:apply-templates select="$refCorresp/addr-line | $refCorresp/country | $refCorresp/institution"/>
+                   </address>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
