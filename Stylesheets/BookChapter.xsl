@@ -561,6 +561,16 @@
                                             <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
                                                 <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
                                             </xsl:when>
+                                            <xsl:when test="/book/book-back/app-group|/book/book-back/app">
+                                                <title level="a" type="main">
+                                                    <xsl:if test="/book/book-back/app-group">
+                                                        <xsl:text>Appendices</xsl:text>
+                                                    </xsl:if>
+                                                    <xsl:if test="/book/book-back/app">
+                                                        <xsl:text>Appendix</xsl:text>
+                                                    </xsl:if>
+                                                </title>
+                                            </xsl:when>
                                             <xsl:otherwise> 
                                                 <!-- cambridge titre vide prendre type de contenu -->
                                                 <title level="a" type="main">
@@ -571,6 +581,22 @@
                                     </xsl:when>
                                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
+                                    </xsl:when>
+                                    <!-- cambridge polit and law -->
+                                    <xsl:when test="/book/front-matter/foreword/book-part-meta/title-group/title">
+                                        <xsl:apply-templates select="/book/front-matter/foreword/book-part-meta/title-group/title"/>
+                                        <xsl:apply-templates select="/book/front-matter/foreword/book-part-meta/title-group/subtitle"/>
+                                    </xsl:when>
+                                    <xsl:when test="/book/front-matter/preface/book-part-meta/title-group/title">
+                                        <xsl:apply-templates select="/book/front-matter/preface/book-part-meta/title-group/title"/>
+                                        <xsl:apply-templates select="/book/front-matter/preface/book-part-meta/title-group/subtitle"/>
+                                    </xsl:when>
+                                    <xsl:when test="/book/front-matter/front-matter-part/book-part-meta/title-group/title">
+                                        <xsl:apply-templates select="/book/front-matter/front-matter-part/book-part-meta/title-group/title"/>
+                                    </xsl:when>
+                                    <!-- combler les absences de titres-->
+                                    <xsl:when test="/book/front-matter/dedication">
+                                        <title level="a" type="main">Dedication</title>
                                     </xsl:when>
                                     <xsl:when test="book-meta/book-title-group/book-title">
                                         <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="analytic"/>
@@ -1751,6 +1777,17 @@
                             <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
                                 <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
                             </xsl:when>
+                            <!-- cambridge polit and law -->
+                            <xsl:when test="/book/book-back/app-group|/book/book-back/app">
+                                <title level="a" type="main">
+                                    <xsl:if test="/book/book-back/app-group">
+                                        <xsl:text>Appendices</xsl:text>
+                                    </xsl:if>
+                                    <xsl:if test="/book/book-back/app">
+                                        <xsl:text>Appendix</xsl:text>
+                                    </xsl:if>
+                                </title>
+                            </xsl:when>
                             <xsl:otherwise> 
                                 <!-- cambridge titre vide prendre type de contenu -->
                                 <title level="a" type="main">
@@ -1761,6 +1798,22 @@
                     </xsl:when>
                     <xsl:when test="/book/book-body/book-part/book-part-meta/title-group/title[string-length()&gt; 0]">
                         <xsl:apply-templates select="/book/book-body/book-part/book-part-meta/title-group/title"/>
+                    </xsl:when>
+                    <!-- cambridge polit and law -->
+                    <xsl:when test="/book/front-matter/foreword/book-part-meta/title-group/title">
+                        <xsl:apply-templates select="/book/front-matter/foreword/book-part-meta/title-group/title"/>
+                        <xsl:apply-templates select="/book/front-matter/foreword/book-part-meta/title-group/subtitle"/>
+                    </xsl:when>
+                    <xsl:when test="/book/front-matter/preface/book-part-meta/title-group/title">
+                        <xsl:apply-templates select="/book/front-matter/preface/book-part-meta/title-group/title"/>
+                        <xsl:apply-templates select="/book/front-matter/preface/book-part-meta/title-group/subtitle"/>
+                    </xsl:when>
+                    <xsl:when test="/book/front-matter/front-matter-part/book-part-meta/title-group/title">
+                        <xsl:apply-templates select="/book/front-matter/front-matter-part/book-part-meta/title-group/title"/>
+                    </xsl:when>
+                    <!-- combler les absences de titres-->
+                    <xsl:when test="/book/front-matter/dedication">
+                        <title level="a" type="main">Dedication</title>
                     </xsl:when>
                     <xsl:when test="book-meta/book-title-group/book-title">
                         <xsl:apply-templates select="book-meta/book-title-group/book-title" mode="analytic"/>
@@ -2264,12 +2317,12 @@
                         </xsl:when>
                     </xsl:choose>
                     <!-- ******************* pagination ******************************-->
-                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[not(body/book-part)]/book-part-meta/fpage[string-length() &gt; 0]">
-                        <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage}">
-                            <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage"/>
+                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[not(body/book-part)]/book-part-meta/fpage[string-length() &gt; 0]||/book/front-matter/front-matter-part/book-part-meta/fpage[string-length() &gt; 0]">
+                        <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage|/book/front-matter/front-matter-part/book-part-meta/fpage}">
+                            <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage|/book/front-matter/front-matter-part/book-part-meta/fpage"/>
                         </biblScope>
-                        <biblScope unit="page" to="{//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[not(body/book-part)]/book-part-meta/lpage}">
-                            <xsl:value-of select="//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[not(body/book-part)]/book-part-meta/lpage"/>
+                        <biblScope unit="page" to="{//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[not(body/book-part)]/book-part-meta/lpage|/book/front-matter/front-matter-part/book-part-meta/lpage}">
+                            <xsl:value-of select="//book/entryGroup/entry/@endpage| /book/book-body/book-part/book-part-meta/lpage |//book-part[not(body/book-part)]/book-part-meta/lpage|/book/front-matter/front-matter-part/book-part-meta/lpage"/>
                         </biblScope>
                     </xsl:if>
                     <xsl:apply-templates select="book-meta/counts/book-page-count"/>
