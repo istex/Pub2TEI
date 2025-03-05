@@ -249,15 +249,7 @@
             <xsl:when test="$codeLangTitle='zha'">za</xsl:when>
             <xsl:when test="$codeLangTitle='zho'">zh</xsl:when>
             <xsl:when test="$codeLangTitle='zul'">zu</xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$codeLangTitle"/>
-                <!--<xsl:choose>
-                    <xsl:when test="string-length($codeLangTitle)=2">
-                        <xsl:value-of select="$codeLangTitle"/>
-                    </xsl:when>
-                    <xsl:otherwise>en</xsl:otherwise>
-                </xsl:choose>-->
-            </xsl:otherwise>
+            <xsl:otherwise>en</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
         
@@ -1449,6 +1441,13 @@
                                                 </language>
                                             </langUsage>
                                         </xsl:when>
+                                        <xsl:otherwise>
+                                            <langUsage>
+                                                <language>
+                                                    <xsl:attribute name="ident">en</xsl:attribute>
+                                                </language>
+                                            </langUsage>
+                                        </xsl:otherwise>
                                     </xsl:choose>
                                 </profileDesc>
                             </xsl:when>
@@ -2317,7 +2316,7 @@
                         </xsl:when>
                     </xsl:choose>
                     <!-- ******************* pagination ******************************-->
-                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[not(body/book-part)]/book-part-meta/fpage[string-length() &gt; 0]||/book/front-matter/front-matter-part/book-part-meta/fpage[string-length() &gt; 0]">
+                    <xsl:if test="//book/entryGroup/entry/@startpage[string-length() &gt; 0] | /book/book-body/book-part/book-part-meta/fpage[string-length() &gt; 0] |//book-part[not(body/book-part)]/book-part-meta/fpage[string-length() &gt; 0]|/book/front-matter/front-matter-part/book-part-meta/fpage[string-length() &gt; 0]">
                         <biblScope unit="page" from="{//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage|/book/front-matter/front-matter-part/book-part-meta/fpage}">
                             <xsl:value-of select="//book/entryGroup/entry/@startpage| /book/book-body/book-part/book-part-meta/fpage |//book-part[not(body/book-part)]/book-part-meta/fpage|/book/front-matter/front-matter-part/book-part-meta/fpage"/>
                         </biblScope>
