@@ -63,9 +63,15 @@
                 <title level="a" type="main">Erratum to 'Conversion-temperature trajectories for
                     well mixed adsorptive reactorsa'</title>
             </xsl:when>
-            <xsl:when
-                test="/article/front/article-meta/title-group/article-title = '' and /article/front/journal-meta/publisher/publisher-name = 'Cambridge University Press'">
-                <title level="a" type="main">Book reviews</title>
+           <xsl:when test="/article/front/article-meta/title-group/article-title ='' and /article/front/journal-meta/publisher/publisher-name='Cambridge University Press'">
+                <title level="a" type="main">
+                    <xsl:choose>
+                        <xsl:when test="/article/front/article-meta/product/source[string-length()&gt; 0]">
+                            <xsl:apply-templates select="/article/front/article-meta/product" mode="title"/>
+                        </xsl:when>
+                        <xsl:otherwise>Book review</xsl:otherwise>
+                    </xsl:choose>
+                </title>
             </xsl:when>
             <xsl:otherwise>
                 <title level="a" type="main">
