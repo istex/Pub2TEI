@@ -322,13 +322,20 @@
                                                 <xsl:value-of select="$codeGenreNature"/>
                                                 </title>
                                             </xsl:when>
+                                            <xsl:when test="/article/front/article-meta/title-group/article-title ='' and /article/front/journal-meta/publisher/publisher-name='Cambridge University Press'">
+                                                <title level="a" type="main">
+                                                    <xsl:choose>
+                                                        <xsl:when test="/article/front/article-meta/product/source[string-length()&gt; 0]">
+                                                            <xsl:apply-templates select="/article/front/article-meta/product" mode="title"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>Book review</xsl:otherwise>
+                                                    </xsl:choose>
+                                                </title>
+                                            </xsl:when>
                                             <xsl:when test="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading']/subject[string-length() &gt; 0]">
                                                 <title level="a" type="main">
                                                     <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[@subj-group-type='heading'][1]/subject"/>
                                                 </title>
-                                            </xsl:when>
-                                            <xsl:when test="/article/front/article-meta/title-group/article-title ='' and /article/front/journal-meta/publisher/publisher-name='Cambridge University Press'">
-                                                <title level="a" type="main">Book reviews</title>
                                             </xsl:when>
                                             <xsl:otherwise><title/></xsl:otherwise>
                                         </xsl:choose>
@@ -5044,5 +5051,23 @@
     <xsl:template match="label" mode="brill-ebooks">
         <xsl:value-of select="normalize-space(.)"/>
         <xsl:text> - </xsl:text>
+    </xsl:template>
+    
+    <!--Cambridge - <article-title> vide, les titres des book-reviews se trouvent dans <product>-->
+    <xsl:template match="product" mode="title">
+        <xsl:apply-templates select="name" mode="product"/>
+        <xsl:value-of select="normalize-space(substring-after(.,'.'))"/>
+    </xsl:template>
+    <xsl:template match="name" mode="product">
+        <xsl:apply-templates select="given-names" mode="product"/>
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates select="surname" mode="product"/>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
+    <xsl:template match="given-names" mode="product">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="surname" mode="product">
+        <xsl:apply-templates/>
     </xsl:template>
 </xsl:stylesheet>
