@@ -1171,13 +1171,6 @@
                 <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
                     <title><xsl:apply-templates/></title>
                 </xsl:when>
-		<xsl:when test="parent::label">
-                    <label>
-                        <hi rend="italic">
-                            <xsl:apply-templates/>
-                        </hi>
-                    </label>
-                </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="not(ancestor::reftxt or parent::list-item)">
                         <hi rend="italic">
@@ -1664,5 +1657,10 @@
         <figure xml:id="{@id}">
             <xsl:apply-templates/>
         </figure>
+    </xsl:template>
+    <xsl:template match="statement/label">
+        <label>
+            <xsl:apply-templates/>
+        </label>
     </xsl:template>
 </xsl:stylesheet>
