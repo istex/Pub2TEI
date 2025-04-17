@@ -25,6 +25,11 @@
 
     <xsl:template match="p| rsc:p| ce:simple-para | ce:note-para | ce:para">
         <xsl:choose>
+	    <xsl:when test="parent::sec">
+                <p>
+                    <xsl:apply-templates/>
+                </p>
+            </xsl:when>
             <!--RSC plusieurs titres dans le titre contenu par des p-->
             <xsl:when test="ancestor::title">
                 <title>
@@ -1165,6 +1170,13 @@
                 </xsl:when>
                 <xsl:when test="ancestor::reftxt and contains(.,'Meeting')">
                     <title><xsl:apply-templates/></title>
+                </xsl:when>
+		<xsl:when test="parent::label">
+                    <label>
+                        <hi rend="italic">
+                            <xsl:apply-templates/>
+                        </hi>
+                    </label>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="not(ancestor::reftxt or parent::list-item)">
