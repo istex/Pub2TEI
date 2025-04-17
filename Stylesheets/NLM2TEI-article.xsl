@@ -3296,7 +3296,7 @@
                     <xsl:when test="child::graphic-file">
                         <xsl:apply-templates/>
                     </xsl:when>
-                   <xsl:when test="parent::alternatives">
+                   <xsl:when test="ancestor::table-wrap/alternatives">
                         <figure>
                             <graphic>
                                 <xsl:attribute name="url">
