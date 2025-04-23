@@ -190,10 +190,10 @@
                                         <xsl:when test="admin/infoarticle/idpublic[@norme='doi'][string-length()&gt; 0]">
                                             <xsl:value-of select="admin/infoarticle/idpublic[@norme='doi']"/>
                                         </xsl:when>
-                                        <xsl:otherwise>
+                                       <!--<xsl:otherwise>
                                             <xsl:text>10.3917/</xsl:text>
                                             <xsl:value-of select="translate(@idproprio,'ABCDEFGHIJKLMNOPQRSTUVWXYZ_','abcdefghijklmnopqrstuvwxyz.')"/>
-                                        </xsl:otherwise>
+                                        </xsl:otherwise>-->
                                     </xsl:choose>        
                                 </idno>
                             </analytic>
