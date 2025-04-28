@@ -6,6 +6,68 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xpath-default-namespace="http://www.wiley.com/namespaces/wiley"
 	exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
+    <!-- code genre ajouté car ne fonctionne pas seul-->
+    <xsl:variable name="codeGenre1">
+        <xsl:value-of select="//component/header/publicationMeta[@level='unit']/@type"/>
+    </xsl:variable>
+    <xsl:variable name="codeGenreA">
+        <xsl:choose>
+            <xsl:when test="normalize-space($codeGenre1)='chapter'">
+                <xsl:choose>
+                    <xsl:when test="contains(//header/publicationMeta[@level='unit']/titleGroup/title[@type='tocHeading1'],'Brief communications')">brief-communication</xsl:when>
+                    <xsl:when test="contains(//header/publicationMeta[@level='unit']/titleGroup/title[@type='tocHeading1'],'Review Paper')">review-article</xsl:when>
+                    <xsl:otherwise>
+                        <xsl:choose>
+                            <xsl:when test="//abstract[string-length()&gt; 0]">article</xsl:when>
+                            <xsl:otherwise>other</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='technicalNote'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='article'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='reviewArticle'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='editorial'">editorial</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='bookReview'">book-reviews</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='shortCommunication'">brief-communication</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='shortArticle'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='rapidCommunication'">brief-communication</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='caseStudy'">case-report</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='abstract'">abstract</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='letter'">review-article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='news'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='commentary'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='meetingReport'">conference</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='rapidPublication'">brief-communication</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='serialArticle'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='erratum'">article</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='miscellaneous'">other</xsl:when>
+            <xsl:when test="normalize-space($codeGenre1)='historicalPerspective'">research-article</xsl:when>
+            <xsl:otherwise>
+                <xsl:text>other</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <!-- lien vers data.istex.fr -->
+    <xsl:variable name="codeGenreArkA">
+        <xsl:choose>
+            <xsl:when test="normalize-space($codeGenreA)='research-article'">https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='article'">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='other'">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='book-reviews'">https://content-type.data.istex.fr/ark:/67375/XTP-PBH5VBM9-4</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='abstract'">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='review-article'">https://content-type.data.istex.fr/ark:/67375/XTP-L5L7X3NF-P</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='brief-communication'">https://content-type.data.istex.fr/ark:/67375/XTP-S9SX2MFS-0</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='editorial'">https://content-type.data.istex.fr/ark:/67375/XTP-STW636XV-K</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='case-report'">https://content-type.data.istex.fr/ark:/67375/XTP-29919SZJ-6</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='conference'">https://content-type.data.istex.fr/ark:/67375/XTP-BFHXPBJJ-3</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='chapter'">https://content-type.data.istex.fr/ark:/67375/XTP-CGT4WMJM-6</xsl:when>
+            <xsl:when test="normalize-space($codeGenreA)='book'">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    
+    
+    
     
     <!-- codeLangue -->
     <xsl:variable name="codeLangue">
@@ -162,10 +224,9 @@
                         </xsl:if>
 						<xsl:if test="header/publicationMeta/copyright">
 							<availability>
-							    <!-- SG: ajout licence -->
-								<licence>
-								    <xsl:apply-templates select="header/publicationMeta[@level='unit']/copyright/text()"/>
-								</licence>
+							    <licence>
+							        <xsl:apply-templates select="header/publicationMeta[@level='unit']/copyright/text()"/>
+							    </licence>
 							</availability>
 						</xsl:if>
 						<!-- date -->
@@ -297,17 +358,29 @@
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:attribute>
                                     <xsl:text>abstract</xsl:text>
                                 </xsl:when>
-                                <xsl:when test="$codeGenreAll">
+                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jbio.200910057' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1600-0730.2006.00858.x'">
+                                    <xsl:attribute name="subtype">article</xsl:attribute>
+                                    <xsl:attribute name="source">article</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
+                                    <xsl:text>article</xsl:text>
+                                </xsl:when>
+                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/germ.201090011' or //component/header/publicationMeta[@level='unit']/doi='10.1002/pssc.201570068' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1095-8339.1893.tb02274a.x'">
+                                    <xsl:attribute name="subtype">other</xsl:attribute>
+                                    <xsl:attribute name="source">other</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
+                                    <xsl:text>other</xsl:text>
+                                </xsl:when>
+                                <xsl:when test="$codeGenreA">
                                     <xsl:attribute name="subtype">
-                                        <xsl:value-of select="$codeGenreIstex"/>
+                                        <xsl:value-of select="$codeGenreA"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                        <xsl:value-of select="$codeGenre1"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
-                                        <xsl:value-of select="$codeGenreArk"/>
+                                        <xsl:value-of select="$codeGenreArkA"/>
                                     </xsl:attribute>
-                                    <xsl:value-of select="$codeGenreIstex"/>
+                                    <xsl:value-of select="$codeGenreA"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:attribute name="subtype">N/A</xsl:attribute>
@@ -772,6 +845,13 @@
 					            <date type="published">
 					                <xsl:attribute name="when">
 					                    <xsl:text>1930</xsl:text>
+					                </xsl:attribute>
+					            </date>
+					        </xsl:when>
+					        <xsl:when test="publicationMeta/issn[@type='print']='2047-1491' and publicationMeta/numberingGroup/numbering[@type='journalVolume']='3'">
+					            <date type="published">
+					                <xsl:attribute name="when">
+					                    <xsl:text>1988</xsl:text>
 					                </xsl:attribute>
 					            </date>
 					        </xsl:when>
@@ -1496,7 +1576,6 @@
                 </xsl:otherwise>
             </xsl:choose>
     </xsl:template>
-    
     <xsl:template match="title" mode="subtitle">
         <title level= "a" type="sub">
             <!-- SG - ajout de la langue du titre -->
@@ -1508,7 +1587,6 @@
             <xsl:value-of select="."/>
         </title>
     </xsl:template>
-    
     <xsl:template match="title" mode="short">
         <title level= "a" type="short">
             <!-- SG - ajout de la langue du titre -->
@@ -1520,5 +1598,4 @@
             <xsl:value-of select="."/>
         </title>
     </xsl:template>
-    
 </xsl:stylesheet>
