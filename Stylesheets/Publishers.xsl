@@ -60,6 +60,8 @@
     <xsl:include href="Erudit.xsl"/>
     <!-- SG: ajout du format Result (proquest archives parlementaires)-->
     <xsl:include href="Result.xsl"/>
+    <!-- SG: ajout du format Jsonxml (oa)-->
+    <xsl:include href="Jsonxml.xsl"/>
     <xsl:template match="/">
         <xsl:choose> 
             <xsl:when test="metadata">
