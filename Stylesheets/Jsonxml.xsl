@@ -5,7 +5,11 @@
 
     <xsl:output encoding="UTF-8" method="xml"/>
     <!-- Feuille de style concernant les données en Jsonxml-->
-   
+    
+    <!-- lien vers donnée externe grobid -->
+    <xsl:param name="grobidPath"/>
+    <xsl:variable name ="grobid" select="document($grobidPath)"/>
+    
    <xsl:variable name="genreJson">
         <xsl:value-of select="//doc/genre"/>
     </xsl:variable>
@@ -138,12 +142,14 @@
                 </fileDesc>
                 <xsl:call-template name="insertVersion"/>
                 <profileDesc>
-            <!-- pas d'abstract dans les données, allez les chercher dans les données grobid TEI-->
-            <!-- pas de mots clés dans les données, allez les chercher dans les données grobid TEI
-            textClass>
-            <xsl:attribute name="ana">keyword</xsl:attribute>
-            <keywords><term></term></keywords></textClass>-->
-            
+                    <!--  reprise des abstracts depuis les données GROBID-->
+                    <xsl:if test ="$grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:abstract !=''">
+                        <xsl:copy-of select="$grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:abstract"/>
+                    </xsl:if>
+                    <!-- reprise des mots clés depuis les données GROBID-->
+                    <xsl:if test ="$grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:textClass !=''">
+                        <xsl:copy-of select="$grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:textClass"/>
+                    </xsl:if>
                     <langUsage>
                         <language>
                             <xsl:attribute name="ident">
@@ -157,9 +163,12 @@
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
             </teiHeader>
-            <!-- reprise du body dans le tei GROBID en format TEI-->
+   
             <xsl:choose>
-                <xsl:when test="lien_vers_grobid"></xsl:when>
+                <!-- reprise du body et du back dans le tei GROBID en format TEI-->
+                <xsl:when test ="$grobid//tei:TEI/tei:text !=''">
+                    <xsl:copy-of select="$grobid//tei:TEI/tei:text"/>
+                </xsl:when>
                 <xsl:when test="string-length($rawfulltextpath) &gt; 0">
                     <text>
                         <body>
@@ -231,9 +240,6 @@
     <xsl:template match="year">
         <xsl:apply-templates/>
     </xsl:template>
-    <!-- pas d'abstract-->
-    
-    <!-- pas de Mots clés -->
     
     <!-- titre du journal -->
     <xsl:template match="journal_name">
@@ -261,12 +267,6 @@
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
-    <!--<xsl:template match="doi"> 
-        <idno>
-            <xsl:attribute name="type">DOI</xsl:attribute>
-            <xsl:apply-templates/> 
-        </idno>
-    </xsl:template>-->
     <xsl:template match="URL" mode="json"> 
         <idno>
             <xsl:choose>
