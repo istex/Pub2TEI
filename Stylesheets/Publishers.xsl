@@ -148,7 +148,10 @@
                 and /article/article-metadata/article-data/article-type[@sort='regular']">
                 <xsl:message>Converting an IOP regular article</xsl:message>
             </xsl:when>
-            
+		<!-- SG json -->
+            <xsl:when test="doc">
+                <xsl:message>Converting a JsonXml items</xsl:message>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:message>Converting a non-identified article: - name: <xsl:value-of
                     select="name(*)"/> - local-name: <xsl:value-of select="local-name(*)"/> -
