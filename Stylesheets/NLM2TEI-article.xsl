@@ -3724,6 +3724,11 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="ancestor::doc">
+                <title level="a" type="main">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
             <xsl:when test="ancestor::notes"/>
             <xsl:otherwise>
                 <head>
