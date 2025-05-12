@@ -38,6 +38,13 @@
             <xsl:when test="//pubfm/categ/@id[string-length() &gt; 0]">
                 <xsl:value-of select="normalize-space(//pubfm/categ/@id)"/>
             </xsl:when>
+            <!-- wiley -->
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1002/germ.201090011'">other</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1002/pssc.201570068'">other</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1111/j.1095-8339.1893.tb02274a.x'">other</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta[@level='unit']/wiley:doi='10.1002/jbio.200910057'">article</xsl:when>
+            <xsl:when test="//wiley:component/wiley:header/wiley:publicationMeta/wiley:issn[@type='print']='0931-7597'">abstract</xsl:when>
+            
             <xsl:when test="//isbn='978-3-318-05934-2' and //article-title='History of the Basel Institute for Immunology'">book</xsl:when>
             <xsl:when test="//isbn='978-3-318-05934-2' and not(//article-title='History of the Basel Institute for Immunology')">other</xsl:when>
             <!-- RSC ebooks -->
@@ -265,6 +272,7 @@
             <xsl:otherwise>
                 <!--codeGenreIOP-->
                 <!--codeGenreSage-->
+                <!--codeGenreWiley-->
                 <!--codeGenreBrepolsBook-->
                 <!--codeGenreRSC-->
                 <!--codeGenreSpringerJournal-->
@@ -277,6 +285,7 @@
                 <xsl:value-of select="normalize-space(
                     //article/article-metadata/article-data/article-type/@type
                     |//SAGEmeta/@type
+                    |//component/header/publicationMeta[@level='unit']/@type
                     |//book-part[not(body/book-part)]/@book-part-type
                     |//body/book-part/@book-part-type
                     |//article/@type  |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm

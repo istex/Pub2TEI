@@ -102,12 +102,6 @@
     <xsl:variable name="date">
         <xsl:choose>
             <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
-	    <xsl:when test="//article/head/ce:date-accepted/@year !=''">
-                <xsl:value-of select="//article/head/ce:date-accepted/@year"/>
-            </xsl:when>
-	    <xsl:when test="//article/head/ce:date-received/@year !=''">
-                <xsl:value-of select="//article/head/ce:date-received/@year"/>
-            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
             </xsl:otherwise>

@@ -25,11 +25,6 @@
 
     <xsl:template match="p| rsc:p| ce:simple-para | ce:note-para | ce:para">
         <xsl:choose>
-	    <xsl:when test="parent::sec">
-                <p>
-                    <xsl:apply-templates/>
-                </p>
-            </xsl:when>
             <!--RSC plusieurs titres dans le titre contenu par des p-->
             <xsl:when test="ancestor::title">
                 <title>
@@ -1657,10 +1652,5 @@
         <figure xml:id="{@id}">
             <xsl:apply-templates/>
         </figure>
-    </xsl:template>
-    <xsl:template match="statement/label">
-        <label>
-            <xsl:apply-templates/>
-        </label>
     </xsl:template>
 </xsl:stylesheet>

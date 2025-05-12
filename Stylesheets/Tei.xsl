@@ -957,7 +957,14 @@
                 </front>
             </xsl:if>
             <xsl:copy-of select="//tei:text/tei:body"/>
-            <xsl:copy-of select="//tei:text/tei:back"/>
+            <xsl:choose>
+                <xsl:when test="contains(.,'Droz')">
+                    <xsl:copy-of select="//tei:text/tei:back"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="//tei:text/tei:back"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </text>
     </xsl:template>
     <xsl:template match="tei:back">
