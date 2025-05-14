@@ -62,7 +62,7 @@
     <xsl:include href="Result.xsl"/>
     <!-- SG: ajout du format Jsonxml (oa)-->
     <xsl:include href="Jsonxml.xsl"/>
-    <xsl:template match="/">
+    <xsl:template match="/" name="xsl:initial-template">
         <xsl:choose> 
             <xsl:when test="metadata">
                 <xsl:message>Converting a BMJ article</xsl:message>
