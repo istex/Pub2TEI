@@ -7,8 +7,8 @@
     <!-- Feuille de style concernant les données en Jsonxml-->
     
     <!-- lien vers donnée externe grobid -->
-    <xsl:param name="grobidPath"/>
-    <xsl:variable name ="grobid" select="document($grobidPath)"/>
+    <xsl:param name="grobidEnrichmentPath"/>
+    <xsl:variable name ="grobid" select="document($grobidEnrichmentPath)"/>
     
    <xsl:variable name="genreJson">
         <xsl:value-of select="//doc/genre"/>
@@ -20,18 +20,26 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="codeLangSubstring">
-        <xsl:value-of select="substring-after(//doc/oa_locations[1]/url,'lang=')"/>
+        <!-- la langue est contenue dans <oa_locations><url> dans un fragment du lien hypertexte
+        "?lang=en"
+    parfois dans oa_location position 1, 2, ou...
+    je parcours donc toute l'xml afin de la cibler-->
+        <xsl:value-of select="substring-after(*,'?lang=')"/>
     </xsl:variable>
-    <xsl:variable name="codeLangBefore">
-        <xsl:value-of select="substring-before($codeLangSubstring,'&amp;format')"/>
+    <xsl:variable name="codeLangString">
+        <!-- Renvoie la sous-chaîne de la position de départ à la longueur spécifiée.
+        L'index du premier caractère est 1. 
+        Si la longueur est omise, la sous-chaîne est renvoyée de la position de départ à la fin.
+ -->
+        <xsl:value-of select="substring($codeLangSubstring,1,2)"/>
     </xsl:variable>
     <xsl:variable name="codeLangJson">
         <xsl:choose>
-            <xsl:when test="//doc/glutton/language">
+            <xsl:when test="/doc/glutton/language">
                 <xsl:value-of select="/doc/glutton/language"/>
             </xsl:when>
-            <xsl:when test="$codeLangBefore !=''">
-                <xsl:value-of select="$codeLangBefore"/>
+            <xsl:when test="$codeLangString !=''">
+                <xsl:value-of select="$codeLangString"/>
             </xsl:when>
         </xsl:choose>
     </xsl:variable>
@@ -51,7 +59,7 @@
                 <fileDesc>
                     <!-- SG - titre brut -->
                     <titleStmt>
-            <xsl:apply-templates select="//doc/title"/>
+                        <xsl:apply-templates select="//doc/title"/>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -62,22 +70,33 @@
                             <xsl:attribute name="status">free</xsl:attribute>
                             <licence>cc-by</licence>
                         </availability>
-                        <date type="published" when="{//doc/year}"/>
+                        <xsl:choose>
+                            <xsl:when test="//doc/year !=''">
+                                <date type="published" when="{//doc/year}">
+                                    <xsl:value-of select="//doc/year"/>
+                                </date>
+                            </xsl:when>
+                            <xsl:when test="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type='published'] !=''">
+                                <date type="published" when="{$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type='published']}">
+                                    <xsl:value-of select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type='published']"/>
+                                </date>
+                            </xsl:when>
+                        </xsl:choose>
                     </publicationStmt>
                     <notesStmt>
                         <note type="content-type">
                             <xsl:choose>
-                                <xsl:when test="$genreJson">
+                                <xsl:when test="$genreJson !=''">
                                     <xsl:attribute name="subtype">
-                                        <xsl:value-of select="$genreJson"/>
+                                        <xsl:value-of select="$codeGenreJson"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:text>journal-article</xsl:text>
+                                        <xsl:value-of select="$genreJson"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
                                         <xsl:value-of select="$codeGenreArk"/>
                                     </xsl:attribute>
-                                    <xsl:value-of select="$genreJson"/>
+                                    <xsl:value-of select="$codeGenreJson"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:attribute name="subtype">other</xsl:attribute>
@@ -111,30 +130,78 @@
                                 <!-- identifiants niveau article -->
                                 <xsl:apply-templates select="/doc/id"/>
                                 <xsl:apply-templates select="/doc/doi"/>
+                                <xsl:apply-templates select="/doc/glutton/pmid"/>
+                                <xsl:apply-templates select="/doc/glutton/pmcid"/>
+                                <xsl:apply-templates select="/doc/doi_url"/>
                                 <xsl:apply-templates select="/doc/glutton/URL" mode="json"/>
                                 <xsl:apply-templates select="/doc/glutton/link/URL" mode="json"/>
                                 <xsl:apply-templates select="//glutton/reference-count"/>
                             </analytic>
                             <monogr>
-                                <title level="m" type="main">
-                                    <xsl:apply-templates select="/doc/journal_name"/>
-                                </title>
-                                <xsl:apply-templates select="/doc/glutton/short-container-title"/>
-                                <!-- identifiant niveau journal -->
-                                <xsl:apply-templates select="/doc/journal_issns"/>
+                                <xsl:apply-templates select="/doc/journal_name"/>
+                                <!-- titre abrégé -->
+                                <xsl:choose>
+                                    <xsl:when test="/doc/glutton/short-container-title !=''">
+                                        <xsl:apply-templates select="/doc/glutton/short-container-title"/>
+                                    </xsl:when>
+                                    <xsl:when test="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title[@type='abbrev'] !=''">
+                                        <xsl:apply-templates select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title[@type='abbrev']"/>
+                                    </xsl:when>
+                                </xsl:choose>
+                                <!-- identifiant ISSN niveau journal -->
+                                <xsl:choose>
+                                    <xsl:when test="/doc/glutton/issn-type !=''">
+                                        <xsl:apply-templates select="/doc/glutton/issn-type"/>
+                                    </xsl:when>
+                                    <xsl:when test="/doc/journal_issns !=''">
+                                        <xsl:apply-templates select="/doc/journal_issns"/>
+                                    </xsl:when>
+                                </xsl:choose>
                                 <imprint>
                                     <publisher>
                                         <xsl:apply-templates select="//doc/publisher" mode="json"/>
                                     </publisher>
-                                    <date type="published" when="{//doc/year}"/>
-                                    <xsl:if test="/doc/glutton/issued/date-parts[2]">
-                                        <biblScope unit="vol">
+                                    <xsl:choose>
+                                        <xsl:when test="//doc/year !=''">
+                                            <date type="published" when="{//doc/year}">
+                                                <xsl:value-of select="//doc/year"/>
+                                            </date>
+                                        </xsl:when>
+                                        <xsl:when test="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type='published'] !=''">
+                                            <date type="published" when="{$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type='published']}">
+                                                <xsl:value-of select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type='published']"/>
+                                            </date>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <!-- volume -->
+                                    <xsl:choose>
+                                        <xsl:when test="/doc/glutton/volume !=''">
+                                            <xsl:apply-templates select="/doc/glutton/volume"/>
+                                        </xsl:when>
+                                        <xsl:when test="/doc/glutton/issued/date-parts[2]">
+                                            <biblScope unit="vol">
                                                 <xsl:value-of select="/doc/glutton/issued/date-parts[2]"/>
-                                        </biblScope>
-                                    </xsl:if>
-                                    <xsl:apply-templates select="/doc/glutton/issue"/>
+                                            </biblScope>
+                                        </xsl:when>
+                                        <xsl:when test="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='volume'] !=''">
+                                            <xsl:apply-templates select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='volume']"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <!-- numéro -->
+                                    <xsl:choose>
+                                        <xsl:when test="/doc/glutton/issue !=''">
+                                            <xsl:apply-templates select="/doc/glutton/issue"/>
+                                        </xsl:when>
+                                        <xsl:when test="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue'] !=''">
+                                            <xsl:apply-templates select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue']"/>
+                                        </xsl:when>
+                                    </xsl:choose>
                                     <!-- pagination -->
-                                    <xsl:apply-templates select="/doc/glutton/page"/>
+                                    <xsl:choose>
+                                        <xsl:when test="/doc/glutton/page !=''">
+                                            <xsl:apply-templates select="/doc/glutton/page"/>
+                                        </xsl:when>
+                                    </xsl:choose>
                                 </imprint>
                             </monogr>
                         </biblStruct>
@@ -149,6 +216,18 @@
                     <!-- reprise des mots clés depuis les données GROBID-->
                     <xsl:if test ="$grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:textClass !=''">
                         <xsl:copy-of select="$grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:textClass"/>
+                    </xsl:if>
+                    <!-- reprise des classifications depuis Json quand présence-->
+                    <xsl:if test ="/doc/glutton/subject !=''">
+                        <textClass ana="subject">
+                            <keywords scheme="journal-subject">
+                                <list>
+                                    <item>
+                        <xsl:apply-templates select="/doc/glutton/subject" mode="json"/>
+                                    </item>
+                                </list>
+                            </keywords>
+                        </textClass>
                     </xsl:if>
                     <langUsage>
                         <language>
@@ -192,7 +271,6 @@
     <!-- ***********************Début des templates d'appel *************************-->
 <!-- table des auteurs -->
     <xsl:template match="z_authors">
-        <xsl:for-each select="given">
             <xsl:variable name="i" select="position()-1"/>
             <xsl:variable name="authorNumber">
                 <xsl:choose>
@@ -215,23 +293,25 @@
                     <xsl:value-of select="$authorNumber"/>
                 </xsl:attribute>
                 <persName>
-                    <forename type="first">
-                    <xsl:value-of select="."/>
-                    </forename>
-                    <surname>
-                    <xsl:value-of select="following-sibling::family[1]"/>
-                    </surname>
-                <xsl:if test="following-sibling::affiliation[1]/name !=''">
-                    <affiliation>
-                        <xsl:value-of select="following-sibling::affiliation[1]/name"/>
-                    </affiliation>
-                </xsl:if>
+                    <xsl:apply-templates select="family"/>
+                    <xsl:apply-templates select="given"/>
+                    <xsl:apply-templates select="affiliation"/>
                     <roleName>author</roleName>
                 </persName>
             </author>
-        </xsl:for-each>
     </xsl:template>
-    
+    <xsl:template match="family">
+        <surname>
+            <xsl:apply-templates/>
+        </surname>
+    </xsl:template>
+    <!-- affiliation -->
+    <xsl:template match="affiliation">
+        <affiliation>
+            <xsl:value-of select="name"/>
+        </affiliation>
+    </xsl:template>
+    <!-- publisher -->
     <xsl:template match="publisher" mode="json">
         <xsl:apply-templates/>
     </xsl:template>
@@ -260,11 +340,30 @@
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
-    
+    <xsl:template match="issn-type">
+        <idno>
+            <xsl:attribute name="type">
+                <xsl:choose>
+                    <xsl:when test="type='electronic'">eISSN</xsl:when>
+                    <xsl:otherwise>ISSN</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates select="value"/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="value">
+        <xsl:apply-templates/>
+    </xsl:template>
     <xsl:template match="id">
         <idno>
             <xsl:attribute name="type">ArticleID</xsl:attribute>
             <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="doi_url"> 
+        <idno>
+            <xsl:attribute name="type">URLdoi</xsl:attribute>
+            <xsl:apply-templates/> 
         </idno>
     </xsl:template>
     <xsl:template match="URL" mode="json"> 
@@ -277,17 +376,26 @@
                     <xsl:attribute name="type">URLpdf</xsl:attribute> 
                 </xsl:otherwise>
             </xsl:choose>
-            
             <xsl:apply-templates/> 
         </idno>
     </xsl:template>
-    
+    <xsl:template match="pmid"> 
+        <idno>
+            <xsl:attribute name="type">pmid</xsl:attribute> 
+            <xsl:apply-templates/> 
+        </idno>
+    </xsl:template>
+    <xsl:template match="pmcid"> 
+        <idno>
+            <xsl:attribute name="type">pmcid</xsl:attribute> 
+            <xsl:apply-templates/> 
+        </idno>
+    </xsl:template>
     <xsl:template match="reference-count"> 
         <idno type="ref-count" >
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
-    
     <xsl:template match="page"> 
         <xsl:choose>
             <xsl:when test="contains(.,'-')">
@@ -304,5 +412,10 @@
                 </biblScope>
             </xsl:when>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="subject" mode="json"> 
+        <term type="Primary">
+            <xsl:apply-templates/>
+        </term>            
     </xsl:template>
 </xsl:stylesheet>
