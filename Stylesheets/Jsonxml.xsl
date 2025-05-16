@@ -295,7 +295,7 @@
                 <persName>
                     <xsl:apply-templates select="family"/>
                     <xsl:apply-templates select="given"/>
-                    <xsl:apply-templates select="affiliation"/>
+                    <xsl:apply-templates select="affiliation" mode="json"/>
                     <roleName>author</roleName>
                 </persName>
             </author>
@@ -306,7 +306,7 @@
         </surname>
     </xsl:template>
     <!-- affiliation -->
-    <xsl:template match="affiliation">
+    <xsl:template match="affiliation" mode="json">
         <affiliation>
             <xsl:value-of select="name"/>
         </affiliation>
