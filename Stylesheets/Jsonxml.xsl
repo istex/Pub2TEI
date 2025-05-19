@@ -63,9 +63,7 @@
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
-                        <publisher>
-                            <xsl:apply-templates select="//doc/publisher" mode="json"/>
-                        </publisher>
+                        <xsl:apply-templates select="//doc/publisher" mode="json"/>
                         <availability>
                             <xsl:attribute name="status">free</xsl:attribute>
                             <licence>cc-by</licence>
@@ -158,9 +156,7 @@
                                     </xsl:when>
                                 </xsl:choose>
                                 <imprint>
-                                    <publisher>
-                                        <xsl:apply-templates select="//doc/publisher" mode="json"/>
-                                    </publisher>
+                                    <xsl:apply-templates select="//doc/publisher" mode="json"/>
                                     <xsl:choose>
                                         <xsl:when test="//doc/year !=''">
                                             <date type="published" when="{//doc/year}">
@@ -223,7 +219,7 @@
                             <keywords scheme="journal-subject">
                                 <list>
                                     <item>
-                        <xsl:apply-templates select="/doc/glutton/subject" mode="json"/>
+                                        <xsl:apply-templates select="/doc/glutton/subject" mode="json"/>
                                     </item>
                                 </list>
                             </keywords>
@@ -242,7 +238,7 @@
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
                 </revisionDesc>
             </teiHeader>
-   
+            <!-- body et back -->
             <xsl:choose>
                 <!-- reprise du body et du back dans le tei GROBID en format TEI-->
                 <xsl:when test ="$grobid//tei:TEI/tei:text !=''">
@@ -313,7 +309,9 @@
     </xsl:template>
     <!-- publisher -->
     <xsl:template match="publisher" mode="json">
+        <publisher>
         <xsl:apply-templates/>
+        </publisher>
     </xsl:template>
     
     <!-- dateIssued -->
