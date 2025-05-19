@@ -7,8 +7,8 @@
     <!-- Feuille de style concernant les données en Jsonxml-->
     
     <!-- lien vers donnée externe grobid -->
-    <xsl:param name="grobidEnrichmentPath"/>
-    <xsl:variable name ="grobid" select="document($grobidEnrichmentPath)"/>
+    <xsl:param name="grobidFulltextEnrichmentPath"/>
+    <xsl:variable name ="grobid" select="document($grobidFulltextEnrichmentPath)"/>
     
    <xsl:variable name="genreJson">
         <xsl:value-of select="//doc/genre"/>
