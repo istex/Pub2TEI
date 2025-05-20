@@ -10,9 +10,7 @@
 
     <!-- Références bibliographiques à la fin d'un article -->
     <!-- ref-list: NLM article, ScholarOne -->
-    <xsl:variable name="id">
-        <xsl:value-of select="normalize-space(@id)"/>
-    </xsl:variable>
+    
     <xsl:template match="biblist | rsc:biblist | ce:bibliography | bibl | wiley:bibliography">
         <xsl:choose>
             <xsl:when test="ce:bibliography-sec">
@@ -40,6 +38,9 @@
                 <div type="references">
                     <listBibl>
                         <xsl:for-each select="rsc:citgroup | citgroup">
+                            <xsl:variable name="id">
+                                <xsl:value-of select="normalize-space(@id)"/>
+                            </xsl:variable>
                             <bibl type="citation">
                                 <xsl:if test="$id">
                                     <xsl:attribute name="xml:id">
@@ -104,6 +105,9 @@
                                 </xsl:if>
                                 <!-- niveau citgroup supplémentaire -->
                                 <xsl:for-each select="rsc:citgroup | citgroup">
+                                    <xsl:variable name="id">
+                                        <xsl:value-of select="@id"/>
+                                    </xsl:variable>
                                     <bibl type="journal">
                                         <xsl:attribute name="xml:id">
                                             <xsl:value-of select="normalize-space($id)"/>
