@@ -24,7 +24,7 @@
         "?lang=en"
     parfois dans oa_location position 1, 2, ou...
     je parcours donc toute l'xml afin de la cibler-->
-        <xsl:value-of select="substring-after(.,'?lang=')"/>
+        <xsl:value-of select="substring-after(.,'lang=')"/>
     </xsl:variable>
     <xsl:variable name="codeLangString">
         <!-- Renvoie la sous-chaîne de la position de départ à la longueur spécifiée.
@@ -41,6 +41,9 @@
             <xsl:when test="$codeLangString !=''">
                 <xsl:value-of select="$codeLangString"/>
             </xsl:when>
+            <xsl:when test="$grobid//tei:TEI/tei:teiHeader/@xml:lang !=''">
+                <xsl:value-of select="$grobid//tei:TEI/tei:teiHeader/@xml:lang"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:variable>
     
@@ -50,7 +53,7 @@
     </xsl:template>
      
     <xsl:template match="doc">
-        <TEI  xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
             <xsl:attribute name="xsi:noNamespaceSchemaLocation">
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
@@ -59,7 +62,15 @@
                 <fileDesc>
                     <!-- SG - titre brut -->
                     <titleStmt>
-                        <xsl:apply-templates select="//doc/title"/>
+                        <!-- titre de l'article si vide ou null prendre le contenu dans les fichiers grobid.tei-->
+                        <xsl:choose>
+                            <xsl:when test="//doc/title !=''">
+                                <xsl:apply-templates select="//doc/title"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -111,9 +122,14 @@
                             <analytic>
                                 <xsl:apply-templates select="//doc/title"/>
                                 <!-- auteurs -->
-                                <xsl:if test="//doc/z_authors !='null'">
-                                    <xsl:apply-templates select="//doc/z_authors"/>
-                                </xsl:if>
+                                <xsl:choose>
+                                    <xsl:when test="//doc/z_authors !=''">
+                                        <xsl:apply-templates select="//doc/z_authors"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:copy-of select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:analytic"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                                 <!-- ajout identifiants ISTEX et ARK -->
                                 <xsl:if test="string-length($idistex) &gt; 0 ">
                                     <idno type="istex">
@@ -292,6 +308,7 @@
                     <xsl:apply-templates select="family"/>
                     <xsl:apply-templates select="given"/>
                     <xsl:apply-templates select="affiliation" mode="json"/>
+                    <xsl:apply-templates select="ORCID"/>
                     <roleName>author</roleName>
                 </persName>
             </author>
@@ -306,6 +323,12 @@
         <affiliation>
             <xsl:value-of select="name"/>
         </affiliation>
+    </xsl:template>
+    <!-- ORCID -->
+    <xsl:template match="ORCID">
+        <idno type="ORCID">
+            <xsl:apply-templates/>
+        </idno>
     </xsl:template>
     <!-- publisher -->
     <xsl:template match="publisher" mode="json">
