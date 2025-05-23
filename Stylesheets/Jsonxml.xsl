@@ -24,7 +24,14 @@
         "?lang=en"
     parfois dans oa_location position 1, 2, ou...
     je parcours donc toute l'xml afin de la cibler-->
-        <xsl:value-of select="substring-after(.,'lang=')"/>
+        <xsl:choose>
+            <xsl:when test="contains(.,'lang=')">
+                <xsl:value-of select="substring-after(.,'lang=')"/>
+            </xsl:when>
+            <xsl:when test="contains(.,'lng=')">
+                <xsl:value-of select="substring-after(.,'lng=')"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:variable>
     <xsl:variable name="codeLangString">
         <!-- Renvoie la sous-chaîne de la position de départ à la longueur spécifiée.
