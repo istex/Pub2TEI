@@ -48,9 +48,9 @@
             <xsl:when test="$codeLangString !=''">
                 <xsl:value-of select="$codeLangString"/>
             </xsl:when>
-            <xsl:when test="$grobid//tei:TEI/tei:teiHeader/@xml:lang !=''">
+            <!--<xsl:when test="$grobid//tei:TEI/tei:teiHeader/@xml:lang !=''">
                 <xsl:value-of select="$grobid//tei:TEI/tei:teiHeader/@xml:lang"/>
-            </xsl:when>
+            </xsl:when>-->
         </xsl:choose>
     </xsl:variable>
     
