@@ -16,6 +16,8 @@
     <xsl:variable name="codeGenreJson">
         <xsl:choose>
             <xsl:when test="$genreJson='journal-article'">research-article</xsl:when>
+            <xsl:when test="$genreJson='journal-issue'">research-article</xsl:when>
+            <xsl:when test="$genreJson='journal'">research-article</xsl:when>
             <xsl:otherwise>other</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
