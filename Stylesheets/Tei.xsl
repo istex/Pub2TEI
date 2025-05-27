@@ -1131,6 +1131,9 @@
             <xsl:otherwise>
                 <affiliation>
                     <xsl:choose>
+                        <xsl:when test="contains(.,' Courriel')">
+                            <xsl:value-of select="normalize-space(substring-before(.,' Courriel'))"/>
+                        </xsl:when>
                         <xsl:when test="not(contains(.,','))">
                             <xsl:value-of select="normalize-space(.)"/>
                         </xsl:when>
