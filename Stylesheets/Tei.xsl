@@ -733,7 +733,7 @@
                                         <!-- pagination -->
                                         <xsl:choose>
                                             <!-- découpage des pages -->
-                                            <xsl:when test="contains(//tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page'],'-')">
+                                            <xsl:when test="contains(//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page'],'-')">
                                                 <xsl:variable name="firstPage">
                                                     <xsl:value-of select="substring-before(//tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page'],'-')"/>
                                                 </xsl:variable>
@@ -752,7 +752,7 @@
                                                 </xsl:if>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:copy-of select="//tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']"/>
+                                                <xsl:copy-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page']"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </imprint>
@@ -989,6 +989,9 @@
                 </xsl:otherwise>
             </xsl:choose>
         </titleStmt>
+    </xsl:template>
+   <xsl:template match="tei:title">
+        <xsl:copy-of select="."></xsl:copy-of>
     </xsl:template>
     <xsl:template match="tei:title" mode="chap">
         <title level='a' type='main'>
