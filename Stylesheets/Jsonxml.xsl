@@ -70,17 +70,17 @@
             <teiHeader>
                 <fileDesc>
                     <!-- SG - titre brut -->
-                     <titleStmt>
+                    <titleStmt>
                         <!-- titre de l'article si vide ou [NO TITLE AVAILABLE] prendre le contenu dans les fichiers grobid.tei-->
                         <xsl:choose>
                             <xsl:when test="//doc/title ='[NO TITLE AVAILABLE]'">
-                                <xsl:apply-templates select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title"/>
+                                <xsl:copy-of select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title"/>
                             </xsl:when>
                             <xsl:when test="//doc/title !=''">
                                 <xsl:apply-templates select="//doc/title"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:apply-templates select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title"/>
+                                <xsl:copy-of select="$grobid//tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </titleStmt>
