@@ -193,6 +193,7 @@
                                     </xsl:if>
                                 </xsl:when>
                                 <xsl:otherwise>
+                                    <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title"/>
                                     <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
                                 </xsl:otherwise>
                             </xsl:choose>
