@@ -193,13 +193,13 @@
                                     </xsl:if>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title"/>
-                                    <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:author"/>
+                                    <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:title"/>
+                                    <xsl:apply-templates select="tei:fileDesc/tei:titleStmt/tei:author"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                             <!-- autre éditeur -->
-                            <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:editor"/>
-                            <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:respStmt"/>
+                            <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:editor"/>
+                            <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:respStmt"/>
                             <!-- ajout identifiants ISTEX et ARK -->
                             <xsl:if test="string-length($idistex) &gt; 0 ">
                                 <idno type="istex">
@@ -211,8 +211,9 @@
                                     <xsl:value-of select="$arkistex"/>
                                 </idno>
                             </xsl:if>
-                            <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']"/>
-                            <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno[@type='url']"/>
+                            <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='doi']"/>
+                            <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='url']"/>
+                            <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='url']"/>
                         </analytic>
                         <monogr>
                             <xsl:choose>
@@ -997,13 +998,10 @@
                     <xsl:copy-of select="tei:funder"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="tei:title"/>
+                    <xsl:copy-of select="tei:title"/>
                 </xsl:otherwise>
             </xsl:choose>
         </titleStmt>
-    </xsl:template>
-   <xsl:template match="tei:title">
-        <xsl:copy-of select="."></xsl:copy-of>
     </xsl:template>
     <xsl:template match="tei:title" mode="chap">
         <title level='a' type='main'>
