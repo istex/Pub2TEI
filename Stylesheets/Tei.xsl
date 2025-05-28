@@ -843,6 +843,12 @@
                                     <language ident="fr">fr</language>
                                 </langUsage>
                             </xsl:when>
+                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/ateliers/10883'"><langUsage>
+                                <language ident="">way</language>
+                            </langUsage></xsl:when>
+                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/primatologie/1932'"><langUsage>
+                                <language ident="fr">fr</language>
+                            </langUsage></xsl:when>
                             <xsl:otherwise>
                                 <xsl:copy-of select="//tei:langUsage"/>
                             </xsl:otherwise>
@@ -957,7 +963,12 @@
                     <xsl:copy-of select="//tei:text/tei:front/tei:div[@type='ack']"/>
                 </front>
             </xsl:if>
-            <xsl:copy-of select="//tei:text/tei:body"/>
+            <xsl:choose>
+                <xsl:when test="//tei:text/tei:body !=''">
+                    <xsl:copy-of select="//tei:text/tei:body"/>
+                </xsl:when>
+                <xsl:otherwise><body><div><p/></div></body></xsl:otherwise>
+            </xsl:choose>
             <xsl:copy-of select="//tei:text/tei:back"/>
         </text>
     </xsl:template>
