@@ -7,6 +7,7 @@
     <!-- Feuille de style concernant les données:
     - DROZ
     - Open Edition Revues
+    - Scielo
     -->
    
     <xsl:variable name="idnoUrl" select="string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'])"/>
@@ -191,6 +192,10 @@
                                             </xsl:if>
                                         </xsl:for-each>
                                     </xsl:if>
+                                </xsl:when>
+                                <!-- scielo -->
+                                <xsl:when test="contains(.,'[NO TITLE AVAILABLE]')">
+                                    <title/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:title"/>
@@ -996,6 +1001,10 @@
                 <xsl:when test="contains(.,'Droz')">
                     <xsl:apply-templates select="tei:title" mode="chap"/>
                     <xsl:copy-of select="tei:funder"/>
+                </xsl:when>
+                <!-- scielo -->
+                <xsl:when test="contains(.,'[NO TITLE AVAILABLE]')">
+                    <title/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="tei:title"/>
