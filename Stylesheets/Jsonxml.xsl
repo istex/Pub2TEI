@@ -17,6 +17,7 @@
         <xsl:choose>
             <xsl:when test="$genreJson='journal-article'">article</xsl:when>
             <xsl:when test="$genreJson='journal-issue'">article</xsl:when>
+            <xsl:when test="$genreJson='journal-volume'">article</xsl:when>
             <xsl:when test="$genreJson='journal'">article</xsl:when>
             <xsl:otherwise>other</xsl:otherwise>
         </xsl:choose>
