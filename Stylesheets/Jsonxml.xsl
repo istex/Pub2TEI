@@ -45,6 +45,10 @@
     </xsl:variable>
     <xsl:variable name="codeLangJson">
         <xsl:choose>
+            <!-- donnée déclarée en latin au lieu de portugais -->
+            <xsl:when test="//doc/doi = '10.1590/s0101-31731982000100008'">
+                <xsl:text>pt</xsl:text>
+            </xsl:when>
             <xsl:when test="/doc/glutton/language">
                 <xsl:value-of select="/doc/glutton/language"/>
             </xsl:when>
