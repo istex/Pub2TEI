@@ -63,6 +63,9 @@
     <!-- SG: ajout du format Jsonxml (oa)-->
     <xsl:include href="Jsonxml.xsl"/>
     <xsl:template match="/" name="xsl:initial-template">
+        <xsl:apply-templates select="istexDoc/sourceDoc"/>
+    </xsl:template>
+    <xsl:template match="sourceDoc">
         <xsl:choose> 
             <xsl:when test="metadata">
                 <xsl:message>Converting a BMJ article</xsl:message>

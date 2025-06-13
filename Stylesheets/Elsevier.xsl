@@ -16,7 +16,7 @@
     <xsl:output encoding="UTF-8" method="xml"/>
     <xsl:include href="ElsevierFormula.xsl"/>
     <xsl:param name="partOfSetXmlPath" />
-    <xsl:variable name="docIssueEls" select="document($partOfSetXmlPath)"/>
+    <xsl:variable name="docIssueEls" select="/istexDoc/externalDoc[@type='partOfSet']"/>
     <xsl:variable name="currentPii" select="//ce:pii"/>
     
     <xsl:variable name="titleCodes" select="document('TitleCodes.xml')"/>
@@ -341,14 +341,16 @@
                                     select="els1:head/ce:author-group/ce:collaboration |els2:head/ce:author-group/ce:collaboration | head/ce:author-group/ce:collaboration"/>
                                 <!-- identifier -->
                                 <!-- ajout identifiants ISTEX et ARK -->
-                                <xsl:if test="string-length($idistex) &gt; 0 ">
+                                <xsl:variable name="idIstex" select="/istexDoc/parameters/identifier[@type='istex']/@value"/>
+                                <xsl:if test="string-length($idIstex) &gt; 0">
                                     <idno type="istex">
-                                        <xsl:value-of select="$idistex"/>
+                                        <xsl:value-of select="$idIstex"/>
                                     </idno>
                                 </xsl:if>
-                                <xsl:if test="string-length($arkistex) &gt; 0 ">
+                                <xsl:variable name="arkIstex" select="/istexDoc/parameters/identifier[@type='ark']/@value"/>
+                                <xsl:if test="string-length($arkIstex) &gt; 0 ">
                                     <idno type="ark">
-                                        <xsl:value-of select="$arkistex"/>
+                                        <xsl:value-of select="$arkIstex"/>
                                     </idno>
                                 </xsl:if>
                                 <xsl:apply-templates select="els1:item-info/ce:doi |els2:item-info/ce:doi | item-info/ce:doi"/>
