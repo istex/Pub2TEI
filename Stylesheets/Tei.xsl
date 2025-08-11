@@ -75,6 +75,7 @@
                         <xsl:attribute name="type">
                             <xsl:choose>
                                 <xsl:when test="contains(.,'Droz')">inbook</xsl:when>
+                                <xsl:when test="$idnoUrl = 'http://journals.openedition.org/anglophonia/1027'">editorial</xsl:when>
                                 <xsl:otherwise>article</xsl:otherwise>
                             </xsl:choose>
                         </xsl:attribute>
@@ -849,12 +850,26 @@
                                     <language ident="fr">fr</language>
                                 </langUsage>
                             </xsl:when>
-                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/ateliers/10883'"><langUsage>
-                                <language ident="">way</language>
-                            </langUsage></xsl:when>
-                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/primatologie/1932'"><langUsage>
-                                <language ident="fr">fr</language>
-                            </langUsage></xsl:when>
+                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/ateliers/10883'">
+                                <langUsage>
+                                    <language ident="">way</language>
+                                </langUsage>
+                            </xsl:when>
+                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/primatologie/1932'
+                                or $idnoUrl = 'http://journals.openedition.org/primatologie/1561'">
+                                <langUsage>
+                                    <language ident="fr">fr</language>
+                                </langUsage>
+                            </xsl:when>
+                            <!-- liste des documents contenant 2 langues -->
+                            <xsl:when test="$idnoUrl = 'http://journals.openedition.org/primatologie/9047'
+                                or $idnoUrl = 'http://journals.openedition.org/primatologie/3846'
+                                or $idnoUrl = 'http://journals.openedition.org/primatologie/5996'">
+                                <langUsage>
+                                    <language ident="fr">fr</language>
+                                    <language ident="en">en</language>
+                                </langUsage>
+                            </xsl:when>
                             <xsl:otherwise>
                                 <xsl:copy-of select="//tei:langUsage"/>
                             </xsl:otherwise>

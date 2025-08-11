@@ -958,6 +958,17 @@
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000443598'">en</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000445337'">en</xsl:when>
                                             <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446124'">en</xsl:when>
+                                            <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/ZRPH.2006.221'">fr</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/zrph.1998.114.3.447'">fr</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/flin.1982.16.1-4.41'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/kadmos-2012-0009'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/kadm.1977.16.2.131'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/flih.1997.18.1-2.39'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/flih.2000.21.1-2.119'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/angl.1881.1881.4.412'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/angl.1936.1936.60.366'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/zcph.1974.33.1.66'">en</xsl:when>
+                                <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700308'">fr</xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:choose>
                                                     <xsl:when test="@xml:lang[string-length()&gt; 0]">
@@ -972,12 +983,21 @@
                                         </xsl:choose>
                         </xsl:variable>
                             <langUsage>
-                                <language>
-                                    <xsl:attribute name="ident">
-                                        <xsl:value-of select="$langNLM"/>
-                                    </xsl:attribute>
-                                    <xsl:value-of select="$langNLM"/>
-                                </language>
+                                <xsl:choose>
+                                    <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/zrph.1995.111.4.554'">
+                                        <language ident="fr">de</language>
+                                        <language ident="en">fr</language>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <language>
+                                            <xsl:attribute name="ident">
+                                                <xsl:value-of select="$langNLM"/>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="$langNLM"/>
+                                        </language>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                
                             </langUsage>
                     </profileDesc>
                 </xsl:if>
