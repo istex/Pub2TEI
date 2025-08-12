@@ -444,8 +444,12 @@
             <xsl:when test="$codeGenreAll='CRP'">review-article</xsl:when>
             <xsl:when test="$codeGenreAll='CRV'">review-article</xsl:when>
             <xsl:when test="$codeGenreAll='CVR'">review-article</xsl:when>
-            <xsl:when test="$codeGenreAll='DIS'">article</xsl:when>
-            <xsl:when test="$codeGenreAll='dis'">article</xsl:when>
+            <xsl:when test="$codeGenreAll='DIS' or $codeGenreAll='dis'">
+                <xsl:choose>
+                    <xsl:when test="//ce:abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:otherwise>other</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:when test="$codeGenreAll='dissertation'">other</xsl:when>
             <xsl:when test="$codeGenreAll='EDG'">article</xsl:when>
             <xsl:when test="$codeGenreAll='EDI'">editorial</xsl:when>

@@ -364,7 +364,7 @@
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
                                     <xsl:text>article</xsl:text>
                                 </xsl:when>
-                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/germ.201090011' or //component/header/publicationMeta[@level='unit']/doi='10.1002/pssc.201570068' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1095-8339.1893.tb02274a.x'">
+                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/geoa.12073' or //component/header/publicationMeta[@level='unit']/doi='10.1002/germ.201090011' or //component/header/publicationMeta[@level='unit']/doi='10.1002/pssc.201570068' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1095-8339.1893.tb02274a.x'">
                                     <xsl:attribute name="subtype">other</xsl:attribute>
                                     <xsl:attribute name="source">other</xsl:attribute>
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>

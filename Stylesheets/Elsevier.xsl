@@ -214,6 +214,12 @@
                         <!-- niveau article / chapter -->
                         <note type="content-type">
                             <xsl:choose>
+                                <xsl:when test="//ce:doi='10.1016/j.srt.2011.07.024'">
+                                    <xsl:attribute name="subtype">Nws</xsl:attribute>
+                                    <xsl:attribute name="source">ISTEX</xsl:attribute>
+                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                    <xsl:text>other</xsl:text>
+                                </xsl:when>
                                 <xsl:when test="//@docsubtype[string-length() &gt; 0]">
                                     <xsl:attribute name="subtype">
                                         <xsl:value-of select="$codeGenreIstex"/>
