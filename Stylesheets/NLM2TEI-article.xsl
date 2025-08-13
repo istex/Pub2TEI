@@ -253,17 +253,17 @@
                 <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
             </xsl:attribute>
             <xsl:choose>
+                <!-- karger-ebooks-->
+                <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446123'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000443598'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000445337'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446124'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <!-- sage-->
+                <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309' or //article-id[@pub-id-type='doi']='10.1177/053901846800700308'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
                 <xsl:when test="@xml:lang">
                     <xsl:choose>
                         <xsl:when test="//article/@xml:lang='IW'"><xsl:attribute name="xml:lang">he</xsl:attribute></xsl:when>
                         <xsl:when test="//article/@xml:lang='fn'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
-                        <!-- karger-ebooks-->
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446123'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000443598'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000445337'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446124'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
-                        <!-- sage-->
-                        <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
                         <xsl:otherwise>
                             <xsl:copy-of select="@xml:lang"/>
                         </xsl:otherwise>
