@@ -3,10 +3,11 @@
     xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0" xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:rsc="http://www.rsc.org/schema/rscart38"
-    xmlns:s1="http://www.elsevier.com/xml/si/dtd" exclude-result-prefixes="#all">
+    xmlns:s1="http://www.elsevier.com/xml/si/dtd"
+    xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
-
+    
     <!-- KEYWORDS -->
 
     <!-- BMJ: classinfo, keyword -->
@@ -232,6 +233,19 @@
                         <xsl:value-of select="substring-after($substringKeywords,'Keywords: ')"/>
                     </xsl:with-param>
                 </xsl:call-template>
+            </xsl:when>
+            <!-- Editeur IOP - codes PACS et JSTAT -->
+            <xsl:when test="contains(../@kwd-group-type,'pacs')
+                or contains(../@kwd-group-type,'jstat')">
+                <term>
+                    <xsl:attribute name="ana">
+                        <xsl:apply-templates/>
+                    </xsl:attribute>
+                    <xsl:variable name="codePacsNLM">
+                        <xsl:value-of select="."/>
+                    </xsl:variable>
+                    <xsl:value-of select="normalize-space($titleCodesPACS/descendant::tei:row[tei:cell/text() = $codePacsNLM]/tei:cell[@role = 'name'])"/>
+                </term>
             </xsl:when>
             <xsl:otherwise>
                 <term>

@@ -364,11 +364,6 @@
         </publisher>
     </xsl:template>
     
-    <!-- dateIssued -->
-    <xsl:template match="year">
-        <xsl:apply-templates/>
-    </xsl:template>
-    
     <!-- titre du journal -->
     <xsl:template match="journal_name">
         <title level="m" type="main">

@@ -1246,13 +1246,13 @@
          (car cet elt recouvre bien tous les 
          contenus possibles de <classifications>) -->
     <xsl:template match="classifications">
-        <textClass ana="classification">
-            <xsl:apply-templates select="subject-areas"/>
+        <xsl:apply-templates/>
+            <!--<xsl:apply-templates select="subject-areas"/>
             <xsl:apply-templates select="class-codes"/>
-        </textClass>
+        
         <textClass ana="keywords">
             <xsl:apply-templates select="keywords"/>
-        </textClass>
+        </textClass>-->
     </xsl:template>
 
     <!-- class-codes ==> classCodes
@@ -1263,34 +1263,61 @@
               (<code>)+ 
            </class-codes>
     -->
-    <xsl:template match="classifications/class-codes">
-        <xsl:apply-templates/>
-    </xsl:template>
-
-
     <!--  IN: celui au-dessus  <<
          OUT: profileDesc/textClass
               >> classCode +
          Ex:  "52.35.Ra"
     -->
-    <xsl:template match="classifications/class-codes/code">
-        <xsl:variable name="codePacs">
+    <xsl:template match="class-codes">
+        <textClass ana="classifications">
+            <keywords>
+                <xsl:attribute name="scheme" select="@scheme"/>
+            <xsl:apply-templates/>
+            </keywords>
+        </textClass>
+    </xsl:template>
+    <xsl:template match="code">
+        <xsl:variable name="codePacsOrig">
             <xsl:value-of select="."/>
         </xsl:variable>
-        <xsl:variable name="resultCodePacs">
-            <xsl:value-of select="$titleCodesPACS/descendant::tei:row[tei:cell/text() = $codePacs]/tei:cell[@role = 'name']"/>
+        <xsl:variable name="codePacs">
+            <xsl:value-of select="translate(.,'.','')"/>
         </xsl:variable>
-        <classCode>
-            <xsl:attribute name="scheme" select="../@scheme"/>
-            <xsl:value-of select="$codePacs"/>
-        </classCode>
-        <keywords>
-            <xsl:attribute name="scheme" select="../@scheme"/>
-            <xsl:attribute name="n" select="."/>
-            <term>
-                <xsl:value-of select="$resultCodePacs"/>
-            </term>
-        </keywords>
+        <xsl:variable name="resultCodePacs">
+            <xsl:value-of select="$titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacs]/tei:cell[@role = 'name']"/>
+        </xsl:variable>
+        <term>
+            <xsl:attribute name="type" select="../@scheme"/>
+            <xsl:attribute name="n">
+                <xsl:choose>
+                    <xsl:when test="contains($codePacs,' ') and contains($codePacsOrig,'.')">
+                        <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
+                        <xsl:value-of select="substring-before($codePacsOrig,' ')"/>
+                    </xsl:when>
+                    <!-- voir ark:/67375/0T8-GGQNJ452-0 -->
+                    <xsl:when test="not(contains($codePacsOrig,'.'))"/>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$codePacsOrig"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:choose>
+                <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
+                <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
+                    <xsl:variable name="corrCode">
+                        <xsl:value-of select="normalize-space(substring-after($codePacsOrig,' '))"/>
+                    </xsl:variable>
+                    <xsl:value-of select="$corrCode"/>
+                    <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
+                </xsl:when>
+                <xsl:when test="$resultCodePacs !=''">
+                    <xsl:value-of select="normalize-space($resultCodePacs)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$codePacsOrig"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </term>
     </xsl:template>
 
 
@@ -1300,34 +1327,12 @@
          OUT: profileDesc/textClass
               >> keywords
     -->
-    <xsl:template match="classifications/keywords">
-        <keywords>
-            <xsl:if test="@type">
-                <xsl:attribute name="scheme" select="@type"/>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </keywords>
-    </xsl:template>
 
     <!--  
          IN: celui au-dessus  <<
         OUT: profileDesc/textClass/keywords
           >> term
     -->
-    <xsl:template match="classifications/keywords/keyword">
-        <term>
-            <xsl:choose>
-                <xsl:when test="@code">
-                    <xsl:value-of select="@code"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="normalize-space(.)"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </term>
-    </xsl:template>
-
-
     <!-- On traite les subject-areas comme des classCode  
         
         subject-areas ==> classCode (en enlevant une imbrication)
@@ -1335,8 +1340,10 @@
         IN: classification  <<
         OUT: skip inside
     -->    
-    <xsl:template match="classifications/subject-areas">
-        <xsl:apply-templates/>
+    <xsl:template match="subject-areas">
+        <textClass ana="classifications">
+            <xsl:apply-templates/>
+        </textClass>
     </xsl:template>
     
     <!--  
@@ -1344,10 +1351,9 @@
         OUT: profileDesc/textClass
         >> classCode +
     -->
-    <xsl:template match="classifications/subject-areas/category">
+    <xsl:template match="category">
         <classCode>
             <xsl:attribute name="scheme" select="../@type"/>
-            
             <xsl:choose>
                 <xsl:when test="@code">
                      <xsl:value-of select="@code"/>

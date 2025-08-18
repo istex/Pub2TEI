@@ -2187,10 +2187,10 @@
                         dans les mixed-citation-->
                         <xsl:apply-templates select="italic" mode="toggle"/>
                         <xsl:if test="not(article-title | chapter-title)">
+                            <xsl:apply-templates select="elocation-id"/>
                             <xsl:apply-templates select="name"/>
                             <xsl:apply-templates select="string-name"/>
                             <xsl:apply-templates select="person-group"/>
-                            <xsl:apply-templates select="elocation-id"/>
                         </xsl:if>
                         <xsl:if test="person-group[@person-group-type='editor']">
                             <xsl:apply-templates select="person-group[@person-group-type='editor']"/>
