@@ -18,7 +18,7 @@
 
         <xsl:choose>
             <xsl:when test="string-length(normalize-space($oldMonth)) = 0">
-                <xsl:value-of select="normalize-space($oldYear)"/>
+                <xsl:value-of select="$oldYear"/>
             </xsl:when>
 
             <!-- RL : ajout cas intermédiaire

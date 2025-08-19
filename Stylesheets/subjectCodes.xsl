@@ -7427,25 +7427,25 @@
                     <xsl:when test="contains(.,' ')">
                         <item>
                             <label>
-                                <xsl:value-of select="normalize-space($avantEspace)"/>
+                                <xsl:value-of select="$avantEspace"/>
                             </label>
                             <term>
-                                <xsl:value-of select="normalize-space($mscSubjectVerb)"/>
+                                <xsl:value-of select="$mscSubjectVerb"/>
                             </term> 
                         </item>
                         <item>
                             <label>
-                                <xsl:value-of select="normalize-space($apresEspace)"/>
+                                <xsl:value-of select="$apresEspace"/>
                             </label>
                         </item>
                     </xsl:when>
                     <xsl:otherwise>
                         <item>
                             <label>
-                                <xsl:value-of select="normalize-space($mscSubjectCode)"/>
+                                <xsl:value-of select="$mscSubjectCode"/>
                             </label>
                             <term>
-                                <xsl:value-of select="normalize-space($mscSubjectVerb)"/>
+                                <xsl:value-of select="$mscSubjectVerb"/>
                             </term> 
                         </item>
                     </xsl:otherwise>

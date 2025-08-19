@@ -184,7 +184,7 @@
     <xsl:template name="parseEDPAuthorName">
         <xsl:param name="theName"/>
         <xsl:choose>
-            <xsl:when test=" contains($theName,' ')">
+            <xsl:when test="contains($theName,' ')">
                 <forename>
                     <xsl:value-of select="substring-before($theName,' ')"/>
                 </forename>
@@ -233,7 +233,7 @@
                         </addrLine>
                         <xsl:call-template name="parseEDPAffiliation">
                             <xsl:with-param name="theAffiliation"
-                                select="substring-after($theAffiliation,',')"/>
+                                select="normalize-space(substring-after($theAffiliation,','))"/>
                             <xsl:with-param name="count" select="2"/>
                         </xsl:call-template>
                     </xsl:otherwise>
@@ -246,7 +246,7 @@
                             <xsl:value-of select="normalize-space(substring-before($theAffiliation,'.'))"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="normalize-space($theAffiliation)"/>
+                            <xsl:value-of select="$theAffiliation"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>

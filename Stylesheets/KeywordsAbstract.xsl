@@ -242,9 +242,9 @@
                         <xsl:apply-templates/>
                     </xsl:attribute>
                     <xsl:variable name="codePacsNLM">
-                        <xsl:value-of select="."/>
+                        <xsl:value-of select="normalize-space(translate(.,'.',''))"/>
                     </xsl:variable>
-                    <xsl:value-of select="normalize-space($titleCodesPACS/descendant::tei:row[tei:cell/text() = $codePacsNLM]/tei:cell[@role = 'name'])"/>
+                    <xsl:value-of select="normalize-space($titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacsNLM]/tei:cell[@role = 'name'])"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
@@ -321,21 +321,21 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template name="ParseKeyword">
-        <xsl:param name="theKeyword" select="translate(.,'¶',' ')"/>
+        <xsl:param name="theKeyword" select="normalize-space(translate(.,'¶',' '))"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:variable name="avantTiret">
             <xsl:choose>
                 <xsl:when test="contains($theKeyword,' – ')">
-                    <xsl:value-of select="normalize-space(substring-before($theKeyword,' – '))"/>
+                    <xsl:value-of select="substring-before($theKeyword,' – ')"/>
                 </xsl:when>
                 <xsl:when test="contains($theKeyword,'; ')">
-                    <xsl:value-of select="normalize-space(substring-before($theKeyword,'; '))"/>
+                    <xsl:value-of select="substring-before($theKeyword,'; ')"/>
                 </xsl:when>
                 <xsl:when test="contains($theKeyword,', ')">
-                    <xsl:value-of select="normalize-space(substring-before($theKeyword,', '))"/>
+                    <xsl:value-of select="substring-before($theKeyword,', ')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="normalize-space($theKeyword)"/>
+                    <xsl:value-of select="$theKeyword"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -358,7 +358,7 @@
         <xsl:choose>
             <xsl:when test="not($inAddress)">
                 <xsl:call-template name="ParseKeyword">
-                    <xsl:with-param name="theKeyword" select="translate(.,'¶',' ')"/>
+                    <xsl:with-param name="theKeyword" select="normalize-space(translate(.,'¶',' '))"/>
                     <xsl:with-param name="inAddress" select="true()"/>
                 </xsl:call-template>
             </xsl:when>

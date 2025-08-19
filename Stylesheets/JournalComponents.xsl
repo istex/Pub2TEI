@@ -765,7 +765,7 @@
                         <xsl:value-of select="normalize-space(substring-after($DOIValue, 'DOI'))"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="normalize-space($DOIValue)"/>
+                        <xsl:value-of select="$DOIValue"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </idno>
@@ -775,14 +775,14 @@
     <!-- SG - ajout DOI niveau book-part-->
     <xsl:template match="wiley:publicationMeta[@level = 'part']/wiley:doi">
         <xsl:if test=". != ''">
-            <xsl:variable name="DOIValue" select="string(.)"/>
+            <xsl:variable name="DOIValue" select="normalize-space(string(.))"/>
             <idno type="book-part-DOI">
                 <xsl:choose>
                     <xsl:when test="starts-with($DOIValue, 'DOI')">
                         <xsl:value-of select="normalize-space(substring-after($DOIValue, 'DOI'))"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="normalize-space($DOIValue)"/>
+                        <xsl:value-of select="$DOIValue"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </idno>

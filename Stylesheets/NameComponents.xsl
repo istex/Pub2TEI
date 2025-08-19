@@ -236,17 +236,17 @@
         <xsl:variable name="avantVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
+                    <xsl:value-of select="substring-before($theAffil,',')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="normalize-space($theAffil)"/>
+                    <xsl:value-of select="$theAffil"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="apresVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
+                    <xsl:value-of select="substring-after($theAffil,',')"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="''"/>

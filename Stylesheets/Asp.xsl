@@ -21,7 +21,7 @@
     <!-- ******************* TRAITEMENT PRINCIPAL ******************************-->
     <xsl:variable name="bibliographicalInformationsTable" select="document('aspBibliographicalInformations.xml')"/>
     <xsl:variable name="currentDorpID">
-        <xsl:value-of select="substring-before(asp/a[1]|asp/text/a[1],'.pdf')"/>
+        <xsl:value-of select="normalize-space(substring-before(asp/a[1]|asp/text/a[1],'.pdf'))"/>
     </xsl:variable>
     <xsl:variable name="currentTitleAsp" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='title']"/>
     <xsl:variable name="currentProductId" select="$bibliographicalInformationsTable/descendant::tei:row[tei:cell[@role='dorpID'] = $currentDorpID]/tei:cell[@role='productID']"/>
@@ -481,7 +481,7 @@
                         <xsl:if test="string-length($currentAbstract) &gt; 0">
                             <abstract>
                                 <p>
-                                    <xsl:value-of select="normalize-space($currentAbstract)"/>
+                                    <xsl:value-of select="$currentAbstract"/>
                                 </p>
                             </abstract>
                         </xsl:if>
@@ -775,9 +775,9 @@
             <xsl:otherwise>
             <forename type="first">
                 <xsl:variable name="given">
-                    <xsl:value-of select="substring-after(.,', ')"/>
+                    <xsl:value-of select="normalize-space(substring-after(.,', '))"/>
                 </xsl:variable>
-                <xsl:value-of select="normalize-space($given)"/>
+                <xsl:value-of select="$given"/>
             </forename>
             <surname>
                 <xsl:variable name="nomFamille">
@@ -898,20 +898,20 @@
             <xsl:call-template name="tokenizeAsp"/>
     </xsl:template>
     <xsl:template name="tokenizeAsp">
-        <xsl:param name="text" select="."/>
+        <xsl:param name="text" select="normalize-space(.)"/>
         <xsl:param name="separator" select="';'"/>
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                        <xsl:value-of select="normalize-space($text)"/>
+                        <xsl:value-of select="$text"/>
                     </term>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="item">
-                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                    <xsl:value-of select="substring-before($text, $separator)"/>
                 </xsl:variable>
                 <term>
-                    <xsl:value-of select="normalize-space($item)"/>
+                    <xsl:value-of select="$item"/>
                 </term>
                 <xsl:call-template name="tokenizeAsp">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
@@ -925,15 +925,15 @@
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                    <xsl:value-of select="normalize-space($text)"/>
+                    <xsl:value-of select="$text"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="item">
-                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                    <xsl:value-of select="substring-before($text, $separator)"/>
                 </xsl:variable>
                 <term>
-                    <xsl:value-of select="normalize-space($item)"/>
+                    <xsl:value-of select="$item"/>
                 </term>
                 <xsl:call-template name="tokenizeIdeological">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
@@ -947,7 +947,7 @@
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                    <xsl:value-of select="normalize-space($text)"/>
+                    <xsl:value-of select="$text"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
@@ -955,7 +955,7 @@
                     <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
                 </xsl:variable>
                 <term>
-                    <xsl:value-of select="normalize-space($item)"/>
+                    <xsl:value-of select="$item"/>
                 </term>
                 <xsl:call-template name="tokenizeSocial">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
@@ -969,15 +969,15 @@
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                    <xsl:value-of select="normalize-space($text)"/>
+                    <xsl:value-of select="$text"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="item">
-                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                    <xsl:value-of select="substring-before($text, $separator)"/>
                 </xsl:variable>
                 <term>
-                    <xsl:value-of select="normalize-space($item)"/>
+                    <xsl:value-of select="$item"/>
                 </term>
                 <xsl:call-template name="tokenizeTheological">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
@@ -991,15 +991,15 @@
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                    <xsl:value-of select="normalize-space($text)"/>
+                    <xsl:value-of select="$text"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="item">
-                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                    <xsl:value-of select="substring-before($text, $separator)"/>
                 </xsl:variable>
                 <term>
-                    <xsl:value-of select="normalize-space($item)"/>
+                    <xsl:value-of select="$item"/>
                 </term>
                 <xsl:call-template name="tokenizeReligionDiscussed">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>
@@ -1013,15 +1013,15 @@
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                    <xsl:value-of select="normalize-space($text)"/>
+                    <xsl:value-of select="$text"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="item">
-                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                    <xsl:value-of select="substring-before($text, $separator)"/>
                 </xsl:variable>
                 <term>
-                    <xsl:value-of select="normalize-space($item)"/>
+                    <xsl:value-of select="$item"/>
                 </term>
                 <xsl:call-template name="tokenizeReligionGenre">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>

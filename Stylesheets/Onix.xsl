@@ -77,7 +77,7 @@
                                             <xsl:value-of select="$codeGenreIstex"/>
                                         </xsl:attribute>
                                         <xsl:attribute name="source">
-                                            <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                            <xsl:value-of select="$codeGenreAll"/>
                                         </xsl:attribute>
                                         <xsl:attribute name="scheme">
                                             <xsl:value-of select="$codeGenreArk"/>
@@ -470,17 +470,17 @@
     
     <!-- book-subject -->
     <xsl:template match="onix:SubjectHeadingText" name="tokenizeOnix">
-        <xsl:param name="text" select="onix:SubjectHeadingText"/>
+        <xsl:param name="text" select="normalize-space(onix:SubjectHeadingText)"/>
         <xsl:param name="separator" select="'--'"/>
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
                 <term>
-                    <xsl:value-of select="normalize-space($text)"/>
+                    <xsl:value-of select="$text"/>
                 </term>
             </xsl:when>
             <xsl:otherwise>
                 <term>
-                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                    <xsl:value-of select="substring-before($text, $separator)"/>
                 </term>
                 <xsl:call-template name="tokenizeOnix">
                     <xsl:with-param name="text" select="substring-after($text, $separator)"/>

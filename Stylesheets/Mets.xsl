@@ -65,7 +65,7 @@
                                             <xsl:value-of select="$codeGenreIstex"/>
                                         </xsl:attribute>
                                         <xsl:attribute name="source">
-                                            <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                            <xsl:value-of select="$codeGenreAll"/>
                                         </xsl:attribute>
                                         <xsl:attribute name="scheme">
                                             <xsl:value-of select="$codeGenreArk"/>

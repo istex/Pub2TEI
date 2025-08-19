@@ -725,12 +725,12 @@
                                             </xsl:when>
                                             <xsl:when test="contains(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue'],'Hors-série')">
                                                 <xsl:variable name="HorsSerie">
-                                                    <xsl:value-of select="substring-after(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue'],'Hors-série')"/>
+                                                    <xsl:value-of select="normalize-space(substring-after(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='issue'],'Hors-série'))"/>
                                                 </xsl:variable>
                                                 <xsl:if test="$HorsSerie">
                                                     <biblScope unit="issue">
                                                         <xsl:text>HS</xsl:text>
-                                                        <xsl:value-of select="normalize-space($HorsSerie)"/>
+                                                        <xsl:value-of select="$HorsSerie"/>
                                                     </biblScope>
                                                 </xsl:if>
                                             </xsl:when>
@@ -779,16 +779,16 @@
                                             </xsl:call-template>
                                             <xsl:if test="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'][string-length()&gt; 0]">
                                                 <xsl:variable name="pageStart">
-                                                    <xsl:value-of select="substring-before(//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'],'-')"/>
+                                                    <xsl:value-of select="normalize-space(substring-before(//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'],'-'))"/>
                                                 </xsl:variable>
                                                 <xsl:variable name="pageEnd">
-                                                    <xsl:value-of select="substring-after(//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'],'-')"/>
+                                                    <xsl:value-of select="normalize-space(substring-after(//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='pp'],'-'))"/>
                                                 </xsl:variable>
-                                                <biblScope unit='page' from="{normalize-space($pageStart)}">
-                                                    <xsl:value-of select="normalize-space($pageStart)"/>
+                                                <biblScope unit='page' from="{$pageStart}">
+                                                    <xsl:value-of select="$pageStart"/>
                                                 </biblScope>
-                                                <biblScope unit='page' to="{normalize-space($pageEnd)}">
-                                                    <xsl:value-of select="normalize-space($pageEnd)"/>
+                                                <biblScope unit='page' to="{$pageEnd}">
+                                                    <xsl:value-of select="$pageEnd"/>
                                                 </biblScope>
                                             </xsl:if>
                                         </imprint>
@@ -1206,15 +1206,15 @@
         <xsl:param name="theAffil"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:for-each select="$theAffil">
-            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+            <xsl:message>Un bout: <xsl:value-of select="normalize-space(.)"/></xsl:message>
         </xsl:for-each>
         <xsl:variable name="avantVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
+                    <xsl:value-of select="substring-before($theAffil,',')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="normalize-space($theAffil)"/>
+                    <xsl:value-of select="$theAffil"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

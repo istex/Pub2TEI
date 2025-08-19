@@ -467,7 +467,7 @@
                                         <xsl:value-of select="$codeGenreIstex"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:value-of select="normalize-space($codeGenreNature)"/>
+                                        <xsl:value-of select="$codeGenreNature"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
                                         <xsl:value-of select="$codeGenreArk"/>
@@ -516,7 +516,7 @@
                                         <xsl:value-of select="$codeGenreIstex"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="source">
-                                        <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                        <xsl:value-of select="$codeGenreAll"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="scheme">
                                         <xsl:value-of select="$codeGenreArk"/>
@@ -2184,20 +2184,20 @@
         <xsl:param name="theAffil"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:for-each select="$theAffil">
-            <xsl:message>Un bout: <xsl:apply-templates/></xsl:message>
+            <xsl:message>Un bout: <xsl:value-of select="normalize-space(.)"/></xsl:message>
         </xsl:for-each>
         <xsl:variable name="avantVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
+                    <xsl:value-of select="substring-before($theAffil,',')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="normalize-space($theAffil)"/>
+                    <xsl:value-of select="$theAffil"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="apresVirgule">
-            <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
+            <xsl:value-of select="substring-after($theAffil,',')"/>
         </xsl:variable>
         <xsl:variable name="testOrganisation">
             <xsl:call-template name="identifyOrgLevel">
@@ -2343,7 +2343,7 @@
     <xsl:template name="NLMParseOrg">
         <xsl:param name="theOrg"/>
         <xsl:for-each select="$theOrg">
-            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+            <xsl:message>Un bout: <xsl:value-of select="normalize-space(.)"/></xsl:message>
         </xsl:for-each>
         <xsl:variable name="avantVirgule">
             <xsl:choose>
@@ -2351,7 +2351,7 @@
                     <xsl:value-of select="normalize-space(substring-before($theOrg,','))"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="normalize-space($theOrg)"/>
+                    <xsl:value-of select="$theOrg"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -3521,8 +3521,8 @@
                                                 <xsl:variable name="diese">
                                                     <xsl:value-of select="translate($concat,' ','#')"/>
                                                 </xsl:variable>
-                                                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                                                <xsl:value-of select="normalize-space($espace)"/>
+                                                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                                                <xsl:value-of select="$espace"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                         <xsl:when test="@id">
@@ -3533,8 +3533,8 @@
                                                 <xsl:variable name="diese">
                                                     <xsl:value-of select="translate($concat,' ','#')"/>
                                                 </xsl:variable>
-                                                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                                                <xsl:value-of select="normalize-space($espace)"/>
+                                                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                                                <xsl:value-of select="$espace"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                     </xsl:choose>
@@ -4267,22 +4267,22 @@
         <xsl:param name="theAffil"/>
         <xsl:param name="inAddress" select="false()"/>
         <xsl:for-each select="$theAffil">
-            <xsl:message>Un bout: <xsl:value-of select="."/></xsl:message>
+            <xsl:message>Un bout: <xsl:value-of select="normalize-space(.)"/></xsl:message>
         </xsl:for-each>
         <xsl:variable name="avantVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
+                    <xsl:value-of select="substring-before($theAffil,',')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="normalize-space($theAffil)"/>
+                    <xsl:value-of select="$theAffil"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="apresVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
+                    <xsl:value-of select="substring-after($theAffil,',')"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="''"/>
@@ -5005,7 +5005,7 @@
                                       <sup>a</sup>Department of Radiology, University of California, San Francisco, CA, USA</aff>
                                 -->
                                 <xsl:when test="//article-meta/article-id[@pub-id-type = 'doi']='10.1159/000481103' or //article-meta/article-id[@pub-id-type = 'doi']='10.1159/000493249'">
-                                    <xsl:value-of select="//aff"/> 
+                                    <xsl:value-of select="normalize-space(//aff)"/> 
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="normalize-space(//aff/sup[.=$text]/following-sibling::text()[position()=1])"/> 
@@ -5016,13 +5016,13 @@
                         <xsl:variable name="supNettoie2">
                             <xsl:choose>
                                 <xsl:when test="contains($supNettoie,', and')">
-                                    <xsl:value-of select="normalize-space(replace($supNettoie,', and',''))"/>
+                                    <xsl:value-of select="replace($supNettoie,', and','')"/>
                                 </xsl:when>
                                 <xsl:when test="contains($supNettoie,';')">
                                     <xsl:value-of select="normalize-space(replace($supNettoie,';',''))"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="normalize-space($supNettoie)"/>
+                                    <xsl:value-of select="$supNettoie"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
@@ -5055,7 +5055,7 @@
                             <xsl:value-of select="normalize-space(replace($supNettoie,',',''))"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="normalize-space($supNettoie)"/>
+                            <xsl:value-of select="$supNettoie"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>

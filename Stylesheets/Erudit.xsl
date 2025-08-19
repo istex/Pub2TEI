@@ -38,7 +38,7 @@
     </xsl:variable>
     <xsl:variable name="codeLangErudit">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeLangErudit1)='fr'">fre</xsl:when>
+            <xsl:when test="$codeLangErudit1='fr'">fre</xsl:when>
         </xsl:choose>
     </xsl:variable>
     <!-- contentType -->

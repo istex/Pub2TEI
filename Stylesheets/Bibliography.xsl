@@ -44,7 +44,7 @@
                             <bibl type="citation">
                                 <xsl:if test="$id">
                                     <xsl:attribute name="xml:id">
-                                        <xsl:value-of select="normalize-space($id)"/>
+                                        <xsl:value-of select="$id"/>
                                     </xsl:attribute>
                                 </xsl:if>
 
@@ -106,11 +106,11 @@
                                 <!-- niveau citgroup supplémentaire -->
                                 <xsl:for-each select="rsc:citgroup | citgroup">
                                     <xsl:variable name="id">
-                                        <xsl:value-of select="@id"/>
+                                        <xsl:value-of select="normalize-space(@id)"/>
                                     </xsl:variable>
                                     <bibl type="journal">
                                         <xsl:attribute name="xml:id">
-                                            <xsl:value-of select="normalize-space($id)"/>
+                                            <xsl:value-of select="$id"/>
                                         </xsl:attribute>
                                         <xsl:for-each
                                             select="
@@ -624,10 +624,10 @@
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:variable name="normalize">
-                                        <xsl:value-of select="article-title"/>
+                                        <xsl:value-of select="normalize-space(article-title)"/>
                                     </xsl:variable>
                                     <title level="m" type="main">
-                                        <xsl:value-of select="normalize-space($normalize)"/>
+                                        <xsl:value-of select="$normalize"/>
                                     </title>
                                 </xsl:otherwise>
                             </xsl:choose>
@@ -679,9 +679,7 @@
                             <!--La référence en position 2 correspond à la source -->
                             <xsl:when test="$countTitle = 2">
                                 <title level="m" type="main">
-                                    <xsl:value-of
-                                        select="normalize-space($entry/article-title[position() = 2])"
-                                    />
+                                    <xsl:value-of select="$entry/article-title[position() = 2]"/>
                                 </title>
                             </xsl:when>
                             <xsl:when test="$entry/source">
@@ -689,7 +687,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <title level="m" type="main">
-                                    <xsl:value-of select="normalize-space($entry/article-title[1])"/>
+                                    <xsl:value-of select="$entry/article-title[1]"/>
                                 </title>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -2425,7 +2423,7 @@
         <xsl:param name="text" select="normalize-space(substring-before(., ':'))"/>
         <xsl:param name="separator" select="','"/>
         <xsl:variable name="authorInLine">
-            <xsl:value-of select="normalize-space($text)"/>
+            <xsl:value-of select="$text"/>
         </xsl:variable>
         <xsl:if test="$authorInLine[string-length() &gt; 0]">
             <xsl:choose>
@@ -2520,7 +2518,7 @@
             select="normalize-space(substring-before(substring-after(., '.'), ':'))"/>
         <xsl:param name="separator" select="'.'"/>
         <xsl:variable name="titleInLine">
-            <xsl:value-of select="normalize-space($text)"/>
+            <xsl:value-of select="$text"/>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="not(contains($text, $separator))">
@@ -2562,19 +2560,19 @@
     <xsl:template name="yearInLine" match="mixed-citation" mode="inLine">
         <xsl:param name="text"
             select="normalize-space(substring-before(substring-after(., '.'), ';'))"/>
-        <xsl:param name="text2" select="."/>
+        <xsl:param name="text2" select="normalize-space(.)"/>
         <xsl:variable name="yearInLine">
-            <xsl:value-of select="normalize-space($text)"/>
+            <xsl:value-of select="$text"/>
         </xsl:variable>
         <xsl:variable name="yearInLine2">
-            <xsl:value-of select="normalize-space($text2)"/>
+            <xsl:value-of select="$text2"/>
         </xsl:variable>
         <!-- pour enlever les balises polluants le texte contenant des identifiants -->
         <xsl:variable name="yearInLine3">
             <xsl:value-of select="./text() except (bold/italic | pub-id)"/>
         </xsl:variable>
        <!-- <year>
-         <xsl:value-of select="normalize-space($text2)"/>
+         <xsl:value-of select="$text2"/>
         </year>-->
         <xsl:choose>
             <xsl:when test="pub-id">
@@ -2991,10 +2989,10 @@
     <xsl:template name="volInLine" match="mixed-citation" mode="inLine">
         <xsl:param name="text"
             select="normalize-space(substring-before(substring-after(., ';'), ':'))"/>
-        <xsl:param name="text2" select="substring-after(substring-after(., ';'), ';')"/>
+        <xsl:param name="text2" select="normalize-space(substring-after(substring-after(., ';'), ';'))"/>
         <xsl:param name="separator" select="';'"/>
         <xsl:variable name="volInLine">
-            <xsl:value-of select="normalize-space($text)"/>
+            <xsl:value-of select="$text"/>
         </xsl:variable>
         <!--<volume>
             <xsl:value-of select="$text2"/>
@@ -3025,30 +3023,30 @@
     <!-- pagination de la revue -->
     <xsl:template name="pageInLine" match="mixed-citation" mode="inLine">
         <xsl:param name="text"
-            select="translate(substring-after(substring-after(., ';'), ':'), '.', '')"/>
-        <xsl:param name="text2" select="."/>
+            select="normalize-space(translate(substring-after(substring-after(., ';'), ':'), '.', ''))"/>
+        <xsl:param name="text2" select="normalize-space(.)"/>
         <xsl:param name="separator" select="';'"/>
         <xsl:variable name="pageInLine">
-            <xsl:value-of select="normalize-space($text)"/>
+            <xsl:value-of select="$text"/>
         </xsl:variable>
         <xsl:variable name="pageInLine2">
-            <xsl:value-of select="normalize-space($text2)"/>
+            <xsl:value-of select="$text2"/>
         </xsl:variable>
         <xsl:variable name="nettoiePage1">
-            <xsl:value-of select="substring-after(substring-after($pageInLine2, ';'), ':')"/>
+            <xsl:value-of select="normalize-space(substring-after(substring-after($pageInLine2, ';'), ':'))"/>
         </xsl:variable>
         <xsl:variable name="nettoiePage3">
-            <xsl:value-of select="substring-after(substring-after($nettoiePage1, ';'), ':')"/>
+            <xsl:value-of select="normalize-space(substring-after(substring-after($nettoiePage1, ';'), ':'))"/>
         </xsl:variable>
         <!-- pour enlever les balises polluants le texte contenant des identifiants -->
         <xsl:variable name="text3">
-            <xsl:value-of select="./text() except (bold/italic | pub-id)"/>
+            <xsl:value-of select="normalize-space(./text() except (bold/italic | pub-id))"/>
         </xsl:variable>
         <xsl:variable name="nettoiePubId">
-            <xsl:value-of select="substring-after(substring-after($text3, ';'), ':')"/>
+            <xsl:value-of select="normalize-space(substring-after(substring-after($text3, ';'), ':'))"/>
         </xsl:variable>
         <xsl:variable name="nettoiePubId2">
-            <xsl:value-of select="substring-before(substring-after($text3, ';'), '. DOI:')"/>
+            <xsl:value-of select="normalize-space(substring-before(substring-after($text3, ';'), '. DOI:'))"/>
         </xsl:variable>
         <!--<page>
             <xsl:value-of select="$nettoiePubId2"/>
@@ -3444,7 +3442,7 @@
                             <xsl:when test="contains($nettoiePage1, 'The Natural and Modified History of Congenital Heart Disease')"/>
                             <xsl:when test="contains($text3, '. DOI:')">
                                 <biblScope unit="page">
-                                    <xsl:value-of select="normalize-space($nettoiePubId2)"/>
+                                    <xsl:value-of select="$nettoiePubId2"/>
                                 </biblScope>
                             </xsl:when>
                             <xsl:when test="contains($text3, ' p ')">
@@ -3454,7 +3452,7 @@
                             </xsl:when>
                             <xsl:when test="contains($nettoiePage1, '.')">
                                 <biblScope unit="page">
-                                    <xsl:value-of select="normalize-space(substring-before($nettoiePage1, '.'))"/>
+                                    <xsl:value-of select="substring-before($nettoiePage1, '.')"/>
                                 </biblScope>
                             </xsl:when>
                             <xsl:otherwise>
@@ -3572,7 +3570,7 @@
             select="normalize-space(substring-before(substring-after(., ':'), '.'))"/>
         <xsl:param name="separator" select="'.'"/>
         <xsl:variable name="articleInLine">
-            <xsl:value-of select="normalize-space($text)"/>
+            <xsl:value-of select="$text"/>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$articleInLine='395-399, 399'">

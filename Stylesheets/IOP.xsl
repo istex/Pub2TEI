@@ -239,26 +239,26 @@
     </xsl:variable>
     <!-- traitement des titres fre/eng concaténés dans une même balise -->
     <xsl:variable name="codeTitre">
-        <xsl:value-of select="//header/ident/doi"/>
+        <xsl:value-of select="normalize-space(//header/ident/doi)"/>
     </xsl:variable>
     <xsl:variable name="codeTitreFre">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/012'">Analyse des fondements de la conduction électronique dans les états localisés, en fonction de la fréquence: II. Analyse des hypothèses fondamentales des théories existantes</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0951-7715/21/6/013'">Expériences sur certaines transformations birationnelles quadratiques</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0954-3899/27/10/301'">Expériences de détection directe de la matière sombre non baryonique</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/011'">Analyse des fondements de la conduction électronique dans les états localisés, en fonction de la fréquence: I. Analyse des méthodes de calcul dans les théories existantes</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0026-1394/7/3/001'">Variation de la masse volumique de l'eau en fonction de sa composition isotopique</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0031-9155/41/5/003'">Caractérisation de la réponse des collimateurs à trous parallèles hexagonaux des caméras à scintillation</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0022-3727/30/2/012'">Analyse des fondements de la conduction électronique dans les états localisés, en fonction de la fréquence: II. Analyse des hypothèses fondamentales des théories existantes</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0951-7715/21/6/013'">Expériences sur certaines transformations birationnelles quadratiques</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0954-3899/27/10/301'">Expériences de détection directe de la matière sombre non baryonique</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0022-3727/30/2/011'">Analyse des fondements de la conduction électronique dans les états localisés, en fonction de la fréquence: I. Analyse des méthodes de calcul dans les théories existantes</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0026-1394/7/3/001'">Variation de la masse volumique de l'eau en fonction de sa composition isotopique</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0031-9155/41/5/003'">Caractérisation de la réponse des collimateurs à trous parallèles hexagonaux des caméras à scintillation</xsl:when>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="codeTitreEng">
         <xsl:choose>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/012'">Analysis of the foundations of the frequency-dependent electronic conductivity in localized states: II. Analysis of the fundamental hypotheses of the existing theories</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0951-7715/21/6/013'">Experiments on some birational quadratic transformations</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0954-3899/27/10/301'">Direct searches for non-baryonic dark matter</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0022-3727/30/2/011'">Analysis of the foundations of the frequency-dependent electronic conductivity in localized states: I. Analysis of the methods of calculation in the available theories</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0026-1394/7/3/001'">Variation of the Water Density as a Function of its Isotopic Composition</xsl:when>
-            <xsl:when test="normalize-space($codeTitre)='10.1088/0031-9155/41/5/003'">Characterization of the response of hexagonal parallel-hole collimators of scintillation cameras</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0022-3727/30/2/012'">Analysis of the foundations of the frequency-dependent electronic conductivity in localized states: II. Analysis of the fundamental hypotheses of the existing theories</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0951-7715/21/6/013'">Experiments on some birational quadratic transformations</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0954-3899/27/10/301'">Direct searches for non-baryonic dark matter</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0022-3727/30/2/011'">Analysis of the foundations of the frequency-dependent electronic conductivity in localized states: I. Analysis of the methods of calculation in the available theories</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0026-1394/7/3/001'">Variation of the Water Density as a Function of its Isotopic Composition</xsl:when>
+            <xsl:when test="$codeTitre='10.1088/0031-9155/41/5/003'">Characterization of the response of hexagonal parallel-hole collimators of scintillation cameras</xsl:when>
         </xsl:choose>
     </xsl:variable>
     
@@ -1278,10 +1278,10 @@
     </xsl:template>
     <xsl:template match="code">
         <xsl:variable name="codePacsOrig">
-            <xsl:value-of select="."/>
+            <xsl:value-of select="normalize-space(.)"/>
         </xsl:variable>
         <xsl:variable name="codePacs">
-            <xsl:value-of select="translate(.,'.','')"/>
+            <xsl:value-of select="normalize-space(translate(.,'.',''))"/>
         </xsl:variable>
         <xsl:variable name="resultCodePacs">
             <xsl:value-of select="$titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacs]/tei:cell[@role = 'name']"/>
@@ -1305,13 +1305,13 @@
                 <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
                 <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
                     <xsl:variable name="corrCode">
-                        <xsl:value-of select="normalize-space(substring-after($codePacsOrig,' '))"/>
+                        <xsl:value-of select="substring-after($codePacsOrig,' ')"/>
                     </xsl:variable>
                     <xsl:value-of select="$corrCode"/>
                     <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
                 </xsl:when>
                 <xsl:when test="$resultCodePacs !=''">
-                    <xsl:value-of select="normalize-space($resultCodePacs)"/>
+                    <xsl:value-of select="$resultCodePacs"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$codePacsOrig"/>

@@ -744,7 +744,7 @@
                                                 <xsl:value-of select="$codeGenreIstex"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="source">
-                                                <xsl:value-of select="normalize-space($codeGenreAll)"/>
+                                                <xsl:value-of select="$codeGenreAll"/>
                                             </xsl:attribute>
                                             <xsl:attribute name="scheme">
                                                 <xsl:value-of select="$codeGenreArk"/>
@@ -2907,7 +2907,7 @@
                         <xsl:variable name="nettoieFinal">
                             <xsl:value-of select="translate($nettoie2,'?]','')"/> 
                         </xsl:variable>
-                        <xsl:value-of select="normalize-space($nettoieFinal)"/> 
+                        <xsl:value-of select="$nettoieFinal"/> 
                     </xsl:when>
                     <!-- ex: <pubDate>[?1789.]</pubDate> -->
                     <xsl:when test="contains(//pubDate,'[')">

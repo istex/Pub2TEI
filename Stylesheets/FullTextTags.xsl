@@ -776,8 +776,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -972,8 +972,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -988,8 +988,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1004,8 +1004,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1020,8 +1020,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1036,8 +1036,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1089,8 +1089,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1106,8 +1106,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1122,8 +1122,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </ref>
@@ -1145,8 +1145,8 @@
                 <xsl:variable name="diese">
                     <xsl:value-of select="translate($concat,' ','#')"/>
                 </xsl:variable>
-                <xsl:variable name="espace" select="replace($diese,'#',' #')"/>
-                <xsl:value-of select="normalize-space($espace)"/>
+                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                <xsl:value-of select="$espace"/>
             </xsl:attribute>
         </ptr>
     </xsl:template>
