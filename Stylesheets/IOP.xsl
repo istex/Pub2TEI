@@ -1269,55 +1269,87 @@
          Ex:  "52.35.Ra"
     -->
     <xsl:template match="class-codes">
-        <textClass ana="classifications">
-            <keywords>
-                <xsl:attribute name="scheme" select="@scheme"/>
-            <xsl:apply-templates/>
-            </keywords>
-        </textClass>
+        <xsl:choose>
+            <!-- kwd écartés car données sources mal-formées
+                voir ark:/67375/0T8-WVGSN7SL-Q
+                <classifications>
+                    <class-codes scheme="pacs">
+                        <code>93C40</code>
+                        <code>Adaptive</code>
+                        <code>control</code>
+                        <code>74M05</code>
+                        <code>Control</code>
+                        <code>switches</code>
+                        <code>and</code>
+                        <code>devices</code>
+                        <code>(&ldquo;smart</code>
+                        <code>materials&rdquo;)</code>
+                        <code>70Q05</code>
+                        <code>Control</code>
+                        <code>of</code>
+                        <code>mechanical</code>
+                        <code>systems</code>
+                     </class-codes>
+                </classifications>
+                -->
+            <xsl:when test="//article/article-metadata/article-data/doi='10.1088/0964-1726/16/5/043'"/>
+            <xsl:otherwise>
+                <textClass ana="classifications">
+                    <keywords>
+                        <xsl:attribute name="scheme" select="@scheme"/>
+                        <xsl:apply-templates/>
+                    </keywords>
+                </textClass>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="code">
         <xsl:variable name="codePacsOrig">
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:variable>
         <xsl:variable name="codePacs">
-            <xsl:value-of select="normalize-space(translate(.,'.',''))"/>
+            <xsl:value-of select="translate($codePacsOrig,'.','')"/>
         </xsl:variable>
         <xsl:variable name="resultCodePacs">
-            <xsl:value-of select="$titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacs]/tei:cell[@role = 'name']"/>
+            <xsl:value-of select="normalize-space($titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacs]/tei:cell[@role = 'name'])"/>
         </xsl:variable>
-        <term>
-            <xsl:attribute name="type" select="../@scheme"/>
-            <xsl:attribute name="n">
-                <xsl:choose>
-                    <xsl:when test="contains($codePacs,' ') and contains($codePacsOrig,'.')">
+        <xsl:choose>
+            <xsl:when test="$codePacsOrig='-'"/>
+            <xsl:otherwise>
+                <term>
+                    <xsl:attribute name="type" select="../@scheme"/>
+                    <xsl:attribute name="n">
+                        <xsl:choose>
+                            <xsl:when test="contains($codePacs,' ') and contains($codePacsOrig,'.')">
+                                <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
+                                <xsl:value-of select="substring-before($codePacsOrig,' ')"/>
+                            </xsl:when>
+                            <!-- voir ark:/67375/0T8-GGQNJ452-0 -->
+                            <xsl:when test="not(contains($codePacsOrig,'.'))"/>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$codePacsOrig"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:choose>
                         <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
-                        <xsl:value-of select="substring-before($codePacsOrig,' ')"/>
-                    </xsl:when>
-                    <!-- voir ark:/67375/0T8-GGQNJ452-0 -->
-                    <xsl:when test="not(contains($codePacsOrig,'.'))"/>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$codePacsOrig"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:choose>
-                <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
-                <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
-                    <xsl:variable name="corrCode">
-                        <xsl:value-of select="substring-after($codePacsOrig,' ')"/>
-                    </xsl:variable>
-                    <xsl:value-of select="$corrCode"/>
-                    <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
-                </xsl:when>
-                <xsl:when test="$resultCodePacs !=''">
-                    <xsl:value-of select="$resultCodePacs"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$codePacsOrig"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </term>
+                        <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
+                            <xsl:variable name="corrCode">
+                                <xsl:value-of select="substring-after($codePacsOrig,' ')"/>
+                            </xsl:variable>
+                            <xsl:value-of select="$corrCode"/>
+                            <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
+                        </xsl:when>
+                        <xsl:when test="$resultCodePacs !=''">
+                            <xsl:value-of select="$resultCodePacs"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$codePacsOrig"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </term>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

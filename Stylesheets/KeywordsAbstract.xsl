@@ -244,6 +244,8 @@
                     <xsl:variable name="codePacsNLM">
                         <xsl:value-of select="normalize-space(translate(.,'.',''))"/>
                     </xsl:variable>
+                    <!-- J'ai supprimé les points dans les codes car il y a des codes erronés dans les données sources
+                    , ces codes sont parfois tronqués - voir ark:/67375/0T8-MZ63G8B9-2-->
                     <xsl:value-of select="normalize-space($titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacsNLM]/tei:cell[@role = 'name'])"/>
                 </term>
             </xsl:when>
