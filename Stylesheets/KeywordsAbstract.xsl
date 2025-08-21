@@ -18,8 +18,51 @@
 
     <!-- IOP: classifications/ puis comme Sage keywords/keyword
               pour l'instant directement traité dans IOP.xsl    -->
-
-    <xsl:template match="kwd-group | classinfo | KeywordGroup | keywords">
+    <xsl:template match="kwd-group">
+        <xsl:choose>
+            <xsl:when test="kwd!=''">
+                <textClass ana="keyword">
+                    <keywords>
+                        <!-- scheme -->
+                        <xsl:if test="@kwd-group-type != ''">
+                            <xsl:attribute name="scheme">
+                                <xsl:value-of select="@kwd-group-type"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <!-- langue parfois non présente -->
+                        <xsl:variable name="theLanguage">
+                            <xsl:choose>
+                                <xsl:when test="@Language">
+                                    <xsl:value-of select="@Language"/>
+                                </xsl:when>
+                                <xsl:when test="@lang">
+                                    <xsl:value-of select="@lang"/>
+                                </xsl:when>
+                                <xsl:when test="@xml:lang">
+                                    <xsl:if test="@xml:lang">
+                                        <xsl:if test="normalize-space(@xml:lang)">
+                                            <xsl:value-of select="normalize-space(@xml:lang)"/>
+                                        </xsl:if>
+                                    </xsl:if>	
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:variable> 
+                        <xsl:if test="$theLanguage">
+                            <xsl:if test="$theLanguage != ''">
+                                <xsl:attribute name="xml:lang">
+                                    <xsl:call-template name="Varia2ISO639">
+                                        <xsl:with-param name="code" select="$theLanguage"/>
+                                    </xsl:call-template>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </xsl:if>
+                        <xsl:apply-templates select="kwd"/>
+                    </keywords>
+                </textClass>
+            </xsl:when>  
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="classinfo | KeywordGroup | keywords">
         <textClass ana="keyword">
             <keywords>
                 <!-- scheme -->

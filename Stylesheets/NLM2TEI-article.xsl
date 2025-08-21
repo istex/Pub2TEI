@@ -4137,7 +4137,7 @@
     </xsl:template>
     <!-- SG: categorisation niveau book -->
     <xsl:template match="front/article-meta/article-categories/subj-group">
-        <keywords>
+        <classCode>
             <xsl:attribute name="scheme">
             <xsl:choose>
                 <xsl:when test="@subj-group-type">
@@ -4147,7 +4147,7 @@
             </xsl:choose>
             </xsl:attribute>
             <xsl:apply-templates/>
-        </keywords>
+        </classCode>
     </xsl:template>
    <!-- <xsl:template match="pubfm/subject">
         <keywords>
@@ -4165,9 +4165,7 @@
         </keywords>
     </xsl:template>-->
     <xsl:template match="front/article-meta/article-categories/subj-group/subject">
-        <term>
             <xsl:apply-templates/>
-        </term>
     </xsl:template>
     <!-- conference -->
     <xsl:template match="//conference">
