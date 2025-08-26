@@ -1421,6 +1421,7 @@
                 <xsl:if test="//publisher-name='S. Karger AG' and not(//issue-title[string-length() &gt; 0]) and not(//journal-meta/journal-title-group/journal-title[string-length() &gt; 0])">
                     <title level="m" type="main">
                         <xsl:choose>
+                            <xsl:when test="//isbn='978-3-318-07272-3'">SickKids Handbook of Pediatric Thrombosis and Hemostasis</xsl:when>
                             <xsl:when test="//isbn='978-3-318-05934-2'">History of the Basel Institute for Immunology</xsl:when>
                             <xsl:when test="//isbn='978-3-318-05822-2'">Well-Being Therapy : Treatment Manual and Clinical Applications</xsl:when>
                             <xsl:when test="//isbn='978-3-318-06379-0'">Peritoneal Dialysis Manual : A Guide for Understanding the Treatment</xsl:when>
@@ -1448,15 +1449,17 @@
                                 <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <title level="j" type="main">
-                                    <xsl:choose>
-                                        <xsl:when test="//journal-id[@journal-id-type='isbn']='978-0-85404-169-5'"><title>Nanotechnologies in Food</title></xsl:when>
-                                        <xsl:when test="//journal-id[@journal-id-type='isbn']='978-1-84755-916-6'"><title>Handbook of Culture Media for Food and Water Microbiology (3rd Edition)</title></xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:value-of select="$resultCodeTitle"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </title>
+                                <xsl:if test="not(//isbn)">
+                                    <title level="j" type="main">
+                                        <xsl:choose>
+                                            <xsl:when test="//journal-id[@journal-id-type='isbn']='978-0-85404-169-5'"><title>Nanotechnologies in Food</title></xsl:when>
+                                            <xsl:when test="//journal-id[@journal-id-type='isbn']='978-1-84755-916-6'"><title>Handbook of Culture Media for Food and Water Microbiology (3rd Edition)</title></xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="$resultCodeTitle"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </title>
+                                </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
 
