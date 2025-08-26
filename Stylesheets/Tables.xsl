@@ -14,6 +14,23 @@
     <!-- Royal Chemical Society: table-entry; NLM: table-wrap -->
     <xsl:template match="table-entry |rsc:table-entry | table-wrap | table">
         <xsl:choose>
+            <!-- karger -->
+            <xsl:when test="ancestor::sec  and not(../row)">
+                <figure>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="label">
+                        <head type="label">
+                            <xsl:value-of select="label"/>
+                        </head>
+                    </xsl:if>
+                    <!--<xsl:apply-templates select="* except tgroup"/>-->
+                    <xsl:apply-templates/>
+                </figure>
+            </xsl:when>
             <xsl:when test="oasis:table or contains(label,'Table')">
                 <table>
                     <xsl:if test="@id">
