@@ -2200,7 +2200,7 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="apresVirgule">
-            <xsl:value-of select="substring-after($theAffil,',')"/>
+            <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
         </xsl:variable>
         <xsl:variable name="testOrganisation">
             <xsl:call-template name="identifyOrgLevel">
@@ -4273,7 +4273,7 @@
         <xsl:variable name="avantVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="substring-before($theAffil,',')"/>
+                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$theAffil"/>
@@ -4283,7 +4283,7 @@
         <xsl:variable name="apresVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="substring-after($theAffil,',')"/>
+                    <xsl:value-of select="normalize-space(substring-after($theAffil,','))"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="''"/>
@@ -4936,6 +4936,30 @@
             <xsl:when test="contains(xref[1]/@rid,'aff_')">
                 <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid]
                     except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/sub)"/>
+            </xsl:when>
+            <xsl:when test="//aff[@id=current()/xref/@rid]">
+                <xsl:for-each select="//aff[@id=current()/xref/@rid]">
+                    <xsl:choose>
+                        <xsl:when test="./email">
+                            <xsl:if test="contains(.,',')">
+                                <affiliation>
+                                    <xsl:value-of select="normalize-space(substring-after(.,./x | ./label | ./sup))"/>
+                                </affiliation>
+                            </xsl:if>
+                            <email>
+                                <xsl:value-of select="normalize-space(./email)"/>
+                            </email>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <affiliation>
+                                <xsl:variable name="Sup">
+                                    <xsl:apply-templates select="."/>
+                                </xsl:variable>
+                                <xsl:value-of select="normalize-space($Sup)"/>
+                            </affiliation>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
             </xsl:when>
             <xsl:when test="xref[@ref-type='corresp']"/>
             <xsl:when test="xref">
