@@ -3663,12 +3663,14 @@
             <!-- SG: ajout licence -->
         <xsl:choose>
             <xsl:when test=".=''"/>
-            <xsl:otherwise> 
+            <xsl:otherwise>
+                <availability>
                     <licence>
                         <p>
                             <xsl:apply-templates/>
                         </p>
                     </licence>
+                </availability>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

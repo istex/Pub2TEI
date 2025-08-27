@@ -147,6 +147,8 @@
                                             <title level="m" type="main">
                                                 <xsl:value-of select="normalize-space(book-meta/book-title-group/book-title)"/>
                                             </title>
+                                        </xsl:if>
+                                        <xsl:if test="book-meta/book-title-group/subtitle[string-length() &gt; 0]">
                                             <title level="m" type="sub">
                                                 <xsl:value-of select="normalize-space(book-meta/book-title-group/subtitle)"/>
                                             </title>
@@ -372,6 +374,13 @@
                                 </xsl:when>
                             </xsl:choose>
                         </persName>
+                        <xsl:if test="bio">
+                            <state type="biography">
+                                <desc>
+                                    <xsl:value-of select="normalize-space(bio)"/>
+                                </desc>
+                            </state> 
+                        </xsl:if>
                     </author>
                 </xsl:when>
                 <xsl:when test="@contrib-type='editor' or @contrib-type='Series Editor'">
@@ -390,6 +399,14 @@
                                 </xsl:when>
                             </xsl:choose>
                         </persName>
+                        <xsl:if test="bio">
+                            <state type="biography">
+                                <desc>
+                                    <xsl:value-of select="normalize-space(bio)"/>
+                                </desc>
+                            </state> 
+                        </xsl:if>
+                        <roleName>editor</roleName>
                     </editor>
                 </xsl:when>
             </xsl:choose>
