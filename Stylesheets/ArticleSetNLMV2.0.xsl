@@ -154,8 +154,11 @@
             <persName>
                 <xsl:apply-templates select="*[name() != 'Affiliation']"/>
             </persName>
-            <xsl:apply-templates select="Affiliation"/>
-            <xsl:apply-templates select="Affiliation/Email"/>
+            <xsl:call-template name="createSpringerAffiliations">
+                <xsl:with-param name="restAff" select="@AffiliationIDS"/>
+            </xsl:call-template>
+            <!--<xsl:apply-templates select="Affiliation"/>
+            <xsl:apply-templates select="Affiliation/Email"/>-->
         </author>
     </xsl:template>
 

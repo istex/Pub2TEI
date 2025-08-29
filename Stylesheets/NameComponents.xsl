@@ -19,9 +19,7 @@
                         <xsl:apply-templates/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <persName>
-                            <xsl:apply-templates select="* except(x|label)"/>
-                        </persName>
+                        <xsl:apply-templates select="* except(x|label)"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
@@ -236,10 +234,10 @@
         <xsl:variable name="avantVirgule">
             <xsl:choose>
                 <xsl:when test="contains($theAffil,',')">
-                    <xsl:value-of select="substring-before($theAffil,',')"/>
+                    <xsl:value-of select="normalize-space(substring-before($theAffil,','))"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="$theAffil"/>
+                    <xsl:value-of select="normalize-space($theAffil)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

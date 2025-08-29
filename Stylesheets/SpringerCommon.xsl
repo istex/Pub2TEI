@@ -418,6 +418,10 @@
             <xsl:if test="$countryWithNoSpace!=''">
             <country>
                 <xsl:choose>
+                    <xsl:when test="contains(.,'Bosnia-Herzegovina')">
+                        <xsl:attribute name="key">BA</xsl:attribute>
+                        <xsl:text>BOSNIA-HERZEGOVINA</xsl:text>
+                    </xsl:when>
                     <xsl:when test="contains(.,'The Netherlands')">
                         <xsl:attribute name="key">NL</xsl:attribute>
                         <xsl:text>THE NETHERLANDS</xsl:text>

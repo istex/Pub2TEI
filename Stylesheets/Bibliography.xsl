@@ -142,24 +142,7 @@
     <xsl:template match="ce:bibliography-sec">
         <xsl:apply-templates/>
     </xsl:template>
-
-    <!-- Références simples Elsevier -->
-
-    <xsl:template match="ce:bib-reference[ce:other-ref]">
-        <bibl xml:id="{@id}">
-            <xsl:if test="ce:label[string-length() &gt; 0]">
-                <xsl:attribute name="n">
-                    <xsl:value-of select="normalize-space(ce:label)"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="*[name() != 'ce:label']"/>
-        </bibl>
-    </xsl:template>
-
-    <xsl:template match="ce:other-ref">
-        <xsl:apply-templates/>
-    </xsl:template>
-
+    
     <!-- Sage -->
     <xsl:template match="other-ref">
         <bibl type="other">
@@ -179,39 +162,72 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <!-- Références complexes Elsevier -->
-
-    <!-- Traitement des références structurées Elsevier -->
-
-    <xsl:template match="ce:bib-reference[sb:reference]">
-        <biblStruct xml:id="{@id}" n="{ce:label}">
+   
+    <!-- Références simples Elsevier -->
+    <xsl:template match="ce:other-ref">
+        <bibl>
             <xsl:choose>
-                <xsl:when test="sb:reference/sb:host/sb:edited-book | sb:reference/sb:host/sb:book">
+                <xsl:when test="following-sibling::sb:reference"/>
+                <xsl:when test="preceding-sibling::sb:reference"/>
+                <xsl:when test="following-sibling::ce:other-ref"/>
+                <xsl:otherwise>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="../@id"/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="ce:label[string-length() &gt; 0]">
+                <xsl:attribute name="n">
+                    <xsl:value-of select="normalize-space(ce:label)"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="*[name() != 'ce:label']"/>
+        </bibl>
+    </xsl:template>
+    <!-- Traitement des références structurées Elsevier -->
+    <!-- Références complexes Elsevier -->
+    <xsl:template match="sb:reference">
+        <biblStruct>
+            <xsl:choose>
+                <xsl:when test="following-sibling::sb:reference"/>
+                <xsl:when test="preceding-sibling::sb:reference"/>
+                <xsl:when test="following-sibling::ce:other-ref"/>
+                <xsl:otherwise>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="../@id"/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:attribute name="n">
+                <xsl:value-of select="../ce:label"/>
+            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="sb:host/sb:edited-book | sb:host/sb:book">
                     <xsl:attribute name="type">book</xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="type">journal</xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="sb:reference/sb:contribution">
+            <xsl:if test="sb:contribution">
                 <analytic>
-                    <xsl:if test="sb:reference/@id">
-                        <ref xml:id="{sb:reference/@id}"/>
+                    <xsl:if test="@id">
+                        <ref xml:id="{@id}"/>
                     </xsl:if>
-                    <xsl:apply-templates select="sb:reference/sb:contribution/*"/>
+                    <xsl:apply-templates select="sb:contribution/*"/>
                 </analytic>
             </xsl:if>
             <monogr>
-                <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:series/sb:title/*"/>
+                <xsl:apply-templates select="sb:host/sb:issue/sb:series/sb:title/*"/>
                 <xsl:choose>
-                    <xsl:when test="sb:reference/sb:host/sb:edited-book/sb:title">
-                        <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:title/*"
+                    <xsl:when test="sb:host/sb:edited-book/sb:title">
+                        <xsl:apply-templates select="sb:host/sb:edited-book/sb:title/*"
                         />
                     </xsl:when>
                     <xsl:otherwise>
                         <!--pour le cas ou le book aurait son titre au niveau de sb:reference-->
                         <xsl:if
-                            test="sb:reference/sb:contribution/sb:title/sb:maintitle[string-length() &gt; 0] and sb:reference/sb:host/sb:edited-book">
+                            test="sb:contribution/sb:title/sb:maintitle[string-length() &gt; 0] and sb:host/sb:edited-book">
                             <title level="m" type="main">
                                 <xsl:if test="@Language | @xml:lang">
                                     <xsl:attribute name="xml:lang">
@@ -229,31 +245,31 @@
                                     </xsl:attribute>
                                 </xsl:if>
                                 <xsl:apply-templates
-                                    select="sb:reference/sb:contribution/sb:title/sb:maintitle"/>
+                                    select="sb:contribution/sb:title/sb:maintitle"/>
                             </title>
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
 
                 <xsl:apply-templates
-                    select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
-                <xsl:apply-templates select="sb:reference/sb:host/sb:edited-book/sb:editors/*"/>
-                <xsl:apply-templates select="sb:reference/sb:host/sb:book/sb:title/*"/>
-                <xsl:apply-templates select="sb:reference/sb:host/sb:book/sb:editors/*"/>
+                    select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
+                <xsl:apply-templates select="sb:host/sb:edited-book/sb:editors/*"/>
+                <xsl:apply-templates select="sb:host/sb:book/sb:title/*"/>
+                <xsl:apply-templates select="sb:host/sb:book/sb:editors/*"/>
                 <imprint>
                     <xsl:apply-templates
-                        select="sb:reference/sb:host/sb:issue/sb:series/*[name() != 'sb:title']"/>
+                        select="sb:host/sb:issue/sb:series/*[name() != 'sb:title']"/>
                     <xsl:apply-templates
-                        select="sb:reference/sb:host/sb:edited-book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
+                        select="sb:host/sb:edited-book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
                     <xsl:apply-templates
-                        select="sb:reference/sb:host/sb:book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
-                    <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:issue-nr"/>
+                        select="sb:host/sb:book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
+                    <xsl:apply-templates select="sb:host/sb:issue/sb:issue-nr"/>
                     <xsl:apply-templates
-                        select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:volume-nr"/>
+                        select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:volume-nr"/>
                     <xsl:apply-templates
-                        select="sb:reference/sb:host/sb:edited-book/sb:book-series/sb:series/sb:issue-nr"/>
-                    <xsl:apply-templates select="sb:reference/sb:host/sb:issue/sb:date"/>
-                    <xsl:apply-templates select="sb:reference/sb:host/sb:pages/*"/>
+                        select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:issue-nr"/>
+                    <xsl:apply-templates select="sb:host/sb:issue/sb:date"/>
+                    <xsl:apply-templates select="sb:host/sb:pages/*"/>
                 </imprint>
             </monogr>
         </biblStruct>

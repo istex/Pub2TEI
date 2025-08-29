@@ -345,40 +345,50 @@
         <p><xsl:apply-templates/></p>
     </xsl:template>
     <xsl:template match="pub-date" mode="TF">
-        <xsl:if test="year!='0'">
-            <date type="published">
-                <xsl:choose>
-                    <xsl:when test="@pub-type = 'epub'">
-                        <xsl:attribute name="type">e-published</xsl:attribute>
-                    </xsl:when>
-                    <xsl:when test="@publication-format='print'">
-                        <xsl:attribute name="type">published</xsl:attribute>
-                    </xsl:when>
-                    <xsl:when test="@publication-format='electronic'">
-                        <xsl:attribute name="type">e-published</xsl:attribute>
-                    </xsl:when>
-                    <xsl:when test="@pub-type = 'epub-original'">
-                        <xsl:attribute name="type">original-e-published</xsl:attribute>
-                    </xsl:when>
-                    <xsl:when test="@pub-type = 'collection'">
-                        <xsl:attribute name="type">collection-published</xsl:attribute>
-                    </xsl:when>
-                    <xsl:when test="@pub-type = 'final'">
-                        <xsl:attribute name="type">final-published</xsl:attribute>
-                    </xsl:when>
-                </xsl:choose>
-                <xsl:attribute name="when">
+        <xsl:choose>
+            <xsl:when test=".[@date-type='actual'] !='0'">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:when test="year!='0'">
+                <date type="published">
+                    <xsl:choose>
+                        <xsl:when test="@pub-type = 'epub'">
+                            <xsl:attribute name="type">e-published</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@publication-format='print'">
+                            <xsl:attribute name="type">published</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@publication-format='electronic'">
+                            <xsl:attribute name="type">e-published</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@pub-type = 'epub-original'">
+                            <xsl:attribute name="type">original-e-published</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@pub-type = 'collection'">
+                            <xsl:attribute name="type">collection-published</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@pub-type = 'final'">
+                            <xsl:attribute name="type">final-published</xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:attribute name="when">
+                        <xsl:call-template name="makeISODateFromComponents">
+                            <xsl:with-param name="oldDay" select="day"/>
+                            <xsl:with-param name="oldMonth" select="month"/>
+                            <xsl:with-param name="oldYear" select="year"/>
+                        </xsl:call-template>
+                    </xsl:attribute>
                     <xsl:call-template name="makeISODateFromComponents">
-                        <xsl:with-param name="oldDay" select="day"/>
-                        <xsl:with-param name="oldMonth" select="month"/>
                         <xsl:with-param name="oldYear" select="year"/>
                     </xsl:call-template>
-                </xsl:attribute>
-                <xsl:call-template name="makeISODateFromComponents">
-                    <xsl:with-param name="oldYear" select="year"/>
-                </xsl:call-template>
-            </date>
-        </xsl:if>
+                </date>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="pub-date">
+                    <xsl:apply-templates/>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="edition" mode="TF">
         <editionStmt>
@@ -712,5 +722,13 @@
     </xsl:template>
     <xsl:template match="back" mode="TF">
         <xsl:apply-templates select="* except(../ref-list|notes)"/>
+    </xsl:template>
+    <xsl:template match="string-date">
+        <date type="published">
+            <xsl:attribute name="when">
+                <xsl:apply-templates/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </date>
     </xsl:template>
 </xsl:stylesheet>

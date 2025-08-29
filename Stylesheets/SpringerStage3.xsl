@@ -8,7 +8,7 @@
     
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <xsl:template match="/Publisher[not(Series/Book/descendant::Chapter)]">
+    <xsl:template match="/Publisher[Journal]">
         <xsl:variable name="countArticle">
             <xsl:value-of select="count(//Article)"/>
         </xsl:variable>
@@ -56,6 +56,11 @@
                             <xsl:when test="number(//Book/BookInfo/BookCopyright/CopyrightYear)">
                                 <date type="published" when="{//Book/BookInfo/BookCopyright/CopyrightYear}">
                                     <xsl:value-of select="//Book/BookInfo/BookCopyright/CopyrightYear"/>
+                                </date>
+                            </xsl:when>
+                            <xsl:when test="//Volume[1]/Issue/IssueInfo/IssueHistory/CoverDate/Year !=''">
+                                <date type="published" when="{//Volume[1]/Issue/IssueInfo/IssueHistory/CoverDate/Year}">
+                                    <xsl:value-of select="//Volume[1]/Issue/IssueInfo/IssueHistory/CoverDate/Year"/>
                                 </date>
                             </xsl:when>
                         </xsl:choose>
@@ -383,6 +388,11 @@
                         <xsl:when test="number(//Book/BookInfo/BookCopyright/CopyrightYear)">
                             <date type="published" when="{//Book/BookInfo/BookCopyright/CopyrightYear}">
                                 <xsl:value-of select="//Book/BookInfo/BookCopyright/CopyrightYear"/>
+                            </date>
+                        </xsl:when>
+                        <xsl:when test="//Volume[1]/Issue/IssueInfo/IssueHistory/CoverDate/Year !=''">
+                            <date type="published" when="{//Volume[1]/Issue/IssueInfo/IssueHistory/CoverDate/Year}">
+                                <xsl:value-of select="//Volume[1]/Issue/IssueInfo/IssueHistory/CoverDate/Year"/>
                             </date>
                         </xsl:when>
                     </xsl:choose>

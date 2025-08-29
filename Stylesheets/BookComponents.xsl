@@ -20,6 +20,16 @@
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
+    <xsl:template match="BookTitleID">
+        <idno type="book-title-id">
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="ChapterID">
+        <idno type="chapter-id">
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
     <xsl:template match="BookPrintISBN">
         <idno type="ISBN">
             <xsl:apply-templates/>
@@ -56,7 +66,7 @@
     <!-- Numéro du chapitre dans un ouvrage -->
     
     <xsl:template match="Chapter">
-        <idno type="chapter-id">
+        <idno type="chapter-number">
             <xsl:value-of select="@ID"/>
         </idno>
     </xsl:template>

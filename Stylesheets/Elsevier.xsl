@@ -366,13 +366,7 @@
                                 
                                 <!-- verbalisation titre série / journal -->
                                 <xsl:if test="//els1:item-info/els1:jid |//els2:item-info/els2:jid | //item-info/jid">
-                                    <title type="main">
-                                        <xsl:attribute name="level">
-                                            <xsl:choose>
-                                                <xsl:when test="$docIssueEls//s1:issue-info/s1:jid">s</xsl:when>
-                                                <xsl:otherwise>j</xsl:otherwise>
-                                            </xsl:choose>
-                                        </xsl:attribute>
+                                    <title type="main" level="j">
                                         <xsl:choose>
                                             <xsl:when test="$codeISSN='1095-6433'">Comparative Biochemistry and Physiology Part A: Molecular &amp; Integrative Physiology</xsl:when>
                                             <xsl:when test="$codeISSN='0742-8413'">Comparative biochemistry and physiology. C. Comparative pharmacology and toxicology</xsl:when>
@@ -381,13 +375,7 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </title>
-                                    <title type="abbrev">
-                                        <xsl:attribute name="level">
-                                            <xsl:choose>
-                                                <xsl:when test="$docIssueEls//s1:issue-info/s1:jid">s</xsl:when>
-                                                <xsl:otherwise>j</xsl:otherwise>
-                                            </xsl:choose>
-                                        </xsl:attribute>
+                                    <title type="abbrev" level="j">
                                         <xsl:value-of select="$value_to_jid"/>
                                     </title>
                                 </xsl:if>
@@ -974,25 +962,24 @@
     <!-- Fin de la bibliographie -->
 
     <xsl:template match="ce:bib-reference">
+        <xsl:variable name="countReference">
+            <xsl:value-of select="count(sb:reference)"/>
+        </xsl:variable>
         <xsl:choose>
-            <xsl:when test="../sb:reference">
-                <biblStruct>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="@id"/>
-                    </xsl:attribute>
+            <xsl:when test="sb:reference !='' and ce:other-ref !=''">
+                <listBibl xml:id="{@id}" type="multi">
                     <xsl:apply-templates/>
-                </biblStruct>
+                </listBibl>
+            </xsl:when>
+            <xsl:when test="$countReference &gt; 1">
+                <listBibl xml:id="{@id}" type="multi">
+                    <xsl:apply-templates/>
+                </listBibl>
             </xsl:when>
             <xsl:otherwise>
-                <bibl>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="@id"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </bibl>
+                <xsl:apply-templates/>
             </xsl:otherwise>
         </xsl:choose>
-        
     </xsl:template>
     <xsl:template match="ce:note">
        <note>

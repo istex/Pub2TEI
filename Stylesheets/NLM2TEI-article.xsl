@@ -3664,13 +3664,11 @@
         <xsl:choose>
             <xsl:when test=".=''"/>
             <xsl:otherwise>
-                <availability>
-                    <licence>
-                        <p>
-                            <xsl:apply-templates/>
-                        </p>
-                    </licence>
-                </availability>
+                <licence>
+                    <p>
+                        <xsl:apply-templates/>
+                    </p>
+                </licence>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

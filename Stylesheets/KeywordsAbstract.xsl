@@ -534,9 +534,14 @@
         <xsl:when test="not(contains(@class,'graphical'))">
         <abstract>
 			    <!-- Karger ebooks tous les abstracts sont en anglais-->
-			    <xsl:if test="//publisher-name='S. Karger AG'">
-			        <xsl:attribute name="xml:lang">en</xsl:attribute>
+            <xsl:if test="@abstract-type !=''">
+			        <xsl:attribute name="ana">
+			            <xsl:value-of select="@abstract-type"/>
+			        </xsl:attribute>
 			    </xsl:if>
+            <xsl:if test="//publisher-name='S. Karger AG'">
+                <xsl:attribute name="xml:lang">en</xsl:attribute>
+            </xsl:if>
 			    <xsl:variable name="theLanguage">
 	                <xsl:choose>
 	                    <xsl:when test="@Language !='--'">

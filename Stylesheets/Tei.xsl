@@ -1099,10 +1099,6 @@
                 </xsl:when>
                 <xsl:when test="tei:availability/tei:p[string-length(normalize-space(text())) &gt; 0]">
                     <xsl:copy-of select="tei:availability"/>
-                    <availability>
-                        <licence>© <xsl:value-of select="tei:date"/> OpenEdition</licence>
-                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-Z4364Z68-Q">open-edition</p>
-                    </availability>
                 </xsl:when>
                 <xsl:otherwise>
                     <availability>
@@ -1112,7 +1108,15 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor"/>
-            <xsl:apply-templates select="tei:date"/>
+            <!--
+            <xsl:if test="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date !=''">
+                <date type="published" when="{//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date}">
+                    <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+                </date>
+            </xsl:if>-->
+            <xsl:call-template name="fixAndCopyDate">
+                <xsl:with-param name="date" select="//tei:sourceDesc[1]/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+            </xsl:call-template>
             <xsl:if test="tei:availability/tei:licence/tei:date">
                 <date type="Copyright" when="{tei:availability/tei:licence/tei:date}"/>
             </xsl:if>
@@ -1328,5 +1332,4 @@
             <xsl:value-of select="$fixedDate"/>
         </date>
     </xsl:template>
-    
 </xsl:stylesheet>
