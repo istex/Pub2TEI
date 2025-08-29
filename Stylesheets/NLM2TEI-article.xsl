@@ -4951,9 +4951,10 @@
                             </email>
                         </xsl:when>
                         <xsl:otherwise>
+                            <!-- ne pas reprendre la balise label -->
                             <affiliation>
                                 <xsl:variable name="Sup">
-                                    <xsl:apply-templates select="."/>
+                                    <xsl:value-of select="text()[normalize-space()]"/>
                                 </xsl:variable>
                                 <xsl:value-of select="normalize-space($Sup)"/>
                             </affiliation>
