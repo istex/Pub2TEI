@@ -5063,7 +5063,7 @@
                                     <xsl:value-of select="normalize-space(//aff)"/> 
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="normalize-space(//aff/sup[.=$text]/following-sibling::text()[position()=1])"/> 
+                                    <xsl:value-of select="//aff/sup[.=$text]/following-sibling::text()[position()=1]"/> 
                                 </xsl:otherwise>
                             </xsl:choose>
 
@@ -5182,7 +5182,9 @@
                 <xsl:apply-templates select="string-name"/>
                 <xsl:apply-templates select="name-alternatives"/>
             </persName>
-            <xsl:call-template name="supAffil"/>
+            <xsl:if test="xref/@rid !=''">
+                <xsl:call-template name="supAffil"/>
+            </xsl:if>
             <xsl:apply-templates select="email"/>
             <roleName>
                 <xsl:value-of select="@contrib-type"/>
