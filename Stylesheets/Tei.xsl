@@ -220,6 +220,7 @@
                             <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='doi']"/>
                             <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='url']"/>
                             <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='url']"/>
+                            <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']"/>
                         </analytic>
                         <monogr>
                             <xsl:choose>
@@ -959,23 +960,12 @@
     </xsl:template>
     
     <xsl:template match="tei:list">
-        <list>
            <xsl:apply-templates select="tei:item"/>
-        </list>
     </xsl:template>
     <xsl:template match="tei:item">
-        <item>
-            <xsl:choose>
-                <xsl:when test="tei:p">
-                    <xsl:apply-templates/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <term>
-                        <xsl:apply-templates/>
-                    </term>
-                </xsl:otherwise>
-            </xsl:choose>
-        </item>
+        <term>
+            <xsl:apply-templates/>
+        </term>
     </xsl:template>
     <xsl:template match="tei:text">
         <text>
