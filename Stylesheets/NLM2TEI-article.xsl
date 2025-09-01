@@ -1462,7 +1462,6 @@
                                 </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
-
                         <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title"/>
                         <xsl:apply-templates select="journal-meta/journal-id"/>
                         <xsl:apply-templates select="journal-meta/issue-title"/>
@@ -1616,6 +1615,7 @@
                     </author>
                 </xsl:if>
                 <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='editor']"/>
+                <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='book_editor']"/>
                 <xsl:apply-templates select="//conference"/>
                 <imprint>
                     <!-- Bloc RSL version dtd highWire -->
@@ -2225,36 +2225,35 @@
                             <xsl:value-of select="$avantVirgule"/>
                         </orgName>
                         <xsl:if test="$apresVirgule !=''">
+                            <xsl:choose>
+                                <xsl:when test="../institution">
+                                    <xsl:call-template name="NLMparseAffiliation">
+                                        <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                                    </xsl:call-template>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:variable name="address">
+                                        <xsl:call-template name="NLMparseAffiliation">
+                                            <xsl:with-param name="theAffil" select="$apresVirgule"/>
+                                        </xsl:call-template>
+                                    </xsl:variable>
+                                    
                                     <xsl:choose>
-                                        <xsl:when test="../institution">
+                                        <xsl:when test="$address!=''">
                                             <xsl:call-template name="NLMparseAffiliation">
                                                 <xsl:with-param name="theAffil" select="$apresVirgule"/>
                                             </xsl:call-template>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:variable name="address">
-                                                <xsl:call-template name="NLMparseAffiliation">
-                                                    <xsl:with-param name="theAffil" select="$apresVirgule"/>
-                                                </xsl:call-template>
-                                            </xsl:variable>
-                                            
-                                                <xsl:choose>
-                                                    <xsl:when test="$address!=''">
-                                                        <xsl:call-template name="NLMparseAffiliation">
-                                                            <xsl:with-param name="theAffil" select="$apresVirgule"/>
-                                                        </xsl:call-template>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <address>
-                                                            <addrLine>
-                                                                <xsl:value-of select="$apresVirgule"/>
-                                                            </addrLine>
-                                                        </address>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            
+                                            <address>
+                                                <addrLine>
+                                                    <xsl:value-of select="$apresVirgule"/>
+                                                </addrLine>
+                                            </address>
                                         </xsl:otherwise>
                                     </xsl:choose>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
@@ -4399,7 +4398,8 @@
                                 or $avantVirgule='PA'
                                 or $avantVirgule='TN'
                                 or $avantVirgule='VA'
-                                or $avantVirgule='N.Y.'">
+                                or $avantVirgule='N.Y.'
+                                or $avantVirgule='Ontario'">
                                 <address>
                                     <region>
                                         <xsl:value-of select="$avantVirgule"/>
@@ -4461,7 +4461,8 @@
                                 or starts-with($avantVirgule,'WA ')
                                 or starts-with($avantVirgule,'WI ')
                                 or starts-with($avantVirgule,'WV ')
-                                or starts-with($avantVirgule,'WY ')">
+                                or starts-with($avantVirgule,'WY ')
+                                or $avantVirgule='Ontario'">
                                 <xsl:if test="not(contains(//aff,'USA'))">
                                     <country key="US" xml:lang="en">UNITED STATES</country>
                                 </xsl:if>
@@ -4537,7 +4538,9 @@
                                         or $avantVirgule='WI'
                                         or $avantVirgule='WY'
                                         or $avantVirgule='N.J.'
-                                        or $avantVirgule='N.Y.'">
+                                        or $avantVirgule='N.Y.'
+                                        or $avantVirgule='Ontario'
+                                        or $avantVirgule='South Australia'">
                                         <region>
                                             <xsl:value-of select="$avantVirgule"/>
                                         </region>
@@ -4799,21 +4802,23 @@
                                                                                     </addrLine>
                                                                                 </xsl:when>
                                                                                 <xsl:otherwise>
-                                                                                            <settlement>
-                                                                                                <xsl:apply-templates select="$avantVirgule"/>
-                                                                                            </settlement>
-                                                                                            <xsl:if test="$apresVirgule[string-length() &gt; 0]">
-                                                                                                <addrLine>
-                                                                                                    <xsl:choose>
-                                                                                                        <xsl:when test="contains($apresVirgule,',')">
-                                                                                                            <xsl:value-of select="substring-before($apresVirgule,',')"/>
-                                                                                                        </xsl:when>
-                                                                                                        <xsl:otherwise>
-                                                                                                            <xsl:apply-templates select="$apresVirgule"/>
-                                                                                                        </xsl:otherwise>
-                                                                                                    </xsl:choose>
-                                                                                                </addrLine>
-                                                                                            </xsl:if>
+                                                                                    <address>
+                                                                                        <settlement>
+                                                                                            <xsl:apply-templates select="$avantVirgule"/>
+                                                                                        </settlement>
+                                                                                        <xsl:if test="$apresVirgule[string-length() &gt; 0]">
+                                                                                            <addrLine>
+                                                                                                <xsl:choose>
+                                                                                                    <xsl:when test="contains($apresVirgule,',')">
+                                                                                                        <xsl:value-of select="substring-before($apresVirgule,',')"/>
+                                                                                                    </xsl:when>
+                                                                                                    <xsl:otherwise>
+                                                                                                        <xsl:apply-templates select="$apresVirgule"/>
+                                                                                                    </xsl:otherwise>
+                                                                                                </xsl:choose>
+                                                                                            </addrLine>
+                                                                                        </xsl:if>
+                                                                                    </address>
                                                                                 </xsl:otherwise>
                                                                             </xsl:choose>
                                                                         </xsl:otherwise>
@@ -4934,12 +4939,13 @@
     <xsl:template name="supAffil">
         <xsl:choose>
             <xsl:when test="contains(xref[1]/@rid,'aff_')">
-                <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid]
-                    except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/sub)"/>
+                <!--<xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid]
+                    except(/article/front/article-meta/contrib-group/aff[@id=current()/xref/@rid]/sub)"/>-->
+                <xsl:apply-templates select="/article/front/article-meta/aff[@id=current()/xref/@rid]"/>
             </xsl:when>
             <xsl:when test="//aff[@id=current()/xref/@rid]">
                 <xsl:for-each select="//aff[@id=current()/xref/@rid]">
-                    <xsl:choose>
+                   <!-- <xsl:choose>
                         <xsl:when test="./email">
                             <xsl:if test="contains(.,',')">
                                 <affiliation>
@@ -4951,7 +4957,7 @@
                             </email>
                         </xsl:when>
                         <xsl:otherwise>
-                            <!-- ne pas reprendre la balise label -->
+                            <!-\- ne pas reprendre la balise label -\->
                             <affiliation>
                                 <xsl:variable name="Sup">
                                     <xsl:value-of select="text()[normalize-space()]"/>
@@ -4959,7 +4965,30 @@
                                 <xsl:value-of select="normalize-space($Sup)"/>
                             </affiliation>
                         </xsl:otherwise>
-                    </xsl:choose>
+                    </xsl:choose>-->
+                    <!-- découpage des affiliations KARGER / NLM  -->
+                    <affiliation>
+                        <xsl:call-template name="NLMParseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:variable name="nettoie">
+                                    <xsl:apply-templates/>
+                                </xsl:variable>
+                                <xsl:choose>
+                                    <xsl:when test="contains($nettoie,'SISSA/ISAS')">
+                                        <xsl:value-of select="translate($nettoie,';','')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="translate($nettoie,';/','')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:if test="email">
+                            <email>
+                                <xsl:value-of select="email"/>
+                            </email>
+                        </xsl:if>
+                    </affiliation>
                 </xsl:for-each>
             </xsl:when>
             <xsl:when test="xref[@ref-type='corresp']"/>
@@ -5121,4 +5150,44 @@
     <xsl:template match="surname" mode="product">
         <xsl:apply-templates/>
     </xsl:template>
+    
+    <xsl:template match="contrib[@contrib-type='editors'] |contrib[@contrib-type='volume editor']|contrib[@contrib-type='book_editor']">
+        <editor>
+            <xsl:variable name="i" select="position()-1"/>
+            <xsl:variable name="editorNumber">
+                <xsl:choose>
+                    <xsl:when test="$i &lt; 10">
+                        <xsl:value-of select="concat('editor-000', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 100">
+                        <xsl:value-of select="concat('editor-00', $i)"/>
+                    </xsl:when>
+                    <xsl:when test="$i &lt; 1000">
+                        <xsl:value-of select="concat('editor-0', $i)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('editor-', $i)"/>
+                    </xsl:otherwise>
+                </xsl:choose> 
+            </xsl:variable>
+            <xsl:if test="not(ancestor::sub-article) or not(ancestor::ref)">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="$editorNumber"/>
+                </xsl:attribute>
+            </xsl:if>
+            <persName>
+                <xsl:apply-templates select="contrib-id"/>
+                <xsl:apply-templates select="collab"/>
+                <xsl:apply-templates select="name"/>
+                <xsl:apply-templates select="string-name"/>
+                <xsl:apply-templates select="name-alternatives"/>
+            </persName>
+            <xsl:call-template name="supAffil"/>
+            <xsl:apply-templates select="email"/>
+            <roleName>
+                <xsl:value-of select="@contrib-type"/>
+            </roleName>
+        </editor>
+    </xsl:template>
+
 </xsl:stylesheet>

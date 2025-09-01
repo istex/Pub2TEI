@@ -124,6 +124,7 @@
                 contains($theOrg,'Fakult') or
                 contains($theOrg,'Inflammatory') or
                 contains($theOrg,'High Education') or
+                contains($theOrg,'hospital') or
                 contains($theOrg,'MIND-IN2UB')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
@@ -241,7 +242,7 @@
                 or contains($theOrg,'Team')
                 or contains($theOrg,'Private')
                 or contains($theOrg,' Co.')
-                or contains($theOrg,' Co.')
+                or contains($theOrg,'Amsterdam UMC')
                 or contains($theOrg,'EURATOM')
                 ">
                 <xsl:text>group</xsl:text>

@@ -2463,38 +2463,6 @@
             </xsl:otherwise>
         </xsl:choose>        
     </xsl:template>
-    <xsl:template match="contrib" mode="editor">
-        <editor>
-            <xsl:variable name="i" select="position()-1"/>
-            <xsl:variable name="editorNumber">
-                <xsl:choose>
-                    <xsl:when test="$i &lt; 10">
-                        <xsl:value-of select="concat('editor-000', $i)"/>
-                    </xsl:when>
-                    <xsl:when test="$i &lt; 100">
-                        <xsl:value-of select="concat('editor-00', $i)"/>
-                    </xsl:when>
-                    <xsl:when test="$i &lt; 1000">
-                        <xsl:value-of select="concat('editor-0', $i)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="concat('editor-', $i)"/>
-                    </xsl:otherwise>
-                </xsl:choose> 
-            </xsl:variable>
-            <xsl:if test="not(ancestor::sub-article | ancestor::ref)">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="$editorNumber"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-            <xsl:if test="@contrib-type[string-length() &gt; 0]">
-                <roleName>
-                    <xsl:value-of select="@contrib-type"/>
-                </roleName>
-            </xsl:if>
-        </editor>
-    </xsl:template>
     <xsl:template match="contrib" mode="author">
         <author>
             <xsl:variable name="i" select="position()-1"/>
