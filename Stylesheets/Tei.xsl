@@ -931,7 +931,14 @@
                 </xsl:when>
                 <xsl:when test="not(//tei:profileDesc/tei:textClass/tei:keywords)">
                     <profileDesc>
-                        <xsl:copy-of select="//tei:langUsage"/>
+                        <xsl:choose>
+                            <xsl:when test="//tei:langUsage='zh-cn'">
+                                <language ident="zh">zh</language>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:copy-of select="//tei:langUsage"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                         <xsl:copy-of select="//tei:abstract"/>
                     </profileDesc>
                 </xsl:when>
