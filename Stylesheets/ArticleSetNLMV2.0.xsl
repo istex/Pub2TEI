@@ -151,9 +151,7 @@
                     <xsl:text>corresp</xsl:text>
                 </xsl:attribute>
             </xsl:if>
-            <persName>
                 <xsl:apply-templates select="*[name() != 'Affiliation']"/>
-            </persName>
             <xsl:call-template name="createSpringerAffiliations">
                 <xsl:with-param name="restAff" select="@AffiliationIDS"/>
             </xsl:call-template>

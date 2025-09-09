@@ -302,6 +302,7 @@
                     <xsl:apply-templates select="SeriesInfo/SeriesAbbreviatedTitle"/>
                     <xsl:apply-templates select="SeriesHeader/AuthorGroup/Author"/>
                     <xsl:apply-templates select="SeriesHeader/EditorGroup/Editor"/>
+                    <xsl:apply-templates select="SeriesHeader/CollaboratorGroup/Collaborator"/>
                     <xsl:apply-templates select="SeriesInfo/SeriesPrintISSN"/>
                     <xsl:apply-templates select="SeriesInfo/SeriesElectronicISSN"/>
                     <xsl:apply-templates select="SeriesInfo/SeriesID"/>

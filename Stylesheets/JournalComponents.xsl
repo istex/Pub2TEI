@@ -363,6 +363,11 @@
                     <xsl:when test="//JournalTitle = 'J Biosci'">
                         <title level="j" type="main">Journal of Biosciences</title>
                     </xsl:when>
+                    <xsl:when test="//journal-title = 'Geological Society, London, Special Publications'">
+                        <title level="s" type="main">
+                            <xsl:apply-templates/>
+                        </title>
+                    </xsl:when>
                     <xsl:otherwise>
                         <title level="j" type="main">
                             <xsl:apply-templates/>
@@ -427,14 +432,19 @@
         match="journal_abbreviation | abbrev-journal-title | els1:jid | els2:jid | JournalShortTitle | j-shorttitle | JournalAbbreviatedTitle">
         <xsl:if test=". != ''">
             <xsl:choose>
-                <xsl:when
-                    test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
+                <!-- edp 10.1051/epjconf/20122407002 -->
+                <xsl:when test="//article-meta/issue-title!=''"/>
+                <xsl:when test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
                     <title level="m" type="abbrev">
                         <xsl:apply-templates/>
                     </title>
                 </xsl:when>
-                <xsl:when
-                    test="//article-meta/isbn[string-length() &gt; 0] | //journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
+                <xsl:when test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
+                    <title level="m" type="abbrev">
+                        <xsl:apply-templates/>
+                    </title>
+                </xsl:when>
+                <xsl:when test="//article-meta/isbn[string-length() &gt; 0] | //journal-meta/isbn[string-length() &gt; 0] and //journal-meta/issn">
                     <title level="s" type="abbrev">
                         <xsl:apply-templates/>
                     </title>
@@ -459,7 +469,12 @@
             </xsl:choose>
         </xsl:if>
     </xsl:template>
-
+    <!-- edp 10.1051/epjconf/20122407002 -->
+    <xsl:template match="abbrev-journal-title" mode="edp">
+        <title level="s" type="abbrev">
+            <xsl:apply-templates/>
+        </title>
+    </xsl:template>
     <xsl:template match="pubmed_abbreviation">
         <xsl:if test=". != ''">
             <title level="j" type="pubmed">
@@ -533,6 +548,11 @@
     <xsl:template match="issue_description | issue-title | IssueTitle">
         <xsl:if test=". != ''">
             <xsl:choose>
+                <xsl:when test="//volume-id[@pub-id-type='isbn'][string-length() &gt; 0]">
+                    <title level="m" type="main">
+                        <xsl:apply-templates/>
+                    </title>
+                </xsl:when>
                 <xsl:when
                     test="//publicationMeta/isbn[string-length() &gt; 0] and //publicationMeta/issn">
                     <title level="m" type="issue">
@@ -699,6 +719,7 @@
                             <xsl:value-of select="$ISSNCode"/>
                         </idno>
                     </xsl:when>
+                    <xsl:when test="//issue-title !=''"/>
                     <xsl:otherwise>
                         <idno type="pISSN">
                             <xsl:value-of select="$ISSNCode"/>
@@ -716,13 +737,13 @@
                     <xsl:choose>
                         <xsl:when test="@content-type = 'e-isbn'">eISBN</xsl:when>
                         <xsl:when test="@content-type = 'epub'">eISBN</xsl:when>
-                        <xsl:when test="@publication-format = 'pbk'">pISBN</xsl:when>
+                        <xsl:when test="@publication-format = 'pbk'">ISBN</xsl:when>
                         <xsl:when test="@publication-format = 'ebk'">eISBN</xsl:when>
                         <xsl:when test="@publication-format !=''">
                             <xsl:value-of select="@publication-format"/>
                         </xsl:when>
                         <xsl:when test="@publication-format = 'epub'">eISBN</xsl:when>
-                        <xsl:otherwise>pISBN</xsl:otherwise>
+                        <xsl:otherwise>ISBN</xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
                 <xsl:apply-templates/>
@@ -752,6 +773,11 @@
                 test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1051/limn/2022010'">
                 <idno type="eISSN">2823-1465</idno>
             </xsl:when>
+            <xsl:when
+                test="/article/front/article-meta/article-id[@pub-id-type='doi']='10.1051/limn/2022010'">
+                <idno type="eISSN">2823-1465</idno>
+            </xsl:when>
+            <xsl:when test="//article-meta/issue-title!=''"/>
             <xsl:otherwise>
                 <xsl:if test=". != ''">
                     <idno type="eISSN">

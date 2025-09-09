@@ -236,7 +236,7 @@
     
     <!-- Same for Editors -->
     
-    <xsl:template match="EditorGroup/Editor">
+    <xsl:template match="EditorGroup/Editor | CollaboratorGroup/Collaborator[@Type='Series editor']">
         <editor>
             <xsl:variable name="i" select="position()-1"/>
             <xsl:variable name="editorNumber">
@@ -296,7 +296,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="AuthorName | EditorName">
+    <xsl:template match="AuthorName | EditorName | CollaboratorName">
         <persName>
             <xsl:apply-templates/>
         </persName>

@@ -1445,8 +1445,18 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
+                            <xsl:when test="article-meta/issue-title!=''">
+                                <xsl:apply-templates select="article-meta/issue-title"/>
+                            </xsl:when>
                             <xsl:when test="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title">
                                 <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl | article-meta/issue-title"/>
+                            </xsl:when>
+                            <!-- degruyter exemple 10.2478/v10003-009-0006-4
+                            quand absence de titre de journal main-->
+                            <xsl:when test="journal-meta/journal-title-group/abbrev-journal-title[@abbrev-type='full']">
+                                <title level="j" type="main">
+                                    <xsl:value-of select="journal-meta/journal-title-group/abbrev-journal-title[@abbrev-type='full']"/>
+                                </title>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:if test="not(//isbn)">
@@ -1791,6 +1801,36 @@
                     </series>
                 </xsl:when>
             </xsl:choose>
+            <!-- edp -->
+            <xsl:choose>  
+                <xsl:when test="//article-meta/issue-title!=''">
+                    <series>
+                        <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
+                        <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title" mode="edp"/>
+                        <xsl:if test="journal-meta/issn[@pub-type='ppub'][string-length() &gt; 0]">
+                            <idno type="ISSN">
+                                <xsl:value-of select="journal-meta/issn[@pub-type='ppub']"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:if test="journal-meta/issn[@pub-type='epub'][string-length() &gt; 0]">
+                            <idno type="eISSN">
+                                <xsl:value-of select="journal-meta/issn[@pub-type='epub']"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:if test="journal-meta/journal-id/@journal-id-type='doi'[string-length() &gt; 0]">
+                            <idno type="DOI">
+                                <xsl:value-of select="journal-meta/journal-id[@journal-id-type='doi']"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:if test="journal-meta/journal-id/@journal-id-type='publisher-id'[string-length() &gt; 0]">
+                            <idno type="publisherID">
+                                <xsl:value-of select="journal-meta/journal-id[@journal-id-type='publisher-id']"/>
+                            </idno>
+                        </xsl:if>
+                        <xsl:apply-templates select="journal-meta/journal-id"/>
+                    </series>
+                </xsl:when>
+            </xsl:choose>
         </biblStruct>
     </xsl:template>
 <!-- SG information book-reviews -->
@@ -1988,10 +2028,8 @@
                        <affiliation>
                            <xsl:apply-templates select="institution"/>
                            <xsl:if test="addr-line or country">
-                               <address>
-                                   <xsl:apply-templates select="addr-line"/>
-                                   <xsl:apply-templates select="country"/>
-                               </address>
+                               <xsl:apply-templates select="addr-line"/>
+                               <xsl:apply-templates select="country"/>
                            </xsl:if>
                        </affiliation>
                    </xsl:when>
@@ -4191,6 +4229,7 @@
             <xsl:apply-templates select="conf-date"/>
             <xsl:apply-templates select="conf-loc"/>
             <xsl:apply-templates select="conf-num"/>
+            <xsl:apply-templates select="conf-acronym"/>
         </meeting>
     </xsl:template>
     <xsl:template match="conf-name">
@@ -4222,6 +4261,11 @@
         <date>
             <xsl:apply-templates/>
         </date>
+    </xsl:template>
+    <xsl:template match="conf-acronym">
+        <idno type="acronym">
+            <xsl:apply-templates/>
+        </idno>
     </xsl:template>
     <xsl:template match="conf-loc">
         <placeName>
