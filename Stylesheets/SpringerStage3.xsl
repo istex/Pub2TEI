@@ -8,7 +8,7 @@
     
     
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
-    <xsl:template match="/Publisher[Journal]">
+    <xsl:template match="/Publisher[Journal] | /Publisher[Book]">
         <xsl:variable name="countArticle">
             <xsl:value-of select="count(//Article)"/>
         </xsl:variable>
@@ -19,7 +19,14 @@
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
-                        <xsl:apply-templates select="Journal//ArticleInfo | Book/BookInfo/BookTitle"/>
+                        <xsl:choose>
+                            <xsl:when test="Journal//ArticleInfo | descendant::Chapter/ChapterInfo/ChapterTitle">
+                                <xsl:apply-templates select="Journal//ArticleInfo | descendant::Chapter/ChapterInfo/ChapterTitle"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select=" Book/BookInfo/BookTitle"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>

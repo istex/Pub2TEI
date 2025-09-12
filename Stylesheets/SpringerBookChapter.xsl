@@ -194,15 +194,20 @@
                         <textClass ana="subject"><xsl:apply-templates select="//descendant::Book[1]/descendant::BookSubjectGroup"/></textClass>
                     </xsl:if>
                     <!-- ******************* Language ******************************-->
-                    <xsl:if test="//Chapter/@Language|@xml:lang">
-                        <langUsage>
-                            <language>
-                                <xsl:attribute name="ident">
-                                    <xsl:value-of select="translate(//Chapter/@Language|@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                </xsl:attribute>
-                            </language>
-                        </langUsage>
-                    </xsl:if>
+                    <langUsage>
+                        <language>
+                            <xsl:attribute name="ident">
+                                <xsl:choose>
+                                    <xsl:when test="//Chapter/@Language|@xml:lang">
+                                        <xsl:value-of select="translate(//Chapter/@Language|@xml:lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:text>en</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </language>
+                    </langUsage>
                 </profileDesc>
                 <!-- traceability -->
                 <revisionDesc>

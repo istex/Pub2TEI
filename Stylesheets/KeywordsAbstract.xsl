@@ -535,10 +535,10 @@
         <abstract>
 			    <!-- Karger ebooks tous les abstracts sont en anglais-->
             <xsl:if test="@abstract-type !=''">
-			        <xsl:attribute name="ana">
-			            <xsl:value-of select="@abstract-type"/>
-			        </xsl:attribute>
-			    </xsl:if>
+                <xsl:attribute name="ana">
+                    <xsl:value-of select="@abstract-type"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="//publisher-name='S. Karger AG'">
                 <xsl:attribute name="xml:lang">en</xsl:attribute>
             </xsl:if>
@@ -585,6 +585,9 @@
 								</xsl:if>
 							</xsl:if>	
 	                    </xsl:when>
+	                    <xsl:otherwise>
+	                        <xsl:text>en</xsl:text>
+	                    </xsl:otherwise>
 	                </xsl:choose>
 	            </xsl:variable> 
 	            <xsl:if test="$theLanguage">

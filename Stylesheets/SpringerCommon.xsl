@@ -191,6 +191,28 @@
                 <author>
                     <xsl:choose>
                         <xsl:when test="$countArticle&gt;=2"/>
+                        <xsl:when test="ancestor::BookHeader and //Chapter">
+                            <xsl:variable name="i" select="position()-1"/>
+                            <xsl:variable name="authorBookNumber">
+                                <xsl:choose>
+                                    <xsl:when test="$i &lt; 10">
+                                        <xsl:value-of select="concat('book-author-000', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 100">
+                                        <xsl:value-of select="concat('book-author-00', $i)"/>
+                                    </xsl:when>
+                                    <xsl:when test="$i &lt; 1000">
+                                        <xsl:value-of select="concat('book-author-0', $i)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('book-author-', $i)"/>
+                                    </xsl:otherwise>
+                                </xsl:choose> 
+                            </xsl:variable>
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="$authorBookNumber"/>
+                            </xsl:attribute>
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:variable name="i" select="position()-1"/>
                             <xsl:variable name="authorNumber">
