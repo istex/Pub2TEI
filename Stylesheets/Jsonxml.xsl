@@ -46,18 +46,21 @@
     <xsl:variable name="codeLangJson">
         <xsl:choose>
             <!-- donnée déclarée en latin au lieu de portugais -->
-            <xsl:when test="//doc/doi = '10.1590/s0101-31731982000100008'">
+            <xsl:when test="/doc/doi = '10.1590/s0101-31731982000100008'">
                 <xsl:text>pt</xsl:text>
             </xsl:when>
-            <xsl:when test="/doc/glutton/language">
-                <xsl:value-of select="/doc/glutton/language"/>
+            <xsl:when test="/doc/doi = '10.4067/s0718-221x2013005000010'">
+                <xsl:text>en</xsl:text>
+            </xsl:when>
+            <xsl:when test="/doc/doi = '10.4067/s0717-95022012000400047'">
+                <xsl:text>en</xsl:text>
             </xsl:when>
             <xsl:when test="$codeLangString !=''">
                 <xsl:value-of select="$codeLangString"/>
             </xsl:when>
-            <!--<xsl:when test="$grobid//tei:TEI/tei:teiHeader/@xml:lang !=''">
-                <xsl:value-of select="$grobid//tei:TEI/tei:teiHeader/@xml:lang"/>
-            </xsl:when>-->
+            <xsl:when test="$grobid//tei:TEI/tei:text/@xml:lang !=''">
+                <xsl:value-of select="$grobid//tei:TEI/tei:text/@xml:lang"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:variable>
     
