@@ -55,11 +55,11 @@
             <xsl:when test="/doc/doi = '10.4067/s0717-95022012000400047'">
                 <xsl:text>en</xsl:text>
             </xsl:when>
-            <xsl:when test="$codeLangString !=''">
-                <xsl:value-of select="$codeLangString"/>
-            </xsl:when>
             <xsl:when test="$grobid//tei:TEI/tei:text/@xml:lang !=''">
                 <xsl:value-of select="$grobid//tei:TEI/tei:text/@xml:lang"/>
+            </xsl:when>
+            <xsl:when test="$codeLangString !=''">
+                <xsl:value-of select="$codeLangString"/>
             </xsl:when>
         </xsl:choose>
     </xsl:variable>
