@@ -3798,6 +3798,9 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="ancestor::doc/doi ='10.5007/1980-0037.2015v17n4p472'">
+                <title level="a" type="main">Functional fitness in older women from southern brazil: normative scores and comparison with different countries</title>
+            </xsl:when>
             <xsl:when test="ancestor::doc">
                 <title level="a" type="main">
                     <xsl:apply-templates/>
