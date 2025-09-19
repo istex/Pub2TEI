@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- oa language and title -->
+<?xml-stylesheet type="text/xsl" href="completeCodes.xsl"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:tei="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Reference table for collections codes (De Gruyter)</title>
+            </titleStmt>
+            <publicationStmt>
+                <p>...</p>
+            </publicationStmt>
+            <sourceDesc>
+                <p>...</p>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div>
+                <table type="lang">
+                    <row>
+                        <cell role="doi">10.1590/s1517-106x2012000200003</cell>
+                        <cell role="lang">it</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.4067/s0718-40262011000200012</cell>
+                        <cell role="lang">es</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.4067/s0717-73482011000100007</cell>
+                        <cell role="lang">es</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.4067/s0718-40262011000200021</cell>
+                        <cell role="lang">es</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s1516-89132003000100011</cell>
+                        <cell role="lang">en</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s1516-89132002000600006</cell>
+                        <cell role="lang">en</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.4067/s0718-221x2013005000010</cell>
+                        <cell role="lang">en</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.4067/s0717-95022012000400047</cell>
+                        <cell role="lang">en</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/2317-1782/20172016082</cell>
+                        <cell role="lang">en</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0004-282x1951000400003</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0101-31731982000100008</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/S0034-8910.2014048004799</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0100-512x2009000100010</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0100-512x2009000100007</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0004-282x1953000100006</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0004-282x1945000200003</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.5216/pat.v40i2.3931</cell>
+                        <cell role="lang">pt</cell>
+                    </row>
+                </table>
+                <table type="titre">
+                    <row>
+                        <cell role="doi">10.5007/1980-0037.2015v17n4p472</cell>
+                        <cell role="titre">Functional fitness in older women from southern brazil: normative scores and comparison with different countries</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0034-8910.2014048004914</cell>
+                        <cell role="titre">Consumer reaction to information on the labels of genetically modified food</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/2317-1782/20162015062</cell>
+                        <cell role="titre">Relationship between vocal symptoms, severity of voice disorders, and laryngeal diagnosis in patients with voice disorders</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/2317-1782/20182018119</cell>
+                        <cell role="titre">Hearing alterations in systemic sclerosis</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/2317-1782/20172016082</cell>
+                        <cell role="titre">Brazilian Portuguese Hearing in Noise Test (HINT): different interpretation criteria for individuals’ responses</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s1516-14982014000300010</cell>
+                        <cell role="titre">Séparation, dépendance et dépression à l'adolescence</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0104-71832010000100013</cell>
+                        <cell role="titre">Ce que soulève la jupe</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0104-71832010000100013</cell>
+                        <cell role="titre">Book review:Tratado de Micologia médica</cell>
+                    </row>
+                    <row>
+                        <cell role="doi">10.1590/s0104-71832010000100013</cell>
+                        <cell role="titre">CARTA DE GALILEU A LUDOVICO CARDI DE CIGOLI EM ROMA</cell>
+                    </row>
+                </table>
+            </div>
+        </body>
+    </text>
+</TEI>
