@@ -10,6 +10,16 @@
     <xsl:param name="grobidFulltextEnrichmentPath"/>
     <xsl:variable name ="grobid" select="document($grobidFulltextEnrichmentPath)"/>
     
+    <!-- correction titre et lang -->
+    <xsl:variable name="titleLangCodes" select="document('oaTitleLangCodes.xml')"/>
+    <xsl:variable name="value_to_doi" select="//doc/doi"/>
+    <xsl:variable name="resultCodeTitre">
+        <xsl:value-of select="$titleLangCodes/descendant::tei:row[tei:cell/text() = $value_to_doi]/tei:cell[@role = 'titre']"/>
+    </xsl:variable>
+    <xsl:variable name="resultCodeLang">
+        <xsl:value-of select="$titleLangCodes/descendant::tei:row[tei:cell/text() = $value_to_doi]/tei:cell[@role = 'lang']"/>
+    </xsl:variable>
+    
    <xsl:variable name="genreJson">
         <xsl:value-of select="//doc/genre"/>
     </xsl:variable>
@@ -44,17 +54,29 @@
         <xsl:value-of select="substring($codeLangSubstring,1,2)"/>
     </xsl:variable>
     <xsl:variable name="codeLangJson">
+        <xsl:variable name="abstract">
+            <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:abstract/tei:div[1]/tei:head)"/>
+        </xsl:variable>
+        <xsl:variable name="abstract2">
+            <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:abstract/tei:div[1])"/>
+        </xsl:variable>
         <xsl:choose>
-            <!-- donnée déclarée en latin au lieu de portugais -->
-            <xsl:when test="/doc/doi = '10.1590/s0101-31731982000100008'">
-                <xsl:text>pt</xsl:text>
+            <!-- tableau de correction -->
+            <xsl:when test="$resultCodeLang !=''">
+                <xsl:value-of select="$resultCodeLang"/>
             </xsl:when>
-            <xsl:when test="/doc/doi = '10.4067/s0718-221x2013005000010' or /doc/doi = '10.4067/s0717-95022012000400047'">
-                <xsl:text>en</xsl:text>
-            </xsl:when>
+            <!-- dans le head de l'abstract -->
+            <xsl:when test="contains($abstract,'OBJECTIVE') or contains($abstract,'Objective')">en</xsl:when>
+            <xsl:when test="contains($abstract,'Resumen') or contains($abstract,'RESUMEN') or contains($abstract,'Objetivo') or contains($abstract,'OBJETIVO') or contains($abstract,'Introducción')">es</xsl:when>
+            <xsl:when test="contains($abstract,'Resumo') or contains($abstract,'RESUMO')">pt</xsl:when>
+            <!-- dans l'abstract -->
+            <xsl:when test="contains($abstract2,'Introducción') or contains($abstract2,'objetivo') or contains($abstract2,'trabajo') or contains($abstract2,'estudio')">es</xsl:when>
+            <xsl:when test="contains($abstract2,'Introdução') or contains($abstract2,'Estudo')">pt</xsl:when>
+            <!-- code langue extrait de la 1ère url -->
             <xsl:when test="$codeLangString !=''">
                 <xsl:value-of select="$codeLangString"/>
             </xsl:when>
+            <!-- code extrait du body GROBID -->
             <xsl:when test="$grobid//tei:TEI/tei:text/@xml:lang !=''">
                 <xsl:value-of select="$grobid//tei:TEI/tei:text/@xml:lang"/>
             </xsl:when>
