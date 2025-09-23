@@ -1515,6 +1515,9 @@
                                         <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/asna.19322451602'">
                                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                                         </xsl:when>
+                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">
+                                            <xsl:attribute name="xml:lang">en</xsl:attribute>
+                                        </xsl:when>
                                         <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
                                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                                         </xsl:when>
@@ -1589,7 +1592,14 @@
             <!-- SG - ajout de la langue du titre -->
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="xml:lang">
-                    <xsl:value-of select="@xml:lang"/>
+                    <xsl:choose>
+                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">
+                            <xsl:attribute name="xml:lang">en</xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@xml:lang"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
             <xsl:value-of select="."/>
