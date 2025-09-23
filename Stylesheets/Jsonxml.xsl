@@ -54,7 +54,7 @@
         <xsl:value-of select="substring($codeLangSubstring,1,2)"/>
     </xsl:variable>
     <xsl:variable name="bodyHeadExtract">
-        <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:text/tei:body/tei:div/tei:head[1])"/>
+        <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:text/tei:body/tei:div[1]/tei:head[1])"/>
     </xsl:variable>
     <xsl:variable name="codeLangJson">
         <xsl:choose>
