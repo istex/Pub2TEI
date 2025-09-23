@@ -20,112 +20,107 @@
         <body>
             <div>
                 <table type="lang">
-                    <row>
-                        <cell role="doi">10.1590/s1517-106x2012000200003</cell>
-                        <cell role="lang">it</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.4067/s0718-40262011000200012</cell>
-                        <cell role="lang">es</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.4067/s0717-73482011000100007</cell>
-                        <cell role="lang">es</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.4067/s0718-40262011000200021</cell>
-                        <cell role="lang">es</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s1516-89132003000100011</cell>
-                        <cell role="lang">en</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s1516-89132002000600006</cell>
-                        <cell role="lang">en</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.4067/s0718-221x2013005000010</cell>
-                        <cell role="lang">en</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.4067/s0717-95022012000400047</cell>
-                        <cell role="lang">en</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/2317-1782/20172016082</cell>
-                        <cell role="lang">en</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0004-282x1951000400003</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0101-31731982000100008</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/S0034-8910.2014048004799</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0100-512x2009000100010</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0100-512x2009000100007</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0004-282x1953000100006</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0004-282x1945000200003</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.5216/pat.v40i2.3931</cell>
-                        <cell role="lang">pt</cell>
-                    </row>
+                    <row><cell role="doi">10.1590/s1517-106x2012000200003</cell><cell role="lang">it</cell></row>
+                    <row><cell role="doi">10.1590/s1516-89132003000100011</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.1590/s1516-89132002000600006</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.4067/s0718-221x2013005000010</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.4067/s0717-95022012000400047</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.1590/2317-1782/20172016082</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.1590/s0004-282x1951000400003</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.1590/s0101-31731982000100008</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.1590/S0034-8910.2014048004799</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.1590/s0100-512x2009000100010</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.1590/s0100-512x2009000100007</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.1590/s0004-282x1953000100006</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.1590/s0004-282x1945000200003</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.5216/pat.v40i2.3931</cell><cell role="lang">pt</cell></row>
+                    <row><cell role="doi">10.4067/s0718-40262011000200012</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73482011000100007</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-40262011000200021</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-00122022000100264</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s1726-569x2013000200008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-00122011000100002</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0719-51762021000100143</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562010000100030</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-34372018000300771</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562022005001601</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562022005001901</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562007000100007</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352007000200012</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-92002008000200008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0716-27902013000100003</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562010000100031</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0716-10182020000100023</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1139-13752007000400003</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s1726-569x2012000200014</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-33992018000100001</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562022005001101</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0034-98872021001201751</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352008000100011</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-92732018000300139</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0716-078x2010000100004</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1130-14732009000400008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562022005001201</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0716-27902017000100242</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-66432014000200008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352008000200012</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-68512020000200065</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-52002019000200015</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-66432017005000319</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562007000200002</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352008000100006</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0719-51762021000200291</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-47272020000200102</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-34372017000300677</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352008000100009</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-22282008000100004</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562010000100036</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352008000100004</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1137-66272013000300009</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352007000200006</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352009000100011</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-09342009000300005</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-85602012000200008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0716-27902016000200003</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-71812016000200014</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1137-66272014000100008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73482021000300293</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0034-98872019000600776</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1134-80462014000100004</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0034-98872020000400488</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1139-13752007000400003</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73562022005001101</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s1130-14732009000400008</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0034-98872021000600819</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73482021000200115</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0034-98872018001001112</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0716-27902017000100242</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4321/s0211-57352008000200012</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-68512020000200065</cell><cell role="lang">es</cell></row>
                 </table>
                 <table type="titre">
-                    <row>
-                        <cell role="doi">10.5007/1980-0037.2015v17n4p472</cell>
-                        <cell role="titre">Functional fitness in older women from southern brazil: normative scores and comparison with different countries</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0034-8910.2014048004914</cell>
-                        <cell role="titre">Consumer reaction to information on the labels of genetically modified food</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/2317-1782/20162015062</cell>
-                        <cell role="titre">Relationship between vocal symptoms, severity of voice disorders, and laryngeal diagnosis in patients with voice disorders</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/2317-1782/20182018119</cell>
-                        <cell role="titre">Hearing alterations in systemic sclerosis</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/2317-1782/20172016082</cell>
-                        <cell role="titre">Brazilian Portuguese Hearing in Noise Test (HINT): different interpretation criteria for individuals’ responses</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s1516-14982014000300010</cell>
-                        <cell role="titre">Séparation, dépendance et dépression à l'adolescence</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0104-71832010000100013</cell>
-                        <cell role="titre">Ce que soulève la jupe</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0104-71832010000100013</cell>
-                        <cell role="titre">Book review:Tratado de Micologia médica</cell>
-                    </row>
-                    <row>
-                        <cell role="doi">10.1590/s0104-71832010000100013</cell>
-                        <cell role="titre">CARTA DE GALILEU A LUDOVICO CARDI DE CIGOLI EM ROMA</cell>
-                    </row>
+                    <row><cell role="doi">10.5007/1980-0037.2015v17n4p472</cell><cell role="titre">Functional fitness in older women from southern brazil: normative scores and comparison with different countries</cell></row>
+                    <row><cell role="doi">10.1590/s0034-8910.2014048004914</cell><cell role="titre">Consumer reaction to information on the labels of genetically modified food</cell></row>
+                    <row><cell role="doi">10.1590/2317-1782/20162015062</cell><cell role="titre">Relationship between vocal symptoms, severity of voice disorders, and laryngeal diagnosis in patients with voice disorders</cell></row>
+                    <row><cell role="doi">10.1590/2317-1782/20182018119</cell><cell role="titre">Hearing alterations in systemic sclerosis</cell></row>
+                    <row><cell role="doi">10.1590/2317-1782/20172016082</cell><cell role="titre">Brazilian Portuguese Hearing in Noise Test (HINT): different interpretation criteria for individuals’ responses</cell></row>
+                    <row><cell role="doi">10.1590/s1516-14982014000300010</cell><cell role="titre">Séparation, dépendance et dépression à l'adolescence</cell></row>
+                    <row><cell role="doi">10.1590/s0104-71832010000100013</cell><cell role="titre">Ce que soulève la jupe</cell></row>
+                    <row><cell role="doi">10.1590/s0104-71832010000100013</cell><cell role="titre">Book review:Tratado de Micologia médica</cell></row>
+                    <row><cell role="doi">10.1590/s0104-71832010000100013</cell><cell role="titre">CARTA DE GALILEU A LUDOVICO CARDI DE CIGOLI EM ROMA</cell></row>
+                    <row><cell role="doi">10.1590/s0066-782x2010005000127</cell><cell role="titre">Clinical and Angiographic Profile in Coronary Artery Disease: Hospital Outcome with Emphasis on the Very Elderly</cell></row>
+                    <row><cell role="doi">10.1590/s0066-782x2010005000021</cell><cell role="titre">Glomerular Filtration and Associated Factors in Hypertensive Individuals Treated at Primary Care Level</cell></row>
+                    <row><cell role="doi">10.5007/1980-0037.2013v15n6p715</cell><cell role="titre">Influence of the selection from incremental stages on lactate minimum intensity: a pilot study</cell></row>
+                    <row><cell role="doi">10.1590/s1806-37132012000300007</cell><cell role="titre">Immunophenotyping and extracellular matrix remodeling in pulmonary and extrapulmonary sarcoidosis</cell></row>
+                    <row><cell role="doi">10.1590/s0034-89102011005000024</cell><cell role="titre">Utilization of medical services in the public health system in the Southern Brazil</cell></row>
+                    <row><cell role="doi">10.1590/s0034-89102011000300005</cell><cell role="titre">Utilization of medical services in the public health system in the Southern Brazil</cell></row>
+                    <row><cell role="doi">10.1590/s0101-28002010000400005</cell><cell role="titre">Repercussion of physiotherapy intradialytic protocol for respiratory muscle function, grip strength and quality of life of patients with chronic renal diseases</cell></row>
+                    <row><cell role="doi">10.1590/s0066-782x2010005000103</cell><cell role="titre">Suspicion of Obstructive Sleep Apnea by Berlin Questionnaire Predicts Events in Patients with Acute Coronary Syndrome</cell></row>
+                    <row><cell role="doi">10.1590/s0066-782x2012000500001</cell><cell role="titre">Summary of the II Brazilian Guideline Update on Acute Heart Failure 2009/2011</cell></row>
+                    <row><cell role="doi">10.1590/s0066-782x2009005000001</cell><cell role="titre">Different Measurements of the Sagittal Abdominal Diameter and Waist Perimeter in the Prediction of HOMA-IR</cell></row>
+                    <row><cell role="doi">10.4067/s0717-69962016000200005</cell><cell role="titre">Defining inequality</cell></row>
+                    <row><cell role="doi">10.1590/s0101-60832010000200006</cell><cell role="titre">A systematic review to study the efficacy of cognitive behavioral therapy for sexually abused children and adolescents with posttraumatic stress disorder</cell></row>
+                    <row><cell role="doi">10.4067/s0717-69962020000300012</cell><cell role="titre">COEXISTENCE BETWEEN DIFFERENT SPECIES: Emanuele Coccia in conversation with Jorge Godoy</cell></row>
                 </table>
             </div>
         </body>

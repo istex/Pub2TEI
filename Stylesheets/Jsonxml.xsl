@@ -53,25 +53,60 @@
  -->
         <xsl:value-of select="substring($codeLangSubstring,1,2)"/>
     </xsl:variable>
+    <xsl:variable name="bodyHeadExtract">
+        <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:text/tei:body/tei:div/tei:head)"/>
+    </xsl:variable>
     <xsl:variable name="codeLangJson">
-        <xsl:variable name="abstract">
-            <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:abstract/tei:div[1]/tei:head)"/>
-        </xsl:variable>
-        <xsl:variable name="abstract2">
-            <xsl:value-of select="normalize-space($grobid//tei:TEI/tei:teiHeader/tei:profileDesc/tei:abstract/tei:div[1])"/>
-        </xsl:variable>
         <xsl:choose>
-            <!-- tableau de correction -->
+            <!-- tableau de correction des langues-->
             <xsl:when test="$resultCodeLang !=''">
                 <xsl:value-of select="$resultCodeLang"/>
             </xsl:when>
-            <!-- dans le head de l'abstract -->
-            <xsl:when test="contains($abstract,'OBJECTIVE') or contains($abstract,'Objective')">en</xsl:when>
-            <xsl:when test="contains($abstract,'Resumen') or contains($abstract,'RESUMEN') or contains($abstract,'Objetivo') or contains($abstract,'OBJETIVO') or contains($abstract,'Introducción')">es</xsl:when>
-            <xsl:when test="contains($abstract,'Resumo') or contains($abstract,'RESUMO')">pt</xsl:when>
-            <!-- dans l'abstract -->
-            <xsl:when test="contains($abstract2,'Introducción') or contains($abstract2,'objetivo') or contains($abstract2,'trabajo') or contains($abstract2,'estudio')">es</xsl:when>
-            <xsl:when test="contains($abstract2,'Introdução') or contains($abstract2,'Estudo')">pt</xsl:when>
+            <!-- dans le <tei:head> du corps du texte -->
+            <xsl:when test="contains($bodyHeadExtract,'Introducción')
+                or contains($bodyHeadExtract,'introducción')
+                or contains($bodyHeadExtract,'INTRODUCCIÓN')
+                or contains($bodyHeadExtract,'INTRODUCCION')
+                or contains($bodyHeadExtract,'introducciÓn')
+                or contains($bodyHeadExtract,'IntroduccIón')
+                or contains($bodyHeadExtract,'InTRODUCCIÓn')
+                or contains($bodyHeadExtract,'introDucción')
+                or contains($bodyHeadExtract,'PRODUCCIÓN')
+                or contains($bodyHeadExtract,'MÉTODO')
+                or contains($bodyHeadExtract,'Método')
+                or contains($bodyHeadExtract,'MétoDo')
+                or contains($bodyHeadExtract,'método')
+                or contains($bodyHeadExtract,'Metodología')
+                or contains($bodyHeadExtract,'teórico')
+                or contains($bodyHeadExtract,'análisis')
+                or contains($bodyHeadExtract,'Palabras')
+                or contains($bodyHeadExtract,'artículos')
+                or contains($bodyHeadExtract,'definición')
+                or contains($bodyHeadExtract,'Presentación')
+                or contains($bodyHeadExtract,'Programa')
+                or contains($bodyHeadExtract,'Objetivo')
+                or contains($bodyHeadExtract,'OBJETIVO')
+                or contains($bodyHeadExtract,'RESULTADOS')
+                or contains($bodyHeadExtract,'Estados')
+                or contains($bodyHeadExtract,'ESTUDIO')
+                or contains($bodyHeadExtract,'Estudio')
+                or contains($bodyHeadExtract,'estudio')
+                or contains($bodyHeadExtract,'Proceso')
+                or contains($bodyHeadExtract,'ORIGINALES')
+                or contains($bodyHeadExtract,'PRÁCTICA')
+                or contains($bodyHeadExtract,'Problemáticas')
+                or contains($bodyHeadExtract,'problemática')
+                or contains($bodyHeadExtract,'Investigación')
+                or contains($bodyHeadExtract,'Discusión')
+                or contains($bodyHeadExtract,'Características')
+                or contains($bodyHeadExtract,'Análisis')
+                or contains($bodyHeadExtract,'Antecedentes')
+                or contains($bodyHeadExtract,'ANTECEDENTES')
+                or contains($bodyHeadExtract,'investigación')
+                or contains($bodyHeadExtract,'Investigación')
+                or contains($bodyHeadExtract,'RESULTADOS')">es</xsl:when>
+            <xsl:when test="contains($bodyHeadExtract,'Introdução')
+                or contains($bodyHeadExtract,'Estudo')">pt</xsl:when>
             <!-- code langue extrait de la 1ère url -->
             <xsl:when test="$codeLangString !=''">
                 <xsl:value-of select="$codeLangString"/>
@@ -80,6 +115,9 @@
             <xsl:when test="$grobid//tei:TEI/tei:text/@xml:lang !=''">
                 <xsl:value-of select="$grobid//tei:TEI/tei:text/@xml:lang"/>
             </xsl:when>
+            <!--<xsl:when test="/doc/glutton/language">
+                <xsl:value-of select="normalize-space(/doc/glutton/language)"/>
+            </xsl:when>-->
         </xsl:choose>
     </xsl:variable>
     
@@ -356,10 +394,10 @@
                 <persName>
                     <xsl:apply-templates select="family"/>
                     <xsl:apply-templates select="given"/>
-                    <xsl:apply-templates select="affiliation" mode="json"/>
-                    <xsl:apply-templates select="ORCID"/>
-                    <roleName>author</roleName>
                 </persName>
+                <xsl:apply-templates select="affiliation" mode="json"/>
+                <xsl:apply-templates select="ORCID"/>
+                <roleName>author</roleName>
             </author>
     </xsl:template>
     <xsl:template match="family">
@@ -388,13 +426,13 @@
     
     <!-- titre du journal -->
     <xsl:template match="journal_name">
-        <title level="m" type="main">
+        <title level="j" type="main">
             <xsl:apply-templates/>
         </title>
     </xsl:template>
     
     <xsl:template match="short-container-title">
-        <title level="m" type="abbreviated">
+        <title level="j" type="abbreviated">
             <xsl:apply-templates/>
         </title>
     </xsl:template>
