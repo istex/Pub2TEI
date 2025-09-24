@@ -125,6 +125,9 @@
                 contains($theOrg,'Inflammatory') or
                 contains($theOrg,'High Education') or
                 contains($theOrg,'hospital') or
+                contains($theOrg,'Ospedale') or
+                contains($theOrg,'Hopital') or
+                contains($theOrg,'Infirmary') or
                 contains($theOrg,'MIND-IN2UB')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>

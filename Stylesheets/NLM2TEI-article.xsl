@@ -4863,9 +4863,9 @@
                                                                         <xsl:otherwise>
                                                                             <xsl:choose>
                                                                                 <xsl:when test="contains($avantVirgule,' ')">
-                                                                                    <addrLine>
+                                                                                    <region>
                                                                                         <xsl:apply-templates select="$avantVirgule"/>
-                                                                                    </addrLine>
+                                                                                    </region>
                                                                                 </xsl:when>
                                                                                 <xsl:otherwise>
                                                                                     <address>
