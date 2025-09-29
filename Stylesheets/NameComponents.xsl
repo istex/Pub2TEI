@@ -54,12 +54,7 @@
         </affiliation>
     </xsl:template>
     <xsl:template match="name-alternatives">
-                    <xsl:apply-templates/>
-        <xsl:if test="ancestor::contrib-group/aff">
-            <affiliation>
-                <xsl:value-of select="ancestor::contrib-group/aff"/>
-            </affiliation>
-        </xsl:if>
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="collab">
         <name>

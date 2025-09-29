@@ -1107,6 +1107,8 @@
     </xsl:template>
     <xsl:template match="string-name">
         <xsl:choose>
+            <!-- emerald  10.1108/IJRDM-04-2019-0142-->
+            <xsl:when test="ancestor::name-alternatives"/>
             <xsl:when test="wiley:givenNames | wiley:familyName">
                 <persName>
                     <xsl:apply-templates select="wiley:givenNames"/>

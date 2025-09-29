@@ -5216,4 +5216,7 @@
     <xsl:template match="surname" mode="product">
         <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="institution-wrap">
+        <xsl:apply-templates/>
+    </xsl:template>
 </xsl:stylesheet>

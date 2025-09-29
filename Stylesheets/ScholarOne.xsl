@@ -332,7 +332,6 @@
                 <xsl:apply-templates select="string-name"/>
                 <xsl:apply-templates select="name-alternatives"/>
             </persName>
-            <xsl:apply-templates select="email"/>
                 <!-- à tester et enlever si ça pose des soucis -->
                 <xsl:if test="xref[@ref-type='corresp'] and not(xref[@ref-type='aff'])">
                     <xsl:apply-templates select="../aff"/>
@@ -449,6 +448,8 @@
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
                 </xsl:when>
             </xsl:choose>
+            <xsl:apply-templates select="email"/>
+            <xsl:apply-templates select="bio"/>
         </author>
         </xsl:if>
     </xsl:template>
