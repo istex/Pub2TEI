@@ -185,7 +185,7 @@
             <xsl:when test="contains(/article/front/article-meta/article-categories/subj-group[1]/subject[1],'Chapter')">
                 <xsl:value-of select="/article/front/article-meta/article-categories/subj-group[1]/subject[1]"/>
             </xsl:when>
-            <xsl:when test="//article/front/article-meta/title-group/subtitle[1] [string-length() &gt; 0]">
+            <xsl:when test="//article/front/article-meta/title-group/subtitle[1] [string-length() &gt; 0] and starts-with(//article-id[@pub-id-type='doi'],'10.1039/')">
                 <!-- traitement spécial RSC-ebooks -->
                 <xsl:choose>
                     <xsl:when test="contains(/article/front/article-meta/title-group/subtitle[1] | /article/front/article-meta/title-group/title,'Preface')">editorial</xsl:when>
@@ -274,12 +274,13 @@
                 <!--codeGenreMets-->
                 <!--codeGenreIOPHeader-->
                 <!--codeGenreCUPebooks-->
+                <!--codeGenreEmerald-->
                 <xsl:value-of select="normalize-space(
                     //article/article-metadata/article-data/article-type/@type
                     |//SAGEmeta/@type
                     |//book-part[not(body/book-part)]/@book-part-type
                     |//body/book-part/@book-part-type
-                    |//article/@type  |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm
+                    |//article/@article-type|//article/@type  |//articletype/@pubmedForm |//rsc:articletype/@pubmedForm
                     |//ArticleInfo/@ArticleType
                     |//Series/Book/Chapter/ChapterInfo/@ChapterType | //Series/Book/Part/Chapter/ChapterInfo/@ChapterType | //Publisher/Book/Chapter/ChapterInfo/@ChapterType | //Publisher/Book/Part/Chapter/ChapterInfo/@ChapterType
                     |//article/@article-type
@@ -547,6 +548,11 @@
             <xsl:when test="$codeGenreAll='TWA'">research-article</xsl:when>
             <xsl:when test="$codeGenreAll='VPT'">review-article</xsl:when>
             <xsl:when test="$codeGenreAll='WAT'">review-article</xsl:when>
+            <!--Emerald-->
+            <xsl:when test="$codeGenreAll='e-conceptual-paper'">article</xsl:when>
+            <xsl:when test="$codeGenreAll='e-viewpoint'">article</xsl:when>
+            <xsl:when test="$codeGenreAll='e-technical-paper'">article</xsl:when>
+            <xsl:when test="$codeGenreAll='e-literature-review'">review-article</xsl:when>
             <!-- NATURE -->
             <xsl:when test="$codeGenreAll='adfeat'">article</xsl:when>
             <xsl:when test="$codeGenreAll='af'">research-article</xsl:when>
