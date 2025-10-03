@@ -709,7 +709,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="@publication-format='electronic'">
+                    <xsl:when test="@publication-format='electronic'or @publication-format='online'">
                         <idno type="eISSN">
                             <xsl:value-of select="$ISSNCode"/>
                         </idno>

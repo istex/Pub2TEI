@@ -3490,9 +3490,11 @@
     </xsl:template>
     <xsl:template match="app-group/app">
         <div>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
+            <xsl:if test="@id !=''">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates select="title"/>
             <xsl:apply-templates select="*except(title)"/>
         </div>
@@ -3506,7 +3508,6 @@
 
     <!-- References in main text -->
     <xsl:template match="xref">
-        <xsl:if test=".!=''">
         <xsl:choose>
             <xsl:when test="@rid and ancestor::contrib">
                 <xsl:variable name="numberedIndex">
@@ -3600,7 +3601,7 @@
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
-        </xsl:if>
+        
     </xsl:template>
 
     <xsl:template match="ext-link">

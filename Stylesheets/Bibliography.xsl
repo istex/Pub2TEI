@@ -1073,7 +1073,7 @@
     <xsl:template match="collab" mode="authors">
         <author role="collab">
             <name>
-                <xsl:value-of select="."/>
+                <xsl:value-of select="normalize-space(.)"/>
             </name>
         </author>
     </xsl:template>
@@ -2219,6 +2219,7 @@
                                     <xsl:apply-templates select="date/year"/>
                                     <xsl:apply-templates select="year"/>
                                     <xsl:apply-templates select="volume"/>
+                                    <xsl:apply-templates select="issue"/>
                                     <xsl:apply-templates select="fpage"/>
                                     <xsl:apply-templates select="lpage"/>
                                 </xsl:when>

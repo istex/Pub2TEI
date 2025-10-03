@@ -129,8 +129,24 @@
     </xsl:template>
 
     <xsl:template match="Year | year| rsc:year | yy">
-        <date type="published" when="{translate(.,'abcdefghijklmnopqrstuvwyyz[] ','')}">
+        <xsl:variable name="clean">
             <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwyyz ','')"/>
+        </xsl:variable>
+        <xsl:variable name="dateClean">
+            <xsl:choose>
+                <xsl:when test="contains($clean,';')">
+                    <xsl:value-of select="substring-before($clean,';')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$clean"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <date type="published">
+            <xsl:attribute name="when">
+                <xsl:value-of select="$dateClean"/>
+            </xsl:attribute>
+            <xsl:value-of select="$clean"/>
         </date>
     </xsl:template>
 
