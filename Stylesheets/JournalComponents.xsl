@@ -77,22 +77,24 @@
                 <title level="a" type="main">
                     <xsl:choose>
                         <xsl:when test=". != ''">
-                            <xsl:if test="@Language != '--'">
-                                <xsl:attribute name="xml:lang">
-                                    <xsl:value-of
-                                        select="translate(@Language, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"
-                                    />
-                                </xsl:attribute>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="@Language != '--'">
+                                    <xsl:attribute name="xml:lang">
+                                        <xsl:value-of select="translate(@Language, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+                                    </xsl:attribute>
+                                </xsl:when>
+                                <xsl:when test="ancestor::article/@xml:lang != ''">
+                                    <xsl:attribute name="xml:lang">
+                                        <xsl:value-of select="ancestor::article/@xml:lang"/>
+                                    </xsl:attribute>
+                                </xsl:when>
+                            </xsl:choose>
                             <xsl:apply-templates/>
-                            <xsl:if
-                                test="//article/front/article-meta/title-group/subtitle[string-length() &gt; 0]">
+                            <xsl:if test="//article/front/article-meta/title-group/subtitle[string-length() &gt; 0]">
                                 <xsl:text> : </xsl:text>
-                                <xsl:value-of
-                                    select="//article/front/article-meta/title-group/subtitle"/>
+                                <xsl:value-of select="//article/front/article-meta/title-group/subtitle"/>
                             </xsl:if>
-                            <xsl:if
-                                test="//article/front/article-meta/title-group/article-title = 'REVIEWS' and //product/source">
+                            <xsl:if test="//article/front/article-meta/title-group/article-title = 'REVIEWS' and //product/source">
                                 <xsl:variable name="countProduct">
                                     <xsl:value-of select="count(//product)"/>
                                 </xsl:variable>
