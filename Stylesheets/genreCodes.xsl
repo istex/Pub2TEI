@@ -553,6 +553,8 @@
             <xsl:when test="$codeGenreAll='e-viewpoint'">article</xsl:when>
             <xsl:when test="$codeGenreAll='e-technical-paper'">article</xsl:when>
             <xsl:when test="$codeGenreAll='e-literature-review'">review-article</xsl:when>
+            <xsl:when test="$codeGenreAll='e-review'">book-reviews</xsl:when>
+            <xsl:when test="$codeGenreAll='back-matter'">editorial</xsl:when>
             <!-- NATURE -->
             <xsl:when test="$codeGenreAll='adfeat'">article</xsl:when>
             <xsl:when test="$codeGenreAll='af'">research-article</xsl:when>
