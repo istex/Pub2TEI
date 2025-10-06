@@ -2163,6 +2163,23 @@
                    </xsl:choose>
                </affiliation>
            </xsl:when>
+           <!-- cas particulier Emerald 10.1108/09513571111139139-->
+           <xsl:when test="contains(.,'and Department')">
+               <affiliation>
+                   <xsl:call-template name="NLMParseAffiliation">
+                       <xsl:with-param name="theAffil">
+                           <xsl:value-of select="normalize-space(substring-before(.,' and Department'))"/>
+                       </xsl:with-param>
+                   </xsl:call-template>
+               </affiliation>
+               <affiliation>
+                   <xsl:call-template name="NLMParseAffiliation">
+                       <xsl:with-param name="theAffil">
+                           <xsl:value-of select="normalize-space(substring-after(.,'and '))"/>
+                       </xsl:with-param>
+                   </xsl:call-template>
+               </affiliation>
+           </xsl:when>
            <!-- cas particulier ACS -->
            <!--<xsl:when test="//author-notes/fn/label='†'"/>-->
            <xsl:otherwise>

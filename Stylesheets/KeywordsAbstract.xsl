@@ -45,6 +45,9 @@
                                         </xsl:if>
                                     </xsl:if>	
                                 </xsl:when>
+                                <xsl:when test="ancestor::article/@xml:lang != ''">
+                                    <xsl:value-of select="ancestor::article/@xml:lang"/>
+                                </xsl:when>
                             </xsl:choose>
                         </xsl:variable> 
                         <xsl:if test="$theLanguage">
