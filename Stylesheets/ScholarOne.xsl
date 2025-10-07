@@ -325,13 +325,19 @@
                     <xsl:text>corresp</xsl:text>
                 </xsl:attribute>
             </xsl:if>
-            <persName>
-                <xsl:apply-templates select="contrib-id"/>
-                <xsl:apply-templates select="collab"/>
-                <xsl:apply-templates select="name"/>
-                <xsl:apply-templates select="string-name"/>
-                <xsl:apply-templates select="name-alternatives"/>
-            </persName>
+            <xsl:choose>
+                <xsl:when test="string-name">
+                    <xsl:apply-templates select="string-name"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <persName>
+                        <xsl:apply-templates select="contrib-id"/>
+                        <xsl:apply-templates select="collab"/>
+                        <xsl:apply-templates select="name"/>
+                        <xsl:apply-templates select="name-alternatives"/>
+                    </persName>
+                </xsl:otherwise>
+            </xsl:choose>
             <!-- email -->
             <xsl:apply-templates select="email"/>
                 <!-- à tester et enlever si ça pose des soucis -->

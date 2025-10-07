@@ -1121,16 +1121,20 @@
                         <author>
                             <persName>
                                 <xsl:apply-templates select="surname"/>
+                                <xsl:apply-templates select="prefix"/>
                                 <xsl:apply-templates select="given-names"/>
+                                <xsl:apply-templates select="suffix"/>
                                 <xsl:apply-templates select="../contrib-id"/>
                             </persName>
                         </author>
                     </xsl:when>
                     <xsl:otherwise>
                         <persName>
-                            <xsl:apply-templates select="surname"/>
-                            <xsl:apply-templates select="given-names"/>
                             <xsl:apply-templates select="../contrib-id"/>
+                            <xsl:apply-templates select="surname"/>
+                            <xsl:apply-templates select="prefix"/>
+                            <xsl:apply-templates select="given-names"/>
+                            <xsl:apply-templates select="suffix"/>
                         </persName>
                     </xsl:otherwise>
                 </xsl:choose>

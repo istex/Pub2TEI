@@ -170,6 +170,7 @@
                 contains($theOrg,'wissenschaft') or
                 contains($theOrg,'CEN Saclay') or
                 contains($theOrg,'EMBL ') or
+                contains($theOrg,'IAE') or
                 contains($theOrg,'Naka Joint Work Site') or
                 contains($theOrg,'Ricerche')">
                 <xsl:text>laboratory</xsl:text>

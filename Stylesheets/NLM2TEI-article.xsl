@@ -1445,6 +1445,12 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
+                            <xsl:when test="//publisher-name ='Emerald Group Publishing Limited'">
+                                <xsl:apply-templates select="journal-meta/journal-title-group/journal-title"/>
+                                <xsl:apply-templates select="article-meta/issue-title"/>
+                                <xsl:apply-templates select="journal-meta/issn[@pub-type='ppub']"/>
+                                <xsl:apply-templates select="journal-meta/issn[@pub-type='epub']"/>
+                            </xsl:when>
                             <xsl:when test="article-meta/issue-title!=''">
                                 <xsl:apply-templates select="article-meta/issue-title"/>
                             </xsl:when>
@@ -1803,7 +1809,7 @@
             </xsl:choose>
             <!-- edp -->
             <xsl:choose>  
-                <xsl:when test="//article-meta/issue-title!=''">
+                <xsl:when test="not(contains(//journal-meta/publisher/publisher-name,'Emerald'))">
                     <series>
                         <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
                         <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title" mode="edp"/>

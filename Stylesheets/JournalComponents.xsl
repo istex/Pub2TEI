@@ -516,8 +516,7 @@
                             <xsl:apply-templates/>
                         </idno>
                     </xsl:when>
-                    <xsl:when
-                        test="@journal-id-type = 'doi' and //journal-meta/issn and //journal-meta/isbn"/>
+                    <xsl:when test="@journal-id-type = 'doi' and //journal-meta/issn and //journal-meta/isbn"/>
                     <xsl:otherwise>
                         <xsl:if test=". != ''">
                             <idno>
@@ -589,6 +588,11 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <title level="j" type="issue">
+                        <xsl:choose>
+                            <xsl:when test="@content-type='short'">
+                               <xsl:attribute name="rendition">short</xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
                         <xsl:apply-templates/>
                     </title>
                 </xsl:otherwise>
@@ -603,8 +607,7 @@
     <!-- Elsevier: ce:issn -->
     <!-- Rem.: @pub-typr not considered -->
 
-    <xsl:template
-        match="Issn[string-length() &gt; 0] | ISSN[string-length() &gt; 0] | ce:issn[string-length() &gt; 0]">
+    <xsl:template match="Issn[string-length() &gt; 0] | ISSN[string-length() &gt; 0] | ce:issn[string-length() &gt; 0]">
         <xsl:choose>
             <xsl:when test="@publication-format = 'print'">
                 <idno type="pISSN">
