@@ -532,14 +532,14 @@
 	<!-- PL: this could be moved to KeywordsAbstract.xsl when generalised to all publishers -->
     <xsl:template match="abstract |rsc:abstract |trans-abstract | Abstract | els1:head/ce:abstract | els2:head/ce:abstract | head/ce:abstract | fp | abs | execsumm | websumm">
         <xsl:variable name="normalizeAbstractHead">
-            <xsl:value-of select="normalize-space(translate(head|title|Heading,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))"/>
+            <xsl:value-of select="normalize-space(translate(head[1]|title[1]|Heading[1],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))"/>
         </xsl:variable>
         <xsl:variable name="normalizeAbstract">
-            <xsl:value-of select="normalize-space(translate(p|Para,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))"/>
+            <xsl:value-of select="translate(p[1]|Para[1],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
         </xsl:variable>
         <!-- 09/2022 non reprise des abstracts type graphical car ce ne sont pas des résumés -->
         <xsl:choose>
-            <xsl:when test="contains(title,'TABLE DES MATIÈRES')"/>
+            <xsl:when test="contains(title[1],'TABLE DES MATIÈRES')"/>
             <!-- abstracts contenant "No abstract is available for this article" écartés et d'autres variantes-->
             <xsl:when test="starts-with($normalizeAbstract,'no abstract')"/>
             <xsl:when test="starts-with($normalizeAbstractHead,'no abstract')"/>
