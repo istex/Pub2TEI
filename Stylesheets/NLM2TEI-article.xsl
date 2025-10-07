@@ -2577,7 +2577,17 @@
             </xsl:choose>
     </xsl:template>
     <xsl:template match="contrib-id">
-        <idno type="{translate(@contrib-id-type,' ','')}">
+        <idno>
+            <xsl:attribute name="type">
+                <xsl:choose>
+                    <xsl:when test="contains(.,'orcid')">
+                        <xsl:text>ORCID</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="translate(@contrib-id-type,' ','')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </idno>
     </xsl:template>
