@@ -2590,23 +2590,38 @@
     
     <!-- liens vers images externes en relation chez Cambridge ebooks -->
     <xsl:template match="related-object">
-        <relatedItem>
-            <xsl:if test="@content-type">
-                <xsl:attribute name="type">
-                    <xsl:value-of select="@content-type"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@object-type">
-                <xsl:attribute name="subtype">
-                    <xsl:value-of select="@object-type"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@xlink:href">
-                <ref>
-                    <xsl:value-of select="@xlink:href"/>
-                </ref>
-            </xsl:if>
-        </relatedItem>
+        <xsl:choose>
+            <xsl:when test="ancestor::article-title"/>
+            <xsl:otherwise>
+                <relatedItem>
+                    <xsl:if test="@content-type">
+                        <xsl:attribute name="type">
+                            <xsl:value-of select="@content-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@object-type">
+                        <xsl:attribute name="subtype">
+                            <xsl:value-of select="@object-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@source-id">
+                        <xsl:attribute name="source">
+                            <xsl:value-of select="@source-id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@source-id-type">
+                        <xsl:attribute name="style">
+                            <xsl:value-of select="@source-id-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@xlink:href">
+                        <ref>
+                            <xsl:value-of select="@xlink:href"/>
+                        </ref>
+                    </xsl:if>
+                </relatedItem>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="series">

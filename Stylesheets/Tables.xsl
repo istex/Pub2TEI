@@ -14,6 +14,22 @@
     <!-- Royal Chemical Society: table-entry; NLM: table-wrap -->
     <xsl:template match="table-entry |rsc:table-entry | table-wrap | table">
         <xsl:choose>
+            <!-- edp -->
+            <xsl:when test="ancestor::sec  and ./table/tbody/tr/td !=''">
+                <table>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="label">
+                        <head type="label">
+                            <xsl:value-of select="label"/>
+                        </head>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </table>
+            </xsl:when>
             <!-- karger -->
             <xsl:when test="ancestor::sec  and not(../row)">
                 <figure>
@@ -470,11 +486,9 @@
     </xsl:template>
     
     <xsl:template match="array">
-        <ref type="array">
-            <table>
-                <xsl:apply-templates/>
-            </table>
-        </ref>
+        <table type="array">
+            <xsl:apply-templates/>
+        </table>
     </xsl:template>
 
     <xsl:template match="th">
