@@ -1633,35 +1633,35 @@
 					
 					<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='a']]">
 						<xsl:if test="marc:subfield[@code='a']">
-							<idno type="issn">
+							<idno type="pISSN">
 								<xsl:value-of select="marc:subfield[@code='a']"/>
 							</idno>
 						</xsl:if>
 					</xsl:for-each>
 					<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='z']]">
 						<xsl:if test="marc:subfield[@code='z']">
-							<idno type="issn" invalid="yes">
+							<idno type="pISSN" invalid="yes">
 								<xsl:value-of select="marc:subfield[@code='z']"/>
 							</idno>
 						</xsl:if>
 					</xsl:for-each>
 					<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='y']]">
 						<xsl:if test="marc:subfield[@code='y']">
-							<idno type="issn" invalid="yes">
+							<idno type="pISSN" invalid="yes">
 								<xsl:value-of select="marc:subfield[@code='y']"/>
 							</idno>
 						</xsl:if>
 					</xsl:for-each>
 					<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='l']]">
 						<xsl:if test="marc:subfield[@code='l']">
-							<idno type="issn-l">
+							<idno type="ISSN-l">
 								<xsl:value-of select="marc:subfield[@code='l']"/>
 							</idno>
 						</xsl:if>
 					</xsl:for-each>
 					<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='m']]">
 						<xsl:if test="marc:subfield[@code='m']">
-							<idno type="issn-l" invalid="yes">
+							<idno type="ISSN-l" invalid="yes">
 								<xsl:value-of select="marc:subfield[@code='m']"/>
 							</idno>
 						</xsl:if>
@@ -1817,35 +1817,35 @@
 						
 						<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='a']]">
 							<xsl:if test="marc:subfield[@code='a']">
-								<idno type="issn">
+								<idno type="pISSN">
 									<xsl:value-of select="marc:subfield[@code='a']"/>
 								</idno>
 							</xsl:if>
 						</xsl:for-each>
 						<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='z']]">
 							<xsl:if test="marc:subfield[@code='z']">
-								<idno type="issn" invalid="yes">
+								<idno type="pISSN" invalid="yes">
 									<xsl:value-of select="marc:subfield[@code='z']"/>
 								</idno>
 							</xsl:if>
 						</xsl:for-each>
 						<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='y']]">
 							<xsl:if test="marc:subfield[@code='y']">
-								<idno type="issn" invalid="yes">
+								<idno type="pISSN" invalid="yes">
 									<xsl:value-of select="marc:subfield[@code='y']"/>
 								</idno>
 							</xsl:if>
 						</xsl:for-each>
 						<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='l']]">
 							<xsl:if test="marc:subfield[@code='l']">
-								<idno type="issn-l">
+								<idno type="ISSN-l">
 									<xsl:value-of select="marc:subfield[@code='l']"/>
 								</idno>
 							</xsl:if>
 						</xsl:for-each>
 						<xsl:for-each select="marc:datafield[@tag='022'][marc:subfield[@code='m']]">
 							<xsl:if test="marc:subfield[@code='m']">
-								<idno type="issn-l" invalid="yes">
+								<idno type="ISSN-l" invalid="yes">
 									<xsl:value-of select="marc:subfield[@code='m']"/>
 								</idno>
 							</xsl:if>
@@ -2289,7 +2289,7 @@
 	</xsl:template>
 	<xsl:template name="relatedIdentifierISSN">
 		<xsl:for-each select="marc:subfield[@code='x']">
-			<idno type="ISSN">
+			<idno type="pISSN">
 				<xsl:value-of select="."/>
 			</idno>
 		</xsl:for-each>

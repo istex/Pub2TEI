@@ -2215,6 +2215,7 @@
                         <xsl:if test="person-group[@person-group-type='editor']">
                             <xsl:apply-templates select="person-group[@person-group-type='editor']"/>
                         </xsl:if>
+                        <xsl:apply-templates select="collab"/>
                         <imprint>
                             <xsl:choose>
                                 <xsl:when test="publisher-name | publisher-loc | year| date/year">

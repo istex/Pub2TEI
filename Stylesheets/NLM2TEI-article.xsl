@@ -1561,6 +1561,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:if>
+                <xsl:apply-templates select="article-meta/issue-id"/>
                 <!-- author manquant Karger-ebooks suite-->
                 <xsl:if test="//isbn='978-3-318-05934-2'">
                     <author>
@@ -1810,31 +1811,33 @@
             <!-- edp -->
             <xsl:choose>  
                 <xsl:when test="not(contains(//journal-meta/publisher/publisher-name,'Emerald'))">
-                    <series>
-                        <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
-                        <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title" mode="edp"/>
-                        <xsl:if test="journal-meta/issn[@pub-type='ppub'][string-length() &gt; 0]">
-                            <idno type="ISSN">
-                                <xsl:value-of select="journal-meta/issn[@pub-type='ppub']"/>
-                            </idno>
-                        </xsl:if>
-                        <xsl:if test="journal-meta/issn[@pub-type='epub'][string-length() &gt; 0]">
-                            <idno type="eISSN">
-                                <xsl:value-of select="journal-meta/issn[@pub-type='epub']"/>
-                            </idno>
-                        </xsl:if>
-                        <xsl:if test="journal-meta/journal-id/@journal-id-type='doi'[string-length() &gt; 0]">
-                            <idno type="DOI">
-                                <xsl:value-of select="journal-meta/journal-id[@journal-id-type='doi']"/>
-                            </idno>
-                        </xsl:if>
-                        <xsl:if test="journal-meta/journal-id/@journal-id-type='publisher-id'[string-length() &gt; 0]">
-                            <idno type="publisherID">
-                                <xsl:value-of select="journal-meta/journal-id[@journal-id-type='publisher-id']"/>
-                            </idno>
-                        </xsl:if>
-                        <xsl:apply-templates select="journal-meta/journal-id"/>
-                    </series>
+                    <xsl:if test="journal-meta/issn[@pub-type='isbn'] !='' or journal-meta/isbn !=''">
+                        <series>
+                            <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>
+                            <xsl:apply-templates select="journal-meta/abbrev-journal-title | journal-meta/journal-title-group/abbrev-journal-title" mode="edp"/>
+                            <xsl:if test="journal-meta/issn[@pub-type='ppub'][string-length() &gt; 0]">
+                                <idno type="pISSN">
+                                    <xsl:value-of select="journal-meta/issn[@pub-type='ppub']"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="journal-meta/issn[@pub-type='epub'][string-length() &gt; 0]">
+                                <idno type="eISSN">
+                                    <xsl:value-of select="journal-meta/issn[@pub-type='epub']"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="journal-meta/journal-id/@journal-id-type='doi'[string-length() &gt; 0]">
+                                <idno type="DOI">
+                                    <xsl:value-of select="journal-meta/journal-id[@journal-id-type='doi']"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:if test="journal-meta/journal-id/@journal-id-type='publisher-id'[string-length() &gt; 0]">
+                                <idno type="publisherID">
+                                    <xsl:value-of select="journal-meta/journal-id[@journal-id-type='publisher-id']"/>
+                                </idno>
+                            </xsl:if>
+                            <xsl:apply-templates select="journal-meta/journal-id"/>
+                        </series>
+                    </xsl:if>
                 </xsl:when>
             </xsl:choose>
         </biblStruct>
@@ -5252,5 +5255,33 @@
     </xsl:template>
     <xsl:template match="institution-wrap">
         <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="issue-id">
+        <idno>
+            <xsl:attribute name="type">
+                <xsl:value-of select="@pub-id-type"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+    <xsl:template match="self-uri">
+        <idno>
+            <xsl:if test="@content-type">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="normalize-space(@content-type)"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="contains(.,'http://dx.doi.org/')">
+                <xsl:attribute name="type">URI-DOI</xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@xlink:href">
+                    <xsl:value-of select="normalize-space(@xlink:href)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </idno>
     </xsl:template>
 </xsl:stylesheet>

@@ -1733,7 +1733,7 @@
                                 <xsl:value-of select="$titreSerieDG"/>
                             </title>
                             <xsl:if test="$issnSerieDG !=''">
-                            <idno type="ISSN">
+                            <idno type="pISSN">
                                 <xsl:value-of select="$issnSerieDG"/>
                             </idno>
                             </xsl:if>
@@ -2685,7 +2685,7 @@
                             <title level="s" type="main">
                                 <xsl:value-of select="$currentTitle"/>
                             </title>
-                            <idno type="ISSN">
+                            <idno type="pISSN">
                                 <xsl:value-of select="issn"/>
                             </idno>
                             <xsl:if test="$currentDoi">
@@ -2701,7 +2701,7 @@
                             <title level="s" type="main">
                                 <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'name']"/>
                             </title>
-                            <idno type="ISSN">
+                            <idno type="pISSN">
                                 <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='name'] = $currentTitle]/tei:cell[@role = 'issn']"/>
                             </idno>
                             <idno type="DOI">
@@ -2713,7 +2713,7 @@
                                 <title level="s" type="main">
                                     <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='doi'] = $currentDoi]/tei:cell[@role = 'name']"/>
                                 </title>
-                                <idno type="ISSN">
+                                <idno type="pISSN">
                                     <xsl:value-of select="$collectionNames/descendant::tei:row[tei:cell[@role='doi'] = $currentDoi]/tei:cell[@role = 'issn']"/>
                                 </idno>
                                 <idno type="DOI">

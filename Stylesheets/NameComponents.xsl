@@ -57,9 +57,11 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="collab">
-        <name>
-            <xsl:apply-templates/>
-        </name>
+        <author role="collab">
+            <name>
+                <xsl:apply-templates/>
+            </name>
+        </author>
     </xsl:template>
     
     <xsl:template match="sb:collaboration">
