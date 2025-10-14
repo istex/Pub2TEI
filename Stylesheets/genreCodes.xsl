@@ -338,6 +338,7 @@
                     <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
                     <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0] and contains(//article-meta/fpage,'s') or contains(//article-meta/fpage,'S')">article</xsl:when>
                     <xsl:when test="//abstract |rsc:abstract[string-length() &gt; 0] and contains(//article-meta/fpage |//rsc:article-meta/rsc:fpage,'s') or contains(//article-meta/fpage | //rsc:article-meta/rsc:fpage,'S')">article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0] and //journal-meta/issn[@pub-type='ppub']='0767-0974'">brief-communication</xsl:when>
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
@@ -358,7 +359,8 @@
             <xsl:when test="$codeGenreAll='discussion'">
                 <xsl:choose>
                     <xsl:when test="article/front/article-meta/kwd-group/kwd[string-length() &gt; 0]">research-article</xsl:when>
-                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">brief-communication</xsl:when>
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
@@ -385,6 +387,7 @@
             </xsl:when>
             <xsl:when test="$codeGenreAll='magazine'">
                 <xsl:choose>
+                    <xsl:when test="article/front/article-meta/abstract[string-length() &gt; 0]">brief-communication</xsl:when>
                     <xsl:when test="article/front/article-meta/trans-abstract[string-length() &gt; 0]">article</xsl:when>
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
