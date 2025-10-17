@@ -535,7 +535,7 @@
             <xsl:value-of select="normalize-space(translate(head[1]|title[1]|Heading[1],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))"/>
         </xsl:variable>
         <xsl:variable name="normalizeAbstract">
-            <xsl:value-of select="translate(p[1]|Para[1],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+            <xsl:value-of select="translate(p[1]|Para[1],'ABCDEFGHIJKLMNOPQRSTUVWXYZ&#160;','abcdefghijklmnopqrstuvwxyz ')"/>
         </xsl:variable>
         <!-- 09/2022 non reprise des abstracts type graphical car ce ne sont pas des résumés -->
         <xsl:choose>
@@ -544,6 +544,7 @@
             <xsl:when test="starts-with($normalizeAbstract,'no abstract')"/>
             <xsl:when test="starts-with($normalizeAbstractHead,'no abstract')"/>
         <xsl:when test="not(contains(@class,'graphical'))">
+            <xsl:if test=".!=''">
         <abstract>
 			    <!-- Karger ebooks tous les abstracts sont en anglais-->
             <xsl:if test="@abstract-type !=''">
@@ -669,6 +670,7 @@
 	                </xsl:otherwise>
 	            </xsl:choose>
 			</abstract>
+            </xsl:if>
 			</xsl:when>
 			</xsl:choose>
     </xsl:template>
