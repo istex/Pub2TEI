@@ -115,9 +115,8 @@
             <xsl:when test="$grobid//tei:TEI/tei:text/@xml:lang !=''">
                 <xsl:value-of select="$grobid//tei:TEI/tei:text/@xml:lang"/>
             </xsl:when>
-            <!--<xsl:when test="/doc/glutton/language">
-                <xsl:value-of select="normalize-space(/doc/glutton/language)"/>
-            </xsl:when>-->
+            <!-- anglais par défaut pour copernicus-->
+            <xsl:when test="contains(/doc/publisher,'Copernicus')">en</xsl:when>
         </xsl:choose>
     </xsl:variable>
     
