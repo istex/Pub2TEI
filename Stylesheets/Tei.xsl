@@ -15,7 +15,8 @@
     <xsl:template match="tei:TEI">
         <xsl:choose>
             <!-- traitement des données venant de scienceMiner -->
-            <xsl:when test="contains(@xsi:noNamespaceSchemaLocation,'https://istex.github.io/odd-istex/out/istex.xsd')">
+            <xsl:when test="contains(@xsi:noNamespaceSchemaLocation,'https://istex.github.io/odd-istex/out/istex.xsd')
+                or contains(@xsi:schemaLocation,'https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd')">
                 <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
                     <xsl:apply-templates select="tei:teiHeader" mode="scienceMiner"/>
                     <xsl:copy-of select="tei:text"/>
@@ -1154,7 +1155,7 @@
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
-                <xsl:when test="tei:availability/tei:p[string-length(normalize-space(text())) &gt; 0]">
+                <xsl:when test="tei:availability/tei:p">
                     <xsl:copy-of select="tei:availability"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1378,7 +1379,7 @@
                 <xsl:when test="ends-with($idnoUrl,'sociologies/11087')">2019</xsl:when>
                 <xsl:when test="ends-with($idnoUrl,'sociologies/11110')">2019</xsl:when>
                 <xsl:when test="ends-with($idnoUrl,'resf/1215')">2018</xsl:when>
-                <xsl:otherwise><xsl:value-of select="string($date)"/></xsl:otherwise>
+                <xsl:otherwise><xsl:value-of select="string($date[1])"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <date>
