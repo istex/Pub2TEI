@@ -13,11 +13,71 @@
     <xsl:variable name="idnoUrl" select="string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'])"/>
    
     <xsl:template match="tei:TEI">
-        <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
-            <xsl:apply-templates select="tei:teiHeader"/>
-            <xsl:apply-templates select="tei:text"/>
-        </TEI>
+        <xsl:choose>
+            <!-- traitement des données venant de scienceMiner -->
+            <xsl:when test="contains(@xsi:noNamespaceSchemaLocation,'https://istex.github.io/odd-istex/out/istex.xsd')">
+                <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+                    <xsl:apply-templates select="tei:teiHeader" mode="scienceMiner"/>
+                    <xsl:copy-of select="tei:text"/>
+                </TEI>
+            </xsl:when>
+            <xsl:otherwise>
+                <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+                    <xsl:apply-templates select="tei:teiHeader"/>
+                    <xsl:apply-templates select="tei:text"/>
+                </TEI>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
+    <!-- traitements des données venant de scienceMiner -->
+    <xsl:template match="tei:teiHeader" mode="scienceMiner">
+        <teiHeader>
+            <fileDesc>
+                <xsl:apply-templates select="tei:fileDesc" mode="scienceMiner"/>
+            </fileDesc>
+            <xsl:copy-of select="tei:profileDesc"/>
+            <xsl:copy-of select="tei:revisionDesc"/>
+        </teiHeader>
+    </xsl:template>
+    <xsl:template match="tei:fileDesc" mode="scienceMiner">
+        <xsl:copy-of select="tei:titleStmt"/>
+        <xsl:copy-of select="tei:publicationStmt"/>
+        <xsl:copy-of select="tei:notesStmt"/>
+        <sourceDesc>
+            <xsl:apply-templates select="tei:sourceDesc" mode="scienceMiner"/>
+        </sourceDesc>
+    </xsl:template>
+    <xsl:template match="tei:sourceDesc" mode="scienceMiner">
+        <biblStruct>
+            <xsl:apply-templates select="tei:biblStruct" mode="scienceMiner"/>
+        </biblStruct>
+    </xsl:template>
+    <xsl:template match="tei:biblStruct" mode="scienceMiner">
+        <analytic>
+            <xsl:apply-templates select="tei:analytic" mode="scienceMiner"/>
+        </analytic>
+        <xsl:copy-of select="tei:monogr"/>
+        <xsl:copy-of select="tei:series"/>
+    </xsl:template>
+    <xsl:template match="tei:analytic" mode="scienceMiner">
+        <xsl:apply-templates select="tei:analytic" mode="scienceMiner"/>
+        <xsl:copy-of select="tei:title"/>
+        <xsl:copy-of select="tei:author"/>
+        <xsl:copy-of select="tei:editor"/>
+        <xsl:copy-of select="tei:idno"/>
+        <!-- ajout identifiants ISTEX et ARK -->
+        <xsl:if test="string-length($idistex) &gt; 0 ">
+            <idno type="istex">
+                <xsl:value-of select="$idistex"/>
+            </idno>
+        </xsl:if>
+        <xsl:if test="string-length($arkistex) &gt; 0 ">
+            <idno type="ark">
+                <xsl:value-of select="$arkistex"/>
+            </idno>
+        </xsl:if>
+    </xsl:template>
+    <!-- fin des traitements OA Science-Miner -->
     <xsl:template match="tei:teiHeader">
         <teiHeader>
             <fileDesc>
