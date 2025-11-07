@@ -135,6 +135,9 @@
                     <row><cell role="doi">10.21168/rbrh.v1n1.p48-66</cell><cell role="lang">pt</cell></row>
                     <row><cell role="doi">10.21168/rbrh.v1n2.p89-105</cell><cell role="lang">pt</cell></row>
                     <!-- copernicus -->
+                    <row><cell role="doi">10.3285/eg.25.1.14</cell><cell role="lang">de</cell></row>
+                    <row><cell role="doi">10.3285/eg.26.1.06</cell><cell role="lang">de</cell></row>
+                    <row><cell role="doi">10.3285/eg.13.1.14</cell><cell role="lang">de</cell></row>
                     <row><cell role="doi">10.5194/gh-28-69-1973</cell><cell role="lang">de</cell></row>
                     <row><cell role="doi">10.5194/gh-33-29-1978</cell><cell role="lang">de</cell></row>
                     <row><cell role="doi">10.5194/gh-31-127-1976</cell><cell role="lang">de</cell></row>
@@ -258,6 +261,32 @@
                     <row><cell role="doi">10.5194/isprs-annals-v-3-2022-7-2022</cell><cell role="lang">en</cell></row>
                     <row><cell role="doi">10.5194/isprsarchives-xxxix-b4-123-2012</cell><cell role="lang">en</cell></row>
                     <row><cell role="doi">10.5194/isprsarchives-xxxix-b5-257-2012</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/gh-7-232-1952</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.60.2-3.09</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.57.1-2.9</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.60.2-3.02</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.58.2.05</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/egqsj-68-119-2019</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/isprsarchives-xxxix-b3-103-2012</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.30.1.14</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.57.3-4.1</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.60.2-3.03</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.64.2.04</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.60.1.01</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.60.4.05</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.18.1.04</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.55.1.06</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/aab-44-521-2001</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.62.2.01</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.63.1.05</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/sand-1-17-2021</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/isprsarchives-xl-5-w2-477-2013</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/aab-51-33-2008</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/egqsj-69-225-2020</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/sand-1-59-2021</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.63.2.01</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.3285/eg.47.1.08</cell><cell role="lang">en</cell></row>
+                    <row><cell role="doi">10.5194/isprsarchives-xxxix-b5-315-2012</cell><cell role="lang">en</cell></row>
                     <row><cell role="doi">10.5194/gh-19-57-1964</cell><cell role="lang">fr</cell></row>
                     <row><cell role="doi">10.5194/gh-12-67-1957</cell><cell role="lang">fr</cell></row>
                     <row><cell role="doi">10.5194/gh-11-96-1956</cell><cell role="lang">fr</cell></row>
@@ -270,6 +299,7 @@
                     <row><cell role="doi">10.5194/gh-8-57-1953</cell><cell role="lang">fr</cell></row>
                     <row><cell role="doi">10.5194/gh-47-13-1992</cell><cell role="lang">fr</cell></row>
                     <row><cell role="doi">10.5194/gh-9-41-1954</cell><cell role="lang">fr</cell></row>
+                    <row><cell role="doi">10.3285/eg.10.1.17</cell><cell role="lang">fr</cell></row>
                     <row><cell role="doi">10.5194/gh-5-108-1950</cell><cell role="lang">it</cell></row>
                     <row><cell role="doi">10.5194/gh-6-47-1951</cell><cell role="lang">it</cell></row>
                 </table>
