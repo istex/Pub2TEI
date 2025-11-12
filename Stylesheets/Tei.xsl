@@ -15,9 +15,13 @@
     <xsl:template match="tei:TEI">
         <xsl:choose>
             <!-- traitement des données venant de scienceMiner -->
+            <!-- je pointe le schéma de Patrice Lopez pour la validation de la TEI produite -->
             <xsl:when test="contains(@xsi:noNamespaceSchemaLocation,'https://istex.github.io/odd-istex/out/istex.xsd')
-                or contains(@xsi:schemaLocation,'https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd')">
-                <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+                or contains(@xsi:schemaLocation,'http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd')">
+                <TEI xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
                     <xsl:apply-templates select="tei:teiHeader" mode="scienceMiner"/>
                     <xsl:copy-of select="tei:text"/>
                 </TEI>
@@ -42,11 +46,20 @@
     </xsl:template>
     <xsl:template match="tei:fileDesc" mode="scienceMiner">
         <xsl:copy-of select="tei:titleStmt"/>
-        <xsl:copy-of select="tei:publicationStmt"/>
+        <publicationStmt>
+            <xsl:apply-templates select="tei:publicationStmt" mode="scienceMiner"/>
+        </publicationStmt>
         <xsl:copy-of select="tei:notesStmt"/>
         <sourceDesc>
             <xsl:apply-templates select="tei:sourceDesc" mode="scienceMiner"/>
         </sourceDesc>
+    </xsl:template>
+    <xsl:template match="tei:publicationStmt" mode="scienceMiner">
+        <authority>Science-Miner</authority>
+        <xsl:copy-of select="tei:publisher"/>
+        <xsl:copy-of select="tei:pubPlace"/>
+        <xsl:copy-of select="tei:availability"/>
+        <xsl:copy-of select="tei:date"/>
     </xsl:template>
     <xsl:template match="tei:sourceDesc" mode="scienceMiner">
         <biblStruct>

@@ -126,10 +126,12 @@
     </xsl:template>
      
     <xsl:template match="doc">
-        <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
-            <xsl:attribute name="xsi:noNamespaceSchemaLocation">
-                <xsl:text>https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd</xsl:text>
-            </xsl:attribute>
+        <!-- les résumés et le corps du texte proviennent de ScienceMiner -->
+        <!-- je pointe le schéma de Patrice Lopez pour la validation de la TEI produite -->
+        <TEI xmlns="http://www.tei-c.org/ns/1.0" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
             <xsl:attribute name="xml:lang" select="$codeLangJson"/>
             <teiHeader>
                 <fileDesc>
@@ -149,7 +151,7 @@
                         </xsl:choose>
                     </titleStmt>
                     <publicationStmt>
-                        <authority>ISTEX</authority>
+                        <authority>ISTEX &amp; Science-Miner</authority>
                         <xsl:apply-templates select="//doc/publisher" mode="json"/>
                         <availability>
                             <xsl:attribute name="status">free</xsl:attribute>
@@ -178,20 +180,20 @@
                                     <xsl:attribute name="source">
                                         <xsl:value-of select="$genreJson"/>
                                     </xsl:attribute>
-                                    <xsl:attribute name="scheme">
+                                    <!--<xsl:attribute name="scheme">
                                         <xsl:value-of select="$codeGenreArk"/>
-                                    </xsl:attribute>
+                                    </xsl:attribute>-->
                                     <xsl:value-of select="$codeGenreJson"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:attribute name="subtype">other</xsl:attribute>
                                     <xsl:attribute name="source">N/A</xsl:attribute>
-                                    <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>
+                                    <!--<xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0</xsl:attribute>-->
                                     <xsl:text>other</xsl:text>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </note>
-                        <note type="publication-type" source="journal" subtype="journal" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-0GLKJH51-B">journal</note>
+                        <note type="publication-type" source="journal" subtype="journal">journal</note>
                     </notesStmt>
                     <sourceDesc>
                         <biblStruct type="article">
