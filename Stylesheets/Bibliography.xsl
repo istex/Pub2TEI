@@ -376,9 +376,7 @@
                             <xsl:apply-templates select="$entry/person-group"/>
                         </xsl:if>
                         <xsl:if test="$entry/collab">
-                            <author>
-                                <xsl:apply-templates select="$entry/collab"/>
-                            </author>
+                            <xsl:apply-templates select="$entry/collab"/>
                         </xsl:if>
                         <xsl:apply-templates
                             select="$entry/citauth | $entry/rsc:citauth | $entry/name"/>
@@ -714,7 +712,7 @@
                         <xsl:if test="not($entry/article-title)">
                             <xsl:apply-templates select="$entry/person-group"/>
                             <xsl:apply-templates select="$entry/name"/>
-                            <xsl:apply-templates select="$entry/citauth | $entry/name"/>
+                            <xsl:apply-templates select="$entry/citauth"/>
                         </xsl:if>
                         <xsl:apply-templates select="$entry/editor"/>
                         <imprint>

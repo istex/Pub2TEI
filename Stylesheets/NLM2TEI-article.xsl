@@ -326,6 +326,7 @@
                                                 <title level="a" type="main">
                                                     <xsl:choose>
                                                         <xsl:when test="/article/front/article-meta/product/source[string-length()&gt; 0]">
+                                                            <xsl:text>Book reviews : </xsl:text>
                                                             <xsl:apply-templates select="/article/front/article-meta/product" mode="title"/>
                                                         </xsl:when>
                                                         <xsl:otherwise>Book review</xsl:otherwise>
@@ -1304,8 +1305,8 @@
                     <xsl:when test="$ttl='[no title]' or $ttl='[No title]' or $ttl='[No Title]' or $ttl='No Title' or $ttl='No title' or $ttl='no title'">
                         <title level="a" type="main">Communications</title>
                     </xsl:when>
-                    <xsl:when test="//article/front/article-meta/title-group/article-title[string-length() &gt; 0]">
-                        <xsl:apply-templates select="//article/front/article-meta/title-group/article-title"/>
+                    <xsl:when test="front/article-meta/title-group/article-title[string-length() &gt; 0]">
+                        <xsl:apply-templates select="front/article-meta/title-group/article-title"/>
                     </xsl:when>
                     <xsl:when test="//fm/atl">
                         <xsl:apply-templates select="//fm/atl"/>
@@ -1332,7 +1333,10 @@
                     <xsl:when test="article-meta/contrib-group/contrib[@contrib-type='author']">
                         <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='author']"/>
                     </xsl:when>
-                    <xsl:when test="//article-meta/contrib-group/contrib[@contrib-type='editor']"/>
+                    <xsl:when test="article-meta/contrib-group/contrib[@contrib-type='editor']"/>
+                    <xsl:when test="article-meta/contrib-group/contrib">
+                        <xsl:apply-templates select="article-meta/contrib-group/contrib"/>
+                    </xsl:when>
                     <xsl:otherwise>
                                 <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
                     </xsl:otherwise>
@@ -1346,7 +1350,7 @@
                 </xsl:if>
                 <!-- cas particulier 26F643143005AA7642AD684F8B69A743D0117A8B.xml 
                         biographies hors contrib-->
-                <xsl:for-each select="//article-meta/aff">
+                <xsl:for-each select="article-meta/aff">
                     <xsl:if test="contains(@id,'cor')">
                         <author>
                             <xsl:attribute name="corresp">
@@ -1394,9 +1398,9 @@
                 <xsl:if test="article-meta/related-article/name">
                     <ref type="corrected-article">
                         <xsl:for-each select="article-meta/related-article/name">
-                            <name>
+                            <persName>
                                 <xsl:if test="given-names">
-                                    <forename>
+                                    <forename type="first">
                                         <xsl:value-of select="given-names"/>
                                     </forename>
                                 </xsl:if>
@@ -1405,7 +1409,7 @@
                                         <xsl:value-of select="surname"/>
                                     </surname>
                                 </xsl:if>
-                            </name>
+                            </persName>
                         </xsl:for-each>
                         <xsl:if test="article-meta/related-article/object-id">
                             <idno type="doi">
@@ -1714,6 +1718,16 @@
                             article-meta/volume | vol | suppmast/vol | suppmast/iss | article-meta/issue | iss
                             | article-meta/fpage | pp/spn | pp/epn | article-meta/lpage
                             "/>
+                    
+                    <xsl:choose>
+                        <!-- exemple 10.1079/PHN2001149 
+                                    <supplement supplement-type="issue">yes</supplement>-->
+                        <xsl:when test="article-meta/supplement = 'yes'"/>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="article-meta/supplement"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
 				    <xsl:if test="//article/front/article-meta/counts/page-count/@count">
 				        <biblScope unit="page-count">
 				            <xsl:value-of select="normalize-space(//article/front/article-meta/counts/page-count/@count)"/>
@@ -1810,7 +1824,7 @@
             </xsl:choose>
             <!-- edp -->
             <xsl:choose>  
-                <xsl:when test="not(contains(//journal-meta/publisher/publisher-name,'Emerald'))">
+                <xsl:when test="not(contains(/article/front/journal-meta/publisher/publisher-name,'Emerald'))">
                     <xsl:if test="journal-meta/issn[@pub-type='isbn'] !='' or journal-meta/isbn !=''">
                         <series>
                             <xsl:apply-templates select="journal-meta/journal-title  |journal-meta/journal-title-group/journal-title|journal-meta/journal-title-group/journal-subtitle | jtl | suppmast/jtl | suppmast/suppttl"/>

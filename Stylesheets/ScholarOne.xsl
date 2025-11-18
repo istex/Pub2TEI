@@ -352,6 +352,10 @@
                 <xsl:value-of select="count(xref)"/>
             </xsl:variable>
             <xsl:choose>
+                <!-- traitements des affiliations dans des sub-articles -->
+                <xsl:when test="//sub-article/front/article-meta/aff[@id=current()/xref/@rid]">
+                    <xsl:apply-templates select="//sub-article/front/article-meta/aff[@id=current()/xref/@rid]"/>
+                </xsl:when>
                 <!-- cas particulier Karger doi 10.1159/000493063  -->
                 <xsl:when test="//article-meta/aff/@id='aff_ '">
                         <xsl:apply-templates select="//article-meta/aff"/>

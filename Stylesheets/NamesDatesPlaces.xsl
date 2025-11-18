@@ -613,9 +613,9 @@
                          </xsl:if>
                      </xsl:when>
                      <xsl:otherwise>
-                         <addrLine>
+                         <settlement>
                              <xsl:value-of select="normalize-space($addrline)"/>
-                         </addrLine>
+                         </settlement>
                      </xsl:otherwise>
                  </xsl:choose>
                 </xsl:otherwise>

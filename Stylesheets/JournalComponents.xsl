@@ -1113,6 +1113,12 @@
     <xsl:template match="volumeref/link">
         <xsl:apply-templates/>
     </xsl:template>
+    
+    <xsl:template match="supplement">
+        <biblScope unit="supplement">
+            <xsl:apply-templates/>
+        </biblScope>
+    </xsl:template>
 
     <xsl:template
         match="iid | iss | Issue | issue | issue-number | IssueID | issueref | wiley:numbering[@type = 'journalIssue'] | wiley:numbering[@type = 'supplement'] | wiley:issue | sb:issue-nr">
