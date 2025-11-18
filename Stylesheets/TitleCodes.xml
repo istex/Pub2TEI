@@ -762,6 +762,10 @@
                         <cell role="name">Alpha Omegan</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">AOGH</cell>
+                        <cell role="name">Annals of Global Health</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">AOLM</cell>
                         <cell role="name">Archives of Legal Medicine</cell>
                     </row>
@@ -2854,7 +2858,8 @@
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CRASIM</cell>
-                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series I - Mathematics</cell>
+                        <cell role="name">Comptes Rendus de l'Académie des Sciences - Series I -
+                            Mathematics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CRASS1</cell>
@@ -2868,6 +2873,10 @@
                         <cell role="code" style="elsevier">CRCS</cell>
                         <cell role="name">Carnegie-Rochester Conference Series on Public
                             Policy</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">CRCU</cell>
+                        <cell role="name">Chemical Research in Chinese Universities</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">CROHNS</cell>
@@ -3889,6 +3898,10 @@
                         <cell role="name">Environmental Development</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">ENVHAZ</cell>
+                        <cell role="name">Environmental Hazards</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">ENVIPO</cell>
                         <cell role="name">Environmental Pollution (1970)</cell>
                     </row>
@@ -4510,6 +4523,10 @@
                         <cell role="name">Gene Analysis Techniques</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">GEECSO</cell>
+                        <cell role="name">Géographie Economie Société</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">GEGE</cell>
                         <cell role="name">Geotextiles and Geomembranes</cell>
                     </row>
@@ -4670,6 +4687,10 @@
                     <row>
                         <cell role="code" style="elsevier">GR</cell>
                         <cell role="name">Gondwana Research</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">GRJ</cell>
+                        <cell role="name">GeoResJ</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">GSD</cell>
@@ -7032,6 +7053,10 @@
                         <cell role="name">Studies in Educational Evaluation</cell>
                     </row>
                     <row>
+                        <cell role="code" style="elsevier">JSEEC</cell>
+                        <cell role="name">Journal of Systems Engineering and Electronics</cell>
+                    </row>
+                    <row>
                         <cell role="code" style="elsevier">JSHA</cell>
                         <cell role="name">Journal of the Saudi Heart Association</cell>
                     </row>
@@ -8278,6 +8303,10 @@
                     <row>
                         <cell role="code" style="elsevier">NEURON</cell>
                         <cell role="name">Neuron</cell>
+                    </row>
+                    <row>
+                        <cell role="code" style="elsevier">NEUROT</cell>
+                        <cell role="name">Neurotherapeutics</cell>
                     </row>
                     <row>
                         <cell role="code" style="elsevier">NEUTOX</cell>
