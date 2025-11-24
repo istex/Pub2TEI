@@ -86,7 +86,7 @@
                                 <xsl:when test="ancestor::ref-list"/>
                                 <xsl:when test="ancestor::article/@xml:lang != ''">
                                     <xsl:attribute name="xml:lang">
-                                        <xsl:value-of select="ancestor::article/@xml:lang"/>
+                                        <xsl:value-of select="translate(ancestor::article/@xml:lang, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
                                     </xsl:attribute>
                                 </xsl:when>
                             </xsl:choose>

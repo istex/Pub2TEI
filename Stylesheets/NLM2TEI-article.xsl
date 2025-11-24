@@ -265,7 +265,9 @@
                         <xsl:when test="//article/@xml:lang='IW'"><xsl:attribute name="xml:lang">he</xsl:attribute></xsl:when>
                         <xsl:when test="//article/@xml:lang='fn'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
                         <xsl:otherwise>
-                            <xsl:copy-of select="@xml:lang"/>
+                            <xsl:attribute name="xml:lang">
+                                <xsl:value-of select="translate(@xml:lang, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+                            </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>

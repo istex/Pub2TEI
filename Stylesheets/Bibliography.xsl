@@ -3062,7 +3062,7 @@
         </xsl:variable>
         <!-- pour enlever les balises polluants le texte contenant des identifiants -->
         <xsl:variable name="text3">
-            <xsl:value-of select="normalize-space(./text() except (bold/italic | pub-id))"/>
+            <xsl:value-of select="./text() except (bold/italic | pub-id)"/>
         </xsl:variable>
         <xsl:variable name="nettoiePubId">
             <xsl:value-of select="normalize-space(substring-after(substring-after($text3, ';'), ':'))"/>
