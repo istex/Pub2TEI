@@ -258,6 +258,9 @@
                 <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000443598'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
                 <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000445337'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
                 <xsl:when test="//article-id[@pub-id-type='doi']='10.1159/000446124'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S181638311800067X'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S1816383118000462'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2078633610000706'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
                 <!-- sage-->
                 <xsl:when test="//article-id[@pub-id-type='doi']='10.1177/053901846800700309' or //article-id[@pub-id-type='doi']='10.1177/053901846800700308'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
                 <xsl:when test="@xml:lang">
@@ -988,9 +991,12 @@
                             <langUsage>
                                 <xsl:choose>
                                     <xsl:when test="//article-id[@pub-id-type='doi']='10.1515/zrph.1995.111.4.554'">
-                                        <language ident="fr">de</language>
-                                        <language ident="en">fr</language>
+                                        <language ident="de">de</language>
+                                        <language ident="fr">fr</language>
                                     </xsl:when>
+                                    <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S181638311800067X'"><language ident="en">en</language></xsl:when>
+                                    <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S1816383118000462'"><language ident="en">en</language></xsl:when>
+                                    <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2078633610000706'"><language ident="fr">fr</language></xsl:when>
                                     <xsl:otherwise>
                                         <language>
                                             <xsl:attribute name="ident">

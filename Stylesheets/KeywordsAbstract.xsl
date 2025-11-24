@@ -46,7 +46,14 @@
                                     </xsl:if>	
                                 </xsl:when>
                                 <xsl:when test="ancestor::article/@xml:lang != ''">
-                                    <xsl:value-of select="ancestor::article/@xml:lang"/>
+                                    <xsl:choose>
+                                        <xsl:when test="ancestor::article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S181638311800067X'">en</xsl:when>
+                                        <xsl:when test="ancestor::article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S1816383118000462'">en</xsl:when>
+                                        <xsl:when test="ancestor::article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2078633610000706'">fr</xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="ancestor::article/@xml:lang"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:when>
                             </xsl:choose>
                         </xsl:variable> 

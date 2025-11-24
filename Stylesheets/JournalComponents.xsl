@@ -86,7 +86,14 @@
                                 <xsl:when test="ancestor::ref-list"/>
                                 <xsl:when test="ancestor::article/@xml:lang != ''">
                                     <xsl:attribute name="xml:lang">
-                                        <xsl:value-of select="translate(ancestor::article/@xml:lang, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+                                        <xsl:choose>
+                                            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S181638311800067X'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                                            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S1816383118000462'"><xsl:attribute name="xml:lang">en</xsl:attribute></xsl:when>
+                                            <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2078633610000706'"><xsl:attribute name="xml:lang">fr</xsl:attribute></xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="translate(ancestor::article/@xml:lang, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:attribute>
                                 </xsl:when>
                             </xsl:choose>
@@ -1124,11 +1131,9 @@
         match="iid | iss | Issue | issue | issue-number | IssueID | issueref | wiley:numbering[@type = 'journalIssue'] | wiley:numbering[@type = 'supplement'] | wiley:issue | sb:issue-nr">
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation">
-                <bibl>
-                    <biblScope unit="issue">
-                        <xsl:apply-templates/>
-                    </biblScope>
-                </bibl>
+                <biblScope unit="issue">
+                    <xsl:apply-templates/>
+                </biblScope>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="normalize-space(.) and . != '0'">
