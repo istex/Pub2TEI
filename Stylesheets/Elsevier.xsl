@@ -102,11 +102,11 @@
     <xsl:variable name="date">
         <xsl:choose>
             <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
-	    <xsl:when test="//article/head/ce:date-accepted/@year !=''">
-                <xsl:value-of select="//article/head/ce:date-accepted/@year"/>
+            <xsl:when test="//*[local-name()='head']/ce:date-accepted/@year !=''">
+                <xsl:value-of select="//*[local-name()='head']/ce:date-accepted/@year"/>
             </xsl:when>
-	    <xsl:when test="//article/head/ce:date-received/@year !=''">
-                <xsl:value-of select="//article/head/ce:date-received/@year"/>
+            <xsl:when test="//*[local-name()='simple-head']/ce:date-accepted/@year !=''">
+                <xsl:value-of select="//*[local-name()='simple-head']/ce:date-accepted/@year"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
@@ -578,20 +578,26 @@
                                                 <xsl:value-of select="//book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:surname | //els1:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:surname| //els2:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:surname"/>, <xsl:value-of select="//book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:given-name | //els1:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:given-name| //els2:book-review-head/sb:reference/sb:contribution/sb:authors/sb:author/ce:given-name"/>
                                             </author>
                                             <title type="main" level="m">
-                                                <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle"/>
+                                                <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle |
+                                                    //book-review-head/sb:reference/sb:host/sb:edited-book/sb:title/sb:maintitle | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:title/sb:maintitle| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:title/sb:maintitle"/>
                                             </title>
                                             <idno type="ISBN">
                                                 <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:isbn | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:isbn| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:isbn"/>
+                                                <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:edited-book/sb:isbn | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:isbn| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:isbn"/>
                                             </idno>
                                             <imprint>
-                                                <pubPlace>
-                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location"/>
-                                                </pubPlace>
-                                                <publisher>
-                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name"/>
-                                                </publisher>
-                                                <date when="{//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date}">
-                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date"/>
+                                                <xsl:if test="//book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:location | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:location| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:location">
+                                                    <pubPlace>
+                                                        <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:location|//book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:location | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:location| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:location"/>
+                                                    </pubPlace>
+                                                </xsl:if>
+                                                <xsl:if test="//book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:name | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:name| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:name">
+                                                    <publisher>
+                                                        <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:publisher/sb:name|//book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:name | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:name| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:publisher/sb:name"/>
+                                                    </publisher>
+                                                </xsl:if>
+                                                <date when="{//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date|//book-review-head/sb:reference/sb:host/sb:edited-book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:date}">
+                                                    <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:date|//book-review-head/sb:reference/sb:host/sb:edited-book/sb:date | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:date| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:date"/>
                                                 </date>
                                             </imprint>
                                         </monogr>
@@ -603,7 +609,6 @@
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion"/>
-                <xsl:if test="//ce:doctopics|head/ce:keywords |els2:head/ce:keywords | head/ce:keywords | els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract">
                     <profileDesc>
                         <creation>
                             <date>
@@ -643,12 +648,14 @@
                         </xsl:if>
 						<!-- PL: abstract is moved from <front> to here -->
                         <xsl:apply-templates select="els1:head/ce:abstract |els2:head/ce:abstract | head/ce:abstract"/>
+                        <xsl:apply-templates select="els1:simple-head/ce:abstract |els2:simple-head/ce:abstract | simple-head/ce:abstract"/>
                         <xsl:apply-templates select="els1:item-info/ce:doctopics"/>
                         <xsl:apply-templates select="els2:item-info/ce:doctopics"/>
                         <xsl:apply-templates select="item-info/ce:doctopics"/>
                         <xsl:apply-templates select="els1:head/ce:keywords |els2:head/ce:keywords | head/ce:keywords"/>
+                        <xsl:apply-templates select="els1:simple-head/ce:keywords |els2:simple-head/ce:keywords | simple-head/ce:keywords"/>
                     </profileDesc>
-                </xsl:if>
+                
                 <!-- traceability -->
                 <revisionDesc>
                     <change when="{$releasedate}" who="#istex" xml:id="pub2tei">formatting</change>
@@ -694,60 +701,67 @@
     <!-- Traitement des méta-données (génération de l'entête TEI) -->
 
     <xsl:template match="ce:copyright">
-        <!-- moved up publisher information -->
-        <publisher>
-            <xsl:choose>
-                <xsl:when test="text()">
-                    <xsl:variable name="text">
-                        <xsl:apply-templates/>
-                    </xsl:variable>
-                    <xsl:value-of select="normalize-space($text)"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G</xsl:attribute>
-                    <xsl:text>Elsevier</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </publisher>
-        <!-- PL: put the date under the paragraph, as it is TEI P5 valid -->
-        <!-- LR: moved the date two nodes higher so that the encompassing publicationStmt is closer to what is expected-->
-        
-        <date type="copyright">
-            <xsl:attribute name="when">
-                <xsl:choose>
-                    <xsl:when test="string-length(@year)=8">
-                        <xsl:value-of select="substring($date,-3,string-length($date))"/>
-                    </xsl:when>
-                    <xsl:when test="string-length(@year)=6">
-                        <xsl:value-of select="substring($date,-1,string-length($date))"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="@year"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-        </date>
-        <availability status="restricted">
-            <licence>
-                <p>
-            	    <xsl:if test="@year">
-            	        <xsl:text>&#169;</xsl:text>
-            	        <xsl:value-of select="@year"/>
-            	        <xsl:text>, </xsl:text>
-            	    </xsl:if>
-            	    <xsl:choose>
-            	        <xsl:when test="text()">
-            	            <xsl:variable name="text">
-            	                <xsl:apply-templates/>
-            	            </xsl:variable>
-            	            <xsl:value-of select="normalize-space($text)"/>
-            	        </xsl:when>
-            	        <xsl:otherwise>Elsevier.</xsl:otherwise>
-            	    </xsl:choose>
-            	</p>
-                <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-HKKZVM7B-M"/>
-			</licence>
-        </availability>
+        <xsl:choose>
+            <xsl:when test="parent::ce:figure">
+                <p><xsl:value-of select="."/></p>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- moved up publisher information -->
+                <publisher>
+                    <xsl:choose>
+                        <xsl:when test="text()">
+                            <xsl:variable name="text">
+                                <xsl:apply-templates/>
+                            </xsl:variable>
+                            <xsl:value-of select="normalize-space($text)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="ref">https://scientific-publisher.data.istex.fr/ark:/67375/H02-C6NSG6CL-G</xsl:attribute>
+                            <xsl:text>Elsevier</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </publisher>
+                <!-- PL: put the date under the paragraph, as it is TEI P5 valid -->
+                <!-- LR: moved the date two nodes higher so that the encompassing publicationStmt is closer to what is expected-->
+                
+                <date type="copyright">
+                    <xsl:attribute name="when">
+                        <xsl:choose>
+                            <xsl:when test="string-length(@year)=8">
+                                <xsl:value-of select="substring($date,-3,string-length($date))"/>
+                            </xsl:when>
+                            <xsl:when test="string-length(@year)=6">
+                                <xsl:value-of select="substring($date,-1,string-length($date))"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="@year"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </date>
+                <availability status="restricted">
+                    <licence>
+                        <p>
+                            <xsl:if test="@year">
+                                <xsl:text>&#169;</xsl:text>
+                                <xsl:value-of select="@year"/>
+                                <xsl:text>, </xsl:text>
+                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="text()">
+                                    <xsl:variable name="text">
+                                        <xsl:apply-templates/>
+                                    </xsl:variable>
+                                    <xsl:value-of select="normalize-space($text)"/>
+                                </xsl:when>
+                                <xsl:otherwise>Elsevier.</xsl:otherwise>
+                            </xsl:choose>
+                        </p>
+                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-HKKZVM7B-M"/>
+                    </licence>
+                </availability>  
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="ce:text">

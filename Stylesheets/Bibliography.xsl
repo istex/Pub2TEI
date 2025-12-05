@@ -1258,7 +1258,7 @@
     <xsl:template match="sb:maintitle">
         <xsl:choose>
             <xsl:when test="ancestor::sb:series/sb:title">
-                <title level="s" type="main">
+                <title level="j" type="main">
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
@@ -1276,7 +1276,7 @@
     <xsl:template match="sb:subtitle">
         <xsl:choose>
             <xsl:when test="ancestor::sb:series/sb:title">
-                <title level="s" type="sub">
+                <title level="j" type="sub">
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>

@@ -134,11 +134,6 @@
                         <xsl:value-of select="@class"/>
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:if test="normalize-space(ce:section-title)">
-                    <xsl:attribute name="ana">
-                        <xsl:value-of select="ce:section-title"/>
-                    </xsl:attribute>
-                </xsl:if>
                 <xsl:if test="ce:section-title/@id">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="ce:section-title/@id"/>

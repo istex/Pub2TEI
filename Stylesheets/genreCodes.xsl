@@ -454,6 +454,8 @@
                     <xsl:otherwise>other</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
+            <!-- pour Elsevier -->
+            <xsl:when test="$codeGenreAll='Discussion'">article</xsl:when>
             <xsl:when test="$codeGenreAll='dissertation'">other</xsl:when>
             <xsl:when test="$codeGenreAll='EDG'">article</xsl:when>
             <xsl:when test="$codeGenreAll='EDI'">editorial</xsl:when>
