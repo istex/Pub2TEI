@@ -1416,7 +1416,7 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="ce:refers-to-document">
-        <ref type="corrected-article">
+        <ref type="refers-to-document">
         <xsl:apply-templates/>
         </ref>
     </xsl:template>
