@@ -17,8 +17,8 @@
     <xsl:include href="ElsevierFormula.xsl"/>
     <xsl:param name="partOfSetXmlPath" />
     <xsl:variable name="docIssueEls" select="document($partOfSetXmlPath)"/>
-    <xsl:variable name="currentPii" select="//*[local-name()='item-info']/ce:pii"/>
-    <xsl:variable name="currentDoi" select="//*[local-name()='item-info']/ce:doi"/>
+    <xsl:variable name="currentPiiEls" select="//*[local-name()='item-info']/ce:pii"/>
+    <xsl:variable name="currentDoiEls" select="//*[local-name()='item-info']/ce:doi"/>
     <xsl:variable name="titleCodes" select="document('TitleCodes.xml')"/>
     <xsl:variable name="value_to_jid" select="//jid|//els1:jid | //els2:jid"/>
     <xsl:variable name="resultCodeTitle">
@@ -548,21 +548,21 @@
                                     </xsl:if>
                                     <!-- pagination article -->
                                     <xsl:choose>
-                                        <xsl:when test="$docIssueEls//ce:include-item[ce:doi=$currentDoi]">
-                                            <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:doi=$currentDoi]/ce:pages/ce:first-page}">
-                                                <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=$currentDoi]/ce:pages/ce:first-page"/>
+                                        <xsl:when test="$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]">
+                                            <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:first-page}">
+                                                <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:first-page"/>
                                             </biblScope>
-                                            <biblScope unit="page" to="{$docIssueEls//ce:include-item[ce:doi=$currentDoi]/ce:pages/ce:last-page}">
-                                                <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=$currentDoi]/ce:pages/ce:last-page"/>
+                                            <biblScope unit="page" to="{$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:last-page}">
+                                                <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:last-page"/>
                                             </biblScope>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:if test="$docIssueEls//ce:include-item[ce:pii=$currentPii]">
-                                                <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:pii=$currentPii]/ce:pages/ce:first-page}">
-                                                    <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=$currentPii]/ce:pages/ce:first-page"/>
+                                            <xsl:if test="$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]">
+                                                <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:first-page}">
+                                                    <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:first-page"/>
                                                 </biblScope>
-                                                <biblScope unit="page" to="{$docIssueEls//ce:include-item[ce:pii=$currentPii]/ce:pages/ce:last-page}">
-                                                    <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=$currentPii]/ce:pages/ce:last-page"/>
+                                                <biblScope unit="page" to="{$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:last-page}">
+                                                    <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:last-page"/>
                                                 </biblScope>
                                             </xsl:if>
                                         </xsl:otherwise>

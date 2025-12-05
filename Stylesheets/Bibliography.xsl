@@ -219,6 +219,7 @@
             </xsl:if>
             <monogr>
                 <xsl:apply-templates select="sb:host/sb:issue/sb:series/sb:title/*"/>
+                <xsl:apply-templates select="sb:host/sb:e-host/*"/>
                 <xsl:choose>
                     <xsl:when test="sb:host/sb:edited-book/sb:title">
                         <xsl:apply-templates select="sb:host/sb:edited-book/sb:title/*"
@@ -268,7 +269,13 @@
                         select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:volume-nr"/>
                     <xsl:apply-templates
                         select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:issue-nr"/>
-                    <xsl:apply-templates select="sb:host/sb:issue/sb:date"/>
+                    <xsl:choose>
+                        <xsl:when test="sb:host/sb:issue/sb:date">
+                            <xsl:apply-templates select="sb:host/sb:issue/sb:date"/>
+                        </xsl:when>
+                        <!-- validation / ajout d'un element date afin qu'<imprint> ne soit pas vide de contenu -->
+                        <xsl:otherwise><date/></xsl:otherwise>
+                    </xsl:choose>
                     <xsl:apply-templates select="sb:host/sb:pages/*"/>
                 </imprint>
             </monogr>
