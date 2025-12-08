@@ -24,23 +24,6 @@
     <xsl:variable name="resultCodeTitle">
         <xsl:value-of select="$titleCodes/descendant::tei:row[tei:cell/text() = $value_to_jid]/tei:cell[@role = 'name']"/>
     </xsl:variable>
-
-    <xsl:variable name="substringOfDate">
-        <xsl:choose>
-            <xsl:when test="$codeISSN='0047-2670' and $codeVol='22'">1983</xsl:when>
-            <xsl:when test="$codeISSN='0044-328X' and $codeVol='107'">1982</xsl:when>
-            <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
-            <xsl:when test="string-length($date)=8">
-                <xsl:value-of select="substring($date,-3,string-length($date))"/>
-            </xsl:when>
-            <xsl:when test="string-length($date)=6">
-                <xsl:value-of select="substring($date,-1,string-length($date))"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$date"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
     <xsl:variable name="titre">
         <xsl:choose>
             <xsl:when test="//ce:doi='10.1016/S0140-7007(01)00037-8'">
@@ -101,19 +84,34 @@
     </xsl:variable>
     <xsl:variable name="date">
         <xsl:choose>
-            <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
+            <xsl:when test="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date">
+                <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+            </xsl:when>
             <xsl:when test="//*[local-name()='head']/ce:date-accepted/@year !=''">
                 <xsl:value-of select="//*[local-name()='head']/ce:date-accepted/@year"/>
             </xsl:when>
             <xsl:when test="//*[local-name()='simple-head']/ce:date-accepted/@year !=''">
                 <xsl:value-of select="//*[local-name()='simple-head']/ce:date-accepted/@year"/>
             </xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="substringOfDate">
+        <xsl:choose>
+            <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
+            <xsl:when test="$codeISSN='0047-2670' and $codeVol='22'">1983</xsl:when>
+            <xsl:when test="$codeISSN='0044-328X' and $codeVol='107'">1982</xsl:when>
+            <xsl:when test="$codeISSN='0091-6749' and $codeVol='69'">1982</xsl:when>
+            <xsl:when test="string-length($date)=8">
+                <xsl:value-of select="substring($date,-3,string-length($date))"/>
+            </xsl:when>
+            <xsl:when test="string-length($date)=6">
+                <xsl:value-of select="substring($date,-1,string-length($date))"/>
+            </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$docIssueEls//issue-data/cover-date/date-range/start-date | $docIssueEls//s1:issue-data/s1:cover-date/s1:date-range/s1:start-date"/>
+                <xsl:value-of select="$date"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    
     <xsl:variable name="rattrapageVolElsevier">
         <xsl:choose>
             <xsl:when test="$codeISSN='0022-1902' and $codeVol='28' and $date='1976'">sup.28</xsl:when>
@@ -161,7 +159,6 @@
             <teiHeader>
                 <fileDesc>
                     <titleStmt>
-                        <xsl:apply-templates select="ce:dochead/ce:textfn"/>
                         <xsl:choose>
                             <xsl:when test="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title">
                                 <title level="a" type="main">
@@ -197,6 +194,7 @@
                                 <xsl:value-of select="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle"/>
                             </title>
                         </xsl:if>
+                        <xsl:apply-templates select="ce:dochead/ce:textfn"/>
                     </titleStmt>
                     <publicationStmt>
                         <authority>ISTEX</authority>
@@ -688,8 +686,16 @@
                         </body>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:if test="els1:back/* | simple-tail/* | els1:simple-tail/*|els2:simple-tail/*| els1:tail/* |els2:back/* | els2:tail/* | tail/*">
+                <xsl:if test="els1:back/* | simple-tail/* | els1:simple-tail/*|els2:simple-tail/*| els1:tail/* |els2:back/* | els2:tail/* | tail/*
+                    |//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group">
                     <back>
+                        <!-- traitement des listes de contributeurs appartenant un groupe -->
+                        <div type="listAuthors">
+                            <head>Authors list</head>
+                            <bibl>
+                                <xsl:apply-templates select="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group/* except(ce:affiliation)"/>
+                            </bibl>
+                        </div>
                         <!-- Bravo: Elsevier a renommé son back en tail... visionnaire -->
                         <xsl:apply-templates select="simple-tail/* | els1:simple-tail/*|els2:simple-tail/*|els1:back/* | els1:tail/* |els2:back/* | els2:tail/* | tail/*"/>
                     </back>
@@ -1177,11 +1183,20 @@
                     </xsl:otherwise>
                 </xsl:choose> 
             </xsl:variable>
-            <xsl:if test="not(ancestor::sub-article)">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="$authorNumber"/>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@id">
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="@id"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="not(ancestor::sub-article)">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="$authorNumber"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:variable name="structId" select="ce:cross-ref/@refid"/>
             <xsl:for-each select="$structId">
                 <xsl:if test="//ce:correspondence[@id=.]">
@@ -1291,15 +1306,23 @@
     </xsl:template>
 
     <xsl:template match="ce:affiliation">
-        <affiliation>
-            <address>
-            <xsl:call-template name="parseAffiliation">
-                <xsl:with-param name="theAffil">
-                    <xsl:value-of select="ce:textfn"/>
-                </xsl:with-param>
-            </xsl:call-template>
-            </address>
-        </affiliation>
+        <xsl:choose>
+            <!-- ne pas reprendre les blocs affiliations au niveau des listes de contributors à des événements, sinon doublon,
+            le lien auteur/affiliation est fait en amont-->
+            <xsl:when test="ancestor::ce:collaboration/ce:author-group"/>
+            <xsl:otherwise>
+                <affiliation>
+                    <address>
+                        <xsl:call-template name="parseAffiliation">
+                            <xsl:with-param name="theAffil">
+                                <xsl:value-of select="ce:textfn"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </address>
+                </affiliation>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
     <xsl:template match="ce:correspondence">

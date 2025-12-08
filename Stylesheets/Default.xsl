@@ -48,7 +48,7 @@
     
     <xsl:template match="node() | @*" mode="mathml">
         <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="node() | @*" mode="mathml"/>
+            <xsl:apply-templates select="node() | @* except(@displaystyle)" mode="mathml"/>
         </xsl:copy>
     </xsl:template>
     

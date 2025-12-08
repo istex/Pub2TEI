@@ -113,21 +113,6 @@
                                     </xsl:when>
                                 </xsl:choose>
                             </xsl:if>
-                            <xsl:if test="//ce:dochead/ce:textfn">
-                                <title level="a" type="note">
-                                    <xsl:if test="@fn-type">
-                                        <xsl:attribute name="type">
-                                            <xsl:value-of select="@fn-type"/>
-                                        </xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@id">
-                                        <xsl:attribute name="xml:id">
-                                            <xsl:value-of select="@id"/>
-                                        </xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:value-of select="//ce:dochead/ce:textfn"/>
-                                </title>
-                            </xsl:if>
                         </xsl:when>
                     </xsl:choose>
                 </title>

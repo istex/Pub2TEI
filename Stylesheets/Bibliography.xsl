@@ -219,7 +219,7 @@
             </xsl:if>
             <monogr>
                 <xsl:apply-templates select="sb:host/sb:issue/sb:series/sb:title/*"/>
-                <xsl:apply-templates select="sb:host/sb:e-host/*"/>
+                <xsl:apply-templates select="sb:host/sb:e-host/ce:inter-ref"/>
                 <xsl:choose>
                     <xsl:when test="sb:host/sb:edited-book/sb:title">
                         <xsl:apply-templates select="sb:host/sb:edited-book/sb:title/*"
@@ -252,8 +252,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
 
-                <xsl:apply-templates
-                    select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
+                <xsl:apply-templates select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:host/sb:edited-book/sb:editors/*"/>
                 <xsl:apply-templates select="sb:host/sb:book/sb:title/*"/>
                 <xsl:apply-templates select="sb:host/sb:book/sb:editors/*"/>
@@ -272,6 +271,19 @@
                     <xsl:choose>
                         <xsl:when test="sb:host/sb:issue/sb:date">
                             <xsl:apply-templates select="sb:host/sb:issue/sb:date"/>
+                        </xsl:when>
+                        <xsl:when test="sb:host/sb:e-host/sb:date">
+                            <xsl:apply-templates select="sb:host/sb:e-host/sb:date"/>
+                        </xsl:when>
+                        <xsl:when test="sb:host/sb:e-host/sb:date/@year">
+                            <date>
+                                <xsl:apply-templates select="sb:host/sb:e-host/sb:date/@year"/>
+                            </date>
+                        </xsl:when>
+                        <xsl:when test="sb:host/sb:e-host/sb:date-accessed/@year">
+                            <date>
+                                <xsl:apply-templates select="sb:host/sb:e-host/sb:date-accessed/@year"/>
+                            </date>
                         </xsl:when>
                         <!-- validation / ajout d'un element date afin qu'<imprint> ne soit pas vide de contenu -->
                         <xsl:otherwise><date/></xsl:otherwise>
@@ -1296,8 +1308,8 @@
     <!-- Elsevier -->
     <xsl:template match="sb:date">
         <!-- ne garder que les chiffres dans @when -->
-        <date when="{translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')}">
-            <xsl:apply-templates/>
+        <date>
+            <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')"/>
         </date>
     </xsl:template>
 
