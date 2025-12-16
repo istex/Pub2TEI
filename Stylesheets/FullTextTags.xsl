@@ -1468,7 +1468,16 @@
             </xsl:if>
         </graphic>
     </xsl:template>
-	
+    <xsl:template match="tex-math">
+        <formula notation="tex">
+            <xsl:if test="normalize-space(@id)">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </formula>
+    </xsl:template>
     <xsl:template match="online-methods"><xsl:apply-templates/></xsl:template>
     <xsl:template match="wiley:header/wiley:contentMeta/wiley:supportingInformation">
         <xsl:apply-templates select="wiley:supportingInfoItem"/>

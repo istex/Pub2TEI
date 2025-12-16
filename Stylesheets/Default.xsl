@@ -41,7 +41,7 @@
         </xsl:message>
         <formula>
             <xsl:copy copy-namespaces="no">
-                <xsl:apply-templates select="node() | @*" mode="mathml"/>
+                <xsl:apply-templates select="node() | @* except(@type)" mode="mathml"/>
             </xsl:copy>
         </formula>
     </xsl:template>
