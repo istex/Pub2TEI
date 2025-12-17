@@ -1261,7 +1261,7 @@
     </xsl:template>
     
     <xsl:template match="Superscript |rsc:Superscript | ce:sup | super| rsc:super | wiley:sup">
-        <xsl:if test=". !=''"><hi rend="superscript"><xsl:apply-templates/></hi></xsl:if>
+        <hi rend="superscript"><xsl:apply-templates/></hi>
     </xsl:template>
     <xsl:template match="sup| rsc:sup">
         <xsl:if test=".!=''">

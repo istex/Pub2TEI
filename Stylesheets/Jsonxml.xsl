@@ -121,9 +121,9 @@
     </xsl:variable>
     
     <!-- ******************* TRAITEMENT PRINCIPAL ******************************-->
-    <xsl:template match="text()">
-        <xsl:value-of select="translate(., '&#9;&#13;&#10;&#133;&#8232;&#8233;&#8234;&#8235;&#8236;&#8237;', '')"/>
-    </xsl:template>
+  <!--  <xsl:template match="text()">
+        <xsl:value-of select="normalize-space(translate(.,'&#9;&#13;&#10;&#133;&#8232;&#8233;&#8234;&#8235;&#8236;&#8237;',''))"/>
+    </xsl:template>-->
      
     <xsl:template match="doc">
         <!-- les résumés et le corps du texte proviennent de ScienceMiner -->

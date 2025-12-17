@@ -690,12 +690,14 @@
                     |//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group">
                     <back>
                         <!-- traitement des listes de contributeurs appartenant un groupe -->
-                        <div type="listAuthors">
-                            <head>Authors list</head>
-                            <bibl>
-                                <xsl:apply-templates select="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group/* except(ce:affiliation)"/>
-                            </bibl>
-                        </div>
+                        <xsl:if test="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group">
+                            <div type="listAuthors">
+                                <head>Authors list</head>
+                                <bibl>
+                                    <xsl:apply-templates select="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group/* except(ce:affiliation)"/>
+                                </bibl>
+                            </div>
+                        </xsl:if>
                         <!-- Bravo: Elsevier a renommé son back en tail... visionnaire -->
                         <xsl:apply-templates select="simple-tail/* | els1:simple-tail/*|els2:simple-tail/*|els1:back/* | els1:tail/* |els2:back/* | els2:tail/* | tail/*"/>
                     </back>

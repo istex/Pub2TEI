@@ -2213,6 +2213,7 @@
                             <xsl:apply-templates select="article-title | chapter-title"/>
                             <xsl:apply-templates select="name"/>
                             <xsl:apply-templates select="string-name"/>
+                            <xsl:apply-templates select="etal"/>
                             <xsl:apply-templates select="person-group[@person-group-type='author']"/>
                             <xsl:apply-templates select="elocation-id"/>
                         </analytic>
@@ -2227,6 +2228,7 @@
                             <xsl:apply-templates select="elocation-id"/>
                             <xsl:apply-templates select="name"/>
                             <xsl:apply-templates select="string-name"/>
+                            <xsl:apply-templates select="etal"/>
                             <xsl:apply-templates select="person-group"/>
                         </xsl:if>
                         <xsl:if test="person-group[@person-group-type='editor']">
@@ -3627,5 +3629,10 @@
         <hi rend="roman">
             <xsl:apply-templates/>
         </hi>
+    </xsl:template>
+    <xsl:template match="etal">
+        <author>
+            <orgName>et al.</orgName>
+        </author>
     </xsl:template>
 </xsl:stylesheet>
