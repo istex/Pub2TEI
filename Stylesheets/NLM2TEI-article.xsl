@@ -3120,7 +3120,7 @@
             <head>
                 <xsl:if test="../label[string-length()&gt; 0]">
                     <xsl:value-of select="../label"/>
-                    <xsl:text> - </xsl:text>
+                    <xsl:text> </xsl:text>
                 </xsl:if>
                 <xsl:apply-templates/>
             </head>

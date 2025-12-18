@@ -3630,9 +3630,4 @@
             <xsl:apply-templates/>
         </hi>
     </xsl:template>
-    <xsl:template match="etal">
-        <author>
-            <orgName>et al.</orgName>
-        </author>
-    </xsl:template>
 </xsl:stylesheet>
