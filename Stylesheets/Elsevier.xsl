@@ -687,7 +687,8 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:if test="els1:back/* | simple-tail/* | els1:simple-tail/*|els2:simple-tail/*| els1:tail/* |els2:back/* | els2:tail/* | tail/*
-                    |//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group">
+                    |//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group
+                    |//ce:para/ce:footnote">
                     <back>
                         <!-- traitement des listes de contributeurs appartenant un groupe -->
                         <xsl:if test="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group">
@@ -696,6 +697,15 @@
                                 <bibl>
                                     <xsl:apply-templates select="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group/* except(ce:affiliation)"/>
                                 </bibl>
+                            </div>
+                        </xsl:if>
+                        <xsl:if test="//ce:para/ce:footnote">
+                            <div type="fn-group">
+                                <xsl:for-each select="//ce:para/ce:footnote">
+                                    <note place="foot" xml:id="{@id}">
+                                        <xsl:apply-templates/>
+                                    </note>
+                                </xsl:for-each>
                             </div>
                         </xsl:if>
                         <!-- Bravo: Elsevier a renommé son back en tail... visionnaire -->
@@ -1334,11 +1344,15 @@
     </xsl:template>
 
     <xsl:template match="ce:footnote">
-        <note place="foot">
-            <xsl:apply-templates/>
-        </note>
+        <xsl:choose>
+            <xsl:when test="ce:note-para"/>
+            <xsl:otherwise>
+                <note place="foot" xml:id="{@id}">
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-
     <xsl:template match="ce:label">
         <xsl:if test="parent::ce:figure">
             <head>

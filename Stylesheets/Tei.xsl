@@ -8,6 +8,8 @@
     - DROZ
     - Open Edition Revues
     - Scielo
+    - Copernicus
+    - PLOS
     -->
    
     <xsl:variable name="idnoUrl" select="string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'])"/>
@@ -19,9 +21,9 @@
             <xsl:when test="contains(@xsi:noNamespaceSchemaLocation,'https://istex.github.io/odd-istex/out/istex.xsd')
                 or contains(@xsi:schemaLocation,'http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd')">
                 <TEI xmlns="http://www.tei-c.org/ns/1.0" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
- xmlns:xlink="http://www.w3.org/1999/xlink">
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                    xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
                     <xsl:apply-templates select="tei:teiHeader" mode="scienceMiner"/>
                     <xsl:copy-of select="tei:text"/>
                 </TEI>
@@ -424,9 +426,19 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
                                 <imprint>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:publisher"/>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:pubPlace"/>
-                                    <xsl:call-template name="fixAndCopyDate">
-                                        <xsl:with-param name="date" select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
-                                    </xsl:call-template>
+                                    <xsl:choose>
+                                        <!-- droz -->
+                                        <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:date/@when">
+                                            <date type="published" when="{//tei:fileDesc/tei:publicationStmt/tei:date/@when}">
+                                                <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
+                                            </date>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:call-template name="fixAndCopyDate">
+                                                <xsl:with-param name="date" select="//tei:sourceDesc[1]/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+                                            </xsl:call-template>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                    <!-- ajout des tomaisons quand seulement présente dans le titre de l'ouvrage -->
                             <xsl:choose>
                                 <xsl:when test="//tei:idno[@type='EAN-13']='9782600031660'
@@ -1056,16 +1068,93 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
                 </front>
             </xsl:if>
             <xsl:choose>
-                <xsl:when test="//tei:text/tei:body !=''">
-                    <xsl:copy-of select="//tei:text/tei:body"/>
+                <xsl:when test="tei:body !=''">
+                    <xsl:apply-templates/>
                 </xsl:when>
                 <xsl:otherwise><body><div><p/></div></body></xsl:otherwise>
             </xsl:choose>
-            <xsl:copy-of select="//tei:text/tei:back"/>
+            <xsl:choose>
+                <xsl:when test="tei:back !=''">
+                    <xsl:if test="//tei:note">
+                        <div type="fn-group">
+                            <xsl:copy-of select="//tei:note"/>
+                        </div>
+                    </xsl:if>
+                    <xsl:copy-of select="tei:back"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="//tei:note">
+                        <back>
+                            <div type="fn-group">
+                                <xsl:copy-of select="//tei:note"/>
+                            </div>
+                        </back>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
         </text>
+    </xsl:template>
+    <xsl:template match="tei:body">
+        <body>
+          <xsl:choose>
+                <!-- open-edition -->
+              <xsl:when test="tei:p and //tei:distributor='OpenEdition'">
+                    <xsl:apply-templates select="tei:p"/>
+                </xsl:when>
+                <!-- droz -->
+                <xsl:when test="tei:div and //tei:funder='Librairie Droz'">
+                    <xsl:apply-templates select="tei:div"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="*"/>
+                </xsl:otherwise>
+            </xsl:choose>
+          <!--  <xsl:copy-of select="* except node()//tei:note"/>-->
+        </body>
+    </xsl:template>
+    <xsl:template match="tei:p">
+        <p>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="tei:div">
+        <div>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="tei:pb|tei:emph|tei:quote">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+  <xsl:template match="tei:hi">
+        <xsl:choose>
+            <xsl:when test="tei:note">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="tei:note">
+        <ref type="fn" rend="italic" n="{@n}">
+            <xsl:if test="@xml:id">
+                <xsl:attribute name="xml:id">
+                    <xsl:text>#</xsl:text>
+                    <xsl:value-of select="@xml:id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="@n"/>
+        </ref>
     </xsl:template>
     <xsl:template match="tei:back">
         <back>
+            <xsl:if test="//tei:note">
+                <div type="fn-group">
+                    <xsl:copy-of select="//tei:note"/>
+                </div>
+            </xsl:if>
             <div>
                 <xsl:apply-templates select="//tei:listBibl"/>
             </div>
@@ -1179,15 +1268,21 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor"/>
-            <!--
-            <xsl:if test="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date !=''">
-                <date type="published" when="{//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date}">
-                    <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
-                </date>
-            </xsl:if>-->
-            <xsl:call-template name="fixAndCopyDate">
-                <xsl:with-param name="date" select="//tei:sourceDesc[1]/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
-            </xsl:call-template>
+            
+            <xsl:choose>
+                <!-- droz -->
+                <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:date/@when">
+                    <date type="published" when="{//tei:fileDesc/tei:publicationStmt/tei:date/@when}">
+                        <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
+                    </date>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:call-template name="fixAndCopyDate">
+                        <xsl:with-param name="date" select="//tei:sourceDesc[1]/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
+                    </xsl:call-template>
+                </xsl:otherwise>
+            </xsl:choose>
+           
             <xsl:if test="tei:availability/tei:licence/tei:date">
                 <date type="Copyright" when="{tei:availability/tei:licence/tei:date}"/>
             </xsl:if>
@@ -1392,7 +1487,8 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
                 <xsl:when test="ends-with($idnoUrl,'sociologies/11087')">2019</xsl:when>
                 <xsl:when test="ends-with($idnoUrl,'sociologies/11110')">2019</xsl:when>
                 <xsl:when test="ends-with($idnoUrl,'resf/1215')">2018</xsl:when>
-                <xsl:otherwise><xsl:value-of select="string($date[1])"/></xsl:otherwise>
+                <xsl:otherwise>
+                    <xsl:value-of select="string($date[1])"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <date>

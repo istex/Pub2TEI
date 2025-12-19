@@ -23,7 +23,7 @@
     </xsl:template>
     <!-- Springer: Para, SimplePara -->
 
-    <xsl:template match="p| rsc:p| ce:simple-para | ce:note-para | ce:para">
+    <xsl:template match="p| rsc:p| ce:simple-para | ce:para">
         <xsl:choose>
 	    <xsl:when test="parent::sec">
                 <p>
@@ -199,6 +199,9 @@
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="ce:note-para">
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="Para | SimplePara| para">
         <xsl:choose>
@@ -1671,5 +1674,15 @@
         <label>
             <xsl:apply-templates/>
         </label>
+    </xsl:template>
+    <xsl:template match="ce:inline-figure">
+        <figure>
+            <xsl:if test="normalize-space(ce:link/@locator)">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="ce:link/@locator"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </figure>
     </xsl:template>
 </xsl:stylesheet>

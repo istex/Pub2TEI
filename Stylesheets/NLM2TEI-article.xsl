@@ -3537,6 +3537,9 @@
                 <xsl:attribute name="n">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </note>

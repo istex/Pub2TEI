@@ -1043,7 +1043,9 @@
 
     <xsl:template match="name" mode="authors">
         <author>
-            <xsl:apply-templates select="."/>
+            <persName>
+                <xsl:apply-templates select="."/>
+            </persName>
             <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
                 <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
             </xsl:if>
@@ -1052,14 +1054,18 @@
     <xsl:template match="string-name" mode="authors">
         <xsl:choose>
             <xsl:when test="ancestor::ref">
-                <xsl:apply-templates select="."/>
+                <persName>
+                    <xsl:apply-templates select="."/>
+                </persName>
                 <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
                     <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <author>
-                    <xsl:apply-templates select="."/>
+                    <persName>
+                        <xsl:apply-templates select="."/>
+                    </persName>
                     <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
                         <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"
                         />
@@ -1071,14 +1077,18 @@
     <xsl:template match="string-name" mode="editors">
         <xsl:choose>
             <xsl:when test="ancestor::ref">
-                <xsl:apply-templates select="."/>
+                <persName>
+                    <xsl:apply-templates select="."/>
+                </persName>
                 <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
                     <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <editor>
-                    <xsl:apply-templates select="."/>
+                    <persName>
+                        <xsl:apply-templates select="."/>
+                    </persName>
                     <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
                         <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"
                         />
