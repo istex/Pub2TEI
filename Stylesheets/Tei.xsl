@@ -1124,8 +1124,26 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="tei:pb|tei:emph|tei:quote">
+    <xsl:template match="tei:pb|tei:emph">
         <xsl:copy-of select="."/>
+    </xsl:template>
+    <xsl:template match="tei:quote">
+        <quote>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </quote>
+    </xsl:template>
+    <xsl:template match="tei:lg">
+        <lg>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </lg>
+    </xsl:template>
+    <xsl:template match="tei:l">
+        <l>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </l>
     </xsl:template>
   <xsl:template match="tei:hi">
         <xsl:choose>
@@ -1140,7 +1158,7 @@
     <xsl:template match="tei:note">
         <ref type="fn" rend="italic" n="{@n}">
             <xsl:if test="@xml:id">
-                <xsl:attribute name="xml:id">
+                <xsl:attribute name="target">
                     <xsl:text>#</xsl:text>
                     <xsl:value-of select="@xml:id"/>
                 </xsl:attribute>
