@@ -1124,6 +1124,12 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+    <xsl:template match="tei:head">
+        <head>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </head>
+    </xsl:template>
     <xsl:template match="tei:pb|tei:emph">
         <xsl:copy-of select="."/>
     </xsl:template>
