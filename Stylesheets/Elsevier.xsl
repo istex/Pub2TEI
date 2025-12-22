@@ -296,17 +296,17 @@
                             <analytic>
                                 <!-- Title information related to the paper goes here -->
                                 <!-- rattrapage titres vides -->
-                                <xsl:if test="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title">
-                                    <title level="a" type="main">
-                                        <xsl:value-of select="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title"/>
-                                    </title>
-                                    <xsl:if test="simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
-                                        <title level="a" type="sub">
-                                            <xsl:value-of select="simple-head/ce:dochead/ce:textfn | els1:simple-head/ce:dochead/ce:textfn | els2:simple-head/ce:dochead/ce:textfn"/>
-                                        </title>
-                                    </xsl:if>
-                                </xsl:if>
                                 <xsl:choose>
+                                    <xsl:when test="simple-head/ce:title | els1:simple-head/ce:title|els2:simple-head/ce:title">
+                                        <title level="a" type="main">
+                                            <xsl:value-of select="simple-head/ce:title| els1:simple-head/ce:title|els2:simple-head/ce:title"/>
+                                        </title>
+                                        <xsl:if test="simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]| els1:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0] | els2:simple-head/ce:dochead/ce:textfn[string-length() &gt; 0]">
+                                            <title level="a" type="sub">
+                                                <xsl:value-of select="simple-head/ce:dochead/ce:textfn | els1:simple-head/ce:dochead/ce:textfn | els2:simple-head/ce:dochead/ce:textfn"/>
+                                            </title>
+                                        </xsl:if>
+                                    </xsl:when>
                                     <xsl:when test="els1:book-review-head/ce:title | els2:book-review-head/ce:title |book-review-head/ce:title !=''">
                                         <title level="a" type="main">
                                             <xsl:value-of select="els1:book-review-head/ce:title | els2:book-review-head/ce:title |book-review-head/ce:title"/>
@@ -317,26 +317,18 @@
                                             </title>
                                         </xsl:if>
                                     </xsl:when>
-                                    <xsl:when test="simple-head/ce:title | els1:head/ce:title 
-                                        |els2:head/ce:title 
-                                        | head/ce:title ='' 
-                                        or not(simple-head/ce:title | els1:head/ce:title |els2:head/ce:title | head/ce:title)">
+                                    <xsl:when test="els1:head/ce:title | els2:head/ce:title |head/ce:title ='' or not(els1:head/ce:title | els2:head/ce:title |head/ce:title)">
                                         <title level="a" type="main">
                                             <xsl:value-of select="$titre"/>
                                         </title>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:apply-templates select="els1:head/ce:title | els2:head/ce:title |head/ce:title"/>
+                                        <xsl:apply-templates select="els1:head/ce:title |els2:head/ce:title | head/ce:title"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                                 <xsl:if test="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle">
                                     <title level="a" type="sub">
                                         <xsl:value-of select="els1:head/ce:subtitle | els2:head/ce:subtitle |head/ce:subtitle"/>
-                                    </title>
-                                </xsl:if>
-                                <xsl:if test="els1:head/ce:presented |els2:head/ce:presented | head/ce:presented">
-                                    <title level="a" type="sub">
-                                        <xsl:value-of select="els1:head/ce:presented |els2:head/ce:presented | head/ce:presented"/>
                                     </title>
                                 </xsl:if>
                                 <!-- All authors are included here -->

@@ -763,7 +763,7 @@
                                     <xsl:for-each select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title">
                                         <xsl:choose>
                                             <xsl:when test="@level = 'j'">
-                                                <title level="j">
+                                                <title type="main" level="j">
                                                     <xsl:choose>
                                                         <xsl:when test="$eissn = '1724-2150'">Mélanges de l’École française de Rome - Moyen Âge</xsl:when>
                                                         <xsl:when test="$eissn = '1724-2142'">Mélanges de l’École française de Rome - Italie et Méditerranée modernes et contemporaines</xsl:when>
@@ -921,6 +921,14 @@
                                         <xsl:choose>
                                             <xsl:when test="@level = 's'">
                                                 <title level="s">
+                                                    <xsl:attribute name="type">
+                                                        <xsl:choose>
+                                                            <xsl:when test="@type">
+                                                               <xsl:value-of select="@type"/> 
+                                                            </xsl:when>
+                                                            <xsl:otherwise>main</xsl:otherwise>
+                                                        </xsl:choose>
+                                                    </xsl:attribute>
                                                     <xsl:value-of select="string(.)"/>
                                                 </title>
                                             </xsl:when>
