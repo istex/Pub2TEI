@@ -339,13 +339,18 @@
             <xsl:otherwise>
                 <div type="table">
                     <table>
+                        <xsl:if test="tgroup/@cols !='0'">
+                            <xsl:attribute name="cols">
+                                <xsl:value-of select="tgroup/@cols"/>
+                            </xsl:attribute>
+                        </xsl:if>
                         <xsl:if test="@id">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:if>
                         <xsl:if test="ce:label[string-length() &gt; 0]">
-                            <head>
+                            <head type="label">
                                 <xsl:value-of select="ce:label"/>
                             </head>
                         </xsl:if>

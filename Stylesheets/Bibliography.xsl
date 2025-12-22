@@ -2121,9 +2121,11 @@
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
                     </xsl:attribute>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="../@id"/>
-                    </xsl:attribute>
+                    <xsl:if test="@xml:id !=''">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="../@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>

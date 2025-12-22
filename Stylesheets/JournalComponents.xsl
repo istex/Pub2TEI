@@ -456,6 +456,8 @@
                         <xsl:apply-templates/>
                     </title>
                 </xsl:when>
+                <!-- degruyter-->
+                <xsl:when test="//journal-meta/journal-title-group/abbrev-journal-title and not(//journal-meta/journal-title-group/journal-title)"/>
                 <xsl:otherwise>
                     <title level="j" type="abbrev">
                         <xsl:apply-templates/>
@@ -580,7 +582,7 @@
                     </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
-                    <title level="j" type="issue">
+                    <title level="j" type="sub">
                         <xsl:choose>
                             <xsl:when test="@content-type='short'">
                                <xsl:attribute name="rendition">short</xsl:attribute>

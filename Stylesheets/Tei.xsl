@@ -274,10 +274,19 @@
                                 <xsl:when test="contains(.,'[NO TITLE AVAILABLE]')">
                                     <title/>
                                 </xsl:when>
+                                <xsl:when test="tei:fileDesc/tei:titleStmt/tei:title/tei:hi[tei:note]">
+                                    <xsl:apply-templates select="tei:fileDesc/tei:titleStmt/tei:title" mode="article"/>
+                                </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:title"/>
                                     <xsl:apply-templates select="tei:fileDesc/tei:titleStmt/tei:author"/>
                                 </xsl:otherwise>
+                            </xsl:choose>
+                            <!-- auteur -->
+                            <xsl:choose>
+                                <xsl:when test="//tei:distributor='OpenEdition'">
+                                    <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:author"/>
+                                </xsl:when>
                             </xsl:choose>
                             <!-- autre éditeur -->
                             <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:editor"/>
@@ -762,6 +771,37 @@
                                     <xsl:variable name="eissn" select="string(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type = 'eISSN'])"/>
                                     <xsl:for-each select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title">
                                         <xsl:choose>
+                                            <xsl:when test="@level = 'm' and //tei:distributor ='OpenEdition'">
+                                                <title level="m">
+                                                    <xsl:attribute name="type">
+                                                        <xsl:choose>
+                                                            <xsl:when test="@type">
+                                                                <xsl:value-of select="@type"/> 
+                                                            </xsl:when>
+                                                            <xsl:otherwise>main</xsl:otherwise>
+                                                        </xsl:choose>
+                                                    </xsl:attribute>
+                                                    <xsl:value-of select="string(.)"/>
+                                                </title>
+                                            </xsl:when>
+                                            <xsl:when test="@level = 'j' and //tei:distributor ='OpenEdition'">
+                                                <xsl:choose>
+                                                    <xsl:when test="../tei:title[@level='m']"/>
+                                                    <xsl:otherwise>
+                                                        <title level="j">
+                                                            <xsl:attribute name="type">
+                                                                <xsl:choose>
+                                                                    <xsl:when test="@type">
+                                                                        <xsl:value-of select="@type"/> 
+                                                                    </xsl:when>
+                                                                    <xsl:otherwise>main</xsl:otherwise>
+                                                                </xsl:choose>
+                                                            </xsl:attribute>
+                                                            <xsl:value-of select="string(.)"/>
+                                                        </title>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:when>
                                             <xsl:when test="@level = 'j'">
                                                 <title type="main" level="j">
                                                     <xsl:choose>
@@ -932,6 +972,19 @@
                                                     <xsl:value-of select="string(.)"/>
                                                 </title>
                                             </xsl:when>
+                                            <xsl:when test="@level = 'j' and //tei:distributor ='OpenEdition'">
+                                                <title level="s">
+                                                    <xsl:attribute name="type">
+                                                        <xsl:choose>
+                                                            <xsl:when test="@type">
+                                                                <xsl:value-of select="@type"/> 
+                                                            </xsl:when>
+                                                            <xsl:otherwise>main</xsl:otherwise>
+                                                        </xsl:choose>
+                                                    </xsl:attribute>
+                                                    <xsl:value-of select="string(.)"/>
+                                                </title>
+                                            </xsl:when>
                                         </xsl:choose>
                                     </xsl:for-each>
                                 </series>
@@ -1067,17 +1120,22 @@
             <xsl:if test="./@xml:lang">
                 <xsl:copy-of select="./@xml:lang"/>
             </xsl:if>
-               <xsl:apply-templates select="tei:list"/> 
+            <xsl:apply-templates select="tei:list" mode="kw"/> 
         </keywords>
     </xsl:template>
     
-    <xsl:template match="tei:list">
-           <xsl:apply-templates select="tei:item"/>
+    <xsl:template match="tei:list" mode="kw">
+        <xsl:apply-templates select="tei:item" mode="kw"/>
     </xsl:template>
-    <xsl:template match="tei:item">
+    <xsl:template match="tei:item" mode="kw">
         <term>
             <xsl:apply-templates/>
         </term>
+    </xsl:template>
+    <xsl:template match="tei:item">
+        <item>
+            <xsl:apply-templates/>
+        </item>
     </xsl:template>
     <xsl:template match="tei:text">
         <text>
@@ -1094,12 +1152,15 @@
             </xsl:choose>
             <xsl:choose>
                 <xsl:when test="tei:back !=''">
-                    <xsl:if test="//tei:note">
-                        <div type="fn-group">
-                            <xsl:copy-of select="//tei:note"/>
-                        </div>
-                    </xsl:if>
-                    <xsl:copy-of select="tei:back"/>
+                    <back>
+                        <xsl:if test="//tei:note">
+                            <div type="fn-group">
+                                <xsl:copy-of select="//tei:note"/>
+                            </div>
+                        </xsl:if>
+                            <xsl:copy-of select="tei:back/*"/>
+                        
+                    </back>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="//tei:note">
@@ -1117,8 +1178,8 @@
         <body>
           <xsl:choose>
                 <!-- open-edition -->
-              <xsl:when test="tei:p and //tei:distributor='OpenEdition'">
-                    <xsl:apply-templates select="tei:p"/>
+              <xsl:when test="(tei:p |tei:div)  and //tei:distributor='OpenEdition'">
+                  <xsl:apply-templates select="tei:p|tei:div"/>
                 </xsl:when>
                 <!-- droz -->
                 <xsl:when test="tei:div and //tei:funder='Librairie Droz'">
@@ -1182,13 +1243,27 @@
             <xsl:apply-templates/>
         </said>
     </xsl:template>
-  <xsl:template match="tei:hi">
+    <xsl:template match="tei:q">
+        <q>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </q>
+    </xsl:template>
+    <xsl:template match="tei:list">
+        <list>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </list>
+    </xsl:template>
+    <xsl:template match="tei:hi">
         <xsl:choose>
             <xsl:when test="tei:note">
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="tei:note"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="."/>
+                <hi>
+                    <xsl:copy-of select="@*|node()"/>
+                </hi>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1203,7 +1278,27 @@
             <xsl:value-of select="@n"/>
         </ref>
     </xsl:template>
-    <xsl:template match="tei:back">
+    <xsl:template match="tei:table">
+        <table>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </table>
+    </xsl:template>
+    <xsl:template match="tei:row">
+        <row>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </row>
+    </xsl:template>
+    <xsl:template match="tei:cell">
+        <cell>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </cell>
+    </xsl:template>
+    
+    
+    <xsl:template match="tei:back" mode="openEd">
         <back>
             <xsl:if test="//tei:note">
                 <div type="fn-group">
@@ -1215,6 +1310,7 @@
             </div>
         </back>
     </xsl:template>
+    
     <xsl:template match="tei:listBibl">
         <listBibl type="references">
             <xsl:copy-of select="//tei:text/tei:back/tei:div/tei:listBibl/tei:bibl"/>
@@ -1236,11 +1332,25 @@
                 <xsl:when test="contains(.,'[NO TITLE AVAILABLE]')">
                     <title/>
                 </xsl:when>
+                <xsl:when test="tei:title/tei:hi[tei:note]">
+                    <xsl:apply-templates select="tei:title" mode="article"/>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="tei:title"/>
                 </xsl:otherwise>
             </xsl:choose>
         </titleStmt>
+    </xsl:template>
+    <xsl:template match="tei:title" mode="article">
+        <title level='a'>
+            <xsl:attribute name="type">
+                <xsl:choose>
+                    <xsl:when test="@type !=''"><xsl:value-of select="@type"/></xsl:when>
+                    <xsl:otherwise>main</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </title>
     </xsl:template>
     <xsl:template match="tei:title" mode="chap">
         <title level='a' type='main'>
@@ -1348,7 +1458,6 @@
             <xsl:with-param name="date" select="."/>
         </xsl:call-template>
     </xsl:template>
-    
     <xsl:template match="tei:author">
         <author>
             <xsl:copy-of select="tei:persName"/>

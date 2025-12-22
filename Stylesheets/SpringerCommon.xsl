@@ -852,9 +852,14 @@
 
     <xsl:template match="row | rsc:row">
         <row>
+            <xsl:if test="@rowsep">
+                <xsl:attribute name="rows">
+                    <xsl:value-of select="@rowsep"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="ancestor::thead | ancestor::rsc:thead">
-            <xsl:attribute name="role">label</xsl:attribute>
-        </xsl:if>
+                <xsl:attribute name="role">label</xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </row>
     </xsl:template>
