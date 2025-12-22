@@ -1168,6 +1168,12 @@
             <xsl:apply-templates/>
         </lb>
     </xsl:template>
+    <xsl:template match="tei:said">
+        <said>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </said>
+    </xsl:template>
   <xsl:template match="tei:hi">
         <xsl:choose>
             <xsl:when test="tei:note">
