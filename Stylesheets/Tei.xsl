@@ -740,9 +740,7 @@
                                     or //tei:idno[@type='EAN-13']='9782600015929'">
                                     <biblScope unit="volume">2</biblScope>
                                 </xsl:when>
-                            </xsl:choose> 
-                                    
-                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']">
+                            </xsl:choose>                                     <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']">
                                         <biblScope unit="issue">
                                             <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:title[@type='sub-num']"/>
                                         </biblScope>
@@ -775,10 +773,10 @@
                                                         <xsl:otherwise><xsl:value-of select="string(.)"/></xsl:otherwise>
                                                     </xsl:choose>
                                                 </title>
-                                            </xsl:when>
+                                            </xsl:when><!--
                                             <xsl:otherwise>
                                                 <xsl:copy-of select="."/>
-                                            </xsl:otherwise>
+                                            </xsl:otherwise>-->
                                         </xsl:choose>
                                     </xsl:for-each>
                                     <xsl:copy-of select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno"/>
@@ -916,6 +914,19 @@
                                         <xsl:copy-of select="//tei:sourceDesc/tei:biblFull/tei:seriesStmt/tei:idno"/>
                                     </series>
                                 </xsl:if>
+                            </xsl:when>
+                            <xsl:when test="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title">
+                                <series>
+                                    <xsl:for-each select="//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title">
+                                        <xsl:choose>
+                                            <xsl:when test="@level = 's'">
+                                                <title level="s">
+                                                    <xsl:value-of select="string(.)"/>
+                                                </title>
+                                            </xsl:when>
+                                        </xsl:choose>
+                                    </xsl:for-each>
+                                </series>
                             </xsl:when>
                         </xsl:choose>
                     </biblStruct>
@@ -1150,6 +1161,12 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </l>
+    </xsl:template>
+    <xsl:template match="tei:lb">
+        <lb>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </lb>
     </xsl:template>
   <xsl:template match="tei:hi">
         <xsl:choose>
