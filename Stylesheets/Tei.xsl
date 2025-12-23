@@ -28,6 +28,12 @@
                     <xsl:copy-of select="tei:text"/>
                 </TEI>
             </xsl:when>
+            <xsl:when test="//tei:distributor='OpenEdition'">
+                <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
+                    <xsl:apply-templates select="tei:teiHeader"/>
+                    <xsl:apply-templates select="tei:text" mode="openEdition"/>
+                </TEI>
+            </xsl:when>
             <xsl:otherwise>
                 <TEI xsi:noNamespaceSchemaLocation="https://xml-schema.delivery.istex.fr/formats/tei-istex.xsd" xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
                     <xsl:apply-templates select="tei:teiHeader"/>
@@ -972,7 +978,7 @@
                                                     <xsl:value-of select="string(.)"/>
                                                 </title>
                                             </xsl:when>
-                                            <xsl:when test="@level = 'j' and //tei:distributor ='OpenEdition'">
+                                            <xsl:when test="@level = 'j' and //tei:distributor ='OpenEdition' and //tei:title[@level='m']">
                                                 <title level="s">
                                                     <xsl:attribute name="type">
                                                         <xsl:choose>
@@ -1137,6 +1143,119 @@
             <xsl:apply-templates/>
         </item>
     </xsl:template>
+    
+    <!-- openEdition Ebooks -->
+    <xsl:template match="tei:text" mode="openEdition">
+        <text>
+            <xsl:apply-templates select="tei:*" mode="tei"/>
+            <xsl:choose>
+                <xsl:when test="tei:back !=''">
+                    <back>
+                        <xsl:if test="//tei:note">
+                            <div type="fn-group">
+                                <listBibl>
+                                    <xsl:apply-templates select="//tei:note" mode="teiTarget"/>
+                                </listBibl>
+                            </div>
+                        </xsl:if>
+                        <xsl:copy-of select="tei:back/*"/>
+                    </back>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="//tei:note">
+                        <back>
+                            <div type="fn-group">
+                                <listBibl>
+                                    <xsl:for-each select="//tei:note">
+                                        <bibl type="fn" n="{@n}">
+                                            <xsl:if test="@xml:id">
+                                                <xsl:attribute name="target">
+                                                    <xsl:text>#</xsl:text>
+                                                    <xsl:value-of select="@xml:id"/>
+                                                </xsl:attribute>
+                                                <xsl:value-of select="@xml:id"/>
+                                            </xsl:if>
+                                            <!--<xsl:copy-of select="@*|node()"/>-->
+                                            <xsl:apply-templates select="*" mode="teiBack"/>
+                                        </bibl> 
+                                    </xsl:for-each>
+                                </listBibl>
+                            </div>
+                        </back>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
+        </text>
+    </xsl:template>
+    <xsl:template match="tei:*" mode="tei"> 
+        <xsl:element name="{local-name()}">
+            <xsl:apply-templates select="node()|@*" mode="tei"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="node() | @*" mode="tei">
+        <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="node() | @*" mode="tei"/>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template match="tei:note" mode="tei">
+        <ref type="fn" rend="italic" n="{@n}">
+            <xsl:choose>
+                <xsl:when test="@xml:id">
+                    <xsl:attribute name="target">
+                        <xsl:text>#</xsl:text>
+                        <xsl:value-of select="@xml:id"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="@xml:id"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="@n"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </ref>
+    </xsl:template>
+    <xsl:template match="tei:p" mode="teiBack">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <!--<xsl:template match="tei:hi" mode="teiBack">
+        <hi>
+            <xsl:copy-of select="@*|node()"/>
+            <xsl:apply-templates/>
+        </hi>
+    </xsl:template>-->
+    <xsl:template match="tei:ref">
+        <ref>
+            <xsl:copy-of select="@*|node()"/>
+            <xsl:apply-templates/>
+        </ref>
+    </xsl:template>
+    
+    
+    <xsl:template match="tei:hi">
+        <xsl:choose>
+            <xsl:when test="tei:note">
+                <xsl:apply-templates select="tei:note"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <hi>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:apply-templates/>
+                </hi>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="tei:note">
+        <ref type="fn" rend="italic" n="{@n}">
+            <xsl:if test="@xml:id">
+                <xsl:attribute name="target">
+                    <xsl:text>#</xsl:text>
+                    <xsl:value-of select="@xml:id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="@n"/>
+        </ref>
+    </xsl:template>
+    
+    <!-- les autres -->
     <xsl:template match="tei:text">
         <text>
             <xsl:if test="//tei:text/tei:front/tei:div[@type='ack'][string-length()&gt; 0]">
@@ -1174,6 +1293,8 @@
             </xsl:choose>
         </text>
     </xsl:template>
+    
+    
     <xsl:template match="tei:body">
         <body>
           <xsl:choose>
@@ -1192,6 +1313,7 @@
           <!--  <xsl:copy-of select="* except node()//tei:note"/>-->
         </body>
     </xsl:template>
+    
     <xsl:template match="tei:p">
         <p>
             <xsl:copy-of select="@*"/>
@@ -1255,29 +1377,7 @@
             <xsl:apply-templates/>
         </list>
     </xsl:template>
-    <xsl:template match="tei:hi">
-        <xsl:choose>
-            <xsl:when test="tei:note">
-                <xsl:apply-templates select="tei:note"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <hi>
-                    <xsl:copy-of select="@*|node()"/>
-                </hi>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    <xsl:template match="tei:note">
-        <ref type="fn" rend="italic" n="{@n}">
-            <xsl:if test="@xml:id">
-                <xsl:attribute name="target">
-                    <xsl:text>#</xsl:text>
-                    <xsl:value-of select="@xml:id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:value-of select="@n"/>
-        </ref>
-    </xsl:template>
+   
     <xsl:template match="tei:table">
         <table>
             <xsl:copy-of select="@*"/>

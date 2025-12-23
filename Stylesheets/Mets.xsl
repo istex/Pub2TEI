@@ -274,7 +274,7 @@
                 <!-- reprise du body dans le tei openEdition au 
                 niveau du chapitre en format TEI-->
                 <xsl:when test="//tei:text !=''">
-                        <xsl:apply-templates select="//tei:text" mode="openEditionBook"/> 
+                    <xsl:apply-templates select="//tei:text" mode="openEdition"/> 
                 </xsl:when>
                 <xsl:when test="string-length($rawfulltextpath) &gt; 0">
                     <text>
