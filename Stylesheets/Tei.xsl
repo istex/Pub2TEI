@@ -7,6 +7,7 @@
     <!-- Feuille de style concernant les données:
     - DROZ
     - Open Edition Revues
+    - Open Edition ebooks
     - Scielo
     - Copernicus
     - PLOS
@@ -1146,42 +1147,6 @@
     
     <!-- openEdition et DROZ - sortir les notes du <body> et les rediriger
         dans le <back>, créer des liens à la place-->
-    <xsl:template match="tei:text" mode="openEditionDroz">
-        <text>
-            <xsl:apply-templates select="tei:body" mode="tei"/>
-            <xsl:choose>
-                <xsl:when test="tei:back !=''">
-                    <back>
-                        <xsl:if test="//tei:note">
-                            <div type="fn-group">
-                                <xsl:for-each select="//tei:note">
-                                    <note>
-                                        <xsl:copy-of select="@*|node()"/>
-                                        <xsl:apply-templates/>
-                                    </note>
-                                </xsl:for-each>
-                            </div>
-                        </xsl:if>
-                        <xsl:copy-of select="tei:back/*"/>
-                    </back>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:if test="//tei:note">
-                        <back>
-                            <div type="fn-group">
-                                <xsl:for-each select="//tei:note">
-                                    <note>
-                                        <xsl:copy-of select="@*|node()"/>
-                                        <xsl:apply-templates/>
-                                    </note>
-                                </xsl:for-each>
-                            </div>
-                        </back>
-                    </xsl:if>
-                </xsl:otherwise>
-            </xsl:choose>
-        </text>
-    </xsl:template>
     <xsl:template match="tei:*" mode="tei"> 
         <xsl:element name="{local-name()}">
             <xsl:apply-templates select="node()|@*" mode="tei"/>
@@ -1191,6 +1156,71 @@
         <xsl:copy copy-namespaces="no">
             <xsl:apply-templates select="node() | @*" mode="tei"/>
         </xsl:copy>
+    </xsl:template>
+    <xsl:template match="tei:text" mode="openEditionDroz">
+        <text>
+            <xsl:apply-templates select="tei:body" mode="tei"/>
+            <xsl:choose>
+                <xsl:when test="tei:back !=''">
+                    <back>
+                        <xsl:if test="//tei:note">
+                            <div type="fn-group">
+                               <!-- <xsl:for-each select="//tei:note">
+                                    <note>
+                                        <xsl:copy-of select="@*|node()"/>
+                                        <xsl:apply-templates/>
+                                    </note>
+                                </xsl:for-each>-->
+                                <xsl:apply-templates select="//tei:note" mode="teiALL"/>
+                            </div>
+                        </xsl:if>
+                        <xsl:copy-of select="tei:back/*"/>
+                    </back>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="//tei:note">
+                        <back>
+                            <div type="fn-group">
+                               <!-- <xsl:for-each select="//tei:note">
+                                    <note>
+                                        <xsl:copy-of select="@*|node()"/>
+                                        <xsl:apply-templates/>
+                                    </note>
+                                </xsl:for-each>-->
+                                <xsl:apply-templates select="//tei:note" mode="teiALL"/>
+                            </div>
+                        </back>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
+        </text>
+    </xsl:template>
+    <xsl:template match="tei:note" mode="teiALL">
+        <note>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates mode="teiALL"/>
+        </note>
+    </xsl:template>
+    <xsl:template match="tei:p" mode="teiALL">
+        <p>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="tei:hi" mode="teiALL">
+        <hi>
+            <xsl:copy-of select="@*|node()"/>
+        </hi>
+    </xsl:template>
+    <xsl:template match="tei:ref" mode="teiALL">
+        <ref>
+            <xsl:copy-of select="@*|node()"/>
+        </ref>
+    </xsl:template>
+    <xsl:template match="tei:emph" mode="teiALL">
+        <emph>
+            <xsl:copy-of select="@*|node()"/>
+        </emph>
     </xsl:template>
     <xsl:template match="tei:note" mode="tei">
         <ref type="fn" rend="italic">
@@ -1229,7 +1259,7 @@
     <xsl:template match="tei:hi">
         <xsl:choose>
             <xsl:when test="tei:note">
-                <xsl:apply-templates select="tei:note"/>
+                <xsl:apply-templates select="tei:note" mode="tei"/>
             </xsl:when>
             <xsl:otherwise>
                 <hi>
@@ -1238,17 +1268,6 @@
                 </hi>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
-    <xsl:template match="tei:note">
-        <ref type="fn" rend="italic" n="{@n}">
-            <xsl:if test="@xml:id">
-                <xsl:attribute name="target">
-                    <xsl:text>#</xsl:text>
-                    <xsl:value-of select="@xml:id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:value-of select="@n"/>
-        </ref>
     </xsl:template>
     
     <!-- les autres -->
