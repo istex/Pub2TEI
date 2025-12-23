@@ -446,7 +446,7 @@
                                         <!-- droz -->
                                         <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:date/@when">
                                             <date type="published" when="{//tei:fileDesc/tei:publicationStmt/tei:date/@when}">
-                                                <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
+                                                <xsl:value-of select="//tei:fileDesc/tei:publicationStmt/tei:date/@when"/>
                                             </date>
                                         </xsl:when>
                                         <xsl:otherwise>
