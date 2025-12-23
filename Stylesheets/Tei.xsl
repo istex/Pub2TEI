@@ -1193,13 +1193,20 @@
         </xsl:copy>
     </xsl:template>
     <xsl:template match="tei:note" mode="tei">
-        <ref type="fn" rend="italic" n="{@n}">
+        <ref type="fn" rend="italic">
+            <xsl:if test="@n !=''">
+                <xsl:attribute name="n">
+                    <xsl:value-of select="@n"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@xml:id !=''">
+                <xsl:attribute name="target">
+                    <xsl:text>#</xsl:text>
+                    <xsl:value-of select="@xml:id"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:choose>
-                <xsl:when test="@xml:id">
-                    <xsl:attribute name="target">
-                        <xsl:text>#</xsl:text>
-                        <xsl:value-of select="@xml:id"/>
-                    </xsl:attribute>
+                <xsl:when test="@xml:id !='' and not(@n)">
                     <xsl:value-of select="@xml:id"/>
                 </xsl:when>
                 <xsl:otherwise>
