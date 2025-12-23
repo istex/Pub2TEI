@@ -150,7 +150,7 @@
                                     >book</note>
                             </xsl:otherwise>
                         </xsl:choose>
-                        <xsl:copy-of select="//tei:fileDesc/tei:notesStmt/tei:note"/>
+                        <!--<xsl:copy-of select="//tei:fileDesc/tei:notesStmt/tei:note"/>-->
                     </notesStmt>
                 </xsl:if>
                 <sourceDesc>
@@ -328,7 +328,7 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </title>
-                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub']">
+                                    <xsl:if test="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub'] !=''">
                                         <title level="m" type="sub">
                                             <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:title[@type='sub']"/>
                                         </title>
@@ -1079,7 +1079,7 @@
                         <xsl:copy-of select="//tei:textClass"/>
                     </profileDesc>
                 </xsl:when>
-                <!-- Droz nettoyage de données erronnées type langue 
+                <!-- Droz nettoyage de données erronées type langue 
                     <langUsage>
                        <language ident="la">Lao People's Democratic Republic</language>
                     </langUsage>
@@ -1105,6 +1105,7 @@
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:copy-of select="//tei:abstract"/>
+                        <xsl:copy-of select="//tei:creation"/>
                     </profileDesc>
                 </xsl:when>
                 <xsl:otherwise>
