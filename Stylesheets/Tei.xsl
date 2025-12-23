@@ -1471,7 +1471,7 @@
                 <!-- droz -->
                 <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:date/@when">
                     <date type="published" when="{//tei:fileDesc/tei:publicationStmt/tei:date/@when}">
-                        <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
+                        <xsl:value-of select="//tei:fileDesc/tei:publicationStmt/tei:date/@when"/>
                     </date>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1482,7 +1482,9 @@
             </xsl:choose>
            
             <xsl:if test="tei:availability/tei:licence/tei:date">
-                <date type="Copyright" when="{tei:availability/tei:licence/tei:date}"/>
+                <date type="Copyright" when="{tei:availability/tei:licence/tei:date}">
+                    <xsl:value-of select="//tei:availability/tei:licence/tei:date"/>
+                </date>
             </xsl:if>
         </publicationStmt>
     </xsl:template>
