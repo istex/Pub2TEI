@@ -1222,6 +1222,11 @@
             <xsl:copy-of select="@*|node()"/>
         </emph>
     </xsl:template>
+    <xsl:template match="tei:graphic" mode="teiALL">
+        <graphic>
+            <xsl:copy-of select="@*|node()"/>
+        </graphic>
+    </xsl:template>
     <xsl:template match="tei:note" mode="tei">
         <ref type="fn" rend="italic">
             <xsl:if test="@n !=''">
