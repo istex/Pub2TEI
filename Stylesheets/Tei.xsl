@@ -1084,9 +1084,23 @@
                        <language ident="la">Lao People's Democratic Republic</language>
                     </langUsage>
                     au lieu de latin -->
+                <xsl:when test="//tei:idno[@type='EAN-13']='9782600012850' 
+                    or /tei:idno[@type='EAN-13']='9782600018920'
+                    or /tei:idno[@type='EAN-13']='9782600015134'">
+                    <profileDesc>
+                        <xsl:copy-of select="//tei:abstract"/>
+                        <xsl:copy-of select="//tei:creation"/>
+                        <langUsage>
+                            <language ident="fr">Français</language>
+                        </langUsage>
+                        <xsl:if test="string-length(//tei:textClass)&gt;0">
+                            <xsl:copy-of select="//tei:textClass"/>
+                        </xsl:if>
+                    </profileDesc>
+                </xsl:when>
                 <xsl:when test="//tei:langUsage/tei:language[@ident='la']">
                     <profileDesc>
-                            <xsl:copy-of select="//tei:abstract"/>
+                        <xsl:copy-of select="//tei:abstract"/>
                         <xsl:copy-of select="//tei:creation"/>
                         <langUsage>
                             <language ident="la">Latin</language>
@@ -1401,7 +1415,7 @@
                 <xsl:when test="//tei:idno[@type='nom_pdf']='9782600003551_front-1.pdf'"><xsl:text>Cliché Bibliothèque nationale de France, Paris.</xsl:text></xsl:when>
                 <xsl:when test="//tei:idno[@type='nom_pdf']='9782600032421_body-2-1.pdf'"><xsl:text>CHAPITRE XVI - La Poésie mondaine pendant les premières guerres civiles</xsl:text></xsl:when>
                 <xsl:when test="//tei:idno[@type='nom_pdf']='9782600018890_back-5.pdf'"><xsl:text>APPENDIX</xsl:text></xsl:when>
-                <xsl:when test=".=''"><xsl:text>--------------------- NO TITLE ---------------------</xsl:text></xsl:when>
+                <xsl:when test=".=''"><xsl:text>NO TITLE</xsl:text></xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates/>
                 </xsl:otherwise>
