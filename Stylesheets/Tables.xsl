@@ -461,6 +461,11 @@
             <xsl:apply-templates/>
         </row>
     </xsl:template>
+    <xsl:template match="monospace">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
 
     <xsl:template match="thead |rsc:thead | cals:thead">
         <xsl:apply-templates/>
@@ -513,7 +518,7 @@
     </xsl:template>
 
     <xsl:template match="th">
-        <cell role="th">
+        <cell role="label">
             <xsl:if test="@align">
                 <xsl:attribute name="rend">align(<xsl:value-of select="@align"/>)</xsl:attribute>
             </xsl:if>
@@ -528,9 +533,12 @@
     </xsl:template>
 
     <xsl:template match="td">
-        <cell role="td">
+        <cell role="data">
             <xsl:if test="@align">
-                <xsl:attribute name="rend">align(<xsl:value-of select="@align"/>)</xsl:attribute>
+                <xsl:attribute name="rend"><xsl:value-of select="@align"/></xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@valign">
+                <xsl:attribute name="style"><xsl:value-of select="@valign"/></xsl:attribute>
             </xsl:if>
             <xsl:if test="@rowspan">
                 <xsl:attribute name="rows"><xsl:value-of select="@rowspan"/></xsl:attribute>

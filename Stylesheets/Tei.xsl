@@ -1205,7 +1205,7 @@
     <xsl:template match="tei:p" mode="teiALL">
         <p>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="teiALL"/>
         </p>
     </xsl:template>
     <xsl:template match="tei:hi" mode="teiALL">

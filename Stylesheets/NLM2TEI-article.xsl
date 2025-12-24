@@ -1450,9 +1450,6 @@
                             <xsl:value-of select="journal-title-group/abbrev-journal-title"/>
                         </title>
                     </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="journal-meta/journal-title | journal-meta/journal-title-group/journal-title"/>
-                    </xsl:otherwise>
                 </xsl:choose>
                               <!-- Bloc RSL version dtd highWire -->
                 <xsl:if test="//art/@jid|//rsc:art/@jid='roybiogmem'">
@@ -4035,7 +4032,7 @@
         <xsl:choose>
             <xsl:when test="year!='0'">
                 <xsl:if test="not(@pub-type='epreprint')">
-                    <date>
+                    <date when="{normalize-space(year[1])}">
                         <xsl:choose>
                             <xsl:when test="@date-type='issue-pub'">
                                 <xsl:attribute name="type">published</xsl:attribute>
