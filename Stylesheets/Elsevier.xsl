@@ -781,11 +781,18 @@
             </xsl:when>
             <xsl:otherwise>
                 <term>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="parent::ce:keyword/@id !=''">
+                            <xsl:attribute name="xml:id">
+                                <xsl:apply-templates select="parent::ce:keyword/@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                     <xsl:apply-templates/>
                 </term>
             </xsl:otherwise>
@@ -1384,6 +1391,16 @@
 
     <xsl:template match="ce:cross-ref">
         <ref>
+            <xsl:choose>
+                <xsl:when test="@type">
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="@type"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="type">fn</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:attribute name="target">
                 <xsl:choose>
                     <!-- Si par hasard ELsevier bascule sur une vraie syntaxe URI, on n'ajoute pas le # devant l'identifiant -->
