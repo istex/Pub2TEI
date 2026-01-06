@@ -462,9 +462,16 @@
         </row>
     </xsl:template>
     <xsl:template match="monospace">
-        <p>
-            <xsl:apply-templates/>
-        </p>
+        <xsl:choose>
+            <xsl:when test="parent::p">
+                <hi rend="bold">
+                    <xsl:apply-templates/> 
+                </hi>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><xsl:apply-templates/></p>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="thead |rsc:thead | cals:thead">

@@ -3497,6 +3497,11 @@
 
     <xsl:template match="back/fn-group">
         <div type="fn-group">
+            <xsl:choose>
+                <xsl:when test="//article/front/article-meta/title-group/fn-group/fn">
+                    <xsl:apply-templates select="//article/front/article-meta/title-group/fn-group/fn"/>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -3513,38 +3518,58 @@
     <xsl:template match="fn-group">
         <xsl:choose>
             <xsl:when test="ancestor::title-group/fn-group/fn">
-                <title type="note">
-                    <note>
-                        <xsl:if test="@fn-type">
-                            <xsl:attribute name="type">
-                                <xsl:value-of select="@fn-type"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="@id">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@id"/>
-                            </xsl:attribute>
-                        </xsl:if>
-                        <xsl:apply-templates select="fn"/>
-                    </note>
-                </title>
+                <note>
+                    <xsl:if test="@fn-type">
+                        <xsl:attribute name="type">
+                            <xsl:value-of select="@fn-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="label"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates select="fn"/>
+                </note>
+                
             </xsl:when>
             <xsl:otherwise>
-                    <xsl:apply-templates select="fn"/>
+                <xsl:apply-templates select="fn"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="fn">
         <note place="inline">
-            <xsl:if test="@fn-type">
-                <xsl:attribute name="type">
-                    <xsl:value-of select="@fn-type"/>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@fn-type">
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="@fn-type"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="type">fn</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="label and contains(@id,'FN')">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="label"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:if test="@id">
-                <xsl:attribute name="n">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
@@ -3569,11 +3594,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="fn/label">
-        <ref>
-            <xsl:apply-templates/>
-        </ref>
-    </xsl:template>
+    <xsl:template match="fn/label"/>
 
     <!-- References in main text -->
     <xsl:template match="xref">
