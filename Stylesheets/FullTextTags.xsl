@@ -804,7 +804,7 @@
 				    </xsl:when>
 				    <xsl:when test="contains(@href, 'n')">
 				        <!-- we have a note (normally) -->
-				        <hi><ref type="note">
+				        <hi><ref type="fn">
 				            <xsl:attribute name="target">
 				                <xsl:value-of select="@href"/>
 				            </xsl:attribute>

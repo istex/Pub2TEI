@@ -764,7 +764,7 @@
     <xsl:template match="ref">
         <xsl:choose>
             <xsl:when test="note">
-                <bibl type="note">
+                <bibl type="fn">
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>

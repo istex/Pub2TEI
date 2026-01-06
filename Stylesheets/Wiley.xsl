@@ -1502,6 +1502,7 @@
                         <xsl:when test="@type='short'">
                             <xsl:apply-templates select="." mode="short"/>
                         </xsl:when>
+                        <xsl:when test="@type='shortAuthors'"/>
                         <xsl:otherwise>
                             <title level= "a" type="main">
                                 <xsl:if test="@xml:lang">
