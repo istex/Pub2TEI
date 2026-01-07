@@ -2121,11 +2121,18 @@
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
                     </xsl:attribute>
-                    <xsl:if test="@xml:id !=''">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="../@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="@id !=''">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="../@id !=''">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="../@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
@@ -2199,7 +2206,7 @@
                     </xsl:choose>
                 </biblStruct>
             </xsl:when>
-            <xsl:when test="source|person-group|year">
+            <xsl:when test="source|person-group|year and not(contains(.,', et al.'))">
                 <biblStruct>
                     <xsl:if test="@citation-type | @publication-type">
                         <xsl:attribute name="type">
