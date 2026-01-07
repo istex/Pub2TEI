@@ -212,7 +212,7 @@
             <xsl:if test="sb:contribution">
                 <analytic>
                     <xsl:if test="@id">
-                        <ref type="refid" xml:id="{@id}"/>
+                        <ref xml:id="{@id}"/>
                     </xsl:if>
                     <xsl:apply-templates select="sb:contribution/*"/>
                 </analytic>
