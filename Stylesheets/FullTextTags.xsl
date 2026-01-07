@@ -1149,7 +1149,7 @@
                     <xsl:attribute name="type">bibr</xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="type">fn</xsl:attribute>
+                    <xsl:attribute name="type">figure</xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:attribute name="target">

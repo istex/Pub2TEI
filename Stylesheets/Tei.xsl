@@ -1213,7 +1213,7 @@
     <xsl:template match="tei:note" mode="teiALL">
         <note>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()" mode="teiALL"/>
+            <xsl:apply-templates mode="teiALL"/>
         </note>
     </xsl:template>
     <xsl:template match="tei:p" mode="teiALL">
