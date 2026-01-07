@@ -1213,7 +1213,7 @@
     <xsl:template match="tei:note" mode="teiALL">
         <note>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates mode="teiALL"/>
+            <xsl:apply-templates select="node()" mode="teiALL"/>
         </note>
     </xsl:template>
     <xsl:template match="tei:p" mode="teiALL">
@@ -1224,7 +1224,52 @@
     </xsl:template>
     <xsl:template match="tei:hi" mode="teiALL">
         <hi>
-            <xsl:copy-of select="@*|node()"/>
+            <xsl:choose>
+                <xsl:when test="contains(@rendition,'#style01')">
+                    <xsl:attribute name="rend">normal</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:when test="contains(@rendition,'#style02')">
+                    <xsl:attribute name="rend">italic</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:when test="contains(@rendition,'#style03')">
+                    <xsl:attribute name="rend">superscript</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:when test="contains(@rendition,'#style04')">
+                    <xsl:attribute name="rend">bold</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </hi>
+    </xsl:template>
+    <xsl:template match="tei:hi except(tei:hi[tei:note])" mode="tei">
+        <hi>
+            <xsl:choose>
+                <xsl:when test="contains(@rendition,'#style01')">
+                    <xsl:attribute name="rend">normal</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:when test="contains(@rendition,'#style02')">
+                    <xsl:attribute name="rend">italic</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:when test="contains(@rendition,'#style03')">
+                    <xsl:attribute name="rend">superscript</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:when test="contains(@rendition,'#style04')">
+                    <xsl:attribute name="rend">bold</xsl:attribute>
+                    <xsl:copy-of select="node()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </hi>
     </xsl:template>
     <xsl:template match="tei:ref" mode="teiALL">
@@ -1243,7 +1288,7 @@
         </graphic>
     </xsl:template>
     <xsl:template match="tei:note" mode="tei">
-        <ref type="fn" rend="italic">
+        <ref type="fn" rend="superscript">
             <xsl:if test="@n !=''">
                 <xsl:attribute name="n">
                     <xsl:value-of select="@n"/>

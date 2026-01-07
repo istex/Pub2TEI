@@ -1141,6 +1141,17 @@
     
     <xsl:template match="ce:float-anchor">
         <ptr>
+            <xsl:choose>
+                <xsl:when test="starts-with(@refid,'f')">
+                    <xsl:attribute name="type">figure</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="starts-with(@refid,'bb')">
+                    <xsl:attribute name="type">bibr</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="type">fn</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:attribute name="target">
                 <xsl:variable name="concat">
                     <xsl:value-of select="concat('#',@refid)"/>
