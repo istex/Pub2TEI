@@ -794,12 +794,20 @@
 				<!--xsl:message><xsl:value-of select="substring(@href,2,1)"/></xsl:message-->
 				<xsl:choose>
 				    <!-- SG ajout reference WILEY -->
-				    <xsl:when test="contains(@href,'b') or contains(@href,'bib')">
+				    <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">
 				        <ref type="bibr">
 				            <xsl:attribute name="target">
 				                <xsl:value-of select="@href"/>
 				            </xsl:attribute>
 				            <xsl:apply-templates/>
+				        </ref>
+				    </xsl:when>
+				    <xsl:when test="contains(@href,'fig')">
+				        <ref type="fig">
+				            <xsl:attribute name="target">
+				                <xsl:value-of select="@href"/>
+				            </xsl:attribute>
+				            <xsl:value-of select="text()"/>
 				        </ref>
 				    </xsl:when>
 				    <xsl:when test="contains(@href, 'n')">
@@ -820,7 +828,7 @@
 				            <xsl:apply-templates/>
 				        </ref>
 				    </xsl:when>
-				    <xsl:when test="contains(@href,'t')">
+				    <xsl:when test="contains(@href,'tab') or contains(@href,'tb')">
 				        <ref type="table">
 				            <xsl:attribute name="target">
 				                <xsl:value-of select="@href"/>
@@ -829,7 +837,7 @@
 				        </ref>
 				    </xsl:when>
 				    <xsl:when test="contains(@href,'f')">
-				        <ref type="figure">
+				        <ref type="fig">
 				            <xsl:attribute name="target">
 				                <xsl:value-of select="@href"/>
 				            </xsl:attribute>
@@ -1484,16 +1492,16 @@
         </formula>
     </xsl:template>
     <xsl:template match="online-methods"><xsl:apply-templates/></xsl:template>
-    <xsl:template match="wiley:header/wiley:contentMeta/wiley:supportingInformation">
-        <xsl:apply-templates select="wiley:supportingInfoItem"/>
+    <xsl:template match="wiley:header/wiley:contentMeta/wiley:supportingInformation"> 
+        <div type="appendice">
+            <xsl:apply-templates select="wiley:supportingInfoItem"/>
+        </div>
     </xsl:template>
     <!-- reprise supportingInformation -->
     <xsl:template match="wiley:supportingInfoItem">
-        <div type="appendice">
             <p>
                 <xsl:apply-templates/>
             </p>
-        </div>
     </xsl:template>
     <!-- SG - traitement des book-reviews -->
     <xsl:template match="wiley:header/wiley:contentMeta/wiley:titleGroup/wiley:title/wiley:citation">

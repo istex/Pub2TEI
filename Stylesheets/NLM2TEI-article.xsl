@@ -3648,7 +3648,12 @@
                                     <xsl:choose>
                                         <xsl:when test="@ref-type">
                                             <xsl:attribute name="type">
-                                                <xsl:value-of select="@ref-type"/>
+                                                <xsl:choose>
+                                                    <xsl:when test="@ref-type='fig'">figure</xsl:when>
+                                                    <xsl:otherwise>
+                                                        <xsl:value-of select="@ref-type"/>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
                                             </xsl:attribute>
                                         </xsl:when>
                                         <xsl:otherwise>

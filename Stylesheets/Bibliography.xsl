@@ -1503,6 +1503,19 @@
     <xsl:template match="wiley:bibSection">
         <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="wiley:accessionId">
+        <idno>
+        <xsl:if test="contains(@ref,'doi')">
+            <xsl:attribute name="type">doi</xsl:attribute>
+        </xsl:if>
+            <xsl:if test="@ref !=''">
+                <xsl:attribute name="source">
+                    <xsl:value-of select="@ref"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
     <xsl:template match="wiley:citation">
         <bibl type="{@type}" xml:id="{@xml:id}">
             <xsl:apply-templates/>
@@ -2117,6 +2130,11 @@
                     <xsl:if test="@citation-type | @publication-type">
                         <xsl:attribute name="type">
                             <xsl:apply-templates select="@citation-type | @publication-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="../label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="../label"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:choose>

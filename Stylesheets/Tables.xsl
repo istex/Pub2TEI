@@ -429,10 +429,15 @@
         <xsl:apply-templates select="wiley:row"/>
     </xsl:template>
     <xsl:template match="wiley:row">
-        <row role="data">
-            <xsl:if test="@rowsep">
-                <xsl:attribute name="role">label</xsl:attribute>
-            </xsl:if>
+        <row>
+            <xsl:choose>
+                <xsl:when test="wiley:entry/@rowsep">
+                    <xsl:attribute name="role">label</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="role">data</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates select="wiley:entry"/>
         </row>
     </xsl:template>
@@ -445,7 +450,7 @@
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
             <xsl:if test="@align">
-                <xsl:attribute name="style"><xsl:text>align(</xsl:text><xsl:apply-templates select="@align"/><xsl:text>)</xsl:text></xsl:attribute>
+                <xsl:attribute name="rendition"><xsl:text>align(</xsl:text><xsl:apply-templates select="@align"/><xsl:text>)</xsl:text></xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </cell>

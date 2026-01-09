@@ -1418,6 +1418,18 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="@year">
+                    <xsl:value-of
+                        select="translate(@year, ',.[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]', '')"
+                    />
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of
+                        select="translate(., ',.[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]', '')"
+                    />
+                </xsl:otherwise>
+            </xsl:choose>
         </date>
     </xsl:template>
     <!-- conference -->

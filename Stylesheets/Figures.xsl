@@ -202,7 +202,16 @@
             </xsl:when>
             <xsl:otherwise>
                     <media>
-                        
+                        <xsl:if test="../@xml:id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:apply-templates select="../@xml:id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@alt">
+                            <xsl:attribute name="source">
+                                <xsl:apply-templates select="@alt"/>
+                            </xsl:attribute>
+                        </xsl:if>
                         <xsl:choose>
                             <xsl:when test="@mimeType !=''">
                                 <xsl:attribute name="mimeType">
@@ -218,7 +227,6 @@
                                 <xsl:attribute name="mimeType">image</xsl:attribute>
                             </xsl:otherwise>
                         </xsl:choose>
-                        
                         <xsl:attribute name="url">
                             <xsl:apply-templates select="@href"/>
                         </xsl:attribute>

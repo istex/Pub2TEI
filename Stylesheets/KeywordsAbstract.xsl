@@ -129,18 +129,25 @@
                      <xsl:attribute name="ana">abbreviation</xsl:attribute>
                  </xsl:if>
             <keywords>
-                <xsl:if test="normalize-space(@class)">
-                    <xsl:attribute name="scheme">
-                        <xsl:value-of select="@class"/>
-                    </xsl:attribute>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="normalize-space(@class)">
+                        <xsl:attribute name="scheme">
+                            <xsl:value-of select="@class"/>
+                        </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="normalize-space(ce:section-title)">
+                        <xsl:attribute name="scheme">
+                            <xsl:value-of select="ce:section-title"/>
+                        </xsl:attribute>
+                    </xsl:when>
+                </xsl:choose>
                 <xsl:if test="normalize-space(@id)">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="@id"/>
                     </xsl:attribute>
                 </xsl:if>
                 <xsl:if test="ce:section-title/@id">
-                    <xsl:attribute name="xml:id">
+                    <xsl:attribute name="n">
                         <xsl:value-of select="ce:section-title/@id"/>
                     </xsl:attribute>
                 </xsl:if>
@@ -173,10 +180,7 @@
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="ce:keyword/ce:text">
-                        <list>
-                            <xsl:apply-templates select="ce:section-title"/>
-                            <xsl:apply-templates select="*[not(self::ce:section-title|self::Heading)]"/>
-                        </list>
+                        <xsl:apply-templates select="*[not(self::ce:section-title|self::Heading)]"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:apply-templates select="*[not(self::ce:section-title|self::Heading)]"/>
@@ -453,9 +457,7 @@
     <xsl:template match="ce:keyword">
         <xsl:choose>
             <xsl:when test="parent::ce:keywords">
-            <item>
                 <xsl:apply-templates/>
-            </item>
             </xsl:when>
         <xsl:otherwise>
                 <xsl:apply-templates/>
@@ -464,26 +466,19 @@
     </xsl:template>
     <xsl:template match="SubjectCollection">
         <keywords scheme="book-subject-collection">
-            <list>
                 <label><xsl:value-of select="@Code"/></label>
-                <item>
                     <term>
                         <xsl:apply-templates/>
                     </term>
-                </item>
-            </list>
         </keywords>
     </xsl:template>
     <xsl:template match="BookSubjectGroup">
         <keywords scheme="book-subject">
-            <list>
                 <xsl:apply-templates select="BookSubject"/>
-            </list>
         </keywords>
     </xsl:template>
     <xsl:template match="BookSubject">
         <label><xsl:value-of select="@Code"/></label>
-        <item>
             <term>
                 <xsl:attribute name="type">
                     <xsl:apply-templates select="@Type"/>
@@ -496,16 +491,13 @@
                 </xsl:if>
                 <xsl:apply-templates/>
             </term>
-        </item>
     </xsl:template>
 <!-- -->
     
     <!-- For NLM - EDPS -->
 
     <xsl:template match="compound-kwd">
-        <item>
         <xsl:apply-templates/>
-        </item>
     </xsl:template>
 
     <xsl:template match="compound-kwd-part[@content-type = 'code']">
