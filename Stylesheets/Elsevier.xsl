@@ -1408,6 +1408,9 @@
                         <xsl:when test="starts-with(@refid,'bb')">
                             <xsl:attribute name="type">bibr</xsl:attribute>
                         </xsl:when>
+                        <xsl:when test="starts-with(@refid,'bib')">
+                            <xsl:attribute name="type">bibr</xsl:attribute>
+                        </xsl:when>
                     </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
@@ -1441,9 +1444,9 @@
                 <xsl:when test="starts-with(@refid,'bb')">
                     <xsl:attribute name="type">bibr</xsl:attribute>
                 </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="type">fn</xsl:attribute>
-                </xsl:otherwise>
+                <xsl:when test="starts-with(@refid,'bib')">
+                    <xsl:attribute name="type">bibr</xsl:attribute>
+                </xsl:when>
             </xsl:choose>
             <xsl:attribute name="target">
                 <xsl:for-each select="tokenize(@refid,' ')">

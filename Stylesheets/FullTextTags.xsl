@@ -903,19 +903,21 @@
     
     <xsl:template match="bibr | bibrinl">
         <ref type="bibr">
-            <xsl:attribute name="target">
                 <xsl:variable name="diese">
                     <xsl:value-of select="@rid"/>
                 </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="contains($diese,' ')">
-                        <xsl:apply-templates select="@rid" mode="rid"/>
+                        <xsl:attribute name="steftarget">
+                            <xsl:apply-templates select="@rid" mode="rid"/>
+                        </xsl:attribute>
                     </xsl:when>
                     <xsl:otherwise>
+                        <xsl:attribute name="target">
                         <xsl:value-of select="concat('#',$diese)"/>
+                        </xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:attribute>
         </ref>
     </xsl:template>
     <xsl:template match="bibr/@rid" mode="rid">
