@@ -538,7 +538,7 @@
                                     </xsl:if>
                                     <!-- pagination article -->
                                     <xsl:choose>
-                                        <xsl:when test="$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]">
+                                        <xsl:when test="$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:first-page !=''">
                                             <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:first-page}">
                                                 <xsl:value-of select="$docIssueEls//ce:include-item[ce:doi=$currentDoiEls]/ce:pages/ce:first-page"/>
                                             </biblScope>
@@ -547,7 +547,7 @@
                                             </biblScope>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:if test="$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]">
+                                            <xsl:if test="$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:first-page !=''">
                                                 <biblScope unit="page" from="{$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:first-page}">
                                                     <xsl:value-of select="$docIssueEls//ce:include-item[ce:pii=$currentPiiEls]/ce:pages/ce:first-page"/>
                                                 </biblScope>
