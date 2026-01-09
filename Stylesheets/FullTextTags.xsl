@@ -916,7 +916,7 @@
                 </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="contains($diese,' ')">
-                        <xsl:attribute name="steftarget">
+                        <xsl:attribute name="target">
                             <xsl:apply-templates select="@rid" mode="rid"/>
                         </xsl:attribute>
                     </xsl:when>
