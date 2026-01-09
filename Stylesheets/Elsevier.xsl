@@ -1399,19 +1399,16 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="starts-with(@refid,'tbl')">
+                        <xsl:when test="starts-with(@refid,'tbl') or starts-with(@refid,'TBL')">
                             <xsl:attribute name="type">table</xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="starts-with(@refid,'fn')">
+                        <xsl:when test="starts-with(@refid,'fn') or starts-with(@refid,'FN')">
                             <xsl:attribute name="type">fn</xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="starts-with(@refid,'f')">
+                        <xsl:when test="starts-with(@refid,'f') or starts-with(@refid,'fig') or starts-with(@refid,'FIG')">
                             <xsl:attribute name="type">fig</xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="starts-with(@refid,'bb')">
-                            <xsl:attribute name="type">bibr</xsl:attribute>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@refid,'bib')">
+                        <xsl:when test="starts-with(@refid,'bb') or starts-with(@refid,'BB') or starts-with(@refid,'bib') or starts-with(@refid,'BIB')">
                             <xsl:attribute name="type">bibr</xsl:attribute>
                         </xsl:when>
                     </xsl:choose>
@@ -1438,19 +1435,16 @@
     <xsl:template match="ce:cross-refs">
         <ref>
             <xsl:choose>
-                <xsl:when test="starts-with(@refid,'tbl')">
+                <xsl:when test="starts-with(@refid,'tbl') or starts-with(@refid,'TBL')">
                     <xsl:attribute name="type">table</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="starts-with(@refid,'fn')">
+                <xsl:when test="starts-with(@refid,'fn') or starts-with(@refid,'FN')">
                     <xsl:attribute name="type">fn</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="starts-with(@refid,'f')">
+                <xsl:when test="starts-with(@refid,'f') or starts-with(@refid,'fig') or starts-with(@refid,'FIG')">
                     <xsl:attribute name="type">fig</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="starts-with(@refid,'bb')">
-                    <xsl:attribute name="type">bibr</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="starts-with(@refid,'bib')">
+                <xsl:when test="starts-with(@refid,'bb') or starts-with(@refid,'BB') or starts-with(@refid,'bib') or starts-with(@refid,'BIB')">
                     <xsl:attribute name="type">bibr</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
