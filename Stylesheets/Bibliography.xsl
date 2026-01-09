@@ -1111,8 +1111,12 @@
             </name>
         </editor>
     </xsl:template>
+    
+    <xsl:template match="wiley:author">
+        <xsl:apply-templates/>
+    </xsl:template>
 
-    <xsl:template match="citauth | rsc:citauth | wiley:author">
+    <xsl:template match="citauth | rsc:citauth">
         <xsl:choose>
             <xsl:when test="ancestor::name-alternatives">
                 <persName type="byline">
@@ -1470,145 +1474,18 @@
     <xsl:template match="wiley:bibSection">
         <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="wiley:citation">
+        <bibl type="{@type}" xml:id="{@xml:id}">
+            <xsl:apply-templates/>
+        </bibl>
+    </xsl:template>
     <xsl:template match="wiley:bib | wiley:bibSection/wiley:bib">
         <!-- SG - reprise ref structurées et ref non structurées -->
         <bibl type="citation">
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@xml:id"/>
             </xsl:attribute>
-            <xsl:for-each select="wiley:citation">
-                <xsl:choose>
-                    <xsl:when test="wiley:articleTitle | wiley:journalTitle">
-                        <bibl type="journal">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@xml:id"/>
-                            </xsl:attribute>
-                            <xsl:if
-                                test="wiley:articleTitle | wiley:chapterTitle | wiley:author | wiley:groupName">
-                                <xsl:apply-templates select="wiley:articleTitle"/>
-                                <!-- SG - ajout chapterTitle -->
-                                <xsl:apply-templates select="wiley:chapterTitle"/>
-                                <xsl:apply-templates select="wiley:author"/>
-                                <xsl:apply-templates select="wiley:groupName"/>
-
-                            </xsl:if>
-                            <xsl:apply-templates select="wiley:journalTitle"/>
-
-                            <xsl:choose>
-                                <xsl:when
-                                    test="wiley:vol | wiley:pageFirst | wiley:pageLast | wiley:pubYear">
-                                    <xsl:apply-templates select="wiley:vol"/>
-                                    <xsl:apply-templates select="wiley:issue"/>
-                                    <xsl:apply-templates select="wiley:pageFirst"/>
-                                    <xsl:apply-templates select="wiley:pageLast"/>
-                                    <xsl:apply-templates select="wiley:pubYear"/>
-
-                                </xsl:when>
-                            </xsl:choose>
-                        </bibl>
-                    </xsl:when>
-                    <!-- SG - ajout book / book-series -  chapterTitle -->
-                    <xsl:when test="wiley:bookSeriesTitle">
-                        <bibl type="book-series">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@xml:id"/>
-                            </xsl:attribute>
-                            <xsl:apply-templates select="wiley:author"/>
-                            <xsl:apply-templates select="wiley:editor"/>
-                            <xsl:apply-templates select="wiley:chapterTitle"/>
-                            <xsl:apply-templates select="wiley:bookTitle"/>
-                            <xsl:choose>
-                                <xsl:when
-                                    test="wiley:vol | wiley:pageFirst | wiley:pageLast | wiley:pubYear">
-                                    <xsl:apply-templates select="wiley:vol"/>
-                                    <xsl:apply-templates select="wiley:pageFirst"/>
-                                    <xsl:apply-templates select="wiley:pageLast"/>
-                                    <xsl:apply-templates select="wiley:pubYear"/>
-                                </xsl:when>
-                            </xsl:choose>
-                            <xsl:if test="wiley:bookSeriesTitle">
-                                <series>
-                                    <xsl:apply-templates select="wiley:bookSeriesTitle"/>
-                                </series>
-                            </xsl:if>
-                        </bibl>
-                    </xsl:when>
-                    <!-- SG - reprise refs book -->
-                    <xsl:when test="wiley:bookTitle">
-                        <bibl type="book">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@xml:id"/>
-                            </xsl:attribute>
-                            <xsl:if test="wiley:chapterTitle">
-                                <xsl:apply-templates select="wiley:author"/>
-                                <xsl:apply-templates select="wiley:editor"/>
-                                <xsl:apply-templates select="wiley:chapterTitle"/>
-
-                            </xsl:if>
-                            <xsl:apply-templates select="wiley:bookTitle"/>
-                            <xsl:if test="not(wiley:chapterTitle)">
-                                <xsl:apply-templates select="wiley:author"/>
-                                <xsl:apply-templates select="wiley:editor"/>
-                            </xsl:if>
-
-                            <xsl:choose>
-                                <xsl:when
-                                    test="wiley:vol | wiley:pageFirst | wiley:pageLast | wiley:pubYear">
-
-                                    <xsl:apply-templates select="wiley:vol"/>
-                                    <xsl:apply-templates select="wiley:pageFirst"/>
-                                    <xsl:apply-templates select="wiley:pageLast"/>
-                                    <xsl:apply-templates select="wiley:pubYear"/>
-                                    <xsl:apply-templates select="wiley:publisherLoc"/>
-                                    <xsl:apply-templates select="wiley:publisherName"/>
-
-                                </xsl:when>
-                            </xsl:choose>
-
-                        </bibl>
-                    </xsl:when>
-                    <xsl:when test="wiley:otherTitle">
-                        <bibl type="other">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@xml:id"/>
-                            </xsl:attribute>
-                            <xsl:apply-templates select="wiley:otherTitle"/>
-                            <xsl:apply-templates select="wiley:groupName"/>
-                            <xsl:apply-templates select="wiley:author"/>
-                            <xsl:apply-templates select="wiley:editor"/>
-
-
-                            <xsl:apply-templates select="wiley:journalTitle"/>
-                            <!-- SG reprise lien url dans référence -->
-                            <xsl:if test="wiley:url">
-                                <idno type="URI">
-                                    <xsl:apply-templates select="wiley:url"/>
-                                </idno>
-                            </xsl:if>
-                            <xsl:choose>
-                                <xsl:when
-                                    test="wiley:vol | wiley:pageFirst | wiley:pageLast | wiley:pubYear">
-
-                                    <xsl:apply-templates select="wiley:vol"/>
-                                    <xsl:apply-templates select="wiley:pageFirst"/>
-                                    <xsl:apply-templates select="wiley:pageLast"/>
-                                    <xsl:apply-templates select="wiley:pubYear"/>
-
-                                </xsl:when>
-                            </xsl:choose>
-
-                        </bibl>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <bibl type="other">
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="@xml:id"/>
-                            </xsl:attribute>
-                            <xsl:apply-templates/>
-                        </bibl>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
+            <xsl:apply-templates select="wiley:citation"/>
         </bibl>
     </xsl:template>
 
