@@ -1365,7 +1365,7 @@
     </xsl:template>
 
     <xsl:template match="sb:et-al">
-        <author role="et-al"/>
+        <author role="et-al">et al.</author>
     </xsl:template>
 
     <xsl:template match="refau">
