@@ -286,7 +286,9 @@
                             </date>
                         </xsl:when>
                         <!-- validation / ajout d'un element date afin qu'<imprint> ne soit pas vide de contenu -->
-                        <xsl:otherwise><date/></xsl:otherwise>
+                        <xsl:otherwise>
+                            <date/>
+                        </xsl:otherwise>
                     </xsl:choose>
                     <xsl:apply-templates select="sb:host/sb:pages/*"/>
                 </imprint>
@@ -1283,18 +1285,28 @@
 
     <xsl:template match="sb:maintitle">
         <xsl:choose>
-            <xsl:when test="ancestor::sb:series/sb:title">
+            <xsl:when test="parent::sb:series/sb:title">
+                <title level="s" type="main">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:when test="ancestor::sb:contribution/sb:title">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:when>
+            <xsl:when test="parent::sb:issue/sb:series/sb:title">
                 <title level="j" type="main">
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
             <xsl:when test="ancestor::sb:edited-book/sb:title | ancestor::sb:book/sb:title">
                 <title level="m" type="main">
-                    <xsl:apply-templates/>
+                    <xsl:value-of select="normalize-space(.)"/>
                 </title>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates/>
+                <title level="j" type="main">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </title>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1323,6 +1335,11 @@
     <xsl:template match="sb:date">
         <!-- ne garder que les chiffres dans @when -->
         <date>
+            <xsl:if test=". !=''">
+                <xsl:attribute name="when">
+                    <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')"/>
         </date>
     </xsl:template>
@@ -1352,12 +1369,23 @@
     </xsl:template>
 
     <xsl:template match="refau">
-        <author>
-            <persName>
-                <xsl:apply-templates select="fnm"/>
-                <xsl:apply-templates select="snm"/>
-            </persName>
-        </author>
+        <xsl:choose>
+            <xsl:when test="parent::reftxt">
+                <author>
+                    <persName>
+                        <xsl:apply-templates/>
+                    </persName>
+                </author>
+            </xsl:when>
+            <xsl:otherwise>
+                <author>
+                    <persName>
+                        <xsl:apply-templates select="fnm"/>
+                        <xsl:apply-templates select="snm"/>
+                    </persName>
+                </author>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="sb:author">
         <author>
@@ -1373,15 +1401,16 @@
             </persName>
         </editor>
     </xsl:template>
+    <xsl:template match="reftxt">
+        <bibl xml:id="{../@id}">
+            <xsl:apply-templates/>
+        </bibl>
+    </xsl:template>
 
     <xsl:template match="bib">
-
-        <xsl:variable name="count">
-            <xsl:value-of select="count(reftxt)"/>
-        </xsl:variable>
         <xsl:choose>
-            <xsl:when test="$count &gt; 1">
-                <xsl:apply-templates select="reftxt" mode="plusieursRef"/>
+            <xsl:when test="reftxt">
+                <xsl:apply-templates select="reftxt"/>
             </xsl:when>
             <xsl:otherwise>
                 <biblStruct>

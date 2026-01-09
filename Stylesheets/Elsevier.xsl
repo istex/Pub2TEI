@@ -1399,6 +1399,9 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
+                        <xsl:when test="starts-with(@refid,'fn')">
+                            <xsl:attribute name="type">fn</xsl:attribute>
+                        </xsl:when>
                         <xsl:when test="starts-with(@refid,'f')">
                             <xsl:attribute name="type">figure</xsl:attribute>
                         </xsl:when>
@@ -1429,6 +1432,9 @@
     <xsl:template match="ce:cross-refs">
         <ref>
             <xsl:choose>
+                <xsl:when test="starts-with(@refid,'fn')">
+                    <xsl:attribute name="type">fn</xsl:attribute>
+                </xsl:when>
                 <xsl:when test="starts-with(@refid,'f')">
                     <xsl:attribute name="type">figure</xsl:attribute>
                 </xsl:when>

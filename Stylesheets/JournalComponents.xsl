@@ -73,6 +73,12 @@
                     </xsl:choose>
                 </title>
             </xsl:when>
+            <xsl:when test="ancestor::reftxt">
+                <xsl:text> </xsl:text>
+                <title level="a" type="main">
+                   <xsl:apply-templates/>
+                </title>
+            </xsl:when>
             <xsl:otherwise>
                 <title level="a" type="main">
                     <xsl:choose>
@@ -362,6 +368,12 @@
                         <title level="s" type="main">
                             <xsl:apply-templates/>
                         </title>
+                    </xsl:when>
+                    <xsl:when test="ancestor::reftxt">
+                        <title level="j" type="main">
+                            <xsl:value-of select="."/>
+                        </title>
+                        <xsl:text> </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
                         <title level="j" type="main">
@@ -1056,6 +1068,11 @@
                     <xsl:when test="normalize-space(.) and ancestor::bold">
                         <xsl:value-of select="normalize-space(.)"/>
                     </xsl:when>
+                    <xsl:when test="ancestor::reftxt">
+                        <biblScope unit="vol">
+                            <xsl:value-of select="."/>
+                        </biblScope>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
                             <xsl:when test=". = '0'"/>
@@ -1378,6 +1395,7 @@
                         <!--xsl:apply-templates select="@year"/-->
                         <xsl:value-of select="replace(@year, '[a-zA-Z]', '')"/>
                     </xsl:attribute>
+                    <xsl:value-of select="replace(@year, '[a-zA-Z]', '')"/>
                 </date>
             </xsl:otherwise>
         </xsl:choose>
