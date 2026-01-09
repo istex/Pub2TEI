@@ -1086,11 +1086,6 @@
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@xml:id"/>
             </xsl:attribute>
-            <xsl:if test="label">
-                <label>
-                    <xsl:value-of select="label"/>
-                </label>
-            </xsl:if>
             <xsl:apply-templates/>
         </note>
     </xsl:template>
