@@ -509,14 +509,7 @@
             <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="wiley:tgroup">
-        <table>
-            <xsl:if test="@cols">
-                <xsl:attribute name="cols">
-                    <xsl:value-of select="@cols"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </table>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="wiley:chemicalStructure">
@@ -627,15 +620,20 @@
     </xsl:template>
 	
    <xsl:template match="wiley:tabular">
-        <figure>
-            <xsl:attribute name="type">table</xsl:attribute>
-            <xsl:if test="@xml:id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@xml:id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="*"/>
-        </figure>
+       <table>
+           <xsl:attribute name="type">table</xsl:attribute>
+           <xsl:if test="@xml:id">
+               <xsl:attribute name="xml:id">
+                   <xsl:value-of select="@xml:id"/>
+               </xsl:attribute>
+           </xsl:if>
+           <xsl:if test="wiley:table/wiley:tgroup/@cols">
+               <xsl:attribute name="cols">
+                   <xsl:value-of select="wiley:table/wiley:tgroup/@cols"/>
+               </xsl:attribute>
+           </xsl:if>
+           <xsl:apply-templates select="*"/>
+       </table>
     </xsl:template>
     
     <!-- SG - traitement tables ACS -->

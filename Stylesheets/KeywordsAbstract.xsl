@@ -229,32 +229,26 @@
     </xsl:template>
     
     <xsl:template match="JournalSubjectGroup">
-        <keywords scheme="journal-subject">
-            <list>
-                <xsl:apply-templates select="JournalSubject"/>
-            </list>
-            </keywords>
+        <xsl:apply-templates select="JournalSubject"/>
     </xsl:template>
     <xsl:template match="JournalSubject">
-        <item>
-            <xsl:if test="@Code">
-                <label>
-                    <xsl:apply-templates select="@Code"/>
-                </label>
-            </xsl:if>
-            <term>
-                <xsl:attribute name="type">
+            <classCode ana="springerJournalSubject">
+                <xsl:if test="@Code">
+                    <xsl:attribute name="xml:id">
+                        <xsl:apply-templates select="@Code"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:attribute name="scheme">
                     <xsl:apply-templates select="@Type"/>
                 </xsl:attribute>
                 <xsl:if test="@Priority">
-                <xsl:attribute name="subtype">
+                <xsl:attribute name="select">
                     <xsl:text>priority-</xsl:text>
                     <xsl:apply-templates select="@Priority"/>
                 </xsl:attribute>
                 </xsl:if>
                 <xsl:apply-templates/>
-            </term>
-        </item>
+            </classCode>
     </xsl:template>
 
     <!--OUP-->
@@ -588,7 +582,16 @@
 	                        </xsl:choose>
 	                    </xsl:when>
 	                    <xsl:when test="@lang">
-	                        <xsl:value-of select="@lang"/>
+	                        <xsl:choose>
+	                            <xsl:when test="@lang ='english'">en</xsl:when>
+	                            <xsl:when test="@lang ='french'">fr</xsl:when>
+	                            <xsl:when test="@lang ='german'">de</xsl:when>
+	                            <xsl:when test="@lang ='italian'">it</xsl:when>
+	                            <xsl:when test="@lang ='spanish'">es</xsl:when>
+	                            <xsl:otherwise>
+	                                <xsl:value-of select="@lang"/>
+	                            </xsl:otherwise>
+	                        </xsl:choose>
 	                    </xsl:when>
 	                    <xsl:when test="@xml:lang">
 							<xsl:if test="@xml:lang">
@@ -676,9 +679,14 @@
     <!-- Specific to SPringer: AbstractSection -->
     <xsl:template match="AbstractSection">
         <!-- PL: only paragraphs are taken because <div> are not allowed under <abstract> currently -->
-        <!--div-->
-        <xsl:apply-templates/>
-        <!--/div-->
+        <div>
+            <xsl:if test="@ID">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@ID"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
 </xsl:stylesheet>

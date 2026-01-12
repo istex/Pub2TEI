@@ -3635,8 +3635,54 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="ancestor::fn/label">
-                        <xsl:apply-templates/>
+                    <xsl:when test="ancestor::fn/label and @ref-type !=''">
+                            <ref>
+                                <xsl:choose>
+                                    <xsl:when test="@ref-type">
+                                        <xsl:attribute name="type">
+                                            <xsl:choose>
+                                                <xsl:when test="@ref-type='fig'">figure</xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="@ref-type"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:attribute>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:attribute name="type">
+                                            <xsl:text>bib</xsl:text>
+                                        </xsl:attribute>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                <xsl:choose>
+                                    <xsl:when test="@rid">
+                                        <xsl:attribute name="target">
+                                            <xsl:variable name="concat">
+                                                <xsl:value-of select="concat('#',@rid)"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="diese">
+                                                <xsl:value-of select="translate($concat,' ','#')"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                                            <xsl:value-of select="$espace"/>
+                                        </xsl:attribute>
+                                    </xsl:when>
+                                    <xsl:when test="@id">
+                                        <xsl:attribute name="target">
+                                            <xsl:variable name="concat">
+                                                <xsl:value-of select="concat('#',@id)"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="diese">
+                                                <xsl:value-of select="translate($concat,' ','#')"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
+                                            <xsl:value-of select="$espace"/>
+                                        </xsl:attribute>
+                                    </xsl:when>
+                                </xsl:choose>
+                                <xsl:apply-templates/>
+                            </ref>
+                        
                     </xsl:when>
                     <xsl:when test="ancestor::label"/>
                     <xsl:when test="ancestor::notes"/>
@@ -3676,15 +3722,16 @@
                                             </xsl:attribute>
                                         </xsl:when>
                                         <xsl:when test="@id">
-                                            <xsl:attribute name="target">
-                                                <xsl:variable name="concat">
+                                            <xsl:attribute name="xml:id">
+                                               <!-- <xsl:variable name="concat">
                                                     <xsl:value-of select="concat('#',@id)"/>
                                                 </xsl:variable>
                                                 <xsl:variable name="diese">
                                                     <xsl:value-of select="translate($concat,' ','#')"/>
                                                 </xsl:variable>
                                                 <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
-                                                <xsl:value-of select="$espace"/>
+                                                <xsl:value-of select="$espace"/>-->
+                                                <xsl:value-of select="@id"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                     </xsl:choose>
@@ -3891,6 +3938,11 @@
             </xsl:when>
             <xsl:when test="ancestor::header/title-group">
                 <title level="a" type="main">
+                    <xsl:if test="@lang">
+                        <xsl:attribute name="xml:lang">
+                            <xsl:value-of select="$codeLangIOP"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>

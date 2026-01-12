@@ -50,6 +50,18 @@
         /TEI/teiHeader/fileDesc/respStmt
         /TEI/teiHeader/fileDesc/sourceDesc/biblStruct >>
     -->
+    <xsl:variable name="codeLangIOP">
+        <xsl:choose>
+            <xsl:when test="//header/title-group/title/@lang ='english'">en</xsl:when>
+            <xsl:when test="//header/title-group/title/@lang ='french'">fr</xsl:when>
+            <xsl:when test="//header/title-group/title/@lang ='german'">de</xsl:when>
+            <xsl:when test="//header/title-group/title/@lang ='italian'">it</xsl:when>
+            <xsl:when test="//header/title-group/title/@lang ='spanish'">es</xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="//header/title-group/title/@lang"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <!-- table de correspondance des titres car non fournit dans donnée-->
     <xsl:variable name="codeTitleIOP1">
         <xsl:value-of select="//header/ident/issn"/>
@@ -478,7 +490,10 @@
                                 <language ident="en">en</language>
                             </xsl:when>
                             <xsl:when test="//header/title-group/title/@lang[string-length() &gt; 0]">
-                                <language ident="{//header/title-group/title/@lang}">
+                                <language>
+                                    <xsl:attribute name="ident">
+                                        <xsl:value-of select="$codeLangIOP"/>
+                                    </xsl:attribute>
                                     <xsl:value-of select="//header/title-group/title/@lang"/>
                                 </language>
                             </xsl:when>
@@ -1219,10 +1234,7 @@
     -->
 
     <xsl:template match="abstract-group">
-        <abstract>
-            <xsl:apply-templates select="abstract/heading"/>
-            <xsl:apply-templates select="abstract/p"/>
-        </abstract>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <!-- les templates pour <heading> et <p> sont plus bas
@@ -1295,10 +1307,7 @@
             <xsl:when test="//article/article-metadata/article-data/doi='10.1088/0964-1726/16/5/043'"/>
             <xsl:otherwise>
                 <textClass ana="classifications">
-                    <keywords>
-                        <xsl:attribute name="scheme" select="@scheme"/>
                         <xsl:apply-templates/>
-                    </keywords>
                 </textClass>
             </xsl:otherwise>
         </xsl:choose>
@@ -1316,21 +1325,9 @@
         <xsl:choose>
             <xsl:when test="$codePacsOrig='-'"/>
             <xsl:otherwise>
-                <term>
-                    <xsl:attribute name="type" select="../@scheme"/>
-                    <xsl:attribute name="n">
-                        <xsl:choose>
-                            <xsl:when test="contains($codePacs,' ') and contains($codePacsOrig,'.')">
-                                <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
-                                <xsl:value-of select="substring-before($codePacsOrig,' ')"/>
-                            </xsl:when>
-                            <!-- voir ark:/67375/0T8-GGQNJ452-0 -->
-                            <xsl:when test="not(contains($codePacsOrig,'.'))"/>
-                            <xsl:otherwise>
-                                <xsl:value-of select="$codePacsOrig"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:attribute>
+                <classCode>
+                    <xsl:attribute name="scheme" select="../@scheme"/>
+                    <xsl:attribute name="n" select="."/>
                     <xsl:choose>
                         <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
                         <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
@@ -1341,13 +1338,14 @@
                             <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
                         </xsl:when>
                         <xsl:when test="$resultCodePacs !=''">
+                            <xsl:value-of select="."/><xsl:text>: </xsl:text>
                             <xsl:value-of select="$resultCodePacs"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$codePacsOrig"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                </term>
+                </classCode>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1541,7 +1539,7 @@
 
     <!-- art-title -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/art-title">
-        <title level="m" type="main">
+        <title level="a" type="main">
             <xsl:value-of select="normalize-space(.)"/>
         </title>
     </xsl:template>

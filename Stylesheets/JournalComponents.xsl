@@ -13,7 +13,7 @@
 
 
     <xsl:template
-        match="fm/atl | article-title/title | article-title | atl | ce:title | art_title | rsc:art_title | article_title | nihms-submit/title | chapter-title | wiley:chapterTitle | titlegrp/title | rsc:titlegrp/rsc:title | wiley:articleTitle | wiley:otherTitle | chaptl">
+        match="fm/atl | article-title/title | article-title | atl | ce:title | art_title | rsc:art_title | article_title | nihms-submit/title | chapter-title | wiley:chapterTitle | titlegrp/title | rsc:titlegrp/rsc:title | wiley:articleTitle | chaptl">
         <xsl:choose>
             <xsl:when
                 test="ancestor::news-article/art-front/titlegrp | ancestor::rsc:news-article/rsc:art-front/rsc:titlegrp">
@@ -121,6 +121,23 @@
                             </xsl:if>
                         </xsl:when>
                     </xsl:choose>
+                </title>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <!-- wiley -->
+    <xsl:template match="wiley:otherTitle">
+        <xsl:choose>
+            <xsl:when test="parent::wiley:citation and following-sibling::wiley:bookSeriesTitle!=''">
+                <xsl:text> </xsl:text>
+                <title level="m" type="main">
+                    <xsl:apply-templates/>
+                </title>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text> </xsl:text>
+                <title level="a" type="main">
+                    <xsl:apply-templates/>
                 </title>
             </xsl:otherwise>
         </xsl:choose>

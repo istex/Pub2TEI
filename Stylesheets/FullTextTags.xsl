@@ -120,9 +120,18 @@
                         </xsl:call-template>
                     </xsl:when>
                     <xsl:when test="parent::fn |parent::list-item ">
-                        <p>
-                            <xsl:apply-templates/>
-                        </p>
+                        <xsl:choose>
+                            <xsl:when test="xref">
+                                <p>
+                                    <xsl:apply-templates/>
+                                </p>
+                            </xsl:when>
+                           <xsl:otherwise>
+                               <p>
+                                   <xsl:apply-templates/>
+                               </p>
+                           </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="ancestor::boxed-text/sec and not(parent::list-item)">
                         <div>
