@@ -2,7 +2,7 @@
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0" 
-    xmlns:m="http://www.w3.org/1998/Math/MathML" 
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" 
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" 
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
     xmlns:wiley="http://www.wiley.com/namespaces/wiley/wiley"
@@ -34,14 +34,15 @@
     </xsl:template-->
 
     <!-- Default rules for MathML, PL: copy is via template to allow selective copy -->
-    <xsl:template match="m:math">
+    <xsl:template match="mml:math">
         <xsl:message terminate="no">MathML: <xsl:value-of select="name(.)"/> - <xsl:for-each
             select="attribute::*">
             <xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>" </xsl:for-each>
         </xsl:message>
         <formula>
             <xsl:copy copy-namespaces="no">
-                <xsl:apply-templates select="node() | @* except(@type)" mode="mathml"/>
+<!--                <xsl:apply-templates select="node() except(ce:inline-figure)| @* except(@type)" mode="mathml"/>-->
+                <xsl:apply-templates select="node()| @* except(@type)" mode="mathml"/>
             </xsl:copy>
         </formula>
     </xsl:template>

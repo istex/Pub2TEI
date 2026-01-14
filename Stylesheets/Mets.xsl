@@ -4,7 +4,7 @@
     xmlns:oai="http://www.openarchives.org/OAI/2.0/" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:xlink="http://www.w3.org/1999/xlink" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xmlns:m="http://www.w3.org/1998/Math/MathML" 
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" 
     xmlns:tei="http://www.tei-c.org/ns/1.0" 
     xmlns:dcterms="http://purl.org/dc/terms/" 
     xmlns:mets="http://www.loc.gov/METS/"

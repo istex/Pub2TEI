@@ -3,7 +3,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd" xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
-    xmlns:s1="http://www.elsevier.com/xml/si/dtd" xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:s1="http://www.elsevier.com/xml/si/dtd" xmlns:mml="http://www.w3.org/1998/Math/MathML"
     xmlns="http://www.tei-c.org/ns/1.0" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rsc="http://www.rsc.org/schema/rscart38"
     exclude-result-prefixes="#all">

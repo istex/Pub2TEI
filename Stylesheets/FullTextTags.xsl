@@ -677,15 +677,15 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <formula notation="MathML" xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <formula notation="MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
                     <xsl:if test="../ce:label[string-length() &gt; 0]">
                         <xsl:attribute name="n">
                             <xsl:value-of select="../ce:label"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <m:math>
+                    <mml:math>
                         <xsl:apply-templates/>
-                    </m:math>
+                    </mml:math>
                 </formula> 
             </xsl:otherwise>
         </xsl:choose>
@@ -697,21 +697,21 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="els1:fr |els2:fr | fr | ar">
-        <m:mfrac xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <mml:mfrac xmlns:mml="http://www.w3.org/1998/Math/MathML">
                 <xsl:apply-templates/>
-        </m:mfrac>
+        </mml:mfrac>
     </xsl:template>
     <xsl:template match="els1:nu |els2:nu | nu">
         <xsl:choose>
             <xsl:when test="els1:fen |els2:fen | fen">
-                <m:msup xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <mml:msup xmlns:mml="http://www.w3.org/1998/Math/MathML">
                     <xsl:apply-templates/>
-                </m:msup>
+                </mml:msup>
             </xsl:when>
             <xsl:otherwise>
-                <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <mml:mi xmlns:mml="http://www.w3.org/1998/Math/MathML">
                     <xsl:apply-templates/>
-                </m:mi>
+                </mml:mi>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -746,14 +746,14 @@
     <xsl:template match="els1:de |els2:de | de">
         <xsl:choose>
             <xsl:when test="els1:fen |els2:fen | fen">
-                <m:msub xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <mml:msub xmlns:mml="http://www.w3.org/1998/Math/MathML">
                     <xsl:apply-templates/>
-                </m:msub>
+                </mml:msub>
             </xsl:when>
             <xsl:otherwise>
-                <m:mi xmlns:m="http://www.w3.org/1998/Math/MathML">
+                <mml:mi xmlns:mml="http://www.w3.org/1998/Math/MathML">
                     <xsl:apply-templates/>
-                </m:mi>
+                </mml:mi>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

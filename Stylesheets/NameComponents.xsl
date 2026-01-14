@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
-    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley"
     xmlns:rsc="http://www.rsc.org/schema/rscart38" exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
     <!-- Generic rules for the decomposing names (cf. e.g. BMJ) -->
@@ -116,7 +116,7 @@
         </xsl:if>
     </xsl:template>
     <xsl:template
-        match="last_name | LastName | ce:surname| rsc:surname | FamilyName | ln | surname | corresponding-author-lastname | surname | snm | wiley:familyName">
+        match="last_name | LastName | ce:surname| rsc:surname | FamilyName | ln | surname | corresponding-author-lastname | surname | snm">
         <xsl:if test=". !=''">
             <surname>
                 <xsl:variable name="surname">
@@ -124,6 +124,17 @@
                 </xsl:variable>
                 <xsl:value-of select="normalize-space($surname)"/>
             </surname>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="wiley:familyName">
+        <xsl:if test=". !=''">
+            <surname>
+                <xsl:variable name="surname">
+                    <xsl:apply-templates/>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space($surname)"/>
+            </surname>
+            <xsl:text> </xsl:text>
         </xsl:if>
     </xsl:template>
 

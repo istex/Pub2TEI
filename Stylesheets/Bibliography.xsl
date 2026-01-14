@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
-    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd"
     xmlns:rsc="http://www.rsc.org/schema/rscart38"
     xmlns:wiley="http://www.wiley.com/namespaces/wiley" exclude-result-prefixes="#all">
@@ -407,9 +407,9 @@
                         <xsl:choose>
                             <xsl:when
                                 test="$entry/year | $entry/rsc:year | $entry/volume | $entry/volumeno | $entry/rsc:volumeno | $entry/issue | $entry/descendant::fpage | $entry/descendant::lpage">
-                                <note type="content">
+                                <!--<note type="content">
                                     <xsl:value-of select="normalize-space(.)"/>
-                                </note>
+                                </note>-->
                                 <xsl:apply-templates select="$entry/access-date"/>
                                 <imprint>
                                     <xsl:apply-templates select="$entry/citpub | $entry/rsc:citpub"/>
@@ -1115,7 +1115,11 @@
     </xsl:template>
     
     <xsl:template match="wiley:author">
-        <xsl:apply-templates/>
+        <author>
+            <persName>
+                <xsl:apply-templates/>
+            </persName>
+        </author>
     </xsl:template>
 
     <xsl:template match="citauth | rsc:citauth">
@@ -1131,8 +1135,6 @@
                         <xsl:apply-templates select="surname | rsc:surname"/>
                         <xsl:apply-templates select="given-names"/>
                         <xsl:apply-templates select="fname | rsc:fname"/>
-                        <xsl:apply-templates select="wiley:givenNames"/>
-                        <xsl:apply-templates select="wiley:familyName"/>
                     </persName>
                 </author>
             </xsl:otherwise>

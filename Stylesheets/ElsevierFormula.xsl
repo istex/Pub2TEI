@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:ce="http://www.elsevier.com/xml/common/dtd"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:s1="http://www.elsevier.com/xml/si/dtd"
@@ -44,20 +44,20 @@
     </xsl:template>
         
     <xsl:template match="els1:fen | els2:fen |fen">
-        <m:mfenced>
+        <mml:mfenced>
             <xsl:apply-templates/>
-        </m:mfenced>
+        </mml:mfenced>
     </xsl:template>
     
     <xsl:template match="els1:lim">
-        <m:mrow>
+        <mml:mrow>
             <xsl:apply-templates/>
-        </m:mrow>
+        </mml:mrow>
     </xsl:template>
     <xsl:template match="els2:lim">
-        <m:mrow>
+        <mml:mrow>
             <xsl:apply-templates/>
-        </m:mrow>
+        </mml:mrow>
     </xsl:template>
     <xsl:template match="els1:ul">
         <hi rend="underline">
@@ -71,14 +71,14 @@
     </xsl:template>
     
     <xsl:template match="els1:op">
-        <m:mi>
+        <mml:mi>
             <xsl:apply-templates/>
-        </m:mi>
+        </mml:mi>
     </xsl:template>
     <xsl:template match="els2:op">
-        <m:mi>
+        <mml:mi>
             <xsl:apply-templates/>
-        </m:mi>
+        </mml:mi>
     </xsl:template>
     
     <xsl:template match="els1:inf">

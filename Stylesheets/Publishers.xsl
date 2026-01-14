@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" 
-    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML"
     xmlns:els1="http://www.elsevier.com/xml/ja/dtd"    
     xmlns:els2="http://www.elsevier.com/xml/cja/dtd"
     xmlns:onix="http://ns.editeur.org/onix/3.0/reference"

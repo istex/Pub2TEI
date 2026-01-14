@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:rsc="http://www.rsc.org/schema/rscart38" 
-    xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
+    xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="#all">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -3559,6 +3559,11 @@
                 <xsl:when test="label and contains(@id,'FN')">
                     <xsl:attribute name="n">
                         <xsl:value-of select="label"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="p/sup[1]">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="p/sup[1]"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:mml="http://www.w3.org/1998/Math/MathML"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" method="xml"/>
@@ -11,7 +11,7 @@
             <fileDesc>
                 <titleStmt>
                     <xsl:apply-templates select="book-title-group/book-title" mode="TF"/>
-                    <xsl:apply-templates select="book-title-group/subTitle" mode="TF"/>
+                    <xsl:apply-templates select="book-title-group/subtitle" mode="TF"/>
                     <xsl:apply-templates select="contrib-group/contrib" mode="TF"/>
                 </titleStmt>
                 <xsl:apply-templates select="edition" mode="TF"/>
@@ -44,9 +44,11 @@
                     <!-- genre de publication -->
                     <xsl:choose>
                         <xsl:when test="issn[string-length()&gt; 0]">
+                            <note type="book" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T">book</note>
                             <note type="book-series" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-0G6R5W5T-Z">book-series</note>
                         </xsl:when>
                         <xsl:when test="//book">
+                            <note type="book" scheme="https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T">book</note>
                             <note type="book" scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5WTPMB5N-F">book</note>
                         </xsl:when>
                     </xsl:choose>
@@ -56,7 +58,7 @@
                     <biblStruct type="inbook">
                         <analytic>
                             <xsl:apply-templates select="book-title-group/book-title" mode="TF"/>
-                            <xsl:apply-templates select="book-title-group/subTitle" mode="TF"/>
+                            <xsl:apply-templates select="book-title-group/subtitle" mode="TF"/>
                             <xsl:apply-templates select="contrib-group/contrib" mode="TFana"/>
                             <!-- ajout identifiants ISTEX et ARK -->
                             <xsl:if test="string-length($idistex) &gt; 0 ">
@@ -78,6 +80,12 @@
                         <monogr>
                             <xsl:apply-templates select="book-title-group/book-title" mode="TF"/>
                             <xsl:apply-templates select="book-title-group/subTitle" mode="TF"/>
+                            <!-- taylor francis -->
+                            <xsl:if test="//book/book-meta/book-id[@pub-id-type='doi']">
+                                <idno type="DOI">
+                                    <xsl:value-of select="//book/book-meta/book-id[@pub-id-type='doi']"/>
+                                </idno>
+                            </xsl:if>
                             <xsl:if test="//body/book-id[@pub-id-type='doi']">
                                 <idno type="DOI">
                                     <xsl:value-of select="//body/book-id[@pub-id-type='doi']"/>
@@ -248,7 +256,7 @@
             <xsl:value-of select="normalize-space(.)"/>
         </title>
     </xsl:template>
-    <xsl:template match="subTitle" mode="TF">
+    <xsl:template match="subtitle" mode="TF">
         <title level="a" type="sub">
             <xsl:apply-templates/>
         </title>
@@ -290,7 +298,9 @@
                 </xsl:choose>
                 <!--<xsl:variable name="i" select="$i + 1" />-->
             </xsl:attribute>
-            <xsl:apply-templates/>
+            <persName>
+                <xsl:apply-templates/>
+            </persName>
         </author>
     </xsl:template>
     <xsl:template match="publisher" mode="TF">

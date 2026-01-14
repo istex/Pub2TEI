@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:els="http://www.elsevier.com/xml/ja/dtd"
     xmlns:cals="http://www.elsevier.com/xml/common/cals/dtd"
-    xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:wiley2="http://www.wiley.com/namespaces/wiley/wiley" xmlns:m="http://www.w3.org/1998/Math/MathML/"
+    xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:wiley="http://www.wiley.com/namespaces/wiley" xmlns:wiley2="http://www.wiley.com/namespaces/wiley/wiley" xmlns:mml="http://www.w3.org/1998/Math/MathML/"
     xmlns:oasis="http://www.niso.org/standards/z39-96/ns/oasis-exchange/table"
     xmlns:rsc="http://www.rsc.org/schema/rscart38"
     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -292,7 +292,7 @@
     
     <!-- SG - WILEY traitement mathml - voir notice ZYGO.ZYGO1222.xml -->
     <xsl:template match="wiley:displayedItem[@type='mathematics']">
-            <formula xmlns:m="http://www.w3.org/1998/Math/MathML" notation="mathml">
+            <formula xmlns:mml="http://www.w3.org/1998/Math/MathML" notation="mathml">
                 <!--xsl:apply-templates select="m:math"/-->
                 <xsl:if test="@xml:id">
                     <xsl:attribute name="xml:id">
@@ -305,54 +305,76 @@
     
     <!-- PL: neutralize Wiley specific presentation attribute in MathML element math -->
     <xsl:template match="@*[local-name()='location']" mode="mathml"/>
-    <xsl:template match="@altimg" mode="mathml"/>
+    <xsl:template match="ce:inline-figure" mode="mathml">
+        <xsl:value-of select="ce:link/@locator"/>
+    </xsl:template>
     
    <xsl:template match="wiley:displayedItem[@type='mathematics']/wiley:label"/>
     
     <xsl:template match="wiley:displayedItem[@type='mathematics']/wiley2:math">
-        <m:math>
+        <mml:math>
             <xsl:apply-templates/>
-        </m:math>
+        </mml:math>
     </xsl:template>
     <xsl:template match="wiley2:mi | oasis:mi">
-        <m:mi>
+        <mml:mi>
             <xsl:apply-templates/>
-        </m:mi>
+        </mml:mi>
     </xsl:template>
     <xsl:template match="wiley2:mo |oasis:mo">
-        <m:mo>
+        <mml:mo>
             <xsl:apply-templates/>
-        </m:mo>
+        </mml:mo>
     </xsl:template>
     <xsl:template match="wiley2:mn |oasis:mn">
-        <m:mn>
+        <mml:mn>
             <xsl:apply-templates/>
-        </m:mn>
+        </mml:mn>
     </xsl:template>
     <xsl:template match="wiley2:mfrac|oasis:mfrac">
-        <m:mfrac>
+        <mml:mfrac>
             <xsl:apply-templates/>
-        </m:mfrac>
+        </mml:mfrac>
     </xsl:template>
     <xsl:template match="wiley2:mrow|oasis:mrow">
-        <m:mrow>
+        <mml:mrow>
             <xsl:apply-templates/>
-        </m:mrow>
+        </mml:mrow>
     </xsl:template>
     <xsl:template match="wiley2:msup|oasis:msup">
-        <m:msup>
+        <mml:msup>
             <xsl:apply-templates/>
-        </m:msup>
+        </mml:msup>
     </xsl:template>
     <xsl:template match="wiley2:msub|oasis:msub">
-        <m:msub>
+        <mml:msub>
             <xsl:apply-templates/>
-        </m:msub>
+        </mml:msub>
+    </xsl:template>
+    <xsl:template match="wiley2:msub|oasis:msub">
+        <mml:msubsup>
+            <xsl:apply-templates/>
+        </mml:msubsup>
     </xsl:template>
     <xsl:template match="wiley2:mover|oasis:mover">
-        <m:mover>
+        <mml:mover>
             <xsl:apply-templates/>
-        </m:mover>
+        </mml:mover>
+    </xsl:template>
+    <xsl:template match="wiley2:mover|oasis:mover">
+        <mml:mtr>
+            <xsl:apply-templates/>
+        </mml:mtr>
+    </xsl:template>
+    <xsl:template match="wiley2:mover|oasis:mover">
+        <mml:munderover>
+            <xsl:apply-templates/>
+        </mml:munderover>
+    </xsl:template>
+    <xsl:template match="wiley2:mover|oasis:mover">
+        <mml:munder>
+            <xsl:apply-templates/>
+        </mml:munder>
     </xsl:template>
     <!--IOP-->
     <xsl:template match="inline-eqn">
