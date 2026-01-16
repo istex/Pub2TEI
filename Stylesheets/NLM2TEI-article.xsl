@@ -1039,7 +1039,6 @@
                         <body>
                             <xsl:apply-templates select="body/*"/>
                             <xsl:apply-templates select="bdy/*except(bdy/fp)"/>
-                            <xsl:apply-templates select="bm/objects/*"/>
                             <xsl:apply-templates select="//article/floats-group"/>
                         </body>
                     </xsl:when>
@@ -1098,7 +1097,9 @@
                     <back>
                         <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                         <xsl:apply-templates select="front/article-meta/product"/>
-                        <xsl:apply-templates select="back/* | bm/ack | bm/bibl"/>
+                        <xsl:apply-templates select="back/* | bm/ack"/>
+                        <xsl:apply-templates select="bm/objects"/>
+                        <xsl:apply-templates select="bm/bibl"/>
                     </back>
                 </xsl:if>
             </text>
@@ -3365,13 +3366,16 @@
     </xsl:template>
     <xsl:template match="fig">
         <figure>
-            <xsl:choose>
-                <xsl:when test="@id">
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="@id"/>
-                    </xsl:attribute>
-                </xsl:when>
-            </xsl:choose>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@entname">
+                <xsl:attribute name="n">
+                    <xsl:value-of select="@entname"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </figure>
     </xsl:template>

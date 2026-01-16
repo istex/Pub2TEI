@@ -10,6 +10,11 @@
     xmlns="http://www.tei-c.org/ns/1.0">
 
     <!-- NPG -->
+    <xsl:template match="objects">
+        <div type="appendices">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
     <xsl:template match="bm/fig">
         <figure>
             <xsl:if test="@id">

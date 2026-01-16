@@ -927,25 +927,27 @@
     
     <xsl:template match="bibr | bibrinl">
         <ref type="bibr">
-                <xsl:variable name="diese">
+            <xsl:variable name="diese">
+                <xsl:value-of select="replace(@rid,' ',' #')"/>
+            </xsl:variable>
+            <xsl:attribute name="target">
+                <xsl:value-of select="concat('#',$diese)"/>
+            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test=". !=''">
+                    <xsl:apply-templates/>
+                </xsl:when>
+                <xsl:when test="@rid !=''">
                     <xsl:value-of select="@rid"/>
-                </xsl:variable>
-                <xsl:choose>
-                    <xsl:when test="contains($diese,' ')">
-                        <xsl:attribute name="target">
-                            <xsl:apply-templates select="@rid" mode="rid"/>
-                        </xsl:attribute>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:attribute name="target">
-                        <xsl:value-of select="concat('#',$diese)"/>
-                        </xsl:attribute>
-                    </xsl:otherwise>
-                </xsl:choose>
+                </xsl:when>
+            </xsl:choose>
         </ref>
     </xsl:template>
     <xsl:template match="bibr/@rid" mode="rid">
         <xsl:call-template name="splitName"/>
+    </xsl:template>
+    <xsl:template match="accession">
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template name="splitName">
         <!-- start with nothing in $first and all the words in $rest -->
@@ -1396,7 +1398,7 @@
 	<xsl:template match="named-entity">
 	    <rs>
 	        <xsl:attribute name="corresp">
-	            <xsl:apply-templates/>
+	            <xsl:value-of select="@id"/>
 	        </xsl:attribute>
 	        <xsl:apply-templates/>
 	    </rs>
