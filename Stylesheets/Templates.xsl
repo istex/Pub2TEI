@@ -14,14 +14,14 @@
                 </application>
             </appInfo>
             <!-- reprise du stylage QUE pour openEdition -->
-            <xsl:if test="//tei:distributor='OpenEdition'">
+            <!--<xsl:if test="//tei:distributor='OpenEdition'">
                 <tagsDecl>
                     <rendition xml:id="style01" scheme="css">font-style:italic;</rendition>
                     <rendition xml:id="style02" scheme="css">font-variant:small-caps;</rendition>
                     <rendition xml:id="style03" scheme="css">vertical-align:super;</rendition>
                     <rendition xml:id="style04" scheme="css">font-weight:bold;</rendition>
                 </tagsDecl>
-            </xsl:if>
+            </xsl:if>-->
             <!-- ECCO -->
             <xsl:if test="//bookInfo | //marc:datafield[@tag='650']">
                 <classDecl>

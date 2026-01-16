@@ -1040,20 +1040,12 @@
                                 <xsl:copy-of select="//tei:langUsage"/>
                             </xsl:otherwise>
                         </xsl:choose>
-
+                        
+                        <xsl:apply-templates select="//tei:front/tei:div[@type='abstract']"/>
+                        
                         <xsl:if test="//tei:textClass/tei:keywords">
                             <xsl:apply-templates select="//tei:textClass"/>
                         </xsl:if>
-                        <xsl:for-each select="//tei:front/tei:div[@type='abstract']">
-                            <abstract>
-                                <xsl:if test="//tei:front/tei:div[@type='abstract']/@xml:lang[string-length()&gt; 0]">
-                                    <xsl:attribute name="xml:lang">
-                                        <xsl:value-of select="./@xml:lang"/>
-                                    </xsl:attribute>
-                                    <xsl:copy-of select="./*"/>
-                                </xsl:if>
-                            </abstract>
-                        </xsl:for-each>
                     </profileDesc>
                 </xsl:when>
                 <!--Droz  nettoyage de données erronées de la part de l'éditeur-->
@@ -1132,6 +1124,16 @@
             </revisionDesc>
         </teiHeader>
     </xsl:template>
+    <xsl:template match="//tei:front/tei:div[@type='abstract']">
+        <abstract>
+            <xsl:if test="//tei:front/tei:div[@type='abstract']/@xml:lang[string-length()&gt; 0]">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="./@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+                <xsl:apply-templates select="node() |@* except(@type)" mode="tei"/>
+        </abstract>
+    </xsl:template>
     <xsl:template match="tei:textClass">
         <textClass>
             <xsl:apply-templates select="tei:keywords"/>
@@ -1172,6 +1174,52 @@
             <xsl:apply-templates select="node() | @*" mode="tei"/>
         </xsl:copy>
     </xsl:template>
+    <!-- harmonisation des style tei:droz -->
+    <xsl:template match="@rend" mode="tei">
+        <xsl:choose>
+            <xsl:when test=".='i'">
+                <xsl:attribute name="rend">italic</xsl:attribute>
+            </xsl:when>
+            <xsl:when test=".='sup'">
+                <xsl:attribute name="rend">superscript</xsl:attribute>
+            </xsl:when>
+            <xsl:when test=".='sub'">
+                <xsl:attribute name="rend">subscript</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="rend">
+                    <xsl:value-of select="."/>
+                </xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <!-- harmonisation des style tei:openEdition journals et books -->
+    <xsl:template match="@rendition" mode="tei">
+        <xsl:choose>
+            <xsl:when test=".='#style01'">
+                <xsl:attribute name="rend">italic</xsl:attribute>
+            </xsl:when>
+            <xsl:when test=".='#style02'">
+                <xsl:attribute name="rend">italic</xsl:attribute>
+            </xsl:when>
+            <xsl:when test=".='#style03'">
+                <xsl:attribute name="rend">superscript</xsl:attribute>
+            </xsl:when>
+            <xsl:when test=".='#style04'">
+                <xsl:attribute name="rend">bold</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="rendition">
+                    <xsl:value-of select="."/>
+                </xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="div[@type]" mode="tei">
+        <xsl:if test=".='bibliography'">
+            <xsl:attribute name="type">references</xsl:attribute>
+        </xsl:if>
+    </xsl:template>
     <xsl:template match="tei:text" mode="openEditionDroz">
         <text>
             <xsl:apply-templates select="tei:body" mode="tei"/>
@@ -1180,23 +1228,14 @@
                     <back>
                         <xsl:if test="//tei:note">
                             <div type="fn-group">
-                               <!-- <xsl:for-each select="//tei:note">
-                                    <note>
-                                        <xsl:copy-of select="@*|node()"/>
-                                        <xsl:apply-templates/>
-                                    </note>
-                                </xsl:for-each>-->
                                 <xsl:apply-templates select="//tei:note" mode="teiALL"/>
                             </div>
                         </xsl:if>
                         <xsl:if test="//tei:div[@type='bibliography']">
-                            <div type="references">
-                                <xsl:copy-of select="//tei:div[@type='bibliography']/*"/>
-                            </div>
+                            <xsl:apply-templates select="//tei:div[@type='bibliography']" mode="tei"/>
                         </xsl:if>
                         <!-- concerne Open Edition -->
                         <xsl:apply-templates select="tei:back/node() except(tei:div[@type='bibliography'])| @*"/>
-                        <!--<xsl:copy-of select="tei:back/node() except(tei:div[@type='bibliography'])"/>-->
                     </back>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1217,6 +1256,12 @@
             </xsl:choose>
         </text>
     </xsl:template>
+    <xsl:template match="tei:div[@type='bibliography']" mode="tei">
+        <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="node() | @*" mode="tei"/>
+        </xsl:copy>
+    </xsl:template>
+    
     <xsl:template match="tei:note" mode="teiALL">
         <note>
             <xsl:copy-of select="@*"/>
@@ -1231,7 +1276,26 @@
     </xsl:template>
     <xsl:template match="tei:hi" mode="teiALL">
         <hi>
-            <xsl:copy-of select="@*|node()"/>
+            <xsl:choose>
+                <xsl:when test="@rendition='#style01'">
+                    <xsl:attribute name="rend">superscript</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@rendition='#style02'">
+                    <xsl:attribute name="rend">italic</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@rendition='#style03'">
+                    <xsl:attribute name="rend">superscript</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@rendition='#style04'">
+                    <xsl:attribute name="rend">bold</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="rendition">
+                        <xsl:value-of select="."/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates mode="teiALL"/>
         </hi>
     </xsl:template>
     <xsl:template match="tei:ref" mode="teiALL">
@@ -1250,7 +1314,7 @@
         </graphic>
     </xsl:template>
     <xsl:template match="tei:note" mode="tei">
-        <ref type="fn" rend="italic">
+        <ref type="fn" rend="superscript">
             <xsl:if test="@n !=''">
                 <xsl:attribute name="n">
                     <xsl:value-of select="@n"/>
