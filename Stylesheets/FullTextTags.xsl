@@ -716,7 +716,14 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="els1:rm |els2:rm |rm">
+        <mml:mrow xmlns:mml="http://www.w3.org/1998/Math/MathML">
             <xsl:apply-templates/>
+        </mml:mrow>
+    </xsl:template>
+    <xsl:template match="els1:unl |els2:unl |unl">
+        <mml:munder xmlns:mml="http://www.w3.org/1998/Math/MathML">
+            <xsl:apply-templates/>
+        </mml:munder>
     </xsl:template>
     <xsl:template match="els1:a | els2:a| a">
         <xsl:apply-templates/>
@@ -1279,7 +1286,18 @@
     </xsl:template>
 
     <xsl:template match="inf|rsc:inf|Subscript | sub  | rsc:sub | ce:inf | wiley:sub">
-        <xsl:if test="."><hi rend="subscript"><xsl:apply-templates/></hi></xsl:if>
+        <xsl:choose>
+            <xsl:when test="ancestor::math">
+                <mml:msub xmlns:mml="http://www.w3.org/1998/Math/MathML">
+                    <xsl:apply-templates/>
+                </mml:msub>
+            </xsl:when>
+            <xsl:otherwise>
+                <hi rend="subscript">
+                    <xsl:apply-templates/>
+                </hi>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="Superscript |rsc:Superscript | ce:sup | super| rsc:super | wiley:sup">
@@ -1375,7 +1393,14 @@
     </xsl:template>
     
 	<!-- Entity markers (NPG) -->
-	<xsl:template match="named-entity"><rs><xsl:apply-templates/></rs></xsl:template>
+	<xsl:template match="named-entity">
+	    <rs>
+	        <xsl:attribute name="corresp">
+	            <xsl:apply-templates/>
+	        </xsl:attribute>
+	        <xsl:apply-templates/>
+	    </rs>
+	</xsl:template>
 	
     <xsl:template match="sec">
         <div>

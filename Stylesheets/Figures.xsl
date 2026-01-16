@@ -303,10 +303,19 @@
             </formula>
     </xsl:template>
     
-    <!-- PL: neutralize Wiley specific presentation attribute in MathML element math -->
+    <!-- PL: neutralize Wiley/Elsevier specific presentation attribute in MathML element math -->
     <xsl:template match="@*[local-name()='location']" mode="mathml"/>
     <xsl:template match="ce:inline-figure" mode="mathml">
         <xsl:value-of select="ce:link/@locator"/>
+    </xsl:template>
+    <xsl:template match="ce:glyph" mode="mathml">
+        <xsl:value-of select="@name"/>
+    </xsl:template>
+    <xsl:template match="ce:hsp" mode="mathml">
+        <xsl:text> </xsl:text>
+    </xsl:template>
+    <xsl:template match="ce:monospace|ce:sans-serif|ce:small-caps|ce:sup|ce:italic|ce:inf|ce:bold|ce:cross-out|ce:cross-ref|ce:cross-refs" mode="mathml">
+        <xsl:value-of select="normalize-space(.)"/>
     </xsl:template>
     
    <xsl:template match="wiley:displayedItem[@type='mathematics']/wiley:label"/>

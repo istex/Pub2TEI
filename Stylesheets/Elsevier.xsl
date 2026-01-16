@@ -1492,12 +1492,25 @@
     </xsl:template>
 
     <xsl:template match="ce:glyph">
-        <g>
-            <xsl:if test="@name">
-                <xsl:attribute name="ref">#<xsl:value-of select="@name"/></xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </g>
+        <xsl:choose>
+            <xsl:when test="ancestor::ce:caption">
+                <g>
+                    <xsl:if test="@name">
+                        <xsl:attribute name="corresp">#<xsl:value-of select="@name"/></xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </g>   
+            </xsl:when>
+            <xsl:otherwise>
+                <figure>
+                    <xsl:if test="@name">
+                        <xsl:attribute name="corresp">#<xsl:value-of select="@name"/></xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </figure>   
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     
     <!-- erratums -->
