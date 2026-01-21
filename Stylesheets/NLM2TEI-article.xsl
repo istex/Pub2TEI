@@ -3013,7 +3013,7 @@
                 <div>
                     <xsl:if test="@sec-type[string-length()&gt; 0]">
                         <xsl:attribute name="type">
-                            <xsl:value-of select="@sec-type"/>
+                            <xsl:value-of select="translate(@sec-type,' ','')"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:if test="parent::boxed-text">

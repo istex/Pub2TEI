@@ -905,6 +905,9 @@
                                             <xsl:if test="//tei:fileDesc/tei:publicationStmt/tei:publisher[string-length()&gt; 0]">
                                                 <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:publisher"/>
                                             </xsl:if>
+                                            <xsl:if test="//tei:fileDesc/tei:publicationStmt/tei:pubPlace[string-length()&gt; 0]">
+                                                <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:pubPlace"/>
+                                            </xsl:if>
                                             <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor"/>
                                             <xsl:call-template name="fixAndCopyDate">
                                                 <xsl:with-param name="date" select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
@@ -1529,6 +1532,12 @@
             </xsl:choose>
             <xsl:copy-of select="tei:address"/>
             <xsl:choose>
+                <xsl:when test="tei:publisher='BRILL'">
+                    <availability status="{tei:availability/@status}">
+                        <xsl:copy-of select="tei:availability/tei:licence"/>
+                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
+                    </availability>
+                </xsl:when>
                 <xsl:when test="contains(string(tei:availability/tei:licence),'Droz')">
                     <availability status="{tei:availability/@status}">
                         <xsl:copy-of select="tei:availability/tei:licence"/>

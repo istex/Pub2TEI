@@ -467,7 +467,6 @@
                                     <xsl:if test="@xml:id">
                                         <xsl:copy-of select="@xml:id"/>
                                     </xsl:if>
-                                    <head>Highlights</head>
                                     <xsl:choose>
                                         <xsl:when test="@xml:lang[string-length() &gt; 0] | @lang[string-length() &gt; 0]">
                                             <xsl:attribute name="xml:lang">
@@ -475,6 +474,7 @@
                                             </xsl:attribute>
                                         </xsl:when>
                                     </xsl:choose>
+                                    <head>Highlights</head>
                                     <xsl:apply-templates/>
                                 </abstract>
                             </xsl:for-each>
