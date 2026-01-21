@@ -479,13 +479,14 @@
                                 </abstract>
                             </xsl:for-each>
 		                </xsl:if>
-                        <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]| header/publicationMeta[@level='unit']/subjectInfo[string-length()&gt;0] or 
-                            header/publicationMeta[@level='unit']/titleGroup/title[@type][string-length()&gt;0]">
+                        <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]">
                             <textClass ana="keyword">
-							    <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]">
-							        <xsl:apply-templates select="header/contentMeta/keywordGroup"/>
-							    </xsl:if>
-							</textClass>
+                                <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]">
+                                    <xsl:apply-templates select="header/contentMeta/keywordGroup"/>
+                                </xsl:if>
+                            </textClass>
+                        </xsl:if>
+                        <xsl:if test="header/publicationMeta[@level='unit']/titleGroup/title[@type][string-length()&gt;0]">
                             <textClass ana="subject">
                                 <xsl:if test="header/publicationMeta[@level='unit']/titleGroup/title[string-length()&gt;0]">
                                     <xsl:for-each select="header/publicationMeta[@level='unit']/titleGroup/title">
@@ -502,7 +503,7 @@
                                     </xsl:for-each>
                                 </xsl:if>
                             </textClass>
-						</xsl:if>
+                        </xsl:if>
                         <xsl:if test="header/publicationMeta/subjectInfo/subject !=''">
                             <textClass ana="classification">
                                 <xsl:apply-templates select="header/publicationMeta/subjectInfo/*"/>
@@ -1263,7 +1264,7 @@
                             <xsl:attribute name="type">
                                 <xsl:value-of select="$testOrganisation"/>
                             </xsl:attribute>
-                            <xsl:value-of select="$avantVirgule"/>
+                            <xsl:value-of select="normalize-space($avantVirgule)"/>
                         </orgName>
                         <xsl:if test="$apresVirgule !=''">
                             <xsl:call-template name="WileyParseAffiliation">
@@ -1274,11 +1275,11 @@
                     <xsl:when test="$testOrganisation=''">
                         <address>
                             <addrLine>
-                                <xsl:value-of select="$avantVirgule"/>
+                                <xsl:value-of select="normalize-space($avantVirgule)"/>
                             </addrLine>
                             <xsl:if test="$apresVirgule !=''">
                                 <addrLine>
-                                    <xsl:value-of select="$apresVirgule"/>
+                                    <xsl:value-of select="normalize-space($apresVirgule)"/>
                                 </addrLine>
                             </xsl:if>
                                 <xsl:choose>

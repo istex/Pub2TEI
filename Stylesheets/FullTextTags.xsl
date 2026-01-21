@@ -1468,7 +1468,20 @@
         </div>
     </xsl:template>
     <xsl:template match="wiley:abstract/wiley:section">
-        <xsl:apply-templates/>
+        <div>
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <!-- SG - 10.1002/bjs.7563 -->
+            <xsl:if test="@xml:id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@xml:id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 	
    <xsl:template match="wiley:section/wiley:title">
