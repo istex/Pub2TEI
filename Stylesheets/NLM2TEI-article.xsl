@@ -362,6 +362,27 @@
                             <xsl:apply-templates select="fm/rvwinfo"/>
                         </xsl:if>
                     </titleStmt>
+                    <!-- PL: pour les suppinfo, sous fileDesc/editionStmt/edition/ref, solution de HAL --> 
+                    <xsl:if test="pubfm/suppinfo">
+                        <editionStmt>
+                            <edition>
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="pubfm/suppinfo/@id"/>
+                                </xsl:attribute>
+                                <xsl:apply-templates select="pubfm/suppinfo/suppobj"/>
+                            </edition>	
+                        </editionStmt>
+                    </xsl:if>
+                    <xsl:if test="suppfm/suppinfo">
+                        <editionStmt>
+                            <edition>
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="suppfm/suppinfo/@id"/>
+                                </xsl:attribute>
+                                <xsl:apply-templates select="suppfm/suppinfo/suppobj"/>
+                            </edition>	
+                        </editionStmt>
+                    </xsl:if>
                     <publicationStmt>
                         <authority>ISTEX</authority>
                         <xsl:if test="front/journal-meta/publisher">
@@ -1097,8 +1118,9 @@
                     <back>
                         <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                         <xsl:apply-templates select="front/article-meta/product"/>
-                        <xsl:apply-templates select="back/* | bm/ack"/>
+                        <xsl:apply-templates select="back/*"/>
                         <xsl:apply-templates select="bm/objects"/>
+                        <xsl:apply-templates select="bm/ack"/>
                         <xsl:apply-templates select="bm/bibl"/>
                     </back>
                 </xsl:if>
@@ -1127,27 +1149,6 @@
                             <xsl:apply-templates select="front/article-meta/title-group/article-title | fm/atl"/>
                             <xsl:apply-templates select="front/article-meta/fn-group/fn"/>
                         </titleStmt>
-                        <!-- PL: pour les suppinfo, sous fileDesc/editionStmt/edition/ref, solution de HAL --> 
-                        <xsl:if test="pubfm/suppinfo">
-                            <editionStmt>
-                                <edition>
-                                    <xsl:attribute name="xml:id">
-                                        <xsl:value-of select="pubfm/suppinfo/@id"/>
-                                    </xsl:attribute>
-                                    <xsl:apply-templates select="pubfm/suppinfo/suppobj"/>
-                                </edition>	
-                            </editionStmt>
-                        </xsl:if>
-                        <xsl:if test="suppfm/suppinfo">
-                            <editionStmt>
-                                <edition>
-                                    <xsl:attribute name="xml:id">
-                                        <xsl:value-of select="suppfm/suppinfo/@id"/>
-                                    </xsl:attribute>
-                                    <xsl:apply-templates select="suppfm/suppinfo/suppobj"/>
-                                </edition>	
-                            </editionStmt>
-                        </xsl:if>
                         <publicationStmt>
                             <authority>ISTEX</authority>
                             <xsl:if test="front/journal-meta/publisher">
@@ -3063,7 +3064,7 @@
             
             <xsl:if test="parent::boxed-text">
                 <xsl:attribute name="type">
-                    <xsl:text>boxed-text</xsl:text>
+                    <xsl:text>box</xsl:text>
                 </xsl:attribute>
             </xsl:if>
             
@@ -5020,9 +5021,9 @@
                                                                         <xsl:otherwise>
                                                                             <xsl:choose>
                                                                                 <xsl:when test="contains($avantVirgule,' ')">
-                                                                                    <region>
+                                                                                    <settlement>
                                                                                         <xsl:apply-templates select="$avantVirgule"/>
-                                                                                    </region>
+                                                                                    </settlement>
                                                                                 </xsl:when>
                                                                                 <xsl:otherwise>
                                                                                     <address>

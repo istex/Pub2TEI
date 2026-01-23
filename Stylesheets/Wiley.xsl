@@ -234,6 +234,7 @@
 						                <xsl:attribute name="when">
 						                <xsl:text>1972</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1972</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta[@level='unit']/doi='10.1111/j.1744-1714.1968.tb00414.x'">
@@ -241,6 +242,7 @@
 						                <xsl:attribute name="when">
 						                <xsl:text>1968</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1968</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0002-9246' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='58'">
@@ -248,6 +250,7 @@
 						                <xsl:attribute name="when">
 						                <xsl:text>1999</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1999</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0077-8923' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='105'">
@@ -255,6 +258,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1963</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1963</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0077-8923' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='196'">
@@ -262,6 +266,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1972</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1972</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0141-1314' and header/publicationMeta/numberingGroup/numbering[@type='journalIssue']='62'">
@@ -269,6 +274,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>2009</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>2009</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='1355-4905' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='15'">
@@ -276,6 +282,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1998</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1998</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0956-5507' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='7'">
@@ -283,6 +290,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1996</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1996</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0265-0665' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='21'">
@@ -290,6 +298,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>2001</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>2001</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0026-1068' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='24'">
@@ -297,6 +306,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1993</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1993</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0309-8249' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='35'">
@@ -304,6 +314,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>2001</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>2001</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0384-9694' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='29'">
@@ -311,6 +322,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>2001</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>2001</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0363-6550' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='10'">
@@ -318,6 +330,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1986</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1986</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:when test="header/publicationMeta/issn[@type='print']='0363-6550' and header/publicationMeta/numberingGroup/numbering[@type='journalVolume']='12'">
@@ -332,6 +345,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:text>1930</xsl:text>
 						                </xsl:attribute>
+						                <xsl:text>1930</xsl:text>
 						            </date>
 						        </xsl:when>
 						        <xsl:otherwise>
@@ -339,6 +353,7 @@
 						                <xsl:attribute name="when">
 						                    <xsl:value-of select="header/publicationMeta[@level='part']/coverDate/@startDate"/>
 						                </xsl:attribute>
+						                <xsl:value-of select="header/publicationMeta[@level='part']/coverDate/@startDate"/>
 						            </date>
 						        </xsl:otherwise>
 						    </xsl:choose>
@@ -556,12 +571,13 @@
                         <body><div><p/></div></body>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:if test="body/bibliography|header/noteGroup/note|body/noteGroup/note|header/contentMeta/titleGroup/title/citation">
+                <xsl:if test="body/bibliography|header/noteGroup/note|body/noteGroup/note|header/contentMeta/titleGroup/title/citation
+                    |//tabular/noteGroup">
                     <back>
                         <!-- note de bas de page -->
-                        <xsl:if test="header/noteGroup/note">
+                        <xsl:if test="header/noteGroup/note | //tabular/noteGroup">
                             <div type="fn-group">
-                            <xsl:apply-templates select="header/noteGroup/note"/>
+                                <xsl:apply-templates select="header/noteGroup/note| //tabular/noteGroup"/>
                             </div>
                         </xsl:if>
                         <xsl:if test="body/noteGroup/note">
@@ -637,7 +653,7 @@
             <!-- Genre     -->
             <xsl:if test="publicationMeta[@level='unit']/@type[string-length()&gt; 0]">
                 <xsl:attribute name="type">
-                    <xsl:value-of select="$codeGenreIstex"/>
+                    <xsl:value-of select="publicationMeta[@level='unit']/@type"/>
                 </xsl:attribute>
             </xsl:if>
             <analytic>
@@ -1468,6 +1484,11 @@
     </xsl:template>
     <xsl:template match="title">
             <xsl:choose>
+                <xsl:when test="parent::mathStatement">
+                    <head>
+                        <xsl:apply-templates/>
+                    </head>
+                </xsl:when>
                 <xsl:when test="contains(.[@type='main'],'Abstracts') or .[@type='main']/citation[@type='book']">
                     <xsl:choose>
                         <xsl:when test="contains(.[@type='main'],'Abstracts')">

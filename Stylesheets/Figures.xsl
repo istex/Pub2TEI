@@ -275,24 +275,40 @@
     <xsl:template match="wiley:caption/wiley:p">
             <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="wiley:mathStatement/wiley:p">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
     
     <!-- SG - traitement des formula mathML -->
     <xsl:template match="wiley:mathStatement">
-        <formula>
+        <floatingText type="box" source="mathStatement">
             <xsl:if test="@xml:id">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@xml:id"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="wiley:title">
-                <hi>
-                    <xsl:value-of select="wiley:title"/>
-                </hi>
+            <xsl:if test="@xml:id">
+                <xsl:attribute name="n">
+                    <xsl:text>mthst</xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="contains(@xml:id,'-000')">
+                            <xsl:value-of select="substring-after(@xml:id,'-000')"/>
+                        </xsl:when>
+                        <xsl:when test="contains(@xml:id,'-00')">
+                            <xsl:value-of select="substring-after(@xml:id,'-00')"/>
+                        </xsl:when>
+                        <xsl:when test="contains(@xml:id,'-0')">
+                            <xsl:value-of select="substring-after(@xml:id,'-0')"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:attribute>
             </xsl:if>
-            
-            <xsl:message><xsl:value-of select="wiley:title"/></xsl:message>
-            <xsl:apply-templates select="wiley:p"/>
-        </formula>
+            <body>
+                <xsl:apply-templates/>
+            </body>
+        </floatingText>
     </xsl:template>
     
     <!-- SG - WILEY traitement mathml - voir notice ZYGO.ZYGO1222.xml -->
@@ -302,6 +318,27 @@
                 <xsl:if test="@xml:id">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="@xml:id"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="@xml:id">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="@xml:id"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="@xml:id">
+                    <xsl:attribute name="n">
+                        <xsl:text>disp</xsl:text>
+                        <xsl:choose>
+                            <xsl:when test="contains(@xml:id,'-000')">
+                                <xsl:value-of select="substring-after(@xml:id,'-000')"/>
+                            </xsl:when>
+                            <xsl:when test="contains(@xml:id,'-00')">
+                                <xsl:value-of select="substring-after(@xml:id,'-00')"/>
+                            </xsl:when>
+                            <xsl:when test="contains(@xml:id,'-0')">
+                                <xsl:value-of select="substring-after(@xml:id,'-0')"/>
+                            </xsl:when>
+                        </xsl:choose>
                     </xsl:attribute>
                 </xsl:if>
                 <xsl:apply-templates />

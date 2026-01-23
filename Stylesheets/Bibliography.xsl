@@ -365,6 +365,11 @@
                             </xsl:choose>
                         </xsl:attribute>
                     </xsl:if>
+                    <xsl:if test="label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="label"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <!-- <xsl:attribute name="xml:id">
                 <xsl:apply-templates select="$entry/@id | @id"/>
             </xsl:attribute>-->
@@ -1404,7 +1409,7 @@
         </editor>
     </xsl:template>
     <xsl:template match="reftxt">
-        <bibl xml:id="{../@id}">
+        <bibl xml:id="{../@id}" n="{translate(../@id,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ','')}">
             <xsl:apply-templates/>
         </bibl>
     </xsl:template>
@@ -1528,6 +1533,32 @@
         <bibl type="citation">
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@xml:id"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+                <xsl:choose>
+                    <xsl:when test="contains(@xml:id,'-')">
+                        <xsl:variable name="resultat">
+                            <xsl:value-of select="translate(substring-after(@xml:id,'-'),'-','')"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="starts-with($resultat,'bib000')">
+                                <xsl:text>b</xsl:text>
+                                <xsl:value-of select="substring-after($resultat,'bib000')"/>
+                            </xsl:when>
+                            <xsl:when test="starts-with($resultat,'bib00')">
+                                <xsl:text>b</xsl:text>
+                                <xsl:value-of select="substring-after($resultat,'bib00')"/>
+                            </xsl:when>
+                            <xsl:when test="starts-with($resultat,'bib0')">
+                                <xsl:text>b</xsl:text>
+                                <xsl:value-of select="substring-after($resultat,'bib0')"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="@xml:id"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
             <xsl:apply-templates select="wiley:citation"/>
         </bibl>

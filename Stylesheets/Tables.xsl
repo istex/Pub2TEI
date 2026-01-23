@@ -93,6 +93,9 @@
                         <xsl:attribute name="xml:id">
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
                     </xsl:if>
                     <xsl:if test="@rowsep">
                         <xsl:attribute name="rows">
@@ -413,6 +416,11 @@
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:if test="label">
+                <xsl:attribute name="n">
+                    <xsl:value-of select="label"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </note>
     </xsl:template>
@@ -611,6 +619,32 @@
                     <xsl:value-of select="@xml:id"/>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:attribute name="n">
+                <xsl:choose>
+                    <xsl:when test="contains(@xml:id,'-')">
+                        <xsl:variable name="resultat">
+                            <xsl:value-of select="translate(substring-after(@xml:id,'-'),'-','')"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="starts-with($resultat,'note000')">
+                                <xsl:text>fn</xsl:text>
+                                <xsl:value-of select="substring-after($resultat,'note000')"/>
+                            </xsl:when>
+                            <xsl:when test="starts-with($resultat,'note00')">
+                                <xsl:text>fn</xsl:text>
+                                <xsl:value-of select="substring-after($resultat,'note00')"/>
+                            </xsl:when>
+                            <xsl:when test="starts-with($resultat,'note0')">
+                                <xsl:text>fn</xsl:text>
+                                <xsl:value-of select="substring-after($resultat,'note0')"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="@xml:id"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </note>
     </xsl:template>
@@ -623,18 +657,19 @@
 	
    <xsl:template match="wiley:tabular">
        <table>
-           <xsl:attribute name="type">table</xsl:attribute>
            <xsl:if test="@xml:id">
                <xsl:attribute name="xml:id">
                    <xsl:value-of select="@xml:id"/>
                </xsl:attribute>
            </xsl:if>
-           <xsl:if test="wiley:table/wiley:tgroup/@cols">
+           <xsl:if test="wiley:table/wiley:tgroup[1]/@cols">
                <xsl:attribute name="cols">
-                   <xsl:value-of select="wiley:table/wiley:tgroup/@cols"/>
+                   <xsl:value-of select="wiley:table/wiley:tgroup[1]/@cols"/>
                </xsl:attribute>
            </xsl:if>
-           <xsl:apply-templates select="*"/>
+           <!--<xsl:apply-templates select="*"/>-->
+           <!-- pour wiley les <noteGroup> sont rassemblés dans le <back> -->
+           <xsl:apply-templates select="* except(wiley:noteGroup)"/>
        </table>
     </xsl:template>
     

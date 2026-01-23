@@ -252,16 +252,21 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="wiley:p">
-        <p>
-            <xsl:if test="@xml:id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@xml:id"></xsl:value-of>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-            <!--<xsl:apply-templates select="*[not(self::wiley:mathStatement)]"/>-->
-        </p>
-        <!--xsl:apply-templates select="wiley:mathStatement"/-->
+        <xsl:choose>
+            <xsl:when test="wiley:mathStatement">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <p>
+                    <xsl:if test="@xml:id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@xml:id"></xsl:value-of>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </p>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- ajout élément sourceà <figure> -->
     <xsl:template match="wiley:source">
@@ -425,7 +430,7 @@
     <!-- SG supplementary information -->
     <xsl:template match="sir">
         <ref>
-            <xsl:attribute name="type">suppinfo</xsl:attribute>
+            <xsl:attribute name="type">figure</xsl:attribute>
             <xsl:attribute name="target">
                 <xsl:text>#</xsl:text>
                 <xsl:apply-templates select="@rid"/>
@@ -802,123 +807,6 @@
         </ref>
     </xsl:template>
     
-    <xsl:template match="wiley:link">
-		<!-- for wiley we don't know in advance which type of object is referenced but 
-		it seems that we can use the identifier string to have a reliable information -->
-		<xsl:choose>
-			<xsl:when test="string-length(@href) > 0">
-				<!--xsl:message><xsl:value-of select="substring(@href,2,1)"/></xsl:message-->
-				<xsl:choose>
-				    <!-- SG ajout reference WILEY -->
-				    <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">
-				        <ref type="bibr">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:apply-templates/>
-				        </ref>
-				    </xsl:when>
-				    <xsl:when test="contains(@href,'fig')">
-				        <ref type="fig">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:value-of select="text()"/>
-				        </ref>
-				    </xsl:when>
-				    <xsl:when test="contains(@href, 'n')">
-				        <!-- we have a note (normally) -->
-				        <hi><ref type="fn">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:apply-templates/>
-				        </ref></hi>
-				    </xsl:when>
-				    
-				    <xsl:when test="contains(@href,'sec')">
-				        <ref type="section">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:apply-templates/>
-				        </ref>
-				    </xsl:when>
-				    <xsl:when test="contains(@href,'tab') or contains(@href,'tb')">
-				        <ref type="table">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:value-of select="text()"/>
-				        </ref>
-				    </xsl:when>
-				    <xsl:when test="contains(@href,'f')">
-				        <ref type="fig">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:value-of select="text()"/>
-				        </ref>
-				    </xsl:when>
-				    <!--SG - Enriched Object ex:<link href="#aoc1856-eo-0001"/> -->
-				    <xsl:when test="contains(@href, 'eo')">
-				        <!-- we have an Enriched Object -->
-				        <ref type="enrichedObject">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:apply-templates/>
-				        </ref>	
-				    </xsl:when>
-				    <!-- SG ajout lien figure et bibr --> 
-				    <xsl:when test="contains(@href, 'fig')">
-				        <ref type="figure">
-				            <xsl:attribute name="target">
-				                <xsl:value-of select="@href"/>
-				            </xsl:attribute>
-				            <xsl:apply-templates/>
-				        </ref>	
-				    </xsl:when>
-				</xsl:choose>
-			   <!-- <xsl:if test="contains(@href, 'bib')">
-			        <ref type="bibr">
-			            <xsl:attribute name="target">
-			                <xsl:value-of select="@href"/>
-			            </xsl:attribute>
-			            <xsl:apply-templates/>
-			        </ref>	
-			    </xsl:if>-->
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:if test="contains(@href,'bib')">
-					<ref type="bibr">
-			            <xsl:attribute name="target">
-			                <xsl:value-of select="@href"/>
-			            </xsl:attribute>
-						<xsl:value-of select="text()"/>
-			        </ref>
-				</xsl:if>
-				<xsl:if test="substring(@href,2,1) = 'f'">
-					<ref type="figure">
-			            <xsl:attribute name="target">
-			                <xsl:value-of select="@href"/>
-			            </xsl:attribute>
-						<xsl:value-of select="text()"/>
-			        </ref>
-				</xsl:if>
-			    <xsl:if test="substring(@href,2,1) = 't'">
-					<ref type="table">
-		            	<xsl:attribute name="target">
-		                	<xsl:value-of select="@href"/>
-		            	</xsl:attribute>
-						<xsl:value-of select="text()"/>
-		        	</ref>
-				</xsl:if>
-			   
-			</xsl:otherwise>	
-		</xsl:choose>
-    </xsl:template>
-	
     <xsl:template match="greeting">
         <salute>
             <xsl:apply-templates/>
@@ -926,7 +814,7 @@
     </xsl:template>
     
     <xsl:template match="bibr | bibrinl">
-        <ref type="bibr">
+        <ref type="bibr" rend="superscript">
             <xsl:variable name="diese">
                 <xsl:value-of select="replace(@rid,' ',' #')"/>
             </xsl:variable>
@@ -935,10 +823,24 @@
             </xsl:attribute>
             <xsl:choose>
                 <xsl:when test=". !=''">
-                    <xsl:apply-templates/>
+                    <hi rend="superscript">
+                        <xsl:apply-templates/>
+                    </hi>
                 </xsl:when>
                 <xsl:when test="@rid !=''">
-                    <xsl:value-of select="@rid"/>
+                    <hi rend="superscript">
+                        <xsl:variable name="clean">
+                            <xsl:value-of select="translate(@rid,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ','')"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="contains($clean,' ')">
+                                <xsl:value-of select="translate($clean,' ',',')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$clean"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </hi>
                 </xsl:when>
             </xsl:choose>
         </ref>
@@ -1743,5 +1645,425 @@
             </xsl:if>
             <xsl:apply-templates/>
         </figure>
+    </xsl:template>
+    
+    <!-- découpage des références multiples wiley -->
+    <!-- nettoyage des ref -->
+    <xsl:template match="wiley:link">
+        <ref>
+            <xsl:attribute name="type">
+                <xsl:choose>
+                    <xsl:when test="contains(@href,'tab') or contains(@href,'tb')">table</xsl:when>
+                    <xsl:when test="contains(@href,'fig') or contains(@href,'fg')">figure</xsl:when>
+                    <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">bibr</xsl:when>
+                    <xsl:when test="contains(@href,'sec')">section</xsl:when>
+                    <xsl:when test="contains(@href,'note')">fn</xsl:when>
+                    <xsl:when test="contains(@href,'disp') or contains(@href,'mthst')">formula</xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:attribute name="target">
+                <xsl:value-of select="@href"/>
+            </xsl:attribute>
+            <hi rend="superscript">
+                <xsl:choose>
+                    <xsl:when test=". !=''">
+                        <xsl:apply-templates/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="@href"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </hi>
+        </ref>
+    </xsl:template>
+    <xsl:template match="@href">
+        <xsl:choose>
+        <xsl:when test="contains(.,' ')">
+            <xsl:call-template name="ParseRef">
+                <xsl:with-param name="theRef">
+                    <xsl:apply-templates/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="resultat">
+                    <xsl:value-of select="translate(substring-after(.,'-'),'-','')"/>
+                </xsl:variable>
+                <!--<xsl:value-of select="$resultat"/>-->
+                <xsl:choose>
+                    <xsl:when test="starts-with($resultat,'bib000')">
+                        <xsl:text>b</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'bib000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'bib00')">
+                        <xsl:text>b</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'bib00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'bib0')">
+                        <xsl:text>b</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'bib0')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'fig000')">
+                        <xsl:text>fig</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'fig000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'fig00')">
+                        <xsl:text>fig</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'fig00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'fig0')">
+                        <xsl:text>fig</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'fig0')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'note000')">
+                        <xsl:text>fn</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'note000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'note00')">
+                        <xsl:text>fn</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'note00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'note0')">
+                        <xsl:text>fn</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'note0')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'tbl000')">
+                        <xsl:text>tbl</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'tbl000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'tbl00')">
+                        <xsl:text>tbl</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'tbl00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'tbl0')">
+                        <xsl:text>tbl</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'tbl0')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'sec000')">
+                        <xsl:text>sec</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'sec000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'sec00')">
+                        <xsl:text>sec</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'sec00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'sec0')">
+                        <xsl:text>sec</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'sec0')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'mthst000')">
+                        <xsl:text>mthst</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'mthst000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'mthst00')">
+                        <xsl:text>mthst</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'mthst00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'mthst0')">
+                        <xsl:text>mthst</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'mthst0')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'disp000')">
+                        <xsl:text>disp</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'mthst000')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'disp00')">
+                        <xsl:text>disp</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'disp00')"/>
+                    </xsl:when>
+                    <xsl:when test="starts-with($resultat,'disp0')">
+                        <xsl:text>disp</xsl:text>
+                        <xsl:value-of select="substring-after($resultat,'mthst0')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$resultat"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="ParseRef">
+        <!--<xsl:param name="theRef" select="substring-after(.,'bib-')"/>-->
+        <xsl:param name="theRef" select="."/>
+        <xsl:param name="inAddress" select="false()"/>
+        <xsl:variable name="avantEspace">
+            <xsl:choose>
+                <xsl:when test="contains($theRef,' ')">
+                    <xsl:value-of select="normalize-space(substring-before($theRef,' '))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="normalize-space($theRef)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="apresEspace">
+            <xsl:choose>
+                <xsl:when test="contains($theRef,' ')">
+                    <xsl:value-of select="normalize-space(substring-after($theRef,' '))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="''"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="not($inAddress)">
+                <xsl:call-template name="ParseRef">
+                    <!--<xsl:with-param name="theRef" select="substring-after(.,'bib-')"/>-->
+                    <xsl:with-param name="theRef" select="."/>
+                    <xsl:with-param name="inAddress" select="true()"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="contains($avantEspace,' ')">
+                        <xsl:value-of select="substring-after($avantEspace,' ')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                        <xsl:choose>
+                            <xsl:when test="contains($avantEspace,'-')">
+                                <xsl:variable name="resultat">
+                                    <xsl:value-of select="translate(substring-after($avantEspace,'-'),'-','')"/>
+                                </xsl:variable>
+                                <xsl:choose>
+                                    <xsl:when test="starts-with($resultat,'bib000')">
+                                        <xsl:text>b</xsl:text>
+                                        <xsl:value-of select="substring-after($resultat,'bib000')"/>
+                                    </xsl:when>
+                                    <xsl:when test="starts-with($resultat,'bib00')">
+                                        <xsl:text>b</xsl:text>
+                                        <xsl:value-of select="substring-after($resultat,'bib00')"/>
+                                    </xsl:when>
+                                    <xsl:when test="starts-with($resultat,'bib0')">
+                                        <xsl:text>b</xsl:text>
+                                        <xsl:value-of select="substring-after($resultat,'bib0')"/>
+                                    </xsl:when>
+                                </xsl:choose>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="substring-after($avantEspace,'-')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+<!--                        <xsl:value-of select="substring-after($avantEspace,'-')"/>-->
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="$apresEspace !=''">
+                    <xsl:call-template name="ParseRef">
+                        <xsl:with-param name="theRef" select="$apresEspace"/>
+                        <xsl:with-param name="inAddress" select="true()"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    
+    
+    <xsl:template match="wiley:link" mode="endormi">
+        <!-- for wiley we don't know in advance which type of object is referenced but 
+		it seems that we can use the identifier string to have a reliable information -->
+        <xsl:choose>
+            <xsl:when test="string-length(@href) > 0">
+                <!--xsl:message><xsl:value-of select="substring(@href,2,1)"/></xsl:message-->
+                <xsl:choose>
+                    <!-- SG ajout reference WILEY -->
+                    <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">
+                        <ref type="bibr">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>
+                    </xsl:when>
+                    <xsl:when test="contains(@href,'fig')">
+                        <ref type="fig">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>
+                    </xsl:when>
+                    <xsl:when test="contains(@href, 'n')">
+                        <!-- we have a note (normally) -->
+                        <ref type="fn">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>
+                    </xsl:when>
+                    <xsl:when test="contains(@href,'sec')">
+                        <ref type="section">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>
+                    </xsl:when>
+                    <xsl:when test="contains(@href,'tab') or contains(@href,'tb')">
+                        <ref type="table">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>
+                    </xsl:when>
+                    <xsl:when test="contains(@href,'f')">
+                        <ref type="fig">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>
+                    </xsl:when>
+                    <!--SG - Enriched Object ex:<link href="#aoc1856-eo-0001"/> -->
+                    <xsl:when test="contains(@href, 'eo')">
+                        <!-- we have an Enriched Object -->
+                        <ref type="enrichedObject">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>	
+                    </xsl:when>
+                    <!-- SG ajout lien figure et bibr --> 
+                    <xsl:when test="contains(@href, 'fig')">
+                        <ref type="figure">
+                            <xsl:attribute name="target">
+                                <xsl:value-of select="@href"/>
+                            </xsl:attribute>
+                            <hi rend="superscript">
+                                <xsl:choose>
+                                    <xsl:when test=". !=''">
+                                        <xsl:apply-templates/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="@href"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </hi>
+                        </ref>	
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="contains(@href,'bib')">
+                    <ref type="bibr">
+                        <xsl:attribute name="target">
+                            <xsl:value-of select="@href"/>
+                        </xsl:attribute>
+                        <hi rend="superscript">
+                            <xsl:choose>
+                                <xsl:when test=". !=''">
+                                    <xsl:apply-templates/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@href"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </hi>
+                    </ref>
+                </xsl:if>
+                <xsl:if test="substring(@href,2,1) = 'f'">
+                    <ref type="figure">
+                        <xsl:attribute name="target">
+                            <xsl:value-of select="@href"/>
+                        </xsl:attribute>
+                        <hi rend="superscript">
+                            <xsl:choose>
+                                <xsl:when test=". !=''">
+                                    <xsl:apply-templates/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@href"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </hi>
+                    </ref>
+                </xsl:if>
+                <xsl:if test="substring(@href,2,1) = 't'">
+                    <ref type="table">
+                        <xsl:attribute name="target">
+                            <xsl:value-of select="@href"/>
+                        </xsl:attribute>
+                        <hi rend="superscript">
+                            <xsl:choose>
+                                <xsl:when test=". !=''">
+                                    <xsl:apply-templates/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@href"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </hi>
+                    </ref>
+                </xsl:if>
+            </xsl:otherwise>	
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>

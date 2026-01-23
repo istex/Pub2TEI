@@ -637,6 +637,7 @@
             <xsl:when test="$codeGenreAll='indp'">article</xsl:when>
             <xsl:when test="$codeGenreAll='industriesatoms'">article</xsl:when>
             <xsl:when test="$codeGenreAll='industry'">article</xsl:when>
+            <xsl:when test="$codeGenreAll='insight'">article</xsl:when>
             <xsl:when test="$codeGenreAll='invcm'">article</xsl:when>
             <xsl:when test="$codeGenreAll='invcme'">article</xsl:when>
             <xsl:when test="$codeGenreAll='inved'">editorial</xsl:when>
@@ -647,8 +648,8 @@
             <xsl:when test="$codeGenreAll='le'">research-article</xsl:when>
             <xsl:when test="$codeGenreAll='lt'">
                 <xsl:choose>
-                    <xsl:when test="//fm/websumm">research-article</xsl:when>
-                    <xsl:otherwise>other</xsl:otherwise>
+                    <xsl:when test="//fm/websumm|//fm/abs">research-article</xsl:when>
+                    <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="$codeGenreAll='mabs'">conference</xsl:when>

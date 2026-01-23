@@ -222,7 +222,12 @@
     <xsl:template match="pubfm/subject | suppfm/subject">
         <classCode>
             <xsl:attribute name="scheme">
-                <xsl:apply-templates select="@type"/>
+                <xsl:choose>
+                    <xsl:when test="contains(@code,'npg')">npg</xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="@type"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
             <xsl:value-of select="@code"/>
         </classCode>
