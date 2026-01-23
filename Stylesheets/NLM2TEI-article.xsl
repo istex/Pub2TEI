@@ -1122,6 +1122,16 @@
                         <xsl:apply-templates select="bm/objects"/>
                         <xsl:apply-templates select="bm/ack"/>
                         <xsl:apply-templates select="bm/bibl"/>
+                        <xsl:if test="front/article-meta/contrib-group/contrib/collab">
+                            <div type="contributors-list">
+                                <head>List of contributors</head>
+                                <listBibl>
+                                    <bibl>
+                                        <xsl:apply-templates select="front/article-meta/contrib-group/contrib/collab/contrib-group/contrib"/>
+                                    </bibl>
+                                </listBibl>
+                            </div>
+                        </xsl:if>
                     </back>
                 </xsl:if>
             </text>
@@ -1315,8 +1325,8 @@
                     <xsl:when test="$ttl='[no title]' or $ttl='[No title]' or $ttl='[No Title]' or $ttl='No Title' or $ttl='No title' or $ttl='no title'">
                         <title level="a" type="main">Communications</title>
                     </xsl:when>
-                    <xsl:when test="front/article-meta/title-group/article-title[string-length() &gt; 0]">
-                        <xsl:apply-templates select="front/article-meta/title-group/article-title"/>
+                    <xsl:when test="article-meta/title-group/article-title[string-length() &gt; 0]">
+                        <xsl:apply-templates select="article-meta/title-group/article-title"/>
                     </xsl:when>
                     <xsl:when test="//fm/atl">
                         <xsl:apply-templates select="//fm/atl"/>
@@ -1340,6 +1350,9 @@
                 </xsl:choose>
                 <!-- All authors are included here -->
                 <xsl:choose>
+                    <xsl:when test="article-meta/contrib-group/contrib-group/contrib[@contrib-type='collab']">
+                        <xsl:apply-templates select="article-meta/contrib-group/contrib-group/contrib[@contrib-type='collab']"/>
+                    </xsl:when>
                     <xsl:when test="article-meta/contrib-group/contrib[@contrib-type='author']">
                         <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='author']"/>
                     </xsl:when>
@@ -4137,7 +4150,7 @@
                             <xsl:when test="@publication-format='print'">
                                 <xsl:attribute name="type">published</xsl:attribute>
                             </xsl:when>
-                            <xsl:when test="@publication-format='electronic'">
+                            <xsl:when test="@publication-format='electronic' and @date-type='pub'">
                                 <xsl:attribute name="type">e-published</xsl:attribute>
                             </xsl:when>
                             <xsl:when test="@pub-type = 'epub-original'">

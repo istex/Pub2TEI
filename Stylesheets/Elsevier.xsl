@@ -684,11 +684,13 @@
                     <back>
                         <!-- traitement des listes de contributeurs appartenant un groupe -->
                         <xsl:if test="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group">
-                            <div type="listAuthors">
-                                <head>Authors list</head>
-                                <bibl>
-                                    <xsl:apply-templates select="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group/* except(ce:affiliation)"/>
-                                </bibl>
+                            <div type="contributors-list">
+                                <head>List of contributors</head>
+                                <listBibl>
+                                    <bibl>
+                                        <xsl:apply-templates select="//*[local-name()='head']/ce:author-group/ce:collaboration/ce:author-group/* except(ce:affiliation)"/>
+                                    </bibl>
+                                </listBibl>
                             </div>
                         </xsl:if>
                         <xsl:if test="//ce:para/ce:footnote">

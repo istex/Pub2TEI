@@ -282,7 +282,6 @@
             </xsl:if>
             <persName>
                 <xsl:apply-templates select="contrib-id"/>
-                <xsl:apply-templates select="collab"/>
                 <xsl:apply-templates select="name"/>
                 <xsl:apply-templates select="string-name"/>
                 <xsl:apply-templates select="name-alternatives"/>
@@ -293,7 +292,18 @@
                     <xsl:value-of select="@contrib-type"/>
                 </roleName>
             </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@contrib-type='collab'">
+                    <xsl:apply-templates select="collab"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    
+                </xsl:otherwise>
+            </xsl:choose>
         </author>
+    </xsl:template>
+    <xsl:template match="contrib[@contrib-type='collab']">
+        <xsl:apply-templates select="collab"/>
     </xsl:template>
     <xsl:template match="contrib[@contrib-type='author' or not(@contrib-type)]">
         <xsl:if test=".!=''">
@@ -596,7 +606,6 @@
         </xsl:if>
     </xsl:template>
     
-
     <xsl:template match="comments">
         <xsl:if test=". !=''">
 <!--nettoyage des espaces vides dans le contenu des balises-->
