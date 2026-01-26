@@ -8,7 +8,9 @@
 	xmlns:rsc="http://www.rsc.org/schema/rscart38"
     exclude-result-prefixes="#all">
 
-    <xsl:output encoding="UTF-8" method="xml"/>
+    <!-- Reprise des formules LATEX coincées dans des ?CDATA "cdata-section-elements="tex-math"
+    Exemple IOP 10.1088/1751-8113/45/7/073001-->
+    <xsl:output encoding="UTF-8" method="xml" cdata-section-elements="tex-math"/>
     <!-- Macrostructure -->
     
     <xsl:template match="body">
@@ -618,7 +620,7 @@
                             <xsl:attribute name="notation">
                                 <xsl:text>TeX</xsl:text>
                             </xsl:attribute>
-                            <xsl:value-of select="tex-math"/>
+                            <xsl:apply-templates/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates/>
@@ -628,7 +630,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template match="disp-formula/label"/>
     <xsl:template match="disp-formula/alternatives">
         <xsl:apply-templates/>
@@ -1439,7 +1441,7 @@
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
+            <xsl:value-of select="node()"/>
         </formula>
     </xsl:template>
     <xsl:template match="online-methods"><xsl:apply-templates/></xsl:template>
