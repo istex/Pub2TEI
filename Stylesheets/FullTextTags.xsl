@@ -529,21 +529,28 @@
                             <xsl:value-of select="label"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="@Notation">
-                        <xsl:attribute name="notation">
-                            <xsl:value-of select="@Notation"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@notation">
-                        <xsl:attribute name="notation">
-                            <xsl:value-of select="@notation"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@content-type">
-                        <xsl:attribute name="notation">
-                            <xsl:value-of select="@content-type"/>
-                        </xsl:attribute>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="@Notation | @notation">
+                            <xsl:attribute name="notation">
+                                <xsl:value-of select="@Notation | @notation"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@Notation | @notation">
+                            <xsl:attribute name="notation">
+                                <xsl:value-of select="@Notation | @notation"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@content-type">
+                            <xsl:attribute name="notation">
+                                <xsl:value-of select="@content-type"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="tex-math">
+                            <xsl:attribute name="notation">
+                                <xsl:text>TeX</xsl:text>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                     <xsl:if test="tex-math/@id">
                         <xsl:attribute name="xml:id">
                             <xsl:value-of select="tex-math/@id"/>
@@ -559,17 +566,7 @@
                             <xsl:text>display</xsl:text>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:choose>
-                        <xsl:when test="tex-math">
-                            <xsl:attribute name="notation">
-                                <xsl:text>TeX</xsl:text>
-                            </xsl:attribute>
-                            <xsl:value-of select="tex-math"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:apply-templates/>
                 </formula>
                 </p>
             </xsl:when>
@@ -585,21 +582,28 @@
                             <xsl:value-of select="label"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="@Notation">
-                        <xsl:attribute name="notation">
-                            <xsl:value-of select="@Notation"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@notation">
-                        <xsl:attribute name="notation">
-                            <xsl:value-of select="@notation"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@content-type">
-                        <xsl:attribute name="notation">
-                            <xsl:value-of select="@content-type"/>
-                        </xsl:attribute>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="@Notation | @notation">
+                            <xsl:attribute name="notation">
+                                <xsl:value-of select="@Notation | @notation"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@Notation | @notation">
+                            <xsl:attribute name="notation">
+                                <xsl:value-of select="@Notation | @notation"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@content-type">
+                            <xsl:attribute name="notation">
+                                <xsl:value-of select="@content-type"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="tex-math">
+                            <xsl:attribute name="notation">
+                                <xsl:text>TeX</xsl:text>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                     <xsl:if test="tex-math/@id">
                         <xsl:attribute name="xml:id">
                             <xsl:value-of select="tex-math/@id"/>
@@ -615,17 +619,7 @@
                             <xsl:text>display</xsl:text>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:choose>
-                        <xsl:when test="tex-math">
-                            <xsl:attribute name="notation">
-                                <xsl:text>TeX</xsl:text>
-                            </xsl:attribute>
-                            <xsl:apply-templates/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:apply-templates/>
                 </formula>
             </xsl:otherwise>
         </xsl:choose>
@@ -684,7 +678,7 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <formula notation="MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+                <formula notation="mathml" xmlns:mml="http://www.w3.org/1998/Math/MathML">
                     <xsl:if test="../ce:label[string-length() &gt; 0]">
                         <xsl:attribute name="n">
                             <xsl:value-of select="../ce:label"/>
@@ -1435,7 +1429,7 @@
         </graphic>
     </xsl:template>
     <xsl:template match="tex-math">
-        <formula notation="tex">
+        <formula notation="TeX">
             <xsl:if test="normalize-space(@id)">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
@@ -1513,7 +1507,7 @@
         </desc>
     </xsl:template>
     <xsl:template match="display-eqn">
-        <formula style="latexEquation" >
+        <formula notation="TeX" >
             <xsl:variable name="TeX">
                 <xsl:apply-templates/>
             </xsl:variable>

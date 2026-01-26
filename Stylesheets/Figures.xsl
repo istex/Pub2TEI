@@ -313,7 +313,7 @@
     
     <!-- SG - WILEY traitement mathml - voir notice ZYGO.ZYGO1222.xml -->
     <xsl:template match="wiley:displayedItem[@type='mathematics']">
-            <formula xmlns:mml="http://www.w3.org/1998/Math/MathML" notation="mathml">
+            <formula notation="display">
                 <!--xsl:apply-templates select="m:math"/-->
                 <xsl:if test="@xml:id">
                     <xsl:attribute name="xml:id">
@@ -434,7 +434,7 @@
                 <xsl:value-of select="inline-graphic/@filename"/>
             </xsl:when>
             <xsl:otherwise>
-                <formula notation="none">
+                <formula notation="equation">
                     <xsl:apply-templates/>
                 </formula>
             </xsl:otherwise>

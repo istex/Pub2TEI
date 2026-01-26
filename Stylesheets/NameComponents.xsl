@@ -377,6 +377,12 @@
                         <region>Massachusetts</region>
                         <country key="US" xml:lang="en">UNITED STATES</country>
                     </xsl:when>
+                    <xsl:when test="$avantVirgule='PA'">
+                        <region>Pennsylvania</region>
+                    </xsl:when>
+                    <xsl:when test="$avantVirgule='FL'">
+                        <region>Florida</region>
+                    </xsl:when>
                     <xsl:when test="$testCountry != ''">
                         <country>
                             <xsl:choose>

@@ -1132,6 +1132,7 @@
                                 </listBibl>
                             </div>
                         </xsl:if>
+                        
                     </back>
                 </xsl:if>
             </text>
@@ -3165,9 +3166,7 @@
                 </div>
             </xsl:when>
             <xsl:when test="parent::ref-list">
-                <listBibl>
-                    <xsl:apply-templates/>
-                </listBibl>
+                <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
                 <div type="references">
@@ -3534,32 +3533,37 @@
         </div>
     </xsl:template>
     <xsl:template match="fn-group">
-        <xsl:choose>
-            <xsl:when test="ancestor::title-group/fn-group/fn">
-                <note>
-                    <xsl:if test="@fn-type">
-                        <xsl:attribute name="type">
-                            <xsl:value-of select="@fn-type"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="label">
-                        <xsl:attribute name="n">
-                            <xsl:value-of select="label"/>
-                        </xsl:attribute>
-                    </xsl:if>
+        <div type="fn-group">
+            <xsl:choose>
+                <xsl:when test="ancestor::title-group/fn-group/fn">
+                    <note>
+                        <xsl:if test="@fn-type">
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="@fn-type"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="label">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="label"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:apply-templates select="fn"/>
+                    </note>
+                </xsl:when>
+                <xsl:otherwise>
                     <xsl:apply-templates select="fn"/>
-                </note>
-                
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:apply-templates select="fn"/>
-            </xsl:otherwise>
-        </xsl:choose>
+                </xsl:otherwise>
+            </xsl:choose>
+            <!-- notes fn et notes des tableaux -->
+            <xsl:if test="//table-wrap-foot">
+                <xsl:apply-templates select="//table-wrap-foot"/>
+            </xsl:if>
+        </div>
     </xsl:template>
     <xsl:template match="fn">
         <note place="inline">
@@ -3575,6 +3579,11 @@
             </xsl:choose>
             <xsl:choose>
                 <xsl:when test="label and contains(@id,'FN')">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="label"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="label and contains(@id,'fn')">
                     <xsl:attribute name="n">
                         <xsl:value-of select="label"/>
                     </xsl:attribute>
@@ -3718,6 +3727,7 @@
                                         <xsl:when test="@ref-type">
                                             <xsl:attribute name="type">
                                                 <xsl:choose>
+                                                    <xsl:when test="@ref-type='disp-formula'">formula</xsl:when>
                                                     <xsl:when test="@ref-type='fig'">figure</xsl:when>
                                                     <xsl:otherwise>
                                                         <xsl:value-of select="@ref-type"/>

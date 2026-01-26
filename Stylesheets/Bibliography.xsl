@@ -1061,9 +1061,7 @@
     <xsl:template match="string-name" mode="authors">
         <xsl:choose>
             <xsl:when test="ancestor::ref">
-                <persName>
-                    <xsl:apply-templates select="."/>
-                </persName>
+                <xsl:apply-templates select="."/>
                 <xsl:if test="following-sibling::*[1][name() = 'aff']/email">
                     <xsl:apply-templates select="following-sibling::*[1][name() = 'aff']/email"/>
                 </xsl:if>
@@ -2158,31 +2156,41 @@
                     </xsl:choose>
                 </biblStruct>
             </xsl:when>
-            <xsl:when test="source|person-group|year and not(contains(.,','))">
+            <xsl:when test="source|person-group|year">
                 <biblStruct>
                     <xsl:if test="@citation-type | @publication-type">
                         <xsl:attribute name="type">
                             <xsl:apply-templates select="@citation-type | @publication-type"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="../label">
-                        <xsl:attribute name="n">
-                            <xsl:value-of select="../label"/>
-                        </xsl:attribute>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="../label">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="../label"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="../@id">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="../@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                     <xsl:choose>
                         <xsl:when test="@id">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:if test="../@id">
-                                <xsl:attribute name="xml:id">
-                                    <xsl:value-of select="../@id"/>
-                                </xsl:attribute>
-                            </xsl:if>
-                        </xsl:otherwise>
+                        <xsl:when test="../@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="../@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
                     </xsl:choose>
                     <xsl:if test="article-title | chapter-title">
                         <analytic>
@@ -2192,6 +2200,7 @@
                             <xsl:apply-templates select="etal"/>
                             <xsl:apply-templates select="person-group[@person-group-type='author']"/>
                             <xsl:apply-templates select="elocation-id"/>
+                            <xsl:apply-templates select="pub-id"/>
                         </analytic>
                     </xsl:if>
                     <monogr>
@@ -2241,6 +2250,16 @@
                         <xsl:when test="@id">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="../@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="../@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="../label">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="../label"/>
                             </xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>

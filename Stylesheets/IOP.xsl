@@ -1325,27 +1325,29 @@
         <xsl:choose>
             <xsl:when test="$codePacsOrig='-'"/>
             <xsl:otherwise>
-                <classCode>
-                    <xsl:attribute name="scheme" select="../@scheme"/>
-                    <xsl:attribute name="n" select="."/>
-                    <xsl:choose>
-                        <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
-                        <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
-                            <xsl:variable name="corrCode">
-                                <xsl:value-of select="substring-after($codePacsOrig,' ')"/>
-                            </xsl:variable>
-                            <xsl:value-of select="$corrCode"/>
-                            <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
-                        </xsl:when>
-                        <xsl:when test="$resultCodePacs !=''">
-                            <xsl:value-of select="."/><xsl:text>: </xsl:text>
-                            <xsl:value-of select="$resultCodePacs"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$codePacsOrig"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </classCode>
+                <xsl:if test="code !=''">
+                    <classCode>
+                        <xsl:attribute name="scheme" select="../@scheme"/>
+                        <xsl:attribute name="n" select="."/>
+                        <xsl:choose>
+                            <!-- réparation d'un pb de code contenant les codes et la verbalisation des données-->
+                            <xsl:when test="contains($codePacsOrig,' ') and contains($codePacsOrig,'.')">
+                                <xsl:variable name="corrCode">
+                                    <xsl:value-of select="substring-after($codePacsOrig,' ')"/>
+                                </xsl:variable>
+                                <xsl:value-of select="$corrCode"/>
+                                <!--<xsl:value-of select="exslt:node-set($table_codePacs)/row[@raw = $corrCode]/@value"/>-->
+                            </xsl:when>
+                            <xsl:when test="$resultCodePacs !=''">
+                                <xsl:value-of select="."/><xsl:text>: </xsl:text>
+                                <xsl:value-of select="$resultCodePacs"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$codePacsOrig"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </classCode>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

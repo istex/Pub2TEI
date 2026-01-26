@@ -11,7 +11,7 @@
     <xsl:output encoding="UTF-8" method="xml"/>
 
     <xsl:template match="els1:formula |els2:formula">
-        <formula>
+        <formula notation="equation">
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>

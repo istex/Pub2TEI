@@ -39,7 +39,7 @@
             select="attribute::*">
             <xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>" </xsl:for-each>
         </xsl:message>
-        <formula>
+        <formula notation="mathml">
             <xsl:copy copy-namespaces="no">
 <!--                <xsl:apply-templates select="node() except(ce:inline-figure)| @* except(@type)" mode="mathml"/>-->
                 <xsl:apply-templates select="node()| @* except(@type)" mode="mathml"/>

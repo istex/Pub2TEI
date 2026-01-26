@@ -27,7 +27,8 @@
                             <xsl:value-of select="label"/>
                         </head>
                     </xsl:if>
-                    <xsl:apply-templates/>
+                    <!-- les notes des tableaux sont reportées dans le <back) -->
+                    <xsl:apply-templates select="* except(table-wrap-foot)"/>
                 </table>
             </xsl:when>
             <xsl:when test="../table-wrap">
@@ -399,13 +400,11 @@
     </xsl:template>-->
 
     <xsl:template match="table-wrap-foot">
-        <note type="table-wrap-foot">
-            <xsl:apply-templates/>
-        </note>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="table-wrap-foot/fn">
-        <note place="inline">
+        <note type="table-wrap-foot" place="inline">
             <xsl:if test="@fn-type">
                 <xsl:attribute name="type">
                     <xsl:value-of select="@fn-type"/>
@@ -416,11 +415,18 @@
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="label">
-                <xsl:attribute name="n">
-                    <xsl:value-of select="label"/>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="label">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="label"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="p/sup[1]">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="p/sup[1]"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates/>
         </note>
     </xsl:template>
