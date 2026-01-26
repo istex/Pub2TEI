@@ -3493,7 +3493,7 @@
                     <xsl:apply-templates/>
                 </item>
             </xsl:when>
-            <xsl:when test="parent::table-wrap">
+            <xsl:when test="parent::table-wrap | parent::table-wrap-foot">
                 <note>
                     <xsl:apply-templates/>
                 </note>
@@ -3533,7 +3533,6 @@
         </div>
     </xsl:template>
     <xsl:template match="fn-group">
-        <div type="fn-group">
             <xsl:choose>
                 <xsl:when test="ancestor::title-group/fn-group/fn">
                     <note>
@@ -3555,15 +3554,16 @@
                         <xsl:apply-templates select="fn"/>
                     </note>
                 </xsl:when>
+                <!-- notes fn et notes des tableaux -->
+                <xsl:when test="parent::table-wrap-foot">
+                    <xsl:apply-templates/>
+                </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="fn"/>
+                    <div type="fn-group">
+                        <xsl:apply-templates select="fn"/>
+                    </div>
                 </xsl:otherwise>
             </xsl:choose>
-            <!-- notes fn et notes des tableaux -->
-            <xsl:if test="//table-wrap-foot">
-                <xsl:apply-templates select="//table-wrap-foot"/>
-            </xsl:if>
-        </div>
     </xsl:template>
     <xsl:template match="fn">
         <note place="inline">

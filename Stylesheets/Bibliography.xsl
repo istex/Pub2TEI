@@ -2156,7 +2156,7 @@
                     </xsl:choose>
                 </biblStruct>
             </xsl:when>
-            <xsl:when test="source|person-group|year">
+            <xsl:when test="source|person-group|year and not(contains(.,','))">
                 <biblStruct>
                     <xsl:if test="@citation-type | @publication-type">
                         <xsl:attribute name="type">
