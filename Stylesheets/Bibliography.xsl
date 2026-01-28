@@ -176,11 +176,18 @@
                     </xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="ce:label[string-length() &gt; 0]">
-                <xsl:attribute name="n">
-                    <xsl:value-of select="normalize-space(ce:label)"/>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="ce:label[string-length() &gt; 0]">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="normalize-space(ce:label)"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="../ce:label[string-length() &gt; 0]">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="normalize-space(../ce:label)"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates select="*[name() != 'ce:label']"/>
         </bibl>
     </xsl:template>
@@ -2299,9 +2306,11 @@
             </xsl:when>
             <xsl:when test="not(contains(., ':'))">
                 <bibl>
-                    <xsl:attribute name="type">
-                        <xsl:text>in-line</xsl:text>
-                    </xsl:attribute>
+                    <xsl:if test="@citation-type | @publication-type">
+                        <xsl:attribute name="type">
+                            <xsl:apply-templates select="@citation-type | @publication-type"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:choose>
                         <xsl:when test="@id">
                             <xsl:attribute name="xml:id">

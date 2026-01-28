@@ -1018,6 +1018,7 @@
                                     <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S181638311800067X'"><language ident="en">en</language></xsl:when>
                                     <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S1816383118000462'"><language ident="en">en</language></xsl:when>
                                     <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1017/S2078633610000706'"><language ident="fr">fr</language></xsl:when>
+                                    <xsl:when test="//article/front/article-meta/article-id[@pub-id-type='doi']='10.1177/0539018407082595'"><language ident="fr">fr</language></xsl:when>
                                     <xsl:otherwise>
                                         <language>
                                             <xsl:attribute name="ident">
@@ -1122,7 +1123,7 @@
                         <xsl:apply-templates select="bm/objects"/>
                         <xsl:apply-templates select="bm/ack"/>
                         <xsl:apply-templates select="bm/bibl"/>
-                        <xsl:if test="front/article-meta/contrib-group/contrib/collab">
+                        <xsl:if test="front/article-meta/contrib-group/contrib/collab and front/article-meta/contrib-group/contrib/collab/contrib-group/contrib">
                             <div type="contributors-list">
                                 <head>List of contributors</head>
                                 <listBibl>
@@ -1351,8 +1352,12 @@
                 </xsl:choose>
                 <!-- All authors are included here -->
                 <xsl:choose>
-                    <xsl:when test="article-meta/contrib-group/contrib-group/contrib[@contrib-type='collab']">
+                    <xsl:when test="article-meta/contrib-group/contrib-group/contrib[@contrib-type='collab'] and article-meta/contrib-group/contrib">
                         <xsl:apply-templates select="article-meta/contrib-group/contrib-group/contrib[@contrib-type='collab']"/>
+                    </xsl:when>
+                    <xsl:when test="article-meta/contrib-group/contrib[@contrib-type='collab']">
+                        <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='author']"/>
+                        <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='collab']"/>
                     </xsl:when>
                     <xsl:when test="article-meta/contrib-group/contrib[@contrib-type='author']">
                         <xsl:apply-templates select="article-meta/contrib-group/contrib[@contrib-type='author']"/>

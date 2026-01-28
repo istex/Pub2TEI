@@ -1410,7 +1410,7 @@
                         <xsl:when test="starts-with(@refid,'f') or starts-with(@refid,'fig') or starts-with(@refid,'FIG')">
                             <xsl:attribute name="type">fig</xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="starts-with(@refid,'bb') or starts-with(@refid,'BB') or starts-with(@refid,'bib') or starts-with(@refid,'BIB')">
+                        <xsl:when test="starts-with(@refid,'bb') or starts-with(@refid,'BB') or starts-with(@refid,'bib') or starts-with(@refid,'BIB') or starts-with(@refid,'br') or starts-with(@refid,'BR')">
                             <xsl:attribute name="type">bibr</xsl:attribute>
                         </xsl:when>
                     </xsl:choose>
@@ -1473,7 +1473,7 @@
 
     <!-- External references -->
     <xsl:template match="ce:inter-ref">
-        <ref>
+        <ref type="uri">
             <xsl:attribute name="target">
                 <xsl:value-of select="@xlink:href"/>
             </xsl:attribute>

@@ -145,11 +145,13 @@
                     <xsl:when test="parent::notes">
                         <xsl:choose>
                             <xsl:when test="ancestor::back/notes">
-                                <note>
-                                    <p>
-                                        <xsl:apply-templates/>
-                                    </p>
-                                </note>
+                                <div type="fn-group">
+                                    <note>
+                                        <p>
+                                            <xsl:apply-templates/>
+                                        </p>
+                                    </note>
+                                </div>
                             </xsl:when>
                             <xsl:otherwise>
                                 <p>
