@@ -1574,7 +1574,7 @@
                                 <xsl:apply-templates select="journal-meta/issn | issn |parent/issn"/>
                             </xsl:otherwise>
                         </xsl:choose>
-                        <xsl:apply-templates select="journal-meta/issn[@pub-type='isbn'] | //isbn"/>
+                        <xsl:apply-templates select="journal-meta/issn[@pub-type='isbn'] | journal-meta/isbn"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:if test="//volume-id[@pub-id-type='isbn']">
@@ -3788,9 +3788,7 @@
                     </xsl:when>
                     <xsl:otherwise>doi</xsl:otherwise>
                 </xsl:choose>
-
             </xsl:attribute>
-
             <xsl:choose>
                 <xsl:when test="@xlink:href !=''">
                     <xsl:value-of select="@xlink:href"/>

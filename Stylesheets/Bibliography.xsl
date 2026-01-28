@@ -1382,6 +1382,9 @@
                     </persName>
                 </author>
             </xsl:when>
+            <xsl:when test="parent::cite">
+                <xsl:apply-templates/>
+            </xsl:when>
             <xsl:otherwise>
                 <author>
                     <persName>
@@ -2066,6 +2069,31 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
+            <xsl:when test="@publication-type='webpage'">
+                <bibl>
+                    <xsl:attribute name="type">
+                        <xsl:value-of select="@publication-type"/>
+                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="@id !=''">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="../@id !=''">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="../@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:if test="../label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="../label"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
             <xsl:when test="@publication-type='other' or not(article-title |source)">
                 <bibl>
                     <xsl:attribute name="type">
@@ -2083,6 +2111,11 @@
                             </xsl:attribute>
                         </xsl:when>
                     </xsl:choose>
+                    <xsl:if test="../label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="../label"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
@@ -3625,4 +3658,15 @@
             <xsl:apply-templates/>
         </hi>
     </xsl:template>
+    <xsl:template match="p/citation">
+        <bibl>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </bibl>
+    </xsl:template>
+
 </xsl:stylesheet>

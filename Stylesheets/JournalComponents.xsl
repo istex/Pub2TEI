@@ -1382,6 +1382,11 @@
                     <xsl:apply-templates/>
                 </pubPlace>
             </xsl:when>
+            <xsl:when test="ancestor::p/citation">
+                <pubPlace>
+                    <xsl:apply-templates/>
+                </pubPlace>
+            </xsl:when>
             <xsl:when test="ancestor::p/.">
                 <bibl>
                     <pubPlace>
@@ -1621,5 +1626,10 @@
             <xsl:when test="$codeDoi = '10.1093/mnras/90.3.326'">en</xsl:when>
             <xsl:otherwise>en</xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="refdoi">
+        <idno type="doi">
+            <xsl:apply-templates/>
+        </idno>
     </xsl:template>
 </xsl:stylesheet>
