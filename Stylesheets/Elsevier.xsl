@@ -1473,7 +1473,7 @@
 
     <!-- External references -->
     <xsl:template match="ce:inter-ref">
-        <ref type="uri">
+        <ref type="url">
             <xsl:attribute name="target">
                 <xsl:value-of select="@xlink:href"/>
             </xsl:attribute>

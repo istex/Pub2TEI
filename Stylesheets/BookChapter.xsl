@@ -1956,7 +1956,7 @@
                 </xsl:choose>
                 <xsl:choose>
                     <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/self-uri">
-                        <idno type="URI">
+                        <idno type="uri">
                             <xsl:value-of select="//book-part[not(body/book-part)]/book-part-meta/self-uri"/>
                         </idno>
                     </xsl:when>

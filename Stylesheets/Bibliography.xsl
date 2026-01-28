@@ -165,7 +165,7 @@
    
     <!-- Références simples Elsevier -->
     <xsl:template match="ce:other-ref">
-        <bibl>
+        <bibl type="other">
             <xsl:choose>
                 <xsl:when test="following-sibling::sb:reference"/>
                 <xsl:when test="preceding-sibling::sb:reference"/>
@@ -219,7 +219,7 @@
             <xsl:if test="sb:contribution">
                 <analytic>
                     <xsl:if test="@id">
-                        <ref xml:id="{@id}"/>
+                        <ref type="id" xml:id="{@id}"/>
                     </xsl:if>
                     <xsl:apply-templates select="sb:contribution/*"/>
                 </analytic>
@@ -1677,16 +1677,31 @@
                         | crossref/cr_issn"/>
                 <!-- dont imprint -->
                 <imprint>
-                    <xsl:apply-templates
-                        select="
-                            year
+                    <xsl:choose>
+                        <xsl:when test="year
                             | volume | vid | dte | iid
                             | part
                             | issno
                             | art-ref/ppf
                             | art-ref/ppl
-                            | pages"
-                    />
+                            | pages">
+                            <xsl:apply-templates
+                                select="
+                                year
+                                | volume | vid | dte | iid
+                                | part
+                                | issno
+                                | art-ref/ppf
+                                | art-ref/ppl
+                                | pages"
+                            />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- imprint ne doit pas être vide de contenu -->
+                            <date/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
                 </imprint>
             </monogr>
             <!-- notes et url -->
@@ -1773,12 +1788,9 @@
                 <!-- Cas général -->
                 <xsl:otherwise>
                     <monogr>
-                        <xsl:apply-templates
-                            select="
-                                book-title | btl | aut
-                                | authors
-                                | editors | ed | edg
-                                | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
+                        <xsl:apply-templates select="book-title | btl | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
+                        <xsl:apply-templates select="aut| authors | ed | edg"/>
+                        <xsl:apply-templates select="editors" mode="IOP"/>
                         <xsl:apply-templates select="url" mode="citation"/>
                         <xsl:if test="isbn">
                             <xsl:apply-templates/>

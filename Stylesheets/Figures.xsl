@@ -434,7 +434,7 @@
                 <xsl:value-of select="inline-graphic/@filename"/>
             </xsl:when>
             <xsl:otherwise>
-                <formula notation="equation">
+                <formula notation="tex">
                     <xsl:apply-templates/>
                 </formula>
             </xsl:otherwise>

@@ -1015,27 +1015,50 @@
             </xsl:choose>
         </author>
     </xsl:template>
+    <xsl:template match="editors/au">
+        <xsl:apply-templates select="au" mode="IOP"/>
+    </xsl:template>
     <xsl:template match="au" mode="IOP">
-        <author>
-            <xsl:choose>
-                <xsl:when test="first-names">
-                    <persName>
-                        <!-- ne préjuge pas de l'ordre -->
-                        <xsl:apply-templates/>
-                    </persName>
-                </xsl:when>
-                <xsl:otherwise>
-                    <name>
-                        <xsl:apply-templates/>
-                    </name>
-                </xsl:otherwise>
-            </xsl:choose>
-        </author>
+        <xsl:choose>
+            <xsl:when test="parent::editors">
+                <editor>
+                    <xsl:choose>
+                        <xsl:when test="first-names">
+                            <persName>
+                                <!-- ne préjuge pas de l'ordre -->
+                                <xsl:apply-templates/>
+                            </persName>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <name>
+                                <xsl:apply-templates/>
+                            </name>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </editor>
+            </xsl:when>
+            <xsl:otherwise>
+                <author>
+                    <xsl:choose>
+                        <xsl:when test="first-names">
+                            <persName>
+                                <!-- ne préjuge pas de l'ordre -->
+                                <xsl:apply-templates/>
+                            </persName>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <name>
+                                <xsl:apply-templates/>
+                            </name>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </author>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- idem si père = editors -->
-    <xsl:template match="editors/author
-                       | editors/au">
+    <xsl:template match="editors/author" mode="IOP">
         <editor>
             <persName>
                 <!-- ne préjuge pas de l'ordre -->
@@ -1579,7 +1602,7 @@
         <idno type="DOI">
             <xsl:value-of select="substring-after(.,'http://dx.doi.org/')"/>
         </idno>
-        <idno type="URL">
+        <idno type="url">
             <xsl:value-of select="."/>
         </idno>
     </xsl:template>
