@@ -2086,11 +2086,12 @@
                    <xsl:when test="addr-line and institution">
                        <!-- voir comme exemple 10.1093/jnci/13.6.1473 -->
                        <affiliation>
-                           <xsl:apply-templates select="institution"/>
+                           <xsl:apply-templates/>
+                           <!--<xsl:apply-templates select="institution"/>
                            <xsl:if test="addr-line or country">
                                <xsl:apply-templates select="addr-line"/>
                                <xsl:apply-templates select="country"/>
-                           </xsl:if>
+                           </xsl:if>-->
                        </affiliation>
                    </xsl:when>
                  <xsl:when test="../aff">
