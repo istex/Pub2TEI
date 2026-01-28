@@ -1330,7 +1330,7 @@
             <xsl:when test="//article/article-metadata/article-data/doi='10.1088/0964-1726/16/5/043'"/>
             <xsl:otherwise>
                 <textClass ana="classifications">
-                        <xsl:apply-templates/>
+                    <xsl:apply-templates select="code"/>
                 </textClass>
             </xsl:otherwise>
         </xsl:choose>
@@ -1343,12 +1343,13 @@
             <xsl:value-of select="translate($codePacsOrig,'.','')"/>
         </xsl:variable>
         <xsl:variable name="resultCodePacs">
-            <xsl:value-of select="normalize-space($titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacs]/tei:cell[@role = 'name'])"/>
+            <xsl:value-of select="$titleCodesPACS/descendant::tei:row[translate(tei:cell[@role = 'code']/text(),'.','') = $codePacs]/tei:cell[@role = 'name']"/>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="$codePacsOrig='-'"/>
+            <xsl:when test="$codePacsOrig='-'">
+            </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="code !=''">
+                <xsl:if test=". !=''">
                     <classCode>
                         <xsl:attribute name="scheme" select="../@scheme"/>
                         <xsl:attribute name="n" select="."/>
