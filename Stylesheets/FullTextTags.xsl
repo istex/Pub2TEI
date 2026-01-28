@@ -463,23 +463,48 @@
         </ref>
     </xsl:template>
     <xsl:template match="deflist | rsc:deflist">
-        <list>
-            <xsl:apply-templates select="@*"/>
+        <xsl:choose>
+            <xsl:when test="term">
+                <list type="termlist">
+                    <xsl:apply-templates select="@*"/>
+                    <item>
+                        <xsl:apply-templates/>
+                    </item>
+                </list>
+            </xsl:when>
+            <xsl:otherwise>
+                <list type="termlist">
+                    <xsl:apply-templates select="@*"/>
+                    <xsl:apply-templates/>
+                </list>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    <xsl:template match="deflist/head | rsc:deflist/rsc:head">
+        <head>
             <xsl:apply-templates/>
-        </list>
+        </head>
     </xsl:template>
     <xsl:template match="deflist/@type| rsc:deflist/@type">
         <xsl:attribute name="type">gloss</xsl:attribute>
     </xsl:template>
     <xsl:template match="deflist/term |rsc:deflist/rsc:term">
-        <label>
+        <term>
             <xsl:apply-templates/>
-        </label>
+        </term>
     </xsl:template>
     <xsl:template match="deflist/defn | rsc:deflist/rsc:defn">
-        <item>
-            <xsl:apply-templates/>
-        </item>
+        <gloss>
+            <xsl:choose>
+                <xsl:when test="p">
+                    <xsl:value-of select="p"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </gloss>
     </xsl:template>
     <!-- SG - Nature: nettoyage du <bdy> polluant -->
     <xsl:template match="bdy"/>

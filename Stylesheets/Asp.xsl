@@ -473,7 +473,7 @@
                     <xsl:when test="contains(source_title,'pp') and not(div1/p[1]/@align)">
                         <abstract>
                             <p>
-                                <xsl:apply-templates select="div1/p[1]" mode="abstractAsp"/>
+                                <xsl:apply-templates select="div1/p[1]" mode="asp"/>
                             </p>
                         </abstract>
                     </xsl:when>
@@ -726,6 +726,11 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </body>
+            <xsl:if test="//note">
+                <back>
+                    <xsl:apply-templates select="//note" mode="asp"/>
+                </back>
+            </xsl:if>
         </text>
     </TEI>
     </xsl:template>
@@ -1058,9 +1063,14 @@
         </p>
     </xsl:template>
     <xsl:template match="altpage">
-        <p rend="head">
+        <pb rend="page">
+            <xsl:if test="@n">
+                <xsl:attribute name="n">
+                    <xsl:value-of select="@n"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
-        </p>
+        </pb>
     </xsl:template>
     <xsl:template match="sp">
         <sp>

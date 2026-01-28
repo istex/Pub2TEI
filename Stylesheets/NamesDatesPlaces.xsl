@@ -116,7 +116,7 @@
     <!-- default rules for days, months and years in case the makeISODateFromComponents template is not used -->
     <!-- Sage: dd, mm, yy -->
 
-    <xsl:template match="Day | day | dd">
+    <xsl:template match="Day | day">
         <date type="day">
             <xsl:apply-templates/>
         </date>

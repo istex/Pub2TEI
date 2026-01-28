@@ -3335,8 +3335,23 @@
     </xsl:template>
 
     <xsl:template match="def|rsc:def">
+        <xsl:choose>
+            <xsl:when test="child::term">
+                <item>
+                    <!-- To be compliant with the ISO style for terms and definitions ;-) -->
+                    <xsl:apply-templates/>
+                </item>
+            </xsl:when>
+            <xsl:otherwise>
+                <gloss>
+                    <!-- To be compliant with the ISO style for terms and definitions ;-) -->
+                    <xsl:apply-templates/>
+                </gloss>  
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="dd">
         <gloss>
-            <!-- To be compliant with the ISO style for terms and definitions ;-) -->
             <xsl:apply-templates/>
         </gloss>
     </xsl:template>
@@ -3378,19 +3393,40 @@
         </div>
     </xsl:template>
     <xsl:template match="fig">
-        <figure>
-            <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@entname">
-                <xsl:attribute name="n">
-                    <xsl:value-of select="@entname"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </figure>
+        <xsl:choose>
+            <xsl:when test="ancestor::bm/objects">
+                <div type="figure">
+                    <figure>
+                        <xsl:if test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@entname">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="@entname"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:apply-templates/>
+                    </figure>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <figure>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@entname">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="@entname"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </figure>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="fig/label">
@@ -3990,7 +4026,7 @@
                     </xsl:choose>
                 </title>
             </xsl:when>
-            <xsl:when test="ancestor::notes"/>
+            <xsl:when test="ancestor::notes | parent::fn-group"/>
             <xsl:otherwise>
                 <head>
                     <xsl:apply-templates/>

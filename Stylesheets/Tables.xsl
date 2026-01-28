@@ -44,7 +44,7 @@
                         </head>
                     </xsl:if>
                     <!--<xsl:apply-templates select="* except tgroup"/>-->
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="* except ../table-wrap/table-wrap-foot"/>
                 </table>
             </xsl:when>
             <!-- karger -->
@@ -87,6 +87,54 @@
             </xsl:when>
             <xsl:when test="parent::alternatives">
                     <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:when test="ancestor::bm/objects">
+                <div type="table">
+                    <table>
+                        <xsl:if test="@id">
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="@rowsep">
+                            <xsl:attribute name="rows">
+                                <xsl:value-of select="@rowsep"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="@tabcols">
+                                <xsl:attribute name="cols">
+                                    <xsl:value-of select="@tabcols"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                            <xsl:when test="@colsep">
+                                <xsl:attribute name="cols">
+                                    <xsl:value-of select="@colsep"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
+                        <xsl:if test="@position">
+                            <xsl:attribute name="rend">
+                                <xsl:value-of select="@position"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="caption/@label">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="caption/@label"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="label | rsc:label | @label">
+                            <head type="label">
+                                <xsl:value-of select="label | rsc:label | @label"/>
+                            </head>
+                        </xsl:if>
+                        <!-- <xsl:apply-templates select="* except tgroup"/>-->
+                        <xsl:apply-templates/>
+                    </table>
+                </div>
             </xsl:when>
             <xsl:when test="parent::objects |ancestor::p | ancestor::rsc:p| parent::tableau">
                 <table>

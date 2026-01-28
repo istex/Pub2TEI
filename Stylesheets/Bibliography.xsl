@@ -864,9 +864,32 @@
         <xsl:choose>
             <xsl:when test="ancestor::ref"/>
             <xsl:when test="parent::grnote">
-            <note place="inline" xml:id="{@id}">
-                <xsl:apply-templates/>
-            </note>
+                <note place="inline" xml:id="{@id}">
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:when>
+            <!-- TCRT les notes sont redirigées dans le <back>
+            création d'une ref de liaison dans le texte
+            <idno type="bookID">1004919539</idno>-->
+            <xsl:when test="ancestor::asp">
+                <xsl:choose>
+                    <xsl:when test="parent::div1|parent::div2|parent::div3|parent::div4|parent::div5 ">
+                        <p>
+                            <ref type="fn" xml:id="{@id}">
+                                <hi rend="superscript">
+                                    <xsl:value-of select="substring-before(.,' ')"/>
+                                </hi>
+                            </ref>
+                        </p>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <ref type="fn" xml:id="{@id}">
+                            <hi rend="superscript">
+                                <xsl:value-of select="substring-before(.,' ')"/>
+                            </hi>
+                        </ref>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <note>
@@ -880,7 +903,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="note" mode="abstractAsp">
+    <xsl:template match="note" mode="asp">
         <note>
             <xsl:if test="@id[string-length() &gt; 0]">
                 <xsl:attribute name="xml:id">

@@ -860,6 +860,9 @@
             <xsl:if test="ancestor::thead | ancestor::rsc:thead">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
+            <xsl:if test="ancestor::tbody | ancestor::rsc:body">
+                <xsl:attribute name="role">data</xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </row>
     </xsl:template>

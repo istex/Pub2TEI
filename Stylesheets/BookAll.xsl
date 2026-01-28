@@ -233,10 +233,10 @@
             <back>
                <!-- <xsl:apply-templates select="//book/back" mode="TF"/>
                 <xsl:apply-templates select="//book-part/back" mode="TF"/>-->
-                <xsl:if test="//book-part/back/notes/fn-group/fn">
+                <xsl:if test="//fn-group/fn">
                     <div type="fn-group">
                         <head>Notes</head>
-                    <xsl:apply-templates select="//book-part/back/notes/fn-group/fn" mode="TF"/>
+                    <xsl:apply-templates select="//fn-group/fn" mode="TF"/>
                     </div>
                 </xsl:if>
                 <xsl:if test="//book-part/back/ref-list and not(//book/back/ref-list)">
