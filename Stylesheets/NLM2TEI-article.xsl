@@ -4354,6 +4354,11 @@
                 <xsl:if test="string-length(text()) > 4">-<xsl:value-of select="substring(text(), 5, 2)"/></xsl:if>
                 <xsl:if test="string-length(text()) > 6">-<xsl:value-of select="substring(text(), 7, 2)"/></xsl:if>
             </xsl:attribute>
+            <xsl:if test="string-length(text()) > 0">
+                <xsl:value-of select="substring(text(), 0, 5)"/>
+            </xsl:if>
+            <xsl:if test="string-length(text()) > 4">-<xsl:value-of select="substring(text(), 5, 2)"/></xsl:if>
+            <xsl:if test="string-length(text()) > 6">-<xsl:value-of select="substring(text(), 7, 2)"/></xsl:if>
         </date>
     </xsl:template>
 

@@ -283,7 +283,7 @@
     
     <!-- SG - traitement des formula mathML -->
     <xsl:template match="wiley:mathStatement">
-        <floatingText type="box" source="mathStatement">
+        <floatingText type="statement" source="mathStatement">
             <xsl:if test="@xml:id">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@xml:id"/>

@@ -625,11 +625,6 @@
                                 <xsl:value-of select="@content-type"/>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="tex-math">
-                            <xsl:attribute name="notation">
-                                <xsl:text>TeX</xsl:text>
-                            </xsl:attribute>
-                        </xsl:when>
                     </xsl:choose>
                     <xsl:if test="tex-math/@id">
                         <xsl:attribute name="xml:id">
