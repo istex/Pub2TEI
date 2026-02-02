@@ -1697,6 +1697,7 @@
                     <xsl:when test="contains(@href,'sec')">section</xsl:when>
                     <xsl:when test="contains(@href,'note')">fn</xsl:when>
                     <xsl:when test="contains(@href,'disp') or contains(@href,'mthst')">formula</xsl:when>
+                    <xsl:otherwise>bibr</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
             <xsl:attribute name="target">
