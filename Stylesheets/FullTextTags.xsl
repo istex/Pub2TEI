@@ -599,6 +599,9 @@
                 </formula>
                 </p>
             </xsl:when>
+            <xsl:when test="contains(tex-math/node(),'epsfbox')">
+                <xsl:apply-templates/>
+            </xsl:when>
             <xsl:otherwise>
                 <formula>
                     <xsl:if test="@id">
@@ -1462,14 +1465,42 @@
         </graphic>
     </xsl:template>
     <xsl:template match="tex-math">
-        <formula notation="tex">
-            <xsl:if test="normalize-space(@id)">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:value-of select="node()"/>
-        </formula>
+        <xsl:choose>
+            <xsl:when test="contains(node(),'epsfbox')">
+                <figure type="epsbox">
+                    <xsl:if test="normalize-space(../@id)">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="../@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="normalize-space(label)">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="label"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <head type="label">
+                        <xsl:variable name="clean">
+                            <xsl:value-of select="substring-after(node(),'/')"/>
+                        </xsl:variable>
+                        <xsl:variable name="result">
+                            <xsl:value-of select="substring-before($clean,'.eps')"/>
+                            <xsl:text>.eps</xsl:text>
+                        </xsl:variable>
+                        <xsl:value-of select="$result"/>
+                    </head>
+                </figure>
+            </xsl:when>
+            <xsl:otherwise>
+                <formula notation="tex">
+                    <xsl:if test="normalize-space(@id)">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:value-of select="node()"/>
+                </formula>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="online-methods"><xsl:apply-templates/></xsl:template>
     <xsl:template match="wiley:header/wiley:contentMeta/wiley:supportingInformation"> 
@@ -1672,9 +1703,9 @@
         </figure>
     </xsl:template>
     <xsl:template match="statement/label">
-        <label>
+        <head>
             <xsl:apply-templates/>
-        </label>
+        </head>
     </xsl:template>
     <xsl:template match="ce:inline-figure">
         <figure>
