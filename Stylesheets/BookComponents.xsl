@@ -31,7 +31,7 @@
         </idno>
     </xsl:template>
     <xsl:template match="BookPrintISBN">
-        <idno type="ISBN">
+        <idno type="pISBN">
             <xsl:apply-templates/>
         </idno>
     </xsl:template>

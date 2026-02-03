@@ -413,7 +413,6 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </persName>
-            <roleName>author</roleName>
         </author>
     </xsl:template>
     <xsl:template match="dcterms:contributor">
@@ -462,7 +461,7 @@
             </idno>
         </xsl:if>
         <xsl:if test="contains(.,'urn:isbn:')">
-            <idno type="ISBN">
+            <idno type="pISBN">
                 <xsl:value-of select="substring-after(.,'urn:isbn:')"/>
             </idno>
         </xsl:if>

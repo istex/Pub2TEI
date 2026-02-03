@@ -338,12 +338,12 @@
                             </xsl:if>
                             <xsl:choose>
                                 <xsl:when test="@isbn[string-length()&gt; 0]">
-                                    <idno type="ISBN">
+                                    <idno type="pISBN">
                                         <xsl:value-of select="@isbn"/>
                                     </idno>
                                 </xsl:when>
                                 <xsl:when test="$currentIsbn[string-length()&gt; 0]">
-                                    <idno type="ISBN">
+                                    <idno type="pISBN">
                                         <xsl:value-of select="translate($currentIsbn,'-','')"/>
                                     </idno>
                                 </xsl:when>

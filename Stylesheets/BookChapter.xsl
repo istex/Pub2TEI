@@ -1635,7 +1635,7 @@
                 <xsl:apply-templates select="//book/book-meta/book-title-group/book-title"/>
                 <xsl:apply-templates select="//book/book-meta/book-title-group/subtitle" mode="monogr"/>
                 <xsl:if test="$docIssue//book-meta/isbn[@pub-type='ppub'] | //book/book-meta/isbn[@pub-type='ppub']">
-                    <idno type="ISBN">
+                    <idno type="pISBN">
                         <xsl:value-of select="$docIssue//book-meta/isbn[@pub-type='ppub'] | //book/book-meta/isbn[@pub-type='ppub']"/>
                     </idno>
                 </xsl:if>
@@ -2126,7 +2126,7 @@
                 
                 <xsl:if test="metadata/isbn[string-length() &gt; 0]">
                     <xsl:for-each select="metadata/isbn">
-                        <idno type="ISBN">
+                        <idno type="pISBN">
                             <xsl:value-of select="normalize-space(.)"/>
                         </idno>
                     </xsl:for-each>

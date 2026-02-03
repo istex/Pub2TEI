@@ -1709,7 +1709,7 @@
     <!-- misc-text/~ISBN-like~
         NB: les autres misc-text sont traités en elts <note> après monogr -->
     <xsl:template match="*[ends-with(local-name(),'-ref')]/misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]">
-        <idno type="ISBN">
+        <idno type="pISBN">
             <xsl:value-of select="."/>
         </idno>
     </xsl:template>

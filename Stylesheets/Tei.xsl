@@ -335,17 +335,17 @@
                                     </xsl:if>
                                     <xsl:choose>
                                         <xsl:when test="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']">
-                                            <idno type="ISBN">
+                                            <idno type="pISBN">
                                                 <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='EAN-13']"/>
                                             </idno>
                                         </xsl:when>
                                         <xsl:when test="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13'] and not(contains(//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13'],'-'))">
-                                            <idno type="ISBN">
+                                            <idno type="pISBN">
                                                 <xsl:value-of select="//tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:idno[@type='ISBN-13']"/>
                                             </idno>
                                         </xsl:when>
                                         <xsl:when test="//tei:publicationStmt/tei:idno[@type='nom_pdf']">
-                                            <idno type="ISBN">
+                                            <idno type="pISBN">
                                                 <xsl:value-of select="substring-before(//tei:publicationStmt/tei:idno[@type='nom_pdf'],'_')"/>
                                             </idno>
                                         </xsl:when>

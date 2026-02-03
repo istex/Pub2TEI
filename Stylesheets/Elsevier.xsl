@@ -394,7 +394,7 @@
                                 </xsl:if>
                                 <xsl:if test="$docIssueEls//issue-info/ce:isbn[string-length() &gt; 0] | $docIssueEls//s1:issue-info/ce:isbn[string-length() &gt; 0]">
                                     <xsl:for-each select="$docIssueEls//issue-info/ce:isbn | $docIssueEls//s1:issue-info/ce:isbn">
-                                        <idno type="ISBN">
+                                        <idno type="pISBN">
                                             <xsl:value-of select="."/>
                                         </idno>
                                     </xsl:for-each>
@@ -571,7 +571,7 @@
                                                 <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:title/sb:maintitle |
                                                     //book-review-head/sb:reference/sb:host/sb:edited-book/sb:title/sb:maintitle | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:title/sb:maintitle| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:title/sb:maintitle"/>
                                             </title>
-                                            <idno type="ISBN">
+                                            <idno type="pISBN">
                                                 <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:book/sb:isbn | //els1:book-review-head/sb:reference/sb:host/sb:book/sb:isbn| //els2:book-review-head/sb:reference/sb:host/sb:book/sb:isbn"/>
                                                 <xsl:value-of select="//book-review-head/sb:reference/sb:host/sb:edited-book/sb:isbn | //els1:book-review-head/sb:reference/sb:host/sb:edited-book/sb:isbn| //els2:book-review-head/sb:reference/sb:host/sb:edited-book/sb:isbn"/>
                                             </idno>
