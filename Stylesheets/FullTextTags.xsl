@@ -352,7 +352,9 @@
     <xsl:template match="wiley:list">
         <list>
             <xsl:if test="@xml:id">
-                <xsl:copy-of select="@xml:id"/>  
+                <xsl:attribute name="corresp">
+                    <xsl:value-of select="@xml:id"/>
+                </xsl:attribute>
             </xsl:if>
             <xsl:if test="@style">
                 <xsl:copy-of select="@style"/>  
@@ -1471,7 +1473,7 @@
     </xsl:template>
     <xsl:template match="online-methods"><xsl:apply-templates/></xsl:template>
     <xsl:template match="wiley:header/wiley:contentMeta/wiley:supportingInformation"> 
-        <div type="appendice">
+        <div type="appendices">
             <xsl:apply-templates select="wiley:supportingInfoItem"/>
         </div>
     </xsl:template>
@@ -1688,32 +1690,54 @@
     <!-- découpage des références multiples wiley -->
     <!-- nettoyage des ref -->
     <xsl:template match="wiley:link">
-        <ref>
-            <xsl:attribute name="type">
-                <xsl:choose>
-                    <xsl:when test="contains(@href,'tab') or contains(@href,'tb')">table</xsl:when>
-                    <xsl:when test="contains(@href,'fig') or contains(@href,'fg')">figure</xsl:when>
-                    <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">bibr</xsl:when>
-                    <xsl:when test="contains(@href,'sec')">section</xsl:when>
-                    <xsl:when test="contains(@href,'note')">fn</xsl:when>
-                    <xsl:when test="contains(@href,'disp') or contains(@href,'mthst')">formula</xsl:when>
-                    <xsl:otherwise>bibr</xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:attribute name="target">
-                <xsl:value-of select="@href"/>
-            </xsl:attribute>
-            <hi rend="superscript">
-                <xsl:choose>
-                    <xsl:when test=". !=''">
-                        <xsl:apply-templates/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="@href"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </hi>
-        </ref>
+        <xsl:choose>
+            <xsl:when test="contains(@href,'bb') or contains(@href,'bib') or contains(@href,'sec')
+                or contains(@href,'note')
+                or contains(@href,'tab') or contains(@href,'tb') 
+                or contains(@href,'fig') or contains(@href,'fg')">
+                <ref>
+                    <xsl:attribute name="type">
+                        <xsl:choose>
+                            <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">bibr</xsl:when>
+                            <xsl:when test="contains(@href,'sec')">section</xsl:when>
+                            <xsl:when test="contains(@href,'note')">fn</xsl:when>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:attribute name="target">
+                        <xsl:value-of select="@href"/>
+                    </xsl:attribute>
+                    <hi rend="superscript">
+                        <xsl:choose>
+                            <xsl:when test=". !=''">
+                                <xsl:apply-templates/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="@href"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </hi>
+                </ref>
+            </xsl:when>
+            <xsl:when test="contains(@href,'disp') or contains(@href,'mthst')
+                or contains(@href,'formula')">
+                <xsl:call-template name="displayItem"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <ref type="bibr" target="{@href}">
+                    <hi rend="superscript">
+                        <xsl:choose>
+                            <xsl:when test=". !=''">
+                                <xsl:apply-templates/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="@href"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </hi>
+                </ref>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     <xsl:template match="@href">
         <xsl:choose>
@@ -1952,6 +1976,32 @@
                         <xsl:with-param name="inAddress" select="true()"/>
                     </xsl:call-template>
                 </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- rapatriement des formules mathématiques dans le corps du texte à la place des renvois -->
+    <xsl:template name="displayItem">
+        <xsl:call-template name="tokenizeDisplay"/>
+    </xsl:template>
+    <xsl:template match="@href" name="tokenizeDisplay" mode="display">
+        <xsl:param name="text" select="translate(@href,'#','')"/>
+        <xsl:param name="separator" select="' '"/>
+        <xsl:choose>
+            <xsl:when test="not(contains($text, $separator))">
+                <xsl:apply-templates select="//wiley:mathStatement[@xml:id=$text]"/>
+                <xsl:apply-templates select="//wiley:displayedItem[@xml:id=$text]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="ref">
+                    <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                </xsl:variable>
+                <xsl:apply-templates select="//wiley:mathStatement[@xml:id=$ref]"/>
+                <xsl:apply-templates select="//wiley:displayedItem[@xml:id=$ref]"/>
+                    <xsl:text> </xsl:text>
+                <xsl:call-template name="tokenizeDisplay">
+                    <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

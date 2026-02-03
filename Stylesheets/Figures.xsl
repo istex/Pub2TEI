@@ -285,7 +285,7 @@
     <xsl:template match="wiley:mathStatement">
         <floatingText type="statement" source="mathStatement">
             <xsl:if test="@xml:id">
-                <xsl:attribute name="xml:id">
+                <xsl:attribute name="corresp">
                     <xsl:value-of select="@xml:id"/>
                 </xsl:attribute>
             </xsl:if>
@@ -316,7 +316,7 @@
             <formula rend="display">
                 <!--xsl:apply-templates select="m:math"/-->
                 <xsl:if test="@xml:id">
-                    <xsl:attribute name="xml:id">
+                    <xsl:attribute name="corresp">
                         <xsl:value-of select="@xml:id"/>
                     </xsl:attribute>
                 </xsl:if>
