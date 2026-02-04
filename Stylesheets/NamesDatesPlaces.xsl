@@ -525,7 +525,7 @@
     <!-- BMJ: corresponding-author-address-1, corresponding-author-address-1 -->
     <!-- Springer 2: OrgAddress  -->
 
-    <xsl:template match="addr-line | addr1 | addr2 | addr3 | corresponding-author-address-1 | corresponding-author-address-2 | addrelt| rsc:addrelt">
+    <xsl:template match="addr-line | addr1 | addr2 | addr3 | corresponding-author-address-1 | corresponding-author-address-2">
         
         <xsl:if test=". !=''">
             <xsl:choose>
@@ -631,7 +631,11 @@
             </xsl:choose>
         </xsl:if>
     </xsl:template>
-
+    <xsl:template match="addrelt| rsc:addrelt">
+        <addrLine>
+            <xsl:apply-templates/>
+        </addrLine>
+    </xsl:template>
     <!-- PL: add street or Nature -->
     <xsl:template match="Street | street | named-content[@content-type = 'street']">
         <xsl:if test=". !=''">
