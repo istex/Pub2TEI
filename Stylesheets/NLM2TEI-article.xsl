@@ -1115,27 +1115,28 @@
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:if test="back [string-length() &gt; 0] | bm [string-length() &gt; 0]|front/article-meta/product[string-length() &gt; 0]">
-                    <back>
-                        <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
-                        <xsl:apply-templates select="front/article-meta/product"/>
-                        <xsl:apply-templates select="back/*"/>
-                        <xsl:apply-templates select="bm/objects"/>
-                        <xsl:apply-templates select="bm/ack"/>
-                        <xsl:apply-templates select="bm/bibl"/>
-                        <xsl:if test="front/article-meta/contrib-group/contrib/collab and front/article-meta/contrib-group/contrib/collab/contrib-group/contrib">
-                            <div type="contributors-list">
-                                <head>List of contributors</head>
-                                <listBibl>
-                                    <bibl>
-                                        <xsl:apply-templates select="front/article-meta/contrib-group/contrib/collab/contrib-group/contrib"/>
-                                    </bibl>
-                                </listBibl>
-                            </div>
-                        </xsl:if>
-                        
-                    </back>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="back [string-length() &gt; 0] | bm [string-length() &gt; 0]|front/article-meta/product[string-length() &gt; 0]">
+                        <back>
+                            <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
+                            <xsl:apply-templates select="front/article-meta/product"/>
+                            <xsl:apply-templates select="back/*"/>
+                            <xsl:apply-templates select="bm/objects"/>
+                            <xsl:apply-templates select="bm/ack"/>
+                            <xsl:apply-templates select="bm/bibl"/>
+                            <xsl:if test="front/article-meta/contrib-group/contrib/collab and front/article-meta/contrib-group/contrib/collab/contrib-group/contrib">
+                                <div type="contributors-list">
+                                    <head>List of contributors</head>
+                                    <listBibl>
+                                        <bibl>
+                                            <xsl:apply-templates select="front/article-meta/contrib-group/contrib/collab/contrib-group/contrib"/>
+                                        </bibl>
+                                    </listBibl>
+                                </div>
+                            </xsl:if>
+                        </back>
+                    </xsl:when>
+                </xsl:choose>
             </text>
             <xsl:if test="sub-article | response">
                 <text>
@@ -3203,6 +3204,7 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:when test="parent::label"/>
+            <xsl:when test="parent::title"/>
             <xsl:otherwise>
                 <name>
                     <xsl:if test="@content-type">

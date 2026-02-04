@@ -1555,8 +1555,8 @@
                                 <xsl:when test="//front-matter/ack | //front-matter//named-book-part-body |//front-matter/toc|//front-matter/glossary ">
                                     <xsl:apply-templates select="//front-matter/*  "/>
                                 </xsl:when>
-                                <xsl:when test="//book-back/index |//book-back/app">
-                                    <xsl:apply-templates select="//book-back/*"/>
+                                <xsl:when test="//book-back/app">
+                                    <xsl:apply-templates select="//book-back/app/* except(//book-back/app/fn-group)"/>
                                 </xsl:when>
                                 <!-- fin cup-ebooks -->
                                 <xsl:otherwise>
@@ -1579,11 +1579,17 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </body>
-                        <xsl:choose> 
+                        <xsl:choose>
                             <xsl:when test="//book/body/book-part/back">
                                 <back>
                                     <xsl:apply-templates select="//book/body/book-part/back/*"/>
                                 </back>
+                            </xsl:when>
+                            <!-- cas cambridge-law -->
+                            <xsl:when test="//book-back/index |//book-back/app/fn-group">
+                                <back>
+                                    <xsl:apply-templates select="//book/book-back/app/fn-group"/>
+                                </back> 
                             </xsl:when>
                             <xsl:when test="//back">
                                 <back>

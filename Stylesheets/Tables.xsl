@@ -47,6 +47,10 @@
                     <xsl:apply-templates select="* except ../table-wrap/table-wrap-foot"/>
                 </table>
             </xsl:when>
+            <!-- cambridge-law -->
+            <xsl:when test="parent::alternatives">
+                <xsl:apply-templates/>
+            </xsl:when>
             <!-- karger -->
             <xsl:when test="ancestor::sec  and not(../row)">
                 <figure>
