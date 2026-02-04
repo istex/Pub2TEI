@@ -3645,11 +3645,19 @@
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <!-- cas particulier pour cambridge-law, les liens
+                notes de bas de pages ne sont pas correctement référencés dans 
+                les données ark:/67375/KVF-6RJM265J-9-->
+                <xsl:when test="contains(@id,'FN-fn')"/>
+                <xsl:otherwise>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates/>
         </note>
     </xsl:template>
@@ -3773,6 +3781,7 @@
                                                 <xsl:choose>
                                                     <xsl:when test="@ref-type='disp-formula'">formula</xsl:when>
                                                     <xsl:when test="@ref-type='fig'">figure</xsl:when>
+                                                    <xsl:when test="@ref-type='footnote'">fn</xsl:when>
                                                     <xsl:otherwise>
                                                         <xsl:value-of select="@ref-type"/>
                                                     </xsl:otherwise>
@@ -3800,15 +3809,12 @@
                                         </xsl:when>
                                         <xsl:when test="@id">
                                             <xsl:attribute name="xml:id">
-                                               <!-- <xsl:variable name="concat">
-                                                    <xsl:value-of select="concat('#',@id)"/>
-                                                </xsl:variable>
-                                                <xsl:variable name="diese">
-                                                    <xsl:value-of select="translate($concat,' ','#')"/>
-                                                </xsl:variable>
-                                                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
-                                                <xsl:value-of select="$espace"/>-->
                                                 <xsl:value-of select="@id"/>
+                                            </xsl:attribute>
+                                        </xsl:when>
+                                        <xsl:when test="sup">
+                                            <xsl:attribute name="n">
+                                                <xsl:value-of select="sup"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                     </xsl:choose>
