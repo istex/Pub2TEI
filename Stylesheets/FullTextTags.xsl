@@ -27,7 +27,7 @@
 
     <xsl:template match="p| rsc:p| ce:simple-para | ce:para">
         <xsl:choose>
-	    <xsl:when test="parent::sec">
+            <xsl:when test="parent::sec">
                 <p>
                     <xsl:apply-templates/>
                 </p>
@@ -1536,14 +1536,30 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="index-term">
-        <term>
+        <xsl:choose>
+            <xsl:when test="ancestor::fn/p"/>
+            <xsl:when test="ancestor::sec/p"/>
+            <xsl:otherwise>
+                <term>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </term>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="index-term" mode="fn">
+        <item>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
-        </term>
+        </item>
     </xsl:template>
     <xsl:template match="verse-group">
         <lg>

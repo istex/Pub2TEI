@@ -99,6 +99,11 @@
                                 </figDesc>
                             </figure>
                         </xsl:when>
+                        <xsl:when test="ancestor::graphic">
+                            <desc>
+                                <xsl:apply-templates/>
+                            </desc>
+                        </xsl:when>
                         <xsl:otherwise>
                             <figDesc>
                                 <xsl:if test="../@id">

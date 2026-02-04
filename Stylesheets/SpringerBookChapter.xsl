@@ -242,6 +242,14 @@
                         <xsl:if test="//fn-group">
                             <xsl:apply-templates select="//fn-group"/>
                         </xsl:if>
+                        <xsl:if test="//index-term">
+                            <div type="index">
+                                <list>
+                                    <head>List of terms</head>
+                                    <xsl:apply-templates select="//index-term" mode="fn"/>
+                                </list>
+                            </div>
+                        </xsl:if>
                         <xsl:if test="//app-group">
                             <xsl:apply-templates select="//app-group"/>
                         </xsl:if>
@@ -370,18 +378,18 @@
                             <xsl:if test="string-name/not[surname][string-length() &gt; 0]">
                                 <xsl:apply-templates select="name"/>
                             </xsl:if>
-                            <xsl:choose>
-                                <xsl:when test="../aff[@id=current()/xref/@rid]">
-                                    <xsl:apply-templates select="../aff[@id=current()/xref/@rid]" mode="springer"/>
-                                </xsl:when>
-                                <xsl:when test="ancestor::book-part-meta and //aff">
-                                    <xsl:apply-templates select="//aff" mode="springer"/>
-                                </xsl:when>
-                                <xsl:when test="/book-part-meta/aff">
-                                    <xsl:apply-templates select="//aff" mode="springer"/>
-                                </xsl:when>
-                            </xsl:choose>
                         </persName>
+                        <xsl:choose>
+                            <xsl:when test="../aff[@id=current()/xref/@rid]">
+                                <xsl:apply-templates select="../aff[@id=current()/xref/@rid]" mode="springer"/>
+                            </xsl:when>
+                            <xsl:when test="ancestor::book-part-meta and //aff">
+                                <xsl:apply-templates select="//aff" mode="springer"/>
+                            </xsl:when>
+                            <xsl:when test="/book-part-meta/aff">
+                                <xsl:apply-templates select="//aff" mode="springer"/>
+                            </xsl:when>
+                        </xsl:choose>
                         <xsl:if test="bio">
                             <state type="biography">
                                 <desc>
