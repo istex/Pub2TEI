@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all">
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="#all">
 
     <xsl:output encoding="UTF-8" method="xml"/>
     <!-- Feuille de style concernant les données:
@@ -12,9 +14,10 @@
     - Copernicus
     - PLOS
     -->
-   
+    <!-- Brill Pauly add publication date -->
+    <xsl:variable name="TitleCodes" select="document('TitleCodes.xml')"/>
     <xsl:variable name="idnoUrl" select="string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'])"/>
-   
+    <xsl:variable name="hostTitle" select="//tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:bibl/tei:title"/>
     <xsl:template match="tei:TEI">
         <xsl:choose>
             <!-- traitement des données venant de scienceMiner -->
@@ -153,6 +156,17 @@
                         <!--<xsl:copy-of select="//tei:fileDesc/tei:notesStmt/tei:note"/>-->
                     </notesStmt>
                 </xsl:if>
+                <xsl:if test="tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'">
+                    <!-- genre -->
+                    <notesStmt>
+                        <note type="content-type"
+                            subtype="encyclopedia"
+                            source="encyclopedia"
+                            scheme="https://content-type.data.istex.fr/ark:/67375/XTP-LMSJ1W70-6">encyclopedia</note>
+                        <note type="publication-type"
+                            scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5540BQ2P-Q">references-works</note>
+                    </notesStmt>
+                </xsl:if>
                 <sourceDesc>
                     <biblStruct>
                         <xsl:attribute name="type">
@@ -285,7 +299,7 @@
                                     <xsl:apply-templates select="tei:fileDesc/tei:titleStmt/tei:title" mode="article"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:title"/>
+                                    <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:title" copy-namespaces="no"/>
                                     <xsl:apply-templates select="tei:fileDesc/tei:titleStmt/tei:author"/>
                                 </xsl:otherwise>
                             </xsl:choose>
@@ -313,6 +327,7 @@
                             <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='url']"/>
                             <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='url']"/>
                             <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']"/>
+                            <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:idno[@type='DOI']" copy-namespaces="no"/>
                         </analytic>
                         <monogr>
                             <xsl:choose>
@@ -773,6 +788,38 @@
                                     </xsl:if>
                                 </imprint>
                                 </xsl:when>
+                                <!-- Brill New Pauly RPP, RGG, NPO DNP-->
+                                <xsl:when test="tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'">
+                                    <title level='m' type='main'>
+                                        <xsl:value-of select="$hostTitle"/>
+                                    </title>
+                                    <xsl:copy-of select="tei:fileDesc/tei:fileDesc/tei:publicationStmt/tei:idno" copy-namespaces="no"/>
+                                    <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:idno[@type='sams-id']" copy-namespaces="no"/>
+                                    <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:idno[@type='publisher-id']" copy-namespaces="no"/>
+                                    <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:idno[@type='ISSN']" copy-namespaces="no"/>
+                                    <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:idno[@type='ISBN']" mode="Pauly"/>
+                                    <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:author"/>
+                                    <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:editor"/>
+                                    <imprint>
+                                        <date>
+                                            <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role='title']=$hostTitle]/tei:cell[@role='date']"/>
+                                        </date>
+                                        
+                                        <xsl:if test="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='volume'] !=''">
+                                            <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='volume']" copy-namespaces="no"/>
+                                        </xsl:if>
+                                        <!-- extent -->
+                                        <xsl:if test="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='page'] !=''">
+                                            <xsl:if test="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='page'] !='000'">
+                                                <xsl:if test="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='page'] !='00'">
+                                                    <xsl:if test="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='page'] !='0'">
+                                                        <xsl:apply-templates select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='page']"/>
+                                                    </xsl:if>
+                                                </xsl:if>
+                                            </xsl:if>
+                                        </xsl:if>
+                                    </imprint>
+                                </xsl:when>
                                 <!-- autres corpus -->
                                 <xsl:when test="normalize-space(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:title[1])[string-length()&gt; 0]">
                                     <xsl:variable name="eissn" select="string(//tei:fileDesc/tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type = 'eISSN'])"/>
@@ -899,16 +946,16 @@
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title" mode="mono"/>
-                                    <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno"/>
-                                    <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:author"/>
+                                    <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:idno" copy-namespaces="no"/>
+                                    <xsl:copy-of select="//tei:fileDesc/tei:titleStmt/tei:author" copy-namespaces="no"/>
                                         <imprint>
                                             <xsl:if test="//tei:fileDesc/tei:publicationStmt/tei:publisher[string-length()&gt; 0]">
-                                                <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:publisher"/>
+                                                <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:publisher" copy-namespaces="no"/>
                                             </xsl:if>
                                             <xsl:if test="//tei:fileDesc/tei:publicationStmt/tei:pubPlace[string-length()&gt; 0]">
-                                                <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:pubPlace"/>
+                                                <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:pubPlace" copy-namespaces="no"/>
                                             </xsl:if>
-                                            <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor"/>
+                                            <xsl:copy-of select="//tei:fileDesc/tei:publicationStmt/tei:distributor" copy-namespaces="no"/>
                                             <xsl:call-template name="fixAndCopyDate">
                                                 <xsl:with-param name="date" select="//tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:publicationStmt/tei:date"/>
                                             </xsl:call-template>
@@ -1110,15 +1157,30 @@
                                 <language ident="zh">zh</language>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:copy-of select="//tei:langUsage"/>
+                                <xsl:copy-of select="//tei:langUsage" copy-namespaces="no"/>
                             </xsl:otherwise>
                         </xsl:choose>
-                        <xsl:copy-of select="//tei:abstract"/>
-                        <xsl:copy-of select="//tei:creation"/>
+                        <xsl:choose>
+                            <!-- on ne reprend pas les abstract de BrillNewPauly
+                            ce nes sont pas des abstracts mais le début du body-->
+                            <xsl:when test="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'"/>
+                            <xsl:otherwise>
+                                <xsl:copy-of select="//tei:abstract" copy-namespaces="no"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:copy-of select="//tei:creation" copy-namespaces="no"/>
+                    </profileDesc>
+                </xsl:when>
+                <!-- BrillNewPauly -->
+                <xsl:when test="//tei:profileDesc/tei:textClass/tei:catRef[@scheme='classification_subject']">
+                    <profileDesc>
+                        <textClass ana="subject">
+                            <xsl:copy-of select="//tei:keywords" copy-namespaces="no"/>
+                        </textClass>
                     </profileDesc>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="//tei:profileDesc" />
+                    <xsl:copy-of select="//tei:profileDesc" copy-namespaces="no"/>
                 </xsl:otherwise>
             </xsl:choose>
             <!-- traceability -->
@@ -1387,7 +1449,12 @@
                             </div>
                         </xsl:if>
                             <xsl:copy-of select="tei:back/*"/>
-                        
+                    </back>
+                </xsl:when>
+                <xsl:when test="tei:body/tei:div[@type='bibliography'] !=''">
+                    <!-- Pauly -->
+                    <back>
+                        <xsl:copy-of select="tei:body/tei:div[@type='bibliography']" copy-namespaces="no"/>
                     </back>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1415,7 +1482,7 @@
                     <xsl:apply-templates select="tei:div"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="*"/>
+                    <xsl:copy-of select="* except(tei:div[@type='bibliography'])" copy-namespaces="no"/>
                 </xsl:otherwise>
             </xsl:choose>
         </body>
@@ -1458,7 +1525,7 @@
                     <xsl:apply-templates select="tei:title" mode="article"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="tei:title"/>
+                    <xsl:copy-of select="tei:title" copy-namespaces="no"/>
                 </xsl:otherwise>
             </xsl:choose>
         </titleStmt>
@@ -1504,6 +1571,11 @@
             <xsl:when test="contains(//tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type='url'],'alpara')">
                 <title level='m' type='main'>Alpara</title>
             </xsl:when>
+            <xsl:when test="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'">
+                <title level='m' type='main'>
+                <xsl:value-of select="$hostTitle"/>
+                </title>
+            </xsl:when>
             <xsl:otherwise>
                 <title level='m' type='main'>
                     <xsl:value-of select="normalize-space(.)"/>
@@ -1524,7 +1596,7 @@
             <authority>ISTEX</authority>
             <xsl:choose>
                 <xsl:when test="tei:publisher[string-length()&gt; 0]">
-                    <xsl:copy-of select="tei:publisher"/>
+                    <xsl:copy-of select="tei:publisher" copy-namespaces="no"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <publisher>OpenEdition</publisher>
@@ -1534,7 +1606,7 @@
             <xsl:choose>
                 <xsl:when test="tei:publisher='BRILL'">
                     <availability status="{tei:availability/@status}">
-                        <xsl:copy-of select="tei:availability/tei:licence"/>
+                        <xsl:copy-of select="tei:availability/tei:licence" copy-namespaces="no"/>
                         <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
                     </availability>
                 </xsl:when>
@@ -1569,6 +1641,11 @@
                         <xsl:value-of select="//tei:fileDesc/tei:publicationStmt/tei:date/@when"/>
                     </date>
                 </xsl:when>
+                <xsl:when test="tei:publisher='BRILL'">
+                    <date type="published" when="{$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']}">
+                        <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']"/>
+                    </date>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:call-template name="fixAndCopyDate">
                         <xsl:with-param name="date" select="//tei:sourceDesc[1]/tei:biblStruct/tei:monogr/tei:imprint/tei:date"/>
@@ -1589,13 +1666,86 @@
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="tei:author">
-        <author>
-            <xsl:copy-of select="tei:persName"/>
-            <!-- reprise des adresses email -->
-            <xsl:apply-templates select="tei:affiliation" mode="mail"/>
-            <!-- affiliation découpée et structurée -->
-            <xsl:apply-templates select="tei:affiliation"/>
-        </author>
+        <xsl:choose>
+            <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'">
+                <xsl:apply-templates select="tei:persName" mode="Pauly"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <author>
+                    <xsl:copy-of select="tei:persName" copy-namespaces="no"/>
+                </author>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:apply-templates select="tei:affiliation"/>
+    </xsl:template>
+    <xsl:template match="tei:editor">
+        <xsl:choose>
+            <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'">
+                <xsl:apply-templates select="tei:persName" mode="Pauly"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <editor>
+                    <xsl:copy-of select="tei:persName" copy-namespaces="no"/>
+                </editor>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:apply-templates select="tei:affiliation"/>
+    </xsl:template>
+    <xsl:template match="tei:persName" mode="Pauly">
+        <xsl:choose>
+            <xsl:when test="parent::tei:author">
+                <author>
+                  <xsl:call-template name="persName"/>  
+                </author>
+            </xsl:when>
+            <xsl:when test="parent::tei:editor">
+                <editor>
+                    <xsl:call-template name="persName"/>  
+                </editor>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="persName">
+        <persName>
+            <xsl:apply-templates select="tei:forename" mode="Pauly"/>
+            <xsl:apply-templates select="tei:surname" mode="Pauly"/>
+        </persName>
+        <xsl:if test="contains(tei:forename,' (')">
+            <affiliation>
+                <xsl:value-of select="translate(substring-after(tei:forename,' ('),')','')"/>
+            </affiliation>
+        </xsl:if>
+        <xsl:if test="contains(tei:surname,' (')">
+            <affiliation>
+                <xsl:value-of select="translate(substring-after(tei:surname,' ('),')','')"/>
+            </affiliation>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="tei:forename" mode="Pauly">
+        <forename type="first">
+            <!-- cas de brill new pauly, les authors contiennent leur ville de naissance 
+                    accolée à leur nom-->
+            <xsl:choose>
+                <xsl:when test="contains(.,' (')">
+                    <xsl:value-of select="substring-before(.,' (')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </forename>
+    </xsl:template>
+    <xsl:template match="tei:surname" mode="Pauly">
+        <surname>
+            <xsl:choose>
+                <xsl:when test="contains(.,' (')">
+                    <xsl:value-of select="substring-before(.,' (')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </surname>
     </xsl:template>
     
     <xsl:template match="tei:affiliation" mode="mail">
@@ -1792,5 +1942,31 @@
             </xsl:for-each>
             <xsl:value-of select="$fixedDate"/>
         </date>
+    </xsl:template>
+    
+    <xsl:template match="tei:idno[@type='ISBN']" mode="Pauly">
+       <idno type="ISSN">
+           <xsl:apply-templates/>
+       </idno>
+    </xsl:template>
+    <xsl:template match="tei:biblScope[@unit='page']">
+        <biblScope unit="page">
+            <xsl:choose>
+                <xsl:when test="contains(.,'-')">
+                    <xsl:attribute name="from">
+                        <xsl:value-of select="substring-before(.,'-')"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="to">
+                        <xsl:value-of select="substring-after(.,'-')"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="from">
+                        <xsl:apply-templates/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates/>
+        </biblScope>
     </xsl:template>
 </xsl:stylesheet>
