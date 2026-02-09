@@ -702,7 +702,7 @@
         
         <xsl:if test=". !=''">
         <xsl:choose>
-            <xsl:when test="ancestor::citext|ancestor::rsc:citext">
+            <xsl:when test="ancestor::citext|ancestor::rsc:citext|ancestor::fn">
                 <ref type="url">
                     <xsl:attribute name="target">
                         <xsl:choose>

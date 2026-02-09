@@ -3622,6 +3622,11 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:choose>
+                <xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
+                    <xsl:attribute name="n">
+                        <xsl:value-of select="label"/>
+                    </xsl:attribute>
+                </xsl:when>
                 <xsl:when test="label and contains(@id,'FN')">
                     <xsl:attribute name="n">
                         <xsl:value-of select="label"/>
@@ -3646,10 +3651,11 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:choose>
-                <!-- cas particulier pour cambridge-law, les liens
+                <!-- cas particulier pour cambridge-law et Taylor & francis, les liens
                 notes de bas de pages ne sont pas correctement référencés dans 
                 les données ark:/67375/KVF-6RJM265J-9-->
                 <xsl:when test="contains(@id,'FN-fn')"/>
+                <xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'"/>
                 <xsl:otherwise>
                     <xsl:if test="@id">
                         <xsl:attribute name="xml:id">
@@ -3780,6 +3786,20 @@
                                             <xsl:attribute name="type">
                                                 <xsl:choose>
                                                     <xsl:when test="@ref-type='disp-formula'">formula</xsl:when>
+                                                    <!-- springer-phylosophy C187E63EEF225DB3A743CBF5D1366EA375134A38.-->
+                                                    <xsl:when test="@ref-type='' and starts-with(@rid,'FPar')">sec</xsl:when>
+                                                    <xsl:when test="@ref-type='fig'">figure</xsl:when>
+                                                    <xsl:when test="@ref-type='footnote'">fn</xsl:when>
+                                                    <xsl:otherwise>
+                                                        <xsl:value-of select="@ref-type"/>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:attribute>
+                                        </xsl:when>
+                                        <xsl:when test="@ref-type">
+                                            <xsl:attribute name="type">
+                                                <xsl:choose>
+                                                    <xsl:when test="@ref-type='disp-formula'">formula</xsl:when>
                                                     <xsl:when test="@ref-type='fig'">figure</xsl:when>
                                                     <xsl:when test="@ref-type='footnote'">fn</xsl:when>
                                                     <xsl:otherwise>
@@ -3815,6 +3835,12 @@
                                         <xsl:when test="sup">
                                             <xsl:attribute name="n">
                                                 <xsl:value-of select="sup"/>
+                                            </xsl:attribute>
+                                        </xsl:when>
+                                        <xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
+                                            <xsl:attribute name="target">
+                                                <xsl:text>#</xsl:text>
+                                                <xsl:value-of select="translate(.,' .','')"/>
                                             </xsl:attribute>
                                         </xsl:when>
                                     </xsl:choose>

@@ -725,6 +725,11 @@
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
                     </xsl:if>
+                    <xsl:if test="label">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="label"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </note>
             </xsl:otherwise>

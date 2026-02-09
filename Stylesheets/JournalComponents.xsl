@@ -1234,7 +1234,7 @@
 
     <xsl:template match="VolumeIssueCount"/>
 
-    <xsl:template match="BookVolumeNumber">
+    <xsl:template match="BookVolumeNumber | book-volume-number">
         <biblScope unit="vol" from="{.}" to="{.}">
             <xsl:apply-templates/>
         </biblScope>

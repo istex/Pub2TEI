@@ -50,9 +50,23 @@
             <xsl:when test="../table-wrap">
                 <table>
                     <xsl:if test="@id">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="@id"/>
-                        </xsl:attribute>
+                        <xsl:choose>
+                            <xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                                <xsl:if test="label">
+                                    <xsl:attribute name="n">
+                                        <xsl:value-of select="translate(label,' s.','')"/>
+                                    </xsl:attribute>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:if>
                     <xsl:if test="label">
                         <head type="label">
@@ -764,17 +778,8 @@
     </xsl:template>
     <xsl:template match="oasis:entry">
         <cell>
-            <xsl:if test="@rowsep">
-                <xsl:attribute name="role">label</xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@morerows &gt;1">
-                <xsl:attribute name="role">label</xsl:attribute>
-            </xsl:if>
             <xsl:if test="@align">
                 <xsl:attribute name="style"><xsl:text>align(</xsl:text><xsl:apply-templates select="@align"/><xsl:text>)</xsl:text></xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@colname">
-                <xsl:attribute name="cols"><xsl:value-of select="@colname"></xsl:value-of></xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </cell>

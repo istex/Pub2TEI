@@ -161,6 +161,8 @@
                                             <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/pub-date[@publication-format='print']/year"/>
                                             <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/pub-date[@publication-format='electronic']/year"/>
                                             <xsl:apply-templates select="//book-part[body/book-part]/book-part-meta/title-group/title" mode="issue"/>
+                                            <xsl:apply-templates select="/book-part-wrapper/book-meta[1]/permissions[1]/copyright-year[1]"/>
+                                            <xsl:apply-templates select="/book-part-wrapper/book-meta[1]/book-volume-number[1]"/>
                                             <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/fpage"/>
                                             <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/lpage"/>
                                         </imprint>
@@ -234,7 +236,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </body>
-                <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref|fn-group">
+                <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref|fn-group | /book-part-wrapper/book-part[1]/back[1]">
                     <back>
                         <xsl:if test="//book-part[not(body/book-part)]/back/ref-list/ref-list/ref">
                             <xsl:apply-templates select="//book-part[not(body/book-part)]/back/ref-list"/>

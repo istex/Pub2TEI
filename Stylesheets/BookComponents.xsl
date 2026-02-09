@@ -41,9 +41,18 @@
         </idno>
     </xsl:template>
     <xsl:template match="book-id|book-part-id">
-        <idno type="{@pub-id-type|@book-id-type|@book-part-id-type}" >
-            <xsl:apply-templates/>
-        </idno>
+        <xsl:choose>
+            <xsl:when test="@pub-id-type|@book-id-type|@book-part-id-type='doi'">
+                <idno type="DOI" >
+                    <xsl:apply-templates/>
+                </idno>
+            </xsl:when>
+            <xsl:otherwise>
+                <idno type="{@pub-id-type|@book-id-type|@book-part-id-type}" >
+                    <xsl:apply-templates/>
+                </idno>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- Titres des séries (Springer: SeriesTitle) -->
     
