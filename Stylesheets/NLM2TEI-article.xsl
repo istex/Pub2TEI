@@ -2524,6 +2524,16 @@
                     </state>   
                 </note>
             </xsl:when>
+            <xsl:when test="parent::book-front">
+                <div type="biography-group">
+                    <p>
+                        <state>
+                            <xsl:attribute name="type">biography</xsl:attribute>
+                            <xsl:apply-templates/>
+                        </state>
+                    </p>
+                </div>
+            </xsl:when>
             <xsl:otherwise>
                 <state>
                     <xsl:attribute name="type">biography</xsl:attribute>
@@ -4563,6 +4573,16 @@
     </xsl:template>-->
     <xsl:template match="notes">
         <xsl:choose>
+            <xsl:when test="ancestor::back">
+                <div type="fn-group">
+                    <xsl:if test="@id!=''">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </div>
+            </xsl:when>
             <xsl:when test="parent::app">
                 <div type="notes">
                 <xsl:apply-templates/>

@@ -578,11 +578,17 @@
     <xsl:template match="book-part" mode="TFall">
         <div type="sec" xml:id="{@id}">
             <xsl:apply-templates select="book-part-meta" mode="TFall"/>
-            <xsl:apply-templates select="body"/>
+            <xsl:apply-templates select="body/book-part[@book-part-type='chapter'][not(body/book-part)]/book-part-meta" mode="TFchapter"/>
         </div>
     </xsl:template>
     <xsl:template match="book-part-meta" mode="TFall">
             <xsl:apply-templates select="title-group" mode="TFall"/>
+    </xsl:template>
+    <xsl:template match="body/book-part[@book-part-type='chapter'][not(body/book-part)]/book-part-meta" mode="TFchapter">
+        <div type="chapter" xml:id="{../@id}">
+            <xsl:apply-templates select="title-group" mode="TFall"/>
+            <xsl:apply-templates select="following-sibling::body"/>
+        </div>
     </xsl:template>
     <xsl:template match="title-group" mode="TFall">
         <xsl:apply-templates/>

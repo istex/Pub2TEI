@@ -769,7 +769,7 @@
                             <xsl:value-of select="@publication-format"/>
                         </xsl:when>
                         <xsl:when test="@publication-format = 'epub'">eISBN</xsl:when>
-                        <xsl:otherwise>ISBN</xsl:otherwise>
+                        <xsl:otherwise>pISBN</xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
                 <xsl:apply-templates/>

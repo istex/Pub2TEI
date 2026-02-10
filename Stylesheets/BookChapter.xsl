@@ -22,6 +22,9 @@
     <xsl:variable name="titleToDeduceGenre">
         <xsl:value-of select="normalize-space(//book-part[1][not(body/book-part)]/book-part-meta/title-group/title)"/>
     </xsl:variable>
+    <xsl:variable name="countChapter">
+        <xsl:value-of select="count(/book/body/book-part)"/>
+    </xsl:variable>
     <xsl:variable name="doi">
         <xsl:value-of select="//body/book-part/book-part-meta/book-part-id[@pub-id-type = 'doi'] | //book-body/book-part/book-part-meta/book-part-id[@book-part-id-type = 'doi']"/>
     </xsl:variable>
@@ -525,9 +528,6 @@
                     <teiHeader>
                         <fileDesc>
                             <titleStmt>
-                                <xsl:variable name="countChapter">
-                                    <xsl:value-of select="count(/book/body/book-part)"/>
-                                </xsl:variable>
                                 <!-- Title information related to the paper goes here -->
                                 <xsl:choose>
                                     <!-- Taylor & Francis monographies non découpées en chapitre -->
@@ -759,7 +759,18 @@
                             <notesStmt>
                                 <!-- niveau chapter -->
                                 <note type="content-type">
+                                    <xsl:variable name="countChapter">
+                                        <xsl:value-of select="count(/book/body/book-part)"/>
+                                    </xsl:variable>
+                                    <!-- Title information related to the paper goes here -->
                                     <xsl:choose>
+                                        <!-- Taylor & Francis monographies non découpées en chapitre -->
+                                        <xsl:when test="$countChapter &gt;1 and /book/book-meta/book-title-group/book-title !=''">
+                                            <xsl:attribute name="subtype">book</xsl:attribute>
+                                            <xsl:attribute name="source">book</xsl:attribute>
+                                            <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-94FB0L8V-T</xsl:attribute>
+                                            <xsl:text>book</xsl:text>
+                                        </xsl:when>
                                         <!-- brepols -->
                                         <xsl:when test="starts-with(/book/book-meta/book-id[@pub-id-type='doi'][1],'10.1484/')">
                                             <xsl:attribute name="subtype">
@@ -1541,27 +1552,29 @@
                         </revisionDesc>
                     </teiHeader>
                     <text>
-                        <xsl:if test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
-                            <front>
-                                <titlePage>
-                                    <docTitle>
-                                        <titlePart>
-                                            <xsl:if test="//book-part[@book-part-type='part']/book-part-meta/title-group/label[string-length()&gt; 0]">
-                                                <xsl:value-of select="normalize-space(//book-part[@book-part-type='part']/book-part-meta/title-group/label)"/>
-                                                <xsl:text> - </xsl:text>
-                                            </xsl:if>
-                                            <xsl:value-of select="normalize-space(//book-part[@book-part-type='part']/book-part-meta/title-group/title)"/>
-                                        </titlePart>
-                                    </docTitle>
-                                </titlePage>
-                            </front>
-                        </xsl:if>
-                        <xsl:if test="/book/book-front[string-length()&gt; 0]">
-                            <!-- Taylor & Francis ebooks complets -->
-                            <front>
-                                <xsl:apply-templates select="//book/book-front[1]/*"/>
-                            </front>
-                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="/book/book-front[string-length()&gt; 0]">
+                                <!-- Taylor & Francis ebooks complets -->
+                                <front>
+                                    <xsl:apply-templates select="//book/book-front[1]/*"/>
+                                </front>
+                                </xsl:when>
+                                <xsl:when test="//book-part[@book-part-type='part']/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                    <front>
+                                        <titlePage>
+                                            <docTitle>
+                                                <titlePart>
+                                                    <xsl:if test="//book-part[@book-part-type='part']/book-part-meta/title-group/label[string-length()&gt; 0]">
+                                                        <xsl:value-of select="normalize-space(//book-part[@book-part-type='part']/book-part-meta/title-group/label)"/>
+                                                        <xsl:text> - </xsl:text>
+                                                    </xsl:if>
+                                                    <xsl:value-of select="normalize-space(//book-part[@book-part-type='part']/book-part-meta/title-group/title)"/>
+                                                </titlePart>
+                                            </docTitle>
+                                        </titlePage>
+                                    </front>
+                                </xsl:when>
+                        </xsl:choose>
                         <body>
                             <xsl:choose>
                                 <!-- Taylor & Francis ebooks complets -->
@@ -1798,9 +1811,6 @@
                 </xsl:attribute>
             </xsl:if>
             <analytic>
-                <xsl:variable name="countChapter">
-                    <xsl:value-of select="count(/book/body/book-part)"/>
-                </xsl:variable>
                 <!-- Title information related to the paper goes here -->
                 <xsl:choose>
                     <!-- Taylor & Francis monographies non découpées en chapitre -->
@@ -1871,7 +1881,6 @@
                     </xsl:when>
                 </xsl:choose>
                 
-                
                 <!-- All authors are included here -->
                 <xsl:choose>
                     <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/contrib-group/contrib[@contrib-type='author']/name[string-length()&gt; 0]">
@@ -1900,7 +1909,6 @@
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
-                
                 
                 <!-- ajout identifiants ISTEX et ARK -->
                 <xsl:if test="string-length($idistex) &gt; 0 ">
@@ -2033,19 +2041,26 @@
                     </xsl:for-each>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="//book-part[not(body/book-part)]/@id[string-length() &gt; 0]">
+                    <!-- Taylor & Francis monographies non découpées en chapitre -->
+                    <xsl:when test="$countChapter &gt;1 and /book/book-meta/book-title-group/book-title !=''">
+                        <idno>
+                            <xsl:attribute name="type">DOI</xsl:attribute>
+                        <xsl:value-of select="/book/book-meta[1]/book-id[@pub-id-type='doi']"/>
+                        </idno>
+                    </xsl:when>
+                    <xsl:when test="//book-part[1][not(body/book-part)]/@id[string-length() &gt; 0]">
                         <idno>
                             <xsl:attribute name="type">chapterID</xsl:attribute>
                             <xsl:value-of select="normalize-space(//book-part[1][not(body/book-part)]/@id)"/>
                         </idno>
-                    </xsl:when><xsl:when test="$docIssue//book-part[not(body/book-part)]/@id[string-length() &gt; 0]">
+                    </xsl:when>
+                    <xsl:when test="$docIssue//book-part[not(body/book-part)]/@id[string-length() &gt; 0]">
                         <idno>
                             <xsl:attribute name="type">chapterID</xsl:attribute>
                             <xsl:value-of select="normalize-space($docIssue//book-part[not(body/book-part)]/@id)"/>
                         </idno>
                     </xsl:when>
                 </xsl:choose>
-                
             </analytic>
             <monogr>
                 <xsl:choose>
@@ -2112,38 +2127,7 @@
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="book-meta/isbn[string-length() &gt; 0]">
-                        <xsl:for-each select="book-meta/isbn">
-                            <xsl:choose>
-                                <xsl:when test="@publication-format='online' or @publication-format='electronic' or @pub-type='epub'">
-                                    <idno type='eISBN'>
-                                        <xsl:value-of select="normalize-space(.)"/>
-                                    </idno>
-                                </xsl:when>
-                                <xsl:when test="@publication-format='hardback'">
-                                    <idno type='hISBN'>
-                                        <xsl:value-of select="normalize-space(.)"/>
-                                    </idno>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <idno>
-                                        <xsl:choose>
-                                            <xsl:when test="@pub-type='ebk'">
-                                                <xsl:attribute name="type">eISBN</xsl:attribute>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:attribute name="type">pISBN</xsl:attribute>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                        <xsl:if test="@content-type[string-length() &gt; 0]">
-                                            <xsl:attribute name="subtype">
-                                                <xsl:value-of select="@content-type"/>
-                                            </xsl:attribute>
-                                        </xsl:if>
-                                        <xsl:value-of select="normalize-space(.)"/>
-                                    </idno>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:for-each>
+                       <xsl:apply-templates select="book-meta/isbn"/>
                     </xsl:when>
                     <xsl:when test="$docIssue//book-meta/isbn[string-length() &gt; 0]">
                         <xsl:for-each select="$docIssue//book-meta/isbn">
@@ -2193,6 +2177,11 @@
                     </xsl:for-each>
                 </xsl:if>
                 <xsl:choose>
+                    <xsl:when test="starts-with(/book/book-meta/book-id[@book-id-type='doi'] | /book/book-meta/book-id[@pub-id-type='doi'],'978')">
+                        <idno type="pISBN">
+                            <xsl:value-of select="normalize-space(/book/book-meta/book-id[@book-id-type='doi'] | /book/book-meta/book-id[@pub-id-type='doi'])"/>
+                        </idno>
+                    </xsl:when>
                     <xsl:when test="/book/book-meta/book-id[@book-id-type='doi'] | /book/book-meta/book-id[@pub-id-type='doi']">
                         <idno type="DOI">
                             <xsl:value-of select="normalize-space(/book/book-meta/book-id[@book-id-type='doi'] | /book/book-meta/book-id[@pub-id-type='doi'])"/>
@@ -2232,11 +2221,9 @@
                         <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']" mode="editor"/>       
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
+                            <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
                     </xsl:otherwise>
                 </xsl:choose>
-
-
                 <imprint>
                     <xsl:choose>
                         <xsl:when test="book-meta/publisher[1]/publisher-name | metadata/publisher|//imprintPublisher">
@@ -2962,5 +2949,9 @@
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="contrib-group" mode="monogr">
+        <xsl:apply-templates select="contrib" mode="monogr"/>
     </xsl:template>
 </xsl:stylesheet>
