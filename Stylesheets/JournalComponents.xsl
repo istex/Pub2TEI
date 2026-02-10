@@ -199,22 +199,6 @@
             </xsl:choose>
         </title>
     </xsl:template>
-    <xsl:template match="book-title">
-        <title level="m">
-            <xsl:choose>
-                <!-- traitement degruyter ebooks special 
-                exemple 10.1515/9781501504396-->
-                <xsl:when test=". = 'Homer’s Iliad'">
-                    <xsl:value-of select="/book/book-meta/volume[@xml:lang = 'de']"/>
-                    <xsl:text> - </xsl:text>
-                    <xsl:apply-templates/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </title>
-    </xsl:template>
     <xsl:template match="ce:subtitle">
         <xsl:apply-templates/>
     </xsl:template>
@@ -265,6 +249,11 @@
 
     <xsl:template match="subtitle | article_sub_title | art_stitle">
         <xsl:choose>
+            <xsl:when test="ancestor::book-part-meta and /book/book-meta[1]/publisher[1]/publisher-name[1]='Routledge' and //book/body[1]">
+                <head>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:when>
             <xsl:when test="ancestor::collection-meta">
                 <title level="s" type="sub">
                     <xsl:apply-templates/>
@@ -281,6 +270,13 @@
                 </title>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template match="subtitle" mode="analytic">
+        <xsl:if test=". != ''">
+            <title level="a" type="sub">
+                <xsl:apply-templates/>
+            </title>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="subtitle" mode="monogr">
         <xsl:if test=". != ''">
@@ -304,6 +300,7 @@
 
     <xsl:template match="alt-title">
         <xsl:choose>
+            <xsl:when test="/book/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'"/>
             <xsl:when test="ancestor::sec | ancestor::ack | ancestor::app">
                 <head>
                     <xsl:if test="@alt-title-type">

@@ -2992,6 +2992,12 @@
         <xsl:choose>
             <!-- cas particulier taylor et francis
             redondance des informations-->
+            <xsl:when test="ancestor::back and fn-group">
+               <xsl:apply-templates select="fn-group"/>
+            </xsl:when>
+            <xsl:when test="ancestor::back and ref-list">
+                <xsl:apply-templates select="ref-list"/>
+            </xsl:when>
             <xsl:when test="ref-list"/>
             <xsl:when test="fn-group"/>
             <xsl:when test="parent::notes">
@@ -3796,18 +3802,6 @@
                                                 </xsl:choose>
                                             </xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="@ref-type">
-                                            <xsl:attribute name="type">
-                                                <xsl:choose>
-                                                    <xsl:when test="@ref-type='disp-formula'">formula</xsl:when>
-                                                    <xsl:when test="@ref-type='fig'">figure</xsl:when>
-                                                    <xsl:when test="@ref-type='footnote'">fn</xsl:when>
-                                                    <xsl:otherwise>
-                                                        <xsl:value-of select="@ref-type"/>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:attribute>
-                                        </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:attribute name="type">
                                                 <xsl:text>bib</xsl:text>
@@ -3828,9 +3822,18 @@
                                             </xsl:attribute>
                                         </xsl:when>
                                         <xsl:when test="@id">
-                                            <xsl:attribute name="xml:id">
-                                                <xsl:value-of select="@id"/>
-                                            </xsl:attribute>
+                                            <xsl:choose>
+                                                <xsl:when test="@ref-type='page'">
+                                                    <xsl:attribute name="n">
+                                                        <xsl:value-of select="@id"/>
+                                                    </xsl:attribute>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:attribute name="xml:id">
+                                                        <xsl:value-of select="@id"/>
+                                                    </xsl:attribute>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
                                         </xsl:when>
                                         <xsl:when test="sup">
                                             <xsl:attribute name="n">
@@ -4024,6 +4027,11 @@
                     <xsl:apply-templates/>
                 </title>
             </xsl:when>
+            <xsl:when test="ancestor::ref-list or /book/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
+                <head>
+                    <xsl:apply-templates/>
+                </head>
+            </xsl:when>
             <xsl:when test="ancestor::book-part-meta">
                 <title level="a" type="main">
                     <xsl:if test="$codeLang">
@@ -4036,12 +4044,7 @@
                     </xsl:if>
                     <xsl:apply-templates/>
                 </title>
-                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/subtitle"/>
-            </xsl:when>
-            <xsl:when test="ancestor::ref-list">
-                <head>
-                    <xsl:apply-templates/>
-                </head>
+                <xsl:apply-templates select="//book-part[1][not(body/book-part)]/book-part-meta/title-group/subtitle"/>
             </xsl:when>
             <xsl:when test="ancestor::header/title-group">
                 <title level="a" type="main">

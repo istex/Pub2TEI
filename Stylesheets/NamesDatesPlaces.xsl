@@ -130,7 +130,16 @@
 
     <xsl:template match="Year | year| rsc:year | yy">
         <xsl:variable name="clean">
-            <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwyyz-&#x02013; ','')"/>
+            <xsl:choose>
+                <!-- voir taylor 9780203117002 <year>n.d. &#x2013; a</year>-->
+                <xsl:when test="contains(.,'n')"/>
+                <xsl:when test="contains(.,' [')">
+                    <xsl:value-of select="substring-before(.,' [')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwyyz-&#x02013; ','')"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="dateClean">
             <xsl:choose>
@@ -143,17 +152,19 @@
             </xsl:choose>
         </xsl:variable>
         <date type="published">
-            <xsl:attribute name="when">
-                <xsl:choose>
-                    <xsl:when test="string-length($dateClean)&gt;4">
-                        <xsl:value-of select="substring($dateClean,0,string-length($dateClean))"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$dateClean"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:value-of select="$dateClean"/>
+            <xsl:if test="$dateClean !=''">
+                <xsl:attribute name="when">
+                    <xsl:choose>
+                        <xsl:when test="string-length($dateClean)&gt;4">
+                            <xsl:value-of select="substring($dateClean,0,string-length($dateClean))"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$dateClean"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="."/>
         </date>
     </xsl:template>
 

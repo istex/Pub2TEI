@@ -572,17 +572,26 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+    <xsl:template match="body" mode="TFall">
+        <xsl:apply-templates select="book-part" mode="TFall"/>
+    </xsl:template>
+    <xsl:template match="book-part" mode="TFall">
+        <div type="sec" xml:id="{@id}">
+            <xsl:apply-templates select="book-part-meta" mode="TFall"/>
+            <xsl:apply-templates select="body"/>
+        </div>
+    </xsl:template>
+    <xsl:template match="book-part-meta" mode="TFall">
+            <xsl:apply-templates select="title-group" mode="TFall"/>
+    </xsl:template>
+    <xsl:template match="title-group" mode="TFall">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template match="book-part" mode="TF">
             <xsl:apply-templates select="book-part-meta/title-group/title" mode="TF"/>
             <xsl:apply-templates select="body" mode="TF"/>
     </xsl:template>
-   <!-- <xsl:template match="book-part-meta" mode="TF">
-        <xsl:apply-templates select="title-group" mode="TF"/>
-    </xsl:template>
-    <xsl:template match="title-group" mode="TF">
-        <xsl:apply-templates select="title" mode="TF"/>
-    </xsl:template>-->
-    
     <xsl:template match="body" mode="TF">
         <xsl:choose>
             <xsl:when test="ancestor::book/body/book-part/book-part-meta/title-group/title and not(child::book-part/book-part-meta/title-group/title)">
@@ -612,7 +621,7 @@
                     </xsl:if>
                 </div>
             </xsl:when>
-            <xsl:when test="child::book-part/book-part-meta/title-group/title">
+           <xsl:when test="child::book-part/book-part-meta/title-group/title">
                 <xsl:apply-templates select="book-part" mode="child"/>
             </xsl:when>
         </xsl:choose>

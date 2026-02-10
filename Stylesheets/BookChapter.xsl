@@ -20,7 +20,7 @@
     <!-- brill-rgrwo -->
     
     <xsl:variable name="titleToDeduceGenre">
-        <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta/title-group/title)"/>
+        <xsl:value-of select="normalize-space(//book-part[1][not(body/book-part)]/book-part-meta/title-group/title)"/>
     </xsl:variable>
     <xsl:variable name="doi">
         <xsl:value-of select="//body/book-part/book-part-meta/book-part-id[@pub-id-type = 'doi'] | //book-body/book-part/book-part-meta/book-part-id[@book-part-id-type = 'doi']"/>
@@ -525,8 +525,25 @@
                     <teiHeader>
                         <fileDesc>
                             <titleStmt>
+                                <xsl:variable name="countChapter">
+                                    <xsl:value-of select="count(/book/body/book-part)"/>
+                                </xsl:variable>
                                 <!-- Title information related to the paper goes here -->
                                 <xsl:choose>
+                                    <!-- Taylor & Francis monographies non découpées en chapitre -->
+                                    <xsl:when test="$countChapter &gt;1 and /book/book-meta/book-title-group/book-title !=''">
+                                        <xsl:apply-templates select="/book/book-meta/book-title-group/book-title" mode="analytic"/>
+                                        <xsl:apply-templates select="/book/book-meta/book-title-group/subtitle" mode="analytic"/>
+                                    </xsl:when>
+                                    <xsl:when test="//book/entryGroup/entry/headGroup/head[string-length()&gt; 0]">
+                                        <title level="a" type="main">
+                                            <xsl:if test="//book/entryGroup/entry/headGroup/label[string-length()&gt; 0]">
+                                                <xsl:value-of select="/book/entryGroup/entry/headGroup/label"/>
+                                                <xsl:text> - </xsl:text>
+                                            </xsl:if>
+                                            <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
+                                        </title>
+                                    </xsl:when>
                                     <xsl:when test="//book/entryGroup/entry/headGroup/head[string-length()&gt; 0]">
                                         <title level="a" type="main">
                                             <xsl:if test="//book/entryGroup/entry/headGroup/label[string-length()&gt; 0]">
@@ -553,10 +570,10 @@
                                         </title>
                                     </xsl:when>
                                     <!-- fin ecco -->
-                                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[string-length()&gt; 0]">
+                                    <xsl:when test="//book-part[1][not(body/book-part)]/book-part-meta[1][string-length()&gt; 0]">
                                         <xsl:choose>
-                                            <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                                            <xsl:when test="//book-part[1][not(body/book-part)]/book-part-meta[1]/title-group/title[string-length()&gt; 0]">
+                                                <xsl:apply-templates select="//book-part[1][not(body/book-part)]/book-part-meta[1]/title-group/title"/>
                                             </xsl:when>
                                             <xsl:when test="/book/book-back/app-group|/book/book-back/app">
                                                 <title level="a" type="main">
@@ -1539,8 +1556,18 @@
                                 </titlePage>
                             </front>
                         </xsl:if>
+                        <xsl:if test="/book/book-front[string-length()&gt; 0]">
+                            <!-- Taylor & Francis ebooks complets -->
+                            <front>
+                                <xsl:apply-templates select="//book/book-front[1]/*"/>
+                            </front>
+                        </xsl:if>
                         <body>
                             <xsl:choose>
+                                <!-- Taylor & Francis ebooks complets -->
+                                <xsl:when test="/book/book-meta[1]/publisher[1]/publisher-name[1]='Routledge' and //book/body[1]">
+                                    <xsl:apply-templates select="//book/body[1]/*" mode="TFall"/>
+                                </xsl:when>
                                 <!-- brill-ebooks -->
                                 <xsl:when test="//book-part[not(body/book-part)]/body">
                                     <xsl:apply-templates select="//book-part[not(body/book-part)]/body"/>
@@ -1771,8 +1798,16 @@
                 </xsl:attribute>
             </xsl:if>
             <analytic>
+                <xsl:variable name="countChapter">
+                    <xsl:value-of select="count(/book/body/book-part)"/>
+                </xsl:variable>
                 <!-- Title information related to the paper goes here -->
                 <xsl:choose>
+                    <!-- Taylor & Francis monographies non découpées en chapitre -->
+                    <xsl:when test="$countChapter &gt;1 and /book/book-meta/book-title-group/book-title !=''">
+                        <xsl:apply-templates select="/book/book-meta/book-title-group/book-title" mode="analytic"/>
+                        <xsl:apply-templates select="/book/book-meta/book-title-group/subtitle" mode="analytic"/>
+                    </xsl:when>
                     <xsl:when test="//book/entryGroup/entry/headGroup/head[string-length()&gt; 0]">
                         <title level="a" type="main">
                             <xsl:if test="//book/entryGroup/entry/headGroup/label[string-length()&gt; 0]">
@@ -1782,10 +1817,10 @@
                             <xsl:value-of select="/book/entryGroup/entry/headGroup/head"/>
                         </title>
                     </xsl:when>
-                    <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[string-length()&gt; 0]">
+                    <xsl:when test="//book-part[1][not(body/book-part)]/book-part-meta[string-length()&gt; 0]">
                         <xsl:choose>
-                            <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
-                                <xsl:apply-templates select="//book-part[not(body/book-part)]/book-part-meta/title-group/title"/>
+                            <xsl:when test="//book-part[1][not(body/book-part)]/book-part-meta/title-group/title[string-length()&gt; 0]">
+                                <xsl:apply-templates select="//book-part[1][not(body/book-part)]/book-part-meta/title-group/title"/>
                             </xsl:when>
                             <!-- cambridge polit and law -->
                             <xsl:when test="/book/book-back/app-group|/book/book-back/app">
@@ -2001,7 +2036,7 @@
                     <xsl:when test="//book-part[not(body/book-part)]/@id[string-length() &gt; 0]">
                         <idno>
                             <xsl:attribute name="type">chapterID</xsl:attribute>
-                            <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/@id)"/>
+                            <xsl:value-of select="normalize-space(//book-part[1][not(body/book-part)]/@id)"/>
                         </idno>
                     </xsl:when><xsl:when test="$docIssue//book-part[not(body/book-part)]/@id[string-length() &gt; 0]">
                         <idno>
@@ -2090,7 +2125,15 @@
                                     </idno>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <idno type='ISBN'>
+                                    <idno>
+                                        <xsl:choose>
+                                            <xsl:when test="@pub-type='ebk'">
+                                                <xsl:attribute name="type">eISBN</xsl:attribute>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:attribute name="type">pISBN</xsl:attribute>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                         <xsl:if test="@content-type[string-length() &gt; 0]">
                                             <xsl:attribute name="subtype">
                                                 <xsl:value-of select="@content-type"/>
@@ -2357,9 +2400,9 @@
                 </xsl:when>
             </xsl:choose>
             
-            <xsl:if test="//metadata/series[string-length() &gt; 0]">
+            <xsl:if test="//metadata/series[string-length() &gt; 0]|/book/book-meta/series[string-length() &gt; 0]">
                 <series>
-                    <xsl:apply-templates select="//metadata/series"/>
+                    <xsl:apply-templates select="//metadata/series|/book/book-meta/series"/>
                 </series>
             </xsl:if>
             <xsl:if test="/book/book-meta/related-object">
@@ -2545,6 +2588,12 @@
                 <xsl:when test="/book/book-meta/isbn[@publication-format='online']='9789004301351' or /book/book-meta/isbn[@publication-format='online']='9789004295100'">
                     <xsl:text>Herodotus, Book II : </xsl:text>
                     <xsl:value-of select="/book/book-meta/book-title-group/book-title"/>
+                </xsl:when><!-- traitement degruyter ebooks special 
+                exemple 10.1515/9781501504396-->
+                <xsl:when test=". = 'Homer’s Iliad'">
+                    <xsl:value-of select="/book/book-meta/volume[@xml:lang = 'de']"/>
+                    <xsl:text> - </xsl:text>
+                    <xsl:apply-templates/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates/>

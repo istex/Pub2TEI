@@ -244,6 +244,9 @@
                         <xsl:if test="//fn-group">
                             <xsl:apply-templates select="//fn-group"/>
                         </xsl:if>
+                        <xsl:if test="/book-part-wrapper/book-part/back/ref-list">
+                            <xsl:apply-templates select="/book-part-wrapper/book-part/back/ref-list"/>
+                        </xsl:if>
                         <xsl:if test="//index-term">
                             <div type="index">
                                 <list>

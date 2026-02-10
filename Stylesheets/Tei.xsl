@@ -920,7 +920,7 @@
                                         <!-- pagination -->
                                         <xsl:choose>
                                             <!-- découpage des pages -->
-                                            <xsl:when test="contains(//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page'],'-')">
+                                            <xsl:when test="contains(//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page'][1],'-')">
                                                 <xsl:variable name="firstPage">
                                                     <xsl:value-of select="substring-before(//tei:biblStruct/tei:monogr/tei:imprint/tei:biblScope[@unit='page'],'-')"/>
                                                 </xsl:variable>

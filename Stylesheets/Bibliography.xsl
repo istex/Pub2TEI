@@ -1111,6 +1111,9 @@
     </xsl:template>
     <xsl:template match="string-name" mode="editors">
         <xsl:choose>
+            <xsl:when test="parent::person-group">
+                <xsl:apply-templates select="."/>
+            </xsl:when>
             <xsl:when test="ancestor::ref">
                 <persName>
                     <xsl:apply-templates select="."/>
