@@ -1552,14 +1552,38 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="index-term" mode="fn">
-        <item>
-            <xsl:if test="@id">
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@id"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </item>
+        <xsl:choose>
+            <xsl:when test="index-term">
+                <item>
+                    <xsl:if test="@id">
+                        <xsl:attribute name="xml:id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <term>
+                        <xsl:value-of select="term"/>
+                    </term>
+                    <term>
+                        <xsl:value-of select="index-term/term"/>
+                    </term>
+                </item> 
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="ancestor::index-term"/>
+                    <xsl:otherwise>
+                        <item>
+                            <xsl:if test="@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:apply-templates select="term"/>
+                        </item>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="verse-group">
         <lg>
@@ -1677,34 +1701,69 @@
         <xsl:choose>
             <xsl:when test="parent::nomfamille"/>
             <xsl:otherwise>
-                <ref xml:id="{@id}" n="{@id}" type="{@typeref}">
+                <ref type="fn">
+                    <xsl:choose>
+                        <xsl:when test="@typeref='note'">
+                            <xsl:attribute name="type">fn</xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="type">bibr</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="@idref !=''">
+                            <xsl:attribute name="target">
+                                <xsl:text>#</xsl:text>
+                                <xsl:value-of select="@idref"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@id !=''">
+                            <xsl:attribute name="n">
+                                <xsl:text>#</xsl:text>
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                     <xsl:apply-templates/>
                 </ref>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="liensimple">
-        <ref xml:id="{@id}" n="{@id}">
-            <xsl:if test="@typeref[string-length()&gt; 0]">
-                <xsl:attribute name="type">
-                    <xsl:value-of select="@typeref"/>
-                </xsl:attribute>
-            </xsl:if>
+        <ref type="url" xml:id="{@id}" n="{@id}">
             <xsl:if test="@xlink:href[string-length()&gt; 0]">
                 <xsl:attribute name="target">
-                    <xsl:value-of select="@xlink:href"/>
+                    <xsl:value-of select="translate(@xlink:href,'[]','')"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </ref>
     </xsl:template>
     <xsl:template match="listenonord">
-        <list rend="{@signe}">
+        <list>
+            <xsl:choose>
+                <xsl:when test="@signe">
+                    <xsl:attribute name="rend">
+                        <xsl:value-of select="@signe"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="rend">nonOrd</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates/>
         </list>
     </xsl:template>
     <xsl:template match="listeord">
         <list rend="{@numeration}">
+            <xsl:attribute name="rend">
+            <xsl:choose>
+                <xsl:when test="@numeration">
+                    <xsl:value-of select="@numeration"/>
+                </xsl:when>
+                <xsl:otherwise>ord</xsl:otherwise>
+            </xsl:choose>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </list>
     </xsl:template>

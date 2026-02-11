@@ -434,66 +434,8 @@
                
                 <xsl:if test="header/contentMeta/abstractGroup | header/contentMeta/keywordGroup | header/publicationMeta[@level='unit']/subjectInfo | header/publicationMeta[@level='unit']/titleGroup/title[@type='articleCategory']">
                     <profileDesc>
-						<!-- PL: abstract is moved from <front> to here -->
-                        <xsl:if test="header/contentMeta/abstractGroup/abstract">
-                            <!-- SG - reprise de tous les abstracts -->
-                            <xsl:for-each select="header/contentMeta/abstractGroup/abstract[@type='main']">
-                                <abstract>
-                                    <xsl:choose>
-                                        <xsl:when test="@xml:lang[string-length() &gt; 0] | @lang[string-length() &gt; 0]">
-                                            <xsl:attribute name="xml:lang">
-                                                <xsl:variable name="codeLangue">
-                                                    <xsl:value-of select="translate(@xml:lang | @lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                                </xsl:variable>
-                                                <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S au lieu de espagnol -->
-                                                <xsl:choose>
-                                                    <xsl:when test="$codeLangue='ar' and //component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">es</xsl:when>
-                                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x'">de</xsl:when>
-                                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">es</xsl:when>
-                                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">fr</xsl:when>
-                                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">it</xsl:when>
-                                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">it</xsl:when>
-                                                    <xsl:when test="$codeLangue='ka'">de</xsl:when>
-                                                    <xsl:otherwise>
-                                                        <xsl:value-of select="$codeLangue"/>
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                            </xsl:attribute>
-                                        </xsl:when>
-                                    </xsl:choose>
-                                    <xsl:if test="@type">
-                                        <xsl:attribute name="style">
-                                            <xsl:value-of select="@type"/>
-                                        </xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@xml:id">
-                                        <xsl:copy-of select="@xml:id"/>
-                                    </xsl:if>
-                                    <xsl:apply-templates/>
-                                </abstract>
-                            </xsl:for-each>
-                            <xsl:for-each select="header/contentMeta/abstractGroup/abstract[@type='short']">
-                                <abstract ana="{@type}">
-                                    <xsl:if test="@type">
-                                        <xsl:attribute name="style">
-                                            <xsl:value-of select="@type"/>
-                                        </xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@xml:id">
-                                        <xsl:copy-of select="@xml:id"/>
-                                    </xsl:if>
-                                    <xsl:choose>
-                                        <xsl:when test="@xml:lang[string-length() &gt; 0] | @lang[string-length() &gt; 0]">
-                                            <xsl:attribute name="xml:lang">
-                                                <xsl:value-of select="translate(@xml:lang | @lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                            </xsl:attribute>
-                                        </xsl:when>
-                                    </xsl:choose>
-                                    <head>Highlights</head>
-                                    <xsl:apply-templates/>
-                                </abstract>
-                            </xsl:for-each>
-		                </xsl:if>
+                        <xsl:apply-templates select="header/contentMeta/abstractGroup/abstract"/>
+                        
                         <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]">
                             <textClass ana="keyword">
                                 <xsl:if test="header/contentMeta/keywordGroup/keyword[string-length()&gt;0]">
@@ -575,6 +517,18 @@
                     |//tabular/noteGroup">
                     <back>
                         <!-- note de bas de page -->
+                        <!-- ne pas reprendre l'abstract de ChemInform
+                        "ChemInform is a weekly Abstracting Service, delivering concise information at a glance that was extracted from about 100 leading journals."
+                        le rediriger vers les notes de bas de pages-->
+                        <xsl:if test="starts-with(/component/header/contentMeta/abstractGroup/abstract/p[1],'ChemInform is a weekly Abstracting Service')">
+                            <div type="fn-group">
+                                <note place="inline" type="fn">
+                                    <p>
+                                        <xsl:value-of select="/component/header/contentMeta/abstractGroup/abstract/p"/>
+                                    </p>
+                                </note>
+                            </div>
+                        </xsl:if>
                         <xsl:if test="header/noteGroup/note | //tabular/noteGroup">
                             <div type="fn-group">
                                 <xsl:apply-templates select="header/noteGroup/note| //tabular/noteGroup"/>
@@ -1469,7 +1423,7 @@
     </xsl:template>
     
     <xsl:template match="keywordGroup">
-        <keywords scheme="keyword">
+        <keywords scheme="keywords">
             <xsl:if test="@xml:lang[string-length()&gt;0]">
                 <xsl:copy-of select="@xml:lang"/>
             </xsl:if>
@@ -1640,5 +1594,69 @@
             </xsl:if>
             <xsl:value-of select="."/>
         </title>
+    </xsl:template>
+    <xsl:template match="abstract">
+        <xsl:choose>
+            <!-- ne pas reprendre l'abstract de ChemInform
+                        "ChemInform is a weekly Abstracting Service, delivering concise information at a glance that was extracted from about 100 leading journals."
+            le rediriger vers les notes de bas de pages-->
+            <xsl:when test="starts-with(p,'ChemInform is a weekly Abstracting Service')"/>
+            <xsl:when test="@type='main'">
+                <abstract>
+                    <xsl:choose>
+                        <xsl:when test="@xml:lang[string-length() &gt; 0] | @lang[string-length() &gt; 0]">
+                            <xsl:attribute name="xml:lang">
+                                <xsl:variable name="codeLangue">
+                                    <xsl:value-of select="translate(@xml:lang | @lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                </xsl:variable>
+                                <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S au lieu de espagnol -->
+                                <xsl:choose>
+                                    <xsl:when test="$codeLangue='ar' and //component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">es</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x'">de</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">es</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">fr</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">it</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">it</xsl:when>
+                                    <xsl:when test="$codeLangue='ka'">de</xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$codeLangue"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:if test="@type">
+                        <xsl:attribute name="style">
+                            <xsl:value-of select="@type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@xml:id">
+                        <xsl:copy-of select="@xml:id"/>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </abstract>
+            </xsl:when>
+            <xsl:when test="@type='short'">
+                <abstract ana="{@type}">
+                    <xsl:if test="@type">
+                        <xsl:attribute name="style">
+                            <xsl:value-of select="@type"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@xml:id">
+                        <xsl:copy-of select="@xml:id"/>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="@xml:lang[string-length() &gt; 0] | @lang[string-length() &gt; 0]">
+                            <xsl:attribute name="xml:lang">
+                                <xsl:value-of select="translate(@xml:lang | @lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
+                    <head>Highlights</head>
+                    <xsl:apply-templates/>
+                </abstract>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>

@@ -228,7 +228,7 @@
                     <xsl:if test="//mets:xmlData[dcterms:type!='book']/dcterms:subject[@scheme='keywords']">
                         <textClass>
                             <xsl:attribute name="ana">keyword</xsl:attribute>
-                            <keywords>
+                            <keywords scheme="{@scheme}">
                                 <xsl:for-each select="//mets:xmlData[dcterms:type!='book']/dcterms:subject">
                                     <xsl:if test="@scheme='keywords'">
                                         <term>

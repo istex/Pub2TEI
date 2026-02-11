@@ -142,7 +142,7 @@
                         </xsl:if>
                         <xsl:if test="art-front/keyword | rsc:art-front/rsc:keyword">
                             <textClass>
-                                <keywords scheme="keyword">
+                                <keywords scheme="keywords">
                                     <xsl:apply-templates select="art-front/keyword | rsc:art-front/rsc:keyword"/>
                                 </keywords>
                             </textClass>

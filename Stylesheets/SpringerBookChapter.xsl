@@ -463,7 +463,7 @@
     </xsl:template>
     <xsl:template match="institution-id" mode="springer">
         <idno type="{@institution-id-type}">
-        <xsl:apply-templates/>
+            <xsl:apply-templates/>
         </idno>
     </xsl:template>
     <xsl:template match="addr-line" mode="springer">

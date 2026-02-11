@@ -1175,8 +1175,7 @@
      <!-- subject -->
     <xsl:template match="subjects">
         <keywords scheme="msc2000">
-            
-        <xsl:apply-templates/>
+            <xsl:apply-templates/>
         </keywords>
     </xsl:template>
     <xsl:template match="subject">

@@ -303,12 +303,7 @@
                                     <xsl:apply-templates select="tei:fileDesc/tei:titleStmt/tei:author"/>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            <!-- auteur -->
-                            <xsl:choose>
-                                <xsl:when test="//tei:distributor='OpenEdition'">
-                                    <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:author"/>
-                                </xsl:when>
-                            </xsl:choose>
+                            
                             <!-- autre éditeur -->
                             <xsl:copy-of select="tei:fileDesc/tei:titleStmt/tei:editor"/>
                             <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:biblFull/tei:titleStmt/tei:respStmt"/>
@@ -326,7 +321,11 @@
                             <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='doi']"/>
                             <xsl:copy-of select="tei:sourceDesc/tei:biblStruct/tei:monogr/tei:idno[@type='url']"/>
                             <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='url']"/>
-                            <xsl:copy-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']"/>
+                            <xsl:if test="tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']">
+                                <idno type="DOI">
+                                    <xsl:value-of select="tei:fileDesc/tei:publicationStmt/tei:idno[@type='doi']"/>
+                                </idno>
+                            </xsl:if>
                             <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:idno[@type='DOI']" copy-namespaces="no"/>
                         </analytic>
                         <monogr>
@@ -1205,7 +1204,18 @@
         </textClass>
     </xsl:template>
     <xsl:template match="tei:keywords">
-        <keywords scheme="{@scheme}">
+        <keywords>
+            <!-- scheme -->
+            <xsl:choose>
+                <xsl:when test="contains(@scheme,'keyword')">
+                    <xsl:attribute name="scheme">keywords</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@scheme != ''">
+                    <xsl:attribute name="scheme">
+                        <xsl:value-of select="@scheme"/>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:if test="./@xml:lang">
                 <xsl:copy-of select="./@xml:lang"/>
             </xsl:if>
@@ -1322,11 +1332,10 @@
         </text>
     </xsl:template>
     <xsl:template match="tei:div[@type='bibliography']" mode="tei">
-        <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="node() | @*" mode="tei"/>
-        </xsl:copy>
+        <div type="references">
+            <xsl:apply-templates select="node()" mode="tei"/>
+        </div>
     </xsl:template>
-    
     <xsl:template match="tei:note" mode="teiALL">
         <note>
             <xsl:copy-of select="@*"/>
@@ -1669,6 +1678,15 @@
         <xsl:choose>
             <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:publisher='BRILL'">
                 <xsl:apply-templates select="tei:persName" mode="Pauly"/>
+                <xsl:apply-templates select="tei:affiliation"/>
+            </xsl:when>
+            <xsl:when test="//tei:fileDesc/tei:publicationStmt/tei:distributor='OpenEdition'">
+                <author>
+                    <xsl:apply-templates select="tei:persName" mode="open-edition"/>
+                    <xsl:apply-templates select="tei:orgName" mode="open-edition"/>
+                    <xsl:apply-templates select="tei:affiliation/tei:hi[@rend='author-email']" mode="open-edition"/>
+                    <xsl:apply-templates select="tei:affiliation" mode="open-edition"/>
+                </author>
             </xsl:when>
             <xsl:otherwise>
                 <author>
@@ -1676,7 +1694,42 @@
                 </author>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:apply-templates select="tei:affiliation"/>
+    </xsl:template>
+    <xsl:template match="tei:persName" mode="open-edition">
+            <xsl:copy copy-namespaces="no">
+                <xsl:apply-templates select="tei:forename" mode="open-edition"/>
+                <xsl:apply-templates select="node()except(tei:forename)| @*" mode="open-edition"/>
+            </xsl:copy>
+    </xsl:template>
+    <xsl:template match="tei:forename" mode="open-edition">
+        <xsl:choose>
+            <xsl:when test="@type='first'">
+                <xsl:copy-of select="." copy-namespaces="no"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <forename type="first"> 
+                   <xsl:apply-templates/>
+                </forename>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="tei:affiliation" mode="open-edition">
+            <xsl:copy copy-namespaces="no">
+                <xsl:apply-templates select="node()except(tei:hi)| @*" mode="open-edition"/>
+            </xsl:copy>
+    </xsl:template>
+    <xsl:template match="tei:lb" mode="open-edition">
+        <lb/>
+    </xsl:template>
+    <xsl:template match="tei:surname |tei:addName | tei:genName |tei:orgName|tei:roleName" mode="open-edition">
+        <xsl:copy copy-namespaces="no">
+            <xsl:copy-of select="node()|@*" copy-namespaces="no"/>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template match="tei:hi[@rend='author-email']" mode="open-edition">
+        <email>
+            <xsl:apply-templates/>
+        </email>
     </xsl:template>
     <xsl:template match="tei:editor">
         <xsl:choose>

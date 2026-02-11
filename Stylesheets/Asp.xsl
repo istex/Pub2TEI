@@ -490,7 +490,7 @@
                 <!-- mots clés auteurs-->
                 <xsl:if test="string-length(keyword) &gt; 0">
                     <textClass ana="keyword">
-                        <keywords scheme="#keyword">
+                        <keywords scheme="keywords">
                             <xsl:apply-templates select="keyword | text/keyword"/>
                         </keywords>
                     </textClass>

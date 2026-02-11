@@ -330,11 +330,6 @@
                     <xsl:value-of select="$authorNumber"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="@corresp = 'yes'">
-                <xsl:attribute name="role">
-                    <xsl:text>corresp</xsl:text>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:choose>
                 <xsl:when test="string-name">
                     <xsl:apply-templates select="string-name"/>
@@ -351,9 +346,9 @@
             <!-- email -->
             <xsl:apply-templates select="email"/>
                 <!-- à tester et enlever si ça pose des soucis -->
-                <xsl:if test="xref[@ref-type='corresp'] and not(xref[@ref-type='aff'])">
+                <!--<xsl:if test="xref[@ref-type='corresp'] and not(xref[@ref-type='aff'])">
                     <xsl:apply-templates select="../aff"/>
-                </xsl:if>
+                </xsl:if>-->
             <!-- affiliation -->
             <xsl:variable name="count">
                 <xsl:value-of select="count(name)"/>
@@ -466,7 +461,7 @@
                 <xsl:when test="/article/front/article-meta/author-notes/corresp[@id=current()/xref/@rid]">
                     <xsl:apply-templates select="/article/front/article-meta/author-notes"/>
                 </xsl:when>
-                <xsl:when test="/article/front/article-meta/author-notes/corresp and not(/article/front/article-meta/author-notes/corresp/@id)">
+                <xsl:when test="/article/front/article-meta/author-notes/corresp !='' and @corresp='yes'">
                     <xsl:apply-templates select="/article/front/article-meta/author-notes/corresp"/>
                 </xsl:when>
             </xsl:choose>

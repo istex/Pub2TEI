@@ -534,7 +534,9 @@
                     <xsl:attribute name="xml:id">
                         <xsl:apply-templates select="$entry/@id | @id"/>
                     </xsl:attribute>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="nlm-citation/person-group"/>
+                    <xsl:apply-templates select="nlm-citation/year"/>
+                    <xsl:apply-templates select="nlm-citation/comment"/>
                 </bibl>
             </xsl:otherwise>
         </xsl:choose>
@@ -872,6 +874,11 @@
             <xsl:when test="ancestor::ref"/>
             <xsl:when test="parent::grnote">
                 <note place="inline" xml:id="{@id}">
+                    <xsl:if test="no">
+                        <xsl:attribute name="n">
+                            <xsl:value-of select="no"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </note>
             </xsl:when>
@@ -2138,7 +2145,41 @@
                     </xsl:if>
                     <xsl:apply-templates/>
                 </bibl>
-            </xsl:when>
+            </xsl:when><!--
+            <xsl:when test="/book-part-wrapper/book-meta/publisher/publisher-name='Routledge'">
+                <!-\- reconstruction des liens body/ref / références -\->
+                <bibl>
+                    <xsl:attribute name="type">
+                        <xsl:text>in-line</xsl:text>
+                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="../@id">
+                                <xsl:attribute name="xml:id">
+                                    <xsl:value-of select="../@id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:variable name="surname">
+                        <xsl:for-each select="person-group/string-name/surname">
+                            <xsl:value-of select="."/>
+                        </xsl:for-each>
+                    </xsl:variable>
+                    <xsl:variable name="year">
+                        <xsl:value-of select="translate(year, '&quot; áéèü-–', '')" />
+                    </xsl:variable>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="concat($surname,$year)"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>-->
             <xsl:when test="@publication-type='other' or not(article-title |source)">
                 <bibl>
                     <xsl:attribute name="type">

@@ -3523,7 +3523,7 @@
                             </graphic>
                         </figure>
                     </xsl:when>
-                    <xsl:when test="parent::named-book-part-body">
+                    <xsl:when test="parent::named-book-part-body | parent::sec">
                         <figure>
                             <graphic>
                                 <xsl:attribute name="url">
@@ -3850,12 +3850,36 @@
                                                 <xsl:value-of select="sup"/>
                                             </xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
-                                            <xsl:attribute name="target">
-                                                <xsl:text>#</xsl:text>
-                                                <xsl:value-of select="translate(.,' .','')"/>
-                                            </xsl:attribute>
-                                        </xsl:when>
+                                        <!-- reconstruction des liens reférences pour taylor & francis -->
+                                        <!--<xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
+                                            <xsl:variable name="and">
+                                                <xsl:value-of select="substring-before(.,' and ')"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="rest">
+                                                <xsl:value-of select="substring-after(.,' and ')"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="result">
+                                                <xsl:value-of select="concat($and,$rest)"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="final">
+                                                <xsl:value-of select="translate($result,' .','')"/>
+                                                <!-\-<xsl:value-of select="translate($result, '&#xA;&quot; éáèü-–.', '')" />-\->
+                                            </xsl:variable>
+                                            <xsl:choose>
+                                                <xsl:when test="contains(.,' and ')">
+                                                    <xsl:attribute name="target">
+                                                        <xsl:text>#</xsl:text>
+                                                        <xsl:value-of select="$final"/>
+                                                    </xsl:attribute>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:attribute name="target">
+                                                        <xsl:text>#</xsl:text>
+                                                        <xsl:value-of select="translate(.,' .-–','')"/>
+                                                    </xsl:attribute>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:when>-->
                                     </xsl:choose>
                                     <xsl:apply-templates/>
                                 </ref>
@@ -5146,9 +5170,22 @@
                                                                         <xsl:otherwise>
                                                                             <xsl:choose>
                                                                                 <xsl:when test="contains($avantVirgule,' ')">
-                                                                                    <settlement>
-                                                                                        <xsl:apply-templates select="$avantVirgule"/>
-                                                                                    </settlement>
+                                                                                    <xsl:choose>
+                                                                                        <xsl:when test="contains($avantVirgule,'strasse')
+                                                                                            or contains($avantVirgule,' street ')
+                                                                                            or contains($avantVirgule,' rue ')">
+                                                                                            <address>
+                                                                                                <street>
+                                                                                                    <xsl:apply-templates select="$avantVirgule"/>
+                                                                                                </street>
+                                                                                            </address>
+                                                                                        </xsl:when>
+                                                                                        <xsl:otherwise>
+                                                                                            <settlement>
+                                                                                                <xsl:apply-templates select="$avantVirgule"/>
+                                                                                            </settlement>
+                                                                                        </xsl:otherwise>
+                                                                                    </xsl:choose>
                                                                                 </xsl:when>
                                                                                 <xsl:otherwise>
                                                                                     <address>

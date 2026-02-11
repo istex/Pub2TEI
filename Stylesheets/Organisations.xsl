@@ -128,7 +128,8 @@
                 contains($theOrg,'Ospedale') or
                 contains($theOrg,'Hopital') or
                 contains($theOrg,'Infirmary') or
-                contains($theOrg,'MIND-IN2UB')">
+                contains($theOrg,'Infirmary') or
+                contains($theOrg,'MIT')">
                 <xsl:text>institution</xsl:text>
             </xsl:when>
             <xsl:when test="contains($theOrg,'Research') or
@@ -219,6 +220,7 @@
                 contains($theOrg,'Depart') or
                 contains($theOrg,'Dept') or
                 contains($theOrg,'Italy bAcademic Department') or
+                contains($theOrg,'Dep.') or
                 contains($theOrg,'Dipart')">
                 <xsl:text>department</xsl:text>
             </xsl:when>

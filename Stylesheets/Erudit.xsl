@@ -739,9 +739,7 @@
     </xsl:template>
     <xsl:template match="biblio">
         <div type="references">
-            <listBibl>
-                <xsl:apply-templates/>
-            </listBibl>
+            <xsl:apply-templates/>
         </div>
     </xsl:template>
     <xsl:template match="refbiblio">
@@ -806,6 +804,8 @@
                 <hi rend="smallCaps">
                     <xsl:apply-templates/>
                 </hi>
+                <!-- espace pour séparer les <marquage> -->
+                <xsl:text> </xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -939,7 +939,9 @@
     <xsl:template match="spanspec"/>
     <xsl:template match="surtitre"/>
     <xsl:template match="divbiblio">
-        <xsl:apply-templates/>
+        <listBibl>
+            <xsl:apply-templates/>
+        </listBibl>
     </xsl:template>
     <xsl:template match="noteedito|trefbiblio">
         <edition>

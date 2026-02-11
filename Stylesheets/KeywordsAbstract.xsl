@@ -21,14 +21,22 @@
     <xsl:template match="kwd-group">
         <xsl:choose>
             <xsl:when test="kwd!=''">
-                <textClass ana="keyword">
+                <textClass ana="keywords">
                     <keywords>
                         <!-- scheme -->
-                        <xsl:if test="@kwd-group-type != ''">
-                            <xsl:attribute name="scheme">
-                                <xsl:value-of select="@kwd-group-type"/>
-                            </xsl:attribute>
-                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="contains(@kwd-group-type,'keyword')">
+                                <xsl:attribute name="scheme">keywords</xsl:attribute>
+                            </xsl:when>
+                            <xsl:when test="contains(@kwd-group-type,'concept')">
+                                <xsl:attribute name="scheme">keywords</xsl:attribute>
+                            </xsl:when>
+                            <xsl:when test="@kwd-group-type != ''">
+                                <xsl:attribute name="scheme">
+                                    <xsl:value-of select="@kwd-group-type"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
                         <!-- langue parfois non présente -->
                         <xsl:variable name="theLanguage">
                             <xsl:choose>
@@ -76,11 +84,16 @@
         <textClass ana="keyword">
             <keywords>
                 <!-- scheme -->
-                <xsl:if test="@kwd-group-type != ''">
-                    <xsl:attribute name="scheme">
-                        <xsl:value-of select="@kwd-group-type"/>
-                    </xsl:attribute>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="contains(@kwd-group-type,'keyword')">
+                        <xsl:attribute name="scheme">keywords</xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="@kwd-group-type != ''">
+                        <xsl:attribute name="scheme">
+                            <xsl:value-of select="@kwd-group-type"/>
+                        </xsl:attribute>
+                    </xsl:when>
+                </xsl:choose>
                 <!-- langue parfois non présente -->
                 <xsl:variable name="theLanguage">
                     <xsl:choose>
