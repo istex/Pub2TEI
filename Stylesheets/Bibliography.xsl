@@ -889,7 +889,7 @@
                 <xsl:choose>
                     <xsl:when test="parent::div1|parent::div2|parent::div3|parent::div4|parent::div5 ">
                         <p>
-                            <ref type="fn" xml:id="{@id}">
+                            <ref type="fn" target="#{@id}">
                                 <hi rend="superscript">
                                     <xsl:value-of select="substring-before(.,' ')"/>
                                 </hi>
@@ -897,9 +897,19 @@
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
-                        <ref type="fn" xml:id="{@id}">
+                        <xsl:variable name="idASP">
+                            <xsl:choose>
+                                <xsl:when test="contains(@id,'en')">
+                                    <xsl:value-of select="substring-after(@id,'en')"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@id"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <ref type="fn" target="#{@id}">
                             <hi rend="superscript">
-                                <xsl:value-of select="substring-before(.,' ')"/>
+                                <xsl:value-of select="$idASP"/>
                             </hi>
                         </ref>
                     </xsl:otherwise>
@@ -921,8 +931,17 @@
         <note>
             <xsl:if test="@id[string-length() &gt; 0]">
                 <xsl:attribute name="xml:id">
-                    <xsl:text>b</xsl:text>
                     <xsl:value-of select="@id"/>
+                </xsl:attribute>
+                <xsl:attribute name="n">
+                    <xsl:choose>
+                        <xsl:when test="contains(@id,'en')">
+                            <xsl:value-of select="substring-after(@id,'en')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@id"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>

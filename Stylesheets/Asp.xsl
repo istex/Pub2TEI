@@ -728,7 +728,9 @@
             </body>
             <xsl:if test="//note">
                 <back>
-                    <xsl:apply-templates select="//note" mode="asp"/>
+                    <div type="fn-group">
+                        <xsl:apply-templates select="//note" mode="asp"/>
+                    </div>
                 </back>
             </xsl:if>
         </text>
