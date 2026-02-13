@@ -800,12 +800,17 @@
                     <xsl:text>corresp</xsl:text>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates select="person/* | rsc:person/*"/>
+            <xsl:apply-templates select="person | rsc:person"/>
             <xsl:apply-templates select="footnote | rsc:footnote"/>
             <xsl:if test="@aff">
                 <xsl:call-template name="Affiliation"/>
             </xsl:if>
         </author>
+    </xsl:template>
+    <xsl:template match="person |rsc:person">
+        <persName>
+            <xsl:apply-templates/>
+        </persName>
     </xsl:template>
     
     <xsl:template match="biography |rsc:biography">

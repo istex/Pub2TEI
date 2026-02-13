@@ -368,7 +368,6 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </persName>
-            <roleName>author</roleName>
         </author>
     </xsl:template>
     <xsl:template match="dcterms:creator">
@@ -449,14 +448,14 @@
     </xsl:template>
     <xsl:template match="dcterms:identifier" mode="chapter">
         <xsl:if test="contains(.,'urn:doi:')">
-            <idno type="doi">
+            <idno type="DOI">
                 <xsl:value-of select="substring-after(.,'urn:doi:')"/>
             </idno>
         </xsl:if>
     </xsl:template>
     <xsl:template match="dcterms:identifier" mode="book">
         <xsl:if test="contains(.,'urn:doi:')">
-            <idno type="doi">
+            <idno type="DOI">
                 <xsl:value-of select="substring-after(.,'urn:doi:')"/>
             </idno>
         </xsl:if>

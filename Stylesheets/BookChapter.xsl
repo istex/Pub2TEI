@@ -2006,6 +2006,14 @@
                 <xsl:choose>
                     <xsl:when test="//book-part[not(body/book-part)]/book-part-meta/self-uri">
                         <idno type="uri">
+                            <xsl:choose>
+                                <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[1]/self-uri/@xlink:href">
+                                    <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta[1]/self-uri/@xlink:href)"/>
+                                </xsl:when>
+                                <xsl:when test="//book-part[not(body/book-part)]/book-part-meta[1]/self-uri !=''">
+                                    <xsl:value-of select="normalize-space(//book-part[not(body/book-part)]/book-part-meta[1]/self-uri)"/>
+                                </xsl:when>
+                            </xsl:choose>
                             <xsl:value-of select="//book-part[not(body/book-part)]/book-part-meta/self-uri"/>
                         </idno>
                     </xsl:when>
@@ -2218,7 +2226,7 @@
                 <!-- All authors are included here -->
                 <xsl:choose>
                     <xsl:when test="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']">
-                        <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']" mode="editor"/>       
+                        <xsl:apply-templates select="/book/book-meta/contrib-group/contrib[@contrib-type='editor'] |/book/book-meta/contrib-group/contrib[@contrib-type='volume editor']"/>       
                     </xsl:when>
                     <xsl:otherwise>
                             <xsl:apply-templates select="/book/book-meta/contrib-group" mode="monogr"/>
@@ -2709,6 +2717,10 @@
             <xsl:apply-templates select="title-group/title"/>
             <xsl:apply-templates select="title-group/subtitle"/>
             <xsl:choose>
+                <!-- Brill rgrw -->
+                <xsl:when test="/book/book-meta[1]/publisher[1]/publisher-name[1]='Brill'">
+                    <xsl:apply-templates select="contrib-group/contrib[@contrib-type='series editor']"/>
+                </xsl:when>
                 <xsl:when test="//institution-wrap">
                     <xsl:apply-templates select="contrib-group/contrib" mode="springer"/>
                 </xsl:when>

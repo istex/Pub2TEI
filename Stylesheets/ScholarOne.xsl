@@ -296,11 +296,20 @@
                 <xsl:when test="@contrib-type='collab'">
                     <xsl:apply-templates select="collab"/>
                 </xsl:when>
-                <xsl:otherwise>
-                    
-                </xsl:otherwise>
             </xsl:choose>
         </author>
+    </xsl:template>
+    <xsl:template match="contrib[@contrib-type='series editor']">
+        <editor>
+            <persName>
+                <xsl:apply-templates select="contrib-id"/>
+                <xsl:apply-templates select="name"/>
+                <xsl:apply-templates select="string-name"/>
+                <xsl:apply-templates select="name-alternatives"/>
+            </persName>
+            <xsl:apply-templates select="email"/>
+            <xsl:apply-templates select="//aff[@id=current()/xref/@rid]"/>
+        </editor>
     </xsl:template>
     <xsl:template match="contrib[@contrib-type='collab']">
         <xsl:apply-templates select="collab"/>
@@ -357,6 +366,9 @@
                 <xsl:value-of select="count(xref)"/>
             </xsl:variable>
             <xsl:choose>
+                <xsl:when test="not(xref[@id]) and /article/front/article-meta/aff">
+                    <xsl:apply-templates select="/article/front/article-meta/aff"/>
+                </xsl:when>
                 <!-- traitements des affiliations dans des sub-articles -->
                 <xsl:when test="//sub-article/front/article-meta/aff[@id=current()/xref/@rid]">
                     <xsl:apply-templates select="//sub-article/front/article-meta/aff[@id=current()/xref/@rid]"/>

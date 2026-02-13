@@ -1350,25 +1350,32 @@
     </xsl:template>
     <xsl:template match="tei:hi" mode="teiALL">
         <hi>
-            <xsl:choose>
-                <xsl:when test="@rendition='#style01'">
-                    <xsl:attribute name="rend">superscript</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@rendition='#style02'">
-                    <xsl:attribute name="rend">italic</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@rendition='#style03'">
-                    <xsl:attribute name="rend">superscript</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@rendition='#style04'">
-                    <xsl:attribute name="rend">bold</xsl:attribute>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="rendition">
-                        <xsl:value-of select="."/>
-                    </xsl:attribute>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:if test="@rendition !=''">
+                <xsl:choose>
+                    <xsl:when test="@rendition='#style01'">
+                        <xsl:attribute name="rend">superscript</xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="@rendition='#style02'">
+                        <xsl:attribute name="rend">italic</xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="@rendition='#style03'">
+                        <xsl:attribute name="rend">bold</xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="@rendition='#style04'">
+                        <xsl:attribute name="rend">bold</xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="rendition">
+                            <xsl:value-of select="@rendition"/>
+                        </xsl:attribute>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:if>
+            <xsl:if test="@xml:lang !=''">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates mode="teiALL"/>
         </hi>
     </xsl:template>
@@ -1463,7 +1470,7 @@
                 <xsl:when test="tei:body/tei:div[@type='bibliography'] !=''">
                     <!-- Pauly -->
                     <back>
-                        <xsl:copy-of select="tei:body/tei:div[@type='bibliography']" copy-namespaces="no"/>
+                        <xsl:apply-templates select="tei:body/tei:div[@type='bibliography']| @*" mode="tei"/>
                     </back>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1616,7 +1623,7 @@
                 <xsl:when test="tei:publisher='BRILL'">
                     <availability status="{tei:availability/@status}">
                         <xsl:copy-of select="tei:availability/tei:licence" copy-namespaces="no"/>
-                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-984PFWH6-T">droz</p>
+                        <p scheme="https://loaded-corpus.data.istex.fr/ark:/67375/XBH-0RW0QLTD-4">brill</p>
                     </availability>
                 </xsl:when>
                 <xsl:when test="contains(string(tei:availability/tei:licence),'Droz')">

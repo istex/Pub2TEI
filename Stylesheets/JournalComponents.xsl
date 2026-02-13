@@ -544,6 +544,7 @@
                                 <xsl:attribute name="type">
                                     <xsl:choose>
                                         <xsl:when test="@journal-id-type = 'doi'">DOI</xsl:when>
+                                        <xsl:when test="@journal-id-type = 'isbnprint13'">pISBN</xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="@journal-id-type"/>
                                         </xsl:otherwise>
@@ -1625,7 +1626,7 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="refdoi">
-        <idno type="doi">
+        <idno type="DOI">
             <xsl:apply-templates/>
         </idno>
     </xsl:template>

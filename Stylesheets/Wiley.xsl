@@ -1600,7 +1600,17 @@
             <!-- ne pas reprendre l'abstract de ChemInform
                         "ChemInform is a weekly Abstracting Service, delivering concise information at a glance that was extracted from about 100 leading journals."
             le rediriger vers les notes de bas de pages-->
-            <xsl:when test="starts-with(p,'ChemInform is a weekly Abstracting Service')"/>
+            <xsl:when test="starts-with(p[1],'ChemInform is a weekly Abstracting Service')"/>
+            <xsl:when test="contains(title[1],'Books Review') or contains(title[1],'Book Review')"/>
+            <xsl:when test="//publicationMeta[@level = 'unit']/doi[1]='10.1111/1468-229X.00040'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/1478-9299.t01-1-00054'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/1467-9434.00209'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1468-229X.1990.tb01528.x'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/1478-9299.t01-1-00051'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1751-9020.2007.00090.x'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1747-9991.2010.00299.x'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/rsr.17060'
+                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1468-229X.1969.tb01241.x'"/>
             <xsl:when test="@type='main'">
                 <abstract>
                     <xsl:choose>

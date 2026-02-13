@@ -1442,7 +1442,7 @@
                             </persName>
                         </xsl:for-each>
                         <xsl:if test="article-meta/related-article/object-id">
-                            <idno type="doi">
+                            <idno type="DOI">
                                 <xsl:value-of select="article-meta/related-article/object-id"/>
                             </idno>
                         </xsl:if>
@@ -3913,7 +3913,7 @@
         </ref>
         <!-- récuperation des doi -->
         <xsl:if test="contains(.,'doi:')">
-            <ref type="doi">
+            <ref type="DOI">
                 <xsl:value-of select="substring-after(.,'doi:')"/>
             </ref>
         </xsl:if>
