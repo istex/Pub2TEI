@@ -203,62 +203,65 @@
                     <xsl:otherwise>article</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="//body/book-part/book-part-meta/title-group/title [string-length() &gt; 0]">
+            <xsl:when test="//body/book-part[@book-part-type='chapter']/book-part-meta/title-group/title [string-length() &gt; 0]">
+                <xsl:variable name="deduceGenre">
+                    <xsl:value-of select="//body/book-part[@book-part-type='chapter']/book-part-meta/title-group/title"/>
+                </xsl:variable>
                 <!-- traitement spécial Degruyter-ebooks -->
                 <xsl:choose>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Preface')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Préface')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PREFACE')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PREFACE')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PRÉFACE')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'PRÉFACE LA DOMUS À MONTAILLOU ET EN HAUTE-ARIÈGE')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Introduction Générale')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Introduction')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Avant-Propos')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'AVANT-PROPOS')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'INTRODUCTION')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'INTRODUCTION ET PROGRAMME')">editorial</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Backmatter')">other</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'A. Tableaux statistiques')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Abréviations')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'ABRÉVIATIONS')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'ANNEXE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'ARCHIVES')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Avertissement')">other</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Β. Cartes')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Bibliographie')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'BIBLIOGRAPHIE')">other</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'Choix et utilisation des sources')">other</xsl:when>
-                    <xsl:when test="contains(//body/book-part/book-part-meta/title-group/title,'C. Graphiques')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Carte')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Exercices et compléments')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'GLOSSAIRE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Glossaire')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'GRAPHIQUE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'IMPRIMÉS')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Index')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'INDEX')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Liste')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Liste')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Noms des auteurs')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'NOTE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'NOTE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Plan de')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'PIÈCES JUSTIFICATIVES')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'PRINCIPAUX OUVRAGES UTILISES')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'PROGRAMME')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Quelques thèmes')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'REMERCIEMENTS')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'RÈGLES DE TRADUCTION')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Remerciements')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Repères bibliographiques')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SIGLES UTILISÉS')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Sommaire')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOMMAIRE DU TOME PREMIER')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'SOURCES')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Source')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'TABLE')">other</xsl:when>
-                    <xsl:when test="starts-with(//body/book-part/book-part-meta/title-group/title,'Table')">other</xsl:when>
+                    <xsl:when test="contains($deduceGenre,'Preface')">editorial</xsl:when>
+                    <xsl:when test="contains($deduceGenre,'Préface')">editorial</xsl:when>
+                    <xsl:when test="contains($deduceGenre,'PREFACE')">editorial</xsl:when>
+                    <xsl:when test="contains($deduceGenre,'PREFACE')">editorial</xsl:when>
+                    <xsl:when test="contains($deduceGenre,'PRÉFACE')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'PRÉFACE LA DOMUS À MONTAILLOU ET EN HAUTE-ARIÈGE')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'Introduction Générale')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'Introduction')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'Avant-Propos')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'AVANT-PROPOS')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'INTRODUCTION')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'INTRODUCTION ET PROGRAMME')">editorial</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'Backmatter')">other</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'A. Tableaux statistiques')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Abréviations')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'ABRÉVIATIONS')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'ANNEXE')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'ARCHIVES')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Avertissement')">other</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'Β. Cartes')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Bibliographie')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'BIBLIOGRAPHIE')">other</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'Choix et utilisation des sources')">other</xsl:when>
+                    <xsl:when test="contains( $deduceGenre,'C. Graphiques')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Carte')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Exercices et compléments')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'GLOSSAIRE')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Glossaire')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'GRAPHIQUE')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'IMPRIMÉS')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Index')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'INDEX')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Liste')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Liste')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Noms des auteurs')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'NOTE')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'NOTE')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Plan de')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'PIÈCES JUSTIFICATIVES')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'PRINCIPAUX OUVRAGES UTILISES')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'PROGRAMME')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Quelques thèmes')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'REMERCIEMENTS')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'RÈGLES DE TRADUCTION')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Remerciements')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Repères bibliographiques')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'SIGLES UTILISÉS')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Sommaire')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'SOMMAIRE DU TOME PREMIER')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'SOURCES')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Source')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'TABLE')">other</xsl:when>
+                    <xsl:when test="starts-with( $deduceGenre,'Table')">other</xsl:when>
                     <xsl:otherwise>chapter</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
