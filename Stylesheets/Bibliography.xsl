@@ -673,7 +673,7 @@
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:variable name="normalize">
-                                        <xsl:value-of select="normalize-space(article-title)"/>
+                                        <xsl:value-of select="normalize-space(article-title[1])"/>
                                     </xsl:variable>
                                     <title level="m" type="main">
                                         <xsl:value-of select="$normalize"/>
