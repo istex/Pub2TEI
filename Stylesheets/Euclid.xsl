@@ -480,7 +480,9 @@
                     </persName>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="* except(affiliation)"/>  
+                    <persName>
+                        <xsl:apply-templates select="* except(affiliation)"/>
+                    </persName>
                 </xsl:otherwise>
             </xsl:choose>
             <!-- reprise de l'affiliation -->

@@ -13,6 +13,11 @@
                     </persName>
                 </author>
             </xsl:when>
+            <xsl:when test="parent::editor">
+                <persName>
+                    <xsl:apply-templates/>
+                </persName>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
                     <xsl:when test="ancestor::book-part-meta">
