@@ -3655,18 +3655,16 @@
                     <xsl:attribute name="type">fn</xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
+            <xsl:variable name="translateFN">
+                <xsl:value-of select="translate(@id,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+            </xsl:variable>
             <xsl:choose>
                 <xsl:when test="/book-part-wrapper/book-meta[1]/publisher[1]/publisher-name[1]='Routledge'">
                     <xsl:attribute name="n">
                         <xsl:value-of select="label"/>
                     </xsl:attribute>
                 </xsl:when>
-                <xsl:when test="label and contains(@id,'FN')">
-                    <xsl:attribute name="n">
-                        <xsl:value-of select="label"/>
-                    </xsl:attribute>
-                </xsl:when>
-                <xsl:when test="label and contains(@id,'fn')">
+                <xsl:when test="label and contains($translateFN,'fn')">
                     <xsl:attribute name="n">
                         <xsl:value-of select="label"/>
                     </xsl:attribute>
@@ -3677,11 +3675,18 @@
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="@id">
+                    <xsl:choose>
+                        <xsl:when test="@symbol">
                         <xsl:attribute name="n">
-                            <xsl:value-of select="@id"/>
+                            <xsl:value-of select="@symbol"/>
                         </xsl:attribute>
-                    </xsl:if>
+                    </xsl:when>
+                        <xsl:when test="@id">
+                            <xsl:attribute name="n">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:choose>

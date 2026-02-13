@@ -409,18 +409,18 @@
                     <editor>
                         <persName>
                             <xsl:apply-templates select="name"/>
-                            <xsl:choose>
-                                <xsl:when test="../aff[@id=current()/xref/@rid]">
-                                    <xsl:apply-templates select="../aff[@id=current()/xref/@rid]" mode="springer"/>
-                                </xsl:when>
-                                <xsl:when test="ancestor::book-part-meta and //aff">
-                                    <xsl:apply-templates select="//aff" mode="springer"/>
-                                </xsl:when>
-                                <xsl:when test="/book-part-meta/aff">
-                                    <xsl:apply-templates select="//aff" mode="springer"/>
-                                </xsl:when>
-                            </xsl:choose>
                         </persName>
+                        <xsl:choose>
+                            <xsl:when test="../aff[@id=current()/xref/@rid]">
+                                <xsl:apply-templates select="../aff[@id=current()/xref/@rid]" mode="springer"/>
+                            </xsl:when>
+                            <xsl:when test="ancestor::book-part-meta and //aff">
+                                <xsl:apply-templates select="//aff" mode="springer"/>
+                            </xsl:when>
+                            <xsl:when test="/book-part-meta/aff">
+                                <xsl:apply-templates select="//aff" mode="springer"/>
+                            </xsl:when>
+                        </xsl:choose>
                         <xsl:if test="bio">
                             <state type="biography">
                                 <desc>
