@@ -1089,13 +1089,25 @@
                         </biblScope>
                     </xsl:when>
                     <xsl:otherwise>
+                        <xsl:variable name="doiDegruyter">
+                            <xsl:value-of select="/article/front/article-meta/article-id[@pub-id-type='doi']"/>
+                        </xsl:variable>
                         <xsl:choose>
                             <xsl:when test=". = '0'"/>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0007'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0006'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0017'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0012'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0013'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2011-058'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0010'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0019'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0018'"><biblScope unit="vol">12</biblScope></xsl:when>
+                            <xsl:when test="$doiDegruyter='10.1515/advgeom-2012-0009'"><biblScope unit="vol">12</biblScope></xsl:when>
                             <xsl:otherwise>
                                 <xsl:if test=". != ''">
                                     <biblScope unit="vol">
-                                        <xsl:value-of
-                                            select="normalize-space(replace(., 'Band', ''))"/>
+                                        <xsl:value-of select="normalize-space(replace(., 'Band', ''))"/>
                                     </biblScope>
                                 </xsl:if>
                             </xsl:otherwise>
