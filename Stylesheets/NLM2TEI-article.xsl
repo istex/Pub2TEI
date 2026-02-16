@@ -4461,15 +4461,18 @@
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@extrefid"/>
             </xsl:attribute>
-            <title>
-                <xsl:value-of select="title"/>
-            </title>
-            <xsl:if test="normalize-space(descrip/*)">
-                <note>
-                    <xsl:apply-templates select="descrip/*"/>
-                </note>
+            <xsl:if test="title">
+                <title>
+                    <xsl:value-of select="title"/>
+                </title>
             </xsl:if>
+            <xsl:apply-templates select="descrip"/>
         </ref>
+    </xsl:template>
+    <xsl:template match="descrip">
+            <note>
+                <xsl:apply-templates/>
+            </note>
     </xsl:template>
     <xsl:template match="front/article-meta/product">
         <div type="review-of">
