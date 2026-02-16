@@ -110,7 +110,7 @@
                 </fileDesc>
                 <!-- versionning -->
                 <xsl:call-template name="insertVersion"/>
-                <xsl:if test="issue/record/abstract[string-length() &gt; 0] |issue/record/abstract[string-length() &gt; 0]">
+                <xsl:if test="issue/record/abstract[string-length() &gt; 0] |issue/record/abstract[string-length() &gt; 0] | issue/record/subjects[string-length() &gt; 0]">
                     <profileDesc>
 						<!-- PL: abstract is moved from <front> to here -->
                         <xsl:if test="issue/record/abstract[string-length() &gt; 0]">
@@ -516,9 +516,7 @@
                     </orgName>
                 </xsl:if>
                 <xsl:if test="address">
-                    <address>
-                        <xsl:apply-templates select="address/addressline"/>
-                    </address>
+                    <xsl:apply-templates select="address/addressline"/>
                 </xsl:if>
             </affiliation>
     </xsl:template>

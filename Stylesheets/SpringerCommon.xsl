@@ -852,7 +852,7 @@
 
     <xsl:template match="row | rsc:row">
         <row>
-            <xsl:if test="@rowsep">
+            <xsl:if test="contains(@rowsep,'1234567890')">
                 <xsl:attribute name="rows">
                     <xsl:value-of select="@rowsep"/>
                 </xsl:attribute>

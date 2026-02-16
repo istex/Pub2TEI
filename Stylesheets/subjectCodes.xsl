@@ -26,15 +26,15 @@
             <xsl:when test="$theCode='SC-AD-01-10'">Architecture and Design/ Architecture/  History</xsl:when>
             <xsl:when test="$theCode='SC-AD-01-10-01'">Architecture and Design / Architecture / History/ History, general</xsl:when>
             <xsl:when test="$theCode='SC-AD-01-10-02'">Architecture and Design/ Architecture/  History/ Dehio</xsl:when>
-            <xsl:when test="$theCode='SC-AD-01-10-03'">Architecture and Design/ Architecture/  History/ Conservation, Preservation, Restauration </xsl:when>
+            <xsl:when test="$theCode='SC-AD-01-10-03'">Architecture and Design/ Architecture/  History/ Conservation, Preservation, Restauration</xsl:when>
             <xsl:when test="$theCode='SC-AD-02'">Architecture and Design / Landscape Architecture</xsl:when>
             <xsl:when test="$theCode='SC-AD-02-01'">Architecture and Design / Landscape Architecture / Landscape Architects</xsl:when>
             <xsl:when test="$theCode='SC-AD-02-02'">Architecture and Design / Landscape Architecture / Gardens, Landscapes</xsl:when>
             <xsl:when test="$theCode='SC-AD-02-03'">Architecture and Design / Landscape Architecture / Construction, Materials</xsl:when>
             <xsl:when test="$theCode='SC-AD-02-04'">Architecture and Design / Landscape Architecture / Studies, Professional Practice</xsl:when>
             <xsl:when test="$theCode='SC-AD-03'">Architecture and Design / Design</xsl:when>
-            <xsl:when test="$theCode='SC-AD-03-01'">Architecture and Design / Design / Designers </xsl:when>
-            <xsl:when test="$theCode='SC-AD-03-02'">Architecture and Design / Design / Product Design, Interiors, Materials </xsl:when>
+            <xsl:when test="$theCode='SC-AD-03-01'">Architecture and Design / Design / Designers</xsl:when>
+            <xsl:when test="$theCode='SC-AD-03-02'">Architecture and Design / Design / Product Design, Interiors, Materials</xsl:when>
             <xsl:when test="$theCode='SC-AD-03-03'">Architecture and Design / Design / Graphics, Communication</xsl:when>
             <xsl:when test="$theCode='SC-AD-03-04'">Architecture and Design / Design / Studies, Professional Practice</xsl:when>
             <xsl:when test="$theCode='SC-AD-04'">Architecture and Design / Architecture and Design, other</xsl:when>
@@ -54,13 +54,13 @@
             <xsl:when test="$theCode='SC-AR-04-03'">Arts / Periods / 18th Century</xsl:when>
             <xsl:when test="$theCode='SC-AR-04-04'">Arts / Periods / 19th Century</xsl:when>
             <xsl:when test="$theCode='SC-AR-04-05'">Arts / Periods / 20th Century</xsl:when>
-            <xsl:when test="$theCode='SC-AR-04-06'">Arts / Periods / 21st Century </xsl:when>
+            <xsl:when test="$theCode='SC-AR-04-06'">Arts / Periods / 21st Century</xsl:when>
             <xsl:when test="$theCode='SC-AR-05'">Arts / Museums and Collections</xsl:when>
             <xsl:when test="$theCode='SC-AR-06'">Arts / Art Market and Provenance Research</xsl:when>
             <xsl:when test="$theCode='SC-AR-07'">Arts / History of Art History</xsl:when>
             <xsl:when test="$theCode='SC-AR-08'">Arts / Exhibition Catalogues</xsl:when>
             <xsl:when test="$theCode='SC-AR-09'">Arts / Dehio</xsl:when>
-            <xsl:when test="$theCode='SC-AR-10'">Arts / Conservation, Preservation, Restauration </xsl:when>
+            <xsl:when test="$theCode='SC-AR-10'">Arts / Conservation, Preservation, Restauration</xsl:when>
             <xsl:when test="$theCode='SC-AR-11'">Arts / Art Guides</xsl:when>
             <xsl:when test="$theCode='SC-AR-11-01'">Arts / Art Guides / Baden-Württemberg</xsl:when>
             <xsl:when test="$theCode='SC-AR-11-02'">Arts / Art Guides / Bavaria</xsl:when>
@@ -115,10 +115,10 @@
             <xsl:when test="$theCode='SC-CH-17'">Chemistry / Physical Chemistry</xsl:when>
             <xsl:when test="$theCode='SC-CH-19'">Chemistry / Electrochemistry</xsl:when>
             <xsl:when test="$theCode='SC-CH-20'">Chemistry / Spectroscopy</xsl:when>
-            <xsl:when test="$theCode='SC-CH-22'">Chemistry / Theoretical and Quantum Chemistry </xsl:when>
+            <xsl:when test="$theCode='SC-CH-22'">Chemistry / Theoretical and Quantum Chemistry</xsl:when>
             <xsl:when test="$theCode='SC-CH-23'">Chemistry / Computational Chemistry and Molecular Modeling</xsl:when>
             <xsl:when test="$theCode='SC-CH-25'">Chemistry / Toxicology</xsl:when>
-            <xsl:when test="$theCode='SC-CH-26'">Chemistry / Chemistry, other </xsl:when>
+            <xsl:when test="$theCode='SC-CH-26'">Chemistry / Chemistry, other</xsl:when>
             <xsl:when test="$theCode='SC-CL'">Classical and Ancient Near Eastern Studies</xsl:when>
             <xsl:when test="$theCode='SC-CL-01'">Classical and Ancient Near Eastern Studies / Classical Studies</xsl:when>
             <xsl:when test="$theCode='SC-CL-01-01'">Classical and Ancient Near Eastern Studies / Classical Studies / Greek</xsl:when>
@@ -144,7 +144,7 @@
             <xsl:when test="$theCode='SC-CO-01'">Computer Sciences / Fundamentals of Computer Sciences</xsl:when>
             <xsl:when test="$theCode='SC-CO-02'">Computer Sciences / History of Computer Sciences</xsl:when>
             <xsl:when test="$theCode='SC-CO-03'">Computer Sciences / Artificial Intelligence</xsl:when>
-            <xsl:when test="$theCode='SC-CO-04'">Computer Sciences / Theoretical Computer Sciences </xsl:when>
+            <xsl:when test="$theCode='SC-CO-04'">Computer Sciences / Theoretical Computer Sciences</xsl:when>
             <xsl:when test="$theCode='SC-CO-05'">Computer Sciences / Information Technology</xsl:when>
             <xsl:when test="$theCode='SC-CO-06'">Computer Sciences / Project Management</xsl:when>
             <xsl:when test="$theCode='SC-CO-07'">Computer Sciences / Computer Architecture</xsl:when>
@@ -276,16 +276,16 @@
             <xsl:when test="$theCode='SC-EN-03-03'">Engineering / Mechanical Engineering / Thermodynamics</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-04'">Engineering / Mechanical Engineering / Production Technology</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-05'">Engineering / Mechanical Engineering / Energy Engineering</xsl:when>
-            <xsl:when test="$theCode='SC-EN-03-06'">Engineering / Mechanical Engineering / Tools and Methods </xsl:when>
+            <xsl:when test="$theCode='SC-EN-03-06'">Engineering / Mechanical Engineering / Tools and Methods</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-07'">Engineering / Mechanical Engineering / Mechatronics and Automotive</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-08'">Engineering / Mechanical Engineering / Process Engineering</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-09'">Engineering / Mechanical Engineering / Fluid Mechanics</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-10'">Engineering / Mechanical Engineering / Safety</xsl:when>
-            <xsl:when test="$theCode='SC-EN-03-11'">Engineering / Mechanical Engineering / Aeronautics &amp; Astronautics </xsl:when>
+            <xsl:when test="$theCode='SC-EN-03-11'">Engineering / Mechanical Engineering / Aeronautics &amp; Astronautics</xsl:when>
             <xsl:when test="$theCode='SC-EN-03-12'">Engineering / Mechanical Engineering / Materials Engineering</xsl:when>
             <xsl:when test="$theCode='SC-EN-04'">Engineering / Bioengineering and Biomedical Engineering</xsl:when>
             <xsl:when test="$theCode='SC-EN-04-01'">Engineering / Bioengineering and Biomedical Engineering / Biomedical Electronics</xsl:when>
-            <xsl:when test="$theCode='SC-EN-04-02'">Engineering / Bioengineering and Biomedical Engineering / Biotechnology </xsl:when>
+            <xsl:when test="$theCode='SC-EN-04-02'">Engineering / Bioengineering and Biomedical Engineering / Biotechnology</xsl:when>
             <xsl:when test="$theCode='SC-EN-04-03'">Engineering / Bioengineering and Biomedical Engineering / Biomaterials</xsl:when>
             <xsl:when test="$theCode='SC-EN-04-04'">Engineering / Bioengineering and Biomedical Engineering / BioMEMS</xsl:when>
             <xsl:when test="$theCode='SC-EN-04-05'">Engineering / Bioengineering and Biomedical Engineering / Cellular and Tissue Engineering</xsl:when>
@@ -309,7 +309,7 @@
             <xsl:when test="$theCode='SC-GS-04'">Geosciences / Atmospheric Science and Climatology</xsl:when>
             <xsl:when test="$theCode='SC-GS-05'">Geosciences / Geophysics</xsl:when>
             <xsl:when test="$theCode='SC-GS-06'">Geosciences / Geology and Mineralogy</xsl:when>
-            <xsl:when test="$theCode='SC-GS-07'">Geosciences / Remote Sensing </xsl:when>
+            <xsl:when test="$theCode='SC-GS-07'">Geosciences / Remote Sensing</xsl:when>
             <xsl:when test="$theCode='SC-GS-08'">Geosciences / Geosciences, other</xsl:when>
             <xsl:when test="$theCode='SC-HI'">History</xsl:when>
             <xsl:when test="$theCode='SC-HI-01'">History / Historical Periods</xsl:when>
@@ -319,7 +319,7 @@
             <xsl:when test="$theCode='SC-HI-01-04'">History / Historical Periods / Byzantine Studies</xsl:when>
             <xsl:when test="$theCode='SC-HI-01-05'">History / Historical Periods / Medieval History</xsl:when>
             <xsl:when test="$theCode='SC-HI-01-06'">History / Historical Periods / Early Modern History</xsl:when>
-            <xsl:when test="$theCode='SC-HI-01-07'">History / Historical Periods / Modern History </xsl:when>
+            <xsl:when test="$theCode='SC-HI-01-07'">History / Historical Periods / Modern History</xsl:when>
             <xsl:when test="$theCode='SC-HI-01-08'">History / Historical Periods / Contemporary History until 1945</xsl:when>
             <xsl:when test="$theCode='SC-HI-01-08-01'">History / Historical Periods / Contemporary History until 1945 / Other Topics</xsl:when>
             <xsl:when test="$theCode='SC-HI-01-08-03'">History / Historical Periods / Contemporary History until 1945 / World War I</xsl:when>
@@ -362,7 +362,7 @@
             <xsl:when test="$theCode='SC-HI-03-02-05'">History / Topics in History / Jewish History / Jewish Thought</xsl:when>
             <xsl:when test="$theCode='SC-HI-03-02-06'">History / Topics in History / Jewish History / German-Jewish History</xsl:when>
             <xsl:when test="$theCode='SC-HI-03-02-07'">History / Topics in History / Jewish History / Antisemitism</xsl:when>
-            <xsl:when test="$theCode='SC-HI-03-02-08'">History / Topics in History / Jewish History / Holocaust </xsl:when>
+            <xsl:when test="$theCode='SC-HI-03-02-08'">History / Topics in History / Jewish History / Holocaust</xsl:when>
             <xsl:when test="$theCode='SC-HI-03-03'">History / Topics in History / Exile History</xsl:when>
             <xsl:when test="$theCode='SC-HI-03-04'">History / Topics in History / Topics in History, other</xsl:when>
             <xsl:when test="$theCode='SC-HI-03-06'">History / Topics in History / Military History</xsl:when>
@@ -394,7 +394,7 @@
             <xsl:when test="$theCode='SC-IC-03'">Industrial Chemistry / Business and Management</xsl:when>
             <xsl:when test="$theCode='SC-IC-04'">Industrial Chemistry / Catalysis</xsl:when>
             <xsl:when test="$theCode='SC-IC-05'">Industrial Chemistry / Chemical Engineering</xsl:when>
-            <xsl:when test="$theCode='SC-IC-06'">Industrial Chemistry / Energy Harvesting and Conversion </xsl:when>
+            <xsl:when test="$theCode='SC-IC-06'">Industrial Chemistry / Energy Harvesting and Conversion</xsl:when>
             <xsl:when test="$theCode='SC-IC-07'">Industrial Chemistry / Green and Sustainable Technology</xsl:when>
             <xsl:when test="$theCode='SC-IC-10'">Industrial Chemistry / Plant Design</xsl:when>
             <xsl:when test="$theCode='SC-IC-11'">Industrial Chemistry / Process Engineering</xsl:when>
@@ -416,7 +416,7 @@
             <xsl:when test="$theCode='SC-IS-03'">Islamic and Middle Eastern Studies/Text and Exegesis</xsl:when>
             <xsl:when test="$theCode='SC-IS-04'">Islamic and Middle Eastern Studies/Quran</xsl:when>
             <xsl:when test="$theCode='SC-IS-05'">Islamic and Middle Eastern Studies/Theology</xsl:when>
-            <xsl:when test="$theCode='SC-IS-06'">Islamic and Middle Eastern Studies/Religious Life </xsl:when>
+            <xsl:when test="$theCode='SC-IS-06'">Islamic and Middle Eastern Studies/Religious Life</xsl:when>
             <xsl:when test="$theCode='SC-IS-07'">Islamic and Middle Eastern Studies/Religious Groups</xsl:when>
             <xsl:when test="$theCode='SC-IS-08'">Islamic and Middle Eastern Studies/Interreligious Studies</xsl:when>
             <xsl:when test="$theCode='SC-IS-09'">Islamic and Middle Eastern Studies/History</xsl:when>
@@ -436,7 +436,7 @@
             <xsl:when test="$theCode='SC-JS-01-05'">Jewish Studies / Jewish History / Jewish Thought</xsl:when>
             <xsl:when test="$theCode='SC-JS-01-06'">Jewish Studies / Jewish History / German-Jewish History</xsl:when>
             <xsl:when test="$theCode='SC-JS-01-07'">Jewish Studies / Jewish History / Antisemitism</xsl:when>
-            <xsl:when test="$theCode='SC-JS-01-08'">Jewish Studies / Jewish History / Holocaust </xsl:when>
+            <xsl:when test="$theCode='SC-JS-01-08'">Jewish Studies / Jewish History / Holocaust</xsl:when>
             <xsl:when test="$theCode='SC-JS-02'">Jewish Studies / Judaism</xsl:when>
             <xsl:when test="$theCode='SC-JS-02-01'">Jewish Studies / Judaism / Overviews and Introductions</xsl:when>
             <xsl:when test="$theCode='SC-JS-02-02'">Jewish Studies / Judaism / Hellenistic-Roman Era</xsl:when>
@@ -460,7 +460,7 @@
             <xsl:when test="$theCode='SC-JS-05-02'">Jewish Studies / Jewish Culture / Jewish Music</xsl:when>
             <xsl:when test="$theCode='SC-JS-05-03'">Jewish Studies / Jewish Culture / Jewish Folklore</xsl:when>
             <xsl:when test="$theCode='SC-JS-05-04'">Jewish Studies / Jewish Culture / Jewish Culture, other</xsl:when>
-            <xsl:when test="$theCode='SC-LA'">Law </xsl:when>
+            <xsl:when test="$theCode='SC-LA'">Law</xsl:when>
             <xsl:when test="$theCode='SC-LA-01'">Law  / History, Philosophy and Sociology of Law</xsl:when>
             <xsl:when test="$theCode='SC-LA-02'">Law  / International Law, Foreign Law, Comparative Law</xsl:when>
             <xsl:when test="$theCode='SC-LA-02-01'">Law  / International Law, Foreign Law, Comparative Law / International Law, Foreign Law, Comparative Law, other</xsl:when>
@@ -618,7 +618,7 @@
             <xsl:when test="$theCode='SC-LS-10-01'">Linguistics and Semiotics / Semiotics / Biosemiotics</xsl:when>
             <xsl:when test="$theCode='SC-LS-10-02'">Linguistics and Semiotics / Semiotics / Cognitive Semiotics</xsl:when>
             <xsl:when test="$theCode='SC-LS-10-03'">Linguistics and Semiotics / Semiotics / Cultural Semiotics</xsl:when>
-            <xsl:when test="$theCode='SC-LS-10-04'">Linguistics and Semiotics / Semiotics / Semiotic Theory </xsl:when>
+            <xsl:when test="$theCode='SC-LS-10-04'">Linguistics and Semiotics / Semiotics / Semiotic Theory</xsl:when>
             <xsl:when test="$theCode='SC-LS-10-05'">Linguistics and Semiotics / Semiotics / Social Semiotics</xsl:when>
             <xsl:when test="$theCode='SC-LS-10-06'">Linguistics and Semiotics / Semiotics / Zoosemiotics</xsl:when>
             <xsl:when test="$theCode='SC-LS-10-07'">Linguistics and Semiotics / Semiotics / Semiotics, other</xsl:when>
@@ -681,7 +681,7 @@
             <xsl:when test="$theCode='SC-LT-03-04'">Literary Studies / Anglo-American Literature / 18th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-03-05'">Literary Studies / Anglo-American Literature / 19th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-03-06'">Literary Studies / Anglo-American Literature / 20th Century</xsl:when>
-            <xsl:when test="$theCode='SC-LT-03-07'">Literary Studies / Anglo-American Literature / 21st Century </xsl:when>
+            <xsl:when test="$theCode='SC-LT-03-07'">Literary Studies / Anglo-American Literature / 21st Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-04'">Literary Studies / German Literature</xsl:when>
             <xsl:when test="$theCode='SC-LT-04-01'">Literary Studies / German Literature / German Literature, general</xsl:when>
             <xsl:when test="$theCode='SC-LT-04-02'">Literary Studies / German Literature / 8th-15th Century</xsl:when>
@@ -689,7 +689,7 @@
             <xsl:when test="$theCode='SC-LT-04-04'">Literary Studies / German Literature / 18th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-04-05'">Literary Studies / German Literature / 19th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-04-06'">Literary Studies / German Literature / 20th Century</xsl:when>
-            <xsl:when test="$theCode='SC-LT-04-07'">Literary Studies / German Literature / 21st Century </xsl:when>
+            <xsl:when test="$theCode='SC-LT-04-07'">Literary Studies / German Literature / 21st Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-05'">Literary Studies / Jewish Literature</xsl:when>
             <xsl:when test="$theCode='SC-LT-05-01'">Literary Studies / Jewish Literature / Jewish Literature, general</xsl:when>
             <xsl:when test="$theCode='SC-LT-05-02'">Jewish Studies / Jewish Literature / Early Jewish Literature</xsl:when>
@@ -704,7 +704,7 @@
             <xsl:when test="$theCode='SC-LT-06-02-04'">Literary Studies / Romance Literature / French Literature / 18th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-02-05'">Literary Studies / Romance Literature / French Literature / 19th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-02-06'">Literary Studies / Romance Literature / French Literature / 20th Century</xsl:when>
-            <xsl:when test="$theCode='SC-LT-06-02-07'">Literary Studies / Romance Literature / French Literature / 21st Century </xsl:when>
+            <xsl:when test="$theCode='SC-LT-06-02-07'">Literary Studies / Romance Literature / French Literature / 21st Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-03'">Literary Studies / Romance Literature / Italian Literature</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-03-01'">Literary Studies / Romance Literature / Italian Literature / Italian Literature, general</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-03-02'">Literary Studies / Romance Literature / Italian Literature / 13th-15th Century</xsl:when>
@@ -712,7 +712,7 @@
             <xsl:when test="$theCode='SC-LT-06-03-04'">Literary Studies / Romance Literature / Italian Literature / 18th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-03-05'">Literary Studies / Romance Literature / Italian Literature / 19th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-03-06'">Literary Studies / Romance Literature / Italian Literature / 20th Century</xsl:when>
-            <xsl:when test="$theCode='SC-LT-06-03-07'">Literary Studies / Romance Literature / Italian Literature / 21st Century </xsl:when>
+            <xsl:when test="$theCode='SC-LT-06-03-07'">Literary Studies / Romance Literature / Italian Literature / 21st Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-04'">Literary Studies / Romance Literature / Hispanic Literature</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-04-01'">Literary Studies / Romance Literature / Hispanic Literature / Hispanic Literature, general</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-04-02'">Literary Studies / Romance Literature / Hispanic Literature / 10th-15th Century</xsl:when>
@@ -720,7 +720,7 @@
             <xsl:when test="$theCode='SC-LT-06-04-04'">Literary Studies / Romance Literature / Hispanic Literature / 18th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-04-05'">Literary Studies / Romance Literature / Hispanic Literature / 19th Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-06-04-06'">Literary Studies / Romance Literature / Hispanic Literature / 20th Century</xsl:when>
-            <xsl:when test="$theCode='SC-LT-06-04-07'">Literary Studies / Romance Literature / Hispanic Literature / 21st Century </xsl:when>
+            <xsl:when test="$theCode='SC-LT-06-04-07'">Literary Studies / Romance Literature / Hispanic Literature / 21st Century</xsl:when>
             <xsl:when test="$theCode='SC-LT-07'">Literary Studies / Literature of other Nations and Languages</xsl:when>
             <xsl:when test="$theCode='SC-LT-07-01'">Literary Studies / Literature of other Nations and Languages / Indo-European Literature</xsl:when>
             <xsl:when test="$theCode='SC-LT-07-02'">Literary Studies / Literature of other Nations and Languages / Asian Literature</xsl:when>
@@ -736,7 +736,7 @@
             <xsl:when test="$theCode='SC-LT-08-06'">Literary Studies / Literary Genres and Media / Biography and Autobiography</xsl:when>
             <xsl:when test="$theCode='SC-LT-08-07'">Literary Studies / Literary Genres and Media / Diaries, Letters and Journals</xsl:when>
             <xsl:when test="$theCode='SC-LT-08-08'">Literary Studies / Literary Genres and Media / other Genres</xsl:when>
-            <xsl:when test="$theCode='SC-LT-09'">Literary Studies / Textual Scholarship </xsl:when>
+            <xsl:when test="$theCode='SC-LT-09'">Literary Studies / Textual Scholarship</xsl:when>
             <xsl:when test="$theCode='SC-LT-10'">Literary Studies / Literary History</xsl:when>
             <xsl:when test="$theCode='SC-LT-11'">Literary Studies / Literary Theory</xsl:when>
             <xsl:when test="$theCode='SC-LT-12'">Literary Studies / Narratology</xsl:when>
@@ -746,10 +746,10 @@
             <xsl:when test="$theCode='SC-LT-13-03'">Literary Studies / Topics in Literary Studies / Individual Motifs, Motif Research</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-04'">Literary Studies / Topics in Literary Studies / Literary Studies and Linguistics</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-05'">Literary Studies / Topics in Literary Studies / Mythology and Folk Literature</xsl:when>
-            <xsl:when test="$theCode='SC-LT-13-06'">Literary Studies / Topics in Literary Studies / Poetics </xsl:when>
+            <xsl:when test="$theCode='SC-LT-13-06'">Literary Studies / Topics in Literary Studies / Poetics</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-07'">Literary Studies / Topics in Literary Studies / Rhetoric</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-08'">Literary Studies / Topics in Literary Studies / Antiquity</xsl:when>
-            <xsl:when test="$theCode='SC-LT-13-09'">Literary Studies / Topics in Literary Studies / Memory </xsl:when>
+            <xsl:when test="$theCode='SC-LT-13-09'">Literary Studies / Topics in Literary Studies / Memory</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-10'">Literary Studies / Topics in Literary Studies / Law</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-11'">Literary Studies / Topics in Literary Studies / Religion</xsl:when>
             <xsl:when test="$theCode='SC-LT-13-12'">Literary Studies / Topics in Literary Studies / Knowledge</xsl:when>
@@ -807,7 +807,7 @@
             <xsl:when test="$theCode='SC-MD-04-06'">Medicine / Clinical Medicine / Neurosurgery</xsl:when>
             <xsl:when test="$theCode='SC-MD-04-07'">Medicine / Clinical Medicine / Anaesthesiology</xsl:when>
             <xsl:when test="$theCode='SC-MD-04-08'">Medicine / Clinical Medicine / Emergency Medicine and Intensive-Care Medicine</xsl:when>
-            <xsl:when test="$theCode='SC-MD-04-09'">Medicine / Clinical Medicine / Gynaecology and Obstetrics </xsl:when>
+            <xsl:when test="$theCode='SC-MD-04-09'">Medicine / Clinical Medicine / Gynaecology and Obstetrics</xsl:when>
             <xsl:when test="$theCode='SC-MD-04-09-01'">Medicine / Clinical Medicine / Gynaecology and Obstetrics  / Gynaecology and Obstetrics, other</xsl:when>
             <xsl:when test="$theCode='SC-MD-04-09-02'">Medicine / Clinical Medicine / Gynaecology and Obstetrics  / Gynaecological Endocrinology and Reproductive Medicine</xsl:when>
             <xsl:when test="$theCode='SC-MD-04-09-03'">Medicine / Clinical Medicine / Gynaecology and Obstetrics  / Gynaecological Oncology</xsl:when>
@@ -840,10 +840,10 @@
             <xsl:when test="$theCode='SC-MD-05'">Medicine / Veterinary Medicine</xsl:when>
             <xsl:when test="$theCode='SC-MS'">Materials Sciences</xsl:when>
             <xsl:when test="$theCode='SC-MS-01'">Materials Sciences / Materials Sciences, other</xsl:when>
-            <xsl:when test="$theCode='SC-MS-02'">Materials Sciences /Biomaterials and Natural Materials </xsl:when>
-            <xsl:when test="$theCode='SC-MS-03'">Materials Sciences / Ceramics and Glass </xsl:when>
+            <xsl:when test="$theCode='SC-MS-02'">Materials Sciences /Biomaterials and Natural Materials</xsl:when>
+            <xsl:when test="$theCode='SC-MS-03'">Materials Sciences / Ceramics and Glass</xsl:when>
             <xsl:when test="$theCode='SC-MS-04'">Materials Sciences / Composites</xsl:when>
-            <xsl:when test="$theCode='SC-MS-05'">Materials Sciences / Nanomaterials </xsl:when>
+            <xsl:when test="$theCode='SC-MS-05'">Materials Sciences / Nanomaterials</xsl:when>
             <xsl:when test="$theCode='SC-MS-06'">Materials Sciences / Polymers</xsl:when>
             <xsl:when test="$theCode='SC-MS-07'">Materials Sciences / Porous Materials</xsl:when>
             <xsl:when test="$theCode='SC-MS-08'">Materials Sciences / Soft Matter</xsl:when>
@@ -851,10 +851,10 @@
             <xsl:when test="$theCode='SC-MS-10'">Materials Sciences / Electronic Materials</xsl:when>
             <xsl:when test="$theCode='SC-MS-11'">Materials Sciences / Functional, Smart Materials</xsl:when>
             <xsl:when test="$theCode='SC-MS-12'">Materials Sciences / Magnetic Materials</xsl:when>
-            <xsl:when test="$theCode='SC-MS-13'">Materials Sciences / Materials for Energy </xsl:when>
+            <xsl:when test="$theCode='SC-MS-13'">Materials Sciences / Materials for Energy</xsl:when>
             <xsl:when test="$theCode='SC-MS-16'">Materials Sciences / Corrosion</xsl:when>
             <xsl:when test="$theCode='SC-MS-18'">Materials Sciences / Materials Characterization and Properties</xsl:when>
-            <xsl:when test="$theCode='SC-MS-20'">Materials Sciences / Materials Processing </xsl:when>
+            <xsl:when test="$theCode='SC-MS-20'">Materials Sciences / Materials Processing</xsl:when>
             <xsl:when test="$theCode='SC-MS-21'">Materials Sciences / Modeling and Simulations</xsl:when>
             <xsl:when test="$theCode='SC-MS-23'">Materials Sciences / Carbon Materials</xsl:when>
             <xsl:when test="$theCode='SC-MS-24'">Materials Sciences / Metals and Alloys</xsl:when>
@@ -874,7 +874,7 @@
             <xsl:when test="$theCode='SC-MT-12'">Mathematics / General Mathematics</xsl:when>
             <xsl:when test="$theCode='SC-MU'">Music</xsl:when>
             <xsl:when test="$theCode='SC-MU-01'">Music / Theory and Methods</xsl:when>
-            <xsl:when test="$theCode='SC-MU-02'">Music / Styles and Genres </xsl:when>
+            <xsl:when test="$theCode='SC-MU-02'">Music / Styles and Genres</xsl:when>
             <xsl:when test="$theCode='SC-MU-03'">Music / Musicians and Singers</xsl:when>
             <xsl:when test="$theCode='SC-MU-04'">Music / Lyrics and Libretti</xsl:when>
             <xsl:when test="$theCode='SC-MU-05'">Music / Music, general</xsl:when>
@@ -1000,7 +1000,7 @@
             <xsl:when test="$theCode='SC-SN-01-11'">Social Sciences / Sociology / Sociology of Gender and the Body</xsl:when>
             <xsl:when test="$theCode='SC-SN-01-12'">Social Sciences / Sociology / Sociology of Science, Technology, and Environment</xsl:when>
             <xsl:when test="$theCode='SC-SN-01-13'">Social Sciences / Sociology / Sociology of Religion</xsl:when>
-            <xsl:when test="$theCode='SC-SN-01-14'">Social Sciences / Sociology / Political Sociology </xsl:when>
+            <xsl:when test="$theCode='SC-SN-01-14'">Social Sciences / Sociology / Political Sociology</xsl:when>
             <xsl:when test="$theCode='SC-SN-01-15'">Social Sciences / Sociology / Sociology of Migration</xsl:when>
             <xsl:when test="$theCode='SC-SN-01-16'">Social Sciences / Sociology / Urban and Spatial Sociology</xsl:when>
             <xsl:when test="$theCode='SC-SN-02'">Social Sciences / Political Science</xsl:when>
@@ -1021,7 +1021,7 @@
             <xsl:when test="$theCode='SC-SN-04'">Social Sciences / Education</xsl:when>
             <xsl:when test="$theCode='SC-SN-04-01'">Social Sciences / Education / Theory and History of Education</xsl:when>
             <xsl:when test="$theCode='SC-SN-04-02'">Social Sciences / Education / Curriculum and Pedagogy</xsl:when>
-            <xsl:when test="$theCode='SC-SN-04-03'">Social Sciences / Education / Education Administration </xsl:when>
+            <xsl:when test="$theCode='SC-SN-04-03'">Social Sciences / Education / Education Administration</xsl:when>
             <xsl:when test="$theCode='SC-SN-04-04'">Social Sciences / Education / Education Systems</xsl:when>
             <xsl:when test="$theCode='SC-SN-04-05'">Social Sciences / Education / Education, other</xsl:when>
             <xsl:when test="$theCode='SC-SN-04-06'">Social Sciences / Education / Specialist Studies in Education</xsl:when>
@@ -1061,7 +1061,7 @@
             <xsl:when test="$theCode='SC-SR-04'">Sports and Recreation / Sociology of Sports</xsl:when>
             <xsl:when test="$theCode='SC-SR-05'">Sports and Recreation / Sports and Recreation, other</xsl:when>
             <xsl:when test="$theCode='SC-TL'">Theology and Religion</xsl:when>
-            <xsl:when test="$theCode='SC-TL-01'">Theology and Religion / General Topics and Biblical Reception </xsl:when>
+            <xsl:when test="$theCode='SC-TL-01'">Theology and Religion / General Topics and Biblical Reception</xsl:when>
             <xsl:when test="$theCode='SC-TL-01-01'">Theology and Religion / General Topics and Biblical Reception / General</xsl:when>
             <xsl:when test="$theCode='SC-TL-01-02'">Theology and Religion / General Topics and Biblical Reception / Biblical Reception</xsl:when>
             <xsl:when test="$theCode='SC-TL-02'">Theology and Religion / Old Testament / Ancient Near East</xsl:when>
@@ -1084,10 +1084,10 @@
             <xsl:when test="$theCode='SC-TL-03-04'">Theology and Religion / New Testament / History of Exegesis, Methodology, Bibliographies</xsl:when>
             <xsl:when test="$theCode='SC-TL-03-05'">Theology and Religion / New Testament / History of Reception</xsl:when>
             <xsl:when test="$theCode='SC-TL-03-06'">Theology and Religion / New Testament / Historical, Political and Cultural Background</xsl:when>
-            <xsl:when test="$theCode='SC-TL-03-07'">Theology and Religion / New Testament / Exegetical Monographs, general </xsl:when>
+            <xsl:when test="$theCode='SC-TL-03-07'">Theology and Religion / New Testament / Exegetical Monographs, general</xsl:when>
             <xsl:when test="$theCode='SC-TL-03-08'">Theology and Religion / New Testament / Synoptic Gospels and Acts</xsl:when>
             <xsl:when test="$theCode='SC-TL-03-09'">Theology and Religion / New Testament / Paul</xsl:when>
-            <xsl:when test="$theCode='SC-TL-03-10'">Theology and Religion / New Testament / John </xsl:when>
+            <xsl:when test="$theCode='SC-TL-03-10'">Theology and Religion / New Testament / John</xsl:when>
             <xsl:when test="$theCode='SC-TL-03-11'">Theology and Religion / New Testament / Hebrews and Catholic Epistles</xsl:when>
             <xsl:when test="$theCode='SC-TL-03-12'">Theology and Religion / New Testament / New Testament Apocrypha and Pseudepigrapha</xsl:when>
             <xsl:when test="$theCode='SC-TL-04'">Theology and Religion / Patristics</xsl:when>
@@ -1131,7 +1131,7 @@
             <xsl:when test="$theCode='SC-TL-14-03'">Theology and Religion / Jewish Studies / Rabbinic Judaism</xsl:when>
             <xsl:when test="$theCode='SC-TL-14-04'">Theology and Religion / Jewish Studies / Middle Ages and Early Modern Times</xsl:when>
             <xsl:when test="$theCode='SC-TL-14-05'">Theology and Religion / Jewish Studies / Modern Times</xsl:when>
-            <xsl:when test="$theCode='SC-TL-14-06'">Theology and Religion / Jewish Studies / Philosophy </xsl:when>
+            <xsl:when test="$theCode='SC-TL-14-06'">Theology and Religion / Jewish Studies / Philosophy</xsl:when>
             <xsl:when test="$theCode='SC-TL-14-07'">Theology and Religion / Jewish Studies / Jewish Life</xsl:when>
             <xsl:when test="$theCode='SC-TL-14-08'">Theology and Religion / Jewish Studies / Samaritans</xsl:when>
             <xsl:when test="$theCode='SC-TL-14-09'">Theology and Religion / Jewish Studies / Sephardic and Oriental Jews</xsl:when>
@@ -1175,7 +1175,9 @@
      <!-- subject -->
     <xsl:template match="subjects">
         <keywords scheme="msc2000">
-            <xsl:apply-templates/>
+            <list>
+                <xsl:apply-templates select="subject"/>
+            </list>
         </keywords>
     </xsl:template>
     <xsl:template match="subject">
@@ -1189,10 +1191,10 @@
             <xsl:choose>
                 <xsl:when test="contains(.,' ')">
                     <xsl:value-of select="$avantEspace"/>
-                </xsl:when>
+               </xsl:when>
                 <xsl:when test="contains(.,' ')">
                     <xsl:value-of select="$apresEspace"/>
-                </xsl:when>
+               </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="normalize-space(.)"/>
                 </xsl:otherwise>
@@ -1223,7 +1225,7 @@
                 <xsl:when test="$mscSubjectCode='00A69'">General applied mathematics</xsl:when>
                 <xsl:when test="$mscSubjectCode='00A71'">General theory of mathematical modeling</xsl:when>
                 <xsl:when test="$mscSubjectCode='00A72'">General theory of simulation</xsl:when>
-                <xsl:when test="$mscSubjectCode='00A73'">Dimensional analysis </xsl:when>
+                <xsl:when test="$mscSubjectCode='00A73'">Dimensional analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='00A79'">Physics</xsl:when>
                 <xsl:when test="$mscSubjectCode='00A99'">General and miscellaneous specific topics</xsl:when>
                 <xsl:when test="$mscSubjectCode='00Axx'">General and miscellaneous specific topics</xsl:when>
@@ -1245,7 +1247,7 @@
                 <xsl:when test="$mscSubjectCode='0101'">Introductory exposition (textbooks, tutorial papers, etc.) pertaining to history and biography</xsl:when>
                 <xsl:when test="$mscSubjectCode='0102'">Research exposition (monographs, survey articles) pertaining to history and biography</xsl:when>
                 <xsl:when test="$mscSubjectCode='0106'">Proceedings, conferences, collections, etc. pertaining to history and biography</xsl:when>
-                <xsl:when test="$mscSubjectCode='0108'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='0108'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='0111'">Research data for problems pertaining to history and biography</xsl:when>
                 <xsl:when test="$mscSubjectCode='01A'">History of mathematics and mathematicians</xsl:when>
                 <xsl:when test="$mscSubjectCode='01A05'">General histories, source books</xsl:when>
@@ -1443,12 +1445,12 @@
                 <xsl:when test="$mscSubjectCode='03Hxx'">Nonstandard models</xsl:when>
                 <xsl:when test="$mscSubjectCode='03XX'">Mathematical logic and foundations</xsl:when>
                 <xsl:when test="$mscSubjectCode='0400'">General reference works (handbooks, dictionaries, bibliographies, etc.)</xsl:when>
-                <xsl:when test="$mscSubjectCode='0401'">Instructional exposition (textbooks, tutorial papers, etc.) </xsl:when>
+                <xsl:when test="$mscSubjectCode='0401'">Instructional exposition (textbooks, tutorial papers, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='0402'">Research exposition (monographs, survey articles)</xsl:when>
                 <xsl:when test="$mscSubjectCode='0403'">Historical (must be assigned at least one classification number from Section 01)</xsl:when>
                 <xsl:when test="$mscSubjectCode='0404'">Explicit machine computation and programs (not the theory of computation or programming)</xsl:when>
                 <xsl:when test="$mscSubjectCode='0406'">Proceedings, conferences, collections, etc.</xsl:when>
-                <xsl:when test="$mscSubjectCode='04A03'">Set algebra </xsl:when>
+                <xsl:when test="$mscSubjectCode='04A03'">Set algebra</xsl:when>
                 <xsl:when test="$mscSubjectCode='04A05'">Relations, functions</xsl:when>
                 <xsl:when test="$mscSubjectCode='04A10'">Ordinal and cardinal numbers; generalizations</xsl:when>
                 <xsl:when test="$mscSubjectCode='04A15'">Descriptive set theory; Borel classifications, Suslin schemes, etc.</xsl:when>
@@ -1456,7 +1458,7 @@
                 <xsl:when test="$mscSubjectCode='04A25'">Axiom of choice and equivalent propositions (Zorn's lemma, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='04A30'">Continuum hypothesis, generalized continuum hypothesis</xsl:when>
                 <xsl:when test="$mscSubjectCode='04A72'">Fuzzy sets, fuzzy relations</xsl:when>
-                <xsl:when test="$mscSubjectCode='04A99'">Miscellaneous topics </xsl:when>
+                <xsl:when test="$mscSubjectCode='04A99'">Miscellaneous topics</xsl:when>
                 <xsl:when test="$mscSubjectCode='04XX'">Set theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='05'">Combinatorics</xsl:when>
                 <xsl:when test="$mscSubjectCode='0500'">General reference works (handbooks, dictionaries, bibliographies, etc.) pertaining to combinatorics</xsl:when>
@@ -2087,7 +2089,7 @@
                 <xsl:when test="$mscSubjectCode='13A'">General commutative ring theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='13A02'">Graded rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='13A05'">Divisibility and factorizations in commutative rings</xsl:when>
-                <xsl:when test="$mscSubjectCode='13A10'">Radical theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='13A10'">Radical theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='13A15'">Ideals and multiplicative ideal theory in commutative rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='13A18'">Valuations and their generalizations for commutative rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='13A20'">Brauer groups</xsl:when>
@@ -2101,10 +2103,10 @@
                 <xsl:when test="$mscSubjectCode='13B02'">Extension theory of commutative rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B05'">Galois theory and commutative ring extensions</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B10'">Morphisms of commutative rings</xsl:when>
-                <xsl:when test="$mscSubjectCode='13B15'">Ramification theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='13B15'">Ramification theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B21'">Integral dependence in commutative rings; going up, going down</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B22'">Integral closure of commutative rings and ideals</xsl:when>
-                <xsl:when test="$mscSubjectCode='13B24'">Going up; going down; going between </xsl:when>
+                <xsl:when test="$mscSubjectCode='13B24'">Going up; going down; going between</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B25'">Polynomials over commutative rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B30'">Rings of fractions and localization for commutative rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='13B35'">Completion of commutative rings</xsl:when>
@@ -2241,7 +2243,7 @@
                 <xsl:when test="$mscSubjectCode='14Bxx'">Local theory in algebraic geometry</xsl:when>
                 <xsl:when test="$mscSubjectCode='14C'">Cycles and subschemes</xsl:when>
                 <xsl:when test="$mscSubjectCode='14C05'">Parametrization (Chow and Hilbert schemes)</xsl:when>
-                <xsl:when test="$mscSubjectCode='14C10'">Equivalence relations </xsl:when>
+                <xsl:when test="$mscSubjectCode='14C10'">Equivalence relations</xsl:when>
                 <xsl:when test="$mscSubjectCode='14C15'">(Equivariant) Chow groups and rings; motives</xsl:when>
                 <xsl:when test="$mscSubjectCode='14C17'">Intersection theory, characteristic classes, intersection multiplicities in algebraic geometry</xsl:when>
                 <xsl:when test="$mscSubjectCode='14C20'">Divisors, linear systems, invertible sheaves</xsl:when>
@@ -2273,7 +2275,7 @@
                 <xsl:when test="$mscSubjectCode='14E07'">Birational automorphisms, Cremona group and generalizations</xsl:when>
                 <xsl:when test="$mscSubjectCode='14E08'">Rationality questions in algebraic geometry</xsl:when>
                 <xsl:when test="$mscSubjectCode='14E09'">Automorphisms</xsl:when>
-                <xsl:when test="$mscSubjectCode='14E10'">General correspondences </xsl:when>
+                <xsl:when test="$mscSubjectCode='14E10'">General correspondences</xsl:when>
                 <xsl:when test="$mscSubjectCode='14E15'">Global theory and resolution of singularities (algebro-geometric aspects)</xsl:when>
                 <xsl:when test="$mscSubjectCode='14E16'">McKay correspondence</xsl:when>
                 <xsl:when test="$mscSubjectCode='14E18'">Arcs and motivic integration</xsl:when>
@@ -2480,14 +2482,14 @@
                 <xsl:when test="$mscSubjectCode='15A27'">Commutativity of matrices</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A29'">Inverse problems in linear algebra</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A30'">Algebraic systems of matrices</xsl:when>
-                <xsl:when test="$mscSubjectCode='15A33'">Matrices over special rings (quaternions, finite fields, etc.) </xsl:when>
+                <xsl:when test="$mscSubjectCode='15A33'">Matrices over special rings (quaternions, finite fields, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A36'">Matrices of integers</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A39'">Linear inequalities of matrices</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A42'">Inequalities involving eigenvalues and eigenvectors</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A45'">Miscellaneous inequalities involving matrices</xsl:when>
-                <xsl:when test="$mscSubjectCode='15A48'">Positive matrices and their generalizations; cones of matrices </xsl:when>
-                <xsl:when test="$mscSubjectCode='15A51'">Stochastic matrices </xsl:when>
-                <xsl:when test="$mscSubjectCode='15A52'">Random matrices </xsl:when>
+                <xsl:when test="$mscSubjectCode='15A48'">Positive matrices and their generalizations; cones of matrices</xsl:when>
+                <xsl:when test="$mscSubjectCode='15A51'">Stochastic matrices</xsl:when>
+                <xsl:when test="$mscSubjectCode='15A52'">Random matrices</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A54'">Matrices over function rings in one or more variables</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A57'">Other types of matrices (Hermitian, skew-Hermitian, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A60'">Norms of matrices, numerical range, applications of functional analysis to matrix theory</xsl:when>
@@ -2501,7 +2503,7 @@
                 <xsl:when test="$mscSubjectCode='15A80'">Max-plus and related algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A83'">Matrix completion problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A86'">Linear preserver problems</xsl:when>
-                <xsl:when test="$mscSubjectCode='15A90'">Applications of matrix theory to physics </xsl:when>
+                <xsl:when test="$mscSubjectCode='15A90'">Applications of matrix theory to physics</xsl:when>
                 <xsl:when test="$mscSubjectCode='15A99'">Basic linear algebra</xsl:when>
                 <xsl:when test="$mscSubjectCode='15Axx'">Basic linear algebra</xsl:when>
                 <xsl:when test="$mscSubjectCode='15B'">Special matrices</xsl:when>
@@ -2535,7 +2537,7 @@
                 <xsl:when test="$mscSubjectCode='16Bxx'">General and miscellaneous</xsl:when>
                 <xsl:when test="$mscSubjectCode='16D'">Modules, bimodules and ideals in associative algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='16D10'">General module theory in associative algebras</xsl:when>
-                <xsl:when test="$mscSubjectCode='16D15'">1-sided ideals </xsl:when>
+                <xsl:when test="$mscSubjectCode='16D15'">1-sided ideals</xsl:when>
                 <xsl:when test="$mscSubjectCode='16D20'">Bimodules in associative algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='16D25'">Ideals in associative algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='16D30'">Infinite-dimensional simple rings (except as in 16Kxx)</xsl:when>
@@ -2558,7 +2560,7 @@
                 <xsl:when test="$mscSubjectCode='16E50'">von Neumann regular rings and generalizations (associative algebraic aspects)</xsl:when>
                 <xsl:when test="$mscSubjectCode='16E60'">Semihereditary and hereditary rings, free ideal rings, Sylvester rings, etc.</xsl:when>
                 <xsl:when test="$mscSubjectCode='16E65'">Homological conditions on associative rings (generalizations of regular, Gorenstein, Cohen-Macaulay rings, etc.)</xsl:when>
-                <xsl:when test="$mscSubjectCode='16E70'">Other rings of low global or flat dimension </xsl:when>
+                <xsl:when test="$mscSubjectCode='16E70'">Other rings of low global or flat dimension</xsl:when>
                 <xsl:when test="$mscSubjectCode='16E99'">Homological methods in associative algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='16Exx'">Homological methods in associative algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='16G'">Representation theory of associative rings and algebras</xsl:when>
@@ -2694,10 +2696,10 @@
                 <xsl:when test="$mscSubjectCode='17A'">General nonassociative rings</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A01'">General theory of nonassociative rings and algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A05'">Power-associative rings</xsl:when>
-                <xsl:when test="$mscSubjectCode='17A10'">Commutative power-associative </xsl:when>
+                <xsl:when test="$mscSubjectCode='17A10'">Commutative power-associative</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A15'">Noncommutative Jordan algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A20'">Flexible algebras</xsl:when>
-                <xsl:when test="$mscSubjectCode='17A25'">Nodal algebras </xsl:when>
+                <xsl:when test="$mscSubjectCode='17A25'">Nodal algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A30'">Nonassociative algebras satisfying other identities</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A32'">Leibniz algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='17A35'">Nonassociative division algebras</xsl:when>
@@ -2830,7 +2832,7 @@
                 <xsl:when test="$mscSubjectCode='18D20'">Enriched categories (over closed or monoidal categories)</xsl:when>
                 <xsl:when test="$mscSubjectCode='18D25'">Actions of a monoidal category, tensorial strength</xsl:when>
                 <xsl:when test="$mscSubjectCode='18D30'">Fibered categories</xsl:when>
-                <xsl:when test="$mscSubjectCode='18D35'">Structured objects in a category (group objects, etc.) </xsl:when>
+                <xsl:when test="$mscSubjectCode='18D35'">Structured objects in a category (group objects, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='18D40'">Internal categories and groupoids</xsl:when>
                 <xsl:when test="$mscSubjectCode='18D60'">Profunctors (= correspondences, distributors, modules)</xsl:when>
                 <xsl:when test="$mscSubjectCode='18D65'">Proarrow equipments, Yoneda structures, KZ doctrines (lax idempotent monads)</xsl:when>
@@ -2842,7 +2844,7 @@
                 <xsl:when test="$mscSubjectCode='18E08'">Regular categories, Barr-exact categories</xsl:when>
                 <xsl:when test="$mscSubjectCode='18E10'">Abelian categories, Grothendieck categories</xsl:when>
                 <xsl:when test="$mscSubjectCode='18E13'">Protomodular categories, semi-abelian categories, Mal'tsev categories</xsl:when>
-                <xsl:when test="$mscSubjectCode='18E15'">Grothendieck categories </xsl:when>
+                <xsl:when test="$mscSubjectCode='18E15'">Grothendieck categories</xsl:when>
                 <xsl:when test="$mscSubjectCode='18E20'">Categorical embedding theorems</xsl:when>
                 <xsl:when test="$mscSubjectCode='18E25'">Derived functors and satellites</xsl:when>
                 <xsl:when test="$mscSubjectCode='18E30'">Derived categories, triangulated categories</xsl:when>
@@ -3038,7 +3040,7 @@
                 <xsl:when test="$mscSubjectCode='20B27'">Infinite automorphism groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20B30'">Symmetric groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20B35'">Subgroups of symmetric groups</xsl:when>
-                <xsl:when test="$mscSubjectCode='20B40'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='20B40'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='20B99'">Permutation groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20Bxx'">Permutation groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20C'">Representation theory of groups</xsl:when>
@@ -3056,7 +3058,7 @@
                 <xsl:when test="$mscSubjectCode='20C33'">Representations of finite groups of Lie type</xsl:when>
                 <xsl:when test="$mscSubjectCode='20C34'">Representations of sporadic groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20C35'">Applications of group representations to physics and other areas of science</xsl:when>
-                <xsl:when test="$mscSubjectCode='20C40'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='20C40'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='20C99'">Representation theory of groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20Cxx'">Representation theory of groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20D'">Abstract finite groups</xsl:when>
@@ -3161,12 +3163,12 @@
                 <xsl:when test="$mscSubjectCode='20K01'">Finite abelian groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K05'">Finitely generated groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K10'">Torsion groups, primary groups and generalized primary groups</xsl:when>
-                <xsl:when test="$mscSubjectCode='20K12'">Ulm sequences </xsl:when>
+                <xsl:when test="$mscSubjectCode='20K12'">Ulm sequences</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K15'">Torsion-free groups, finite rank</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K20'">Torsion-free groups, infinite rank</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K21'">Mixed groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K25'">Direct sums, direct products, etc. for abelian groups</xsl:when>
-                <xsl:when test="$mscSubjectCode='20K26'">Indecomposable groups </xsl:when>
+                <xsl:when test="$mscSubjectCode='20K26'">Indecomposable groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K27'">Subgroups of abelian groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K30'">Automorphisms, homomorphisms, endomorphisms, etc. for abelian groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='20K35'">Extensions of abelian groups</xsl:when>
@@ -3683,13 +3685,13 @@
                 <xsl:when test="$mscSubjectCode='32F05'">Plurisubharmonic functions and generalizations</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F07'">Complex Monge-Ampere operator</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F10'">\(q\)-convexity, \(q\)-concavity</xsl:when>
-                <xsl:when test="$mscSubjectCode='32F15'">Pseudoconvex domains </xsl:when>
+                <xsl:when test="$mscSubjectCode='32F15'">Pseudoconvex domains</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F17'">Other notions of convexity in relation to several complex variables</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F18'">Finite-type conditions for the boundary of a domain</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F20'">$\overline\partial$- and $\overline\partial_b$-Neumann problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F25'">Real submanifolds in complex manifolds</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F27'">Topological consequences of geometric convexity</xsl:when>
-                <xsl:when test="$mscSubjectCode='32F30'">Pseudoconvex manifolds </xsl:when>
+                <xsl:when test="$mscSubjectCode='32F30'">Pseudoconvex manifolds</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F32'">Analytical consequences of geometric convexity (vanishing theorems, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F40'">CR structures, (tangential) CR operators and generalizations</xsl:when>
                 <xsl:when test="$mscSubjectCode='32F45'">Invariant metrics and pseudodistances in several complex variables</xsl:when>
@@ -3727,7 +3729,7 @@
                 <xsl:when test="$mscSubjectCode='32J15'">Compact complex surfaces</xsl:when>
                 <xsl:when test="$mscSubjectCode='32J17'">Compact complex \(3\)-folds</xsl:when>
                 <xsl:when test="$mscSubjectCode='32J18'">Compact complex \(n\)-folds</xsl:when>
-                <xsl:when test="$mscSubjectCode='32J20'">Algebraicity criteria </xsl:when>
+                <xsl:when test="$mscSubjectCode='32J20'">Algebraicity criteria</xsl:when>
                 <xsl:when test="$mscSubjectCode='32J25'">Transcendental methods of algebraic geometry (complex-analytic aspects)</xsl:when>
                 <xsl:when test="$mscSubjectCode='32J27'">Compact Kähler manifolds: generalizations, classification</xsl:when>
                 <xsl:when test="$mscSubjectCode='32J81'">Applications of compact analytic spaces to the sciences</xsl:when>
@@ -3893,7 +3895,7 @@
                 <xsl:when test="$mscSubjectCode='33D45'">Basic orthogonal polynomials and functions (Askey-Wilson polynomials, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='33D50'">Orthogonal polynomials and functions in several variables expressible in terms of basic hypergeometric functions in one variable</xsl:when>
                 <xsl:when test="$mscSubjectCode='33D52'">Basic orthogonal polynomials and functions associated with root systems (Macdonald polynomials, etc.)</xsl:when>
-                <xsl:when test="$mscSubjectCode='33D55'">Basic spherical functions, spherical harmonics (continuous and discrete) </xsl:when>
+                <xsl:when test="$mscSubjectCode='33D55'">Basic spherical functions, spherical harmonics (continuous and discrete)</xsl:when>
                 <xsl:when test="$mscSubjectCode='33D60'">Basic hypergeometric integrals and functions defined by them</xsl:when>
                 <xsl:when test="$mscSubjectCode='33D65'">Bibasic functions and multiple bases</xsl:when>
                 <xsl:when test="$mscSubjectCode='33D67'">Basic hypergeometric functions associated with root systems</xsl:when>
@@ -3946,12 +3948,12 @@
                 <xsl:when test="$mscSubjectCode='34A38'">Hybrid systems of ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A40'">Differential inequalities involving functions of a single real variable</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A45'">Theoretical approximation of solutions to ordinary differential equations</xsl:when>
-                <xsl:when test="$mscSubjectCode='34A46'">Theoretical solution methods other than approximations </xsl:when>
+                <xsl:when test="$mscSubjectCode='34A46'">Theoretical solution methods other than approximations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A47'">Bifurcation</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A50'">Numerical approximation of solutions</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A55'">Inverse problems involving ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A60'">Ordinary differential inclusions</xsl:when>
-                <xsl:when test="$mscSubjectCode='34A65'">Stiff equations </xsl:when>
+                <xsl:when test="$mscSubjectCode='34A65'">Stiff equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34A99'">General theory for ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34Axx'">General theory for ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34B'">Boundary value problems for ordinary differential equations</xsl:when>
@@ -4010,10 +4012,10 @@
                 <xsl:when test="$mscSubjectCode='34D15'">Singular perturbations of ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34D20'">Stability of solutions to ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34D23'">Global stability of solutions to ordinary differential equations</xsl:when>
-                <xsl:when test="$mscSubjectCode='34D25'">Popov-type stability </xsl:when>
+                <xsl:when test="$mscSubjectCode='34D25'">Popov-type stability</xsl:when>
                 <xsl:when test="$mscSubjectCode='34D30'">Structural stability and analogous concepts of solutions to ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34D35'">Stability of manifolds of solutions to ordinary differential equations</xsl:when>
-                <xsl:when test="$mscSubjectCode='34D40'">Ultimate boundedness </xsl:when>
+                <xsl:when test="$mscSubjectCode='34D40'">Ultimate boundedness</xsl:when>
                 <xsl:when test="$mscSubjectCode='34D45'">Attractors of solutions to ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34D99'">Stability theory for ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34Dxx'">Stability theory for ordinary differential equations</xsl:when>
@@ -4058,7 +4060,7 @@
                 <xsl:when test="$mscSubjectCode='34K12'">Growth, boundedness, comparison of solutions to functional-differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34K13'">Periodic solutions to functional-differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34K14'">Almost and pseudo-almost periodic solutions to functional-differential equations</xsl:when>
-                <xsl:when test="$mscSubjectCode='34K15'">Qualitative theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='34K15'">Qualitative theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='34K19'">Invariant manifolds of functional-differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34K20'">Stability theory of functional-differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='34K21'">Stationary solutions of functional-differential equations</xsl:when>
@@ -4273,7 +4275,7 @@
                 <xsl:when test="$mscSubjectCode='35J47'">Second-order elliptic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35J48'">Higher-order elliptic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35J50'">Variational methods for elliptic systems</xsl:when>
-                <xsl:when test="$mscSubjectCode='35J55'">Boundary value problems for elliptic systems </xsl:when>
+                <xsl:when test="$mscSubjectCode='35J55'">Boundary value problems for elliptic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35J56'">Boundary value problems for first-order elliptic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35J57'">Boundary value problems for second-order elliptic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35J58'">Boundary value problems for higher-order elliptic systems</xsl:when>
@@ -4310,7 +4312,7 @@
                 <xsl:when test="$mscSubjectCode='35K41'">Higher-order parabolic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35K45'">Initial value problems for second-order parabolic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35K46'">Initial value problems for higher-order parabolic systems</xsl:when>
-                <xsl:when test="$mscSubjectCode='35K50'">Boundary value problems for parabolic systems </xsl:when>
+                <xsl:when test="$mscSubjectCode='35K50'">Boundary value problems for parabolic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35K51'">Initial-boundary value problems for second-order parabolic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35K52'">Initial-boundary value problems for higher-order parabolic systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='35K55'">Nonlinear parabolic equations</xsl:when>
@@ -4429,7 +4431,7 @@
                 <xsl:when test="$mscSubjectCode='35Q75'">PDEs in connection with relativity and gravitational theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='35Q76'">Einstein equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='35Q79'">PDEs in connection with classical thermodynamics and heat transfer</xsl:when>
-                <xsl:when test="$mscSubjectCode='35Q80'">Applications of PDE in areas other than physics </xsl:when>
+                <xsl:when test="$mscSubjectCode='35Q80'">Applications of PDE in areas other than physics</xsl:when>
                 <xsl:when test="$mscSubjectCode='35Q81'">PDEs in connection with semiconductor devices</xsl:when>
                 <xsl:when test="$mscSubjectCode='35Q82'">PDEs in connection with statistical mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='35Q83'">Vlasov equations</xsl:when>
@@ -5348,10 +5350,10 @@
                 <xsl:when test="$mscSubjectCode='47D25'">Operator algebras on Hilbert space</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D27'">Dual operator algebras</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D30'">Operator algebras on Banach spaces and other linear topological spaces</xsl:when>
-                <xsl:when test="$mscSubjectCode='47D35'">Dual spaces of operator algebras and topological groups </xsl:when>
+                <xsl:when test="$mscSubjectCode='47D35'">Dual spaces of operator algebras and topological groups</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D40'">Algebras of unbounded operators</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D45'">Applications of operator algebras to physics</xsl:when>
-                <xsl:when test="$mscSubjectCode='47D50'">Operator ideals </xsl:when>
+                <xsl:when test="$mscSubjectCode='47D50'">Operator ideals</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D60'">\(C\)-semigroups, regularized semigroups</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D62'">Integrated semigroups</xsl:when>
                 <xsl:when test="$mscSubjectCode='47D99'">Groups and semigroups of linear operators, their generalizations and applications</xsl:when>
@@ -5466,8 +5468,8 @@
                 <xsl:when test="$mscSubjectCode='49J15'">Existence theories for optimal control problems involving ordinary differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='49J20'">Existence theories for optimal control problems involving partial differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='49J21'">Existence theories for optimal control problems involving relations other than differential equations</xsl:when>
-                <xsl:when test="$mscSubjectCode='49J22'">Optimal control problems involving integral equations </xsl:when>
-                <xsl:when test="$mscSubjectCode='49J24'">Optimal control problems involving differential inclusions </xsl:when>
+                <xsl:when test="$mscSubjectCode='49J22'">Optimal control problems involving integral equations</xsl:when>
+                <xsl:when test="$mscSubjectCode='49J24'">Optimal control problems involving differential inclusions</xsl:when>
                 <xsl:when test="$mscSubjectCode='49J25'">Optimal control problems involving equations with retarded arguments</xsl:when>
                 <xsl:when test="$mscSubjectCode='49J27'">Existence theories for problems in abstract spaces</xsl:when>
                 <xsl:when test="$mscSubjectCode='49J30'">Existence of optimal solutions belonging to restricted classes (Lipschitz controls, bang-bang controls, etc.)</xsl:when>
@@ -5497,8 +5499,8 @@
                 <xsl:when test="$mscSubjectCode='49K99'">Optimality conditions</xsl:when>
                 <xsl:when test="$mscSubjectCode='49Kxx'">Optimality conditions</xsl:when>
                 <xsl:when test="$mscSubjectCode='49L'">Hamilton-Jacobi theories</xsl:when>
-                <xsl:when test="$mscSubjectCode='49L05'">Free problems and problems involving ordinary differential equations </xsl:when>
-                <xsl:when test="$mscSubjectCode='49L10'">Free problems and problems involving partial differential equations </xsl:when>
+                <xsl:when test="$mscSubjectCode='49L05'">Free problems and problems involving ordinary differential equations</xsl:when>
+                <xsl:when test="$mscSubjectCode='49L10'">Free problems and problems involving partial differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='49L12'">Hamilton-Jacobi equations in optimal control and differential games</xsl:when>
                 <xsl:when test="$mscSubjectCode='49L15'">Problems in abstract spaces or problems involving functional relations other than differential equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='49L20'">Dynamic programming in optimal control and differential games</xsl:when>
@@ -5507,7 +5509,7 @@
                 <xsl:when test="$mscSubjectCode='49Lxx'">Hamilton-Jacobi theories</xsl:when>
                 <xsl:when test="$mscSubjectCode='49M'">Numerical methods in optimal control</xsl:when>
                 <xsl:when test="$mscSubjectCode='49M05'">Numerical methods based on necessary conditions</xsl:when>
-                <xsl:when test="$mscSubjectCode='49M07'">Gradient methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='49M07'">Gradient methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='49M10'">Methods of steepest descent type</xsl:when>
                 <xsl:when test="$mscSubjectCode='49M15'">Newton-type methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='49M20'">Numerical methods of relaxation type</xsl:when>
@@ -5532,9 +5534,9 @@
                 <xsl:when test="$mscSubjectCode='49N25'">Impulsive optimal control problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='49N30'">Problems with incomplete information (optimization)</xsl:when>
                 <xsl:when test="$mscSubjectCode='49N35'">Optimal feedback synthesis</xsl:when>
-                <xsl:when test="$mscSubjectCode='49N40'">Open-loop controls </xsl:when>
+                <xsl:when test="$mscSubjectCode='49N40'">Open-loop controls</xsl:when>
                 <xsl:when test="$mscSubjectCode='49N45'">Inverse problems in optimal control</xsl:when>
-                <xsl:when test="$mscSubjectCode='49N50'">Inverse problems in optimal control theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='49N50'">Inverse problems in optimal control theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='49N55'">Noneconomic applications of optimal control theory and differential games</xsl:when>
                 <xsl:when test="$mscSubjectCode='49N60'">Regularity of solutions in optimal control</xsl:when>
                 <xsl:when test="$mscSubjectCode='49N65'">Applications of measurable selections to control theory</xsl:when>
@@ -5551,13 +5553,13 @@
                 <xsl:when test="$mscSubjectCode='49Q15'">Geometric measure and integration theory, integral and normal currents in optimization</xsl:when>
                 <xsl:when test="$mscSubjectCode='49Q20'">Variational problems in a geometric measure-theoretic setting</xsl:when>
                 <xsl:when test="$mscSubjectCode='49Q22'">Optimal transportation</xsl:when>
-                <xsl:when test="$mscSubjectCode='49Q25'">Surface area </xsl:when>
+                <xsl:when test="$mscSubjectCode='49Q25'">Surface area</xsl:when>
                 <xsl:when test="$mscSubjectCode='49Q99'">Manifolds and measure-geometric topics</xsl:when>
                 <xsl:when test="$mscSubjectCode='49Qxx'">Manifolds and measure-geometric topics</xsl:when>
                 <xsl:when test="$mscSubjectCode='49R'">Variational methods for eigenvalues of operators</xsl:when>
                 <xsl:when test="$mscSubjectCode='49R05'">Variational methods for eigenvalues of operators</xsl:when>
-                <xsl:when test="$mscSubjectCode='49R10'">Rayleigh-Ritz methods </xsl:when>
-                <xsl:when test="$mscSubjectCode='49R15'">Weinstein and Aronszajn methods, intermediate problems </xsl:when>
+                <xsl:when test="$mscSubjectCode='49R10'">Rayleigh-Ritz methods</xsl:when>
+                <xsl:when test="$mscSubjectCode='49R15'">Weinstein and Aronszajn methods, intermediate problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='49R20'">Linear operators in Hilbert spaces</xsl:when>
                 <xsl:when test="$mscSubjectCode='49R99'">Variational methods for eigenvalues of operators</xsl:when>
                 <xsl:when test="$mscSubjectCode='49Rxx'">Variational methods for eigenvalues of operators</xsl:when>
@@ -5782,7 +5784,7 @@
                 <xsl:when test="$mscSubjectCode='53A35'">Non-Euclidean differential geometry</xsl:when>
                 <xsl:when test="$mscSubjectCode='53A40'">Other special differential geometries</xsl:when>
                 <xsl:when test="$mscSubjectCode='53A45'">Differential geometric aspects in vector and tensor analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='53A50'">Spinor analysis </xsl:when>
+                <xsl:when test="$mscSubjectCode='53A50'">Spinor analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='53A55'">Differential invariants (local theory), geometric objects</xsl:when>
                 <xsl:when test="$mscSubjectCode='53A60'">Differential geometry of webs</xsl:when>
                 <xsl:when test="$mscSubjectCode='53A70'">Discrete differential geometry</xsl:when>
@@ -6167,7 +6169,7 @@
                 <xsl:when test="$mscSubjectCode='57M10'">Covering spaces and low-dimensional topology</xsl:when>
                 <xsl:when test="$mscSubjectCode='57M12'">Low-dimensional topology of special (e.g., branched) coverings</xsl:when>
                 <xsl:when test="$mscSubjectCode='57M15'">Relations of low-dimensional topology with graph theory</xsl:when>
-                <xsl:when test="$mscSubjectCode='57M20'">Two-dimensional complexes </xsl:when>
+                <xsl:when test="$mscSubjectCode='57M20'">Two-dimensional complexes</xsl:when>
                 <xsl:when test="$mscSubjectCode='57M25'">Knots and links in $S^3$, {For higher dimensions</xsl:when>
                 <xsl:when test="$mscSubjectCode='57M30'">Wild embeddings</xsl:when>
                 <xsl:when test="$mscSubjectCode='57M35'">Dehn's lemma, sphere theorem, loop theorem, asphericity</xsl:when>
@@ -6383,8 +6385,8 @@
                 <xsl:when test="$mscSubjectCode='58F06'">Geometric quantization (applications of representation theory)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F07'">Completely integrable systems (including systems with an infinite number of degrees of freedom)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F08'">Point-mapping properties, iterations, completeness; dynamics of cellular automata</xsl:when>
-                <xsl:when test="$mscSubjectCode='58F09'">Morse-Smale systems </xsl:when>
-                <xsl:when test="$mscSubjectCode='58F10'">Stability theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='58F09'">Morse-Smale systems</xsl:when>
+                <xsl:when test="$mscSubjectCode='58F10'">Stability theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F11'">Ergodic theory; invariant measures</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F12'">Structure of attractors (and repellors)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F13'">Strange attractors; chaos and other pathologies</xsl:when>
@@ -6395,39 +6397,39 @@
                 <xsl:when test="$mscSubjectCode='58F19'">Eigenvalue and spectral problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F20'">Periodic points and zeta functions</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F21'">Limit cycles, singular points, etc.</xsl:when>
-                <xsl:when test="$mscSubjectCode='58F22'">Periodic solutions </xsl:when>
+                <xsl:when test="$mscSubjectCode='58F22'">Periodic solutions</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F23'">Holomorphic dynamics</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F25'">Flows</xsl:when>
-                <xsl:when test="$mscSubjectCode='58F27'">Quasiperiodic flows </xsl:when>
+                <xsl:when test="$mscSubjectCode='58F27'">Quasiperiodic flows</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F30'">Perturbations</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F32'">Functional-differential equations on manifolds</xsl:when>
-                <xsl:when test="$mscSubjectCode='58F35'">Invariance properties </xsl:when>
-                <xsl:when test="$mscSubjectCode='58F36'">Normal forms </xsl:when>
+                <xsl:when test="$mscSubjectCode='58F35'">Invariance properties</xsl:when>
+                <xsl:when test="$mscSubjectCode='58F36'">Normal forms</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F37'">Correspondences and other transformation methods (e.g. Lie-Backlund)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F39'">Dynamical systems treatment of PDE (should be assigned another number from 58F)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58F40'">Applications</xsl:when>
-                <xsl:when test="$mscSubjectCode='58F99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='58F99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='58Fxx'">Ordinary differential equations on manifolds; dynamical systems</xsl:when>
-                <xsl:when test="$mscSubjectCode='58G03'">Elliptic equations on manifolds, general theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='58G03'">Elliptic equations on manifolds, general theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G05'">Differential complexes; elliptic complexes</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G07'">Relations with hyperfunctions</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G10'">Index theory and related fixed point theorems</xsl:when>
-                <xsl:when test="$mscSubjectCode='58G11'">Heat and other parabolic equation methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='58G11'">Heat and other parabolic equation methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G12'">Exotic index theories</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G15'">Pseudodifferential and Fourier integral operators on manifolds</xsl:when>
-                <xsl:when test="$mscSubjectCode='58G16'">Hyperbolic equations </xsl:when>
-                <xsl:when test="$mscSubjectCode='58G17'">Propagation of singularities; initial value problems </xsl:when>
-                <xsl:when test="$mscSubjectCode='58G18'">Perturbations; asymptotics </xsl:when>
+                <xsl:when test="$mscSubjectCode='58G16'">Hyperbolic equations</xsl:when>
+                <xsl:when test="$mscSubjectCode='58G17'">Propagation of singularities; initial value problems</xsl:when>
+                <xsl:when test="$mscSubjectCode='58G18'">Perturbations; asymptotics</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G20'">Boundary value problems on manifolds</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G25'">Spectral problems; spectral geometry; scattering theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G26'">Determinants and determinant bundles</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G28'">Bifurcations</xsl:when>
-                <xsl:when test="$mscSubjectCode='58G30'">Relations with special manifold structures (Riemannian, Finsler, etc.) </xsl:when>
+                <xsl:when test="$mscSubjectCode='58G30'">Relations with special manifold structures (Riemannian, Finsler, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G32'">Diffusion processes and stochastic analysis on manifolds</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G35'">Invariance and symmetry properties</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G37'">Correspondences and other transformation methods (e.g. Lie-Backlund)</xsl:when>
                 <xsl:when test="$mscSubjectCode='58G40'">Applications</xsl:when>
-                <xsl:when test="$mscSubjectCode='58G99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='58G99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='58Gxx'">Partial differential equations on manifolds; differential operators</xsl:when>
                 <xsl:when test="$mscSubjectCode='58H'">Pseudogroups, differentiable groupoids and general structures on manifolds</xsl:when>
                 <xsl:when test="$mscSubjectCode='58H05'">Pseudogroups and differentiable groupoids</xsl:when>
@@ -6580,7 +6582,7 @@
                 <xsl:when test="$mscSubjectCode='60J'">Markov processes</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J05'">Discrete-time Markov processes on general state spaces</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J10'">Markov chains (discrete-time Markov processes on discrete state spaces)</xsl:when>
-                <xsl:when test="$mscSubjectCode='60J15'">Random walks </xsl:when>
+                <xsl:when test="$mscSubjectCode='60J15'">Random walks</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J20'">Applications of Markov chains and discrete-time Markov processes on general state spaces (social mobility, learning theory, industrial processes, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J22'">Computational methods in Markov chains</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J25'">Continuous-time Markov processes on general state spaces</xsl:when>
@@ -6600,7 +6602,7 @@
                 <xsl:when test="$mscSubjectCode='60J68'">Superprocesses</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J70'">Applications of Brownian motions and diffusion theory (population genetics, absorption problems, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J74'">Jump processes on discrete state spaces</xsl:when>
-                <xsl:when test="$mscSubjectCode='60J75'">Jump processes </xsl:when>
+                <xsl:when test="$mscSubjectCode='60J75'">Jump processes</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J76'">Jump processes on general state spaces</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J80'">Branching processes (Galton-Watson, birth-and-death, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='60J85'">Applications of branching processes</xsl:when>
@@ -6639,9 +6641,9 @@
                 <xsl:when test="$mscSubjectCode='6203'">History of statistics</xsl:when>
                 <xsl:when test="$mscSubjectCode='6204'">Software, source code, etc. for problems pertaining to statistics</xsl:when>
                 <xsl:when test="$mscSubjectCode='6206'">Proceedings, conferences, collections, etc. pertaining to statistics</xsl:when>
-                <xsl:when test="$mscSubjectCode='6207'">Data analysis </xsl:when>
+                <xsl:when test="$mscSubjectCode='6207'">Data analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='6208'">Computational methods for problems pertaining to statistics</xsl:when>
-                <xsl:when test="$mscSubjectCode='6209'">Graphical methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='6209'">Graphical methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='6211'">Research data for problems pertaining to statistics</xsl:when>
                 <xsl:when test="$mscSubjectCode='62A'">Foundational topics in statistics</xsl:when>
                 <xsl:when test="$mscSubjectCode='62A01'">Foundations and philosophical topics in statistics</xsl:when>
@@ -6733,7 +6735,7 @@
                 <xsl:when test="$mscSubjectCode='62H25'">Factor analysis and principal components; correspondence analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='62H30'">Classification and discrimination; cluster analysis (statistical aspects)</xsl:when>
                 <xsl:when test="$mscSubjectCode='62H35'">Image analysis in multivariate analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='62H40'">Projection pursuit </xsl:when>
+                <xsl:when test="$mscSubjectCode='62H40'">Projection pursuit</xsl:when>
                 <xsl:when test="$mscSubjectCode='62H86'">Multivariate analysis and fuzziness</xsl:when>
                 <xsl:when test="$mscSubjectCode='62H99'">Multivariate analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='62Hxx'">Multivariate analysis</xsl:when>
@@ -6785,7 +6787,7 @@
                 <xsl:when test="$mscSubjectCode='62N02'">Estimation in survival analysis and censored data</xsl:when>
                 <xsl:when test="$mscSubjectCode='62N03'">Testing in survival analysis and censored data</xsl:when>
                 <xsl:when test="$mscSubjectCode='62N05'">Reliability and life testing</xsl:when>
-                <xsl:when test="$mscSubjectCode='62N10'">Quality control </xsl:when>
+                <xsl:when test="$mscSubjectCode='62N10'">Quality control</xsl:when>
                 <xsl:when test="$mscSubjectCode='62N86'">Fuzziness, and survival analysis and censored data</xsl:when>
                 <xsl:when test="$mscSubjectCode='62N99'">Survival analysis and censored data</xsl:when>
                 <xsl:when test="$mscSubjectCode='62Nxx'">Survival analysis and censored data</xsl:when>
@@ -6820,7 +6822,7 @@
                 <xsl:when test="$mscSubjectCode='6502'">Research exposition (monographs, survey articles) pertaining to numerical analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='6503'">History of numerical analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='6504'">Software, source code, etc. for problems pertaining to numerical analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='6505'">Experimental papers </xsl:when>
+                <xsl:when test="$mscSubjectCode='6505'">Experimental papers</xsl:when>
                 <xsl:when test="$mscSubjectCode='6506'">Proceedings, conferences, collections, etc. pertaining to numerical analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='6511'">Research data for problems pertaining to numerical analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='65A'">Tables in numerical analysis</xsl:when>
@@ -6882,7 +6884,7 @@
                 <xsl:when test="$mscSubjectCode='65F99'">Numerical linear algebra</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Fxx'">Numerical linear algebra</xsl:when>
                 <xsl:when test="$mscSubjectCode='65G'">Error analysis and interval analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='65G05'">Roundoff error </xsl:when>
+                <xsl:when test="$mscSubjectCode='65G05'">Roundoff error</xsl:when>
                 <xsl:when test="$mscSubjectCode='65G10'">Interval and finite arithmetic</xsl:when>
                 <xsl:when test="$mscSubjectCode='65G20'">Algorithms with automatic result verification</xsl:when>
                 <xsl:when test="$mscSubjectCode='65G30'">Interval and finite arithmetic</xsl:when>
@@ -6983,7 +6985,7 @@
                 <xsl:when test="$mscSubjectCode='65P99'">Numerical problems in dynamical systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Pxx'">Numerical problems in dynamical systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Q'">Numerical methods for difference and functional equations, recurrence relations</xsl:when>
-                <xsl:when test="$mscSubjectCode='65Q05'">Difference and functional equations, recurrence relations </xsl:when>
+                <xsl:when test="$mscSubjectCode='65Q05'">Difference and functional equations, recurrence relations</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Q10'">Numerical methods for difference equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Q20'">Numerical methods for functional equations</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Q30'">Numerical aspects of recurrence relations</xsl:when>
@@ -7009,7 +7011,7 @@
                 <xsl:when test="$mscSubjectCode='65T60'">Numerical methods for wavelets</xsl:when>
                 <xsl:when test="$mscSubjectCode='65T99'">Numerical methods in Fourier analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Txx'">Numerical methods in Fourier analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='65U05'">Numerical methods in probability and statistics </xsl:when>
+                <xsl:when test="$mscSubjectCode='65U05'">Numerical methods in probability and statistics</xsl:when>
                 <xsl:when test="$mscSubjectCode='65XX'">Numerical analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Y'">Computer aspects of numerical algorithms</xsl:when>
                 <xsl:when test="$mscSubjectCode='65Y04'">Numerical algorithms for computer arithmetic, etc.</xsl:when>
@@ -7088,7 +7090,7 @@
                 <xsl:when test="$mscSubjectCode='68Q27'">Parameterized complexity, tractability and kernelization</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q30'">Algorithmic information theory (Kolmogorov complexity, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q32'">Computational learning theory</xsl:when>
-                <xsl:when test="$mscSubjectCode='68Q35'">VLSI algorithms </xsl:when>
+                <xsl:when test="$mscSubjectCode='68Q35'">VLSI algorithms</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q40'">Symbolic computation, algebraic computation</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q42'">Grammars and rewriting systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q45'">Formal languages and automata</xsl:when>
@@ -7103,7 +7105,7 @@
                 <xsl:when test="$mscSubjectCode='68Q80'">Cellular automata (computational aspects)</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q85'">Models and methods for concurrent and distributed computing (process algebras, bisimulation, transition nets, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q87'">Probability in computer science (algorithm analysis, random structures, phase transitions, etc.)</xsl:when>
-                <xsl:when test="$mscSubjectCode='68Q90'">Transition nets </xsl:when>
+                <xsl:when test="$mscSubjectCode='68Q90'">Transition nets</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Q99'">Theory of computing</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Qxx'">Theory of computing</xsl:when>
                 <xsl:when test="$mscSubjectCode='68R'">Discrete mathematics in relation to computer science</xsl:when>
@@ -7124,7 +7126,7 @@
                 <xsl:when test="$mscSubjectCode='68T10'">Pattern recognition, speech recognition</xsl:when>
                 <xsl:when test="$mscSubjectCode='68T15'">Theorem proving</xsl:when>
                 <xsl:when test="$mscSubjectCode='68T20'">Problem solving in the context of artificial intelligence (heuristics, search strategies, etc.)</xsl:when>
-                <xsl:when test="$mscSubjectCode='68T25'">AI languages </xsl:when>
+                <xsl:when test="$mscSubjectCode='68T25'">AI languages</xsl:when>
                 <xsl:when test="$mscSubjectCode='68T27'">Logic in artificial intelligence</xsl:when>
                 <xsl:when test="$mscSubjectCode='68T30'">Knowledge representation</xsl:when>
                 <xsl:when test="$mscSubjectCode='68T35'">Theory of languages and software systems (knowledge-based systems, expert systems, etc.) for artificial intelligence</xsl:when>
@@ -7143,7 +7145,7 @@
                 <xsl:when test="$mscSubjectCode='68U10'">Computing methodologies for image processing</xsl:when>
                 <xsl:when test="$mscSubjectCode='68U15'">Computing methodologies for text processing; mathematical typography</xsl:when>
                 <xsl:when test="$mscSubjectCode='68U20'">Simulation</xsl:when>
-                <xsl:when test="$mscSubjectCode='68U30'">Other applications </xsl:when>
+                <xsl:when test="$mscSubjectCode='68U30'">Other applications</xsl:when>
                 <xsl:when test="$mscSubjectCode='68U35'">Computing methodologies for information systems (hypertext navigation, interfaces, decision support, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='68U99'">Computing methodologies and applications</xsl:when>
                 <xsl:when test="$mscSubjectCode='68Uxx'">Computing methodologies and applications</xsl:when>
@@ -7197,9 +7199,9 @@
                 <xsl:when test="$mscSubjectCode='70C20'">Statics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70C99'">Statics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70Cxx'">Statics</xsl:when>
-                <xsl:when test="$mscSubjectCode='70D05'">Newtonian dynamics </xsl:when>
-                <xsl:when test="$mscSubjectCode='70D10'">Lagrangian dynamics </xsl:when>
-                <xsl:when test="$mscSubjectCode='70D99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='70D05'">Newtonian dynamics</xsl:when>
+                <xsl:when test="$mscSubjectCode='70D10'">Lagrangian dynamics</xsl:when>
+                <xsl:when test="$mscSubjectCode='70D99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='70Dxx'">Dynamics of a particle</xsl:when>
                 <xsl:when test="$mscSubjectCode='70E'">Dynamics of a rigid body and of multibody systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='70E05'">Motion of the gyroscope</xsl:when>
@@ -7224,7 +7226,7 @@
                 <xsl:when test="$mscSubjectCode='70F17'">Inverse problems for systems of particles</xsl:when>
                 <xsl:when test="$mscSubjectCode='70F20'">Holonomic systems related to the dynamics of a system of particles</xsl:when>
                 <xsl:when test="$mscSubjectCode='70F25'">Nonholonomic systems related to the dynamics of a system of particles</xsl:when>
-                <xsl:when test="$mscSubjectCode='70F30'">Impulsive motion </xsl:when>
+                <xsl:when test="$mscSubjectCode='70F30'">Impulsive motion</xsl:when>
                 <xsl:when test="$mscSubjectCode='70F35'">Collision of rigid or pseudo-rigid bodies</xsl:when>
                 <xsl:when test="$mscSubjectCode='70F40'">Problems involving a system of particles with friction</xsl:when>
                 <xsl:when test="$mscSubjectCode='70F45'">The dynamics of infinite particle systems</xsl:when>
@@ -7234,10 +7236,10 @@
                 <xsl:when test="$mscSubjectCode='70G05'">Riemannian geometry, tensorial methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='70G10'">Generalized coordinates; event, impulse-energy, configuration, state, or phase space for problems in mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70G15'">Space of events</xsl:when>
-                <xsl:when test="$mscSubjectCode='70G20'">Impulse-energy space </xsl:when>
-                <xsl:when test="$mscSubjectCode='70G25'">Configuration space </xsl:when>
-                <xsl:when test="$mscSubjectCode='70G30'">State space </xsl:when>
-                <xsl:when test="$mscSubjectCode='70G35'">Phase space </xsl:when>
+                <xsl:when test="$mscSubjectCode='70G20'">Impulse-energy space</xsl:when>
+                <xsl:when test="$mscSubjectCode='70G25'">Configuration space</xsl:when>
+                <xsl:when test="$mscSubjectCode='70G30'">State space</xsl:when>
+                <xsl:when test="$mscSubjectCode='70G35'">Phase space</xsl:when>
                 <xsl:when test="$mscSubjectCode='70G40'">Topological and differential topological methods for problems in mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70G45'">Differential geometric methods (tensors, connections, symplectic, Poisson, contact, Riemannian, nonholonomic, etc.) for problems in mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70G50'">Classical field theories (general)</xsl:when>
@@ -7255,7 +7257,7 @@
                 <xsl:when test="$mscSubjectCode='70H07'">Nonintegrable systems for problems in Hamiltonian and Lagrangian mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70H08'">Nearly integrable Hamiltonian systems, KAM theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='70H09'">Perturbation theories for problems in Hamiltonian and Lagrangian mechanics</xsl:when>
-                <xsl:when test="$mscSubjectCode='70H10'">Liouville's theorem </xsl:when>
+                <xsl:when test="$mscSubjectCode='70H10'">Liouville's theorem</xsl:when>
                 <xsl:when test="$mscSubjectCode='70H11'">Adiabatic invariants for problems in Hamiltonian and Lagrangian mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70H12'">Periodic and almost periodic solutions for problems in Hamiltonian and Lagrangian mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70H14'">Stability problems for problems in Hamiltonian and Lagrangian mechanics</xsl:when>
@@ -7282,8 +7284,8 @@
                 <xsl:when test="$mscSubjectCode='70Jxx'">Linear vibration theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='70K'">Nonlinear dynamics in mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70K05'">Phase plane analysis, limit cycles for nonlinear problems in mechanics</xsl:when>
-                <xsl:when test="$mscSubjectCode='70K10'">Limit cycles </xsl:when>
-                <xsl:when test="$mscSubjectCode='70K15'">Lyapunov theorems </xsl:when>
+                <xsl:when test="$mscSubjectCode='70K10'">Limit cycles</xsl:when>
+                <xsl:when test="$mscSubjectCode='70K15'">Lyapunov theorems</xsl:when>
                 <xsl:when test="$mscSubjectCode='70K20'">Stability for nonlinear problems in mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70K25'">Free motions for nonlinear problems in mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='70K28'">Parametric resonances for nonlinear problems in mechanics</xsl:when>
@@ -7327,67 +7329,67 @@
                 <xsl:when test="$mscSubjectCode='70Sxx'">Classical field theories</xsl:when>
                 <xsl:when test="$mscSubjectCode='70XX'">Mechanics of particles and systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='7300'">General reference works (handbooks, dictionaries, bibliographies, etc.)</xsl:when>
-                <xsl:when test="$mscSubjectCode='7301'">Instructional exposition (textbooks, tutorial papers, etc.) </xsl:when>
+                <xsl:when test="$mscSubjectCode='7301'">Instructional exposition (textbooks, tutorial papers, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='7302'">Research exposition (monographs, survey articles)</xsl:when>
                 <xsl:when test="$mscSubjectCode='7303'">Historical (must be assigned at least one classification number from Section 01)</xsl:when>
                 <xsl:when test="$mscSubjectCode='7304'">Explicit machine computation and programs (not the theory of computation or programming)</xsl:when>
-                <xsl:when test="$mscSubjectCode='7305'">Experimental papers </xsl:when>
+                <xsl:when test="$mscSubjectCode='7305'">Experimental papers</xsl:when>
                 <xsl:when test="$mscSubjectCode='7306'">Proceedings, conferences, collections, etc.</xsl:when>
                 <xsl:when test="$mscSubjectCode='73A05'">Axiomatics, foundations of solid mechanics</xsl:when>
-                <xsl:when test="$mscSubjectCode='73B05'">Constitutive equations </xsl:when>
-                <xsl:when test="$mscSubjectCode='73B10'">Symmetry groups </xsl:when>
-                <xsl:when test="$mscSubjectCode='73B18'">Nonlocal theories </xsl:when>
-                <xsl:when test="$mscSubjectCode='73B25'">Polar theories </xsl:when>
+                <xsl:when test="$mscSubjectCode='73B05'">Constitutive equations</xsl:when>
+                <xsl:when test="$mscSubjectCode='73B10'">Symmetry groups</xsl:when>
+                <xsl:when test="$mscSubjectCode='73B18'">Nonlocal theories</xsl:when>
+                <xsl:when test="$mscSubjectCode='73B25'">Polar theories</xsl:when>
                 <xsl:when test="$mscSubjectCode='73B27'">Nonhomogeneous materials; homogenization</xsl:when>
                 <xsl:when test="$mscSubjectCode='73B30'">Thermodynamics of solids</xsl:when>
-                <xsl:when test="$mscSubjectCode='73B35'">Random materials </xsl:when>
-                <xsl:when test="$mscSubjectCode='73B40'">Anisotropic materials </xsl:when>
-                <xsl:when test="$mscSubjectCode='73B50'">Stress concentrations </xsl:when>
-                <xsl:when test="$mscSubjectCode='73B99'">None of the above but in this section </xsl:when>
-                <xsl:when test="$mscSubjectCode='73Bxx'">Continuum mechanics of solids (constitutive description and properties) </xsl:when>
+                <xsl:when test="$mscSubjectCode='73B35'">Random materials</xsl:when>
+                <xsl:when test="$mscSubjectCode='73B40'">Anisotropic materials</xsl:when>
+                <xsl:when test="$mscSubjectCode='73B50'">Stress concentrations</xsl:when>
+                <xsl:when test="$mscSubjectCode='73B99'">None of the above but in this section</xsl:when>
+                <xsl:when test="$mscSubjectCode='73Bxx'">Continuum mechanics of solids (constitutive description and properties)</xsl:when>
                 <xsl:when test="$mscSubjectCode='73C02'">Classical linear elasticity</xsl:when>
-                <xsl:when test="$mscSubjectCode='73C05'">Stress functions </xsl:when>
-                <xsl:when test="$mscSubjectCode='73C10'">Saint-Venant's principle </xsl:when>
-                <xsl:when test="$mscSubjectCode='73C15'">Uniqueness theorems </xsl:when>
+                <xsl:when test="$mscSubjectCode='73C05'">Stress functions</xsl:when>
+                <xsl:when test="$mscSubjectCode='73C10'">Saint-Venant's principle</xsl:when>
+                <xsl:when test="$mscSubjectCode='73C15'">Uniqueness theorems</xsl:when>
                 <xsl:when test="$mscSubjectCode='73C35'">Mixed boundary value problems</xsl:when>
-                <xsl:when test="$mscSubjectCode='73C50'">Nonlinear elasticity </xsl:when>
-                <xsl:when test="$mscSubjectCode='73C99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73C50'">Nonlinear elasticity</xsl:when>
+                <xsl:when test="$mscSubjectCode='73C99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Cxx'">Elasticity, {For the biharmonic equation</xsl:when>
                 <xsl:when test="$mscSubjectCode='73D05'">Impact and explosion problems</xsl:when>
-                <xsl:when test="$mscSubjectCode='73D10'">Integral transforms </xsl:when>
-                <xsl:when test="$mscSubjectCode='73D15'">Body waves </xsl:when>
-                <xsl:when test="$mscSubjectCode='73D20'">Surface waves </xsl:when>
+                <xsl:when test="$mscSubjectCode='73D10'">Integral transforms</xsl:when>
+                <xsl:when test="$mscSubjectCode='73D15'">Body waves</xsl:when>
+                <xsl:when test="$mscSubjectCode='73D20'">Surface waves</xsl:when>
                 <xsl:when test="$mscSubjectCode='73D25'">Wave diffraction and dispersion</xsl:when>
                 <xsl:when test="$mscSubjectCode='73D30'">Linear vibrations</xsl:when>
                 <xsl:when test="$mscSubjectCode='73D35'">Nonlinear vibrations</xsl:when>
-                <xsl:when test="$mscSubjectCode='73D40'">Singular surfaces </xsl:when>
+                <xsl:when test="$mscSubjectCode='73D40'">Singular surfaces</xsl:when>
                 <xsl:when test="$mscSubjectCode='73D50'">Inverse problems</xsl:when>
-                <xsl:when test="$mscSubjectCode='73D70'">Random waves </xsl:when>
-                <xsl:when test="$mscSubjectCode='73D99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73D70'">Random waves</xsl:when>
+                <xsl:when test="$mscSubjectCode='73D99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Dxx'">Wave propagation in and vibrations of solids</xsl:when>
-                <xsl:when test="$mscSubjectCode='73E05'">Constitutive specifications (yield criteria, flow rules, hardening, softening) </xsl:when>
+                <xsl:when test="$mscSubjectCode='73E05'">Constitutive specifications (yield criteria, flow rules, hardening, softening)</xsl:when>
                 <xsl:when test="$mscSubjectCode='73E10'">Method of successive approximations</xsl:when>
-                <xsl:when test="$mscSubjectCode='73E20'">Limit analysis </xsl:when>
-                <xsl:when test="$mscSubjectCode='73E50'">Time-dependent problems </xsl:when>
+                <xsl:when test="$mscSubjectCode='73E20'">Limit analysis</xsl:when>
+                <xsl:when test="$mscSubjectCode='73E50'">Time-dependent problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='73E60'">Viscoplasticity</xsl:when>
-                <xsl:when test="$mscSubjectCode='73E70'">Plastic waves </xsl:when>
-                <xsl:when test="$mscSubjectCode='73E99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73E70'">Plastic waves</xsl:when>
+                <xsl:when test="$mscSubjectCode='73E99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Exx'">Plasticity</xsl:when>
                 <xsl:when test="$mscSubjectCode='73F05'">Creep and relaxation functions</xsl:when>
-                <xsl:when test="$mscSubjectCode='73F10'">Correspondence principle </xsl:when>
-                <xsl:when test="$mscSubjectCode='73F15'">Time-dependent problems </xsl:when>
+                <xsl:when test="$mscSubjectCode='73F10'">Correspondence principle</xsl:when>
+                <xsl:when test="$mscSubjectCode='73F15'">Time-dependent problems</xsl:when>
                 <xsl:when test="$mscSubjectCode='73F20'">Aging of materials</xsl:when>
-                <xsl:when test="$mscSubjectCode='73F25'">Environmental-dependent materials </xsl:when>
-                <xsl:when test="$mscSubjectCode='73F99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73F25'">Environmental-dependent materials</xsl:when>
+                <xsl:when test="$mscSubjectCode='73F99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Fxx'">Viscoelasticity</xsl:when>
-                <xsl:when test="$mscSubjectCode='73G05'">Finite elasticity </xsl:when>
-                <xsl:when test="$mscSubjectCode='73G20'">Finite plasticity </xsl:when>
-                <xsl:when test="$mscSubjectCode='73G25'">Finite viscoelasticity </xsl:when>
-                <xsl:when test="$mscSubjectCode='73G99'">None of the above but in this section </xsl:when>
-                <xsl:when test="$mscSubjectCode='73Gxx'">Finite deformations </xsl:when>
+                <xsl:when test="$mscSubjectCode='73G05'">Finite elasticity</xsl:when>
+                <xsl:when test="$mscSubjectCode='73G20'">Finite plasticity</xsl:when>
+                <xsl:when test="$mscSubjectCode='73G25'">Finite viscoelasticity</xsl:when>
+                <xsl:when test="$mscSubjectCode='73G99'">None of the above but in this section</xsl:when>
+                <xsl:when test="$mscSubjectCode='73Gxx'">Finite deformations</xsl:when>
                 <xsl:when test="$mscSubjectCode='73H05'">Buckling</xsl:when>
-                <xsl:when test="$mscSubjectCode='73H10'">Dynamic stability </xsl:when>
-                <xsl:when test="$mscSubjectCode='73H99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73H10'">Dynamic stability</xsl:when>
+                <xsl:when test="$mscSubjectCode='73H99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Hxx'">Stability (linear and nonlinear)</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K03'">Strings</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K05'">Beams, columns, rods</xsl:when>
@@ -7395,27 +7397,27 @@
                 <xsl:when test="$mscSubjectCode='73K12'">Dynamics of structures</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K15'">Shells</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K20'">Composite structures and materials</xsl:when>
-                <xsl:when test="$mscSubjectCode='73K35'">Random vibrations </xsl:when>
+                <xsl:when test="$mscSubjectCode='73K35'">Random vibrations</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K40'">Optimization</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K50'">Control of structures</xsl:when>
                 <xsl:when test="$mscSubjectCode='73K70'">Aero- or hydromechanic structure interactions</xsl:when>
-                <xsl:when test="$mscSubjectCode='73K99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73K99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Kxx'">Mechanics of structures</xsl:when>
-                <xsl:when test="$mscSubjectCode='73M25'">Fracture mechanics </xsl:when>
+                <xsl:when test="$mscSubjectCode='73M25'">Fracture mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='73N20'">Geophysical solid mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='73P05'">Biomechanics of solids</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Q05'">Soil and rock mechanics</xsl:when>
-                <xsl:when test="$mscSubjectCode='73R05'">Electromagnetic elasticity </xsl:when>
+                <xsl:when test="$mscSubjectCode='73R05'">Electromagnetic elasticity</xsl:when>
                 <xsl:when test="$mscSubjectCode='73S10'">Micromechanics of solids</xsl:when>
                 <xsl:when test="$mscSubjectCode='73T05'">Contact and surface mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='73V05'">Finite element methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='73V10'">Boundary element methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='73V15'">Finite difference methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='73V20'">Other numerical methods</xsl:when>
-                <xsl:when test="$mscSubjectCode='73V25'">Variational methods </xsl:when>
-                <xsl:when test="$mscSubjectCode='73V30'">Stochastic analysis </xsl:when>
+                <xsl:when test="$mscSubjectCode='73V25'">Variational methods</xsl:when>
+                <xsl:when test="$mscSubjectCode='73V30'">Stochastic analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='73V35'">Complex variable techniques</xsl:when>
-                <xsl:when test="$mscSubjectCode='73V99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='73V99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='73Vxx'">Basic methods in solid mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='73XX'">Mechanics of solids</xsl:when>
                 <xsl:when test="$mscSubjectCode='74'">Mechanics of deformable solids</xsl:when>
@@ -7619,7 +7621,7 @@
                 <xsl:when test="$mscSubjectCode='76Axx'">Foundations, constitutive equations, rheology, hydrodynamical models of non-fluid phenomena</xsl:when>
                 <xsl:when test="$mscSubjectCode='76B'">Incompressible inviscid fluids</xsl:when>
                 <xsl:when test="$mscSubjectCode='76B03'">Existence, uniqueness, and regularity theory for incompressible inviscid fluids</xsl:when>
-                <xsl:when test="$mscSubjectCode='76B05'">Airfoil theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='76B05'">Airfoil theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='76B07'">Free-surface potential flows for incompressible inviscid fluids</xsl:when>
                 <xsl:when test="$mscSubjectCode='76B10'">Jets and cavities, cavitation, free-streamline theory, water-entry problems, airfoil and hydrofoil theory, sloshing</xsl:when>
                 <xsl:when test="$mscSubjectCode='76B15'">Water waves, gravity waves; dispersion and scattering, nonlinear interaction</xsl:when>
@@ -7634,11 +7636,11 @@
                 <xsl:when test="$mscSubjectCode='76B75'">Flow control and optimization for incompressible inviscid fluids</xsl:when>
                 <xsl:when test="$mscSubjectCode='76B99'">Incompressible inviscid fluids</xsl:when>
                 <xsl:when test="$mscSubjectCode='76Bxx'">Incompressible inviscid fluids</xsl:when>
-                <xsl:when test="$mscSubjectCode='76C05'">Vorticity flows </xsl:when>
-                <xsl:when test="$mscSubjectCode='76C10'">Internal waves </xsl:when>
-                <xsl:when test="$mscSubjectCode='76C15'">Atmospheric waves </xsl:when>
-                <xsl:when test="$mscSubjectCode='76C20'">Rossby waves </xsl:when>
-                <xsl:when test="$mscSubjectCode='76C99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='76C05'">Vorticity flows</xsl:when>
+                <xsl:when test="$mscSubjectCode='76C10'">Internal waves</xsl:when>
+                <xsl:when test="$mscSubjectCode='76C15'">Atmospheric waves</xsl:when>
+                <xsl:when test="$mscSubjectCode='76C20'">Rossby waves</xsl:when>
+                <xsl:when test="$mscSubjectCode='76C99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='76Cxx'">Incompressible inviscid fluids, vorticity flows</xsl:when>
                 <xsl:when test="$mscSubjectCode='76D'">Incompressible viscous fluids</xsl:when>
                 <xsl:when test="$mscSubjectCode='76D03'">Existence, uniqueness, and regularity theory for incompressible viscous fluids</xsl:when>
@@ -7666,7 +7668,7 @@
                 <xsl:when test="$mscSubjectCode='76E06'">Convection in hydrodynamic stability</xsl:when>
                 <xsl:when test="$mscSubjectCode='76E07'">Rotation in hydrodynamic stability</xsl:when>
                 <xsl:when test="$mscSubjectCode='76E09'">Stability and instability of nonparallel flows in hydrodynamic stability</xsl:when>
-                <xsl:when test="$mscSubjectCode='76E10'">Inertial instability </xsl:when>
+                <xsl:when test="$mscSubjectCode='76E10'">Inertial instability</xsl:when>
                 <xsl:when test="$mscSubjectCode='76E15'">Absolute and convective instability and stability in hydrodynamic stability</xsl:when>
                 <xsl:when test="$mscSubjectCode='76E17'">Interfacial stability and instability in hydrodynamic stability</xsl:when>
                 <xsl:when test="$mscSubjectCode='76E19'">Compressibility effects in hydrodynamic stability</xsl:when>
@@ -7809,7 +7811,7 @@
                 <xsl:when test="$mscSubjectCode='7804'">Software, source code, etc. for problems pertaining to optics and electromagnetic theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='7805'">Experimental work for problems pertaining to optics and electromagnetic theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='7806'">Proceedings, conferences, collections, etc. pertaining to optics and electromagnetic theory</xsl:when>
-                <xsl:when test="$mscSubjectCode='7808'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='7808'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='7810'">Mathematical modeling or simulation for problems pertaining to optics and electromagnetic theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='7811'">Research data for problems pertaining to optics and electromagnetic theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='78A'">General topics in optics and electromagnetic theory</xsl:when>
@@ -7860,7 +7862,7 @@
                 <xsl:when test="$mscSubjectCode='8004'">Software, source code, etc. for problems pertaining to classical thermodynamics</xsl:when>
                 <xsl:when test="$mscSubjectCode='8005'">Experimental work for problems pertaining to classical thermodynamics</xsl:when>
                 <xsl:when test="$mscSubjectCode='8006'">Proceedings, conferences, collections, etc. pertaining to classical thermodynamics</xsl:when>
-                <xsl:when test="$mscSubjectCode='8008'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='8008'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='8010'">Mathematical modeling or simulation for problems pertaining to classical thermodynamics</xsl:when>
                 <xsl:when test="$mscSubjectCode='8011'">Research data for problems pertaining to classical thermodynamics</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A'">Thermodynamics and heat transfer</xsl:when>
@@ -7869,7 +7871,7 @@
                 <xsl:when test="$mscSubjectCode='80A15'">Thermodynamics of mixtures</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A17'">Thermodynamics of continua</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A19'">Diffusive and convective heat and mass transfer, heat flow</xsl:when>
-                <xsl:when test="$mscSubjectCode='80A20'">Heat and mass transfer, heat flow </xsl:when>
+                <xsl:when test="$mscSubjectCode='80A20'">Heat and mass transfer, heat flow</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A21'">Radiative heat transfer</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A22'">Stefan problems, phase changes, etc.</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A23'">Inverse problems in thermodynamics and heat transfer</xsl:when>
@@ -7877,7 +7879,7 @@
                 <xsl:when test="$mscSubjectCode='80A30'">Chemical kinetics in thermodynamics and heat transfer</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A32'">Chemically reacting flows</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A50'">Chemistry (general) in thermodynamics and heat transfer</xsl:when>
-                <xsl:when test="$mscSubjectCode='80A97'">Mathematically heuristic classical thermodynamics (must also be assigned at least one other classification number in this section) </xsl:when>
+                <xsl:when test="$mscSubjectCode='80A97'">Mathematically heuristic classical thermodynamics (must also be assigned at least one other classification number in this section)</xsl:when>
                 <xsl:when test="$mscSubjectCode='80A99'">Thermodynamics and heat transfer</xsl:when>
                 <xsl:when test="$mscSubjectCode='80Axx'">Thermodynamics and heat transfer</xsl:when>
                 <xsl:when test="$mscSubjectCode='80M'">Basic methods in thermodynamics and heat transfer</xsl:when>
@@ -8045,7 +8047,7 @@
                 <xsl:when test="$mscSubjectCode='8204'">Software, source code, etc. for problems pertaining to statistical mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='8205'">Experimental work for problems pertaining to statistical mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='8206'">Proceedings, conferences, collections, etc. pertaining to statistical mechanics</xsl:when>
-                <xsl:when test="$mscSubjectCode='8208'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='8208'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='8210'">Mathematical modeling or simulation for problems pertaining to statistical mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='8211'">Research data for problems pertaining to statistical mechanics</xsl:when>
                 <xsl:when test="$mscSubjectCode='82B'">Equilibrium statistical mechanics</xsl:when>
@@ -8204,7 +8206,7 @@
                 <xsl:when test="$mscSubjectCode='85A30'">Hydrodynamic and hydromagnetic problems in astronomy and astrophysics</xsl:when>
                 <xsl:when test="$mscSubjectCode='85A35'">Statistical astronomy</xsl:when>
                 <xsl:when test="$mscSubjectCode='85A40'">Astrophysical cosmology</xsl:when>
-                <xsl:when test="$mscSubjectCode='85A45'">Radio astronomy </xsl:when>
+                <xsl:when test="$mscSubjectCode='85A45'">Radio astronomy</xsl:when>
                 <xsl:when test="$mscSubjectCode='85A99'">Astronomy and astrophysics</xsl:when>
                 <xsl:when test="$mscSubjectCode='85Axx'">Astronomy and astrophysics</xsl:when>
                 <xsl:when test="$mscSubjectCode='85XX'">Astronomy and astrophysics</xsl:when>
@@ -8249,36 +8251,36 @@
                 <xsl:when test="$mscSubjectCode='9010'">Mathematical modeling or simulation for problems pertaining to operations research and mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='9011'">Research data for problems pertaining to operations research and mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A05'">Decision theory</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A06'">Individual preferences </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A07'">Group preferences </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A08'">Social choice </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A06'">Individual preferences</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A07'">Group preferences</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A08'">Social choice</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A09'">Finance, portfolios, investment</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A10'">Utility theory </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A11'">Production theory, theory of the firm </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A10'">Utility theory</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A11'">Production theory, theory of the firm</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A12'">Price theory and market structure</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A14'">Equilibrium: general theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A15'">General economic models, trade models</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A16'">Dynamic economic models, growth models</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A17'">Multisectoral models </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A19'">Statistical models; economic indexes and measures </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A17'">Multisectoral models</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A19'">Statistical models; economic indexes and measures</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A20'">Economic time series analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A25'">Spatial models </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A27'">Public goods </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A28'">Voting theory </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A30'">Environmental economics (natural resource models, harvesting, pollution, etc.) </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A35'">Informational economics </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A36'">Incentives theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A25'">Spatial models</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A27'">Public goods</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A28'">Voting theory</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A30'">Environmental economics (natural resource models, harvesting, pollution, etc.)</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A35'">Informational economics</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A36'">Incentives theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A40'">Consumer behavior, demand theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A43'">Expected utility; risk-averse utility</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A46'">Risk theory </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A50'">Labor market </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A46'">Risk theory</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A50'">Labor market</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A53'">Special types of economies</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A56'">Special types of equilibria</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A58'">Models of real-world systems; general macro-economic models, etc. </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A58'">Models of real-world systems; general macro-economic models, etc.</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A60'">Market models (auctions, bargaining, bidding, selling, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='90A70'">Macro-economic policy-making, taxation</xsl:when>
-                <xsl:when test="$mscSubjectCode='90A80'">Resource allocation </xsl:when>
-                <xsl:when test="$mscSubjectCode='90A99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='90A80'">Resource allocation</xsl:when>
+                <xsl:when test="$mscSubjectCode='90A99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='90Axx'">Mathematical economics</xsl:when>
                 <xsl:when test="$mscSubjectCode='90B'">Operations research and management science</xsl:when>
                 <xsl:when test="$mscSubjectCode='90B05'">Inventory, storage, reservoirs</xsl:when>
@@ -8318,7 +8320,7 @@
                 <xsl:when test="$mscSubjectCode='90C25'">Convex programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C26'">Nonconvex programming, global optimization</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C27'">Combinatorial optimization</xsl:when>
-                <xsl:when test="$mscSubjectCode='90C28'">Geometric programming </xsl:when>
+                <xsl:when test="$mscSubjectCode='90C28'">Geometric programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C29'">Multi-objective and goal programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C30'">Nonlinear programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C31'">Sensitivity, stability, parametric optimization</xsl:when>
@@ -8328,8 +8330,8 @@
                 <xsl:when test="$mscSubjectCode='90C35'">Programming involving graphs or networks</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C39'">Dynamic programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C40'">Markov and semi-Markov decision processes</xsl:when>
-                <xsl:when test="$mscSubjectCode='90C42'">Markov programming and Markov renewal programming </xsl:when>
-                <xsl:when test="$mscSubjectCode='90C45'">Continuous programming </xsl:when>
+                <xsl:when test="$mscSubjectCode='90C42'">Markov programming and Markov renewal programming</xsl:when>
+                <xsl:when test="$mscSubjectCode='90C45'">Continuous programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C46'">Optimality conditions and duality in mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C47'">Minimax problems in mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C48'">Programming in abstract spaces</xsl:when>
@@ -8346,10 +8348,10 @@
                 <xsl:when test="$mscSubjectCode='90C90'">Applications of mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90C99'">Mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='90Cxx'">Mathematical programming</xsl:when>
-                <xsl:when test="$mscSubjectCode='90D05'">$2$-person games </xsl:when>
+                <xsl:when test="$mscSubjectCode='90D05'">$2$-person games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D06'">$n$-person games, $n>2$</xsl:when>
-                <xsl:when test="$mscSubjectCode='90D10'">Noncooperative games </xsl:when>
-                <xsl:when test="$mscSubjectCode='90D12'">Cooperative games </xsl:when>
+                <xsl:when test="$mscSubjectCode='90D10'">Noncooperative games</xsl:when>
+                <xsl:when test="$mscSubjectCode='90D12'">Cooperative games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D13'">Games with infinitely many players</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D15'">Stochastic games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D20'">Multistage and repeated games</xsl:when>
@@ -8357,18 +8359,18 @@
                 <xsl:when test="$mscSubjectCode='90D26'">Pursuit and evasion games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D35'">Decision theory for games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D40'">Game-theoretic models</xsl:when>
-                <xsl:when test="$mscSubjectCode='90D42'">Positional games </xsl:when>
+                <xsl:when test="$mscSubjectCode='90D42'">Positional games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D43'">Games involving graphs</xsl:when>
-                <xsl:when test="$mscSubjectCode='90D44'">Games involving topology or set theory </xsl:when>
-                <xsl:when test="$mscSubjectCode='90D46'">Combinatorial games </xsl:when>
-                <xsl:when test="$mscSubjectCode='90D50'">Discrete-time games </xsl:when>
+                <xsl:when test="$mscSubjectCode='90D44'">Games involving topology or set theory</xsl:when>
+                <xsl:when test="$mscSubjectCode='90D46'">Combinatorial games</xsl:when>
+                <xsl:when test="$mscSubjectCode='90D50'">Discrete-time games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D55'">Games of timing</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D60'">Probabilistic games; gambling</xsl:when>
-                <xsl:when test="$mscSubjectCode='90D65'">Hierarchical games </xsl:when>
+                <xsl:when test="$mscSubjectCode='90D65'">Hierarchical games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D70'">Spaces of games</xsl:when>
                 <xsl:when test="$mscSubjectCode='90D80'">Applications of game theory</xsl:when>
-                <xsl:when test="$mscSubjectCode='90D99'">None of the above but in this section </xsl:when>
-                <xsl:when test="$mscSubjectCode='90Dxx'">Game theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='90D99'">None of the above but in this section</xsl:when>
+                <xsl:when test="$mscSubjectCode='90Dxx'">Game theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='90XX'">Operations research, mathematical programming</xsl:when>
                 <xsl:when test="$mscSubjectCode='91'">Game theory, economics, finance, and other social and behavioral sciences</xsl:when>
                 <xsl:when test="$mscSubjectCode='9100'">General reference works (handbooks, dictionaries, bibliographies, etc.) pertaining to game theory, economics, and finance</xsl:when>
@@ -8552,36 +8554,36 @@
                 <xsl:when test="$mscSubjectCode='92E'">Chemistry</xsl:when>
                 <xsl:when test="$mscSubjectCode='92E10'">Cognitive psychology</xsl:when>
                 <xsl:when test="$mscSubjectCode='92E20'">Classical flows, reactions, etc.</xsl:when>
-                <xsl:when test="$mscSubjectCode='92E99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='92E99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='92Exx'">Chemistry</xsl:when>
                 <xsl:when test="$mscSubjectCode='92F'">Other natural sciences (mathematical treatment)</xsl:when>
                 <xsl:when test="$mscSubjectCode='92F05'">Other natural sciences (mathematical treatment)</xsl:when>
                 <xsl:when test="$mscSubjectCode='92F99'">Other natural sciences (mathematical treatment)</xsl:when>
                 <xsl:when test="$mscSubjectCode='92Fxx'">Other natural sciences (mathematical treatment)</xsl:when>
-                <xsl:when test="$mscSubjectCode='92G05'">Measurement theory </xsl:when>
+                <xsl:when test="$mscSubjectCode='92G05'">Measurement theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='92G15'">One- and multidimensional scaling</xsl:when>
-                <xsl:when test="$mscSubjectCode='92G20'">Test theory </xsl:when>
-                <xsl:when test="$mscSubjectCode='92G25'">Questionnaire analysis </xsl:when>
+                <xsl:when test="$mscSubjectCode='92G20'">Test theory</xsl:when>
+                <xsl:when test="$mscSubjectCode='92G25'">Questionnaire analysis</xsl:when>
                 <xsl:when test="$mscSubjectCode='92G30'">Clustering</xsl:when>
                 <xsl:when test="$mscSubjectCode='92G40'">Q-analysis</xsl:when>
-                <xsl:when test="$mscSubjectCode='92G99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='92G99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='92Gxx'">Social and behavioral sciences: methodology</xsl:when>
                 <xsl:when test="$mscSubjectCode='92H10'">Models of societies, social and urban evolution</xsl:when>
                 <xsl:when test="$mscSubjectCode='92H20'">Mathematical geography and demography</xsl:when>
                 <xsl:when test="$mscSubjectCode='92H25'">Spatial models</xsl:when>
-                <xsl:when test="$mscSubjectCode='92H30'">Social networks </xsl:when>
+                <xsl:when test="$mscSubjectCode='92H30'">Social networks</xsl:when>
                 <xsl:when test="$mscSubjectCode='92H35'">Manpower systems</xsl:when>
-                <xsl:when test="$mscSubjectCode='92H99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='92H99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='92Hxx'">Mathematical sociology (including anthropology)</xsl:when>
-                <xsl:when test="$mscSubjectCode='92J10'">Cognitive psychology </xsl:when>
+                <xsl:when test="$mscSubjectCode='92J10'">Cognitive psychology</xsl:when>
                 <xsl:when test="$mscSubjectCode='92J30'">Psychophysics and psychophysiology; perception</xsl:when>
                 <xsl:when test="$mscSubjectCode='92J40'">Memory and learning</xsl:when>
                 <xsl:when test="$mscSubjectCode='92J45'">Measurement and performance</xsl:when>
-                <xsl:when test="$mscSubjectCode='92J99'">None of the above but in this section </xsl:when>
-                <xsl:when test="$mscSubjectCode='92Jxx'">Mathematical psychology </xsl:when>
+                <xsl:when test="$mscSubjectCode='92J99'">None of the above but in this section</xsl:when>
+                <xsl:when test="$mscSubjectCode='92Jxx'">Mathematical psychology</xsl:when>
                 <xsl:when test="$mscSubjectCode='92K10'">History, political science</xsl:when>
                 <xsl:when test="$mscSubjectCode='92K20'">Linguistics</xsl:when>
-                <xsl:when test="$mscSubjectCode='92K99'">None of the above but in this section </xsl:when>
+                <xsl:when test="$mscSubjectCode='92K99'">None of the above but in this section</xsl:when>
                 <xsl:when test="$mscSubjectCode='92Kxx'">Other social and behavioral sciences (mathematical treatment)</xsl:when>
                 <xsl:when test="$mscSubjectCode='92XX'">Biology and other natural sciences</xsl:when>
                 <xsl:when test="$mscSubjectCode='93'">Systems theory; control</xsl:when>
@@ -8602,15 +8604,15 @@
                 <xsl:when test="$mscSubjectCode='93A14'">Decentralized systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='93A15'">Large-scale systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='93A16'">Multi-agent systems</xsl:when>
-                <xsl:when test="$mscSubjectCode='93A20'">Cascaded systems </xsl:when>
-                <xsl:when test="$mscSubjectCode='93A25'">Input-output systems </xsl:when>
+                <xsl:when test="$mscSubjectCode='93A20'">Cascaded systems</xsl:when>
+                <xsl:when test="$mscSubjectCode='93A25'">Input-output systems</xsl:when>
                 <xsl:when test="$mscSubjectCode='93A30'">Mathematical modeling (models of systems, model-matching, etc.)</xsl:when>
                 <xsl:when test="$mscSubjectCode='93A99'">General systems theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='93Axx'">General systems theory</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B'">Controllability, observability, and system structure</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B03'">Attainable sets, reachability</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B05'">Controllability</xsl:when>
-                <xsl:when test="$mscSubjectCode='93B06'">Relations between controllability and optimal solutions </xsl:when>
+                <xsl:when test="$mscSubjectCode='93B06'">Relations between controllability and optimal solutions</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B07'">Observability</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B10'">Canonical structure</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B11'">System structure simplification</xsl:when>
@@ -8623,11 +8625,11 @@
                 <xsl:when test="$mscSubjectCode='93B25'">Algebraic methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B27'">Geometric methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B28'">Operator-theoretic methods</xsl:when>
-                <xsl:when test="$mscSubjectCode='93B29'">Differential-geometric methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='93B29'">Differential-geometric methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B30'">System identification</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B35'">Sensitivity (robustness)</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B36'">\(H^\infty\)-control</xsl:when>
-                <xsl:when test="$mscSubjectCode='93B40'">Computational methods </xsl:when>
+                <xsl:when test="$mscSubjectCode='93B40'">Computational methods</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B45'">Model predictive control</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B47'">Iterative learning control</xsl:when>
                 <xsl:when test="$mscSubjectCode='93B50'">Synthesis problems</xsl:when>
@@ -8942,29 +8944,32 @@
                         <term>
                             <xsl:value-of select="$apresEspace"/>
                         </term>
-                    </xsl:when>
+                   </xsl:when>
                     <xsl:otherwise>
-                        <term>
-                            <xsl:if test="@lang[string-length()&gt;0]">
-                                <xsl:attribute name="xml:lang">
-                                    <xsl:value-of select="translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-                                </xsl:attribute>
-                            </xsl:if>
-                            <xsl:if test="@scheme[string-length()&gt;0]">
-                                <xsl:attribute name="type">
-                                    <xsl:value-of select="normalize-space(@scheme)"/>
-                                </xsl:attribute>
-                            </xsl:if>
-                            <xsl:if test="@rank[string-length()&gt;0]">
-                                <xsl:attribute name="ana">
-                                    <xsl:value-of select="normalize-space(@rank)"/>
-                                </xsl:attribute>
-                            </xsl:if>
-                            <xsl:attribute name="n">
-                                <xsl:value-of select="$mscSubjectCode"/>
-                            </xsl:attribute>
-                            <xsl:value-of select="$mscSubjectVerb"/>
-                        </term>
+                            <item>
+                                <label>
+                                    <xsl:value-of select="$mscSubjectCode"/>
+                                </label>
+                                <term>
+                                    <xsl:if test="@lang[string-length()&gt;0]">
+                                        <xsl:attribute name="xml:lang">
+                                            <xsl:value-of select="translate(@lang,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:if test="@scheme[string-length()&gt;0]">
+                                        <xsl:attribute name="type">
+                                            <xsl:value-of select="normalize-space(@scheme)"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:if test="@rank[string-length()&gt;0]">
+                                        <xsl:attribute name="ana">
+                                            <xsl:value-of select="normalize-space(@rank)"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:value-of select="$mscSubjectVerb"/>
+                                </term>
+                            </item>
+                        
                     </xsl:otherwise>
                 </xsl:choose>
     </xsl:template>

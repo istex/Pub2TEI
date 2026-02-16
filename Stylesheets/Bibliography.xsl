@@ -1666,36 +1666,17 @@
             <!-- partie analytique (article) -->
             <analytic>
                 <xsl:apply-templates select="authors/au"/>
-                <!--<xsl:for-each select="authors/au">
-                    <author>
-                        <persName>
-                            <surname>
-                                <xsl:value-of select="second-name"/>
-                            </surname>
-                            <forename type="first">
-                                <xsl:value-of select="first-names"/>
-                            </forename>
-                        </persName>
-                    </author>
-                </xsl:for-each>-->
-                <xsl:for-each select="authors/others">
-                    <author>
-                        <xsl:value-of select="italic"/>
-                    </author>
-                </xsl:for-each>
                 <!-- utilisation pipe xpath => ne préjuge pas de l'ordre -->
-                <xsl:apply-templates
-                    select="
-                        authors | aut
-                        | art-title | art-ref/atl
-                        | art-number
+                
+                <xsl:apply-templates select="authors | aut"/>
+                <xsl:apply-templates select="authors/others"/>
+                <xsl:apply-templates select="art-title | art-ref/atl"/>
+                <xsl:apply-templates select="art-number
                         | preprint-info/art-number
                         | misc-text/extdoi
                         | crossref/cr_doi"/>
-
                 <xsl:apply-templates select="url" mode="citation"/>
             </analytic>
-
             <!-- partie monographique (périodique) -->
             <monogr>
                 <xsl:apply-templates
@@ -3775,5 +3756,4 @@
             <xsl:apply-templates/>
         </bibl>
     </xsl:template>
-
 </xsl:stylesheet>

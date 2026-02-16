@@ -366,7 +366,11 @@
                 <xsl:value-of select="count(xref)"/>
             </xsl:variable>
             <xsl:choose>
-                <xsl:when test="not(xref[@id]) and /article/front/article-meta/aff">
+                <!-- cas particulier OUP doi:10.1093/jjco/hyf080-->
+                <xsl:when test="/article/front/article-meta/contrib-group/aff/target[@id=current()/xref/@rid]">
+                        <xsl:apply-templates select="/article/front/article-meta/contrib-group/aff/target[@id=current()/xref/@rid]" mode="affilOUP"/>
+                </xsl:when>
+                <xsl:when test="not(xref[@rid]) and /article/front/article-meta/aff">
                     <xsl:apply-templates select="/article/front/article-meta/aff"/>
                 </xsl:when>
                 <!-- traitements des affiliations dans des sub-articles -->
@@ -685,4 +689,10 @@
     </xsl:template>
 
     <xsl:template match="flags"/>
+    
+   <xsl:template match="target" mode="affilOUP">
+        <affiliation>
+            <xsl:value-of select="following-sibling::text()[1]"/>
+        </affiliation>
+    </xsl:template>
 </xsl:stylesheet>

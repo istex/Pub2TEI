@@ -383,7 +383,7 @@
                                
 
                                 <!-- Adresse(s) d'affiliation -->
-                                <xsl:apply-templates select="header/editor-group | header/author-group/collaboration | header/authors/collaboration | header/editors/collaboration"/>
+                                <xsl:apply-templates select="header/editor-group | header/editors | header/authors" mode="IOP"/>
 
                                 <!-- Identifiants article (DOI, PII et 3 IDS internes à IOP ...) -->
                                 <xsl:apply-templates select="article-metadata/article-data/doi[string-length() &gt; 0] | ident/doi[string-length() &gt; 0]"/>
@@ -910,7 +910,17 @@
         Cas "auteur normal"
     -->
     <xsl:template match="author-group | collaboration">
-        <xsl:apply-templates select="*" mode="IOP"/>
+        <xsl:apply-templates mode="IOP"/>
+    </xsl:template>
+    <xsl:template match="collaboration" mode="IOP">
+        <xsl:apply-templates select="group" mode="IOP"/>
+    </xsl:template>
+    <xsl:template match="group" mode="IOP">
+        <author>
+            <orgName>
+                <xsl:apply-templates/>
+            </orgName>
+        </author>
     </xsl:template>
     <xsl:template match="authors">
         <xsl:apply-templates select="au" mode="IOP"/>
@@ -1129,18 +1139,18 @@
     <xsl:template match="author-group/collaboration | authors/collaboration | editors/collaboration">
         <xsl:apply-templates select="author"/>
         <xsl:apply-templates select="editor"/>
-        <xsl:apply-templates select="group"/>
+        <xsl:apply-templates select="group" mode="collaboration"/>
     </xsl:template>
     
     <!--authors/collaboration/group
         (optionnel) le seul sous-élément autorisé de <collaboration>
         TODO voir si on peut ajouter quelque chose ici
     -->
-    <xsl:template match="collaboration/group">
+  <xsl:template match="group" mode="collaboration">
         <author>
-            <name>
-        <xsl:apply-templates/>
-            </name>
+            <orgName>
+                <xsl:apply-templates/>
+            </orgName>
         </author>
     </xsl:template>
     <!--authors/others
@@ -1148,7 +1158,7 @@
         Vu uniquement dans les références de fin d'article
     -->
     <xsl:template match="authors/others">
-        <author ana="other-authors">
+        <author ana="etal">
             <xsl:value-of select="normalize-space(.)"/>
         </author>
     </xsl:template>

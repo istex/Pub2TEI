@@ -1268,6 +1268,8 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <!-- brill-rppo -->
+    <xsl:template match="@TEIform" mode="tei"/>
     <!-- harmonisation des style tei:openEdition journals et books -->
     <xsl:template match="@rendition" mode="tei">
         <xsl:choose>
@@ -1331,7 +1333,12 @@
             </xsl:choose>
         </text>
     </xsl:template>
-    <xsl:template match="tei:div[@type='bibliography']" mode="tei">
+    <!--<xsl:template match="tei:div[@type='bibliography']" mode="tei">
+        <div type="references">
+            <xsl:apply-templates select="node()" mode="tei"/>
+        </div>
+    </xsl:template>-->
+    <xsl:template match="tei:div[tei:head='Bibliography']" mode="tei">
         <div type="references">
             <xsl:apply-templates select="node()" mode="tei"/>
         </div>
@@ -1467,10 +1474,10 @@
                             <xsl:copy-of select="tei:back/*"/>
                     </back>
                 </xsl:when>
-                <xsl:when test="tei:body/tei:div[@type='bibliography'] !=''">
+                <xsl:when test="//tei:div[tei:head='Bibliography'] !=''">
                     <!-- Pauly -->
                     <back>
-                        <xsl:apply-templates select="tei:body/tei:div[@type='bibliography']| @*" mode="tei"/>
+                        <xsl:apply-templates select="//tei:div[tei:head='Bibliography']| @*" mode="tei"/>
                     </back>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1487,21 +1494,25 @@
     </xsl:template>
     
     <xsl:template match="tei:body">
-        <body>
-          <xsl:choose>
-                <!-- open-edition -->
-              <xsl:when test="(tei:p |tei:div)  and //tei:distributor='OpenEdition'">
-                  <xsl:apply-templates select="tei:p|tei:div"/>
-                </xsl:when>
-                <!-- droz -->
-                <xsl:when test="tei:div and //tei:funder='Librairie Droz'">
+        <xsl:choose>
+            <!-- open-edition -->
+            <xsl:when test="(tei:p |tei:div)  and //tei:distributor='OpenEdition'">
+                <body>
+                    <xsl:apply-templates select="tei:p|tei:div"/>
+                </body>
+            </xsl:when>
+            <!-- droz -->
+            <xsl:when test="tei:div and //tei:funder='Librairie Droz'">
+                <body>
                     <xsl:apply-templates select="tei:div"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:copy-of select="* except(tei:div[@type='bibliography'])" copy-namespaces="no"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </body>
+                </body>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy copy-namespaces="no">
+                    <xsl:apply-templates select="node() except(tei:div[@type='bibliography']) |@* except(@TEIform)" mode="tei"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="tei:p">

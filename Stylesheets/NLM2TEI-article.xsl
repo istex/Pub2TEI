@@ -2242,8 +2242,6 @@
                    </xsl:call-template>
                </affiliation>
            </xsl:when>
-           <!-- cas particulier ACS -->
-           <!--<xsl:when test="//author-notes/fn/label='†'"/>-->
            <xsl:otherwise>
                <xsl:choose>
                    <xsl:when test="institution">
@@ -5192,7 +5190,8 @@
                                                                                     <xsl:choose>
                                                                                         <xsl:when test="contains($avantVirgule,'strasse')
                                                                                             or contains($avantVirgule,' street ')
-                                                                                            or contains($avantVirgule,' rue ')">
+                                                                                            or contains($avantVirgule,' rue ')
+                                                                                            or contains($avantVirgule,' Road')">
                                                                                             <address>
                                                                                                 <street>
                                                                                                     <xsl:apply-templates select="$avantVirgule"/>

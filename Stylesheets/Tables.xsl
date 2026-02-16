@@ -165,7 +165,7 @@
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:if>
-                        <xsl:if test="@rowsep">
+                        <xsl:if test="contains(@rowsep,'1234567890')">
                             <xsl:attribute name="rows">
                                 <xsl:value-of select="@rowsep"/>
                             </xsl:attribute>
@@ -176,7 +176,7 @@
                                     <xsl:value-of select="@tabcols"/>
                                 </xsl:attribute>
                             </xsl:when>
-                            <xsl:when test="@colsep">
+                            <xsl:when test="contains(@colsep,'1234567890')">
                                 <xsl:attribute name="cols">
                                     <xsl:value-of select="@colsep"/>
                                 </xsl:attribute>
@@ -212,7 +212,7 @@
                             <xsl:value-of select="@id"/>
                         </xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="@rowsep">
+                    <xsl:if test="contains(@rowsep,'1234567890')">
                         <xsl:attribute name="rows">
                             <xsl:value-of select="@rowsep"/>
                         </xsl:attribute>
@@ -223,7 +223,7 @@
                                 <xsl:value-of select="@tabcols"/>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="@colsep">
+                        <xsl:when test="contains(@colsep,'1234567890')">
                             <xsl:attribute name="cols">
                                 <xsl:value-of select="@colsep"/>
                             </xsl:attribute>
@@ -298,12 +298,12 @@
                                     <xsl:value-of select="graphic/@xlink:href|rsc:graphic/@xlink:href"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="oasis:table/@rowsep">
+                            <xsl:if test="contains(oasis:table/@rowsep,'1234567890')">
                                 <xsl:attribute name="rows">
                                     <xsl:value-of select="oasis:table/@rowsep"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="oasis:table/@colsep">
+                            <xsl:if test="contains(oasis:table/@colsep,'1234567890')">
                                 <xsl:attribute name="cols">
                                     <xsl:value-of select="oasis:table/@colsep"/>
                                 </xsl:attribute>
@@ -345,12 +345,12 @@
                                     <xsl:value-of select="graphic/@xlink:href|rsc:graphic/@xlink:href"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="oasis:table/@rowsep">
+                            <xsl:if test="contains(oasis:table/@rowsep,'1234567890')">
                                 <xsl:attribute name="rows">
                                     <xsl:value-of select="oasis:table/@rowsep"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="oasis:table/@colsep">
+                            <xsl:if test="contains(oasis:table/@colsep,'1234567890')">
                                 <xsl:attribute name="cols">
                                     <xsl:value-of select="oasis:table/@colsep"/>
                                 </xsl:attribute>
@@ -392,12 +392,12 @@
                                     <xsl:value-of select="graphic/@xlink:href"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="oasis:table/@rowsep">
+                            <xsl:if test="contains(oasis:table/@rowsep,'1234567890')">
                                 <xsl:attribute name="rows">
                                     <xsl:value-of select="oasis:table/@rowsep"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:if test="oasis:table/@colsep">
+                            <xsl:if test="contains(oasis:table/@colsep,'1234567890')">
                                 <xsl:attribute name="cols">
                                     <xsl:value-of select="oasis:table/@colsep"/>
                                 </xsl:attribute>
@@ -561,7 +561,7 @@
     <xsl:template match="wiley:row">
         <row>
             <xsl:choose>
-                <xsl:when test="wiley:entry/@rowsep">
+                <xsl:when test="contains(wiley:entry/@rowsep,'1234567890')">
                     <xsl:attribute name="role">label</xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
@@ -573,7 +573,7 @@
     </xsl:template>
     <xsl:template match="wiley:entry">
         <cell>
-            <xsl:if test="@rowsep">
+            <xsl:if test="contains(@rowsep,'1234567890')">
                 <xsl:attribute name="role">label</xsl:attribute>
             </xsl:if>
             <xsl:if test="@morerows">
