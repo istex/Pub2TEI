@@ -3834,7 +3834,7 @@
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:attribute name="type">
-                                                <xsl:text>bib</xsl:text>
+                                                <xsl:text>bibr</xsl:text>
                                             </xsl:attribute>
                                         </xsl:otherwise>
                                     </xsl:choose>
