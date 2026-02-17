@@ -1466,7 +1466,7 @@
     </xsl:template>
     <xsl:template match="tex-math">
         <xsl:choose>
-            <xsl:when test="contains(node(),'epsfbox')">
+            <xsl:when test="/article/front/journal-meta/publisher/publisher-name='IOP Publishing' and contains(node(),'epsfbox')">
                 <figure type="epsbox">
                     <xsl:if test="normalize-space(../@id)">
                         <xsl:attribute name="xml:id">
