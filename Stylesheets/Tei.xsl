@@ -164,7 +164,7 @@
                             source="encyclopedia"
                             scheme="https://content-type.data.istex.fr/ark:/67375/XTP-LMSJ1W70-6">encyclopedia</note>
                         <note type="publication-type"
-                            scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5540BQ2P-Q">references-works</note>
+                            scheme="https://publication-type.data.istex.fr/ark:/67375/JMC-5540BQ2P-Q">reference-works</note>
                     </notesStmt>
                 </xsl:if>
                 <sourceDesc>

@@ -1096,8 +1096,7 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </div>
-                                </body>
-                            </xsl:when>
+                                </body>                            </xsl:when>
                             <xsl:otherwise>
                                 <body>
                                 <div>
@@ -1116,7 +1115,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:choose>
-                    <xsl:when test="back [string-length() &gt; 0] | bm [string-length() &gt; 0]|front/article-meta/product[string-length() &gt; 0]">
+                    <xsl:when test="back [string-length() &gt; 0] | bm [string-length() &gt; 0]|front/article-meta/product[string-length() &gt; 0] | /article/front/article-meta/author-notes/fn[@id]">
                         <back>
                             <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                             <xsl:apply-templates select="front/article-meta/product"/>
@@ -1132,6 +1131,12 @@
                                             <xsl:apply-templates select="front/article-meta/contrib-group/contrib/collab/contrib-group/contrib"/>
                                         </bibl>
                                     </listBibl>
+                                </div>
+                            </xsl:if>
+                            
+                            <xsl:if test="//article/front/article-meta/author-notes/fn !=''">
+                                <div type="fn-group">
+                                    <xsl:apply-templates select="/article/front/article-meta/author-notes/fn"/>
                                 </div>
                             </xsl:if>
                         </back>
@@ -5405,7 +5410,7 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="xref" name="tokenizeJats" mode="karger">
-        <xsl:param name="text" select="translate(xref,' ','')"/>
+        <xsl:param name="text" select="translate(.,' ','')"/>
         <xsl:param name="separator" select="','"/>
         <xsl:choose>
             <xsl:when test="contains($text,'-')">
