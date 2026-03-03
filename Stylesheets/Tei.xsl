@@ -800,9 +800,16 @@
                                     <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:author"/>
                                     <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:editor"/>
                                     <imprint>
-                                        <date>
-                                            <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role='title']=$hostTitle]/tei:cell[@role='date']"/>
-                                        </date>
+                                        <xsl:choose>
+                                            <xsl:when test="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']">
+                                                <date>
+                                                    <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']"/>
+                                                </date>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <date type="published" when="2005">2005</date>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                         
                                         <xsl:if test="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='volume'] !=''">
                                             <xsl:copy-of select="tei:fileDesc/tei:sourceDesc/tei:bibl/tei:biblScope[@unit='volume']" copy-namespaces="no"/>
@@ -1149,6 +1156,30 @@
                         <xsl:copy-of select="//tei:textClass"/>
                     </profileDesc>
                 </xsl:when>
+                <!-- BrillNewPauly -->
+                <xsl:when test="//tei:publisher='BRILL'">
+                    <xsl:variable name="codeLangPauly">
+                        <xsl:choose>
+                            <xsl:when test="//tei:TEI/@xml:id='COM-023119'">en</xsl:when>
+                            <xsl:when test="contains($hostTitle,'Handbook of Formosan Languages')">de</xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='lang']"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <profileDesc>
+                        <xsl:if test="//tei:profileDesc/tei:textClass/tei:catRef[@scheme='classification_subject']">
+                            <textClass ana="subject">
+                                <xsl:copy-of select="//tei:keywords" copy-namespaces="no"/>
+                            </textClass>
+                        </xsl:if>
+                        <langUsage>
+                            <language ident="{$codeLangPauly}">
+                                <xsl:value-of select="$codeLangPauly"/>
+                            </language>
+                        </langUsage>
+                    </profileDesc>
+                </xsl:when>
                 <xsl:when test="not(//tei:profileDesc/tei:textClass/tei:keywords)">
                     <profileDesc>
                         <xsl:choose>
@@ -1168,14 +1199,6 @@
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:copy-of select="//tei:creation" copy-namespaces="no"/>
-                    </profileDesc>
-                </xsl:when>
-                <!-- BrillNewPauly -->
-                <xsl:when test="//tei:profileDesc/tei:textClass/tei:catRef[@scheme='classification_subject']">
-                    <profileDesc>
-                        <textClass ana="subject">
-                            <xsl:copy-of select="//tei:keywords" copy-namespaces="no"/>
-                        </textClass>
                     </profileDesc>
                 </xsl:when>
                 <xsl:otherwise>
@@ -1669,9 +1692,16 @@
                     </date>
                 </xsl:when>
                 <xsl:when test="tei:publisher='BRILL'">
-                    <date type="published" when="{$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']}">
-                        <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']"/>
-                    </date>
+                    <xsl:choose>
+                        <xsl:when test="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']">
+                            <date type="published" when="{$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']}">
+                                <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']"/>
+                            </date>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <date type="published" when="2005">2005</date>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:call-template name="fixAndCopyDate">
