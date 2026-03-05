@@ -278,10 +278,10 @@
                 <xsl:apply-templates/>
             </source>
     </xsl:template>
-    <xsl:template match="wiley:mathStatement/wiley:p">
+    <!--<xsl:template match="wiley:mathStatement/wiley:p">
         <xsl:text> </xsl:text>
             <xsl:apply-templates/>
-    </xsl:template>
+    </xsl:template>-->
     <xsl:template match="wiley:biographyInfo/wiley:p">
             <xsl:apply-templates/>
     </xsl:template>
@@ -1807,6 +1807,8 @@
                             <xsl:when test="contains(@href,'bb') or contains(@href,'bib')">bibr</xsl:when>
                             <xsl:when test="contains(@href,'sec')">section</xsl:when>
                             <xsl:when test="contains(@href,'note')">fn</xsl:when>
+                            <xsl:when test="contains(@href,'tab') or contains(@href,'tb')">table</xsl:when>
+                            <xsl:when test="contains(@href,'fig') or contains(@href,'fg')">figure</xsl:when>
                         </xsl:choose>
                     </xsl:attribute>
                     <xsl:attribute name="target">

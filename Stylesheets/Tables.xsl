@@ -561,7 +561,7 @@
     <xsl:template match="wiley:row">
         <row>
             <xsl:choose>
-                <xsl:when test="contains(wiley:entry/@rowsep,'1234567890')">
+                <xsl:when test="contains(wiley:entry[1]/@rowsep,'1234567890')">
                     <xsl:attribute name="role">label</xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
