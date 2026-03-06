@@ -520,7 +520,7 @@
                         <!-- ne pas reprendre l'abstract de ChemInform
                         "ChemInform is a weekly Abstracting Service, delivering concise information at a glance that was extracted from about 100 leading journals."
                         le rediriger vers les notes de bas de pages-->
-                        <xsl:if test="starts-with(/component/header/contentMeta/abstractGroup/abstract/p[1],'ChemInform is a weekly Abstracting Service')">
+                        <xsl:if test="starts-with(/component/header/contentMeta/abstractGroup/abstract[1]/p[1],'ChemInform is a weekly Abstracting Service')">
                             <div type="fn-group">
                                 <note place="inline" type="fn">
                                     <p>
