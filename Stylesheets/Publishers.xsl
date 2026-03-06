@@ -12,7 +12,7 @@
     
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
     <xsl:param name="xslversion">3.8</xsl:param>
-    <xsl:param name="releasedate">2026-02-13</xsl:param>
+    <xsl:param name="releasedate">2026-03-06</xsl:param>
     <xsl:param name="datecreation"/>
     <xsl:param name="idistex"/>
     <xsl:param name="arkistex"/>
