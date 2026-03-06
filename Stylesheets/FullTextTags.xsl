@@ -2096,6 +2096,29 @@
         <xsl:param name="text" select="translate(@href,'#','')"/>
         <xsl:param name="separator" select="' '"/>
         <xsl:choose>
+            <!-- pour palier au conflit quand wiley:link@href est contenu dans le même noeud-->
+            <xsl:when test="ancestor::wiley:mathStatement[@xml:id=$text]">
+                <ref>
+                    <xsl:attribute name="type">
+                        <xsl:choose>
+                            <xsl:when test="contains(@href,'disp') or contains(@href,'mthst')">formula</xsl:when>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:attribute name="target">
+                        <xsl:value-of select="@href"/>
+                    </xsl:attribute>
+                    <hi rend="superscript">
+                        <xsl:choose>
+                            <xsl:when test=". !=''">
+                                <xsl:apply-templates/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="@href"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </hi>
+                </ref>
+            </xsl:when>
             <xsl:when test="not(contains($text, $separator))">
                 <xsl:apply-templates select="//wiley:mathStatement[@xml:id=$text]"/>
                 <xsl:apply-templates select="//wiley:displayedItem[@xml:id=$text]"/>
