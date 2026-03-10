@@ -256,7 +256,7 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="wiley:p">
-        <xsl:choose>
+        <!--<xsl:choose>
             <xsl:when test="wiley:mathStatement">
                 <xsl:apply-templates/>
             </xsl:when>
@@ -270,7 +270,15 @@
                     <xsl:apply-templates/>
                 </p>
             </xsl:otherwise>
-        </xsl:choose>
+        </xsl:choose>-->
+        <p>
+            <xsl:if test="@xml:id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@xml:id"></xsl:value-of>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </p>
     </xsl:template>
     <!-- ajout élément sourceà <figure> -->
     <xsl:template match="wiley:source">
@@ -1936,7 +1944,7 @@
                     </xsl:when>
                     <xsl:when test="starts-with($resultat,'disp000')">
                         <xsl:text>disp</xsl:text>
-                        <xsl:value-of select="substring-after($resultat,'mthst000')"/>
+                        <xsl:value-of select="substring-after($resultat,'disp000')"/>
                     </xsl:when>
                     <xsl:when test="starts-with($resultat,'disp00')">
                         <xsl:text>disp</xsl:text>
@@ -1944,7 +1952,7 @@
                     </xsl:when>
                     <xsl:when test="starts-with($resultat,'disp0')">
                         <xsl:text>disp</xsl:text>
-                        <xsl:value-of select="substring-after($resultat,'mthst0')"/>
+                        <xsl:value-of select="substring-after($resultat,'disp0')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$resultat"/>
@@ -2095,9 +2103,14 @@
     <xsl:template match="@href" name="tokenizeDisplay" mode="display">
         <xsl:param name="text" select="translate(@href,'#','')"/>
         <xsl:param name="separator" select="' '"/>
+        <xsl:variable name="wileyDOI">
+            <xsl:value-of select="//wiley:publicationMeta[@level='unit']/wiley:doi"/>
+        </xsl:variable>
         <xsl:choose>
-            <!-- pour palier au conflit quand wiley:link@href est contenu dans le même noeud-->
-            <xsl:when test="ancestor::wiley:mathStatement[@xml:id=$text]">
+            <!-- pour palier au conflit quand wiley:link@href est contenu dans le même noeud
+            liste DOI posant problème de conception-->
+            <xsl:when test="ancestor::wiley:mathStatement[@xml:id=$text] 
+                or $wileyDOI='10.1002/ecj.11848' or $wileyDOI='10.1111/poms.12355' or $wileyDOI='10.1111/rssb.12121' or $wileyDOI='10.1111/rssb.12030' or $wileyDOI='10.1002/oca.2190' or $wileyDOI='10.1002/bimj.201300153' or $wileyDOI='10.1002/oca.2126' or $wileyDOI='10.1002/asmb.2011' or $wileyDOI='10.1002/rsa.20587' or $wileyDOI='10.1002/nme.4631' or $wileyDOI='10.1111/mafi.12078' or $wileyDOI='10.1002/ecj.11848' or $wileyDOI='10.1111/insr.12035' or $wileyDOI='10.1002/rnc.3076' or $wileyDOI='10.1002/jgt.21844' or $wileyDOI='10.1002/rnc.3001' or $wileyDOI='10.1002/acs.2513' or $wileyDOI='10.1111/manc.12140' or $wileyDOI='10.1002/ett.1486' or $wileyDOI='10.1002/soej.12105' or $wileyDOI='10.1111/risa.12434' or $wileyDOI='10.1002/rsa.20568' or $wileyDOI='10.1002/jae.2487' or $wileyDOI='10.1111/insr.12064' or $wileyDOI='10.1002/asmb.2044' or $wileyDOI='10.1002/oca.2028' or $wileyDOI='10.1002/mana.201400005' or $wileyDOI='10.1002/rnc.1794' or $wileyDOI='10.1002/ett.2561' or $wileyDOI='10.1002/rnc.3453' or $wileyDOI='10.1002/acs.2628' or $wileyDOI='10.1002/nla.2029' or $wileyDOI='10.1002/jgt.21726' or $wileyDOI='10.1002/mma.2778' or $wileyDOI='10.1002/mana.201200242' or $wileyDOI='10.1111/mafi.12047' or $wileyDOI='10.1002/int.21607' or $wileyDOI='10.1111/sjos.12174' or $wileyDOI='10.1002/mma.3070' or $wileyDOI='10.1002/mma.2881' or $wileyDOI='10.1002/mana.201500048' or $wileyDOI='10.1002/mana.201300011' or $wileyDOI='10.1002/asjc.1290' or $wileyDOI='10.1111/sjos.12189' or $wileyDOI='10.1111/ecca.12093' or $wileyDOI='10.1002/malq.201400108' or $wileyDOI='10.1002/asjc.555' or $wileyDOI='10.1002/zamm.201300287' or $wileyDOI='10.1002/asjc.770' or $wileyDOI='10.1111/sapm.12096'">
                 <ref>
                     <xsl:attribute name="type">
                         <xsl:choose>

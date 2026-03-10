@@ -181,8 +181,9 @@
     <xsl:template match="wiley:biographyInfo">
         <state type="biography">
             <desc>
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="wiley:p"/>
             </desc>
+            <xsl:apply-templates select="wiley:mediaResourceGroup"/>
         </state>
     </xsl:template>
     <xsl:template match="wiley:email">

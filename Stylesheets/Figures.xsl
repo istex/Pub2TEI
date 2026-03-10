@@ -178,7 +178,9 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="wiley:mediaResourceGroup">
-        <xsl:apply-templates/>
+        <note>
+            <xsl:apply-templates/>
+        </note>
     </xsl:template>
     <xsl:template match="wiley:mediaResource">
         <xsl:choose>
@@ -209,6 +211,34 @@
                         </xsl:attribute>
                     </xsl:if>
                 </media>
+            </xsl:when>
+            <xsl:when test="ancestor::wiley:biographyInfo">
+                <graphic>
+                    <xsl:choose>
+                        <xsl:when test="@mimeType !=''">
+                            <xsl:attribute name="mimeType">
+                                <xsl:apply-templates select="@mimeType"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@alt !=''">
+                            <xsl:attribute name="mimeType">
+                                <xsl:apply-templates select="@alt"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="mimeType">image</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
+                    <xsl:attribute name="url">
+                        <xsl:apply-templates select="@href"/>
+                    </xsl:attribute>
+                    <xsl:if test="@rendition">
+                        <xsl:attribute name="rendition">
+                            <xsl:apply-templates select="@rendition"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </graphic>
             </xsl:when>
             <xsl:otherwise>
                     <media>
