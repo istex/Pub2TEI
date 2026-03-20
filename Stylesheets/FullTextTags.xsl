@@ -185,6 +185,10 @@
                             </p>
                         </div>  
                     </xsl:when>
+                    <!-- nature crosshd -->
+                    <xsl:when test="//bdy/crosshd[crossttl] !=''">
+                        <div><p><xsl:apply-templates/></p></div>
+                    </xsl:when>
                     <xsl:otherwise>
                         <!--ecco-->
                         <p>
@@ -312,7 +316,17 @@
     
     <!-- SG Nature <crosshd> Titre paragraphe -->
     <xsl:template match="crosshd">
-        <p><hi rend="bold"><xsl:apply-templates/></hi></p>
+        <xsl:choose>
+            <xsl:when test="crossttl">
+                <div><xsl:apply-templates/></div>
+            </xsl:when>
+            <xsl:otherwise>
+                <div><head><xsl:apply-templates/></head></div>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="crossttl">
+        <head><xsl:apply-templates/></head>
     </xsl:template>
     <!-- SG Nature reprise balise bi -->
     <xsl:template match="bi">
@@ -2148,5 +2162,65 @@
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <!-- nature NPG 
+        <doi>10.1038/32220</doi>
+        
+    <product>
+                <prodttl>Assays and cytometry BDNF E<sub>max</sub></prodttl>
+                <contact>From Promega</contact>
+                <summary>The brain-derived neurotrophic factor (BDNF) immunoassay system now comes
+                    in an optimized antibody sandwich format</summary>
+                <prddescr>
+                    <p>After an overnight coating of a 96-well plate with anti-BDNF mAb, the
+                        specific protein is captured and detected using a BDNF polyclonal antibody
+                        (pAb) and a species-specific, anti-IgY antibody conjugated to horseradish
+                        peroxidase (HRP). Incubation with a chromogenic substrate causes a colour
+                        change, easily measured by a plate reader, that is proportional to the
+                        amount of BDNF present. The system can be used to quantify BDNF in tissue
+                        culture supernatants, plasma, serum, urine or tissue extracts. It is
+                        recommended for use in human, mouse, rat, rhesus monkey, goat, sheep, pig
+                        and horse studies. It typically has less than 3% cross-reactivity with other
+                        related neurotrophic factors (NGF, NT-3 and NT-4) at 100 ng
+                            ml<super>minus;1</super>. The assay has a stated minimum sensitivity of
+                        15.6 pg ml<super>minus;1</super> of BDNF.</p>
+                    <p>Reader Enquiry No. 111</p>
+                </prddescr>
+            </product>
+    -->
+    <xsl:template match="market">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="product">
+        <div>
+            <xsl:apply-templates select="prodttl"/>
+            <xsl:apply-templates select="contact" mode="nature"/>
+            <floatingText>
+                <body>
+                    <div>
+                        <xsl:apply-templates select="summary" mode="nature"/>
+                        <xsl:apply-templates select="prddescr"/>
+                    </div>
+                </body>
+            </floatingText>
+        </div>
+    </xsl:template>
+    <xsl:template match="prodttl">
+        <head>
+            <xsl:apply-templates/>
+        </head>
+    </xsl:template>
+    <xsl:template match="contact" mode="nature">
+        <bibl>
+            <xsl:apply-templates/>
+        </bibl>
+    </xsl:template>
+    <xsl:template match="summary" mode="nature">
+        <head>
+            <xsl:apply-templates/>
+        </head>
+    </xsl:template>
+    <xsl:template match="prddescr">
+        <xsl:apply-templates/>
     </xsl:template>
 </xsl:stylesheet>

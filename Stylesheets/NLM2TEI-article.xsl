@@ -1057,7 +1057,7 @@
                             </div>
                         </body>
                     </xsl:when>
-                    <xsl:when test="body/* | bdy/p | bdy/sec | bdy/corres/*|article/floats-group">
+                    <xsl:when test="body/* | bdy/p | bdy/crosshd | bdy/market | bdy/sec | bdy/corres/*|article/floats-group">
                         <body>
                             <xsl:apply-templates select="body/*"/>
                             <xsl:apply-templates select="bdy/*except(bdy/fp)"/>
