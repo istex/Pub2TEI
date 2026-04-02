@@ -1120,6 +1120,7 @@
                             <!-- SG - source des book-reviews, données qualifiés de production chez Cambridge -->
                             <xsl:apply-templates select="front/article-meta/product"/>
                             <xsl:apply-templates select="back/*"/>
+                            <xsl:apply-templates select="bm/endnote"/>
                             <xsl:apply-templates select="bm/objects"/>
                             <xsl:apply-templates select="bm/ack"/>
                             <xsl:apply-templates select="bm/bibl"/>
@@ -1338,6 +1339,9 @@
                     </xsl:when>
                     <xsl:when test="//fm/atl">
                         <xsl:apply-templates select="//fm/atl"/>
+                        <xsl:if test="//fm/stndfrst">
+                            <xsl:apply-templates select="//fm/stndfrst"/>
+                        </xsl:if>
                         <xsl:if test="//fm/rvwinfo">
                             <xsl:apply-templates select="//fm/rvwinfo"/>
                         </xsl:if>
@@ -1376,8 +1380,14 @@
                                 <xsl:apply-templates select="article-meta/contrib-group/*[name() != 'aff']"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:if test="/article/fm/aug | /headerx/fm/aug | /art/fm/aug">
-                    <xsl:apply-templates select="/article/fm/aug/* except(//aff)| /headerx/fm/aug/* except(//aff) | /art/fm/aug/*"/>
+                <xsl:if test="/headerx/fm/aug | /art/fm/aug">
+                    <xsl:apply-templates select="/headerx/fm/aug/* except(//aff) | /art/fm/aug/*"/>
+                </xsl:if>
+                <xsl:if test="/article/fm/aug/*">
+                    <xsl:apply-templates select="/article/fm/aug/* except(//aff)"/>
+                </xsl:if>
+                <xsl:if test="/article/fm/aug/group">
+                    <xsl:apply-templates select="/article/fm/aug/group/au"/>
                 </xsl:if>
                 <!--<xsl:apply-templates select="//article/fm/aug/group"/>-->
                 <xsl:if test="//bdy/corres/aug">
@@ -1950,7 +1960,7 @@
     <!-- +++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- author related information -->
 
-    <xsl:template match="aug/au | aug/cau | group/au">
+    <xsl:template match="au">
         <author>
             <xsl:variable name="i" select="position() - 1"/>
             <xsl:if test="not(//group)">
@@ -2047,18 +2057,22 @@
                 </affiliation>
             </xsl:if>
             <xsl:if test="//aug/group/groupttl">
-                <orgName type="team">
-                    <xsl:value-of select="//aug/group/groupttl"/>
-                    <xsl:if test="ancestor::group">
-                        <xsl:text> (</xsl:text>
-                        <xsl:value-of select="normalize-space(../groupttl)"/>
-                        <xsl:text>)</xsl:text>
-                    </xsl:if>
-                </orgName>
+                <xsl:apply-templates select="//aug/group/groupttl"></xsl:apply-templates>
             </xsl:if>
         </author>
     </xsl:template>
-    
+    <xsl:template match="groupttl">
+        <affiliation>
+            <orgName type="team">
+                <xsl:value-of select="//aug/group/groupttl"/>
+                <xsl:if test="ancestor::group">
+                    <xsl:text> (</xsl:text>
+                    <xsl:value-of select="normalize-space(../groupttl)"/>
+                    <xsl:text>)</xsl:text>
+                </xsl:if>
+            </orgName>
+        </affiliation>
+    </xsl:template>
    <xsl:template match="aff">
        <xsl:if test="email">
            <xsl:apply-templates select="email"/>
@@ -5589,5 +5603,13 @@
                 </xsl:otherwise>
             </xsl:choose>
         </idno>
+    </xsl:template>
+    <xsl:template match="endnote">
+        <div type="fn-group">
+            <note place="foot">
+                <xsl:apply-templates/>
+                <!--<xsl:value-of select="p"/>-->
+            </note>
+        </div>
     </xsl:template>
 </xsl:stylesheet>

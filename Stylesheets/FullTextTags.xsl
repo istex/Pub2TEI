@@ -186,7 +186,10 @@
                         </div>  
                     </xsl:when>
                     <!-- nature crosshd -->
-                    <xsl:when test="//bdy/crosshd[crossttl] !=''">
+                    <xsl:when test="parent::bm/endnote !=''">
+                        <p><xsl:apply-templates/></p>
+                    </xsl:when>
+                    <xsl:when test="parent::bdy and //bdy/crosshd !=''">
                         <div><p><xsl:apply-templates/></p></div>
                     </xsl:when>
                     <xsl:otherwise>

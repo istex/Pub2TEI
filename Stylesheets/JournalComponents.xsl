@@ -125,6 +125,9 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <xsl:template match="fm/stndfrst">
+        <title level="a" type="sub"><xsl:apply-templates/></title>
+    </xsl:template>
     <!-- wiley -->
     <xsl:template match="wiley:otherTitle">
         <xsl:choose>
