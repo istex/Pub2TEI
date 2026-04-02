@@ -3256,6 +3256,9 @@
             </xsl:when>
             <xsl:when test="parent::label"/>
             <xsl:when test="parent::title"/>
+            <xsl:when test="@content-type='bibref-group'">
+                <xsl:apply-templates/>
+            </xsl:when>
             <xsl:otherwise>
                 <name>
                     <xsl:if test="@content-type">
@@ -3835,6 +3838,13 @@
                         <xsl:choose>
                             <xsl:when test="ancestor::aff"/>
                             <xsl:otherwise>
+                                <xsl:variable name="concat">
+                                    <xsl:value-of select="concat('#',@rid)"/>
+                                </xsl:variable>
+                                <xsl:variable name="diese">
+                                    <xsl:value-of select="translate($concat,' ','#')"/>
+                                </xsl:variable>
+                                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
                                 <ref>
                                     <xsl:choose>
                                         <xsl:when test="@ref-type">
@@ -3860,13 +3870,6 @@
                                     <xsl:choose>
                                         <xsl:when test="@rid">
                                             <xsl:attribute name="target">
-                                                <xsl:variable name="concat">
-                                                    <xsl:value-of select="concat('#',@rid)"/>
-                                                </xsl:variable>
-                                                <xsl:variable name="diese">
-                                                    <xsl:value-of select="translate($concat,' ','#')"/>
-                                                </xsl:variable>
-                                                <xsl:variable name="espace" select="normalize-space(replace($diese,'#',' #'))"/>
                                                 <xsl:value-of select="$espace"/>
                                             </xsl:attribute>
                                         </xsl:when>
@@ -3920,7 +3923,20 @@
                                             </xsl:choose>
                                         </xsl:when>-->
                                     </xsl:choose>
-                                    <xsl:apply-templates/>
+                                    <xsl:choose>
+                                        <xsl:when test=". !=''">
+                                            <hi rend="superscript">
+                                                <xsl:apply-templates/>
+                                            </hi>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <hi rend="superscript">
+                                                <xsl:value-of select="substring-after($espace,'b')"/>
+                                                <xsl:value-of select="@id"/>
+                                                <xsl:value-of select="sup"/>
+                                            </hi>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </ref>
                             </xsl:otherwise>
                         </xsl:choose>
