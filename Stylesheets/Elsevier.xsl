@@ -1015,9 +1015,18 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="ce:note">
-       <note>
-            <xsl:apply-templates/>
-       </note>
+        <xsl:choose>
+            <xsl:when test="parent::ce:bib-reference">
+                <bibl type="note" xml:id="{parent::ce:bib-reference/@id}" n="{substring-after(parent::ce:bib-reference/@id,'BIB')}">
+                    <xsl:apply-templates/>
+                </bibl>
+            </xsl:when>
+            <xsl:otherwise>
+                <note>
+                    <xsl:apply-templates/>
+                </note>  
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="els1:conf-name |els2:conf-name">
         <meeting>

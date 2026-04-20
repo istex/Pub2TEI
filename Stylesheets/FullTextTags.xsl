@@ -192,6 +192,9 @@
                     <xsl:when test="parent::bdy and //bdy/crosshd !=''">
                         <div><p><xsl:apply-templates/></p></div>
                     </xsl:when>
+                    <xsl:when test="ancestor::ce:bib-reference !=''">
+                        <xsl:apply-templates/>
+                    </xsl:when>
                     <xsl:otherwise>
                         <!--ecco-->
                         <p>
