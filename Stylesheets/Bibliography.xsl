@@ -199,6 +199,7 @@
                 <xsl:when test="following-sibling::sb:reference"/>
                 <xsl:when test="preceding-sibling::sb:reference"/>
                 <xsl:when test="following-sibling::ce:other-ref"/>
+                <xsl:when test="following-sibling::ce:note"/>
                 <xsl:otherwise>
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="../@id"/>
@@ -1397,14 +1398,8 @@
 
     <!-- Elsevier -->
     <xsl:template match="sb:date">
-        <!-- ne garder que les chiffres dans @when -->
         <date>
-            <xsl:if test=". !=''">
-                <xsl:attribute name="when">
-                    <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:value-of select="translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. /,–;','')"/>
+            <xsl:value-of select="translate(substring-after(.,' '),'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZû. /,–;','')"/>  
         </date>
     </xsl:template>
 

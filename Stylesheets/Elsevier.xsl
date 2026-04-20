@@ -1004,6 +1004,11 @@
                     <xsl:apply-templates/>
                 </listBibl>
             </xsl:when>
+            <xsl:when test="sb:reference !='' and ce:note !=''">
+                <listBibl xml:id="{@id}" type="multi">
+                    <xsl:apply-templates/>
+                </listBibl>
+            </xsl:when>
             <xsl:when test="$countReference &gt; 1">
                 <listBibl xml:id="{@id}" type="multi">
                     <xsl:apply-templates/>
@@ -1017,7 +1022,27 @@
     <xsl:template match="ce:note">
         <xsl:choose>
             <xsl:when test="parent::ce:bib-reference">
-                <bibl type="note" xml:id="{parent::ce:bib-reference/@id}" n="{substring-after(parent::ce:bib-reference/@id,'BIB')}">
+                <bibl type="note">
+                    <xsl:choose>
+                        <xsl:when test="following-sibling::sb:reference"/>
+                        <xsl:when test="preceding-sibling::sb:reference"/>
+                        <xsl:when test="following-sibling::ce:other-ref"/>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="parent::ce:bib-reference/@id"/>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:attribute name="n">
+                        <xsl:choose>
+                            <xsl:when test="contains(parent::ce:bib-reference/@id,'BIB')">
+                                <xsl:value-of select="substring-after(parent::ce:bib-reference/@id,'BIB')"/> 
+                            </xsl:when>
+                            <xsl:when test="contains(parent::ce:bib-reference/@id,'ib')">
+                                <xsl:value-of select="substring-after(parent::ce:bib-reference/@id,'ib')"/> 
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:attribute>
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
