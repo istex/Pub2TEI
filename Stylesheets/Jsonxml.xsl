@@ -25,6 +25,7 @@
     </xsl:variable>
     <xsl:variable name="codeGenreJson">
         <xsl:choose>
+            <xsl:when test="$value_to_doi='10.3285/eg.56.1-2.01'">brief-communication</xsl:when>
             <xsl:when test="$genreJson='journal-article'">article</xsl:when>
             <xsl:when test="$genreJson='journal-issue'">article</xsl:when>
             <xsl:when test="$genreJson='journal-volume'">article</xsl:when>

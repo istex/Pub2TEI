@@ -14,6 +14,7 @@
         <xsl:choose>
             <xsl:when test="$codeGenre1='chapter'">
                 <xsl:choose>
+                    <xsl:when test="component/header/publicationMeta[@level='unit']/doi='10.1111/test.2003.25.issue-3'">article</xsl:when>
                     <xsl:when test="contains(//header/publicationMeta[@level='unit']/titleGroup/title[@type='tocHeading1'],'Brief communications')">brief-communication</xsl:when>
                     <xsl:when test="contains(//header/publicationMeta[@level='unit']/titleGroup/title[@type='tocHeading1'],'Review Paper')">review-article</xsl:when>
                     <xsl:otherwise>
@@ -88,7 +89,7 @@
             <xsl:when test="component/header/publicationMeta/issn[@type='print']='0378-5599'">
                 <xsl:text>fr</xsl:text>
             </xsl:when>
-            <xsl:when test="component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
+            <xsl:when test="component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H' or header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">
                 <xsl:text>en</xsl:text>
             </xsl:when>
             <!-- correction ouzbeck 10.1002/asna.2103030307 -->
@@ -370,7 +371,7 @@
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:attribute>
                                     <xsl:text>abstract</xsl:text>
                                 </xsl:when>
-                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jbio.200910057' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1600-0730.2006.00858.x'">
+                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jbio.200910057' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1600-0730.2006.00858.x' or //component/header/publicationMeta[@level='unit']/doi='10.1111/1467-9639.00138'">
                                     <xsl:attribute name="subtype">article</xsl:attribute>
                                     <xsl:attribute name="source">article</xsl:attribute>
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
@@ -472,6 +473,7 @@
                                 <xsl:attribute name="ident">
                                     <xsl:choose>
                                         <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/ejic.200400619'">en</xsl:when>
+                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">en</xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="$codeLangue"/>
                                         </xsl:otherwise>

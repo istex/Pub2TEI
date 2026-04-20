@@ -512,6 +512,11 @@
                                     source="other"
                                     scheme="https://content-type.data.istex.fr/ark:/67375/XTP-7474895G-0">other</note>
                             </xsl:when>
+                            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1136/adc.2009.175307'">
+                                <note type="content-type"
+                                    source="editorial"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D">article</note>
+                            </xsl:when>
                             <xsl:when test="/article/@article-type='editorial' or /article/@article-type='editorial'">
                                 <note type="content-type"
                                     source="editorial"
