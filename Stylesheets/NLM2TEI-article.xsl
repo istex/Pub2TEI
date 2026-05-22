@@ -502,6 +502,11 @@
                                     <xsl:value-of select="$codeGenreIstex"/>
                                 </note>
                             </xsl:when>
+                            <xsl:when test="//article-meta/article-id[@pub-id-type='doi']='10.1177/1420326X0101000318'">
+                                <note type="content-type"
+                                    source="other"
+                                    scheme="https://content-type.data.istex.fr/ark:/67375/XTP-1JC4F85T-7">research-article</note>
+                            </xsl:when>
                             <xsl:when test="/article/@article-type='biography'">
                                 <note type="content-type"
                                     source="other"
