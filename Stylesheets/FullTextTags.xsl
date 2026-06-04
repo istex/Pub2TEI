@@ -217,9 +217,9 @@
                                 </xsl:attribute>
                             </xsl:if>
                             <xsl:variable name="normalizeText2">
-                                <xsl:value-of select="normalize-space(.)"/>
+                                <xsl:apply-templates/>
                             </xsl:variable>
-                            <xsl:apply-templates select="translate($normalizeText2,'&#13;',' ')"/>
+                            <xsl:value-of select="normalize-space(translate($normalizeText2,'&#13;',' '))"/>
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>

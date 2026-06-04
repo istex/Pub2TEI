@@ -103,8 +103,10 @@
                                     </xsl:attribute>
                                 </xsl:when>
                             </xsl:choose>
-                            <xsl:variable name="normalizeText"><xsl:value-of select="normalize-space(.)"/></xsl:variable>
-                            <xsl:apply-templates select="translate($normalizeText,'&#13;',' ')"/>
+                            <xsl:variable name="normalizeText">
+                                <xsl:apply-templates/>
+                            </xsl:variable>
+                            <xsl:value-of select="normalize-space(translate($normalizeText,'&#13;',' '))"/>
                             <xsl:if test="//article/front/article-meta/title-group/subtitle[string-length() &gt; 0]">
                                 <xsl:text> : </xsl:text>
                                 <xsl:value-of select="//article/front/article-meta/title-group/subtitle"/>
