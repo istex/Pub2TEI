@@ -103,7 +103,7 @@
                                     </xsl:attribute>
                                 </xsl:when>
                             </xsl:choose>
-                            <xsl:apply-templates/>
+                            <xsl:apply-templates select="translate(normalize-space(.),'&#13;',' ')"/>
                             <xsl:if test="//article/front/article-meta/title-group/subtitle[string-length() &gt; 0]">
                                 <xsl:text> : </xsl:text>
                                 <xsl:value-of select="//article/front/article-meta/title-group/subtitle"/>

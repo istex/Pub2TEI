@@ -216,7 +216,7 @@
                                     <xsl:value-of select="@content-type"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:apply-templates/>
+                            <xsl:apply-templates select="translate(normalize-space(.),'&#13;',' ')"/>
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
