@@ -216,7 +216,10 @@
                                     <xsl:value-of select="@content-type"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:apply-templates select="translate(normalize-space(.),'&#13;',' ')"/>
+                            <xsl:variable name="normalizeText2">
+                                <xsl:value-of select="normalize-space(.)"/>
+                            </xsl:variable>
+                            <xsl:apply-templates select="translate($normalizeText2,'&#13;',' ')"/>
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
