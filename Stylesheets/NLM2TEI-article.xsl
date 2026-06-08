@@ -632,11 +632,6 @@
                         <xsl:apply-templates select="front/article-meta/abstract | bdy/fp | fm/abs"/>
                         <xsl:apply-templates select="front/article-meta/trans-abstract| fm/fp | fm/execsumm | fm/websumm"/>
                         <!-- SG NLM subject -->
-                        <xsl:if test="front/article-meta/article-categories/subj-group/subject[string-length()&gt; 0]">
-                            <textClass ana="subject">
-                                <xsl:apply-templates select="front/article-meta/article-categories/subj-group"/>
-                            </textClass>
-                        </xsl:if>
                         <xsl:if test="pubfm/subject">
                             <textClass ana="subject">
                                 <xsl:apply-templates select="pubfm/subject"/>
@@ -648,6 +643,12 @@
                             </textClass>
                         </xsl:if>
                         <xsl:apply-templates select="front/article-meta/kwd-group"/>
+                        
+                        <xsl:if test="front/article-meta/article-categories/subj-group/subject[string-length()&gt; 0]">
+                            <textClass ana="subject">
+                                <xsl:apply-templates select="front/article-meta/article-categories/subj-group"/>
+                            </textClass>
+                        </xsl:if>
                         <!-- language -->
                         <xsl:variable name="langNLM">
                             <xsl:choose>

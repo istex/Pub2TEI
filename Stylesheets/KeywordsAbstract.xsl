@@ -20,7 +20,7 @@
               pour l'instant directement traité dans IOP.xsl    -->
     <xsl:template match="kwd-group">
         <xsl:choose>
-            <xsl:when test="kwd!=''">
+            <xsl:when test="(kwd | compound-kwd)!=''">
                 <textClass ana="keywords">
                     <keywords>
                         <!-- scheme -->
@@ -75,9 +75,10 @@
                             </xsl:if>
                         </xsl:if>
                         <xsl:apply-templates select="kwd"/>
+                        <xsl:apply-templates select="compound-kwd"/>
                     </keywords>
                 </textClass>
-            </xsl:when>  
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="classinfo | KeywordGroup | keywords">
@@ -507,20 +508,22 @@
 <!-- -->
     
     <!-- For NLM - EDPS -->
-
+    
     <xsl:template match="compound-kwd">
-        <xsl:apply-templates/>
+        <xsl:apply-templates select="compound-kwd-part[@content-type = 'keyword']"/>
     </xsl:template>
 
     <xsl:template match="compound-kwd-part[@content-type = 'code']">
-        <label>
-            <xsl:apply-templates/>
-        </label>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="compound-kwd-part[@content-type = 'keyword']">
         <term>
-            <xsl:apply-templates/>
+            <xsl:variable name="normalize">
+                <xsl:apply-templates/>
+            </xsl:variable>
+            <xsl:attribute name="key"><xsl:apply-templates select="../compound-kwd-part[@content-type = 'code']"/></xsl:attribute>
+            <xsl:value-of select="normalize-space($normalize)"/>
         </term>
     </xsl:template>
 
