@@ -101,11 +101,6 @@
                 <xsl:copy-of select="tei:idno"/>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:if test="string-length($idistex) &gt; 0 ">
-            <idno type="istex">
-                <xsl:value-of select="$idistex"/>
-            </idno>
-        </xsl:if>
         <!-- ajout identifiants ISTEX et ARK -->
         <xsl:if test="string-length($idistex) &gt; 0 ">
             <idno type="istex">
