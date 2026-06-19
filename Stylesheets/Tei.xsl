@@ -90,7 +90,22 @@
         <xsl:copy-of select="tei:title"/>
         <xsl:copy-of select="tei:author"/>
         <xsl:copy-of select="tei:editor"/>
-        <xsl:copy-of select="tei:idno"/>
+        <xsl:choose>
+            <xsl:when test="tei:idno[@type='doi']">
+                <idno type="DOI">
+                    <xsl:value-of select="tei:idno[@type='doi']"/>
+                </idno>
+                <xsl:copy-of select="tei:idno except(tei:idno[@type='doi'])" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="tei:idno"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="string-length($idistex) &gt; 0 ">
+            <idno type="istex">
+                <xsl:value-of select="$idistex"/>
+            </idno>
+        </xsl:if>
         <!-- ajout identifiants ISTEX et ARK -->
         <xsl:if test="string-length($idistex) &gt; 0 ">
             <idno type="istex">
