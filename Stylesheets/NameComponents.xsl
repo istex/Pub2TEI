@@ -198,7 +198,7 @@
             </nameLink>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="suffix | Suffix | suff | wiley:nameSuffix|name_suffix">
+    <xsl:template match="ce:suffix | suffix | Suffix | suff | wiley:nameSuffix|name_suffix">
         <xsl:if test=". !=''">
             <genName>
                 <xsl:apply-templates/>

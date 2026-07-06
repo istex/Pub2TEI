@@ -1029,7 +1029,7 @@
                 </listBibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="*[name() != 'ce:source-text']"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1269,16 +1269,27 @@
             </xsl:for-each>
 
             <persName>
-                <xsl:apply-templates select="*[name(.)!='ce:cross-ref' and name(.)!='ce:e-address']"
-                />
+                <xsl:apply-templates select="*[name(.)!='ce:cross-ref' and name(.)!='ce:e-address' and name(.)!='ce:contributor-role']"/>
             </persName>
 
             <xsl:apply-templates select="ce:e-address"/>
-
+            <xsl:apply-templates select="ce:contributor-role"/>
             <xsl:choose>
                 <xsl:when test="../ce:affiliation[not(@id)]">
                     <xsl:message>Affiliation sans identifiant</xsl:message>
                     <xsl:for-each select="../ce:affiliation">
+                        <affiliation>
+                            <xsl:call-template name="parseAffiliation">
+                                <xsl:with-param name="theAffil">
+                                    <xsl:value-of select="ce:textfn"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </affiliation>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:when test="not(contains(ce:cross-ref[1]/@refid,'aff')) and following::ce:affiliation[@id]">
+                    <xsl:message>Affiliation avec identifiant, auteur sans relation</xsl:message>
+                    <xsl:for-each select="following::ce:affiliation">
                         <affiliation>
                             <xsl:call-template name="parseAffiliation">
                                 <xsl:with-param name="theAffil">
@@ -1316,6 +1327,16 @@
                                 </xsl:call-template>
                             </affiliation>
                         </xsl:if>
+                        <!--<xsl:if test="//ce:affiliation/ce:textfn">
+                            <xsl:message>Trouvé: <xsl:value-of select="."/></xsl:message>
+                            <affiliation>
+                                <xsl:call-template name="parseAffiliation">
+                                    <xsl:with-param name="theAffil">
+                                        <xsl:apply-templates select="//ce:affiliation/ce:textfn"/>
+                                    </xsl:with-param>
+                                </xsl:call-template>
+                            </affiliation>
+                        </xsl:if>-->
                     </xsl:for-each>
                 </xsl:otherwise>
             </xsl:choose>
@@ -1390,6 +1411,12 @@
         <note type="correspondence">
             <xsl:apply-templates/>
         </note>
+    </xsl:template>
+    
+    <xsl:template match="ce:contributor-role">
+        <roleName>
+            <xsl:apply-templates/>
+        </roleName>
     </xsl:template>
 
     <xsl:template match="ce:footnote">

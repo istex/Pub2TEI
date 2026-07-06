@@ -105,12 +105,12 @@
                                 </xsl:if>
                                 <!-- niveau citgroup supplémentaire -->
                                 <xsl:for-each select="rsc:citgroup | citgroup">
-                                    <xsl:variable name="id">
+                                    <xsl:variable name="idCitgroup">
                                         <xsl:value-of select="normalize-space(@id)"/>
                                     </xsl:variable>
                                     <bibl type="journal">
                                         <xsl:attribute name="xml:id">
-                                            <xsl:value-of select="$id"/>
+                                            <xsl:value-of select="$idCitgroup"/>
                                         </xsl:attribute>
                                         <xsl:for-each
                                             select="
@@ -228,6 +228,7 @@
             <monogr>
                 <xsl:apply-templates select="sb:host/sb:issue/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:host/sb:e-host/ce:inter-ref"/>
+
                 <xsl:choose>
                     <xsl:when test="sb:host/sb:edited-book/sb:title">
                         <xsl:apply-templates select="sb:host/sb:edited-book/sb:title/*"
@@ -259,16 +260,18 @@
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
-
+                
+                <xsl:apply-templates select="following-sibling::ce:source-text"/>  
                 <xsl:apply-templates select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:host/sb:edited-book/sb:editors/*"/>
                 <xsl:apply-templates select="sb:host/sb:book/sb:title/*"/>
-                <xsl:apply-templates select="sb:host/sb:book/sb:editors/*"/>
+                <xsl:apply-templates select="sb:host/sb:book/sb:editors/*"/>              
+                <xsl:apply-templates select="sb:host/sb:edited-book/sb:conference"/>
                 <imprint>
                     <xsl:apply-templates
                         select="sb:host/sb:issue/sb:series/*[name() != 'sb:title']"/>
                     <xsl:apply-templates
-                        select="sb:host/sb:edited-book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
+                        select="sb:host/sb:edited-book/*[name() != 'sb:editors'][name() != 'sb:title'][name() != 'sb:conference']"/>
                     <xsl:apply-templates
                         select="sb:host/sb:book/*[name() != 'sb:editors'][name() != 'sb:title']"/>
                     <xsl:apply-templates select="sb:host/sb:issue/sb:issue-nr"/>
@@ -1398,9 +1401,23 @@
 
     <!-- Elsevier -->
     <xsl:template match="sb:date">
-        <date>
-            <xsl:value-of select="translate(substring-after(.,' '),'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZû. /,–;','')"/>  
-        </date>
+        <xsl:choose>
+            <xsl:when test="contains(.,' ')">
+                <date>
+                    <xsl:value-of select="translate(substring-after(.,' '),'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZû. /,–;','')"/>  
+                </date>  
+            </xsl:when>
+            <xsl:otherwise>
+                <date>
+                    <xsl:value-of select="."/>  
+                </date>  
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="sb:conference">
+        <meeting>
+            <xsl:apply-templates/>
+        </meeting>
     </xsl:template>
 
     <xsl:template match="sb:publisher">

@@ -195,6 +195,9 @@
                     <xsl:when test="ancestor::ce:bib-reference !=''">
                         <xsl:apply-templates/>
                     </xsl:when>
+                    <xsl:when test="parent::ce:enunciation !=''">
+                        <xsl:apply-templates/>
+                    </xsl:when>
                     <xsl:otherwise>
                         <!--ecco-->
                         <p>
@@ -216,10 +219,11 @@
                                     <xsl:value-of select="@content-type"/>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:variable name="normalizeText2">
+                          <!--  <xsl:variable name="normalizeText2">
                                 <xsl:apply-templates/>
                             </xsl:variable>
-                            <xsl:value-of select="normalize-space(translate($normalizeText2,'&#13;',' '))"/>
+                            <xsl:value-of select="normalize-space(translate($normalizeText2,'&#13;',' '))"/>-->
+                            <xsl:apply-templates/>
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -228,6 +232,29 @@
     </xsl:template>
     <xsl:template match="ce:note-para">
         <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="ce:displayed-quote">
+        <quote>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </quote>
+    </xsl:template>
+    <xsl:template match="ce:enunciation">
+        <seg type="enunciation">
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </seg>
+    </xsl:template>
+    <xsl:template match="ce:br">
+        <lb/>
     </xsl:template>
     <xsl:template match="Para | SimplePara| para">
         <xsl:choose>

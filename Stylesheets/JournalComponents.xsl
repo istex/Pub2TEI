@@ -208,6 +208,11 @@
     <xsl:template match="ce:subtitle">
         <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="ce:source-text">
+        <ref xml:id="{@id}">
+            <xsl:apply-templates/>
+        </ref>
+    </xsl:template>
 
     <!-- EDP - trans-title-group -->
     <xsl:template match="trans-title-group">

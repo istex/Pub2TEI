@@ -892,7 +892,6 @@
             <xsl:apply-templates/>
         </cell>
     </xsl:template>
-
     <xsl:template match="tgroup | rsc:tgroup">
         <xsl:apply-templates/>
     </xsl:template>
