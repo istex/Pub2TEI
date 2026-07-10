@@ -138,6 +138,10 @@
         </xsl:choose>
     </xsl:variable>
     
+    <xsl:variable name="doiWiley">
+        <xsl:value-of select="//component/header/publicationMeta[@level='unit']/doi"/>
+    </xsl:variable>
+    
     <!-- TEI document structure, creation of main header components, front (summary), body, and back -->
     <xsl:template match="component">
         <TEI xmlns:ns1="https://xml-schema.delivery.istex.fr/formats/ns1.xsd">
@@ -371,13 +375,13 @@
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-HPN7T1Q2-R</xsl:attribute>
                                     <xsl:text>abstract</xsl:text>
                                 </xsl:when>
-                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jbio.200910057' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1600-0730.2006.00858.x' or //component/header/publicationMeta[@level='unit']/doi='10.1111/1467-9639.00138'">
+                                <xsl:when test="$doiWiley='10.1002/jbio.200910057' or $doiWiley='10.1111/j.1600-0730.2006.00858.x' or $doiWiley='10.1111/1467-9639.00138'">
                                     <xsl:attribute name="subtype">article</xsl:attribute>
                                     <xsl:attribute name="source">article</xsl:attribute>
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
                                     <xsl:text>article</xsl:text>
                                 </xsl:when>
-                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/geoa.12073' or //component/header/publicationMeta[@level='unit']/doi='10.1002/germ.201090011' or //component/header/publicationMeta[@level='unit']/doi='10.1002/pssc.201570068' or //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1095-8339.1893.tb02274a.x'">
+                                <xsl:when test="$doiWiley='10.1111/geoa.12073' or $doiWiley='10.1002/germ.201090011' or $doiWiley='10.1002/pssc.201570068' or $doiWiley='10.1111/j.1095-8339.1893.tb02274a.x'">
                                     <xsl:attribute name="subtype">other</xsl:attribute>
                                     <xsl:attribute name="source">other</xsl:attribute>
                                     <xsl:attribute name="scheme">https://content-type.data.istex.fr/ark:/67375/XTP-6N5SZHKN-D</xsl:attribute>
@@ -472,8 +476,11 @@
                             <language>
                                 <xsl:attribute name="ident">
                                     <xsl:choose>
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/ejic.200400619'">en</xsl:when>
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">en</xsl:when>
+                                        <xsl:when test="$doiWiley='10.1002/ejic.200400619' or $doiWiley='10.1002/jqs.3390090205'">en</xsl:when>
+                                        <xsl:when test="$doiWiley='10.1111/j.1467-9574.1951.tb00585.x'">nl</xsl:when>
+                                        <xsl:when test="$doiWiley='10.1111/j.1399-3054.1984.tb05906.x' or $doiWiley='10.1111/j.1755-618X.1995.tb00768.x' or $doiWiley='10.1111/j.1467-8268.1995.tb00073.x' or $doiWiley='10.1111/j.1755-618X.1978.tb01001.x' or $doiWiley='10.1111/j.1096-3642.1936.tb01683z.x' or $doiWiley='10.1111/j.1365-2338.1983.tb01578.x' or $doiWiley='10.1002/jhet.5570080313' or $doiWiley='10.1111/j.1439-0329.1972.tb00359.x' or $doiWiley='10.1111/j.1754-7121.1971.tb00289.x' or $doiWiley='10.1111/j.1540-4781.1953.tb06621.x' or $doiWiley='10.1111/j.1439-0329.1973.tb00381.x' or $doiWiley='10.1111/j.1360-0443.1994.tb02796.x'">fr</xsl:when>
+                                        <xsl:when test="$doiWiley='10.1111/j.1439-0418.1988.tb00185.x' or $doiWiley='10.1111/j.1439-0418.1985.tb01996.x' or $doiWiley='10.1111/j.1439-0418.1950.tb01228.x' or $doiWiley='10.1111/j.1439-0450.1982.tb01248.x' or $doiWiley='10.1111/j.1439-0396.1970.tb00355.x' or $doiWiley='10.1111/j.1439-0418.1980.tb03559.x' or $doiWiley='10.1111/j.1439-0442.1955.tb00084.x' or $doiWiley='10.1111/j.1748-1716.1938.tb01194.x' or $doiWiley='10.1111/j.1439-0418.1941.tb00520.x' or $doiWiley='10.1111/j.1439-0418.1930.tb00137.x' or $doiWiley='10.1111/j.1439-0396.1971.tb01583.x' or $doiWiley='10.1111/j.1439-0396.1970.tb00348.x' or $doiWiley='10.1111/j.1439-0442.1955.tb00087.x' or $doiWiley='10.1111/j.1439-0329.1972.tb00345.x' or $doiWiley='10.1111/j.1439-0310.1997.tb00172.x' or $doiWiley='10.1111/j.1439-0329.1973.tb00404.x' or $doiWiley='10.1111/j.1439-0329.1978.tb00618.x' or $doiWiley='10.1111/j.1439-0329.1977.tb00570.x' or $doiWiley='10.1111/j.1439-0396.1970.tb00361.x' or $doiWiley='10.1002/apmc.1977.050630111' or $doiWiley='10.1002/andp.200590005' or $doiWiley='10.1002/andp.200590009' or $doiWiley='10.1002/andp.200590024' or $doiWiley='10.1002/andp.200590020' or $doiWiley='10.1002/andp.200590027' or $doiWiley='10.1111/j.1439-0329.1977.tb00564.x' or $doiWiley='10.1111/j.1439-0329.1973.tb00389.x' or $doiWiley='10.1002/andp.200590037' or $doiWiley='10.1111/j.1439-0418.1941.tb00517.x' or $doiWiley='10.1111/j.1439-0418.1916.tb00559.x' or $doiWiley='10.1111/j.1439-0418.1924.tb01155.x' or $doiWiley='10.1111/j.1439-0507.1986.tb03756.x' or $doiWiley='10.1111/j.1439-0418.1930.tb00135.x' or $doiWiley='10.1111/j.1439-0418.1950.tb01225.x' or $doiWiley='10.1111/j.1439-0418.1916.tb00558.x' or $doiWiley='10.1111/j.1439-0329.1973.tb00383.x' or $doiWiley='10.1111/j.1439-0396.1978.tb00542.x' or $doiWiley='10.1111/j.1439-0442.1955.tb00098.x' or $doiWiley='10.1111/j.1439-0329.1973.tb00371.x' or $doiWiley='10.1111/j.1439-0396.1970.tb00360.x' or $doiWiley='10.1111/j.1439-0329.1996.tb01080.x' or $doiWiley='10.1111/j.1439-0329.1973.tb00382.x' or $doiWiley='10.1111/j.1439-0329.1975.tb00478.x' or $doiWiley='10.1002/andp.200590003' or $doiWiley='10.1111/j.1439-0418.1941.tb01035.x' or $doiWiley='10.1111/j.1365-3113.1936.tb01303.x' or $doiWiley='10.1111/j.1439-0329.1974.tb00413.x' or $doiWiley='10.1111/j.1439-0329.1974.tb00414.x' or $doiWiley='10.1111/j.1439-0329.1974.tb00415.x' or $doiWiley='10.1111/j.1439-0329.1974.tb00416.x' or $doiWiley='10.1111/j.1439-0310.1941.tb00638.x' or $doiWiley='10.1111/j.1439-0388.1961.tb01200.x' or $doiWiley='10.1111/j.1467-6435.1959.tb02164.x' or $doiWiley='10.1111/j.1600-0463.1926.tb06058.x' or $doiWiley='10.1111/j.1600-0463.1926.tb06061.x' or $doiWiley='10.1111/j.1365-3113.1936.tb00587.x' or $doiWiley='10.1111/j.1439-0418.1932.tb00317.x' or $doiWiley='10.1111/j.1439-0418.1950.tb01226.x' or $doiWiley='10.1111/j.1439-0418.1916.tb00561.x' or $doiWiley='10.1111/j.1600-0463.1926.tb06056.x' or $doiWiley='10.1111/j.1439-0418.1941.tb00513.x' or $doiWiley='10.1111/j.1439-0418.1941.tb01028.x' or $doiWiley='10.1111/j.1439-0418.1941.tb01037.x' or $doiWiley='10.1111/j.1439-0507.1986.tb03755.x' or $doiWiley='10.1111/j.1439-0388.1965.tb00153.x' or $doiWiley='10.1111/j.1465-5922.1962.00119.x' or $doiWiley='10.1111/j.1699-0463.1958.tb01735.x' or $doiWiley='10.1111/j.1439-0310.1939.tb01578.x' or $doiWiley='10.1111/j.1439-0418.1932.tb00322.x'">de</xsl:when>
+                                        <xsl:when test="$doiWiley='10.1111/j.1468-2435.1990.tb00146.x' or $doiWiley='10.1111/j.1540-4781.1961.tb03548.x'">es</xsl:when>
                                         <xsl:otherwise>
                                             <xsl:value-of select="$codeLangue"/>
                                         </xsl:otherwise>
@@ -1498,39 +1505,39 @@
                             <title level= "a" type="main">
                                 <xsl:if test="@xml:lang">
                                     <xsl:choose>
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/ejic.200400619'">
+                                        <xsl:when test="$doiWiley='10.1002/ejic.200400619'">
                                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                                         </xsl:when>
                                         <xsl:when test="//component/header/publicationMeta/issn[@type='print']='0378-5599'">
                                             <xsl:attribute name="xml:lang">fr</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/asna.19322451602'">
+                                        <xsl:when test="$doiWiley='10.1002/asna.19322451602'">
                                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">
+                                        <xsl:when test="$doiWiley='10.1002/jqs.3390090205'">
                                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
+                                        <xsl:when test="$doiWiley='10.1002/(SICI)1099-0682(199809)1998:9&lt;1205::AID-EJIC1205&gt;3.0.CO;2-F' or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199910)341:7&lt;657::AID-PRAC657&gt;3.0.CO;2-P'or header/publicationMeta[@level='unit']/doi='10.1002/(SICI)1521-3897(199908)341:6&lt;568::AID-PRAC568&gt;3.0.CO;2-H'">
                                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                                         </xsl:when>
                                         <!-- correction ouzbeck 10.1002/asna.2103030307 -->
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1550-7408.1980.tb04229.x' or header/publicationMeta[@level='unit']/doi='10.1111/j.1365-3180.1990.tb01689.x'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030307'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030305'">
+                                        <xsl:when test="$doiWiley='10.1111/j.1550-7408.1980.tb04229.x' or header/publicationMeta[@level='unit']/doi='10.1111/j.1365-3180.1990.tb01689.x'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030307'or header/publicationMeta[@level='unit']/doi='10.1002/asna.2103030305'">
                                             <xsl:attribute name="xml:lang">de</xsl:attribute>
                                         </xsl:when>
                                         <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S -->
-                                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">
+                                        <xsl:when test="$doiWiley='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">
                                             <xsl:attribute name="xml:lang">es</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x' ">
+                                        <xsl:when test="@xml:lang and $doiWiley='10.1111/j.1439-0469.2008.00477.x' ">
                                             <xsl:attribute name="xml:lang">de</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">
+                                        <xsl:when test="@xml:lang and $doiWiley='10.1111/j.1439-0469.2008.00484.x'">
                                             <xsl:attribute name="xml:lang">es</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">
+                                        <xsl:when test="@xml:lang and $doiWiley='10.1111/j.1439-0469.2007.00453.x'">
                                             <xsl:attribute name="xml:lang">it</xsl:attribute>
                                         </xsl:when>
-                                        <xsl:when test="@xml:lang and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">
+                                        <xsl:when test="@xml:lang and $doiWiley='10.1111/j.1439-0469.2008.00459.x'">
                                             <xsl:attribute name="xml:lang">fr</xsl:attribute>
                                         </xsl:when>
                                         <xsl:when test="@xml:lang ='be'">
@@ -1538,7 +1545,7 @@
                                         </xsl:when>
                                         <xsl:when test="@xml:lang='ka'">
                                             <xsl:choose>
-                                                <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">
+                                                <xsl:when test="$doiWiley='10.1111/j.1439-0469.2008.00489.x'">
                                                     <xsl:attribute name="xml:lang">it</xsl:attribute>
                                                 </xsl:when>
                                                 <xsl:otherwise>
@@ -1556,8 +1563,8 @@
                                     </xsl:choose>
                                 </xsl:if>
                                 <xsl:choose>
-                                    <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/cbdv.200490137'">Prediction of Aqueous Solubility Based on Large Datasets Using Several QSPR Models Utilizing Topological Structure Representation</xsl:when>
-                                    <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1046/j.1365-2605.1997.00042.x'">Letter to the Editor</xsl:when>
+                                    <xsl:when test="$doiWiley='10.1002/cbdv.200490137'">Prediction of Aqueous Solubility Based on Large Datasets Using Several QSPR Models Utilizing Topological Structure Representation</xsl:when>
+                                    <xsl:when test="$doiWiley='10.1046/j.1365-2605.1997.00042.x'">Letter to the Editor</xsl:when>
                                     <xsl:otherwise>
                                         <xsl:apply-templates/>
                                     </xsl:otherwise>
@@ -1585,7 +1592,7 @@
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="xml:lang">
                     <xsl:choose>
-                        <xsl:when test="//component/header/publicationMeta[@level='unit']/doi='10.1002/jqs.3390090205'">
+                        <xsl:when test="$doiWiley='10.1002/jqs.3390090205'">
                             <xsl:attribute name="xml:lang">en</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
@@ -1604,15 +1611,15 @@
             le rediriger vers les notes de bas de pages-->
             <xsl:when test="starts-with(p[1],'ChemInform is a weekly Abstracting Service')"/>
             <xsl:when test="contains(title[1],'Books Review') or contains(title[1],'Book Review')"/>
-            <xsl:when test="//publicationMeta[@level = 'unit']/doi[1]='10.1111/1468-229X.00040'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/1478-9299.t01-1-00054'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/1467-9434.00209'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1468-229X.1990.tb01528.x'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/1478-9299.t01-1-00051'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1751-9020.2007.00090.x'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1747-9991.2010.00299.x'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/rsr.17060'
-                or //publicationMeta[@level = 'unit']/doi[1]='10.1111/j.1468-229X.1969.tb01241.x'"/>
+            <xsl:when test="$doiWiley[1]='10.1111/1468-229X.00040'
+                or $doiWiley[1]='10.1111/1478-9299.t01-1-00054'
+                or $doiWiley[1]='10.1111/1467-9434.00209'
+                or $doiWiley[1]='10.1111/j.1468-229X.1990.tb01528.x'
+                or $doiWiley[1]='10.1111/1478-9299.t01-1-00051'
+                or $doiWiley[1]='10.1111/j.1751-9020.2007.00090.x'
+                or $doiWiley[1]='10.1111/j.1747-9991.2010.00299.x'
+                or $doiWiley[1]='10.1111/rsr.17060'
+                or $doiWiley[1]='10.1111/j.1468-229X.1969.tb01241.x'"/>
             <xsl:when test="@type='main'">
                 <abstract>
                     <xsl:choose>
@@ -1623,12 +1630,12 @@
                                 </xsl:variable>
                                 <!-- correction arabe 10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S au lieu de espagnol -->
                                 <xsl:choose>
-                                    <xsl:when test="$codeLangue='ar' and //component/header/publicationMeta[@level='unit']/doi='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">es</xsl:when>
-                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00477.x'">de</xsl:when>
-                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00484.x'">es</xsl:when>
-                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00459.x'">fr</xsl:when>
-                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2007.00453.x'">it</xsl:when>
-                                    <xsl:when test="$codeLangue='ka' and //component/header/publicationMeta[@level='unit']/doi='10.1111/j.1439-0469.2008.00489.x'">it</xsl:when>
+                                    <xsl:when test="$codeLangue='ar' and $doiWiley='10.1002/1522-239X(200210)113:5/6&lt;342::AID-FEDR342&gt;3.0.CO;2-S'">es</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and $doiWiley='10.1111/j.1439-0469.2008.00477.x'">de</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and $doiWiley='10.1111/j.1439-0469.2008.00484.x'">es</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and $doiWiley='10.1111/j.1439-0469.2008.00459.x'">fr</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and $doiWiley='10.1111/j.1439-0469.2007.00453.x'">it</xsl:when>
+                                    <xsl:when test="$codeLangue='ka' and $doiWiley='10.1111/j.1439-0469.2008.00489.x'">it</xsl:when>
                                     <xsl:when test="$codeLangue='ka'">de</xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="$codeLangue"/>

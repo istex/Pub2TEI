@@ -121,7 +121,7 @@
         </xsl:if>
     </xsl:template>
     <xsl:template
-        match="last_name | LastName | ce:surname| rsc:surname | FamilyName | ln | surname | corresponding-author-lastname | surname | snm">
+        match="last_name | LastName | ce:surname| rsc:surname | wiley:familyNamePrefix | FamilyName | ln | surname | corresponding-author-lastname | surname | snm">
         <xsl:if test=". !=''">
             <surname>
                 <xsl:variable name="surname">

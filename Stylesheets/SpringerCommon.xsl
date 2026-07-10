@@ -927,8 +927,7 @@
                 <xsl:when test="@Language != '--'">
                     <xsl:attribute name="xml:lang">
                         <xsl:choose>
-                            <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when>
-                            <xsl:otherwise>
+                            <xsl:when test="//ArticleDOI='10.1007/BF02584710'">pt</xsl:when><xsl:otherwise>
                                 <xsl:value-of select="translate(@Language,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
                             </xsl:otherwise>
                         </xsl:choose>
