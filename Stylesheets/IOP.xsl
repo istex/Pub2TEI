@@ -489,6 +489,9 @@
                             <xsl:when test="//article-data/doi='10.1088/1751-8113/42/8/085201'">
                                 <language ident="en">en</language>
                             </xsl:when>
+                            <xsl:when test="/header/ident/doi='10.1088/0029-5515/7/1/001' or /header/ident/doi='10.1088/0022-3727/15/5/017' or /header/ident/doi='10.1088/0150-536X/14/1/007' or /header/ident/doi='10.1088/0335-7368/7/2/308' or /header/ident/doi='10.1088/0335-7368/4/6/301' or /header/ident/doi='10.1088/0022-3727/5/3/320' or /header/ident/doi='10.1088/0335-7368/7/6/305' or /header/ident/doi='10.1088/0022-3735/6/11/022' or /header/ident/doi='10.1088/0032-1028/11/7/004' or /header/ident/doi='10.1088/0335-7368/5/2/306' or /header/ident/doi='10.1088/0957-0233/3/11/002' or /header/ident/doi='10.1088/0029-5515/4/1/006' or /header/ident/doi='10.1088/0335-7368/6/3/304' or /header/ident/doi='10.1088/0150-536X/27/5/002'">
+                                <language ident="fr">fr</language>
+                            </xsl:when>
                             <xsl:when test="//header/title-group/title/@lang[string-length() &gt; 0]">
                                 <language>
                                     <xsl:attribute name="ident">

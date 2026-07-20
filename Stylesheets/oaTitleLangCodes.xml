@@ -6,7 +6,7 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title>Reference table for collections codes (De Gruyter)</title>
+                <title>Reference table for collections codes</title>
             </titleStmt>
             <publicationStmt>
                 <p>...</p>
@@ -531,6 +531,20 @@
                     <row><cell role="doi">10.3285/eg.10.1.17</cell><cell role="lang">fr</cell></row>
                     <row><cell role="doi">10.5194/gh-5-108-1950</cell><cell role="lang">it</cell></row>
                     <row><cell role="doi">10.5194/gh-6-47-1951</cell><cell role="lang">it</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104467</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104144</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202205100</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104588</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202204529</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104739</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104530</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202205207</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104595</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202104236</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.1590/0103-6440202305287</cell><cell role="lang">el</cell></row>
+                    <row><cell role="doi">10.4067/s0717-73561999000100005</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-34372019000200583</cell><cell role="lang">es</cell></row>
+                    <row><cell role="doi">10.4067/s0718-85602009000100009</cell><cell role="lang">es</cell></row>
                 </table>
                 <table type="titre">
                     <row><cell role="doi">10.5007/1980-0037.2015v17n4p472</cell><cell role="titre">Functional fitness in older women from southern brazil: normative scores and comparison with different countries</cell></row>
