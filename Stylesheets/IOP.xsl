@@ -749,7 +749,7 @@
     -->
     
     <xsl:template match="date_cover">
-        <date when="{.}">
+        <date type="published" when="{.}">
             <xsl:value-of select="substring-before(.,'-')"/>
         </date>
     </xsl:template>
@@ -1738,7 +1738,7 @@
         <xsl:variable name="nettoieDate">
             <xsl:value-of select="normalize-space(translate(.,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',''))"/>
         </xsl:variable>
-        <date when="{$nettoieDate}">
+        <date type="published" when="{$nettoieDate}">
             <xsl:value-of select="$nettoieDate"/>
         </date>
     </xsl:template>

@@ -180,7 +180,7 @@
             <xsl:attribute name="type">
                 <xsl:choose>
                     <xsl:when test="@PubStatus='epublish'">ePublished</xsl:when>
-                    <xsl:otherwise>Published</xsl:otherwise>
+                    <xsl:otherwise>published</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
             <xsl:attribute name="when">

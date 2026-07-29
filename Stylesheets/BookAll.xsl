@@ -34,7 +34,7 @@
                             <xsl:apply-templates select="pub-date"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <date>
+                            <date type="published">
                                 <xsl:value-of select="//copyright-year"/>
                             </date>
                         </xsl:otherwise>

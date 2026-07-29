@@ -10,7 +10,7 @@
 
     <!-- Références bibliographiques à la fin d'un article -->
     <!-- ref-list: NLM article, ScholarOne -->
-    
+
     <xsl:template match="biblist | rsc:biblist | ce:bibliography | bibl | wiley:bibliography">
         <xsl:choose>
             <xsl:when test="ce:bibliography-sec">
@@ -112,8 +112,7 @@
                                         <xsl:attribute name="xml:id">
                                             <xsl:value-of select="$idCitgroup"/>
                                         </xsl:attribute>
-                                        <xsl:for-each
-                                            select="
+                                        <xsl:for-each select="
                                                 rsc:journalcit | rsc:citation[@type = 'book'] | rsc:citation[@type = 'patent']
                                                 | journalcit | citation[@type = 'book'] | citation[@type = 'patent']">
                                             <bibl type="journal">
@@ -142,7 +141,7 @@
     <xsl:template match="ce:bibliography-sec">
         <xsl:apply-templates/>
     </xsl:template>
-    
+
     <!-- Sage -->
     <xsl:template match="other-ref">
         <bibl type="other">
@@ -162,7 +161,7 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-   
+
     <!-- Références simples Elsevier -->
     <xsl:template match="ce:other-ref">
         <bibl type="other">
@@ -223,6 +222,7 @@
                         <ref type="id" xml:id="{@id}"/>
                     </xsl:if>
                     <xsl:apply-templates select="sb:contribution/*"/>
+                    <xsl:apply-templates select="sb:host/ce:doi"/>
                 </analytic>
             </xsl:if>
             <monogr>
@@ -231,8 +231,7 @@
 
                 <xsl:choose>
                     <xsl:when test="sb:host/sb:edited-book/sb:title">
-                        <xsl:apply-templates select="sb:host/sb:edited-book/sb:title/*"
-                        />
+                        <xsl:apply-templates select="sb:host/sb:edited-book/sb:title/*"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <!--pour le cas ou le book aurait son titre au niveau de sb:reference-->
@@ -254,22 +253,22 @@
                                         </xsl:choose>
                                     </xsl:attribute>
                                 </xsl:if>
-                                <xsl:apply-templates
-                                    select="sb:contribution/sb:title/sb:maintitle"/>
+                                <xsl:apply-templates select="sb:contribution/sb:title/sb:maintitle"
+                                />
                             </title>
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
-                
-                <xsl:apply-templates select="following-sibling::ce:source-text"/>  
-                <xsl:apply-templates select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
+
+                <xsl:apply-templates select="following-sibling::ce:source-text"/>
+                <xsl:apply-templates
+                    select="sb:host/sb:edited-book/sb:book-series/sb:series/sb:title/*"/>
                 <xsl:apply-templates select="sb:host/sb:edited-book/sb:editors/*"/>
                 <xsl:apply-templates select="sb:host/sb:book/sb:title/*"/>
-                <xsl:apply-templates select="sb:host/sb:book/sb:editors/*"/>              
+                <xsl:apply-templates select="sb:host/sb:book/sb:editors/*"/>
                 <xsl:apply-templates select="sb:host/sb:edited-book/sb:conference"/>
                 <imprint>
-                    <xsl:apply-templates
-                        select="sb:host/sb:issue/sb:series/*[name() != 'sb:title']"/>
+                    <xsl:apply-templates select="sb:host/sb:issue/sb:series/*[name() != 'sb:title']"/>
                     <xsl:apply-templates
                         select="sb:host/sb:edited-book/*[name() != 'sb:editors'][name() != 'sb:title'][name() != 'sb:conference']"/>
                     <xsl:apply-templates
@@ -287,18 +286,19 @@
                             <xsl:apply-templates select="sb:host/sb:e-host/sb:date"/>
                         </xsl:when>
                         <xsl:when test="sb:host/sb:e-host/sb:date/@year">
-                            <date>
+                            <date type="published">
                                 <xsl:apply-templates select="sb:host/sb:e-host/sb:date/@year"/>
                             </date>
                         </xsl:when>
                         <xsl:when test="sb:host/sb:e-host/sb:date-accessed/@year">
-                            <date>
-                                <xsl:apply-templates select="sb:host/sb:e-host/sb:date-accessed/@year"/>
+                            <date type="published">
+                                <xsl:apply-templates
+                                    select="sb:host/sb:e-host/sb:date-accessed/@year"/>
                             </date>
                         </xsl:when>
                         <!-- validation / ajout d'un element date afin qu'<imprint> ne soit pas vide de contenu -->
                         <xsl:otherwise>
-                            <date/>
+                            <date type="published"/>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:apply-templates select="sb:host/sb:pages/*"/>
@@ -444,7 +444,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <imprint>
-                                    <date/>
+                                    <date type="published"/>
                                 </imprint>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -525,7 +525,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <imprint>
-                                    <date/>
+                                    <date type="published"/>
                                 </imprint>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -554,8 +554,7 @@
     </xsl:template>
 
     <!-- Reference to a journal article (3.0 style) -->
-    <xsl:template
-        match="
+    <xsl:template match="
             ref[element-citation/@citation-type = 'other']
             | ref[nlm-citation/@citation-type = 'other']">
         <xsl:call-template name="createOther">
@@ -606,7 +605,7 @@
     <xsl:template match="ref[*/@publication-type = 'confproc']">
         <xsl:choose>
             <xsl:when test="not(ref[*/source])">
-                    <xsl:apply-templates/>
+                <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="createInConf">
@@ -789,7 +788,7 @@
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="element-citation"/>
+                <xsl:apply-templates select="element-citation | nlm-citation"/>
                 <xsl:choose>
                     <xsl:when test="count(mixed-citation) &gt;= 2">
                         <bibl xml:id="{@id}">
@@ -804,16 +803,14 @@
                     <bibl>
                         <xsl:attribute name="type">
                             <xsl:choose>
-                                <xsl:when
-                                    test="
+                                <xsl:when test="
                                         citation/@publication-type
                                         | citation/@citation-type
                                         | nlm-citation/@publication-type
                                         | nlm-citation/@citation-type
                                         | mixed-citation/@publication-type
                                         | mixed-citation/@citation-type">
-                                    <xsl:value-of
-                                        select="
+                                    <xsl:value-of select="
                                             citation/@publication-type
                                             | citation/@citation-type
                                             | nlm-citation/@publication-type
@@ -872,7 +869,7 @@
         <xsl:apply-templates select="other-ref"/>
         <xsl:apply-templates select="conference-ref"/>
     </xsl:template>
-    
+
     <xsl:template match="note">
         <xsl:choose>
             <xsl:when test="ancestor::ref"/>
@@ -891,11 +888,12 @@
             <idno type="bookID">1004919539</idno>-->
             <xsl:when test="ancestor::asp">
                 <xsl:choose>
-                    <xsl:when test="parent::div1|parent::div2|parent::div3|parent::div4|parent::div5 ">
+                    <xsl:when
+                        test="parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                         <p>
                             <ref type="fn" target="#{@id}">
                                 <hi rend="superscript">
-                                    <xsl:value-of select="substring-before(.,' ')"/>
+                                    <xsl:value-of select="substring-before(., ' ')"/>
                                 </hi>
                             </ref>
                         </p>
@@ -903,8 +901,8 @@
                     <xsl:otherwise>
                         <xsl:variable name="idASP">
                             <xsl:choose>
-                                <xsl:when test="contains(@id,'en')">
-                                    <xsl:value-of select="substring-after(@id,'en')"/>
+                                <xsl:when test="contains(@id, 'en')">
+                                    <xsl:value-of select="substring-after(@id, 'en')"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="@id"/>
@@ -939,8 +937,8 @@
                 </xsl:attribute>
                 <xsl:attribute name="n">
                     <xsl:choose>
-                        <xsl:when test="contains(@id,'en')">
-                            <xsl:value-of select="substring-after(@id,'en')"/>
+                        <xsl:when test="contains(@id, 'en')">
+                            <xsl:value-of select="substring-after(@id, 'en')"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="@id"/>
@@ -951,10 +949,11 @@
             <xsl:apply-templates/>
         </note>
     </xsl:template>
-    
+
     <xsl:template match="pb">
         <xsl:choose>
-            <xsl:when test="parent::div1|parent::div2|parent::div3|parent::div4|parent::div5">
+            <xsl:when
+                test="parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <ab>
                     <ptr>
                         <xsl:if test="@id[string-length() &gt; 0]">
@@ -1095,7 +1094,7 @@
         </editor>
     </xsl:template>
     <xsl:template match="role">
-        <xsl:if test="ancestor::contrib | parent::editor| parent::author">
+        <xsl:if test="ancestor::contrib | parent::editor | parent::author">
             <roleName>
                 <xsl:apply-templates/>
             </roleName>
@@ -1179,7 +1178,7 @@
             </name>
         </editor>
     </xsl:template>
-    
+
     <xsl:template match="wiley:author">
         <author>
             <persName>
@@ -1276,30 +1275,32 @@
     <xsl:template match="source">
         <xsl:choose>
             <!-- erudit -->
-            <xsl:when test="parent::epigraphe|parent::bloccitation">
+            <xsl:when test="parent::epigraphe | parent::bloccitation">
                 <bibl type="source">
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="parent::tableau|parent::grfigure">
+            <xsl:when test="parent::tableau | parent::grfigure">
                 <span type="source">
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
             <xsl:when test="parent::figure">
-               <note>
-                   <xsl:apply-templates/>
-               </note>
+                <note>
+                    <xsl:apply-templates/>
+                </note>
             </xsl:when>
             <xsl:otherwise>
                 <title>
                     <xsl:attribute name="level">
                         <xsl:choose>
+                            <xsl:when test="
+                                    ancestor::citation/@citation-type = 'journal' or ancestor::mixed-citation/@publication-type = 'journal'
+                                    or ancestor::*/@publication-type = 'journal'"
+                                >j</xsl:when>
                             <xsl:when
-                                test="ancestor::citation/@citation-type = 'journal' or ancestor::mixed-citation/@publication-type = 'journal'
-                                or ancestor::*/@publication-type='journal'">j</xsl:when>
-                            <xsl:when
-                                test="ancestor::citation/@citation-type = 'book' or ancestor::nlm-citation/@citation-type = 'book' or ancestor::mixed-citation/@publication-type = 'book'">m</xsl:when>
+                                test="ancestor::citation/@citation-type = 'book' or ancestor::nlm-citation/@citation-type = 'book' or ancestor::mixed-citation/@publication-type = 'book'"
+                                >m</xsl:when>
                             <xsl:otherwise>j</xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>
@@ -1321,10 +1322,17 @@
         </idno>
     </xsl:template>
     <xsl:template match="object-id">
-        <idno>
-            <xsl:attribute name="type">doi</xsl:attribute>
-            <xsl:apply-templates/>
-        </idno>
+        <xsl:choose>
+            <xsl:when test="@pub-id-type = 'doi'">
+                <link type="doi" source="{.}"/>
+            </xsl:when>
+            <xsl:when test="@pub-id-type = 'pmid'">
+                <link type="pmid" source="{.}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <link source="{.}"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- Generic transformation of the @id attribute -->
     <!-- If the source contains duplicated values (it does exist!) than the duplicated are renamed by order of appearance -->
@@ -1402,15 +1410,17 @@
     <!-- Elsevier -->
     <xsl:template match="sb:date">
         <xsl:choose>
-            <xsl:when test="contains(.,' ')">
-                <date>
-                    <xsl:value-of select="translate(substring-after(.,' '),'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZû. /,–;','')"/>  
-                </date>  
+            <xsl:when test="contains(., ' ')">
+                <date type="published">
+                    <xsl:value-of
+                        select="translate(substring-after(., ' '), 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZû. /,–;', '')"
+                    />
+                </date>
             </xsl:when>
             <xsl:otherwise>
-                <date>
-                    <xsl:value-of select="."/>  
-                </date>  
+                <date type="published">
+                    <xsl:value-of select="."/>
+                </date>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1481,7 +1491,8 @@
         </editor>
     </xsl:template>
     <xsl:template match="reftxt">
-        <bibl xml:id="{../@id}" n="{translate(../@id,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ','')}">
+        <bibl xml:id="{../@id}"
+            n="{translate(../@id,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ','')}">
             <xsl:apply-templates/>
         </bibl>
     </xsl:template>
@@ -1584,10 +1595,10 @@
     </xsl:template>
     <xsl:template match="wiley:accessionId">
         <idno>
-        <xsl:if test="contains(@ref,'doi')">
-            <xsl:attribute name="type">doi</xsl:attribute>
-        </xsl:if>
-            <xsl:if test="@ref !=''">
+            <xsl:if test="contains(@ref, 'doi')">
+                <xsl:attribute name="type">doi</xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@ref != ''">
                 <xsl:attribute name="source">
                     <xsl:value-of select="@ref"/>
                 </xsl:attribute>
@@ -1608,22 +1619,23 @@
             </xsl:attribute>
             <xsl:attribute name="n">
                 <xsl:choose>
-                    <xsl:when test="contains(@xml:id,'-')">
+                    <xsl:when test="contains(@xml:id, '-')">
                         <xsl:variable name="resultat">
-                            <xsl:value-of select="translate(substring-after(@xml:id,'-'),'-','')"/>
+                            <xsl:value-of select="translate(substring-after(@xml:id, '-'), '-', '')"
+                            />
                         </xsl:variable>
                         <xsl:choose>
-                            <xsl:when test="starts-with($resultat,'bib000')">
+                            <xsl:when test="starts-with($resultat, 'bib000')">
                                 <xsl:text>b</xsl:text>
-                                <xsl:value-of select="substring-after($resultat,'bib000')"/>
+                                <xsl:value-of select="substring-after($resultat, 'bib000')"/>
                             </xsl:when>
-                            <xsl:when test="starts-with($resultat,'bib00')">
+                            <xsl:when test="starts-with($resultat, 'bib00')">
                                 <xsl:text>b</xsl:text>
-                                <xsl:value-of select="substring-after($resultat,'bib00')"/>
+                                <xsl:value-of select="substring-after($resultat, 'bib00')"/>
                             </xsl:when>
-                            <xsl:when test="starts-with($resultat,'bib0')">
+                            <xsl:when test="starts-with($resultat, 'bib0')">
                                 <xsl:text>b</xsl:text>
-                                <xsl:value-of select="substring-after($resultat,'bib0')"/>
+                                <xsl:value-of select="substring-after($resultat, 'bib0')"/>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:when>
@@ -1679,11 +1691,12 @@
             <analytic>
                 <xsl:apply-templates select="authors/au"/>
                 <!-- utilisation pipe xpath => ne préjuge pas de l'ordre -->
-                
+
                 <xsl:apply-templates select="authors | aut"/>
                 <xsl:apply-templates select="authors/others"/>
                 <xsl:apply-templates select="art-title | art-ref/atl"/>
-                <xsl:apply-templates select="art-number
+                <xsl:apply-templates select="
+                        art-number
                         | preprint-info/art-number
                         | misc-text/extdoi
                         | crossref/cr_doi"/>
@@ -1691,8 +1704,7 @@
             </analytic>
             <!-- partie monographique (périodique) -->
             <monogr>
-                <xsl:apply-templates
-                    select="
+                <xsl:apply-templates select="
                         jnl-title | jtl
                         | conf-title
                         | editors | ed
@@ -1700,39 +1712,36 @@
                 <!-- dont imprint -->
                 <imprint>
                     <xsl:choose>
-                        <xsl:when test="year
-                            | volume | vid | dte | iid
-                            | part
-                            | issno
-                            | art-ref/ppf
-                            | art-ref/ppl
-                            | pages">
-                            <xsl:apply-templates
-                                select="
+                        <xsl:when test="
                                 year
                                 | volume | vid | dte | iid
                                 | part
                                 | issno
                                 | art-ref/ppf
                                 | art-ref/ppl
-                                | pages"
-                            />
+                                | pages">
+                            <xsl:apply-templates select="
+                                    year
+                                    | volume | vid | dte | iid
+                                    | part
+                                    | issno
+                                    | art-ref/ppf
+                                    | art-ref/ppl
+                                    | pages"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <!-- imprint ne doit pas être vide de contenu -->
-                            <date/>
+                            <date type="published"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                    
+
                 </imprint>
             </monogr>
             <!-- notes et url -->
-            <xsl:apply-templates
-                select="
+            <xsl:apply-templates select="
                     preprint-info/preprint
                     | misc-text[not(extdoi)]
-                    | links/arxiv"
-            />
+                    | links/arxiv"/>
         </biblStruct>
     </xsl:template>
 
@@ -1754,15 +1763,12 @@
                 <!--Du coup les auteurs passent dans analytic (est-ce tjs valable?)-->
                 <xsl:when test="art-title | chaptl">
                     <analytic>
-                        <xsl:apply-templates
-                            select="
+                        <xsl:apply-templates select="
                                 authors
-                                | art-title | chaptl | aut"
-                        />
+                                | art-title | chaptl | aut"/>
                     </analytic>
                     <monogr>
-                        <xsl:apply-templates
-                            select="
+                        <xsl:apply-templates select="
                                 book-title | btl
                                 | editors | ed | edg
                                 | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
@@ -1772,8 +1778,7 @@
                         </xsl:if>
                         <imprint>
                             <xsl:choose>
-                                <xsl:when
-                                    test="
+                                <xsl:when test="
                                         year
                                         | volume
                                         | part
@@ -1784,8 +1789,7 @@
                                         | pub-ref
                                         | pub-place
                                         | pub-name">
-                                    <xsl:apply-templates
-                                        select="
+                                    <xsl:apply-templates select="
                                             year
                                             | volume
                                             | part
@@ -1795,11 +1799,10 @@
                                             | publication/publisher
                                             | pub-ref
                                             | pub-place
-                                            | pub-name"
-                                    />
+                                            | pub-name"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <date/>
+                                    <date type="published"/>
                                 </xsl:otherwise>
                             </xsl:choose>
 
@@ -1810,8 +1813,9 @@
                 <!-- Cas général -->
                 <xsl:otherwise>
                     <monogr>
-                        <xsl:apply-templates select="book-title | btl | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
-                        <xsl:apply-templates select="aut| authors | ed | edg"/>
+                        <xsl:apply-templates
+                            select="book-title | btl | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
+                        <xsl:apply-templates select="aut | authors | ed | edg"/>
                         <xsl:apply-templates select="editors" mode="IOP"/>
                         <xsl:apply-templates select="url" mode="citation"/>
                         <xsl:if test="isbn">
@@ -1819,8 +1823,7 @@
                         </xsl:if>
                         <imprint>
                             <xsl:choose>
-                                <xsl:when
-                                    test="
+                                <xsl:when test="
                                         year | dte
                                         | volume
                                         | part
@@ -1831,8 +1834,7 @@
                                         | pub-ref
                                         | pub-place
                                         | pub-name">
-                                    <xsl:apply-templates
-                                        select="
+                                    <xsl:apply-templates select="
                                             year | dte
                                             | volume
                                             | part
@@ -1842,11 +1844,10 @@
                                             | publication/publisher
                                             | pub-ref
                                             | pub-place
-                                            | pub-name"
-                                    />
+                                            | pub-name"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <date/>
+                                    <date type="published"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </imprint>
@@ -1855,13 +1856,11 @@
             </xsl:choose>
 
             <!-- tout le reste : série, notes, url -->
-            <xsl:apply-templates
-                select="
+            <xsl:apply-templates select="
                     series
                     | preprint-info/preprint
                     | misc-text[not(extdoi) and not(matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$'))]
-                    | links/arxiv"
-            />
+                    | links/arxiv"/>
         </biblStruct>
     </xsl:template>
 
@@ -1906,8 +1905,7 @@
                         <xsl:value-of select="italic"/>
                     </author>
                 </xsl:for-each>
-                <xsl:apply-templates
-                    select="
+                <xsl:apply-templates select="
                         editors
                         | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
                 <!-- conf-title 
@@ -1931,26 +1929,22 @@
                     <xsl:apply-templates/>
                 </xsl:if>
                 <imprint>
-                    <xsl:apply-templates
-                        select="
+                    <xsl:apply-templates select="
                             year
                             | volume
                             | pages
                             | publication/place
-                            | publication/publisher"
-                    />
+                            | publication/publisher"/>
                 </imprint>
             </monogr>
 
 
             <!-- tout le reste : série, notes, url -->
-            <xsl:apply-templates
-                select="
+            <xsl:apply-templates select="
                     series
                     | preprint-info/preprint
                     | misc-text[not(extdoi) and not(matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$'))]
-                    | links/arxiv"
-            />
+                    | links/arxiv"/>
         </biblStruct>
     </xsl:template>
     <xsl:template match="conference-ref">
@@ -1964,11 +1958,9 @@
             </xsl:if>
 
             <analytic>
-                <xsl:apply-templates
-                    select="
+                <xsl:apply-templates select="
                         conf-tl
-                        | art-title | authors | aut"
-                />
+                        | art-title | authors | aut"/>
             </analytic>
             <monogr>
                 <!-- conf-title 
@@ -1993,32 +1985,27 @@
                     </meeting>
                 </xsl:if>
 
-                <xsl:apply-templates
-                    select="
+                <xsl:apply-templates select="
                         editors | edg | editor
                         | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
                 <xsl:apply-templates select="url" mode="sage"/>
                 <imprint>
-                    <xsl:apply-templates
-                        select="
+                    <xsl:apply-templates select="
                             year | conf-date
                             | volume
                             | pages
                             | publication/place
-                            | publication/publisher"
-                    />
+                            | publication/publisher"/>
                 </imprint>
             </monogr>
 
 
             <!-- tout le reste : série, notes, url -->
-            <xsl:apply-templates
-                select="
+            <xsl:apply-templates select="
                     series
                     | preprint-info/preprint
                     | misc-text[not(extdoi) and not(matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$'))]
-                    | links/arxiv"
-            />
+                    | links/arxiv"/>
         </biblStruct>
     </xsl:template>
     <!--misc-ref 
@@ -2028,14 +2015,16 @@
         <biblStruct>
 
             <!-- attribut type (pas aussi univoque que pour les autres ref) -->
-         <xsl:attribute name="type">
+            <xsl:attribute name="type">
                 <xsl:choose>
                     <!-- ne pas hésiter à ajouter d'autres tests -->
                     <xsl:when test="thesis">thesis</xsl:when>
                     <xsl:when test="patent-number">patent</xsl:when>
                     <!-- heuristiques -->
-                    <xsl:when test="misc-title[2] and contains(misc-title[2],'Report')">report</xsl:when>
-                    <xsl:when test="misc-text[1] and starts-with(misc-text[1],'PAT')">patent</xsl:when>
+                    <xsl:when test="misc-title[2] and contains(misc-title[2], 'Report')"
+                        >report</xsl:when>
+                    <xsl:when test="misc-text[1] and starts-with(misc-text[1], 'PAT')"
+                        >patent</xsl:when>
                     <xsl:otherwise>misc</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
@@ -2055,30 +2044,26 @@
                         <xsl:apply-templates select="authors"/>
                     </analytic>
                     <monogr>
-                        <xsl:apply-templates
-                            select="
+                        <xsl:apply-templates select="
                                 editors | ed
                                 | misc-title
                                 | patent-number
                                 | misc-text[matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$')]"/>
                         <imprint>
-                            <xsl:apply-templates
-                                select="
+                            <xsl:apply-templates select="
                                     year
                                     | volume
                                     | pages
                                     | publication/place
                                     | publication/publisher
-                                    | source"
-                            />
+                                    | source"/>
                         </imprint>
                     </monogr>
                 </xsl:when>
                 <!-- cas général -->
                 <xsl:otherwise>
                     <monogr>
-                        <xsl:apply-templates
-                            select="
+                        <xsl:apply-templates select="
                                 authors
                                 | editors
                                 | misc-title
@@ -2087,21 +2072,21 @@
                         <imprint>
                             <xsl:choose>
                                 <xsl:when test="
-                                    year
-                                    | pages
-                                    | publication/place
-                                    | publication/publisher
-                                    | source">
-                                    <xsl:apply-templates
-                                        select="
                                         year
                                         | pages
                                         | publication/place
                                         | publication/publisher
-                                        | source"
-                                    />
+                                        | source">
+                                    <xsl:apply-templates select="
+                                            year
+                                            | pages
+                                            | publication/place
+                                            | publication/publisher
+                                            | source"/>
                                 </xsl:when>
-                                <xsl:otherwise><date/></xsl:otherwise>
+                                <xsl:otherwise>
+                                    <date type="published"/>
+                                </xsl:otherwise>
                             </xsl:choose>
                         </imprint>
                     </monogr>
@@ -2109,13 +2094,11 @@
             </xsl:choose>
 
             <!-- tout le reste : série, notes, url -->
-            <xsl:apply-templates
-                select="
+            <xsl:apply-templates select="
                     thesis
                     | preprint-info/preprint
                     | misc-text[not(extdoi) and not(matches(normalize-space(.), '^ISBN(-1[03])?\s?:?\s[-0-9xX ]{10,17}$'))]
-                    | links/arxiv"
-            />
+                    | links/arxiv"/>
         </biblStruct>
     </xsl:template>
 
@@ -2133,18 +2116,18 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="@publication-type='webpage'">
+            <xsl:when test="@publication-type = 'webpage'">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:value-of select="@publication-type"/>
                     </xsl:attribute>
                     <xsl:choose>
-                        <xsl:when test="@id !=''">
+                        <xsl:when test="@id != ''">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="../@id !=''">
+                        <xsl:when test="../@id != ''">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="../@id"/>
                             </xsl:attribute>
@@ -2157,7 +2140,8 @@
                     </xsl:if>
                     <xsl:apply-templates/>
                 </bibl>
-            </xsl:when><!--
+            </xsl:when>
+            <!--
             <xsl:when test="/book-part-wrapper/book-meta/publisher/publisher-name='Routledge'">
                 <!-\- reconstruction des liens body/ref / références -\->
                 <bibl>
@@ -2192,18 +2176,18 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>-->
-            <xsl:when test="@publication-type='other' or not(article-title |source)">
+            <xsl:when test="@publication-type = 'other' or not(article-title | source)">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
                     </xsl:attribute>
                     <xsl:choose>
-                        <xsl:when test="@id !=''">
+                        <xsl:when test="@id != ''">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="@id"/>
                             </xsl:attribute>
                         </xsl:when>
-                        <xsl:when test="../@id !=''">
+                        <xsl:when test="../@id != ''">
                             <xsl:attribute name="xml:id">
                                 <xsl:value-of select="../@id"/>
                             </xsl:attribute>
@@ -2227,7 +2211,8 @@
             </xsl:when>
             <xsl:when test="not(source)">
                 <xsl:choose>
-                    <xsl:when test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
+                    <xsl:when
+                        test="contains(., 'guidelines') or contains(., 'www') or contains(., 'CD-ROM')">
                         <bibl>
                             <xsl:attribute name="type">
                                 <xsl:text>in-line</xsl:text>
@@ -2247,7 +2232,7 @@
                     </xsl:when>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="contains(., ':') and $count and //publisher-name='S. Karger AG'">
+            <xsl:when test="contains(., ':') and $count and //publisher-name = 'S. Karger AG'">
                 <biblStruct>
                     <xsl:choose>
                         <xsl:when test="@id">
@@ -2287,7 +2272,7 @@
                     </xsl:choose>
                 </biblStruct>
             </xsl:when>
-            <xsl:when test="source|person-group|year and not(contains(.,','))">
+            <xsl:when test="source | person-group | year and not(contains(., ','))">
                 <biblStruct>
                     <xsl:if test="@citation-type | @publication-type">
                         <xsl:attribute name="type">
@@ -2329,7 +2314,8 @@
                             <xsl:apply-templates select="name"/>
                             <xsl:apply-templates select="string-name"/>
                             <xsl:apply-templates select="etal"/>
-                            <xsl:apply-templates select="person-group[@person-group-type='author']"/>
+                            <xsl:apply-templates
+                                select="person-group[@person-group-type = 'author']"/>
                             <xsl:apply-templates select="elocation-id"/>
                             <xsl:apply-templates select="pub-id"/>
                         </analytic>
@@ -2347,13 +2333,14 @@
                             <xsl:apply-templates select="etal"/>
                             <xsl:apply-templates select="person-group"/>
                         </xsl:if>
-                        <xsl:if test="person-group[@person-group-type='editor']">
-                            <xsl:apply-templates select="person-group[@person-group-type='editor']"/>
+                        <xsl:if test="person-group[@person-group-type = 'editor']">
+                            <xsl:apply-templates
+                                select="person-group[@person-group-type = 'editor']"/>
                         </xsl:if>
                         <xsl:apply-templates select="collab"/>
                         <imprint>
                             <xsl:choose>
-                                <xsl:when test="publisher-name | publisher-loc | year| date/year">
+                                <xsl:when test="publisher-name | publisher-loc | year | date/year">
                                     <xsl:apply-templates select="publisher-name"/>
                                     <xsl:apply-templates select="publisher-loc"/>
                                     <xsl:apply-templates select="date/year"/>
@@ -2406,7 +2393,7 @@
                     <xsl:apply-templates/>
                 </bibl>
             </xsl:when>
-            <xsl:when test="not(//publisher-name='S. Karger AG')">
+            <xsl:when test="not(//publisher-name = 'S. Karger AG')">
                 <bibl>
                     <xsl:attribute name="type">
                         <xsl:text>in-line</xsl:text>
@@ -2614,10 +2601,12 @@
                                     </orgName>
                                 </xsl:when>
                                 <xsl:when test="contains($authorInLine, 'et al')">
-                                        <xsl:value-of select="$authorInLine"/>
+                                    <xsl:value-of select="$authorInLine"/>
                                 </xsl:when>
-                                <xsl:when test="contains($authorInLine, 'International Clearinghouse for Birth Defects Surveillance and Research')">
-                                    <orgName type="institution">International Clearinghouse for Birth Defects Surveillance and Research</orgName>
+                                <xsl:when
+                                    test="contains($authorInLine, 'International Clearinghouse for Birth Defects Surveillance and Research')">
+                                    <orgName type="institution">International Clearinghouse for
+                                        Birth Defects Surveillance and Research</orgName>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <persName>
@@ -2627,7 +2616,9 @@
                                         <forename type="first">
                                             <xsl:choose>
                                                 <xsl:when test="contains($apres, ';')">
-                                                  <xsl:value-of select="substring-before(substring-before($apres, ';'),'.')"/>
+                                                  <xsl:value-of
+                                                  select="substring-before(substring-before($apres, ';'), '.')"
+                                                  />
                                                 </xsl:when>
                                                 <xsl:otherwise>
                                                   <xsl:value-of select="$apres"/>
@@ -2655,18 +2646,26 @@
                             <xsl:otherwise>
                                 <persName>
                                     <xsl:variable name="surname">
-                                        <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+                                        <xsl:value-of
+                                            select="normalize-space(substring-before($text, $separator))"
+                                        />
                                     </xsl:variable>
                                     <surname>
-                                        <xsl:value-of select="normalize-space(substring-before($surname, ' '))"/>
+                                        <xsl:value-of
+                                            select="normalize-space(substring-before($surname, ' '))"
+                                        />
                                     </surname>
                                     <forename type="first">
                                         <xsl:choose>
-                                            <xsl:when test="contains($surname,';')">
-                                                <xsl:value-of select="normalize-space(substring-before(substring-after($surname, ' '),';'))"/> 
+                                            <xsl:when test="contains($surname, ';')">
+                                                <xsl:value-of
+                                                  select="normalize-space(substring-before(substring-after($surname, ' '), ';'))"
+                                                />
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:value-of select="normalize-space(substring-after($surname, ' '))"/> 
+                                                <xsl:value-of
+                                                  select="normalize-space(substring-after($surname, ' '))"
+                                                />
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </forename>
@@ -2720,8 +2719,8 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="contains(.,'Six-minute walk test in children and adolescents')">
-                    <title level="j">J Pediatr</title> 
+                <xsl:if test="contains(., 'Six-minute walk test in children and adolescents')">
+                    <title level="j">J Pediatr</title>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
@@ -2742,18 +2741,21 @@
         <xsl:variable name="yearInLine3">
             <xsl:value-of select="./text() except (bold/italic | pub-id)"/>
         </xsl:variable>
-       <!-- <year>
+        <!-- <year>
          <xsl:value-of select="$text2"/>
         </year>-->
         <xsl:choose>
             <xsl:when test="pub-id">
                 <xsl:choose>
-                    
+
                     <xsl:when
                         test="(contains($yearInLine3, '19') or contains($yearInLine3, '20')) and contains($yearInLine3, ';') or contains($text2, '.')">
                         <date type="published">
                             <xsl:choose>
-                                <xsl:when test="contains(.,'The economic burden of lung disease')">2013</xsl:when><xsl:when test="contains(.,'209 (arbaclofen) on neurobehavioral')">2012</xsl:when>
+                                <xsl:when test="contains(., 'The economic burden of lung disease')"
+                                    >2013</xsl:when>
+                                <xsl:when test="contains(., '209 (arbaclofen) on neurobehavioral')"
+                                    >2012</xsl:when>
                                 <xsl:when test="contains($yearInLine3, '19')">
                                     <xsl:text>19</xsl:text>
                                     <xsl:choose>
@@ -2818,17 +2820,20 @@
                                             test="contains(substring-after($yearInLine3, ', 20'), '.')">
                                             <xsl:text>20</xsl:text>
                                             <xsl:variable name="nettoie">
-                                                <xsl:value-of select="translate(substring-before(substring-after($yearInLine3, ', 20'), '.'), ')', '')" />
+                                                <xsl:value-of
+                                                  select="translate(substring-before(substring-after($yearInLine3, ', 20'), '.'), ')', '')"
+                                                />
                                             </xsl:variable>
                                             <xsl:choose>
-                                                <xsl:when test="contains($nettoie,',')">
-                                                    <xsl:value-of select="substring-before($nettoie,',')"/>
+                                                <xsl:when test="contains($nettoie, ',')">
+                                                  <xsl:value-of
+                                                  select="substring-before($nettoie, ',')"/>
                                                 </xsl:when>
                                                 <xsl:otherwise>
-                                                    <xsl:value-of select="$nettoie" />
+                                                  <xsl:value-of select="$nettoie"/>
                                                 </xsl:otherwise>
                                             </xsl:choose>
-                                            
+
                                         </xsl:when>
                                         <xsl:when
                                             test="contains(substring-after($yearInLine3, ', 20'), ',')">
@@ -2865,7 +2870,7 @@
                 </xsl:choose>
             </xsl:when>
             <!-- pas de date de publication lors de la présence de 'accepted' dans la ligne de référence -->
-            <xsl:when test="contains($yearInLine,'accepted')">
+            <xsl:when test="contains($yearInLine, 'accepted')">
                 <date/>
             </xsl:when>
             <xsl:when test="contains($yearInLine, ' 20')">
@@ -2952,24 +2957,32 @@
                                     <xsl:variable name="text3">
                                         <xsl:value-of select="substring-before($text2, ' http')"/>
                                     </xsl:variable>
-                                   <xsl:choose>
-                                       <xsl:when test="contains($text3, '17')">
-                                           <xsl:text>17</xsl:text>
-                                           <xsl:value-of select="translate(substring-after($text3, '17'),'.,;','')" />
-                                       </xsl:when>
-                                       <xsl:when test="contains($text3, '18')">
-                                           <xsl:text>18</xsl:text>
-                                           <xsl:value-of select="translate(substring-after($text3, '18'),'.,;','')" />
-                                       </xsl:when>
-                                       <xsl:when test="contains($text3, '19')">
-                                           <xsl:text>19</xsl:text>
-                                           <xsl:value-of select="translate(substring-after($text3, '19'),'.,;','')" />
-                                       </xsl:when>
-                                       <xsl:when test="contains($text3, '20')">
-                                           <xsl:text>20</xsl:text>
-                                           <xsl:value-of select="translate(substring-after($text3, '20'),'.,;','')" />
-                                       </xsl:when>
-                                   </xsl:choose>
+                                    <xsl:choose>
+                                        <xsl:when test="contains($text3, '17')">
+                                            <xsl:text>17</xsl:text>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text3, '17'), '.,;', '')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when test="contains($text3, '18')">
+                                            <xsl:text>18</xsl:text>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text3, '18'), '.,;', '')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when test="contains($text3, '19')">
+                                            <xsl:text>19</xsl:text>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text3, '19'), '.,;', '')"
+                                            />
+                                        </xsl:when>
+                                        <xsl:when test="contains($text3, '20')">
+                                            <xsl:text>20</xsl:text>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text3, '20'), '.,;', '')"
+                                            />
+                                        </xsl:when>
+                                    </xsl:choose>
                                 </xsl:when>
                                 <xsl:when test="contains($text2, '20')">
                                     <xsl:choose>
@@ -3060,12 +3073,17 @@
                                                 select="substring-before(substring-after($text2, ', 19'), '.')"
                                             />
                                         </xsl:when>
-                                        <xsl:when test="contains($text2, 'Mount Kisco, Futura')">93</xsl:when>
+                                        <xsl:when test="contains($text2, 'Mount Kisco, Futura')"
+                                            >93</xsl:when>
                                         <xsl:when test="contains($text2, '19')">
-                                            <xsl:value-of select="translate(substring-after($text2, '19'),'.','')"/>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text2, '19'), '.', '')"
+                                            />
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="substring-before(substring-after($text2, '19'), ',')" />
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '19'), ',')"
+                                            />
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -3097,10 +3115,14 @@
                                             />
                                         </xsl:when>
                                         <xsl:when test="contains($text2, '18')">
-                                            <xsl:value-of select="translate(substring-after($text2, '18'),'.','')"/>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text2, '18'), '.', '')"
+                                            />
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="substring-before(substring-after($text2, '18'), ',')" />
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '18'), ',')"
+                                            />
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -3132,10 +3154,14 @@
                                             />
                                         </xsl:when>
                                         <xsl:when test="contains($text2, '17')">
-                                            <xsl:value-of select="translate(substring-after($text2, '17'),'.','')"/>
+                                            <xsl:value-of
+                                                select="translate(substring-after($text2, '17'), '.', '')"
+                                            />
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="substring-before(substring-after($text2, '17'), ',')" />
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($text2, '17'), ',')"
+                                            />
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -3160,7 +3186,8 @@
     <xsl:template name="volInLine" match="mixed-citation" mode="inLine">
         <xsl:param name="text"
             select="normalize-space(substring-before(substring-after(., ';'), ':'))"/>
-        <xsl:param name="text2" select="normalize-space(substring-after(substring-after(., ';'), ';'))"/>
+        <xsl:param name="text2"
+            select="normalize-space(substring-after(substring-after(., ';'), ';'))"/>
         <xsl:param name="separator" select="';'"/>
         <xsl:variable name="volInLine">
             <xsl:value-of select="$text"/>
@@ -3204,20 +3231,25 @@
             <xsl:value-of select="$text2"/>
         </xsl:variable>
         <xsl:variable name="nettoiePage1">
-            <xsl:value-of select="normalize-space(substring-after(substring-after($pageInLine2, ';'), ':'))"/>
+            <xsl:value-of
+                select="normalize-space(substring-after(substring-after($pageInLine2, ';'), ':'))"/>
         </xsl:variable>
         <xsl:variable name="nettoiePage3">
-            <xsl:value-of select="normalize-space(substring-after(substring-after($nettoiePage1, ';'), ':'))"/>
+            <xsl:value-of
+                select="normalize-space(substring-after(substring-after($nettoiePage1, ';'), ':'))"
+            />
         </xsl:variable>
         <!-- pour enlever les balises polluants le texte contenant des identifiants -->
         <xsl:variable name="text3">
             <xsl:value-of select="./text() except (bold/italic | pub-id)"/>
         </xsl:variable>
         <xsl:variable name="nettoiePubId">
-            <xsl:value-of select="normalize-space(substring-after(substring-after($text3, ';'), ':'))"/>
+            <xsl:value-of
+                select="normalize-space(substring-after(substring-after($text3, ';'), ':'))"/>
         </xsl:variable>
         <xsl:variable name="nettoiePubId2">
-            <xsl:value-of select="normalize-space(substring-before(substring-after($text3, ';'), '. DOI:'))"/>
+            <xsl:value-of
+                select="normalize-space(substring-before(substring-after($text3, ';'), '. DOI:'))"/>
         </xsl:variable>
         <!--<page>
             <xsl:value-of select="$nettoiePubId2"/>
@@ -3231,148 +3263,163 @@
                             <xsl:value-of select="substring-before($nettoiePage1, 'www')"/>
                         </xsl:variable>
                         <biblScope unit="page" from="{substring-before($nettoiePage2, '-')}">
-                            <xsl:value-of select="substring-before($nettoiePage2, '-')" />
+                            <xsl:value-of select="substring-before($nettoiePage2, '-')"/>
                         </biblScope>
-                        <biblScope unit="page" to="{normalize-space(translate(substring-after($nettoiePage2, '-'),'.',''))}">
-                            <xsl:value-of select="normalize-space(translate(substring-after($nettoiePage2, '-'),'.',''))" />
+                        <biblScope unit="page"
+                            to="{normalize-space(translate(substring-after($nettoiePage2, '-'),'.',''))}">
+                            <xsl:value-of
+                                select="normalize-space(translate(substring-after($nettoiePage2, '-'), '.', ''))"
+                            />
                         </biblScope>
                     </xsl:when>
                     <xsl:when test="contains($nettoiePubId, 'discussion')">
                         <xsl:variable name="disc">
-                            <xsl:value-of select="substring-before($nettoiePubId,'; discussion')"/>
+                            <xsl:value-of select="substring-before($nettoiePubId, '; discussion')"/>
                         </xsl:variable>
-                        <biblScope unit="page"
-                            from="{substring-before($disc,'-')}">
-                            <xsl:value-of
-                                select="substring-before($disc, '-')"/>
+                        <biblScope unit="page" from="{substring-before($disc,'-')}">
+                            <xsl:value-of select="substring-before($disc, '-')"/>
                         </biblScope>
-                        <biblScope unit="page"
-                            to="{substring-after($disc,'-')}">
-                            <xsl:value-of
-                                select="substring-after($disc, '-')"/>
+                        <biblScope unit="page" to="{substring-after($disc,'-')}">
+                            <xsl:value-of select="substring-after($disc, '-')"/>
                         </biblScope>
                     </xsl:when>
                     <xsl:when test="contains($nettoiePubId, 'quiz')">
                         <xsl:variable name="disc">
-                            <xsl:value-of select="substring-before($nettoiePubId,'; quiz')"/>
+                            <xsl:value-of select="substring-before($nettoiePubId, '; quiz')"/>
                         </xsl:variable>
-                        <biblScope unit="page"
-                            from="{substring-before($disc,'-')}">
-                            <xsl:value-of
-                                select="substring-before($disc, '-')"/>
+                        <biblScope unit="page" from="{substring-before($disc,'-')}">
+                            <xsl:value-of select="substring-before($disc, '-')"/>
                         </biblScope>
-                        <biblScope unit="page"
-                            to="{substring-after($disc,'-')}">
-                            <xsl:value-of
-                                select="substring-after($disc, '-')"/>
+                        <biblScope unit="page" to="{substring-after($disc,'-')}">
+                            <xsl:value-of select="substring-after($disc, '-')"/>
                         </biblScope>
                     </xsl:when>
                     <xsl:when test="contains($nettoiePubId, '-')">
                         <xsl:choose>
-                            <xsl:when test="contains($nettoiePage1,':')">
-                               <!-- <year>
+                            <xsl:when test="contains($nettoiePage1, ':')">
+                                <!-- <year>
                                     <xsl:value-of select="$nettoiePage1"/>
                                 </year>-->
                                 <xsl:choose>
-                                    <xsl:when test="contains($nettoiePage1,';') and contains($nettoiePage1,'-')">
+                                    <xsl:when
+                                        test="contains($nettoiePage1, ';') and contains($nettoiePage1, '-')">
                                         <xsl:variable name="resultat">
-                                            <xsl:value-of select="substring-before(substring-after($nettoiePage1,':'),'-')"/>
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($nettoiePage1, ':'), '-')"
+                                            />
                                         </xsl:variable>
                                         <xsl:choose>
-                                            <xsl:when test="contains($resultat,':')">
-                                                <biblScope unit="page" from="{substring-after($resultat,':')}">
-                                                    <xsl:value-of select="substring-after($resultat,':')"/>
+                                            <xsl:when test="contains($resultat, ':')">
+                                                <biblScope unit="page"
+                                                  from="{substring-after($resultat,':')}">
+                                                  <xsl:value-of
+                                                  select="substring-after($resultat, ':')"/>
                                                 </biblScope>
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <biblScope unit="page" from="{$resultat}">
-                                                    <xsl:value-of select="$resultat"/>
+                                                  <xsl:value-of select="$resultat"/>
                                                 </biblScope>
                                             </xsl:otherwise>
                                         </xsl:choose>
-                                        <biblScope unit="page" to="{substring-before(substring-after(substring-after($nettoiePage1,':'),'-'),'.')}">
-                                            <xsl:value-of select="substring-before(substring-after(substring-after($nettoiePage1,':'),'-'),'.')"/>
+                                        <biblScope unit="page"
+                                            to="{substring-before(substring-after(substring-after($nettoiePage1,':'),'-'),'.')}">
+                                            <xsl:value-of
+                                                select="substring-before(substring-after(substring-after($nettoiePage1, ':'), '-'), '.')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
-                                    <xsl:when test="contains($nettoiePage1,'.') and contains($nettoiePage1,'-')">
-                                        <biblScope unit="page" from="{substring-before(substring-before($nettoiePage1,'.'),'-')}">
-                                            <xsl:value-of select="substring-before(substring-before($nettoiePage1,'.'),'-')"/>
+                                    <xsl:when
+                                        test="contains($nettoiePage1, '.') and contains($nettoiePage1, '-')">
+                                        <biblScope unit="page"
+                                            from="{substring-before(substring-before($nettoiePage1,'.'),'-')}">
+                                            <xsl:value-of
+                                                select="substring-before(substring-before($nettoiePage1, '.'), '-')"
+                                            />
                                         </biblScope>
-                                        <biblScope unit="page" to="{substring-after(substring-before($nettoiePage1,'.'),'-')}">
-                                            <xsl:value-of select="substring-after(substring-before($nettoiePage1,'.'),'-')"/>
+                                        <biblScope unit="page"
+                                            to="{substring-after(substring-before($nettoiePage1,'.'),'-')}">
+                                            <xsl:value-of
+                                                select="substring-after(substring-before($nettoiePage1, '.'), '-')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
-                                    <xsl:when test="contains($nettoiePage1,'.')">
+                                    <xsl:when test="contains($nettoiePage1, '.')">
                                         <biblScope unit="page">
-                                            <xsl:value-of select="substring-before($nettoiePage1,'.')"/>
+                                            <xsl:value-of
+                                                select="substring-before($nettoiePage1, '.')"/>
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <biblScope unit="page">
-                                            <xsl:value-of select="substring-before(substring-after($nettoiePage1,':'),'.')"/>
+                                            <xsl:value-of
+                                                select="substring-before(substring-after($nettoiePage1, ':'), '.')"
+                                            />
                                         </biblScope>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
-                            <xsl:when test="contains($nettoiePage1,'pp ')">
+                            <xsl:when test="contains($nettoiePage1, 'pp ')">
                                 <xsl:variable name="nettoiePP">
                                     <xsl:value-of select="substring-after($nettoiePage1, 'pp ')"/>
                                 </xsl:variable>
-                                <biblScope unit="page"
-                                    from="{substring-before($nettoiePP,'-')}">
-                                    <xsl:value-of
-                                        select="substring-before($nettoiePP,'-')"/>
+                                <biblScope unit="page" from="{substring-before($nettoiePP,'-')}">
+                                    <xsl:value-of select="substring-before($nettoiePP, '-')"/>
                                 </biblScope>
                                 <biblScope unit="page"
                                     to="{substring-before(substring-after($nettoiePP,'-'),'.')}">
-                                    <xsl:value-of select="substring-before(substring-after($nettoiePP,'-'),'.')" />
+                                    <xsl:value-of
+                                        select="substring-before(substring-after($nettoiePP, '-'), '.')"
+                                    />
                                 </biblScope>
                             </xsl:when>
-                            <xsl:when test="contains($nettoiePage1,',')">
-                                <biblScope unit="page"
-                                    from="{substring-before($nettoiePage1,'-')}">
-                                    <xsl:value-of
-                                        select="substring-before($nettoiePage1, '-')"/>
+                            <xsl:when test="contains($nettoiePage1, ',')">
+                                <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
+                                    <xsl:value-of select="substring-before($nettoiePage1, '-')"/>
                                 </biblScope>
                                 <biblScope unit="page"
                                     to="{translate(substring-before(substring-after($nettoiePubId,'-'),','),'.','')}">
-                                    <xsl:value-of select="translate(substring-before(substring-after($nettoiePubId,'-'),','),'.','')" />
+                                    <xsl:value-of
+                                        select="translate(substring-before(substring-after($nettoiePubId, '-'), ','), '.', '')"
+                                    />
                                 </biblScope>
                             </xsl:when>
                             <xsl:otherwise>
-                                <biblScope unit="page"
-                                    from="{substring-before($nettoiePage1,'-')}">
-                                    <xsl:value-of
-                                        select="substring-before($nettoiePage1, '-')"/>
+                                <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
+                                    <xsl:value-of select="substring-before($nettoiePage1, '-')"/>
                                 </biblScope>
                                 <xsl:variable name="resultat">
-                                    <xsl:value-of select="substring-after($nettoiePubId,'-'),'.'" />
+                                    <xsl:value-of select="substring-after($nettoiePubId, '-'), '.'"
+                                    />
                                 </xsl:variable>
                                 <xsl:choose>
-                                    <xsl:when test="contains($resultat,' ')">
-                                        <biblScope unit="page" to="{translate(substring-before($resultat,' '),'.','')}">
-                                            <xsl:value-of select="translate(substring-before($resultat,' '),'.','')" />
+                                    <xsl:when test="contains($resultat, ' ')">
+                                        <biblScope unit="page"
+                                            to="{translate(substring-before($resultat,' '),'.','')}">
+                                            <xsl:value-of
+                                                select="translate(substring-before($resultat, ' '), '.', '')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <biblScope unit="page" to="{translate($resultat,'.','')}">
-                                            <xsl:value-of select="translate($resultat,'.','')" />
+                                            <xsl:value-of select="translate($resultat, '.', '')"/>
                                         </biblScope>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                
+
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="contains($nettoiePubId, ' p ')">
                         <biblScope unit="page">
-                            <xsl:value-of select="translate(substring-after($nettoiePubId, ' p '),'.','')"/>
+                            <xsl:value-of
+                                select="translate(substring-after($nettoiePubId, ' p '), '.', '')"/>
                         </biblScope>
                     </xsl:when>
                     <xsl:otherwise>
                         <biblScope unit="page">
-                            <xsl:value-of
-                                select="substring-before($nettoiePubId, '.')"/>
+                            <xsl:value-of select="substring-before($nettoiePubId, '.')"/>
                         </biblScope>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -3385,20 +3432,25 @@
                         </xsl:variable>
                         <xsl:choose>
                             <xsl:when test="contains($nettoiePageBis, '-')">
-                                <biblScope unit="page" from="{substring-before($nettoiePageBis,'-')}">
+                                <biblScope unit="page"
+                                    from="{substring-before($nettoiePageBis,'-')}">
                                     <xsl:value-of select="substring-before($nettoiePageBis, '-')"/>
                                 </biblScope>
                                 <xsl:choose>
-                                    <xsl:when test="contains($nettoiePageBis,',')">
+                                    <xsl:when test="contains($nettoiePageBis, ',')">
                                         <biblScope unit="page"
                                             to="{translate(substring-before(substring-after($nettoiePageBis,'-'),','),'.','')}">
-                                            <xsl:value-of select="translate(substring-before(substring-after($nettoiePageBis,'-'),','),'.','')"/>
+                                            <xsl:value-of
+                                                select="translate(substring-before(substring-after($nettoiePageBis, '-'), ','), '.', '')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <biblScope unit="page"
                                             to="{translate(substring-after($nettoiePageBis,'-'),'.','')}">
-                                            <xsl:value-of select="translate(substring-after($nettoiePageBis, '-'), '.', '')"/>
+                                            <xsl:value-of
+                                                select="translate(substring-after($nettoiePageBis, '-'), '.', '')"
+                                            />
                                         </biblScope>
                                     </xsl:otherwise>
                                 </xsl:choose>
@@ -3407,7 +3459,9 @@
                                 <xsl:choose>
                                     <xsl:when test="contains($pageInLine, ';')">
                                         <xsl:variable name="nettoiePageThree">
-                                            <xsl:value-of select="substring-after(substring-after($pageInLine, ';'), ':')"/>
+                                            <xsl:value-of
+                                                select="substring-after(substring-after($pageInLine, ';'), ':')"
+                                            />
                                         </xsl:variable>
                                         <biblScope unit="page"
                                             from="{substring-before($nettoiePageThree,'-')}">
@@ -3423,7 +3477,9 @@
                                     </xsl:when>
                                     <xsl:when test="contains($pageInLine, '(suppl)')">
                                         <xsl:variable name="nettoiePageDrei">
-                                            <xsl:value-of select="normalize-space(translate(replace($pageInLine,'(suppl)',''),'()',''))"/>
+                                            <xsl:value-of
+                                                select="normalize-space(translate(replace($pageInLine, '(suppl)', ''), '()', ''))"
+                                            />
                                         </xsl:variable>
                                         <biblScope unit="page"
                                             from="{substring-before($nettoiePageDrei,'-')}">
@@ -3439,10 +3495,10 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:choose>
-                                            <xsl:when test="contains($pageInLine,',')"/>
+                                            <xsl:when test="contains($pageInLine, ',')"/>
                                             <xsl:otherwise>
                                                 <biblScope unit="page">
-                                                    <xsl:value-of select="$pageInLine"/>
+                                                  <xsl:value-of select="$pageInLine"/>
                                                 </biblScope>
                                             </xsl:otherwise>
                                         </xsl:choose>
@@ -3474,29 +3530,29 @@
                                         <xsl:choose>
                                             <xsl:when test="contains($nettoiePage4, '-')">
                                                 <xsl:variable name="resultat">
-                                                    <xsl:value-of
-                                                        select="substring-before($nettoiePage4, '-')"/>
+                                                  <xsl:value-of
+                                                  select="substring-before($nettoiePage4, '-')"/>
                                                 </xsl:variable>
                                                 <xsl:choose>
-                                                    <xsl:when test="contains($resultat,',')">
-                                                        <biblScope unit="page"
-                                                            from="{normalize-space(substring-after($resultat,','))}">
-                                                            <xsl:value-of select="normalize-space(substring-after($resultat,','))"/>
-                                                        </biblScope>
-                                                    </xsl:when>
-                                                    <xsl:otherwise>
-                                                        <biblScope unit="page"
-                                                            from="{$resultat}">
-                                                            <xsl:value-of
-                                                                select="$resultat"/>
-                                                        </biblScope>
-                                                    </xsl:otherwise>
+                                                  <xsl:when test="contains($resultat, ',')">
+                                                  <biblScope unit="page"
+                                                  from="{normalize-space(substring-after($resultat,','))}">
+                                                  <xsl:value-of
+                                                  select="normalize-space(substring-after($resultat, ','))"
+                                                  />
+                                                  </biblScope>
+                                                  </xsl:when>
+                                                  <xsl:otherwise>
+                                                  <biblScope unit="page" from="{$resultat}">
+                                                  <xsl:value-of select="$resultat"/>
+                                                  </biblScope>
+                                                  </xsl:otherwise>
                                                 </xsl:choose>
                                                 <biblScope unit="page"
-                                                    to="{translate(substring-after($nettoiePage4,'-'),'.','')}">
-                                                    <xsl:value-of
-                                                        select="translate(substring-after($nettoiePage4, '-'), '.', '')"
-                                                    />
+                                                  to="{translate(substring-after($nettoiePage4,'-'),'.','')}">
+                                                  <xsl:value-of
+                                                  select="translate(substring-after($nettoiePage4, '-'), '.', '')"
+                                                  />
                                                 </biblScope>
                                             </xsl:when>
                                             <xsl:otherwise>
@@ -3521,58 +3577,87 @@
                         <xsl:choose>
                             <xsl:when test="contains($nettoiePage1, '-')">
                                 <xsl:choose>
-                                    <xsl:when test="contains($nettoiePage1,'accepted')"/>
-                                    <xsl:when test="contains($nettoiePage1,'Geschichte der Kaiser')"/>
-                                    <xsl:when test="contains($nettoiePage1,'Limited contribution of NR5A1 (SF')">
+                                    <xsl:when test="contains($nettoiePage1, 'accepted')"/>
+                                    <xsl:when
+                                        test="contains($nettoiePage1, 'Geschichte der Kaiser')"/>
+                                    <xsl:when
+                                        test="contains($nettoiePage1, 'Limited contribution of NR5A1 (SF')">
                                         <biblScope unit="vol">97</biblScope>
                                         <biblScope unit="page" from="141">141</biblScope>
                                         <biblScope unit="page" to="146">146</biblScope>
                                     </xsl:when>
-                                    <xsl:when test="contains($nettoiePage1,'1010 CONCL')">
+                                    <xsl:when test="contains($nettoiePage1, '1010 CONCL')">
                                         <biblScope unit="page" from="1003">1003</biblScope>
                                         <biblScope unit="page" to="1010">1010</biblScope>
                                     </xsl:when>
                                     <xsl:when test="contains($nettoiePage1, ';')">
                                         <xsl:variable name="nettoiePageTwo">
-                                            <xsl:value-of select="substring-before($nettoiePage1, ';')"/>
+                                            <xsl:value-of
+                                                select="substring-before($nettoiePage1, ';')"/>
                                         </xsl:variable>
-                                        <biblScope unit="page" from="{substring-before($nettoiePageTwo, '-')}">
-                                            <xsl:value-of select="substring-before($nettoiePageTwo, '-')" />
+                                        <biblScope unit="page"
+                                            from="{substring-before($nettoiePageTwo, '-')}">
+                                            <xsl:value-of
+                                                select="substring-before($nettoiePageTwo, '-')"/>
                                         </biblScope>
-                                        <biblScope unit="page" to="{substring-after($nettoiePageTwo, '-')}">
-                                            <xsl:value-of select="substring-after($nettoiePageTwo, '-')" />
+                                        <biblScope unit="page"
+                                            to="{substring-after($nettoiePageTwo, '-')}">
+                                            <xsl:value-of
+                                                select="substring-after($nettoiePageTwo, '-')"/>
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:when test="contains($nettoiePage1, ',')">
-                                        <biblScope unit="page" from="{substring-before(substring-before($nettoiePage1,','),'-')}">
-                                            <xsl:value-of select="substring-before(substring-before($nettoiePage1,','), '-')"/>
+                                        <biblScope unit="page"
+                                            from="{substring-before(substring-before($nettoiePage1,','),'-')}">
+                                            <xsl:value-of
+                                                select="substring-before(substring-before($nettoiePage1, ','), '-')"
+                                            />
                                         </biblScope>
-                                        <biblScope unit="page" to="{substring-after(substring-before($nettoiePage1,','),'-')}">
-                                            <xsl:value-of select="substring-after(substring-before($nettoiePage1,','), '-')"/>
+                                        <biblScope unit="page"
+                                            to="{substring-after(substring-before($nettoiePage1,','),'-')}">
+                                            <xsl:value-of
+                                                select="substring-after(substring-before($nettoiePage1, ','), '-')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:when test="contains($nettoiePage1, '- ')">
-                                        <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
-                                            <xsl:value-of select="substring-before($nettoiePage1,'-')" />
+                                        <biblScope unit="page"
+                                            from="{substring-before($nettoiePage1,'-')}">
+                                            <xsl:value-of
+                                                select="substring-before($nettoiePage1, '-')"/>
                                         </biblScope>
-                                        <biblScope unit="page" to="{normalize-space(translate(substring-after($nettoiePage1,'-'),'.',''))}">
-                                            <xsl:value-of select="normalize-space(translate(substring-after($nettoiePage1, '-'), '.', ''))" />
+                                        <biblScope unit="page"
+                                            to="{normalize-space(translate(substring-after($nettoiePage1,'-'),'.',''))}">
+                                            <xsl:value-of
+                                                select="normalize-space(translate(substring-after($nettoiePage1, '-'), '.', ''))"
+                                            />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:when test="contains($nettoiePage1, ' ')">
-                                        <biblScope unit="page" from="{substring-after(substring-before($nettoiePage1,'-'),' ')}">
-                                            <xsl:value-of select="substring-after(substring-before($nettoiePage1, '-'), ' ')" />
+                                        <biblScope unit="page"
+                                            from="{substring-after(substring-before($nettoiePage1,'-'),' ')}">
+                                            <xsl:value-of
+                                                select="substring-after(substring-before($nettoiePage1, '-'), ' ')"
+                                            />
                                         </biblScope>
-                                        <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
-                                            <xsl:value-of select="translate(substring-after($nettoiePage1, '-'), '.', '')" />
+                                        <biblScope unit="page"
+                                            to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
+                                            <xsl:value-of
+                                                select="translate(substring-after($nettoiePage1, '-'), '.', '')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <biblScope unit="page" from="{substring-before($nettoiePage1,'-')}">
-                                            <xsl:value-of select="substring-before($nettoiePage1, '-')"/>
+                                        <biblScope unit="page"
+                                            from="{substring-before($nettoiePage1,'-')}">
+                                            <xsl:value-of
+                                                select="substring-before($nettoiePage1, '-')"/>
                                         </biblScope>
-                                        <biblScope unit="page" to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
-                                            <xsl:value-of select="translate(substring-after($nettoiePage1, '-'), '.', '')" />
+                                        <biblScope unit="page"
+                                            to="{translate(substring-after($nettoiePage1,'-'),'.','')}">
+                                            <xsl:value-of
+                                                select="translate(substring-after($nettoiePage1, '-'), '.', '')"
+                                            />
                                         </biblScope>
                                     </xsl:otherwise>
                                 </xsl:choose>
@@ -3590,27 +3675,24 @@
                                     />
                                 </xsl:variable>
                                 <xsl:choose>
-                                    <xsl:when test="contains($resultat,',')">
+                                    <xsl:when test="contains($resultat, ',')">
                                         <biblScope unit="page"
                                             to="{substring-before($resultat,',')}">
-                                            <xsl:value-of
-                                                select="substring-before($resultat,',')"
+                                            <xsl:value-of select="substring-before($resultat, ',')"
                                             />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <biblScope unit="page"
-                                            to="{$resultat}">
-                                            <xsl:value-of
-                                                select="$resultat"
-                                            />
+                                        <biblScope unit="page" to="{$resultat}">
+                                            <xsl:value-of select="$resultat"/>
                                         </biblScope>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
                             <xsl:when test="contains($nettoiePage1, '®')"/>
                             <xsl:when test="contains($nettoiePage1, 'db')"/>
-                            <xsl:when test="contains($nettoiePage1, 'The Natural and Modified History of Congenital Heart Disease')"/>
+                            <xsl:when
+                                test="contains($nettoiePage1, 'The Natural and Modified History of Congenital Heart Disease')"/>
                             <xsl:when test="contains($text3, '. DOI:')">
                                 <biblScope unit="page">
                                     <xsl:value-of select="$nettoiePubId2"/>
@@ -3618,7 +3700,9 @@
                             </xsl:when>
                             <xsl:when test="contains($text3, ' p ')">
                                 <biblScope unit="page">
-                                    <xsl:value-of select="translate(substring-after($text3,' p '),'.','')"/>
+                                    <xsl:value-of
+                                        select="translate(substring-after($text3, ' p '), '.', '')"
+                                    />
                                 </biblScope>
                             </xsl:when>
                             <xsl:when test="contains($nettoiePage1, '.')">
@@ -3632,7 +3716,9 @@
                                     <xsl:when test="not(contains($pageInLine2, ';'))"/>
                                     <xsl:when test="contains($pageInLine2, '.')">
                                         <biblScope unit="page">
-                                            <xsl:value-of select="translate(substring-after($pageInLine2, ';'),'.','')"/>
+                                            <xsl:value-of
+                                                select="translate(substring-after($pageInLine2, ';'), '.', '')"
+                                            />
                                         </biblScope>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -3671,7 +3757,8 @@
                     <xsl:value-of select="substring-after($pageInLine2, 'pp ')"/>
                 </xsl:variable>
                 <xsl:choose>
-                    <xsl:when test="contains($pageInLine2,'Sex-, age-, and height-specific reference curves for the 6-min walk test in healthy children and adolescents')"/>
+                    <xsl:when
+                        test="contains($pageInLine2, 'Sex-, age-, and height-specific reference curves for the 6-min walk test in healthy children and adolescents')"/>
                     <xsl:when test="contains($nettoiePageZwei, '-')">
                         <biblScope unit="page" from="{substring-before($nettoiePageZwei,'-')}">
                             <xsl:value-of select="substring-before($nettoiePageZwei, '-')"/>
@@ -3679,7 +3766,8 @@
                         <biblScope unit="page"
                             to="{translate(substring-after($nettoiePageZwei,'-'),'.','')}">
                             <xsl:value-of
-                                select="translate(substring-after($nettoiePageZwei, '-'), '.', '')"/>
+                                select="translate(substring-after($nettoiePageZwei, '-'), '.', '')"
+                            />
                         </biblScope>
                     </xsl:when>
                     <xsl:otherwise>
@@ -3744,7 +3832,7 @@
             <xsl:value-of select="$text"/>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="$articleInLine='395-399, 399'">
+            <xsl:when test="$articleInLine = '395-399, 399'">
                 <xsl:text>Six-minute walk test in children and adolescents.</xsl:text>
             </xsl:when>
             <xsl:otherwise>
@@ -3752,7 +3840,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="roman">
         <hi rend="roman">
             <xsl:apply-templates/>
@@ -3767,5 +3855,29 @@
             </xsl:if>
             <xsl:apply-templates/>
         </bibl>
+    </xsl:template>
+
+    <xsl:template match="nlm-citation">
+        <biblStruct>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <analytic>
+                <xsl:apply-templates select="person-group"/>
+                <xsl:apply-templates select="article-title"/>
+            </analytic>
+            <monogr>
+                <xsl:apply-templates select="source"/>
+                <imprint>
+                    <xsl:apply-templates select="year"/>
+                    <xsl:apply-templates select="volume"/>
+                    <xsl:apply-templates select="issue"/>
+                    <xsl:apply-templates select="fpage"/>
+                    <xsl:apply-templates select="lpage"/>
+                </imprint>
+            </monogr>
+        </biblStruct>
     </xsl:template>
 </xsl:stylesheet>

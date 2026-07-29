@@ -812,7 +812,7 @@
                                     <imprint>
                                         <xsl:choose>
                                             <xsl:when test="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']">
-                                                <date>
+                                                <date type="published">
                                                     <xsl:value-of select="$TitleCodes/descendant::tei:row[tei:cell[@role = 'title']=$hostTitle]/tei:cell[@role='date']"/>
                                                 </date>
                                             </xsl:when>

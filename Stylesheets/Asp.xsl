@@ -121,7 +121,7 @@
                     <xsl:apply-templates select="publication_year | text/publication_year"/>
                 </xsl:when>
                 <xsl:when test="source_title[string-length()&gt; 0]|text/source_title[string-length()&gt; 0]">
-                    <date>
+                    <date type="published">
                         <xsl:apply-templates select="source_title|text/source_title" mode="date"/>
                     </date>
                 </xsl:when>

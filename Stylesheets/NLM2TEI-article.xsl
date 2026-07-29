@@ -2154,10 +2154,10 @@
                        <affiliation>
                            <xsl:choose>
                                <xsl:when test="addr-line">
-                                   <address>
+                                  
                                        <xsl:apply-templates select="addr-line"/>
                                        <xsl:apply-templates select="country"/>
-                                   </address>
+                                   
                                </xsl:when>
                                <xsl:otherwise>
                                    <xsl:call-template name="NLMParseAffiliation">
@@ -2771,7 +2771,7 @@
     </xsl:template>-->
 
     <xsl:template match="dateStruct">
-        <date>
+        <date type="published">
             <xsl:value-of select="."/>
         </date>
     </xsl:template>
@@ -4005,13 +4005,13 @@
     </xsl:template>
 
     <xsl:template match="supplementary-material">
-        <ref>
-            <xsl:attribute name="type"> supplementary-material </xsl:attribute>
-            <xsl:attribute name="target">
+        <figure>
+            <xsl:attribute name="type">supplementary-material</xsl:attribute>
+            <xsl:attribute name="source">
                 <xsl:value-of select="@xlink:href"/>
             </xsl:attribute>
             <xsl:apply-templates/>
-        </ref>
+        </figure>
     </xsl:template>
 
     <!-- Copyright related information to appear in <publicationStmt> -->

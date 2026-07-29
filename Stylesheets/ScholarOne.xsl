@@ -627,7 +627,7 @@
     </xsl:template>
 
     <xsl:template match="dateStruct">
-        <date>
+        <date type="published">
             <xsl:value-of select="."/>
         </date>
     </xsl:template>

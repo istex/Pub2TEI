@@ -1133,14 +1133,14 @@
         <xsl:choose>
             <xsl:when test="ancestor::p/citation | ancestor::p/mixed-citation | ancestor::p">
                 <bibl>
-                    <date when="{.}">
+                    <date type="published" when="{.}">
                         <xsl:apply-templates/>
                     </date>
                 </bibl>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test=". != ''">
-                    <date when="{.}">
+                    <date type="published" when="{.}">
                         <xsl:apply-templates/>
                     </date>
                 </xsl:if>
@@ -1432,7 +1432,7 @@
                 <date/>
             </xsl:when>
             <xsl:otherwise>
-                <date>
+                <date type="published">
                     <xsl:attribute name="when">
                         <!-- SG reprise de la date (ex:nrn3258_subject.xml)(26 Aug  2011)
                 cibler sur attribut @year et non plus sur le text() + PL: cleaning of alphabetical characters in the year string -->
@@ -1447,7 +1447,7 @@
 
     <!-- SG: nettoyage caractéres polluants dans les données -->
     <xsl:template match="wiley:pubYear">
-        <date>
+        <date type="published">
             <xsl:attribute name="when">
                 <xsl:choose>
                     <xsl:when test="@year">
