@@ -544,7 +544,7 @@
     <!-- PL: removed, Elsevier abstracts are processed in Elsevier.xsl -->
     <!-- Springer: Abstract, Heading, Para -->
 	<!-- PL: this could be moved to KeywordsAbstract.xsl when generalised to all publishers -->
-    <xsl:template match="abstract |rsc:abstract |trans-abstract | Abstract | els1:head/ce:abstract | els2:head/ce:abstract | head/ce:abstract | fp | abs | execsumm | websumm">
+    <xsl:template match="abstract |rsc:abstract |trans-abstract | Abstract | //ce:abstract | fp | abs | execsumm | websumm">
         <xsl:variable name="normalizeAbstractHead">
             <xsl:value-of select="normalize-space(translate(head[1]|title[1]|Heading[1],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))"/>
         </xsl:variable>
