@@ -707,12 +707,24 @@
                                 <xsl:choose>
                                     <!-- ecco -->
                                     <xsl:when test="//bookInfo/pubDate">
-                                        <date type="published">
-                                            <xsl:attribute name="when">
-                                                <xsl:call-template name="dateEcco"/>
-                                            </xsl:attribute>
-                                            <xsl:call-template name="dateEcco"/>
-                                        </date>
+                                        <xsl:choose>
+                                            <xsl:when test="string-length(pubDate) &lt; 8">
+                                                <date type="published">
+                                                    <xsl:attribute name="when">
+                                                        <xsl:value-of select="substring(//pubDate,1,4)"/>
+                                                    </xsl:attribute>
+                                                    <xsl:value-of select="substring(//pubDate,1,4)"/>
+                                                </date>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <date type="published">
+                                                    <xsl:attribute name="when">
+                                                        <xsl:call-template name="dateEcco"/>
+                                                    </xsl:attribute>
+                                                    <xsl:call-template name="dateEcco"/>
+                                                </date>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:when>
                                     <xsl:when test="book-meta/pub-date[@publication-format='print']/year[string-length() &gt; 0]">
                                         <date type="published">
@@ -2265,12 +2277,24 @@
                     <xsl:choose>
                         <!-- ecco -->
                         <xsl:when test="//bookInfo/pubDate">
-                            <date type="published">
-                                <xsl:attribute name="when">
-                                    <xsl:call-template name="dateEcco"/>
-                                </xsl:attribute>
-                                <xsl:call-template name="dateEcco"/>
-                            </date>
+                            <xsl:choose>
+                                <xsl:when test="string-length(pubDate) &lt; 8">
+                                    <date type="published">
+                                        <xsl:attribute name="when">
+                                            <xsl:value-of select="substring(//pubDate,1,4)"/>
+                                        </xsl:attribute>
+                                        <xsl:value-of select="substring(//bookInfo/pubDate,1,4)"/>
+                                    </date>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <date type="published">
+                                        <xsl:attribute name="when">
+                                            <xsl:call-template name="dateEcco"/>
+                                        </xsl:attribute>
+                                        <xsl:call-template name="dateEcco"/>
+                                    </date>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:when>
                         <xsl:when test="book-meta/pub-date[@publication-format='print']/year[string-length() &gt; 0]">
                             <date type="published">
@@ -2940,6 +2964,8 @@
             <xsl:when test="//bookInfo/documentID='0531600300'">1733</xsl:when>
             <xsl:when test="//bookInfo/documentID='0277000600'">1719</xsl:when>
             <xsl:when test="//bookInfo/documentID='0154603700'">1792</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1600200600'">1787</xsl:when>
+            <xsl:when test="//bookInfo/documentID='1659401500'">1775</xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="date">
                     <xsl:value-of select="//pubDate"/>
